@@ -1,0 +1,157 @@
+@import "./mixins.scss";
+
+$nav-small-width: 3.5rem;
+$bar-height: 2.6rem;
+
+:root {
+  font-size: 20px;
+
+  @media only screen and (min-width: 1080px) { // LARGE MONITOR
+    // font-size: 25px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  &::-webkit-scrollbar-track { background: #bcc3ce }
+  &::-webkit-scrollbar-thumb { background: #66758c }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+details summary { 
+  cursor: pointer;
+}
+
+body { // scrollbar css props
+  &::-webkit-scrollbar { width: 0.4rem }
+  &.drawer-open{
+    height: 100vh;
+    overflow-y: hidden;
+  }
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: 500;
+}
+
+.h6, h6 {
+  font-size: .8rem;
+}
+
+#root { // this is needed for nav-spacing
+  display: flex;
+  height: 100%;
+
+  @media only screen and (max-width: 550px) { // NARROW
+    flex-direction: column;
+  }
+
+  @media only screen and (min-width: 550px) { // WIDE
+      flex-direction: row;
+  }
+
+  #view {
+    width: 100%;
+    // display: flex;
+    flex-direction: column;
+    padding: 25px;
+    margin-top: 4.0rem;
+    // @media only screen and (max-width: 550px) { // NARROW
+    //   max-width: 100vw;
+    // }
+
+  }
+
+  #viewcontent {
+    flex-grow: 1;
+  }
+}
+
+#loader {
+  // this loader isn't centered
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  &:after {
+    height: 2rem!important;
+    width: 2rem!important;
+  }
+}
+
+#drawer {
+  .tooltip:after {
+    position: fixed;
+    transform: initial;
+    bottom: initial;
+    left: 2.8rem;
+  }
+}
+
+#top-modal {
+  z-index: 1001;
+  textarea {
+    min-height: 5rem;
+  }
+  .modal-container {
+    max-height: 95vh;
+  }
+}
+
+.tab-item, .menu-item {
+  a {
+    cursor: pointer;
+  }
+}
+
+.link-btn-hover {
+  &:hover {
+    background: #f1f1fc!important;
+    color: #5755d9!important;
+    border-radius: .1rem!important;
+    cursor: pointer!important;
+  }
+}
+
+.profile-badge {
+  display: flex;
+  align-items: center;
+  .profile-info {
+      padding: 0px 10px;
+      color: black;
+      font-size: 80%;
+      line-height: .7rem;
+  
+      p {
+          margin: 0;
+      }
+  }
+}
+
+td, th {
+  &.min-width {
+    width: 1%;
+    text-align: center !important;
+  }
+}
+
+// not functioning yet
+td .expandable {
+    .expand {
+        // border-top: none;
+        // display: grid;
+        // grid-column: 1/-1;
+        // justify-content: flex-start;
+        // color: #AEB1B3;
+        // font-size: 13px;
+        // background-color: #fff;
+    }
+
+    .collapse {
+      display: none;
+    }
+  }

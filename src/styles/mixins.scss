@@ -1,0 +1,93 @@
+.center-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Overwrite VisTimeline
+// .vis-item-content {
+//     width: 100%;
+//  }
+
+.vis-time-axis .vis-text.vis-major {
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.vis-time-axis .vis-text.vis-minor {
+    text-align: center;
+    font-size: 90%;
+}
+
+.vis-content .vis-labelset .vis-label .vis-inner {
+    text-align: center;
+    font-size: 80%;
+    display: block;
+}
+
+.vis-item.vis-dot {
+    border-color: #97B0F8;
+}
+
+.vis-item.vis-dot.vis-selected {
+    border-color: #97B0F8;
+    background-color: #97B0F8;
+}
+
+.vis-item {
+    border-color: #97B0F8
+}
+
+.vis-item.vis-selected {
+    border-color: #97B0F8;
+    background-color: rgb(65, 160, 255) !important;
+    z-index: 2;
+}
+
+.vis-item.vis-range, .vis-item.vis-box {
+   background-color: rgb(25, 120, 216);
+   border: none !important;
+   border-radius: 3px !important;
+   border-style: none !important;
+   cursor: pointer !important;
+}
+
+.vis-item.vis-range * , .vis-item.vis-box *{
+    cursor: pointer;
+}
+
+.vis-item .vis-item-content {
+   padding: 2px 10px !important;
+   font-size: 80% !important;
+   color: white !important; 
+   font-weight: 500 !important;
+}
+
+.vis-item.vis-background.negativeTimelineBackground {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.vis-background > .vis-custom-time {
+    background-color: #FF7F6E
+}
+
+// Overwrite Spectre
+.divider[data-content]:after {
+    font-size: 80%;
+}
+
+.panel, .card, .tile {
+    border-radius: 15px;
+}
+
+// .table.table-scroll {
+//     display: table;
+// }
+
+// .tile {
+//     display: block;
+// }
+
+// p {
+//     margin: 0px;
+// }

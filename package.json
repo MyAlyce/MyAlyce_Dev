@@ -1,0 +1,60 @@
+{
+  "name": "tinybuildapp8785",
+  "version": "0.0.0",
+  "description": "Barebones esbuild and test node server implementation. For building",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "tinybuild && cd backend && tinybuild && node server.node.js",
+    "build": "tinybuild build",
+    "serve": "tinybuild serve",
+    "init": "node tinybuild/init.js",
+    "concurrent": "concurrently \\'npm run python\\' \\'npm start\\'",
+    "dev": "npm run pip && npm i --save-dev concurrently && npm i --save-dev nodemon && npm run concurrent",
+    "startdev": "nodemon --exec \\'node tinybuild.js\\' -e ejs,js,ts,jsx,tsx,css,html,jpg,png,scss,txt,csv",
+    "python": "python python/server.py",
+    "pip": "pip install quart && pip install websockets",
+    "pwa": "npm i workbox-cli && workbox generateSW node_server/pwa/workbox-config.js && npm run build && npm start"
+  },
+  "keywords": [
+    "esbuild"
+  ],
+  "author": "",
+  "license": "AGPL-3.0-or-later",
+  "dependencies": {
+    "@capacitor-community/bluetooth-le": "~2.1.0",
+    "@giveback007/fitbit-api": "^0.1.0",
+    "device-decoder": "^0.4.21",
+    "graphscript": "~0.2.82",
+    "graphscript-node": "~0.2.81",
+    "graphscript-services": "~0.2.81",
+    "graphscript-services.storage": "~0.2.81",
+    "hamburger-react": "^2.5.0",
+    "my-alyce-component-lib": "^0.1.30",
+    "react": "~18.2.0",
+    "react-burger-menu": "^3.0.9",
+    "react-dom": "^18.2.0",
+    "realm-web": "^2.0.0",
+    "webgl-plot-utils": "~0.3.20"
+  },
+  "devDependencies": {
+    "@capacitor/android": "~4.6.3",
+    "@capacitor/cli": "~4.6.3",
+    "@capacitor/core": "~4.6.3",
+    "@capacitor/ios": "~4.6.3",
+    "esbuild-sass-plugin": "^2.5.0",
+    "tinybuild": "^0.3.202",
+    "typescript": "~4.9.5",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11"
+  },
+  "nodemonConfig": {
+    "env": {
+      "NODEMON": true
+    },
+    "ignore": [
+      "dist/",
+      ".temp/"
+    ]
+  }
+}
