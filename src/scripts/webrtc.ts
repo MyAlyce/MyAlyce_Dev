@@ -20,8 +20,7 @@ export async function startCall(userId) {
         onicecandidate:async (ev) => {
             if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
                 let cid = `hostcandidate${Math.floor(Math.random()*1000000000000000)}`;
-                let ready = await userAccepted;
-                if(ready) usersocket.run(
+                usersocket.run(
                     'runConnection', //run this function on the backend router
                     [
                         userId, //run this connection 

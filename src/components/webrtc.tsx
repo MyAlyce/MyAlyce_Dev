@@ -105,11 +105,11 @@ export class WebRTCComponent extends sComponent {
                     [
                         call.caller, //run this connection 
                         'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                        'receiveCallInformation', //run this function on the user's end
+                        'answerPeer', //run this function on the user's end
                         [ //and pass these arguments
                             {
                                 _id:rtc._id, 
-                                peerdescription:rtc.peerdescription, //the peer needs to accept this
+                                peerdescription:rtc.peerdescription, //the host needs this
                                 caller:client.currentUser._id
                             }
                         ]

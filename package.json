@@ -25,7 +25,7 @@
     "@capacitor-community/bluetooth-le": "~2.1.0",
     "@giveback007/fitbit-api": "^0.1.0",
     "device-decoder": "^0.4.21",
-    "graphscript": "^0.2.86",
+    "graphscript": "^0.2.87",
     "graphscript-node": "~0.2.85",
     "graphscript-services": "~0.2.85",
     "graphscript-services.storage": "~0.2.85",
