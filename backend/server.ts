@@ -114,7 +114,7 @@ const initDB = (router:Router) => {
                 db: mongoose.connections[0].db, //set database
                 users:router.users as any,
                 useAuths:false //bypass our permissions system for users to be able to view each other
-            });
+            } as any);
 
             router.addServices({
                 db
@@ -127,7 +127,7 @@ const initDB = (router:Router) => {
                 mode:'local', //'local'
                 users:router.users as any,
                 useAuths:false //bypass our permissions system for users to be able to view each other
-            });
+            } as any);
 
             router.addServices({
                 db

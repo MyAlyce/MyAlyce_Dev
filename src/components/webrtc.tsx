@@ -8,9 +8,17 @@ export class WebRTCComponent extends sComponent {
 
     state = {
         loggedInId:undefined,
-        availableUsers:undefined,
+        availableUsers:undefined as undefined|any[],
         webrtcStream:undefined,
-        availableStreams:{}
+        availableStreams:{}, //we can handle multiple connections too
+        unansweredCalls:{}, //webrtc.unanswered reference
+        unansweredCallDivs:undefined as undefined|any[],
+    }
+
+    constructor(props:any) {
+        super(props);
+        this.getUsers();
+        this.getUnanweredCallInfo();
     }
 
     async getUsers() {
@@ -20,29 +28,6 @@ export class WebRTCComponent extends sComponent {
         if(userInfo) {
             let divs = [] as any[];
             userInfo.forEach((user:Partial<ProfileStruct>) => {
-                
-                async function openRTC() {
-                    //send handshake
-                    let rtcId = `room${Math.floor(Math.random()*1000000000000000)}`;
-                    
-                    //has the user accepted the call?
-                    let userAccepted = new Promise((res,rej) => {
-                        res(true);
-                    });
-                    
-                    let rtc = await webrtc.openRTC({ 
-                        _id:rtcId,
-                        onicecandidate:async (ev) => {
-                            if(ev.candidate) {
-                                //let cid = `hostcandidate${Math.floor(Math.random()*1000000000000000)}`;
-                                let ready = await userAccepted;
-                                if(ready) usersocket.run('runConnection',[user._id, 'run', 'addIceCandidate', [rtcId, ev.candidate]]);
-                            }
-                        }
-                    });
-
-                    //usersocket.run('runConnection',[user._id, 'run', ''])
-                }
 
                 let voicecall = async() => {
                     if(this.state.availableStreams[user._id as string]) {
@@ -67,7 +52,7 @@ export class WebRTCComponent extends sComponent {
                     }
                 }
 
-                divs.push(
+                divs.push( //turn into a dropdown or something
                     <div>
                         <div>User: {user.firstName} {user.lastName}</div>
                         <button id={`voicecall${user._id}`} onClick={voicecall}>📞</button>
@@ -76,14 +61,44 @@ export class WebRTCComponent extends sComponent {
                     </div>
                 )
             })
+            this.setState({
+                availableUsers:divs
+            })
         }
+    }
+
+    async getUnanweredCallInfo() {
+        let divs = Object.keys(this.state.unansweredCalls).map(async (key) => {
+                        
+            let call = this.state.unansweredCalls[key];
+            let caller = (await client.getUsers([call.caller]))[0]
+
+            let divId = `call${call._id}`;
+
+            let answerCall = () => {
+                webrtc.answerCall(call);
+                document.getElementById(divId)?.remove();
+            }
+
+            return (
+                <div id={divId}>
+                    <div>User: {caller.firstName} {caller.lastName}</div>
+                    <button onClick={answerCall}>Join Call</button>
+                </div>
+            );
+        });
+
+        this.setState({unansweredCallDivs:divs});
     }
 
     render() {
         return (
             <div>
+                <div id='receivedCalls'>
+                    { this.state.unansweredCallDivs && this.state.unansweredCallDivs.map((div) => div ) }
+                </div>
                 <div id='availableUsers'>
-                    { this.state.availableUsers }
+                    { this.state.availableUsers && this.state.availableUsers.map((div) => div ) }
                 </div>
                 <div id='webrtcstream'>
                     {  this.state.webrtcStream  }
@@ -93,3 +108,5 @@ export class WebRTCComponent extends sComponent {
     }
 
 }
+
+
