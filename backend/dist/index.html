@@ -41999,24 +41999,6 @@ td .expandable .collapse {
       this.rtc = {};
       this.iceServers = [{ urls: ["stun:stun.l.google.com:19302"] }, { urls: ["stun:stun1.l.google.com:19302"] }, { urls: ["stun:stun2.l.google.com:19302"] }, { urls: ["stun:stun3.l.google.com:19302"] }, { urls: ["stun:stun4.l.google.com:19302"] }];
       this.connections = { rtc: this.rtc };
-      this.createStream = (options2) => {
-        let stream = new MediaStream();
-        for (const key in options2) {
-          let track = options2[key].track;
-          if (!(track instanceof MediaStreamTrack) && typeof track === "object") {
-            track = new MediaStreamTrack();
-            track.applyConstraints(options2[key].track);
-            stream.addTrack(track);
-          }
-          if (track instanceof MediaStreamTrack) {
-            stream.addTrack(track);
-            track.onmute = options2[key].onmute;
-            track.onunmute = options2[key].onunmute;
-            track.onended = options2[key].onended;
-          }
-        }
-        return stream;
-      };
       this.openRTC = async (options2) => {
         if (!options2)
           options2 = {};
@@ -42188,7 +42170,25 @@ td .expandable .collapse {
         });
       };
       this.open = this.openRTC;
-      this.addUserMedia = (rtc, options2 = { audio: false, video: { optional: [{ minWidth: 320 }, { minWidth: 640 }, { minWidth: 1024 }, { minWidth: 1280 }, { minWidth: 1920 }, { minWidth: 2560 }] } }) => {
+      this.createStream = (options2) => {
+        let stream = new MediaStream();
+        for (const key in options2) {
+          let track = options2[key].track;
+          if (!(track instanceof MediaStreamTrack) && typeof track === "object") {
+            track = new MediaStreamTrack();
+            track.applyConstraints(options2[key].track);
+            stream.addTrack(track);
+          }
+          if (track instanceof MediaStreamTrack) {
+            stream.addTrack(track);
+            track.onmute = options2[key].onmute;
+            track.onunmute = options2[key].onunmute;
+            track.onended = options2[key].onended;
+          }
+        }
+        return stream;
+      };
+      this.addUserMedia = (rtc, options2 = { audio: true, video: { optional: [{ minWidth: 320 }, { minWidth: 640 }, { minWidth: 1024 }, { minWidth: 1280 }, { minWidth: 1920 }, { minWidth: 2560 }] } }) => {
         let senders = [];
         navigator.mediaDevices.getUserMedia(options2).then((stream) => {
           let tracks = stream.getTracks();
@@ -42337,7 +42337,32 @@ td .expandable .collapse {
         this.iceServers = iceServers;
     }
     addIceCandidate(rtc, candidate) {
-      return rtc.addIceCandidate(candidate);
+      if (typeof rtc === "string")
+        rtc = this.rtc[rtc]?.rtc;
+      if (rtc)
+        return rtc.addIceCandidate(candidate);
+    }
+    receiveCallInformation(options) {
+      if (!options._id)
+        options._id = `rtc${Math.floor(Math.random() * 1e15)}`;
+      else if (this.rtc[options._id]) {
+        if (options.hostcandidates) {
+          for (const key in options.hostcandidates)
+            this.addIceCandidate(this.rtc[options._id].rtc, options.hostcandidates[key]);
+        } else if (options.peercandidates) {
+          for (const key in options.peercandidates)
+            this.addIceCandidate(this.rtc[options._id].rtc, options.peercandidates[key]);
+        }
+      } else if (this.unanswered[options._id]) {
+        this.recursivelyAssign(this.unanswered[options._id], options);
+      }
+      return options._id;
+    }
+    answerCall(options) {
+      if (typeof options === "string")
+        options = this.unanswered[options];
+      delete this.unanswered[options._id];
+      this.openRTC(options);
     }
     answerPeer(rtc, options) {
       return new Promise((res2, rej) => {
@@ -59255,15 +59280,20 @@ td .expandable .collapse {
   // src/components/webrtc.tsx
   var import_react3 = __toESM(require_react(), 1);
   var WebRTCComponent = class extends sComponent {
-    constructor() {
-      super(...arguments);
+    constructor(props) {
+      super(props);
       this.state = {
         loggedInId: void 0,
         availableUsers: void 0,
         webrtcStream: void 0,
         availableStreams: {},
-        receivedCalls: {}
+        //we can handle multiple connections too
+        unansweredCalls: {},
+        //webrtc.unanswered reference
+        unansweredCallDivs: void 0
       };
+      this.getUsers();
+      this.getUnanweredCallInfo();
     }
     async getUsers() {
       let userIds = await usersocket.run("getAllOnlineUsers");
@@ -59271,43 +59301,6 @@ td .expandable .collapse {
       if (userInfo) {
         let divs = [];
         userInfo.forEach((user) => {
-          async function openRTC() {
-            let rtcId = `room${Math.floor(Math.random() * 1e15)}`;
-            let userAccepted = new Promise((res2, rej) => {
-              res2(true);
-            });
-            let rtc = await webrtc.openRTC({
-              _id: rtcId,
-              onicecandidate: async (ev2) => {
-                if (ev2.candidate) {
-                  let cid = `hostcandidate${Math.floor(Math.random() * 1e15)}`;
-                  let ready = await userAccepted;
-                  if (ready)
-                    usersocket.run(
-                      "runConnection",
-                      //run this function on the backend router
-                      [
-                        user._id,
-                        //run this connection 
-                        "run",
-                        //use this function (e.g. run, post, subscribe, etc. see User type)
-                        "receiveCallInformation",
-                        //run this function on the user's end
-                        [
-                          //and pass these arguments
-                          {
-                            _id: rtcId,
-                            hostcandidates: { [cid]: ev2.candidate }
-                          }
-                        ]
-                      ]
-                    ).then(() => {
-                      console.log("call information received");
-                    });
-                }
-              }
-            });
-          }
           let voicecall = async () => {
             if (this.state.availableStreams[user._id]) {
             } else {
@@ -59324,14 +59317,30 @@ td .expandable .collapse {
             }
           };
           divs.push(
+            //turn into a dropdown or something
             /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("div", null, "User: ", user.firstName, " ", user.lastName), /* @__PURE__ */ import_react3.default.createElement("button", { id: `voicecall${user._id}`, onClick: voicecall }, "\u{1F4DE}"), /* @__PURE__ */ import_react3.default.createElement("button", { id: `videocall${user._id}`, onClick: videocall }, "\u{1F4FD}\uFE0F"), /* @__PURE__ */ import_react3.default.createElement("button", { id: `view${user._id}`, onClick: view }, "\u{1F493}"))
           );
         });
-        this.setState({ availableUsers: divs });
+        this.setState({
+          availableUsers: divs
+        });
       }
     }
+    async getUnanweredCallInfo() {
+      let divs = Object.keys(this.state.unansweredCalls).map(async (key) => {
+        let call = this.state.unansweredCalls[key];
+        let caller = (await client.getUsers([call.caller]))[0];
+        let divId = `call${call._id}`;
+        let answerCall = () => {
+          webrtc.answerCall(call);
+          document.getElementById(divId)?.remove();
+        };
+        return /* @__PURE__ */ import_react3.default.createElement("div", { id: divId }, /* @__PURE__ */ import_react3.default.createElement("div", null, "User: ", caller.firstName, " ", caller.lastName), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: answerCall }, "Join Call"));
+      });
+      this.setState({ unansweredCallDivs: divs });
+    }
     render() {
-      return /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("div", { id: "receivedCalls" }), /* @__PURE__ */ import_react3.default.createElement("div", { id: "availableUsers" }, this.state.availableUsers && this.state.availableUsers.map((div) => div)), /* @__PURE__ */ import_react3.default.createElement("div", { id: "webrtcstream" }, this.state.webrtcStream));
+      return /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("div", { id: "receivedCalls" }, this.state.unansweredCallDivs && this.state.unansweredCallDivs.map((div) => div)), /* @__PURE__ */ import_react3.default.createElement("div", { id: "availableUsers" }, this.state.availableUsers && this.state.availableUsers.map((div) => div)), /* @__PURE__ */ import_react3.default.createElement("div", { id: "webrtcstream" }, this.state.webrtcStream));
     }
   };
 

@@ -11,14 +11,9 @@ const webrtcData = {
 state.setState(webrtcData);
 
                 
-export async function openRTC(userId) {
+export async function startCall(userId) {
     //send handshake
     let rtcId = `room${Math.floor(Math.random()*1000000000000000)}`;
-    
-    //has the user accepted the call?
-    let userAccepted = new Promise((res,rej) => {
-        res(true);
-    });
     
     let rtc = await webrtc.openRTC({ 
         _id:rtcId,
@@ -63,6 +58,7 @@ export async function openRTC(userId) {
     );
     //usersocket.run('runConnection',[user._id, 'run', ''])
 }
+
 
 webrtc.subscribe('receiveCallInformation', (id) => {
     

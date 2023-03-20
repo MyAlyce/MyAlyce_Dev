@@ -71,12 +71,50 @@ export class WebRTCComponent extends sComponent {
         let divs = Object.keys(this.state.unansweredCalls).map(async (key) => {
                         
             let call = this.state.unansweredCalls[key];
-            let caller = (await client.getUsers([call.caller]))[0]
+            let caller = (await client.getUsers([call.caller]))[0];
+            
+            call.onicecandidate = (ev) => {
+                if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
+                    let cid = `peercandidate${Math.floor(Math.random()*1000000000000000)}`;
+                    usersocket.run(
+                        'runConnection', //run this function on the backend router
+                        [
+                            call.caller, //run this connection 
+                            'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                            'receiveCallInformation', //run this function on the user's end
+                            [ //and pass these arguments
+                                {
+                                    _id:call._id, 
+                                    peercandidates:{[cid]:ev.candidate}
+                                }
+                            ]
+                        ]
+                    ).then((id) => {
+                        console.log('call information echoed from peer:', id);
+                    });
+                }
+            }
 
             let divId = `call${call._id}`;
 
-            let answerCall = () => {
-                webrtc.answerCall(call);
+            let answerCall = async () => {
+                let rtc = await webrtc.answerCall(call);
+                
+                usersocket.run(
+                    'runConnection', //run this function on the backend router
+                    [
+                        call.caller, //run this connection 
+                        'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                        'receiveCallInformation', //run this function on the user's end
+                        [ //and pass these arguments
+                            {
+                                _id:rtc._id, 
+                                peerdescription:rtc.peerdescription, //the peer needs to accept this
+                                caller:client.currentUser._id
+                            }
+                        ]
+                    ]
+                );
                 document.getElementById(divId)?.remove();
             }
 
