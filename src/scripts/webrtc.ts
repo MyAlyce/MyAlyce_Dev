@@ -40,6 +40,9 @@ export async function startCall(userId) {
         },
         ondatachannel:(ev) => {
             //the call is now live, add tracks
+        },
+        ontrack:(ev) => {
+            //received a media track, e.g. audio or video
         }
     });
 

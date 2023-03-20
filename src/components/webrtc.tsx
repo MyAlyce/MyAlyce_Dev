@@ -99,6 +99,10 @@ export class WebRTCComponent extends sComponent {
                 //the call is now live, add tracks
             } 
 
+            call.ontrack = (ev) => {
+                //received a media track, e.g. audio or video
+            }
+
             let divId = `call${call._id}`;
 
             let answerCall = async () => {
