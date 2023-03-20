@@ -37,6 +37,9 @@ export async function startCall(userId) {
                     console.log('call information echoed from peer:', id);
                 });
             }
+        },
+        ondatachannel:(ev) => {
+            //the call is now live, add tracks
         }
     });
 

@@ -95,6 +95,10 @@ export class WebRTCComponent extends sComponent {
                 }
             }
 
+            call.ondatachannel = (ev) => {
+                //the call is now live, add tracks
+            } 
+
             let divId = `call${call._id}`;
 
             let answerCall = async () => {
