@@ -13,6 +13,8 @@ export class WebRTCComponent extends sComponent {
         availableStreams:{}, //we can handle multiple connections too
         unansweredCalls:{}, //webrtc.unanswered reference
         unansweredCallDivs:undefined as undefined|any[],
+        chartDataDiv:undefined,
+        videoTrackDiv:undefined
     }
 
     constructor(props:any) {
@@ -97,10 +99,13 @@ export class WebRTCComponent extends sComponent {
 
             call.ondatachannel = (ev) => {
                 //the call is now live, add tracks
+                //data channel streams the device data
+                //todo:set the format proper
             } 
 
             call.ontrack = (ev) => {
                 //received a media track, e.g. audio or video
+                //video/audio channel, if video add a video tag, if audio make the audio context
             }
 
             let divId = `call${call._id}`;
@@ -147,7 +152,8 @@ export class WebRTCComponent extends sComponent {
                     { this.state.availableUsers && this.state.availableUsers.map((div) => div ) }
                 </div>
                 <div id='webrtcstream'>
-                    {  this.state.webrtcStream  }
+                    {  this.state.videoTrackDivDiv  }
+                    {  this.state.chartDataDiv  }
                 </div>
             </div>
         )
