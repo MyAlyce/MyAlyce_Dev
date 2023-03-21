@@ -48,9 +48,7 @@ export const graph = new Router({
         SessionsService,
         WorkerService
     },
-    roots:{
-        
-    }
+    roots:{}
 });
 
 let appState = {

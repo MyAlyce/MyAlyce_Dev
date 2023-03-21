@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { state } from 'graphscript';
+import { EventHandler, state } from 'graphscript';
 
 //These components share their state with the global state provided by graphscript's EventHandler, 
 //  and changes propagate both directions with setState
@@ -14,7 +14,7 @@ export class sComponent extends Component {
     unique = `component${Math.floor(Math.random()*1000000000000000)}`;
 
     constructor(
-        props={
+        props:{[key:string]:any, state?:EventHandler}={
             state:state //can apply a new state other than the global state so you can have states for certain pages for example
         }
     ) {
