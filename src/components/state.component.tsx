@@ -7,14 +7,17 @@ import { EventHandler, state } from 'graphscript';
 // It assumes all state keys are to be shared with global state, 
 //    so if you want unique properties on this component, enforce a random Id, qhich we provided with this.unique, e.g. state = { [this.unique+'.textColor']:'blue' }
 
-export class sComponent extends Component {
+export class sComponent extends Component<{[key:string]:any}> {
 
     statemgr = state;
     UPDATED = [] as any;
     unique = `component${Math.floor(Math.random()*1000000000000000)}`;
 
     constructor(
-        props:{[key:string]:any, state?:EventHandler}={
+        props:{
+            [key:string]:any,
+            state?:EventHandler
+        }={
             state:state //can apply a new state other than the global state so you can have states for certain pages for example
         }
     ) {

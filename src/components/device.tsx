@@ -13,11 +13,14 @@ import { mpu6050ChartSettings } from 'device-decoder/dist/src/devices/mpu6050';
 import { bme280ChartSettings } from 'device-decoder/dist/src/devices/bme280'
 import { ads131m08ChartSettings } from 'device-decoder/dist/src/devices/ads131m08';
 
+
+
 export class DeviceComponent extends sComponent {
     
     state = {
         deviceConnected:false,
-        device:undefined 
+        device:undefined,
+        remote:false
     }
 
     canvas = document.createElement('canvas');
@@ -25,8 +28,13 @@ export class DeviceComponent extends sComponent {
     plotter:WGLPlotter;
     subscriptions={} as any;
 
-    constructor(props:{lines?:{[key:string]:WebglLineProps}}) {
+    constructor(props:{
+        remote?:boolean
+        lines?:{[key:string]:WebglLineProps}
+    }) {
         super(props as any);
+
+        if(props.remote) this.state.remote = props.remote;
 
         this.canvas.style.width = '100%';
         this.canvas.style.height = '100%';
@@ -96,9 +104,13 @@ export class DeviceComponent extends sComponent {
     render() {
         return (
             <div>
-                { this.state.deviceConnected ? 
-                    <button onClick={connectDevice}>Connect</button> :
-                    <button onClick={disconnectDevice}>Disconnect</button>
+                { !this.state.remote && 
+                    <div>
+                    { this.state.deviceConnected ? 
+                        <button onClick={connectDevice}>Connect</button> :
+                        <button onClick={disconnectDevice}>Disconnect</button>
+                    } 
+                    </div>
                 }
                 <div className='chartContainer'>
                     <div ref={ ref => {ref?.appendChild(this.canvas); ref?.appendChild(this.overlay);} }></div>

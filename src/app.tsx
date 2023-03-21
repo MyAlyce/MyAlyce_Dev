@@ -1,8 +1,8 @@
 import React from 'react'
 import {state} from 'graphscript'
 import { sComponent } from './components/state.component';
-import { login } from './scripts/login';
-import { client, onLogin } from './scripts/client';
+import { login, logout } from './scripts/login';
+import { client, onLogin, onLogout } from './scripts/client';
 import { Login, Avatar, TopBar } from 'my-alyce-component-lib';
 import { SettingsView } from './components/SettingsView';
 
@@ -44,6 +44,12 @@ export class App extends sComponent {
         })
     }
 
+    logout() {
+        logout().then((res) => {
+            onLogout(res);
+        })
+    }
+
     setNavOpen(b:boolean) {
         this.setState({navOpen:b});
     }
@@ -69,8 +75,8 @@ export class App extends sComponent {
                         <Menu>
                             <button onClick={() => {this.setState({'route':'/dashboard', navOpen:false})}} id="home" className="menu-item">Dash</button>
                             <button onClick={() => this.setState({'route':'/peers',     navOpen:false})} className="menu-item">Peers</button>
-                            <button onClick={() => this.setState({'route':'/settings',  navOpen:false})} className="menu-item" >Profile</button>
-                            <button onClick={() => this.setState({'route':'/dev',  navOpen:false})} className="menu-item--small">DEV</button>
+                            <button onClick={() => this.setState({'route':'/history',  navOpen:false})} className="menu-item" >History</button>
+                            <button onClick={() => this.setState({'route':'/device',  navOpen:false})} className="menu-item--small">Device</button>
                         </Menu>
                         {/* <NavDrawer fixed="left" zIndex={102} isOpen={this.state.navOpen} 
                             brand={brand()} 
@@ -112,16 +118,16 @@ export class App extends sComponent {
                         <div id='viewcontent'>
                             <div id='route'>
                                 { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
-                                    <div>Dash</div> //<DashContainer/>
+                                    <div>Dashboard</div> 
                                 }
                                 { this.state.route.includes('peers') &&
-                                    <WebRTCComponent/> //<AuthList/>
+                                    <WebRTCComponent/>
                                 }
                                 { this.state.route.includes('settings') &&
-                                    <SettingsView/>
+                                    <div>Recordings</div>
                                 }
-                                { this.state.route.includes('dev') &&
-                                    <div>Dev</div> //<Dev/>
+                                { this.state.route.includes('device') &&
+                                    <SettingsView/>
                                 }
                             </div>
                         </div>

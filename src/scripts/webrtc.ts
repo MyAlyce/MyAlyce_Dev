@@ -1,11 +1,11 @@
 import { client, usersocket, webrtc } from "./client"
-import { state } from 'graphscript'
+import { state, WebRTCInfo, WebRTCProps } from 'graphscript'
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
 const webrtcData = {
     webrtcStream:undefined, //current active stream
-    availableStreams:{},
-    unansweredCalls:{}
+    availableStreams:{} as {[key:string]:WebRTCInfo}, //list of accepted calls
+    unansweredCalls:{} as {[key:string]:WebRTCProps & {caller:string}}
 }
 
 state.setState(webrtcData);
@@ -38,12 +38,12 @@ export async function startCall(userId) {
                 });
             }
         },
-        ondatachannel:(ev) => {
-            //the call is now live, add tracks
-        },
-        ontrack:(ev) => {
-            //received a media track, e.g. audio or video
-        }
+        // ondatachannel:(ev) => {
+        //     //the call is now live, set ev.channel.onmessage function and add media tracks etc.
+        // },
+        // ontrack:(ev) => {
+        //     //received a media track, e.g. audio or video
+        // }
     });
 
     usersocket.run(
@@ -61,9 +61,36 @@ export async function startCall(userId) {
             ]
         ]
     );
-    //usersocket.run('runConnection',[user._id, 'run', ''])
 }
 
+export let answerCall = async (call:WebRTCProps & {caller:string}) => {
+    let rtc = await webrtc.answerCall(call);
+    
+    usersocket.run(
+        'runConnection', //run this function on the backend router
+        [
+            call.caller, //run this connection 
+            'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+            'answerPeer', //run this function on the user's end
+            [ //and pass these arguments
+                {
+                    _id:rtc._id, 
+                    peerdescription:rtc.peerdescription, //the host needs this
+                    caller:client.currentUser._id
+                }
+            ]
+        ]
+    );
+
+    state.setState({
+        availableStreams:Object.assign(
+            state.data.availableStreams,
+            {
+                [rtc._id]:rtc
+            }
+        )
+    });
+}
 
 webrtc.subscribe('receiveCallInformation', (id) => {
     

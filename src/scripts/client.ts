@@ -26,19 +26,25 @@ export let client = new StructFrontend();
 export let sockets = new WSSfrontend();
 export let webrtc = new WebRTCfrontend();
 
-export let usersocket:WebSocketInfo = sockets.open({
-    host:config.host,
-    port:config.dataserverport,
-    path:'wss'
-});
+export let usersocket:WebSocketInfo;
 
-//debug
-usersocket.socket.addEventListener('message', (ev) => {
-    let data = ev.data;
-    console.log(ev.data);
-    if(data.includes('{')) data = JSON.parse(data);
-    client.baseServerCallback(ev.data)
-});
+let makeSocket = () => {
+    usersocket = sockets.open({
+        host:config.host,
+        port:config.dataserverport,
+        path:'wss'
+    });
+    
+    //debug
+    usersocket.socket.addEventListener('message', (ev) => {
+        let data = ev.data;
+        console.log(ev.data);
+        if(data.includes('{')) data = JSON.parse(data);
+        client.baseServerCallback(ev.data)
+    });
+}
+
+makeSocket();
 
 export const graph = new Router({
     services:{
@@ -114,6 +120,20 @@ export const onLogin = async (
     }          
 
     return undefined;
+}
+
+export const onLogout = (
+    result:{ type: 'FAIL'|'LOGOUT', data?:{err:Error}}
+) => {
+
+    usersocket.terminate();
+    makeSocket(); //this just lets the backend know this connection is no longer associated with the previous user
+
+    graph.setState({
+        isLoggedIn: false,
+        loggedInId: undefined,
+        viewingId: undefined
+    });
 }
 
 
