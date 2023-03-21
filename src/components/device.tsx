@@ -30,7 +30,8 @@ export class DeviceComponent extends sComponent {
 
     constructor(props:{
         remote?:boolean
-        lines?:{[key:string]:WebglLineProps}
+        lines?:{[key:string]:WebglLineProps},
+        deviceId?:string
     }) {
         super(props as any);
 
@@ -42,6 +43,8 @@ export class DeviceComponent extends sComponent {
         this.overlay.style.zIndex = '2';
         this.overlay.style.width = '100%';
         this.overlay.style.height = '100%';
+
+        //we can break these down into more toggleable plots next
 
         const defaultSettings = {
             hr: { sps: 1, nSec: 100, units: 'bpm' },
@@ -67,28 +70,28 @@ export class DeviceComponent extends sComponent {
         });
 
         Object.assign(this.subscriptions,{
-            emg:state.subscribeEvent('emg', (data) => {
+            emg:state.subscribeEvent(props.deviceId ? props.deviceId+'emg' : 'emg', (data) => {
                 this.plotter.__operator({ 0:data[0], 1:data[1] });
             }),
-            ppg:state.subscribeEvent('ppg', (ppg) => {
+            ppg:state.subscribeEvent(props.deviceId ? props.deviceId+'ppg' :'ppg', (ppg) => {
                 this.plotter.__operator(ppg);
             }),
-            hr:state.subscribeEvent('hr', (hr) => {
+            hr:state.subscribeEvent(props.deviceId ? props.deviceId+'hr' :'hr', (hr) => {
                 this.plotter.__operator({
                     hr: hr.bpm,
                     hrv: hr.change
                 });
             }),
-            breath:state.subscribeEvent('breath', (breath) => {
+            breath:state.subscribeEvent(props.deviceId ? props.deviceId+'breath' :'breath', (breath) => {
                 this.plotter.__operator({
                     breath:breath.bpm,
                     brv:breath.change
                 });
             }),
-            imu:state.subscribeEvent('imu', (imu) => {
+            imu:state.subscribeEvent(props.deviceId ? props.deviceId+'imu' :'imu', (imu) => {
                 this.plotter.__operator(imu);
             }),
-            env:state.subscribeEvent('env', (env) => {
+            env:state.subscribeEvent(props.deviceId ? props.deviceId+'env' :'env', (env) => {
                 this.plotter.__operator(env);
             })
         });
@@ -114,6 +117,7 @@ export class DeviceComponent extends sComponent {
                 }
                 <div className='chartContainer'>
                     <div ref={ ref => {ref?.appendChild(this.canvas); ref?.appendChild(this.overlay);} }></div>
+                    {/*this is an example of weird reactjs crap*/}
                 </div>
             </div>
         )

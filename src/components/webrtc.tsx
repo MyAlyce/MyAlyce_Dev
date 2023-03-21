@@ -20,9 +20,11 @@ export class WebRTCComponent extends sComponent {
     }
 
     subscriptions = {} as any;
+    deviceId?:string
 
-    constructor(props:any) {
+    constructor(props:{deviceId?:string}) {
         super(props);
+        if(props.deviceId) this.deviceId = props.deviceId;
         this.getUsers();
         this.getUnanweredCallInfo();
     }
@@ -54,7 +56,6 @@ export class WebRTCComponent extends sComponent {
                     if(this.state.availableStreams[user._id as string]) {
                         //add track
                     } else {
-                    
                     }
                 }
 
@@ -106,31 +107,29 @@ export class WebRTCComponent extends sComponent {
                 //the call is now live, add tracks
                 //data channel streams the device data
                 ev.channel.onmessage = (ev) => { 
-                    //need to rework state keys from remote webrtc
-                    // so it's compatible with multiple streams + local stream (ez to do just lazy tonight)
                     if(ev.data.emg) {
-                        state.setValue('emg', ev.data.emg);
+                        state.setValue(this.deviceId ? this.deviceId+'emg' : 'emg', ev.data.emg);
                     } 
                     if (ev.data.ppg) {
-                        state.setValue('ppg', ev.data.ppg);
+                        state.setValue(this.deviceId ? this.deviceId+'ppg' : 'ppg', ev.data.ppg);
                     } 
                     if (ev.data.hr) {
-                        state.setValue('hr', ev.data.hr);
+                        state.setValue(this.deviceId ? this.deviceId+'hr' : 'hr', ev.data.hr);
                     } 
                     if (ev.data.hrv) {
-                        state.setValue('hrv', ev.data.hrv);
+                        state.setValue(this.deviceId ? this.deviceId+'hrv' : 'hrv', ev.data.hrv);
                     } 
                     if (ev.data.breath) {
-                        state.setValue('breath', ev.data.breath);
+                        state.setValue(this.deviceId ? this.deviceId+'breath' : 'breath', ev.data.breath);
                     } 
                     if (ev.data.brv) {
-                        state.setValue('breath', ev.data.brv);
+                        state.setValue(this.deviceId ? this.deviceId+'breath' : 'breath', ev.data.brv);
                     } 
                     if (ev.data.imu) {
-                        state.setValue('imu', ev.data.imu);
+                        state.setValue(this.deviceId ? this.deviceId+'imu' : 'imu', ev.data.imu);
                     } 
                     if (ev.data.env) {
-                        state.setValue('env', ev.data.env);
+                        state.setValue(this.deviceId ? this.deviceId+'env' : 'env', ev.data.env);
                     } //else if (ev.data.emg2) {}
                 }
 
@@ -140,6 +139,7 @@ export class WebRTCComponent extends sComponent {
                         <div>
                             <DeviceComponent
                               remote={false}
+                              deviceId={call._id}
                             />
                         </div>
                     )
@@ -182,28 +182,28 @@ export class WebRTCComponent extends sComponent {
             let stream = (this.state.availableStreams)[streamId as string] as WebRTCInfo;
             this.subscriptions[streamId] = {
                 emg:state.subscribeEvent('emg', (data) => {
-                    stream.send({ emg:data });
+                    stream.send({ [streamId+'emg']:data });
                 }),
                 ppg:state.subscribeEvent('ppg', (ppg) => {
-                    stream.send({ppg});
+                    stream.send({ [streamId+'ppg']:ppg });
                 }),
                 hr:state.subscribeEvent('hr', (hr) => {
                     stream.send({
-                        hr: hr.bpm,
-                        hrv: hr.change
+                        [streamId+'hr']: hr.bpm,
+                        [streamId+'hrv']: hr.change
                     });
                 }),
                 breath:state.subscribeEvent('breath', (breath) => {
                     stream.send({
-                        breath:breath.bpm,
-                        brv:breath.change
+                        [streamId+'breath']:breath.bpm,
+                        [streamId+'brv']:breath.change
                     });
                 }),
                 imu:state.subscribeEvent('imu', (imu) => {
-                    stream.send({imu});
+                    stream.send({[streamId+'imu']:imu});
                 }),
                 env:state.subscribeEvent('env', (env) => {
-                    stream.send({env});
+                    stream.send({[streamId+'env']:env});
                 })
             };
 
