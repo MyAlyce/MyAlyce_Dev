@@ -126,7 +126,7 @@ export class WebRTCComponent extends sComponent {
                         state.setValue(this.deviceId ? this.deviceId+'breath' : 'breath', ev.data.breath);
                     } 
                     if (ev.data.brv) {
-                        state.setValue(this.deviceId ? this.deviceId+'breath' : 'breath', ev.data.brv);
+                        state.setValue(this.deviceId ? this.deviceId+'brv' : 'brv', ev.data.brv);
                     } 
                     if (ev.data.imu) {
                         state.setValue(this.deviceId ? this.deviceId+'imu' : 'imu', ev.data.imu);
