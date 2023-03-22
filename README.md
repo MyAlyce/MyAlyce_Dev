@@ -5,7 +5,7 @@
 
 With the latest NodeJS LTS installed:
 
-Install depedencies, build, and run `npm i && npm start`
+Install dependencies, build, and run `npm i && npm start`
 
 #### Android
 
