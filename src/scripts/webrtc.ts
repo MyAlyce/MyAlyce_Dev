@@ -24,7 +24,7 @@ export async function startCall(userId) {
                     'runConnection', //run this function on the backend router
                     [
                         userId, //run this connection 
-                        'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                        'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
                         'receiveCallInformation', //run this function on the user's end
                         [ //and pass these arguments
                             {
@@ -46,11 +46,11 @@ export async function startCall(userId) {
         // }
     });
 
-    usersocket.run(
+    usersocket.post(
         'runConnection', //run this function on the backend router
         [
             userId, //run this connection 
-            'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+            'postAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
             'receiveCallInformation', //run this function on the user's end
             [ //and pass these arguments
                 {
