@@ -24,6 +24,8 @@ if(fs.existsSync('.env'))
 
 //NodeJS script
 
+export let db;
+
 const ContentServer = new Router({
     graph:{
         'wss':WSSbackend,
@@ -118,7 +120,7 @@ const initDB = (router:Router) => {
     console.log('Connecting to MongoDB URI:', MONGODB_URI);
     mongoose.connect(MONGODB_URI)
         .then(() => {
-            const db = new StructBackend({},{
+            db = new StructBackend({},{
                 mode:'mongo', //'local'
                 db: mongoose.connections[0].db, //set database
                 users:router.users as any,
@@ -132,7 +134,7 @@ const initDB = (router:Router) => {
             console.log("MongoDB Connected!");
         })
         .catch((e:any) => {
-            const db = new StructBackend({},{
+            db = new StructBackend({},{
                 mode:'local', //'local'
                 users:router.users as any,
                 useAuths:false //bypass our permissions system for users to be able to view each other
