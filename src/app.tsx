@@ -18,7 +18,7 @@ state.subscribeEvent('route', (route:string) => {
 });
   
 
-const TESTVIEWS = true; //skip login page (debug)
+const TESTVIEWS = false //true; //skip login page (debug)
 
 const brand = () => {
     return <img src="dist/assets/myalyce.png" width='100px' alt='MyAlyce'/>
@@ -62,7 +62,7 @@ export class App extends sComponent {
             <div>
                 {(!this.state.isLoggedIn && !TESTVIEWS) && 
                     <Login
-                        useRegularLogin={true}
+                        useRegularLogin={false}
                         onLoginClick={this.onLoginClick}
                         thirdPartyLogins={[
                             {

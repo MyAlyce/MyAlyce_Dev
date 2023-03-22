@@ -1,7 +1,7 @@
 //google login and backend setup
 import { App as RealmApp, Credentials, handleAuthRedirect } from "realm-web";
 
-const realmId = 'buckleup-ilscy';
+const realmId = 'myalyce_dev-fyfvh';
 
 export const realm = new RealmApp(realmId);
 

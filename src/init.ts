@@ -41,7 +41,7 @@ async function initThirdPartyAPIs(u:Partial<ProfileStruct>) {
 
 
 //TEST
-const TESTUSER = true;
+const TESTUSER = false;
 
 
 
