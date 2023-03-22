@@ -66256,7 +66256,6 @@
       };
     }
     render() {
-      console.log(this.state.deviceConnected);
       return /* @__PURE__ */ import_react2.default.createElement("div", null, !this.state.deviceConnected ? /* @__PURE__ */ import_react2.default.createElement("button", { onClick: connectDevice }, "Connect") : /* @__PURE__ */ import_react2.default.createElement("button", { onClick: disconnectDevice }, "Disconnect"));
     }
   };

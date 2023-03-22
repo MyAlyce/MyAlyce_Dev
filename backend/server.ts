@@ -7,7 +7,7 @@ import {
     SessionsService, 
     User, 
     SocketServerInfo 
-} from 'graphscript-node'//'../../graphscript/index.node'//
+} from '../../graphscript/index.node'//'graphscript-node'//
 import { 
     StructBackend 
 } from 'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'//'graphscript-services'
@@ -46,9 +46,18 @@ const ContentServer = new Router({
                                 // response.setHeader('Cross-Origin-Embedder-Policy','require-corp');
                             }
                         }, //serve the built dist
-                        '/*':{ //redirect subdomains to main page which sort of fakes the subdomains from state
+                        'dashboard':{ //redirect subdomains to main page which sort of fakes the subdomains from state
                             redirect:'/'
-                        }, //serve the built dist
+                        }, 
+                        'device':{ //redirect subdomains to main page which sort of fakes the subdomains from state
+                            redirect:'/'
+                        },
+                        'peers':{ //redirect subdomains to main page which sort of fakes the subdomains from state
+                            redirect:'/'
+                        },
+                        'history':{ //redirect subdomains to main page which sort of fakes the subdomains from state
+                            redirect:'/'
+                        },
                         'config':{
                             template:'tinybuild.config.js',
                             onrequest:function (self, node, request, response) {
