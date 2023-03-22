@@ -7,7 +7,7 @@ import {
     SessionsService, 
     User, 
     SocketServerInfo 
-} from '../../graphscript/index.node'//'graphscript-node'//
+} from 'graphscript-node'//'../../graphscript/index.node'////
 import { 
     StructBackend 
 } from 'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'//'graphscript-services'
