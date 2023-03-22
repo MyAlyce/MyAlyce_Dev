@@ -5,7 +5,7 @@ import { state, WebRTCInfo, WebRTCProps } from 'graphscript'
 const webrtcData = {
     webrtcStream:undefined, //current active stream
     availableStreams:{} as {[key:string]:WebRTCInfo}, //list of accepted calls
-    unansweredCalls:{} as {[key:string]:WebRTCProps & {caller:string}}
+    unansweredCalls:{} as {[key:string]:WebRTCProps & {caller:string, firstName?:string, lastName?: string}}
 }
 
 state.setState(webrtcData);
@@ -76,7 +76,9 @@ export let answerCall = async (call:WebRTCProps & {caller:string}) => {
                 {
                     _id:rtc._id, 
                     peerdescription:rtc.peerdescription, //the host needs this
-                    caller:client.currentUser._id
+                    caller:client.currentUser._id,
+                    firstName:client.currentUser.firstName,
+                    lastName:client.currentUser.lastName
                 }
             ]
         ]

@@ -1,6 +1,10 @@
 
-import { initDevice, Devices, FilterSettings } from 'device-decoder'
+import { initDevice, Devices, FilterSettings, workers } from 'device-decoder'
+
+import gsworker from './device.worker'
+
 import { state } from 'graphscript';
+import { ByteParser } from 'device-decoder/src/util/ByteParser';
 
 let device;
 
@@ -9,8 +13,59 @@ export function disconnectDevice() {
     state.setState({device:undefined});
 }
 
+function genTimestamps(ct, sps, from?) {
+    let now = from ? from : Date.now();
+    let toInterp = [now - ct * 1000 / sps, now];
+    return ByteParser.upsample(toInterp, ct);
+}
+
 export async function connectDevice() {
-    const device = await initDevice(
+
+    const hrworker = workers.addWorker({url:gsworker});
+    const brworker = workers.addWorker({url:gsworker});
+
+    hrworker.post('loadFromTemplate',['beat_detect','hr',{
+        sps:100
+    }]);
+    brworker.post('loadFromTemplate',['beat_detect','breath',{
+        sps:100
+    }]);
+
+    hrworker.subscribe('hr', (data: {
+        bpm: number,
+        change: number, //lower is better
+        height0: number,
+        height1: number,
+        timestamp: number
+    }) => {
+        const hr = {
+            hr: data.bpm,
+            hrv: data.change,
+            timestamp: data.timestamp
+        };
+
+        state.setValue('hr', hr);
+
+    });
+    brworker.subscribe('breath', (data: {
+        bpm: number,
+        change: number, //lower is better
+        height0: number,
+        height1: number,
+        timestamp: number
+    }) => {
+        const breath = {
+            breath: data.bpm,
+            brv: data.change,
+            timestamp: data.timestamp
+        };
+
+        state.setValue('breath', breath);
+
+    });
+
+
+    device = await initDevice(
         Devices['BLE']['nrf5x'],
         {
             ondecoded: { //after data comes back from codec
@@ -26,6 +81,12 @@ export async function connectDevice() {
                     timestamp: number
                 }) => {
                     state.setValue('ppg', data);
+                    
+                    let d = Object.assign({}, data);
+                    d.timestamp = genTimestamps(32, 100, data.timestamp) as any;
+                    hrworker.post('hr', d);
+                    brworker.post('breath', d);
+
                 }, //max30102
                 '0004cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
                     ax: number[],

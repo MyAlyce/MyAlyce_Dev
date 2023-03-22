@@ -7,17 +7,18 @@ import { WGLPlotter } from '../scripts/webglplot/plotter';
 
 import plotworker from '../scripts/webglplot/canvas.worker'
 import { WebglLineProps } from 'webgl-plot-utils';
-import { nrf5x_usbChartSettings } from 'device-decoder/dist/src/devices/nrf5x_usb';
-import { max3010xChartSettings } from 'device-decoder/dist/src/devices/max30102';
-import { mpu6050ChartSettings } from 'device-decoder/dist/src/devices/mpu6050';
-import { bme280ChartSettings } from 'device-decoder/dist/src/devices/bme280'
-import { ads131m08ChartSettings } from 'device-decoder/dist/src/devices/ads131m08';
+
+import { max3010xChartSettings } from 'device-decoder/src/devices/max30102';
+import { mpu6050ChartSettings } from 'device-decoder/src/devices/mpu6050';
+import { bme280ChartSettings } from 'device-decoder/src/devices/bme280'
+import { ads131m08ChartSettings } from 'device-decoder/src/devices/ads131m08';
+import { DeviceConnect } from './DeviceConnect';
 
 
 
 export class DeviceComponent extends sComponent {
     
-    state = {
+    state = { //synced with global state
         deviceConnected:false,
         device:undefined,
         remote:false
@@ -39,8 +40,12 @@ export class DeviceComponent extends sComponent {
 
         this.canvas.style.width = '100%';
         this.canvas.style.height = '100%';
-        this.overlay.style.position = 'absolute';
-        this.overlay.style.zIndex = '2';
+        this.canvas.width = 800;
+        this.canvas.height = 600;
+        this.canvas.style.zIndex = '1';
+        this.overlay.style.transform = 'translateY(-100%)'
+        this.overlay.width = 800;
+        this.overlay.height = 600;
         this.overlay.style.width = '100%';
         this.overlay.style.height = '100%';
 
@@ -98,8 +103,8 @@ export class DeviceComponent extends sComponent {
 
     }
 
-    componentWillUnmount(): void {
-        for(const key of this.subscriptions) {
+    componentWillUnmount() {
+        for(const key in this.subscriptions) {
             state.unsubscribeEvent(key, this.subscriptions[key]);
         }
     }
@@ -107,18 +112,17 @@ export class DeviceComponent extends sComponent {
     render() {
         return (
             <div>
+                <div>Device Connect</div>
                 { !this.state.remote && 
-                    <div>
-                    { this.state.deviceConnected ? 
-                        <button onClick={connectDevice}>Connect</button> :
-                        <button onClick={disconnectDevice}>Disconnect</button>
-                    } 
-                    </div>
+                    <DeviceConnect/>
                 }
-                <div className='chartContainer'>
-                    <div ref={ ref => {ref?.appendChild(this.canvas); ref?.appendChild(this.overlay);} }></div>
-                    {/*this is an example of weird reactjs crap*/}
+                <div className='chartContainer' ref={ (ref) => {
+                    ref?.appendChild(this.canvas); 
+                    ref?.appendChild(this.overlay);
+                    /*this is an example of weird reactjs crap*/
+                }}>
                 </div>
+                
             </div>
         )
     }

@@ -8,7 +8,9 @@ import { SettingsView } from './components/SettingsView';
 
 //@ts-ignore
 import {slide as Menu} from 'react-burger-menu'
-import { WebRTCComponent } from './components/webrtc';
+import { WebRTCComponent } from './components/WebRTC';
+import { Dashboard } from './components/Dashboard';
+import { Recordings } from './components/Recordings';
 
 state.subscribeEvent('route', (route:string) => {
     window.history.pushState(undefined, route, location.origin + route); //uhh
@@ -21,7 +23,7 @@ const brand = () => {
     return <img src="dist/assets/myalyce.png" width='100px' alt='MyAlyce'/>
 };
   
-
+//note we're using sComponent which has some extended functionality for a global state
 export class App extends sComponent {
 
     state = {
@@ -118,13 +120,13 @@ export class App extends sComponent {
                         <div id='viewcontent'>
                             <div id='route'>
                                 { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
-                                    <div>Dashboard</div> 
+                                    <Dashboard/>
                                 }
                                 { this.state.route.includes('peers') &&
                                     <WebRTCComponent/>
                                 }
                                 { this.state.route.includes('settings') &&
-                                    <div>Recordings</div>
+                                    <Recordings/>
                                 }
                                 { this.state.route.includes('device') &&
                                     <SettingsView/>

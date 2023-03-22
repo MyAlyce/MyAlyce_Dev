@@ -3,7 +3,7 @@ import {ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 import React from 'react'
 import { sComponent } from './state.component';
 import { state, WebRTCInfo, WebRTCProps } from "graphscript";
-import { DeviceComponent } from "./device";
+import { DeviceComponent } from "./Device";
 import { answerCall } from "../scripts/webrtc";
 
 export class WebRTCComponent extends sComponent {
@@ -25,6 +25,9 @@ export class WebRTCComponent extends sComponent {
     constructor(props:{deviceId?:string}) {
         super(props);
         if(props.deviceId) this.deviceId = props.deviceId;
+    }
+
+    componentDidMount() {
         this.getUsers();
         this.getUnanweredCallInfo();
     }
@@ -219,11 +222,16 @@ export class WebRTCComponent extends sComponent {
         return (
             <div>
                 <div id='receivedCalls'>
+                    Received Calls
                     { this.state.unansweredCallDivs && this.state.unansweredCallDivs.map((div) => div ) }
                 </div>
+                <hr/>
                 <div id='availableUsers'>
+                    Available Users
                     { this.state.availableUsers && this.state.availableUsers.map((div) => div ) }
                 </div>
+                <hr/>
+                    Stream:
                 <div id='webrtcstream'>
                     {  this.state.videoTrackDiv  }
                     {  this.state.chartDataDiv  }

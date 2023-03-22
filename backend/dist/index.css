@@ -2093,6 +2093,12 @@ select {
   }
 }
 
+/* src/styles/styles.css */
+.chartContainer {
+  width: 100%;
+  height: 500px;
+}
+
 /* src/styles/index.scss */
 .center-child {
   display: flex;

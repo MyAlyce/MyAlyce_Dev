@@ -6,7 +6,7 @@ import { sComponent } from './state.component';
 
 export class SettingsView extends sComponent  {
 
-    state = {
+    state = { //synced with global state
         viewingId: undefined
     }
 

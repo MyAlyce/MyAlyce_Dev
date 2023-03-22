@@ -8913,7 +8913,12 @@ var require_index_node = __commonJS({
           return connection.terminate();
         };
         this.runConnection = (endpoint, method, args) => {
-          let sendTo = this.getConnection(endpoint, method);
+          let sendTo;
+          if (method.indexOf("All") > -1) {
+            sendTo = this.users[endpoint];
+          } else {
+            sendTo = this.getConnection(endpoint, method);
+          }
           if (sendTo)
             return sendTo[method](...args);
         };

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { EventHandler, state } from 'graphscript';
 
 //These components share their state with the global state provided by graphscript's EventHandler, 
-//  and changes propagate both directions with setState
+//  and changes propagate both directions with setState on the component state or global state
 
 // It assumes all state keys are to be shared with global state, 
 //    so if you want unique properties on this component, enforce a random Id, qhich we provided with this.unique, e.g. state = { [this.unique+'.textColor']:'blue' }
@@ -23,7 +23,7 @@ export class sComponent extends Component<{[key:string]:any}> {
     ) {
         super(props);
 
-        if(props.state)
+        if(props.state) //synced with global state
             this.statemgr = props.state;
 
         //lets overload setState
