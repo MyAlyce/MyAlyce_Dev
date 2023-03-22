@@ -114,7 +114,7 @@ export class App extends sComponent {
                             },
                             {
                                 children:(<p style={{fontSize:'16px'}}>logout</p>),
-                                onClick:()=>{}
+                                onClick:()=>{this.logout()}
                             }
                             ]}  
                         /> 

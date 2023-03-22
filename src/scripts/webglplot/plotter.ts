@@ -37,10 +37,12 @@ export class WGLPlotter {
             //console.log(this); // should be worker scope on the thread
             
             let onresize = (o) => {    
-                canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight;
-                options.overlay.width = canvas.clientWidth; options.overlay.height = canvas.clientHeight;
-                ((this.plotter.plots[options._id].plot as any).webgl as WebGLRenderingContext).viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
-                (this.plotter.plots[options._id].plot as any).update();
+                if(canvas.clientHeight) {
+                    canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight;
+                    options.overlay.width = canvas.clientWidth; options.overlay.height = canvas.clientHeight;
+                    ((this.plotter.plots[options._id].plot as any).webgl as WebGLRenderingContext).viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
+                    (this.plotter.plots[options._id].plot as any).update();
+                }
             }
 
             if(typeof window !== 'undefined') window.addEventListener('resize',onresize);

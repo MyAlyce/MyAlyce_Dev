@@ -57457,7 +57457,7 @@
   // src/components/WebRTC.tsx
   var import_react4 = __toESM(require_react(), 1);
 
-  // src/components/device.tsx
+  // src/components/Device.tsx
   var import_react3 = __toESM(require_react(), 1);
 
   // src/scripts/webglplot/canvas.worker.ts
@@ -58249,12 +58249,14 @@
         const init2 = (options2, canvas, context) => {
           this.plotter.initPlot(options2);
           let onresize = (o) => {
-            canvas.width = canvas.clientWidth;
-            canvas.height = canvas.clientHeight;
-            options2.overlay.width = canvas.clientWidth;
-            options2.overlay.height = canvas.clientHeight;
-            this.plotter.plots[options2._id].plot.webgl.viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
-            this.plotter.plots[options2._id].plot.update();
+            if (canvas.clientHeight) {
+              canvas.width = canvas.clientWidth;
+              canvas.height = canvas.clientHeight;
+              options2.overlay.width = canvas.clientWidth;
+              options2.overlay.height = canvas.clientHeight;
+              this.plotter.plots[options2._id].plot.webgl.viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
+              this.plotter.plots[options2._id].plot.update();
+            }
           };
           if (typeof window !== "undefined")
             window.addEventListener("resize", onresize);
@@ -66259,7 +66261,7 @@
     }
   };
 
-  // src/components/device.tsx
+  // src/components/Device.tsx
   var Device = class extends sComponent {
     constructor(props) {
       super(props);
@@ -66722,6 +66724,7 @@
             {
               children: /* @__PURE__ */ import_react8.default.createElement("p", { style: { fontSize: "16px" } }, "logout"),
               onClick: () => {
+                this.logout();
               }
             }
           ]

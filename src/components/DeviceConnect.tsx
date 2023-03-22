@@ -10,8 +10,6 @@ export class DeviceConnect extends sComponent {
     }
     
     render() {
-
-        console.log(this.state.deviceConnected)
         return (                    
             <div>
             { !this.state.deviceConnected ? 
