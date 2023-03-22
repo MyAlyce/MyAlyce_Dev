@@ -1,6 +1,6 @@
 import React from 'react'
 import { sComponent } from './state.component'
-import { DeviceComponent } from './Device'
+import { Device } from './Device'
 import { StreamSelect } from './StreamSelect'
 
 export class Dashboard extends sComponent {
@@ -23,7 +23,7 @@ export class Dashboard extends sComponent {
                 </div>
                 {/*Chart*/}
                 <div>
-                    <DeviceComponent 
+                    <Device 
                         remote={!!this.state.streamSelected}
                         deviceId={this.state.streamSelected}
                     />

@@ -11,6 +11,7 @@ import {slide as Menu} from 'react-burger-menu'
 import { WebRTCComponent } from './components/WebRTC';
 import { Dashboard } from './components/Dashboard';
 import { Recordings } from './components/Recordings';
+import { Device } from './components/device';
 
 state.subscribeEvent('route', (route:string) => {
     window.history.pushState(undefined, route, location.origin + route); //uhh
@@ -129,7 +130,7 @@ export class App extends sComponent {
                                     <Recordings/>
                                 }
                                 { this.state.route.includes('device') &&
-                                    <SettingsView/>
+                                    <Device/>
                                 }
                             </div>
                         </div>

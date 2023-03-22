@@ -16,7 +16,7 @@ import { DeviceConnect } from './DeviceConnect';
 
 
 
-export class DeviceComponent extends sComponent {
+export class Device extends sComponent {
     
     state = { //synced with global state
         deviceConnected:false,

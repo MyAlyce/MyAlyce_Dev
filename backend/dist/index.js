@@ -58319,7 +58319,7 @@
             canvas.height = canvas.clientHeight;
             options2.overlay.width = canvas.clientWidth;
             options2.overlay.height = canvas.clientHeight;
-            this.plotter.plots[options2._id].plot.webgl.viewport(0, 0, canvas.width, canvas.height);
+            this.plotter.plots[options2._id].plot.webgl.viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
             this.plotter.plots[options2._id].plot.update();
           };
           if (typeof window !== "undefined")

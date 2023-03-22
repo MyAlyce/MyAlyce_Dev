@@ -39,7 +39,7 @@ export class WGLPlotter {
             let onresize = (o) => {    
                 canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight;
                 options.overlay.width = canvas.clientWidth; options.overlay.height = canvas.clientHeight;
-                ((this.plotter.plots[options._id].plot as any).webgl as WebGLRenderingContext).viewport(0, 0, canvas.width, canvas.height);
+                ((this.plotter.plots[options._id].plot as any).webgl as WebGLRenderingContext).viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
                 (this.plotter.plots[options._id].plot as any).update();
             }
 
