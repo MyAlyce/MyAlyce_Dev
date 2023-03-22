@@ -3,7 +3,7 @@ import {ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 import React from 'react'
 import { sComponent } from './state.component';
 import { state, WebRTCInfo, WebRTCProps } from "graphscript";
-import { DeviceComponent } from "./Device";
+import { Device } from "./Device";
 import { answerCall } from "../scripts/webrtc";
 
 export class WebRTCComponent extends sComponent {
@@ -140,7 +140,7 @@ export class WebRTCComponent extends sComponent {
                 this.setState({
                     chartDataDiv:(
                         <div>
-                            <DeviceComponent
+                            <Device
                               remote={false}
                               deviceId={call._id}
                             />

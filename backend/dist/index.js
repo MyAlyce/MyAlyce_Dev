@@ -2397,9 +2397,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React11 = require_react();
+          var React10 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React11.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React10.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4004,7 +4004,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React11.Children.forEach(props.children, function(child) {
+                  React10.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12451,7 +12451,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React11.Component().refs;
+          var emptyRefsObject = new React10.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -26737,2287 +26737,6 @@
     }
   });
 
-  // node_modules/@giveback007/fitbit-api/node_modules/tslib/tslib.es6.js
-  var tslib_es6_exports2 = {};
-  __export(tslib_es6_exports2, {
-    __assign: () => __assign2,
-    __asyncDelegator: () => __asyncDelegator2,
-    __asyncGenerator: () => __asyncGenerator2,
-    __asyncValues: () => __asyncValues2,
-    __await: () => __await2,
-    __awaiter: () => __awaiter2,
-    __classPrivateFieldGet: () => __classPrivateFieldGet2,
-    __classPrivateFieldSet: () => __classPrivateFieldSet2,
-    __createBinding: () => __createBinding2,
-    __decorate: () => __decorate2,
-    __exportStar: () => __exportStar2,
-    __extends: () => __extends3,
-    __generator: () => __generator2,
-    __importDefault: () => __importDefault2,
-    __importStar: () => __importStar2,
-    __makeTemplateObject: () => __makeTemplateObject2,
-    __metadata: () => __metadata2,
-    __param: () => __param2,
-    __read: () => __read2,
-    __rest: () => __rest2,
-    __spread: () => __spread2,
-    __spreadArray: () => __spreadArray3,
-    __spreadArrays: () => __spreadArrays2,
-    __values: () => __values2
-  });
-  function __extends3(d2, b) {
-    if (typeof b !== "function" && b !== null)
-      throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics3(d2, b);
-    function __() {
-      this.constructor = d2;
-    }
-    d2.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  }
-  function __rest2(s, e) {
-    var t3 = {};
-    for (var p2 in s)
-      if (Object.prototype.hasOwnProperty.call(s, p2) && e.indexOf(p2) < 0)
-        t3[p2] = s[p2];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-      for (var i4 = 0, p2 = Object.getOwnPropertySymbols(s); i4 < p2.length; i4++) {
-        if (e.indexOf(p2[i4]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i4]))
-          t3[p2[i4]] = s[p2[i4]];
-      }
-    return t3;
-  }
-  function __decorate2(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d2;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i4 = decorators.length - 1; i4 >= 0; i4--)
-        if (d2 = decorators[i4])
-          r = (c < 3 ? d2(r) : c > 3 ? d2(target, key, r) : d2(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  }
-  function __param2(paramIndex, decorator) {
-    return function(target, key) {
-      decorator(target, key, paramIndex);
-    };
-  }
-  function __metadata2(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(metadataKey, metadataValue);
-  }
-  function __awaiter2(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
-      });
-    }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e) {
-          reject(e);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  }
-  function __generator2(thisArg, body) {
-    var _ = { label: 0, sent: function() {
-      if (t3[0] & 1)
-        throw t3[1];
-      return t3[1];
-    }, trys: [], ops: [] }, f, y4, t3, g2;
-    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-      return this;
-    }), g2;
-    function verb(n) {
-      return function(v2) {
-        return step([n, v2]);
-      };
-    }
-    function step(op) {
-      if (f)
-        throw new TypeError("Generator is already executing.");
-      while (_)
-        try {
-          if (f = 1, y4 && (t3 = op[0] & 2 ? y4["return"] : op[0] ? y4["throw"] || ((t3 = y4["return"]) && t3.call(y4), 0) : y4.next) && !(t3 = t3.call(y4, op[1])).done)
-            return t3;
-          if (y4 = 0, t3)
-            op = [op[0] & 2, t3.value];
-          switch (op[0]) {
-            case 0:
-            case 1:
-              t3 = op;
-              break;
-            case 4:
-              _.label++;
-              return { value: op[1], done: false };
-            case 5:
-              _.label++;
-              y4 = op[1];
-              op = [0];
-              continue;
-            case 7:
-              op = _.ops.pop();
-              _.trys.pop();
-              continue;
-            default:
-              if (!(t3 = _.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                _ = 0;
-                continue;
-              }
-              if (op[0] === 3 && (!t3 || op[1] > t3[0] && op[1] < t3[3])) {
-                _.label = op[1];
-                break;
-              }
-              if (op[0] === 6 && _.label < t3[1]) {
-                _.label = t3[1];
-                t3 = op;
-                break;
-              }
-              if (t3 && _.label < t3[2]) {
-                _.label = t3[2];
-                _.ops.push(op);
-                break;
-              }
-              if (t3[2])
-                _.ops.pop();
-              _.trys.pop();
-              continue;
-          }
-          op = body.call(thisArg, _);
-        } catch (e) {
-          op = [6, e];
-          y4 = 0;
-        } finally {
-          f = t3 = 0;
-        }
-      if (op[0] & 5)
-        throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
-    }
-  }
-  function __exportStar2(m, o) {
-    for (var p2 in m)
-      if (p2 !== "default" && !Object.prototype.hasOwnProperty.call(o, p2))
-        __createBinding2(o, m, p2);
-  }
-  function __values2(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i4 = 0;
-    if (m)
-      return m.call(o);
-    if (o && typeof o.length === "number")
-      return {
-        next: function() {
-          if (o && i4 >= o.length)
-            o = void 0;
-          return { value: o && o[i4++], done: !o };
-        }
-      };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-  }
-  function __read2(o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m)
-      return o;
-    var i4 = m.call(o), r, ar = [], e;
-    try {
-      while ((n === void 0 || n-- > 0) && !(r = i4.next()).done)
-        ar.push(r.value);
-    } catch (error) {
-      e = { error };
-    } finally {
-      try {
-        if (r && !r.done && (m = i4["return"]))
-          m.call(i4);
-      } finally {
-        if (e)
-          throw e.error;
-      }
-    }
-    return ar;
-  }
-  function __spread2() {
-    for (var ar = [], i4 = 0; i4 < arguments.length; i4++)
-      ar = ar.concat(__read2(arguments[i4]));
-    return ar;
-  }
-  function __spreadArrays2() {
-    for (var s = 0, i4 = 0, il = arguments.length; i4 < il; i4++)
-      s += arguments[i4].length;
-    for (var r = Array(s), k = 0, i4 = 0; i4 < il; i4++)
-      for (var a = arguments[i4], j = 0, jl = a.length; j < jl; j++, k++)
-        r[k] = a[j];
-    return r;
-  }
-  function __spreadArray3(to, from, pack) {
-    if (pack || arguments.length === 2)
-      for (var i4 = 0, l = from.length, ar; i4 < l; i4++) {
-        if (ar || !(i4 in from)) {
-          if (!ar)
-            ar = Array.prototype.slice.call(from, 0, i4);
-          ar[i4] = from[i4];
-        }
-      }
-    return to.concat(ar || Array.prototype.slice.call(from));
-  }
-  function __await2(v2) {
-    return this instanceof __await2 ? (this.v = v2, this) : new __await2(v2);
-  }
-  function __asyncGenerator2(thisArg, _arguments, generator) {
-    if (!Symbol.asyncIterator)
-      throw new TypeError("Symbol.asyncIterator is not defined.");
-    var g2 = generator.apply(thisArg, _arguments || []), i4, q = [];
-    return i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
-      return this;
-    }, i4;
-    function verb(n) {
-      if (g2[n])
-        i4[n] = function(v2) {
-          return new Promise(function(a, b) {
-            q.push([n, v2, a, b]) > 1 || resume(n, v2);
-          });
-        };
-    }
-    function resume(n, v2) {
-      try {
-        step(g2[n](v2));
-      } catch (e) {
-        settle(q[0][3], e);
-      }
-    }
-    function step(r) {
-      r.value instanceof __await2 ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
-    }
-    function fulfill(value) {
-      resume("next", value);
-    }
-    function reject(value) {
-      resume("throw", value);
-    }
-    function settle(f, v2) {
-      if (f(v2), q.shift(), q.length)
-        resume(q[0][0], q[0][1]);
-    }
-  }
-  function __asyncDelegator2(o) {
-    var i4, p2;
-    return i4 = {}, verb("next"), verb("throw", function(e) {
-      throw e;
-    }), verb("return"), i4[Symbol.iterator] = function() {
-      return this;
-    }, i4;
-    function verb(n, f) {
-      i4[n] = o[n] ? function(v2) {
-        return (p2 = !p2) ? { value: __await2(o[n](v2)), done: n === "return" } : f ? f(v2) : v2;
-      } : f;
-    }
-  }
-  function __asyncValues2(o) {
-    if (!Symbol.asyncIterator)
-      throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i4;
-    return m ? m.call(o) : (o = typeof __values2 === "function" ? __values2(o) : o[Symbol.iterator](), i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
-      return this;
-    }, i4);
-    function verb(n) {
-      i4[n] = o[n] && function(v2) {
-        return new Promise(function(resolve, reject) {
-          v2 = o[n](v2), settle(resolve, reject, v2.done, v2.value);
-        });
-      };
-    }
-    function settle(resolve, reject, d2, v2) {
-      Promise.resolve(v2).then(function(v3) {
-        resolve({ value: v3, done: d2 });
-      }, reject);
-    }
-  }
-  function __makeTemplateObject2(cooked, raw) {
-    if (Object.defineProperty) {
-      Object.defineProperty(cooked, "raw", { value: raw });
-    } else {
-      cooked.raw = raw;
-    }
-    return cooked;
-  }
-  function __importStar2(mod) {
-    if (mod && mod.__esModule)
-      return mod;
-    var result = {};
-    if (mod != null) {
-      for (var k in mod)
-        if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
-          __createBinding2(result, mod, k);
-    }
-    __setModuleDefault2(result, mod);
-    return result;
-  }
-  function __importDefault2(mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  }
-  function __classPrivateFieldGet2(receiver, state4, kind, f) {
-    if (kind === "a" && !f)
-      throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state4 === "function" ? receiver !== state4 || !f : !state4.has(receiver))
-      throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state4.get(receiver);
-  }
-  function __classPrivateFieldSet2(receiver, state4, value, kind, f) {
-    if (kind === "m")
-      throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f)
-      throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state4 === "function" ? receiver !== state4 || !f : !state4.has(receiver))
-      throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state4.set(receiver, value), value;
-  }
-  var extendStatics3, __assign2, __createBinding2, __setModuleDefault2;
-  var init_tslib_es62 = __esm({
-    "node_modules/@giveback007/fitbit-api/node_modules/tslib/tslib.es6.js"() {
-      extendStatics3 = function(d2, b) {
-        extendStatics3 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b2) {
-          d3.__proto__ = b2;
-        } || function(d3, b2) {
-          for (var p2 in b2)
-            if (Object.prototype.hasOwnProperty.call(b2, p2))
-              d3[p2] = b2[p2];
-        };
-        return extendStatics3(d2, b);
-      };
-      __assign2 = function() {
-        __assign2 = Object.assign || function __assign3(t3) {
-          for (var s, i4 = 1, n = arguments.length; i4 < n; i4++) {
-            s = arguments[i4];
-            for (var p2 in s)
-              if (Object.prototype.hasOwnProperty.call(s, p2))
-                t3[p2] = s[p2];
-          }
-          return t3;
-        };
-        return __assign2.apply(this, arguments);
-      };
-      __createBinding2 = Object.create ? function(o, m, k, k2) {
-        if (k2 === void 0)
-          k2 = k;
-        Object.defineProperty(o, k2, { enumerable: true, get: function() {
-          return m[k];
-        } });
-      } : function(o, m, k, k2) {
-        if (k2 === void 0)
-          k2 = k;
-        o[k2] = m[k];
-      };
-      __setModuleDefault2 = Object.create ? function(o, v2) {
-        Object.defineProperty(o, "default", { enumerable: true, value: v2 });
-      } : function(o, v2) {
-        o["default"] = v2;
-      };
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/@types.js
-  var require_types2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/@types.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/array.js
-  var require_array2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/array.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.arrHas = exports.arrLast = exports.arrToBoolDict = exports.arrToIdxDict = exports.arrToDict = exports.arrRemoveValues = exports.arrReplace = exports.arrDeepFlatten = exports.arrFlatten = exports.arrDivide = exports.arrGetByIds = exports.arrRemoveById = exports.arrGen = void 0;
-      var _1 = require_dist3();
-      var arrGen = (length) => Array(length).fill(null);
-      exports.arrGen = arrGen;
-      function arrRemoveById(arr, idArr, idKey = "id") {
-        const objDict = arrToDict(arr, idKey);
-        const keep = _1.objRemoveKeys(objDict, idArr);
-        return _1.objVals(keep);
-      }
-      exports.arrRemoveById = arrRemoveById;
-      function arrGetByIds(arr, idArr, idKey = "id") {
-        const dict = arrToBoolDict(idArr);
-        return arr.filter((x3) => dict[x3[idKey]]);
-      }
-      exports.arrGetByIds = arrGetByIds;
-      function arrDivide(arr, maxRowLength) {
-        const rows = Math.ceil(arr.length / maxRowLength);
-        const newArr = exports.arrGen(rows).map(() => []);
-        arr.forEach((x3, i4) => newArr[Math.floor(i4 / maxRowLength)].push(x3));
-        return newArr;
-      }
-      exports.arrDivide = arrDivide;
-      function arrFlatten(arr) {
-        return [].concat.apply([], arr);
-      }
-      exports.arrFlatten = arrFlatten;
-      var arrDeepFlatten = (arr) => arr.reduce((newArr, x3) => newArr.concat(_1.isType(x3, "array") ? exports.arrDeepFlatten(x3) : x3), []);
-      exports.arrDeepFlatten = arrDeepFlatten;
-      function arrReplace(arr) {
-        const newArr = [...arr];
-        return {
-          all: (item) => {
-            const idxs = [];
-            arr.forEach((match, i4) => _1.equal(item, match) ? idxs[i4] = i4 : null);
-            return {
-              with: (newItem) => {
-                if (!idxs.length)
-                  return arr;
-                idxs.forEach((i4) => newArr[i4] = newItem);
-                return newArr;
-              }
-            };
-          },
-          first: (item) => {
-            const idx = arr.findIndex((match) => _1.equal(item, match));
-            return {
-              with: (newItem) => {
-                if (_1.nonValue(idx))
-                  return arr;
-                newArr[idx] = newItem;
-                return newArr;
-              }
-            };
-          }
-        };
-      }
-      exports.arrReplace = arrReplace;
-      function arrRemoveValues(arr, valsToRemove) {
-        let newArr = [...arr];
-        valsToRemove.forEach((removeVal) => newArr = newArr.filter((x3) => !_1.equal(x3, removeVal)));
-        return newArr;
-      }
-      exports.arrRemoveValues = arrRemoveValues;
-      function arrToDict(arr, idKey) {
-        const dict = {};
-        arr.forEach((obj) => dict[obj[idKey]] = obj);
-        return dict;
-      }
-      exports.arrToDict = arrToDict;
-      function arrToIdxDict(arr) {
-        const dict = {};
-        arr.forEach((x3, idx) => dict[x3] = idx + "");
-        return dict;
-      }
-      exports.arrToIdxDict = arrToIdxDict;
-      function arrToBoolDict(arr) {
-        const dict = {};
-        arr.forEach((x3) => dict[x3] = true);
-        return dict;
-      }
-      exports.arrToBoolDict = arrToBoolDict;
-      var arrLast = (arr) => arr[arr.length - 1];
-      exports.arrLast = arrLast;
-      function arrHas(arr, find, equivalent = false) {
-        const fct = equivalent ? (x3) => _1.equal(x3, find) : (x3) => x3 === find;
-        return arr.findIndex(fct) !== -1;
-      }
-      exports.arrHas = arrHas;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/clone.js
-  var require_clone2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/clone.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.clone = void 0;
-      function clone(o) {
-        let c, x3, l, i4, k, a, q;
-        if (typeof o !== "object" || o === null)
-          return o;
-        if (o instanceof Date)
-          return new Date(o);
-        x3 = Object.keys(o);
-        l = x3.length;
-        if (Array.isArray(o)) {
-          a = new Array(l);
-          for (i4 = 0; i4 < l; i4++) {
-            k = x3[i4];
-            c = o[k];
-            if (typeof c !== "object" || c === null)
-              a[k] = c;
-            else if (c instanceof Date)
-              a[k] = new Date(c);
-            else
-              a[k] = clone(c);
-          }
-          return a;
-        }
-        q = {};
-        for (i4 = 0; i4 < l; i4++) {
-          k = x3[i4];
-          c = o[k];
-          if (Object.hasOwnProperty.call(o, k) === false)
-            continue;
-          if (typeof c !== "object" || c === null)
-            q[k] = c;
-          else if (c instanceof Date)
-            q[k] = new Date(c);
-          else
-            q[k] = clone(c);
-        }
-        return q;
-      }
-      exports.clone = clone;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/equality.js
-  var require_equality2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/equality.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.equal = void 0;
-      function equal(a, b) {
-        if (a === b)
-          return true;
-        if (a && b && typeof a === "object" && typeof b === "object") {
-          if (a.constructor !== b.constructor)
-            return false;
-          var length, i4, keys4;
-          if (Array.isArray(a)) {
-            length = a.length;
-            if (length !== b.length)
-              return false;
-            for (i4 = length; i4-- !== 0; )
-              if (!equal(a[i4], b[i4]))
-                return false;
-            return true;
-          }
-          if (a instanceof Map && b instanceof Map) {
-            if (a.size !== b.size)
-              return false;
-            for (i4 of a.entries())
-              if (!b.has(i4[0]))
-                return false;
-            for (i4 of a.entries())
-              if (!equal(i4[1], b.get(i4[0])))
-                return false;
-            return true;
-          }
-          if (a instanceof Set && b instanceof Set) {
-            if (a.size !== b.size)
-              return false;
-            for (i4 of a.entries())
-              if (!b.has(i4[0]))
-                return false;
-            return true;
-          }
-          if (ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
-            length = a.length;
-            if (length != b.length)
-              return false;
-            for (i4 = length; i4-- !== 0; )
-              if (a[i4] !== b[i4])
-                return false;
-            return true;
-          }
-          if (a.constructor === RegExp)
-            return a.source === b.source && a.flags === b.flags;
-          if (a.valueOf !== Object.prototype.valueOf)
-            return a.valueOf() === b.valueOf();
-          if (a.toString !== Object.prototype.toString)
-            return a.toString() === b.toString();
-          keys4 = Object.keys(a);
-          length = keys4.length;
-          if (length !== Object.keys(b).length)
-            return false;
-          for (i4 = length; i4-- !== 0; )
-            if (!Object.prototype.hasOwnProperty.call(b, keys4[i4]))
-              return false;
-          for (i4 = length; i4-- !== 0; ) {
-            var key = keys4[i4];
-            if (key === "_owner" && a.$$typeof) {
-              continue;
-            }
-            if (!equal(a[key], b[key]))
-              return false;
-          }
-          return true;
-        }
-        return a !== a && b !== b;
-      }
-      exports.equal = equal;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/general.js
-  var require_general2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/general.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.promiseOut = exports.debounceTimeOut = exports.randomColorHex = exports.uiid = exports.assertType = exports.type = exports.cloneLog = exports.unsubAll = exports.wait = exports.interval = void 0;
-      var _1 = require_dist3();
-      var interval = (funct, ms, times) => {
-        if (_1.isType(times, "number") && times < 1)
-          throw Error(`argument "times" can't be less than 1`);
-        let i4 = 0;
-        const intv = setInterval(() => {
-          funct(i4);
-          i4++;
-          if (times && i4 >= times)
-            clearInterval(intv);
-        }, ms);
-        return { stop: () => clearInterval(intv) };
-      };
-      exports.interval = interval;
-      var wait = (ms) => new Promise((res2) => setTimeout(() => res2(), ms));
-      exports.wait = wait;
-      var usubAllFunct = (x3, unsubName = "unsubscribe") => _1.isType(x3, "object") && _1.hasKey(x3, unsubName) ? x3[unsubName]() : null;
-      function unsubAll(objOrArr, unsubName = "unsubscribe") {
-        if (_1.isType(objOrArr, "array"))
-          objOrArr.forEach((x3) => usubAllFunct(x3, unsubName));
-        else if (_1.isType(objOrArr, "object"))
-          _1.objMap(objOrArr, ({ val }) => usubAllFunct(val, unsubName));
-        else
-          throw Error('argument "objOrArr" must be of type "object" or "array"');
-      }
-      exports.unsubAll = unsubAll;
-      var cloneLog = (x3) => console.log(_1.clone(x3));
-      exports.cloneLog = cloneLog;
-      function type(val) {
-        if (typeof val === "object") {
-          if (Array.isArray(val))
-            return "array";
-          else if (val === null)
-            return "null";
-          else
-            return "object";
-        } else {
-          if (val !== val)
-            return "NaN";
-          else
-            return typeof val;
-        }
-      }
-      exports.type = type;
-      function assertType(val, types) {
-        if (!_1.isType(types, "array"))
-          types = [types];
-        for (const t3 of types)
-          if (_1.isType(val, t3))
-            return;
-        throw Error(`value needs to be of type ${types.join(" || ")}`);
-      }
-      exports.assertType = assertType;
-      var uiid = () => {
-        let d2 = (/* @__PURE__ */ new Date()).getTime();
-        let d22 = performance && performance.now && performance.now() * 1e3 || 0;
-        const str6 = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
-        return str6.replace(/[xy]/g, (c) => {
-          let r = Math.random() * 16;
-          if (d2 > 0) {
-            r = (d2 + r) % 16 | 0;
-            d2 = Math.floor(d2 / 16);
-          } else {
-            r = (d22 + r) % 16 | 0;
-            d22 = Math.floor(d22 / 16);
-          }
-          return (c === "x" ? r : r & 3 | 8).toString(16);
-        });
-      };
-      exports.uiid = uiid;
-      var randomColorHex = () => "#" + ((1 << 24) * Math.random() | 0).toString(16);
-      exports.randomColorHex = randomColorHex;
-      function debounceTimeOut() {
-        let timeoutId = null;
-        return (fct, ms) => {
-          if (timeoutId)
-            clearTimeout(timeoutId);
-          timeoutId = setTimeout(fct, ms);
-        };
-      }
-      exports.debounceTimeOut = debounceTimeOut;
-      function promiseOut() {
-        let resolve;
-        const promise = new Promise((res2) => resolve = res2);
-        return { resolve, promise };
-      }
-      exports.promiseOut = promiseOut;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/iterate.js
-  var require_iterate2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/iterate.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.iterate = void 0;
-      var array_1 = require_array2();
-      function iterate(xLength, yLength, zLength) {
-        const iterator = (fct, nested = false) => {
-          const arr = [];
-          for (let x3 = 0; x3 < xLength; x3++) {
-            if (!yLength)
-              arr.push(fct({ x: x3 }));
-            else
-              for (let y4 = 0; y4 < yLength; y4++) {
-                if (!zLength)
-                  arr.push(fct({ x: x3, y: y4 }));
-                else
-                  for (let z3 = 0; z3 < zLength; z3++) {
-                    arr.push(fct({ x: x3, y: y4, z: z3 }));
-                  }
-              }
-          }
-          if (!nested)
-            return arr;
-          if (zLength && yLength) {
-            const newArr = array_1.arrDivide(arr, yLength * zLength);
-            return newArr.map((yArr) => array_1.arrDivide(yArr, zLength));
-          } else if (yLength) {
-            return array_1.arrDivide(arr, yLength);
-          } else {
-            return arr;
-          }
-        };
-        return {
-          for: (fct) => {
-            iterator(fct);
-          },
-          map: (fct) => iterator(fct),
-          nestedMap: (fct) => iterator(fct, true)
-        };
-      }
-      exports.iterate = iterate;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/number.js
-  var require_number2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/number.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.newNumFromRange = exports.numberWithCommas = exports.decPlace = exports.average = exports.rand = void 0;
-      var _1 = require_dist3();
-      var rand = (min, max) => Math.floor(Math.random() * (max + 1 - min)) + min;
-      exports.rand = rand;
-      var average = (nArr) => nArr.reduce((a = 0, b = 0) => a + b, 0) / nArr.length;
-      exports.average = average;
-      var decPlace = (n, places) => parseFloat(n.toFixed(places));
-      exports.decPlace = decPlace;
-      var numberWithCommas = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      exports.numberWithCommas = numberWithCommas;
-      function newNumFromRange(prevNum, min, max) {
-        let num;
-        let loop4 = 0;
-        const dict = _1.isType(prevNum, "array") ? _1.arrToBoolDict(prevNum) : { [prevNum]: true };
-        do {
-          num = exports.rand(min, max);
-          loop4++;
-          if (loop4 > 1e6) {
-            console.error("Check for infinite loops");
-            throw new Error("Looped 1 million times");
-          }
-        } while (dict[num]);
-        return num;
-      }
-      exports.newNumFromRange = newNumFromRange;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/object.js
-  var require_object2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/object.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.objPromiseAll = exports.objSortKeys = exports.objResolve = exports.objExtract = exports.objKeyVals = exports.objVals = exports.objKeys = exports.objRemoveKeys = exports.objFilter = exports.objMap = void 0;
-      function objMap(o, funct) {
-        const newObj = {};
-        for (const key in o) {
-          newObj[key] = funct({ key, val: o[key] });
-        }
-        return newObj;
-      }
-      exports.objMap = objMap;
-      function objFilter(o, funct) {
-        const newObj = Object.assign({}, o);
-        for (const key in o) {
-          if (!funct({ key, val: o[key] }))
-            delete newObj[key];
-        }
-        return newObj;
-      }
-      exports.objFilter = objFilter;
-      function objRemoveKeys(obj, filterOut) {
-        const newObj = Object.assign({}, obj);
-        filterOut.forEach((key) => delete newObj[key]);
-        return newObj;
-      }
-      exports.objRemoveKeys = objRemoveKeys;
-      function objKeys(o) {
-        if (Object.keys)
-          return Object.keys(o);
-        const keys4 = [];
-        for (const k in o)
-          keys4.push(k);
-        return keys4;
-      }
-      exports.objKeys = objKeys;
-      var objVals = (o) => Object.values ? Object.values(o) : objKeys(o).map((key) => o[key]);
-      exports.objVals = objVals;
-      var objKeyVals = (o) => objKeys(o).map((key) => ({ key, val: o[key] }));
-      exports.objKeyVals = objKeyVals;
-      function objExtract(extract, keys4) {
-        const newObj = {};
-        keys4.forEach((key) => newObj[key] = extract[key]);
-        return newObj;
-      }
-      exports.objExtract = objExtract;
-      var objResolve = (o, path) => path.split(".").reduce((prev, key) => prev[key], o);
-      exports.objResolve = objResolve;
-      var objSortKeys = (o, compareFn) => {
-        const newObj = {};
-        const keys4 = objKeys(o).sort(compareFn);
-        keys4.map((k) => newObj[k] = o[k]);
-        return newObj;
-      };
-      exports.objSortKeys = objSortKeys;
-      function objPromiseAll(obj) {
-        const keyValues = exports.objKeyVals(obj);
-        const toEqual = keyValues.length;
-        const values = {};
-        let total = 0;
-        return new Promise((resolve) => keyValues.forEach(({ key, val: x3 }) => x3.then((data) => {
-          values[key] = data;
-          total++;
-          if (toEqual === total)
-            resolve(values);
-        })));
-      }
-      exports.objPromiseAll = objPromiseAll;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/string.js
-  var require_string2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/string.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.minAppend = exports.strRemove = exports.strIncludes = void 0;
-      var strIncludes = (str6, subStr) => str6.indexOf(subStr) !== -1;
-      exports.strIncludes = strIncludes;
-      var strRemove = (str6, remove) => str6.replace(new RegExp(remove, "g"), "");
-      exports.strRemove = strRemove;
-      var minAppend = (item, length, append = "0") => {
-        item = item + "";
-        if (length < 1)
-          throw Error("length can not be less than 1");
-        if (item.length > length)
-          throw Error("item can not exceed length");
-        return (append.repeat(length - 1) + item).slice(-length);
-      };
-      exports.minAppend = minAppend;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/test.js
-  var require_test2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/test.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.isValidEmail = exports.nonValue = exports.nullOrEmpty = exports.isType = exports.hasKeys = exports.hasKey = void 0;
-      var _1 = require_dist3();
-      var hasKey = (obj, key) => exports.isType(obj, "object") && obj.hasOwnProperty(key);
-      exports.hasKey = hasKey;
-      function hasKeys(obj, keys4) {
-        if (!exports.isType(obj, "object"))
-          return false;
-        for (const key of keys4)
-          if (!obj.hasOwnProperty(key))
-            return false;
-        return true;
-      }
-      exports.hasKeys = hasKeys;
-      var isType = (val, testType) => _1.type(val) === testType;
-      exports.isType = isType;
-      function nullOrEmpty(x3) {
-        if (exports.nonValue(x3))
-          return true;
-        if (exports.isType(x3, "string") || exports.isType(x3, "array"))
-          return !x3.length;
-        if (exports.isType(x3, "object"))
-          return !_1.objVals(x3).length;
-        return false;
-      }
-      exports.nullOrEmpty = nullOrEmpty;
-      var nonValue = (val) => val === null || val === void 0;
-      exports.nonValue = nonValue;
-      var isValidEmail = (email) => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-      exports.isValidEmail = isValidEmail;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/time.js
-  var require_time2 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/time.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.yearStartEnd = exports.monthStartEnd = exports.weekStartEnd = exports.getDayStartEnd = exports.wks = exports.weeks = exports.dys = exports.days = exports.hrs = exports.hours = exports.min = exports.minutes = exports.sec = exports.seconds = exports.msToTime = exports.msToWks = exports.msToDys = exports.msToHrs = exports.msToMin = exports.msToSec = exports.dateTimeToString = exports.weekTuple = exports.msTime = void 0;
-      var _1 = require_dist3();
-      exports.msTime = {
-        s: 1e3,
-        m: 6e4,
-        h: 36e5,
-        d: 864e5,
-        w: 6048e5
-      };
-      exports.weekTuple = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-      function dateTimeToString(dt = /* @__PURE__ */ new Date()) {
-        const h = ("0" + dt.getHours()).slice(-2);
-        const m = ("0" + dt.getMinutes()).slice(-2);
-        const s = ("0" + dt.getSeconds()).slice(-2);
-        const ms = ("00" + dt.getMilliseconds()).slice(-3);
-        return `${h}:${m}:${s}:${ms}`;
-      }
-      exports.dateTimeToString = dateTimeToString;
-      var msToSec = (ms) => ms / exports.msTime.s;
-      exports.msToSec = msToSec;
-      var msToMin = (ms) => ms / exports.msTime.m;
-      exports.msToMin = msToMin;
-      var msToHrs = (ms) => ms / exports.msTime.h;
-      exports.msToHrs = msToHrs;
-      var msToDys = (ms) => ms / exports.msTime.d;
-      exports.msToDys = msToDys;
-      var msToWks = (ms) => ms / exports.msTime.w;
-      exports.msToWks = msToWks;
-      function msToTime(msT, toObj = false) {
-        const msN = msT % 1e3;
-        let sN = Math.floor(msT / 1e3);
-        let mN = Math.floor(sN / 60);
-        sN = sN % 60;
-        let hN = Math.floor(mN / 60);
-        mN = mN % 60;
-        const dN = Math.floor(hN / 24);
-        hN = hN % 24;
-        const d2 = ("00" + dN).slice(-3);
-        const h = ("0" + hN).slice(-2);
-        const m = ("0" + mN).slice(-2);
-        const s = ("0" + sN).slice(-2);
-        const ms = ("00" + msN).slice(-3);
-        if (toObj)
-          return { d: dN, h: hN, m: mN, s: sN, ms: msN };
-        return `${dN ? d2 + ":" : ""}${h}:${m}:${s}:${ms}`;
-      }
-      exports.msToTime = msToTime;
-      var seconds = (s) => s * exports.msTime.s;
-      exports.seconds = seconds;
-      exports.sec = exports.seconds;
-      var minutes = (m) => m * exports.msTime.m;
-      exports.minutes = minutes;
-      exports.min = exports.minutes;
-      var hours = (h) => h * exports.msTime.h;
-      exports.hours = hours;
-      exports.hrs = exports.hours;
-      var days = (d2) => d2 * exports.msTime.d;
-      exports.days = days;
-      exports.dys = exports.days;
-      var weeks = (w) => w * exports.msTime.w;
-      exports.weeks = weeks;
-      exports.wks = exports.weeks;
-      function getDayStartEnd(t3, type = "local") {
-        if (_1.isType(t3, "number"))
-          t3 = new Date(t3);
-        const y4 = t3.getFullYear();
-        const m = t3.getMonth();
-        const d2 = t3.getDate();
-        let start = new Date(y4, m, d2);
-        let end = new Date(y4, m, d2, 23, 59, 59, 999);
-        if (type === "unix") {
-          const tzOffset = exports.min(start.getTimezoneOffset());
-          start = new Date(start.getTime() + tzOffset);
-          end = new Date(end.getTime() + tzOffset);
-        }
-        return { start, end };
-      }
-      exports.getDayStartEnd = getDayStartEnd;
-      function weekStartEnd(t3, weekStart = "sun", type = "local") {
-        if (_1.isType(t3, "number"))
-          t3 = new Date(t3);
-        const wd = t3.getDay();
-        const startOffset = wd * -1 + (weekStart === "mon" ? 1 : 0);
-        const endOffset = 6 + startOffset;
-        const s = new Date(t3.getTime() + exports.days(startOffset));
-        const e = new Date(t3.getTime() + exports.days(endOffset));
-        let start = new Date(s.getFullYear(), s.getMonth(), s.getDate());
-        let end = new Date(e.getFullYear(), e.getMonth(), e.getDate(), 23, 59, 59, 999);
-        if (type === "unix") {
-          const tzOffset = exports.min(start.getTimezoneOffset());
-          start = new Date(start.getTime() + tzOffset);
-          end = new Date(end.getTime() + tzOffset);
-        }
-        return { start, end };
-      }
-      exports.weekStartEnd = weekStartEnd;
-      function monthStartEnd(t3, type = "local") {
-        if (_1.isType(t3, "number"))
-          t3 = new Date(t3);
-        const y4 = t3.getFullYear();
-        const m = t3.getMonth();
-        let start = new Date(y4, m, 1);
-        let end = new Date(y4, m, 0, 23, 59, 59, 999);
-        if (type === "unix") {
-          const tzOffset = exports.min(start.getTimezoneOffset());
-          start = new Date(start.getTime() + tzOffset);
-          end = new Date(end.getTime() + tzOffset);
-        }
-        return { start, end };
-      }
-      exports.monthStartEnd = monthStartEnd;
-      function yearStartEnd(t3, type = "local") {
-        if (_1.isType(t3, "number"))
-          t3 = new Date(t3);
-        const y4 = t3.getFullYear();
-        let start = new Date(y4, 0, 1);
-        let end = new Date(y4, 12, 0, 23, 59, 59, 999);
-        if (type === "unix") {
-          const tzOffset = exports.min(start.getTimezoneOffset());
-          start = new Date(start.getTime() + tzOffset);
-          end = new Date(end.getTime() + tzOffset);
-        }
-        return { start, end };
-      }
-      exports.yearStartEnd = yearStartEnd;
-    }
-  });
-
-  // node_modules/@giveback007/util-lib/dist/index.js
-  var require_dist3 = __commonJS({
-    "node_modules/@giveback007/util-lib/dist/index.js"(exports) {
-      "use strict";
-      var __createBinding3 = exports && exports.__createBinding || (Object.create ? function(o, m, k, k2) {
-        if (k2 === void 0)
-          k2 = k;
-        Object.defineProperty(o, k2, { enumerable: true, get: function() {
-          return m[k];
-        } });
-      } : function(o, m, k, k2) {
-        if (k2 === void 0)
-          k2 = k;
-        o[k2] = m[k];
-      });
-      var __exportStar3 = exports && exports.__exportStar || function(m, exports2) {
-        for (var p2 in m)
-          if (p2 !== "default" && !Object.prototype.hasOwnProperty.call(exports2, p2))
-            __createBinding3(exports2, m, p2);
-      };
-      Object.defineProperty(exports, "__esModule", { value: true });
-      __exportStar3(require_types2(), exports);
-      __exportStar3(require_array2(), exports);
-      __exportStar3(require_clone2(), exports);
-      __exportStar3(require_equality2(), exports);
-      __exportStar3(require_general2(), exports);
-      __exportStar3(require_iterate2(), exports);
-      __exportStar3(require_number2(), exports);
-      __exportStar3(require_object2(), exports);
-      __exportStar3(require_string2(), exports);
-      __exportStar3(require_test2(), exports);
-      __exportStar3(require_time2(), exports);
-    }
-  });
-
-  // node_modules/@babel/runtime/helpers/typeof.js
-  var require_typeof = __commonJS({
-    "node_modules/@babel/runtime/helpers/typeof.js"(exports, module2) {
-      function _typeof(obj) {
-        "@babel/helpers - typeof";
-        return module2.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
-          return typeof obj2;
-        } : function(obj2) {
-          return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-        }, module2.exports.__esModule = true, module2.exports["default"] = module2.exports, _typeof(obj);
-      }
-      module2.exports = _typeof, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
-    }
-  });
-
-  // node_modules/@babel/runtime/helpers/toPrimitive.js
-  var require_toPrimitive = __commonJS({
-    "node_modules/@babel/runtime/helpers/toPrimitive.js"(exports, module2) {
-      var _typeof = require_typeof()["default"];
-      function _toPrimitive(input, hint) {
-        if (_typeof(input) !== "object" || input === null)
-          return input;
-        var prim = input[Symbol.toPrimitive];
-        if (prim !== void 0) {
-          var res2 = prim.call(input, hint || "default");
-          if (_typeof(res2) !== "object")
-            return res2;
-          throw new TypeError("@@toPrimitive must return a primitive value.");
-        }
-        return (hint === "string" ? String : Number)(input);
-      }
-      module2.exports = _toPrimitive, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
-    }
-  });
-
-  // node_modules/@babel/runtime/helpers/toPropertyKey.js
-  var require_toPropertyKey = __commonJS({
-    "node_modules/@babel/runtime/helpers/toPropertyKey.js"(exports, module2) {
-      var _typeof = require_typeof()["default"];
-      var toPrimitive = require_toPrimitive();
-      function _toPropertyKey(arg) {
-        var key = toPrimitive(arg, "string");
-        return _typeof(key) === "symbol" ? key : String(key);
-      }
-      module2.exports = _toPropertyKey, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
-    }
-  });
-
-  // node_modules/@babel/runtime/helpers/defineProperty.js
-  var require_defineProperty = __commonJS({
-    "node_modules/@babel/runtime/helpers/defineProperty.js"(exports, module2) {
-      var toPropertyKey = require_toPropertyKey();
-      function _defineProperty(obj, key, value) {
-        key = toPropertyKey(key);
-        if (key in obj) {
-          Object.defineProperty(obj, key, {
-            value,
-            enumerable: true,
-            configurable: true,
-            writable: true
-          });
-        } else {
-          obj[key] = value;
-        }
-        return obj;
-      }
-      module2.exports = _defineProperty, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
-    }
-  });
-
-  // node_modules/rest-api-handler/dist/resolveProcessors.js
-  var require_resolveProcessors = __commonJS({
-    "node_modules/rest-api-handler/dist/resolveProcessors.js"(exports, module2) {
-      "use strict";
-      async function resolveProcessors(response, list, request, i4 = 0) {
-        const processor = list[i4];
-        if (!processor) {
-          return response;
-        }
-        const processedResponse = typeof processor === "function" ? await processor(response, request) : await processor.processResponse(response, request);
-        if (list[i4 + 1]) {
-          return resolveProcessors(processedResponse, list, request, i4 + 1);
-        }
-        return processedResponse;
-      }
-      module2.exports = resolveProcessors;
-    }
-  });
-
-  // node_modules/rest-api-handler/dist/data-formats.js
-  var require_data_formats = __commonJS({
-    "node_modules/rest-api-handler/dist/data-formats.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      var JSON2 = "json";
-      var FORM_DATA = "formdata";
-      var URL_ENCODED = "urlencoded";
-      exports.FORM_DATA = FORM_DATA;
-      exports.JSON = JSON2;
-      exports.URL_ENCODED = URL_ENCODED;
-    }
-  });
-
-  // node_modules/rest-api-handler/dist/Api.js
-  var require_Api = __commonJS({
-    "node_modules/rest-api-handler/dist/Api.js"(exports, module2) {
-      "use strict";
-      var _defineProperty = require_defineProperty();
-      var resolveProcessors = require_resolveProcessors();
-      var dataFormats = require_data_formats();
-      function _interopDefaultLegacy(e) {
-        return e && typeof e === "object" && "default" in e ? e : { "default": e };
-      }
-      var _defineProperty__default = /* @__PURE__ */ _interopDefaultLegacy(_defineProperty);
-      function ownKeys(object, enumerableOnly) {
-        var keys4 = Object.keys(object);
-        if (Object.getOwnPropertySymbols) {
-          var symbols = Object.getOwnPropertySymbols(object);
-          if (enumerableOnly) {
-            symbols = symbols.filter(function(sym) {
-              return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-            });
-          }
-          keys4.push.apply(keys4, symbols);
-        }
-        return keys4;
-      }
-      function _objectSpread(target) {
-        for (var i4 = 1; i4 < arguments.length; i4++) {
-          var source = arguments[i4] != null ? arguments[i4] : {};
-          if (i4 % 2) {
-            ownKeys(Object(source), true).forEach(function(key) {
-              _defineProperty__default["default"](target, key, source[key]);
-            });
-          } else if (Object.getOwnPropertyDescriptors) {
-            Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-          } else {
-            ownKeys(Object(source)).forEach(function(key) {
-              Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-            });
-          }
-        }
-        return target;
-      }
-      var Api = class {
-        /**
-         * Base api url
-         */
-        /**
-         * Base http headers
-         */
-        /**
-         * Base settings for Fetch Request
-         */
-        /**
-         * List of processors that parse response from server.
-         */
-        /**
-         * List of formatter you can use to process content of body request.
-         */
-        /**
-         * Constructor.
-         *
-         * @param apiUrl - Base api url
-         * @param processors - List of processors that parse response from server.
-         * @param defaultHeaders - Base settings for Fetch Request
-         * @param defaultOptions - List of processors that parse response from server.
-         */
-        constructor(apiUrl, processors = [], defaultHeaders = {}, defaultOptions = {}) {
-          this.apiUrl = void 0;
-          this.defaultHeaders = void 0;
-          this.defaultOptions = void 0;
-          this.processors = void 0;
-          this.apiUrl = apiUrl;
-          this.defaultHeaders = defaultHeaders;
-          this.defaultOptions = defaultOptions;
-          this.processors = processors;
-        }
-        /**
-         * Convert data in object to format of Fetch body.
-         *
-         * @param data - Data to convert
-         * @param to - Format to which convert the data. Default is JSON.
-         * @returns Converted data
-         *
-         * @example
-         * const body = Api.convertData({ a: 'b' }, Api.FORMATS.JSON);
-         * // output is {"a":"b"}
-         */
-        static convertData(data, to = dataFormats.JSON) {
-          if (to === dataFormats.FORM_DATA) {
-            const formData = new FormData();
-            Object.entries(data).forEach(([key, value]) => {
-              formData.append(key, value);
-            });
-            return formData;
-          }
-          if (to === dataFormats.URL_ENCODED) {
-            return Api.convertParametersToUrl(data).slice(1);
-          }
-          return JSON.stringify(data);
-        }
-        /**
-         * Convert object to url parameters string.
-         *
-         * @param parameters - List of parameters
-         * @returns Encoded string with ? prefix and variables separated by &
-         *
-         * @example
-         * const parameters = Api.convertData({ a: '%b%' });
-         * // output is ?a=%25b%25
-         */
-        static convertParametersToUrl(parameters) {
-          const keys4 = Object.keys(parameters);
-          if (keys4.length === 0) {
-            return "";
-          }
-          return `?${keys4.map((key) => {
-            return `${key}=${encodeURIComponent(parameters[key])}`;
-          }).join("&")}`;
-        }
-        /**
-         * Set default headers.
-         *
-         * @param headers - HTTP headers
-         */
-        setDefaultHeaders(headers) {
-          this.defaultHeaders = headers;
-        }
-        /**
-         * Add default HTTP header.
-         *
-         * @param name - Name of header
-         * @param value - Value for header
-         * @example
-         * api.setDefaultHeader('content-type', 'application/json');
-         */
-        setDefaultHeader(name2, value) {
-          this.defaultHeaders[name2] = value;
-        }
-        /**
-         * Remove default header.
-         *
-         * @param name - Name of header
-         */
-        removeDefaultHeader(name2) {
-          delete this.defaultHeaders[name2];
-        }
-        /**
-         * Get default headers.
-         *
-         * @returns Get Default headers
-         */
-        getDefaultHeaders() {
-          return this.defaultHeaders;
-        }
-        /**
-         * Fetch API url.
-         *
-         * @protected
-         * @param request - Fetch request
-         * @returns Fetch response
-         */
-        fetchRequest(request) {
-          return fetch(request);
-        }
-        /**
-         * Request given API endpoint.
-         *
-         * @param namespace - Api endpoint or full url
-         * @param method - Request method eg. POST or GET
-         * @param options - Fetch options
-         * @param headers - Custom headers
-         * @returns processed response
-         * @example
-         * const { data } = await api.request('ad', 'POST', {
-         *     body: '{"ad":1}'
-         * })
-         *
-         * const { data } = await api.request('http://i-can-request-full-url.com/?a=b', 'GET')
-         */
-        async request(namespace, method, options = {}, headers = {}) {
-          const urlToRequest = namespace.indexOf("http") === 0 ? namespace : `${this.apiUrl}/${namespace}`;
-          const request = new Request(urlToRequest, _objectSpread(_objectSpread({}, this.defaultOptions), {}, {
-            method,
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            // eslint-disable-next-line compat/compat
-            headers: new Headers(_objectSpread(_objectSpread({}, this.getDefaultHeaders()), headers))
-          }, options));
-          const response = await this.fetchRequest(request);
-          return resolveProcessors(response, this.processors, request);
-        }
-        /**
-         * Send a request with body.
-         *
-         * @protected
-         * @param namespace - api endpoint
-         * @param method - api method
-         * @param data - body JSON parameters
-         * @param format - format of body request
-         * @param headers - custom headers
-         * @returns processed response
-         */
-        requestWithBody(namespace, method, data, format, headers = {}) {
-          return this.request(namespace, method, {
-            body: Api.convertData(data, format)
-          }, headers);
-        }
-        /**
-         * Send a GET request.
-         *
-         * @param namespace - api endpoint
-         * @param parameters - get parameters
-         * @param headers - custom headers
-         * @returns processed response
-         *
-         * @example
-         * const { data } = await api.get('brand', { id: 5 })
-         * // will call YOUR_URI/brand?id=5
-         * console.log(data);
-         */
-        get(namespace, parameters = {}, headers = {}) {
-          return this.request(`${namespace}${Api.convertParametersToUrl(parameters)}`, "GET", {}, headers);
-        }
-        /**
-         * Send a POST request.
-         *
-         * @param namespace - Api endpoint
-         * @param data - Request object
-         * @param format - Format of body request
-         * @param headers - custom headers
-         * @returns Processed response
-         */
-        post(namespace, data = {}, format = dataFormats.JSON, headers = {}) {
-          return this.requestWithBody(namespace, "POST", data, format, headers);
-        }
-        /**
-         * Send a PUT request.
-         *
-         * @param namespace - Api endpoint
-         * @param data - Request object
-         * @param format - Format of body request
-         * @param headers - custom headers
-         * @returns Processed response
-         */
-        put(namespace, data = {}, format = dataFormats.JSON, headers = {}) {
-          return this.requestWithBody(namespace, "PUT", data, format, headers);
-        }
-        /**
-         * Send a DELETE request.
-         *
-         * @param namespace - Api endpoint
-         * @param headers - custom headers
-         * @returns Processed response
-         */
-        delete(namespace, headers = {}) {
-          return this.request(namespace, "DELETE", {}, headers);
-        }
-      };
-      Api.FORMATS = dataFormats;
-      module2.exports = Api;
-    }
-  });
-
-  // node_modules/rest-api-handler/dist/DefaultResponseProcessor.js
-  var require_DefaultResponseProcessor = __commonJS({
-    "node_modules/rest-api-handler/dist/DefaultResponseProcessor.js"(exports, module2) {
-      "use strict";
-      var DefaultResponseProcessor = class {
-        /**
-         * Constructor.
-         *
-         * @param Exception - Exception class that will be throwed if request fails.
-         * @param decoder - Define custom response body decoder.
-         */
-        constructor(Exception, decoder3) {
-          this.Exception = void 0;
-          this.decoder = void 0;
-          this.Exception = Exception;
-          this.decoder = decoder3 || DefaultResponseProcessor.decodeResponse;
-        }
-        async processResponse(response, request) {
-          const decodedResponse = await this.decoder(response);
-          const toRespond = {
-            data: decodedResponse,
-            status: response.status,
-            source: response,
-            request
-          };
-          if (!response.ok) {
-            throw new this.Exception(toRespond, request);
-          }
-          return toRespond;
-        }
-        static decodeResponse(response) {
-          const contentType = response.headers.get("content-type");
-          if (!contentType) {
-            return response.text();
-          }
-          if (contentType.includes("json")) {
-            return response.json();
-          }
-          if (contentType.includes("text") || contentType.includes("xml")) {
-            return response.text();
-          }
-          return response.blob();
-        }
-      };
-      module2.exports = DefaultResponseProcessor;
-    }
-  });
-
-  // node_modules/rest-api-handler/dist/DefaultApiException.js
-  var require_DefaultApiException = __commonJS({
-    "node_modules/rest-api-handler/dist/DefaultApiException.js"(exports, module2) {
-      "use strict";
-      var DefaultApiException = class extends Error {
-        /**
-         * Response from server that throwed an error.
-         */
-        /**
-         * Constructor.
-         *
-         * @param response - Processed response from server.
-         */
-        constructor(response) {
-          super(`Api exception: ${JSON.stringify(response.data)}`);
-          this.response = void 0;
-          this.response = response;
-        }
-        getResponse() {
-          return this.response;
-        }
-        getRequest() {
-          return this.response.request;
-        }
-      };
-      module2.exports = DefaultApiException;
-    }
-  });
-
-  // node_modules/rest-api-handler/dist/index.js
-  var require_dist4 = __commonJS({
-    "node_modules/rest-api-handler/dist/index.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      var Api = require_Api();
-      var DefaultResponseProcessor = require_DefaultResponseProcessor();
-      var DefaultApiException = require_DefaultApiException();
-      exports.Api = Api;
-      exports.DefaultResponseProcessor = DefaultResponseProcessor;
-      exports.DefaultApiException = DefaultApiException;
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/fitbit.api.js
-  var require_fitbit_api = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/fitbit.api.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.FitbitApi = exports.dictToUrlParams = void 0;
-      var tslib_1 = (init_tslib_es62(), __toCommonJS(tslib_es6_exports2));
-      var util_lib_1 = require_dist3();
-      var rest_api_handler_1 = require_dist4();
-      function dictToUrlParams(dict) {
-        let search = "";
-        (0, util_lib_1.objKeyVals)(dict).forEach(({ key, val }, i4) => !(0, util_lib_1.nonValue)(val) && (search += `${i4 ? "&" : "?"}${key}=${val}`));
-        return search;
-      }
-      exports.dictToUrlParams = dictToUrlParams;
-      var fromDateObj = (o) => new Date(o.y, (o.m || 1) - 1, o.d || 1, o.hr || 0, o.min || 0, o.sec || 0, o.ms || 0);
-      var toDate = (anyDate) => {
-        const dt = anyDate instanceof Date ? anyDate : anyDate === "now" ? /* @__PURE__ */ new Date() : anyDate === "today" ? (0, util_lib_1.getDayStartEnd)(/* @__PURE__ */ new Date()).start : anyDate === "yesterday" ? (0, util_lib_1.getDayStartEnd)(Date.now() - (0, util_lib_1.days)(1)).start : (0, util_lib_1.isType)(anyDate, "number") || (0, util_lib_1.isType)(anyDate, "string") ? new Date(anyDate) : fromDateObj(anyDate);
-        if (dt.toDateString() === "Invalid Date") {
-          console.error(`date: "${anyDate.toString()}" is an invalid date`);
-          throw new Error("Invalid Date");
-        }
-        return dt;
-      };
-      function dayAndTime(time, useSeconds = false) {
-        const dt = toDate(time);
-        const dayStr = `${dt.getFullYear()}-${(0, util_lib_1.minAppend)(dt.getMonth() + 1, 2, "0")}-${(0, util_lib_1.minAppend)(dt.getDate(), 2, "0")}`;
-        const timeStr = `${(0, util_lib_1.minAppend)(dt.getHours(), 2, "0")}:${(0, util_lib_1.minAppend)(dt.getMinutes(), 2, "0")}` + (useSeconds ? ":" + (0, util_lib_1.minAppend)(dt.getSeconds(), 2, "0") : "");
-        return [dayStr, timeStr];
-      }
-      var FitbitApi2 = class {
-        constructor(accessToken, fitBitUserId = "-", getToken) {
-          this.accessToken = accessToken;
-          this.fitBitUserId = fitBitUserId;
-          this.getToken = getToken;
-          this.api = new rest_api_handler_1.Api("https://api.fitbit.com");
-          this.url = (version2, namespace, noUser = false) => noUser ? `${version2}/${namespace}` : `${version2}/user/${this.fitBitUserId}/${namespace}`;
-          this.getApiInfo = () => ({
-            accessToken: this.accessToken,
-            fitBitUserId: this.fitBitUserId
-          });
-          this.sleep = {
-            /** Returns a list of a user's sleep log entries before `beforeDate` or after `afterDate` a given date specifying offset, limit and sort order.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/sleep/get-sleep-log-list/
-             */
-            getLogList: (opts) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-              const params2 = Object.assign({ limit: opts.limit || 100, offset: opts.offset || 0 }, (0, util_lib_1.hasKey)(opts, "afterDate") ? { afterDate: dayAndTime(opts.afterDate)[0], sort: opts.sort || "asc" } : { beforeDate: dayAndTime(opts.beforeDate)[0], sort: opts.sort || "desc" });
-              if (params2.limit > 100 || params2.limit < 1)
-                throw new Error(`Invalid limit: ${params2.limit}, needs to be between 1 to 100`);
-              const url4 = this.url(1.2, `sleep/list.json${dictToUrlParams(params2)}`);
-              return this.pageGenerator(url4, "sleep");
-            }),
-            /** Deletes a sleep log with the given log id.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/sleep/delete-sleep-log/
-             */
-            deleteLog: (sleepLogId) => this.handleData(() => this.api.delete(this.url(1.2, `sleep/${sleepLogId}.json`))),
-            /** Creates a log entry for a sleep event and returns a response in the format requested.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/sleep/create-sleep-log/
-             */
-            createLog: ({ time, duration }) => {
-              const [date, startTime] = dayAndTime(time);
-              const url4 = this.url(1.2, `sleep.json${dictToUrlParams({ duration, date, startTime })}`);
-              return this.handleData(() => this.api.post(url4));
-            },
-            /** Returns a list of a user's sleep log entries for a given date.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/sleep/get-sleep-log-by-date/
-             */
-            getByDate: ({ date }) => this.handleData(() => this.api.get(this.url(1.2, `sleep/date/${dayAndTime(date)[0]}.json`))),
-            /** Returns a list of a user's sleep log entries for a given date range.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/sleep/get-sleep-log-by-date-range/
-             */
-            getByDateRange: (opts) => {
-              const url4 = this.url(1.2, `sleep/date/${dayAndTime(opts.startDate)[0]}/${dayAndTime(opts.endDate)[0]}.json`);
-              return this.handleData(() => this.api.get(url4));
-            },
-            /** Create or update a user's sleep goal.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/sleep/create-sleep-goals/
-             */
-            createGoal: (opts) => this.handleData(() => this.api.post(this.url(1.2, `sleep/goal.json${dictToUrlParams(opts)}`))),
-            /** Returns a user's current sleep goal.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/sleep/get-sleep-goals/
-             */
-            getGoal: () => this.handleData(() => this.api.get(this.url(1.2, "sleep/goal.json")))
-          };
-          this.heartRate = {
-            /** Retrieves the heart rate time series data over a period of time by specifying a date and time period or a date range. The response will include only the daily summary values.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/heartrate-timeseries/get-heartrate-timeseries-by-date/
-             */
-            getTimeSeries: (opts) => {
-              const url4 = this.url(1, opts.type === "By_Date" ? `activities/heart/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `activities/heart/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
-              return this.handleData(() => this.api.get(url4));
-            },
-            /** Retrieves the heart rate intraday time series data on a specific date or date range for a 24 hour period.
-             *
-             * Can't exceed 24 hours, or an error will be given.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/intraday/get-heartrate-intraday-by-date/
-             */
-            getIntraday: (opts) => {
-              let url4;
-              if (opts.type === "By_Date") {
-                url4 = this.url(1, `activities/heart/date/${dayAndTime(opts.date)[0]}/1d/${opts.detailLevel}.json`);
-              } else {
-                const start = dayAndTime(opts.fromTime);
-                const end = dayAndTime(opts.toTime);
-                url4 = this.url(1, `activities/heart/date/${start[0]}/${end[0]}/${opts.detailLevel}/time/${start[1]}/${end[1]}.json`);
-              }
-              return this.handleData(() => this.api.get(url4));
-            }
-          };
-          this.user = {
-            /** Retrieves a list of the user’s badges.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/user/get-badges/
-             */
-            getBadges: () => this.handleData(() => this.api.get(this.url(1, `badges.json`))),
-            /** Retrieves the user's profile data.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/user/get-profile/
-             */
-            getProfile: () => this.handleData(() => this.api.get(this.url(1, `profile.json`))),
-            /** Modifies a user's profile data.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/user/update-profile/
-             */
-            updateProfile: (opts) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-              return this.handleData(() => this.api.post(this.url(1, `profile.json${dictToUrlParams(opts)}`)));
-            })
-          };
-          this.body = {
-            /** Retrieves a list of all user's weight or fat log entries for a given date or date range.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body/get-weight-log/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body/get-bodyfat-log/
-             */
-            getLogs: (opts) => {
-              const url4 = this.url(1, opts.type === "By_Date" ? `body/log/${opts.data}/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `body/log/${opts.data}/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
-              return this.handleData(() => this.api.get(url4));
-            },
-            /** Returns time series data in the specified range for weight, fat, or bmi.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body-timeseries/
-            */
-            getTimeSeries: (opts) => {
-              const url4 = this.url(1, opts.type === "By_Date" ? `body/${opts.data}/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `body/${opts.data}/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
-              return this.handleData(() => this.api.get(url4));
-            },
-            /** Retrieves a user's body fat and weight goals.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body/get-body-goals/
-             */
-            getGoals: (opts) => this.handleData(() => this.api.get(this.url(1, `body/log/${opts.data}/goal.json`))),
-            /** Updates a user's body fat and weight goals.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body/create-weight-goal/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body/create-bodyfat-goal/
-             */
-            createGoals: (opts) => this.handleData(() => this.api.post(this.url(1, `body/log/${opts.data}/goal.json`))),
-            /** Creates a body fat or weight log entry.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body/create-bodyfat-log/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body/create-weight-log/
-             */
-            createLog: (opts) => {
-              const [date, time] = dayAndTime(opts.time, true);
-              const url4 = this.url(1, `body/log/${opts.data}.json${dictToUrlParams({ [opts.data]: opts.unit, date, time })}`);
-              return this.handleData(() => this.api.post(url4));
-            },
-            /** Deletes a body fat or weight log entry
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body/delete-bodyfat-log/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body/delete-weight-log/
-             */
-            deleteLog: ({ logId, data }) => this.handleData(() => this.api.delete(this.url(1, `body/log/${data}/${logId}.json`)))
-          };
-          this.activity = {
-            /** Retrieves the user's activity statistics.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/get-lifetime-stats/
-             */
-            getLifetimeStats: () => this.handleData(() => this.api.get(this.url(1, `activities.json`))),
-            /** Retrieves a user's current daily or weekly activity goals.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/get-activity-goals/
-             */
-            getGoals: (opts) => this.handleData(() => this.api.get(this.url(1, `activities/goals/${opts.period}.json`))),
-            /** Creates or updates a user's daily or weekly activity goal.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/create-activity-goals/
-             */
-            createGoals: ({ period, type, value }) => this.handleData(() => this.api.post(this.url(1, `activities/goals/${period}.json${dictToUrlParams({ type, value })}`))),
-            /** Creates a log entry containing the Fitbit user's activity or private custom activity.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/create-activity-log/
-             */
-            createLog: (opts) => {
-              const [date, startTime] = dayAndTime(opts.startTime);
-              const url4 = this.url(1, `activities.json${dictToUrlParams(Object.assign(Object.assign({}, opts), { date, startTime }))}`);
-              return this.handleData(() => this.api.post(url4));
-            },
-            /** Deletes a user’s activity log entry with the given ID.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/delete-activity-log/
-             */
-            deleteLog: (activityLogId) => this.handleData(() => this.api.delete(this.url(1, `activities/${activityLogId}.json`))),
-            /** Retrieves a list of a user's activity log entries before or after a given day.
-             *
-             * @returns generator, call .next() to get data, keep calling .next() to continue loading data beforeDate or afterDate offset by data already loaded.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/get-activity-log-list/
-             */
-            getLogList: (opts) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-              const params2 = Object.assign({ limit: opts.limit || 100, offset: opts.offset || 0 }, (0, util_lib_1.hasKey)(opts, "afterDate") ? { afterDate: dayAndTime(opts.afterDate)[0], sort: opts.sort || "asc" } : { beforeDate: dayAndTime(opts.beforeDate)[0], sort: opts.sort || "desc" });
-              if (params2.limit > 100 || params2.limit < 1)
-                throw new Error(`Invalid limit: ${opts.limit}, needs to be a number between 1 to 100`);
-              const url4 = this.url(1, `activities/list.json${dictToUrlParams(params2)}`);
-              return this.pageGenerator(url4, "activities");
-            }),
-            /** Retrieves a list of all valid Fitbit public activities and private, user-created activities. If available, activity level details will display.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/get-all-activity-types/
-             */
-            getAllTypes: () => this.handleData(() => this.api.get(this.url(1, `activities.json`))),
-            /** Retrieves the details for a single activity. If available, activity level details will display.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/get-activity-type/
-             */
-            getType: (activityId) => this.handleData(() => this.api.get(this.url(1, `activities/${activityId}.json`))),
-            /** Retrieves a list of a user's favorite activities.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/get-favorite-activities/
-             */
-            getFavorite: () => this.handleData(() => this.api.get(this.url(1, `activities/favorite.json`))),
-            /** Adds the activity with the given ID to user's list of favorite activities.
-             *
-             * For the list of available ids use: `.activity.getAllTypes()`
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/create-favorite-activity/
-             */
-            createFavorite: (activityId) => this.handleData(() => this.api.post(this.url(1, `activities/favorite/${activityId}.json`))),
-            /** Adds the activity with the given ID to user's list of favorite activities.
-             *
-             * For the list of available ids use: `.activity.getAllTypes()`
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/create-favorite-activity/
-             */
-            deleteFavorite: (activityId) => this.handleData(() => this.api.delete(this.url(1, `activities/favorite/${activityId}.json`))),
-            /** Retrieves a list of a user's recent activities types logged with some details of the last activity log of that type.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/get-recent-activity-types/
-             */
-            getRecent: () => this.handleData(() => this.api.get(this.url(1, `activities/recent.json`))),
-            /** Retrieves a summary and list of a user’s activities and activity log entries for a given day.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/get-daily-activity-summary/
-             */
-            getDailySummary: () => this.handleData(() => this.api.get(this.url(1, `activities/recent.json`))),
-            /** Retrieves a list of a user's frequent activities.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/activity/get-frequent-activities/
-             */
-            getFrequent: () => this.handleData(() => this.api.get(this.url(1, `activities/frequent.json`))),
-            /** Returns time series data in the specified range for weight, fat, or bmi.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/body-timeseries/
-            */
-            getTimeSeries: (opts) => {
-              const url4 = this.url(1, opts.type === "By_Date" ? `activities/${opts.data}/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `activities/${opts.data}/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
-              return this.handleData(() => this.api.get(url4));
-            },
-            /** Retrieves the activity intraday time series data for a given resource on a specific date or 24 hour period.
-             *
-             * Can't exceed 24 hours, or an error will be given.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/intraday/get-activity-intraday-by-date/
-             */
-            getIntraday: (opts) => {
-              let url4;
-              if (opts.type === "By_Date") {
-                url4 = this.url(1, `activities/${opts.data}/date/${dayAndTime(opts.date)[0]}/1d/${opts.detailLevel}.json`);
-              } else {
-                const start = dayAndTime(opts.fromTime);
-                const end = dayAndTime(opts.toTime);
-                url4 = this.url(1, `activities/${opts.data}/date/${start[0]}/${end[0]}/${opts.detailLevel}/time/${start[1]}/${end[1]}.json`);
-              }
-              return this.handleData(() => this.api.get(url4));
-            }
-          };
-          this.devices = {
-            /** Get Devices retrieves a list of devices paired to the user's account.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/devices/get-devices/
-             */
-            getList: () => this.handleData(() => this.api.get(this.url(1, `devices.json`))),
-            /** Create Alarm creates an alarm for the given device.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/devices/create-alarm/
-             */
-            createAlarm: (opts) => {
-              const params2 = (0, util_lib_1.objRemoveKeys)(opts, ["deviceTrackerId"]);
-              const url4 = this.url(1, `devices/tracker/${opts.deviceTrackerId}/alarms.json${dictToUrlParams(params2)}`);
-              return this.handleData(() => this.api.post(url4));
-            },
-            /** Update Alarm updates an alarm for the given device.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/devices/update-alarm/
-             */
-            updateAlarm: ({ deviceTrackerId, alarmId }, update) => this.handleData(() => this.api.post(this.url(1, `devices/tracker/${deviceTrackerId}/alarms/${alarmId}.json${dictToUrlParams(Object.assign(Object.assign({}, update), { weekDays: update.weekDays.join() }))}`))),
-            /** Retrieves the alarms enabled for a specific device. This endpoint is supported for trackers that support alarms.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/devices/get-alarms/
-             */
-            getAlarms: (deviceTrackerId) => this.handleData(() => this.api.get(this.url(1, `devices/tracker/${deviceTrackerId}/alarms.json`))),
-            /** Delete Alarm deletes an alarm for the given device.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/devices/delete-alarm/
-             */
-            deleteAlarm: ({ deviceTrackerId, alarmId }) => this.handleData(() => this.api.delete(this.url(1, `devices/tracker/${deviceTrackerId}/alarms/${alarmId}.json`)))
-          };
-          this.friends = {
-            /** Retrieves a list of the Fitbit user's friends.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/friends/get-friends/
-             */
-            getList: () => this.handleData(() => this.api.get(this.url(1.1, `friends.json`))),
-            /** Retrieves the user's friends leaderboard in the format requested using units in the unit system which corresponds to the Accept-Language header provided.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/friends/get-friends-leaderboard/
-             */
-            getLeaderboard: () => this.handleData(() => this.api.get(this.url(1.1, `leaderboard/friends.json`)))
-          };
-          this.nutrition = {
-            // --- // FOODS INFO // --- //
-            /** Retrieves a list of public foods from the Fitbit foods database and private foods the user created in the format requested.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/search-foods/
-             */
-            searchFood: (query) => this.handleData(() => this.api.get(this.url(1, `foods/search.json${dictToUrlParams({ query })}`, true))),
-            /** Retrieves the details of a specific food stored in the Fitbit food database or a private food the authorized user has entered.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food/
-             */
-            getFood: (foodId) => this.handleData(() => this.api.get(this.url(1, `${foodId}.json`, true))),
-            /** Retrieves the food locales used to search, log or create food.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food-locales/
-             */
-            getFoodLocales: () => this.handleData(() => this.api.get(this.url(1, `foods/locales.json`, true))),
-            /** Retrieves a list of all valid Fitbit food units in the format requested.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food-units/
-             */
-            getFoodUnits: () => this.handleData(() => this.api.get(this.url(1, `foods/units.json`, true))),
-            /** Creates a new private food for a user.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-food/
-             */
-            createFood: (params2, addNutritionInfo = "") => this.handleData(() => this.api.post(this.url(1, `foods.json${dictToUrlParams(params2)}${addNutritionInfo}`))),
-            /** Deletes a custom food created by the user.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-custom-food/
-             */
-            deleteFood: (foodId) => this.handleData(() => this.api.delete(this.url(1, `foods/${foodId}.json`))),
-            // --- // FOOD // --- //
-            /** Retrieves a list of user-specific frequent consumed foods.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-frequent-foods/
-             */
-            getFrequentFoods: () => this.handleData(() => this.api.get(this.url(1, `foods/log/frequent.json`))),
-            /** Retrieves a list of user-specific recently consumed foods.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-recent-foods/
-             */
-            getRecentFoods: () => this.handleData(() => this.api.get(this.url(1, `foods/log/recent.json`))),
-            // --- // LOGS FOOD & WATER // --- //
-            /** Creates a food log entry for a given day. (OR) Create a user's water log entry.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-food-log/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-water-log/
-             */
-            createLog: (opts) => {
-              const [date] = dayAndTime(opts.date)[0];
-              const params2 = Object.assign(Object.assign({}, (0, util_lib_1.objRemoveKeys)(opts, ["data", "date"])), { date });
-              const url4 = this.url(1, `foods/log${opts.data === "water" ? "/water" : ""}.json${dictToUrlParams(params2)}`);
-              return this.handleData(() => this.api.post(url4));
-            },
-            /** Retrieves a summary of the user's food log entry for a given day. (OR) Retrieves a summary and list of a user's water log entries for a given day.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food-log/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-water-log/
-             */
-            getLog: (opts) => {
-              const [date] = dayAndTime(opts.date)[0];
-              const params2 = Object.assign(Object.assign({}, (0, util_lib_1.objRemoveKeys)(opts, ["data", "date"])), { date });
-              const url4 = this.url(1, `foods/log${opts.data === "water" ? "/water" : ""}.json${dictToUrlParams(params2)}`);
-              return this.handleData(() => this.api.get(url4));
-            },
-            /** Deletes a user's food log entry using the given log ID. (OR) Deleted a user's water log entry using the given log ID.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-food-log/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-water-log/
-             */
-            deleteLog: ({ logId, data }) => this.handleData(() => this.api.delete(this.url(1, `foods/log${data === "water" ? "/water" : ""}/${logId}.json`))),
-            /** Update food or water log.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/update-food-log/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/update-water-log/
-             */
-            updateLog: (opts) => {
-              const { logId, data } = opts;
-              const params2 = (0, util_lib_1.objRemoveKeys)(opts, ["data", "logId"]);
-              this.handleData(() => this.api.post(this.url(1, `foods/log${data === "water" ? "/water" : ""}/${logId}.json${dictToUrlParams(params2)}`)));
-            },
-            // --- // MEALS // --- //
-            /** Creates a meal with the given food.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-meal/
-             *
-             * Endpoint doesn't match the documentation:
-             * https://community.fitbit.com/t5/Web-API-Development/Create-a-meal-using-the-API-return-emtpy-array-and-I-don-t-understand-why/m-p/4839132#M13151
-             *
-             * To get the correct input use the type definitions in opts.
-             */
-            createMeal: (opts) => this.handleData(() => this.api.post(this.url(1, `meals.json`), opts)),
-            /** Retrieves a single meal created by the user from their food log given the meal id.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-meal/
-             */
-            getMeal: (mealId) => this.handleData(() => this.api.get(this.url(1, `meals/${mealId}.json`))),
-            /** Retrieves a list of meals created by the user from their food log.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-meals/
-             */
-            getMealList: () => this.handleData(() => this.api.get(this.url(1, `meals.json`))),
-            /** Updates an existing meal with the contents of the request.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/update-meal/
-             */
-            updateMeal: (opts) => this.handleData(() => this.api.post(this.url(1, `meals/${opts.mealId}.json`), (0, util_lib_1.objRemoveKeys)(opts, ["mealId"]))),
-            /** Deletes an existing meal of the given meal ID.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-meal/
-             */
-            deleteMeal: (mealId) => this.handleData(() => this.api.delete(this.url(1, `meals/${mealId}.json`))),
-            // --- // FAVORITE FOODS // --- //
-            /** Adds a food with the given ID to the user's list of favorite foods.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/add-favorite-foods/
-             */
-            addFavoriteFood: (foodId) => this.handleData(() => this.api.post(this.url(1, `foods/log/favorite/${foodId}.json`))),
-            /** Retrieves a list of user-specific favorite consumed foods.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-favorite-foods/
-             */
-            getFavoriteFoodList: () => this.handleData(() => this.api.get(this.url(1, `foods/log/favorite.json`))),
-            /** Deletes a food with the given ID from the user's list of favorite foods.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-favorite-foods/
-             */
-            deleteFavoriteFood: (foodId) => this.handleData(() => this.api.delete(this.url(1, `foods/log/favorite/${foodId}.json`))),
-            // Delete Favorite Foods deletes a food from the user's favorite food list.
-            // --- // GOALS FOOD & WATER // --- //
-            /** Creates or updates a user's daily calorie consumption or food plan goals. (OR) Creates or updates a user's daily water consumption goal.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-food-goal/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-water-goal/
-             */
-            createGoal: (opts) => this.handleData(() => this.api.post(this.url(1, `foods/log${opts.data === "water" ? "/water" : ""}/goal.json${dictToUrlParams(opts)}`))),
-            /** Retrieves the user's current daily calorie consumption goal and/or food plan. (OR) Retrieves a user's daily water consumption goal.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food-goals/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-water-goal/
-             */
-            getGoal: (data) => this.handleData(() => this.api.get(this.url(1, `foods/log${data === "water" ? "/water" : ""}/goal.json`))),
-            // --- // TIME SERIES // --- //
-            /** Retrieves the food and water consumption data for a given resource over a period of time by specifying a date or date range. The response will include only the daily summary values.
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition-timeseries/get-nutrition-timeseries-by-date/
-             *
-             * https://dev.fitbit.com/build/reference/web-api/nutrition-timeseries/get-nutrition-timeseries-by-date-range/
-            */
-            getTimeSeries: (opts) => {
-              const resource = opts.data === "food" ? "caloriesIn" : "water";
-              const url4 = this.url(1, opts.type === "By_Date" ? `foods/log/${resource}/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `foods/log/${resource}/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
-              return this.handleData(() => this.api.get(url4));
-            }
-          };
-          this.subscription = {
-            create: ({ collection, subscriptionId, subscriberId }) => {
-              const url4 = this.subUrl(collection, subscriptionId);
-              return this.handleData(() => this.api.post(url4, void 0, void 0, subscriberId ? { "X-Fitbit-Subscriber-Id": subscriberId } : {}));
-            },
-            getList: ({ collection, subscriberId }) => this.handleData(() => this.api.get(this.subUrl(collection), void 0, subscriberId ? { "X-Fitbit-Subscriber-Id": subscriberId } : {})),
-            delete: ({ collection, subscriptionId, subscriberId }) => this.handleData(() => this.api.delete(this.subUrl(collection, subscriptionId), subscriberId ? { "X-Fitbit-Subscriber-Id": subscriberId } : {}))
-          };
-          this.subUrl = (cl, id) => this.url(1, `${cl === "all" ? "" : `${cl}/`}apiSubscriptions${id ? `/${id}` : ""}.json`);
-          this.setAccessToken(accessToken);
-        }
-        setAccessToken(token) {
-          this.accessToken = token;
-          this.api.setDefaultHeader("Authorization", `Bearer ${this.accessToken}`);
-        }
-        handleData(dataCall, nRecur = 0) {
-          return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-            const response = yield dataCall();
-            const headers = {};
-            const iter = response.headers.entries();
-            for (const [key, val] of iter)
-              headers[key] = val;
-            let json;
-            try {
-              json = yield response.json();
-            } catch (_a) {
-              if (!response.ok) {
-                const code2 = response.status;
-                console.error(`${code2 === 500 ? "Fitbit Internal" : "Unhandled"} Error.`);
-                if (code2 !== 500)
-                  throw new Error("Unhandled Error");
-              }
-              json = null;
-            }
-            if (!response.ok || json && (0, util_lib_1.hasKey)(json, "errors")) {
-              let error = null;
-              if ((0, util_lib_1.hasKey)(json, "errors")) {
-                error = json;
-                const { errorType: err } = json.errors[0];
-                if ((err === "expired_token" || err === "invalid_token") && this.getToken && nRecur < 2) {
-                  try {
-                    const token = yield this.getToken();
-                    this.setAccessToken(token);
-                    return yield this.handleData(dataCall, nRecur + 1);
-                  } catch (err2) {
-                    console.error(err2);
-                  }
-                }
-              }
-              return {
-                type: "ERROR",
-                isSuccess: false,
-                code: response.status,
-                error,
-                response,
-                headers
-              };
-            }
-            return {
-              type: "SUCCESS",
-              isSuccess: true,
-              code: response.status,
-              data: json,
-              response,
-              headers
-            };
-          });
-        }
-        pageGenerator(startingUrl, dataKey) {
-          return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-            let lastResponse = yield this.handleData(() => this.api.get(startingUrl));
-            return function(self2) {
-              return (0, tslib_1.__asyncGenerator)(this, arguments, function* () {
-                let allData = lastResponse.isSuccess ? [...lastResponse.data[dataKey]] : [];
-                let totalCalls = 1;
-                const getObj = () => ({ lastResponse, allData, totalCalls });
-                if (lastResponse.type === "ERROR")
-                  return yield (0, tslib_1.__await)(getObj());
-                yield yield (0, tslib_1.__await)(getObj());
-                let nextUrl = lastResponse.data.pagination.next;
-                while (nextUrl) {
-                  lastResponse = yield (0, tslib_1.__await)(self2.handleData(() => self2.api.get(nextUrl)));
-                  totalCalls++;
-                  if (lastResponse.type === "ERROR")
-                    return yield (0, tslib_1.__await)(getObj());
-                  nextUrl = lastResponse.data.pagination.next;
-                  allData = [...allData, ...lastResponse.data[dataKey]];
-                  if (nextUrl)
-                    yield yield (0, tslib_1.__await)(getObj());
-                }
-                return yield (0, tslib_1.__await)(getObj());
-              });
-            }(this);
-          });
-        }
-      };
-      exports.FitbitApi = FitbitApi2;
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/Activity.type.js
-  var require_Activity_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/Activity.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/Badges.type.js
-  var require_Badges_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/Badges.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.BadgeType = void 0;
-      var BadgeType;
-      (function(BadgeType2) {
-        BadgeType2["DailyFloors"] = "DAILY_FLOORS";
-        BadgeType2["DailySteps"] = "DAILY_STEPS";
-        BadgeType2["LifetimeDistance"] = "LIFETIME_DISTANCE";
-      })(BadgeType = exports.BadgeType || (exports.BadgeType = {}));
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/Devices.type.js
-  var require_Devices_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/Devices.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/FitbitError.type.js
-  var require_FitbitError_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/FitbitError.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/Friends.type.js
-  var require_Friends_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/Friends.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/General.type.js
-  var require_General_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/General.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/HeartRate.type.js
-  var require_HeartRate_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/HeartRate.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/Nutrition.type.js
-  var require_Nutrition_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/Nutrition.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/Profile.type.js
-  var require_Profile_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/Profile.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/Sleep.type.js
-  var require_Sleep_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/Sleep.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/Subscription.type.js
-  var require_Subscription_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/Subscription.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/types/Weight.type.js
-  var require_Weight_type = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/types/Weight.type.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-    }
-  });
-
-  // node_modules/@giveback007/fitbit-api/dist/index.js
-  var require_dist5 = __commonJS({
-    "node_modules/@giveback007/fitbit-api/dist/index.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      var tslib_1 = (init_tslib_es62(), __toCommonJS(tslib_es6_exports2));
-      (0, tslib_1.__exportStar)(require_fitbit_api(), exports);
-      (0, tslib_1.__exportStar)(require_Activity_type(), exports);
-      (0, tslib_1.__exportStar)(require_Badges_type(), exports);
-      (0, tslib_1.__exportStar)(require_Devices_type(), exports);
-      (0, tslib_1.__exportStar)(require_FitbitError_type(), exports);
-      (0, tslib_1.__exportStar)(require_Friends_type(), exports);
-      (0, tslib_1.__exportStar)(require_General_type(), exports);
-      (0, tslib_1.__exportStar)(require_HeartRate_type(), exports);
-      (0, tslib_1.__exportStar)(require_Nutrition_type(), exports);
-      (0, tslib_1.__exportStar)(require_Profile_type(), exports);
-      (0, tslib_1.__exportStar)(require_Sleep_type(), exports);
-      (0, tslib_1.__exportStar)(require_Subscription_type(), exports);
-      (0, tslib_1.__exportStar)(require_Weight_type(), exports);
-    }
-  });
-
   // node_modules/react-is/cjs/react-is.development.js
   var require_react_is_development = __commonJS({
     "node_modules/react-is/cjs/react-is.development.js"(exports) {
@@ -36513,12 +34232,2293 @@
     }
   });
 
+  // node_modules/@giveback007/fitbit-api/node_modules/tslib/tslib.es6.js
+  var tslib_es6_exports2 = {};
+  __export(tslib_es6_exports2, {
+    __assign: () => __assign2,
+    __asyncDelegator: () => __asyncDelegator2,
+    __asyncGenerator: () => __asyncGenerator2,
+    __asyncValues: () => __asyncValues2,
+    __await: () => __await2,
+    __awaiter: () => __awaiter2,
+    __classPrivateFieldGet: () => __classPrivateFieldGet2,
+    __classPrivateFieldSet: () => __classPrivateFieldSet2,
+    __createBinding: () => __createBinding2,
+    __decorate: () => __decorate2,
+    __exportStar: () => __exportStar2,
+    __extends: () => __extends3,
+    __generator: () => __generator2,
+    __importDefault: () => __importDefault2,
+    __importStar: () => __importStar2,
+    __makeTemplateObject: () => __makeTemplateObject2,
+    __metadata: () => __metadata2,
+    __param: () => __param2,
+    __read: () => __read2,
+    __rest: () => __rest2,
+    __spread: () => __spread2,
+    __spreadArray: () => __spreadArray3,
+    __spreadArrays: () => __spreadArrays2,
+    __values: () => __values2
+  });
+  function __extends3(d2, b) {
+    if (typeof b !== "function" && b !== null)
+      throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics3(d2, b);
+    function __() {
+      this.constructor = d2;
+    }
+    d2.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  }
+  function __rest2(s, e) {
+    var t3 = {};
+    for (var p2 in s)
+      if (Object.prototype.hasOwnProperty.call(s, p2) && e.indexOf(p2) < 0)
+        t3[p2] = s[p2];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i4 = 0, p2 = Object.getOwnPropertySymbols(s); i4 < p2.length; i4++) {
+        if (e.indexOf(p2[i4]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i4]))
+          t3[p2[i4]] = s[p2[i4]];
+      }
+    return t3;
+  }
+  function __decorate2(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d2;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i4 = decorators.length - 1; i4 >= 0; i4--)
+        if (d2 = decorators[i4])
+          r = (c < 3 ? d2(r) : c > 3 ? d2(target, key, r) : d2(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  }
+  function __param2(paramIndex, decorator) {
+    return function(target, key) {
+      decorator(target, key, paramIndex);
+    };
+  }
+  function __metadata2(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(metadataKey, metadataValue);
+  }
+  function __awaiter2(thisArg, _arguments, P2, generator) {
+    function adopt(value) {
+      return value instanceof P2 ? value : new P2(function(resolve) {
+        resolve(value);
+      });
+    }
+    return new (P2 || (P2 = Promise))(function(resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  }
+  function __generator2(thisArg, body) {
+    var _ = { label: 0, sent: function() {
+      if (t3[0] & 1)
+        throw t3[1];
+      return t3[1];
+    }, trys: [], ops: [] }, f, y4, t3, g2;
+    return g2 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
+      return this;
+    }), g2;
+    function verb(n) {
+      return function(v2) {
+        return step([n, v2]);
+      };
+    }
+    function step(op) {
+      if (f)
+        throw new TypeError("Generator is already executing.");
+      while (_)
+        try {
+          if (f = 1, y4 && (t3 = op[0] & 2 ? y4["return"] : op[0] ? y4["throw"] || ((t3 = y4["return"]) && t3.call(y4), 0) : y4.next) && !(t3 = t3.call(y4, op[1])).done)
+            return t3;
+          if (y4 = 0, t3)
+            op = [op[0] & 2, t3.value];
+          switch (op[0]) {
+            case 0:
+            case 1:
+              t3 = op;
+              break;
+            case 4:
+              _.label++;
+              return { value: op[1], done: false };
+            case 5:
+              _.label++;
+              y4 = op[1];
+              op = [0];
+              continue;
+            case 7:
+              op = _.ops.pop();
+              _.trys.pop();
+              continue;
+            default:
+              if (!(t3 = _.trys, t3 = t3.length > 0 && t3[t3.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                _ = 0;
+                continue;
+              }
+              if (op[0] === 3 && (!t3 || op[1] > t3[0] && op[1] < t3[3])) {
+                _.label = op[1];
+                break;
+              }
+              if (op[0] === 6 && _.label < t3[1]) {
+                _.label = t3[1];
+                t3 = op;
+                break;
+              }
+              if (t3 && _.label < t3[2]) {
+                _.label = t3[2];
+                _.ops.push(op);
+                break;
+              }
+              if (t3[2])
+                _.ops.pop();
+              _.trys.pop();
+              continue;
+          }
+          op = body.call(thisArg, _);
+        } catch (e) {
+          op = [6, e];
+          y4 = 0;
+        } finally {
+          f = t3 = 0;
+        }
+      if (op[0] & 5)
+        throw op[1];
+      return { value: op[0] ? op[1] : void 0, done: true };
+    }
+  }
+  function __exportStar2(m, o) {
+    for (var p2 in m)
+      if (p2 !== "default" && !Object.prototype.hasOwnProperty.call(o, p2))
+        __createBinding2(o, m, p2);
+  }
+  function __values2(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i4 = 0;
+    if (m)
+      return m.call(o);
+    if (o && typeof o.length === "number")
+      return {
+        next: function() {
+          if (o && i4 >= o.length)
+            o = void 0;
+          return { value: o && o[i4++], done: !o };
+        }
+      };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+  }
+  function __read2(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m)
+      return o;
+    var i4 = m.call(o), r, ar = [], e;
+    try {
+      while ((n === void 0 || n-- > 0) && !(r = i4.next()).done)
+        ar.push(r.value);
+    } catch (error) {
+      e = { error };
+    } finally {
+      try {
+        if (r && !r.done && (m = i4["return"]))
+          m.call(i4);
+      } finally {
+        if (e)
+          throw e.error;
+      }
+    }
+    return ar;
+  }
+  function __spread2() {
+    for (var ar = [], i4 = 0; i4 < arguments.length; i4++)
+      ar = ar.concat(__read2(arguments[i4]));
+    return ar;
+  }
+  function __spreadArrays2() {
+    for (var s = 0, i4 = 0, il = arguments.length; i4 < il; i4++)
+      s += arguments[i4].length;
+    for (var r = Array(s), k = 0, i4 = 0; i4 < il; i4++)
+      for (var a = arguments[i4], j = 0, jl = a.length; j < jl; j++, k++)
+        r[k] = a[j];
+    return r;
+  }
+  function __spreadArray3(to, from, pack) {
+    if (pack || arguments.length === 2)
+      for (var i4 = 0, l = from.length, ar; i4 < l; i4++) {
+        if (ar || !(i4 in from)) {
+          if (!ar)
+            ar = Array.prototype.slice.call(from, 0, i4);
+          ar[i4] = from[i4];
+        }
+      }
+    return to.concat(ar || Array.prototype.slice.call(from));
+  }
+  function __await2(v2) {
+    return this instanceof __await2 ? (this.v = v2, this) : new __await2(v2);
+  }
+  function __asyncGenerator2(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator)
+      throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g2 = generator.apply(thisArg, _arguments || []), i4, q = [];
+    return i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
+      return this;
+    }, i4;
+    function verb(n) {
+      if (g2[n])
+        i4[n] = function(v2) {
+          return new Promise(function(a, b) {
+            q.push([n, v2, a, b]) > 1 || resume(n, v2);
+          });
+        };
+    }
+    function resume(n, v2) {
+      try {
+        step(g2[n](v2));
+      } catch (e) {
+        settle(q[0][3], e);
+      }
+    }
+    function step(r) {
+      r.value instanceof __await2 ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+    }
+    function fulfill(value) {
+      resume("next", value);
+    }
+    function reject(value) {
+      resume("throw", value);
+    }
+    function settle(f, v2) {
+      if (f(v2), q.shift(), q.length)
+        resume(q[0][0], q[0][1]);
+    }
+  }
+  function __asyncDelegator2(o) {
+    var i4, p2;
+    return i4 = {}, verb("next"), verb("throw", function(e) {
+      throw e;
+    }), verb("return"), i4[Symbol.iterator] = function() {
+      return this;
+    }, i4;
+    function verb(n, f) {
+      i4[n] = o[n] ? function(v2) {
+        return (p2 = !p2) ? { value: __await2(o[n](v2)), done: n === "return" } : f ? f(v2) : v2;
+      } : f;
+    }
+  }
+  function __asyncValues2(o) {
+    if (!Symbol.asyncIterator)
+      throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i4;
+    return m ? m.call(o) : (o = typeof __values2 === "function" ? __values2(o) : o[Symbol.iterator](), i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
+      return this;
+    }, i4);
+    function verb(n) {
+      i4[n] = o[n] && function(v2) {
+        return new Promise(function(resolve, reject) {
+          v2 = o[n](v2), settle(resolve, reject, v2.done, v2.value);
+        });
+      };
+    }
+    function settle(resolve, reject, d2, v2) {
+      Promise.resolve(v2).then(function(v3) {
+        resolve({ value: v3, done: d2 });
+      }, reject);
+    }
+  }
+  function __makeTemplateObject2(cooked, raw) {
+    if (Object.defineProperty) {
+      Object.defineProperty(cooked, "raw", { value: raw });
+    } else {
+      cooked.raw = raw;
+    }
+    return cooked;
+  }
+  function __importStar2(mod) {
+    if (mod && mod.__esModule)
+      return mod;
+    var result = {};
+    if (mod != null) {
+      for (var k in mod)
+        if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
+          __createBinding2(result, mod, k);
+    }
+    __setModuleDefault2(result, mod);
+    return result;
+  }
+  function __importDefault2(mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  }
+  function __classPrivateFieldGet2(receiver, state4, kind, f) {
+    if (kind === "a" && !f)
+      throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state4 === "function" ? receiver !== state4 || !f : !state4.has(receiver))
+      throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state4.get(receiver);
+  }
+  function __classPrivateFieldSet2(receiver, state4, value, kind, f) {
+    if (kind === "m")
+      throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f)
+      throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state4 === "function" ? receiver !== state4 || !f : !state4.has(receiver))
+      throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state4.set(receiver, value), value;
+  }
+  var extendStatics3, __assign2, __createBinding2, __setModuleDefault2;
+  var init_tslib_es62 = __esm({
+    "node_modules/@giveback007/fitbit-api/node_modules/tslib/tslib.es6.js"() {
+      extendStatics3 = function(d2, b) {
+        extendStatics3 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b2) {
+          d3.__proto__ = b2;
+        } || function(d3, b2) {
+          for (var p2 in b2)
+            if (Object.prototype.hasOwnProperty.call(b2, p2))
+              d3[p2] = b2[p2];
+        };
+        return extendStatics3(d2, b);
+      };
+      __assign2 = function() {
+        __assign2 = Object.assign || function __assign3(t3) {
+          for (var s, i4 = 1, n = arguments.length; i4 < n; i4++) {
+            s = arguments[i4];
+            for (var p2 in s)
+              if (Object.prototype.hasOwnProperty.call(s, p2))
+                t3[p2] = s[p2];
+          }
+          return t3;
+        };
+        return __assign2.apply(this, arguments);
+      };
+      __createBinding2 = Object.create ? function(o, m, k, k2) {
+        if (k2 === void 0)
+          k2 = k;
+        Object.defineProperty(o, k2, { enumerable: true, get: function() {
+          return m[k];
+        } });
+      } : function(o, m, k, k2) {
+        if (k2 === void 0)
+          k2 = k;
+        o[k2] = m[k];
+      };
+      __setModuleDefault2 = Object.create ? function(o, v2) {
+        Object.defineProperty(o, "default", { enumerable: true, value: v2 });
+      } : function(o, v2) {
+        o["default"] = v2;
+      };
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/@types.js
+  var require_types2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/@types.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/array.js
+  var require_array2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/array.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.arrHas = exports.arrLast = exports.arrToBoolDict = exports.arrToIdxDict = exports.arrToDict = exports.arrRemoveValues = exports.arrReplace = exports.arrDeepFlatten = exports.arrFlatten = exports.arrDivide = exports.arrGetByIds = exports.arrRemoveById = exports.arrGen = void 0;
+      var _1 = require_dist3();
+      var arrGen = (length) => Array(length).fill(null);
+      exports.arrGen = arrGen;
+      function arrRemoveById(arr, idArr, idKey = "id") {
+        const objDict = arrToDict(arr, idKey);
+        const keep = _1.objRemoveKeys(objDict, idArr);
+        return _1.objVals(keep);
+      }
+      exports.arrRemoveById = arrRemoveById;
+      function arrGetByIds(arr, idArr, idKey = "id") {
+        const dict = arrToBoolDict(idArr);
+        return arr.filter((x3) => dict[x3[idKey]]);
+      }
+      exports.arrGetByIds = arrGetByIds;
+      function arrDivide(arr, maxRowLength) {
+        const rows = Math.ceil(arr.length / maxRowLength);
+        const newArr = exports.arrGen(rows).map(() => []);
+        arr.forEach((x3, i4) => newArr[Math.floor(i4 / maxRowLength)].push(x3));
+        return newArr;
+      }
+      exports.arrDivide = arrDivide;
+      function arrFlatten(arr) {
+        return [].concat.apply([], arr);
+      }
+      exports.arrFlatten = arrFlatten;
+      var arrDeepFlatten = (arr) => arr.reduce((newArr, x3) => newArr.concat(_1.isType(x3, "array") ? exports.arrDeepFlatten(x3) : x3), []);
+      exports.arrDeepFlatten = arrDeepFlatten;
+      function arrReplace(arr) {
+        const newArr = [...arr];
+        return {
+          all: (item) => {
+            const idxs = [];
+            arr.forEach((match, i4) => _1.equal(item, match) ? idxs[i4] = i4 : null);
+            return {
+              with: (newItem) => {
+                if (!idxs.length)
+                  return arr;
+                idxs.forEach((i4) => newArr[i4] = newItem);
+                return newArr;
+              }
+            };
+          },
+          first: (item) => {
+            const idx = arr.findIndex((match) => _1.equal(item, match));
+            return {
+              with: (newItem) => {
+                if (_1.nonValue(idx))
+                  return arr;
+                newArr[idx] = newItem;
+                return newArr;
+              }
+            };
+          }
+        };
+      }
+      exports.arrReplace = arrReplace;
+      function arrRemoveValues(arr, valsToRemove) {
+        let newArr = [...arr];
+        valsToRemove.forEach((removeVal) => newArr = newArr.filter((x3) => !_1.equal(x3, removeVal)));
+        return newArr;
+      }
+      exports.arrRemoveValues = arrRemoveValues;
+      function arrToDict(arr, idKey) {
+        const dict = {};
+        arr.forEach((obj) => dict[obj[idKey]] = obj);
+        return dict;
+      }
+      exports.arrToDict = arrToDict;
+      function arrToIdxDict(arr) {
+        const dict = {};
+        arr.forEach((x3, idx) => dict[x3] = idx + "");
+        return dict;
+      }
+      exports.arrToIdxDict = arrToIdxDict;
+      function arrToBoolDict(arr) {
+        const dict = {};
+        arr.forEach((x3) => dict[x3] = true);
+        return dict;
+      }
+      exports.arrToBoolDict = arrToBoolDict;
+      var arrLast = (arr) => arr[arr.length - 1];
+      exports.arrLast = arrLast;
+      function arrHas(arr, find, equivalent = false) {
+        const fct = equivalent ? (x3) => _1.equal(x3, find) : (x3) => x3 === find;
+        return arr.findIndex(fct) !== -1;
+      }
+      exports.arrHas = arrHas;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/clone.js
+  var require_clone2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/clone.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.clone = void 0;
+      function clone(o) {
+        let c, x3, l, i4, k, a, q;
+        if (typeof o !== "object" || o === null)
+          return o;
+        if (o instanceof Date)
+          return new Date(o);
+        x3 = Object.keys(o);
+        l = x3.length;
+        if (Array.isArray(o)) {
+          a = new Array(l);
+          for (i4 = 0; i4 < l; i4++) {
+            k = x3[i4];
+            c = o[k];
+            if (typeof c !== "object" || c === null)
+              a[k] = c;
+            else if (c instanceof Date)
+              a[k] = new Date(c);
+            else
+              a[k] = clone(c);
+          }
+          return a;
+        }
+        q = {};
+        for (i4 = 0; i4 < l; i4++) {
+          k = x3[i4];
+          c = o[k];
+          if (Object.hasOwnProperty.call(o, k) === false)
+            continue;
+          if (typeof c !== "object" || c === null)
+            q[k] = c;
+          else if (c instanceof Date)
+            q[k] = new Date(c);
+          else
+            q[k] = clone(c);
+        }
+        return q;
+      }
+      exports.clone = clone;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/equality.js
+  var require_equality2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/equality.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.equal = void 0;
+      function equal(a, b) {
+        if (a === b)
+          return true;
+        if (a && b && typeof a === "object" && typeof b === "object") {
+          if (a.constructor !== b.constructor)
+            return false;
+          var length, i4, keys4;
+          if (Array.isArray(a)) {
+            length = a.length;
+            if (length !== b.length)
+              return false;
+            for (i4 = length; i4-- !== 0; )
+              if (!equal(a[i4], b[i4]))
+                return false;
+            return true;
+          }
+          if (a instanceof Map && b instanceof Map) {
+            if (a.size !== b.size)
+              return false;
+            for (i4 of a.entries())
+              if (!b.has(i4[0]))
+                return false;
+            for (i4 of a.entries())
+              if (!equal(i4[1], b.get(i4[0])))
+                return false;
+            return true;
+          }
+          if (a instanceof Set && b instanceof Set) {
+            if (a.size !== b.size)
+              return false;
+            for (i4 of a.entries())
+              if (!b.has(i4[0]))
+                return false;
+            return true;
+          }
+          if (ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
+            length = a.length;
+            if (length != b.length)
+              return false;
+            for (i4 = length; i4-- !== 0; )
+              if (a[i4] !== b[i4])
+                return false;
+            return true;
+          }
+          if (a.constructor === RegExp)
+            return a.source === b.source && a.flags === b.flags;
+          if (a.valueOf !== Object.prototype.valueOf)
+            return a.valueOf() === b.valueOf();
+          if (a.toString !== Object.prototype.toString)
+            return a.toString() === b.toString();
+          keys4 = Object.keys(a);
+          length = keys4.length;
+          if (length !== Object.keys(b).length)
+            return false;
+          for (i4 = length; i4-- !== 0; )
+            if (!Object.prototype.hasOwnProperty.call(b, keys4[i4]))
+              return false;
+          for (i4 = length; i4-- !== 0; ) {
+            var key = keys4[i4];
+            if (key === "_owner" && a.$$typeof) {
+              continue;
+            }
+            if (!equal(a[key], b[key]))
+              return false;
+          }
+          return true;
+        }
+        return a !== a && b !== b;
+      }
+      exports.equal = equal;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/general.js
+  var require_general2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/general.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.promiseOut = exports.debounceTimeOut = exports.randomColorHex = exports.uiid = exports.assertType = exports.type = exports.cloneLog = exports.unsubAll = exports.wait = exports.interval = void 0;
+      var _1 = require_dist3();
+      var interval = (funct, ms, times) => {
+        if (_1.isType(times, "number") && times < 1)
+          throw Error(`argument "times" can't be less than 1`);
+        let i4 = 0;
+        const intv = setInterval(() => {
+          funct(i4);
+          i4++;
+          if (times && i4 >= times)
+            clearInterval(intv);
+        }, ms);
+        return { stop: () => clearInterval(intv) };
+      };
+      exports.interval = interval;
+      var wait = (ms) => new Promise((res2) => setTimeout(() => res2(), ms));
+      exports.wait = wait;
+      var usubAllFunct = (x3, unsubName = "unsubscribe") => _1.isType(x3, "object") && _1.hasKey(x3, unsubName) ? x3[unsubName]() : null;
+      function unsubAll(objOrArr, unsubName = "unsubscribe") {
+        if (_1.isType(objOrArr, "array"))
+          objOrArr.forEach((x3) => usubAllFunct(x3, unsubName));
+        else if (_1.isType(objOrArr, "object"))
+          _1.objMap(objOrArr, ({ val }) => usubAllFunct(val, unsubName));
+        else
+          throw Error('argument "objOrArr" must be of type "object" or "array"');
+      }
+      exports.unsubAll = unsubAll;
+      var cloneLog = (x3) => console.log(_1.clone(x3));
+      exports.cloneLog = cloneLog;
+      function type(val) {
+        if (typeof val === "object") {
+          if (Array.isArray(val))
+            return "array";
+          else if (val === null)
+            return "null";
+          else
+            return "object";
+        } else {
+          if (val !== val)
+            return "NaN";
+          else
+            return typeof val;
+        }
+      }
+      exports.type = type;
+      function assertType(val, types) {
+        if (!_1.isType(types, "array"))
+          types = [types];
+        for (const t3 of types)
+          if (_1.isType(val, t3))
+            return;
+        throw Error(`value needs to be of type ${types.join(" || ")}`);
+      }
+      exports.assertType = assertType;
+      var uiid = () => {
+        let d2 = (/* @__PURE__ */ new Date()).getTime();
+        let d22 = performance && performance.now && performance.now() * 1e3 || 0;
+        const str6 = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+        return str6.replace(/[xy]/g, (c) => {
+          let r = Math.random() * 16;
+          if (d2 > 0) {
+            r = (d2 + r) % 16 | 0;
+            d2 = Math.floor(d2 / 16);
+          } else {
+            r = (d22 + r) % 16 | 0;
+            d22 = Math.floor(d22 / 16);
+          }
+          return (c === "x" ? r : r & 3 | 8).toString(16);
+        });
+      };
+      exports.uiid = uiid;
+      var randomColorHex = () => "#" + ((1 << 24) * Math.random() | 0).toString(16);
+      exports.randomColorHex = randomColorHex;
+      function debounceTimeOut() {
+        let timeoutId = null;
+        return (fct, ms) => {
+          if (timeoutId)
+            clearTimeout(timeoutId);
+          timeoutId = setTimeout(fct, ms);
+        };
+      }
+      exports.debounceTimeOut = debounceTimeOut;
+      function promiseOut() {
+        let resolve;
+        const promise = new Promise((res2) => resolve = res2);
+        return { resolve, promise };
+      }
+      exports.promiseOut = promiseOut;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/iterate.js
+  var require_iterate2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/iterate.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.iterate = void 0;
+      var array_1 = require_array2();
+      function iterate(xLength, yLength, zLength) {
+        const iterator = (fct, nested = false) => {
+          const arr = [];
+          for (let x3 = 0; x3 < xLength; x3++) {
+            if (!yLength)
+              arr.push(fct({ x: x3 }));
+            else
+              for (let y4 = 0; y4 < yLength; y4++) {
+                if (!zLength)
+                  arr.push(fct({ x: x3, y: y4 }));
+                else
+                  for (let z3 = 0; z3 < zLength; z3++) {
+                    arr.push(fct({ x: x3, y: y4, z: z3 }));
+                  }
+              }
+          }
+          if (!nested)
+            return arr;
+          if (zLength && yLength) {
+            const newArr = array_1.arrDivide(arr, yLength * zLength);
+            return newArr.map((yArr) => array_1.arrDivide(yArr, zLength));
+          } else if (yLength) {
+            return array_1.arrDivide(arr, yLength);
+          } else {
+            return arr;
+          }
+        };
+        return {
+          for: (fct) => {
+            iterator(fct);
+          },
+          map: (fct) => iterator(fct),
+          nestedMap: (fct) => iterator(fct, true)
+        };
+      }
+      exports.iterate = iterate;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/number.js
+  var require_number2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/number.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.newNumFromRange = exports.numberWithCommas = exports.decPlace = exports.average = exports.rand = void 0;
+      var _1 = require_dist3();
+      var rand = (min, max) => Math.floor(Math.random() * (max + 1 - min)) + min;
+      exports.rand = rand;
+      var average = (nArr) => nArr.reduce((a = 0, b = 0) => a + b, 0) / nArr.length;
+      exports.average = average;
+      var decPlace = (n, places) => parseFloat(n.toFixed(places));
+      exports.decPlace = decPlace;
+      var numberWithCommas = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      exports.numberWithCommas = numberWithCommas;
+      function newNumFromRange(prevNum, min, max) {
+        let num;
+        let loop4 = 0;
+        const dict = _1.isType(prevNum, "array") ? _1.arrToBoolDict(prevNum) : { [prevNum]: true };
+        do {
+          num = exports.rand(min, max);
+          loop4++;
+          if (loop4 > 1e6) {
+            console.error("Check for infinite loops");
+            throw new Error("Looped 1 million times");
+          }
+        } while (dict[num]);
+        return num;
+      }
+      exports.newNumFromRange = newNumFromRange;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/object.js
+  var require_object2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/object.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.objPromiseAll = exports.objSortKeys = exports.objResolve = exports.objExtract = exports.objKeyVals = exports.objVals = exports.objKeys = exports.objRemoveKeys = exports.objFilter = exports.objMap = void 0;
+      function objMap(o, funct) {
+        const newObj = {};
+        for (const key in o) {
+          newObj[key] = funct({ key, val: o[key] });
+        }
+        return newObj;
+      }
+      exports.objMap = objMap;
+      function objFilter(o, funct) {
+        const newObj = Object.assign({}, o);
+        for (const key in o) {
+          if (!funct({ key, val: o[key] }))
+            delete newObj[key];
+        }
+        return newObj;
+      }
+      exports.objFilter = objFilter;
+      function objRemoveKeys(obj, filterOut) {
+        const newObj = Object.assign({}, obj);
+        filterOut.forEach((key) => delete newObj[key]);
+        return newObj;
+      }
+      exports.objRemoveKeys = objRemoveKeys;
+      function objKeys(o) {
+        if (Object.keys)
+          return Object.keys(o);
+        const keys4 = [];
+        for (const k in o)
+          keys4.push(k);
+        return keys4;
+      }
+      exports.objKeys = objKeys;
+      var objVals = (o) => Object.values ? Object.values(o) : objKeys(o).map((key) => o[key]);
+      exports.objVals = objVals;
+      var objKeyVals = (o) => objKeys(o).map((key) => ({ key, val: o[key] }));
+      exports.objKeyVals = objKeyVals;
+      function objExtract(extract, keys4) {
+        const newObj = {};
+        keys4.forEach((key) => newObj[key] = extract[key]);
+        return newObj;
+      }
+      exports.objExtract = objExtract;
+      var objResolve = (o, path) => path.split(".").reduce((prev, key) => prev[key], o);
+      exports.objResolve = objResolve;
+      var objSortKeys = (o, compareFn) => {
+        const newObj = {};
+        const keys4 = objKeys(o).sort(compareFn);
+        keys4.map((k) => newObj[k] = o[k]);
+        return newObj;
+      };
+      exports.objSortKeys = objSortKeys;
+      function objPromiseAll(obj) {
+        const keyValues = exports.objKeyVals(obj);
+        const toEqual = keyValues.length;
+        const values = {};
+        let total = 0;
+        return new Promise((resolve) => keyValues.forEach(({ key, val: x3 }) => x3.then((data) => {
+          values[key] = data;
+          total++;
+          if (toEqual === total)
+            resolve(values);
+        })));
+      }
+      exports.objPromiseAll = objPromiseAll;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/string.js
+  var require_string2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/string.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.minAppend = exports.strRemove = exports.strIncludes = void 0;
+      var strIncludes = (str6, subStr) => str6.indexOf(subStr) !== -1;
+      exports.strIncludes = strIncludes;
+      var strRemove = (str6, remove) => str6.replace(new RegExp(remove, "g"), "");
+      exports.strRemove = strRemove;
+      var minAppend = (item, length, append = "0") => {
+        item = item + "";
+        if (length < 1)
+          throw Error("length can not be less than 1");
+        if (item.length > length)
+          throw Error("item can not exceed length");
+        return (append.repeat(length - 1) + item).slice(-length);
+      };
+      exports.minAppend = minAppend;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/test.js
+  var require_test2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/test.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.isValidEmail = exports.nonValue = exports.nullOrEmpty = exports.isType = exports.hasKeys = exports.hasKey = void 0;
+      var _1 = require_dist3();
+      var hasKey = (obj, key) => exports.isType(obj, "object") && obj.hasOwnProperty(key);
+      exports.hasKey = hasKey;
+      function hasKeys(obj, keys4) {
+        if (!exports.isType(obj, "object"))
+          return false;
+        for (const key of keys4)
+          if (!obj.hasOwnProperty(key))
+            return false;
+        return true;
+      }
+      exports.hasKeys = hasKeys;
+      var isType = (val, testType) => _1.type(val) === testType;
+      exports.isType = isType;
+      function nullOrEmpty(x3) {
+        if (exports.nonValue(x3))
+          return true;
+        if (exports.isType(x3, "string") || exports.isType(x3, "array"))
+          return !x3.length;
+        if (exports.isType(x3, "object"))
+          return !_1.objVals(x3).length;
+        return false;
+      }
+      exports.nullOrEmpty = nullOrEmpty;
+      var nonValue = (val) => val === null || val === void 0;
+      exports.nonValue = nonValue;
+      var isValidEmail = (email) => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+      exports.isValidEmail = isValidEmail;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/time.js
+  var require_time2 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/time.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.yearStartEnd = exports.monthStartEnd = exports.weekStartEnd = exports.getDayStartEnd = exports.wks = exports.weeks = exports.dys = exports.days = exports.hrs = exports.hours = exports.min = exports.minutes = exports.sec = exports.seconds = exports.msToTime = exports.msToWks = exports.msToDys = exports.msToHrs = exports.msToMin = exports.msToSec = exports.dateTimeToString = exports.weekTuple = exports.msTime = void 0;
+      var _1 = require_dist3();
+      exports.msTime = {
+        s: 1e3,
+        m: 6e4,
+        h: 36e5,
+        d: 864e5,
+        w: 6048e5
+      };
+      exports.weekTuple = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+      function dateTimeToString(dt = /* @__PURE__ */ new Date()) {
+        const h = ("0" + dt.getHours()).slice(-2);
+        const m = ("0" + dt.getMinutes()).slice(-2);
+        const s = ("0" + dt.getSeconds()).slice(-2);
+        const ms = ("00" + dt.getMilliseconds()).slice(-3);
+        return `${h}:${m}:${s}:${ms}`;
+      }
+      exports.dateTimeToString = dateTimeToString;
+      var msToSec = (ms) => ms / exports.msTime.s;
+      exports.msToSec = msToSec;
+      var msToMin = (ms) => ms / exports.msTime.m;
+      exports.msToMin = msToMin;
+      var msToHrs = (ms) => ms / exports.msTime.h;
+      exports.msToHrs = msToHrs;
+      var msToDys = (ms) => ms / exports.msTime.d;
+      exports.msToDys = msToDys;
+      var msToWks = (ms) => ms / exports.msTime.w;
+      exports.msToWks = msToWks;
+      function msToTime(msT, toObj = false) {
+        const msN = msT % 1e3;
+        let sN = Math.floor(msT / 1e3);
+        let mN = Math.floor(sN / 60);
+        sN = sN % 60;
+        let hN = Math.floor(mN / 60);
+        mN = mN % 60;
+        const dN = Math.floor(hN / 24);
+        hN = hN % 24;
+        const d2 = ("00" + dN).slice(-3);
+        const h = ("0" + hN).slice(-2);
+        const m = ("0" + mN).slice(-2);
+        const s = ("0" + sN).slice(-2);
+        const ms = ("00" + msN).slice(-3);
+        if (toObj)
+          return { d: dN, h: hN, m: mN, s: sN, ms: msN };
+        return `${dN ? d2 + ":" : ""}${h}:${m}:${s}:${ms}`;
+      }
+      exports.msToTime = msToTime;
+      var seconds = (s) => s * exports.msTime.s;
+      exports.seconds = seconds;
+      exports.sec = exports.seconds;
+      var minutes = (m) => m * exports.msTime.m;
+      exports.minutes = minutes;
+      exports.min = exports.minutes;
+      var hours = (h) => h * exports.msTime.h;
+      exports.hours = hours;
+      exports.hrs = exports.hours;
+      var days = (d2) => d2 * exports.msTime.d;
+      exports.days = days;
+      exports.dys = exports.days;
+      var weeks = (w) => w * exports.msTime.w;
+      exports.weeks = weeks;
+      exports.wks = exports.weeks;
+      function getDayStartEnd(t3, type = "local") {
+        if (_1.isType(t3, "number"))
+          t3 = new Date(t3);
+        const y4 = t3.getFullYear();
+        const m = t3.getMonth();
+        const d2 = t3.getDate();
+        let start = new Date(y4, m, d2);
+        let end = new Date(y4, m, d2, 23, 59, 59, 999);
+        if (type === "unix") {
+          const tzOffset = exports.min(start.getTimezoneOffset());
+          start = new Date(start.getTime() + tzOffset);
+          end = new Date(end.getTime() + tzOffset);
+        }
+        return { start, end };
+      }
+      exports.getDayStartEnd = getDayStartEnd;
+      function weekStartEnd(t3, weekStart = "sun", type = "local") {
+        if (_1.isType(t3, "number"))
+          t3 = new Date(t3);
+        const wd = t3.getDay();
+        const startOffset = wd * -1 + (weekStart === "mon" ? 1 : 0);
+        const endOffset = 6 + startOffset;
+        const s = new Date(t3.getTime() + exports.days(startOffset));
+        const e = new Date(t3.getTime() + exports.days(endOffset));
+        let start = new Date(s.getFullYear(), s.getMonth(), s.getDate());
+        let end = new Date(e.getFullYear(), e.getMonth(), e.getDate(), 23, 59, 59, 999);
+        if (type === "unix") {
+          const tzOffset = exports.min(start.getTimezoneOffset());
+          start = new Date(start.getTime() + tzOffset);
+          end = new Date(end.getTime() + tzOffset);
+        }
+        return { start, end };
+      }
+      exports.weekStartEnd = weekStartEnd;
+      function monthStartEnd(t3, type = "local") {
+        if (_1.isType(t3, "number"))
+          t3 = new Date(t3);
+        const y4 = t3.getFullYear();
+        const m = t3.getMonth();
+        let start = new Date(y4, m, 1);
+        let end = new Date(y4, m, 0, 23, 59, 59, 999);
+        if (type === "unix") {
+          const tzOffset = exports.min(start.getTimezoneOffset());
+          start = new Date(start.getTime() + tzOffset);
+          end = new Date(end.getTime() + tzOffset);
+        }
+        return { start, end };
+      }
+      exports.monthStartEnd = monthStartEnd;
+      function yearStartEnd(t3, type = "local") {
+        if (_1.isType(t3, "number"))
+          t3 = new Date(t3);
+        const y4 = t3.getFullYear();
+        let start = new Date(y4, 0, 1);
+        let end = new Date(y4, 12, 0, 23, 59, 59, 999);
+        if (type === "unix") {
+          const tzOffset = exports.min(start.getTimezoneOffset());
+          start = new Date(start.getTime() + tzOffset);
+          end = new Date(end.getTime() + tzOffset);
+        }
+        return { start, end };
+      }
+      exports.yearStartEnd = yearStartEnd;
+    }
+  });
+
+  // node_modules/@giveback007/util-lib/dist/index.js
+  var require_dist3 = __commonJS({
+    "node_modules/@giveback007/util-lib/dist/index.js"(exports) {
+      "use strict";
+      var __createBinding3 = exports && exports.__createBinding || (Object.create ? function(o, m, k, k2) {
+        if (k2 === void 0)
+          k2 = k;
+        Object.defineProperty(o, k2, { enumerable: true, get: function() {
+          return m[k];
+        } });
+      } : function(o, m, k, k2) {
+        if (k2 === void 0)
+          k2 = k;
+        o[k2] = m[k];
+      });
+      var __exportStar3 = exports && exports.__exportStar || function(m, exports2) {
+        for (var p2 in m)
+          if (p2 !== "default" && !Object.prototype.hasOwnProperty.call(exports2, p2))
+            __createBinding3(exports2, m, p2);
+      };
+      Object.defineProperty(exports, "__esModule", { value: true });
+      __exportStar3(require_types2(), exports);
+      __exportStar3(require_array2(), exports);
+      __exportStar3(require_clone2(), exports);
+      __exportStar3(require_equality2(), exports);
+      __exportStar3(require_general2(), exports);
+      __exportStar3(require_iterate2(), exports);
+      __exportStar3(require_number2(), exports);
+      __exportStar3(require_object2(), exports);
+      __exportStar3(require_string2(), exports);
+      __exportStar3(require_test2(), exports);
+      __exportStar3(require_time2(), exports);
+    }
+  });
+
+  // node_modules/@babel/runtime/helpers/typeof.js
+  var require_typeof = __commonJS({
+    "node_modules/@babel/runtime/helpers/typeof.js"(exports, module2) {
+      function _typeof(obj) {
+        "@babel/helpers - typeof";
+        return module2.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj2) {
+          return typeof obj2;
+        } : function(obj2) {
+          return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
+        }, module2.exports.__esModule = true, module2.exports["default"] = module2.exports, _typeof(obj);
+      }
+      module2.exports = _typeof, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+    }
+  });
+
+  // node_modules/@babel/runtime/helpers/toPrimitive.js
+  var require_toPrimitive = __commonJS({
+    "node_modules/@babel/runtime/helpers/toPrimitive.js"(exports, module2) {
+      var _typeof = require_typeof()["default"];
+      function _toPrimitive(input, hint) {
+        if (_typeof(input) !== "object" || input === null)
+          return input;
+        var prim = input[Symbol.toPrimitive];
+        if (prim !== void 0) {
+          var res2 = prim.call(input, hint || "default");
+          if (_typeof(res2) !== "object")
+            return res2;
+          throw new TypeError("@@toPrimitive must return a primitive value.");
+        }
+        return (hint === "string" ? String : Number)(input);
+      }
+      module2.exports = _toPrimitive, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+    }
+  });
+
+  // node_modules/@babel/runtime/helpers/toPropertyKey.js
+  var require_toPropertyKey = __commonJS({
+    "node_modules/@babel/runtime/helpers/toPropertyKey.js"(exports, module2) {
+      var _typeof = require_typeof()["default"];
+      var toPrimitive = require_toPrimitive();
+      function _toPropertyKey(arg) {
+        var key = toPrimitive(arg, "string");
+        return _typeof(key) === "symbol" ? key : String(key);
+      }
+      module2.exports = _toPropertyKey, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+    }
+  });
+
+  // node_modules/@babel/runtime/helpers/defineProperty.js
+  var require_defineProperty = __commonJS({
+    "node_modules/@babel/runtime/helpers/defineProperty.js"(exports, module2) {
+      var toPropertyKey = require_toPropertyKey();
+      function _defineProperty(obj, key, value) {
+        key = toPropertyKey(key);
+        if (key in obj) {
+          Object.defineProperty(obj, key, {
+            value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+          });
+        } else {
+          obj[key] = value;
+        }
+        return obj;
+      }
+      module2.exports = _defineProperty, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+    }
+  });
+
+  // node_modules/rest-api-handler/dist/resolveProcessors.js
+  var require_resolveProcessors = __commonJS({
+    "node_modules/rest-api-handler/dist/resolveProcessors.js"(exports, module2) {
+      "use strict";
+      async function resolveProcessors(response, list, request, i4 = 0) {
+        const processor = list[i4];
+        if (!processor) {
+          return response;
+        }
+        const processedResponse = typeof processor === "function" ? await processor(response, request) : await processor.processResponse(response, request);
+        if (list[i4 + 1]) {
+          return resolveProcessors(processedResponse, list, request, i4 + 1);
+        }
+        return processedResponse;
+      }
+      module2.exports = resolveProcessors;
+    }
+  });
+
+  // node_modules/rest-api-handler/dist/data-formats.js
+  var require_data_formats = __commonJS({
+    "node_modules/rest-api-handler/dist/data-formats.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var JSON2 = "json";
+      var FORM_DATA = "formdata";
+      var URL_ENCODED = "urlencoded";
+      exports.FORM_DATA = FORM_DATA;
+      exports.JSON = JSON2;
+      exports.URL_ENCODED = URL_ENCODED;
+    }
+  });
+
+  // node_modules/rest-api-handler/dist/Api.js
+  var require_Api = __commonJS({
+    "node_modules/rest-api-handler/dist/Api.js"(exports, module2) {
+      "use strict";
+      var _defineProperty = require_defineProperty();
+      var resolveProcessors = require_resolveProcessors();
+      var dataFormats = require_data_formats();
+      function _interopDefaultLegacy(e) {
+        return e && typeof e === "object" && "default" in e ? e : { "default": e };
+      }
+      var _defineProperty__default = /* @__PURE__ */ _interopDefaultLegacy(_defineProperty);
+      function ownKeys(object, enumerableOnly) {
+        var keys4 = Object.keys(object);
+        if (Object.getOwnPropertySymbols) {
+          var symbols = Object.getOwnPropertySymbols(object);
+          if (enumerableOnly) {
+            symbols = symbols.filter(function(sym) {
+              return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+            });
+          }
+          keys4.push.apply(keys4, symbols);
+        }
+        return keys4;
+      }
+      function _objectSpread(target) {
+        for (var i4 = 1; i4 < arguments.length; i4++) {
+          var source = arguments[i4] != null ? arguments[i4] : {};
+          if (i4 % 2) {
+            ownKeys(Object(source), true).forEach(function(key) {
+              _defineProperty__default["default"](target, key, source[key]);
+            });
+          } else if (Object.getOwnPropertyDescriptors) {
+            Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+          } else {
+            ownKeys(Object(source)).forEach(function(key) {
+              Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+            });
+          }
+        }
+        return target;
+      }
+      var Api = class {
+        /**
+         * Base api url
+         */
+        /**
+         * Base http headers
+         */
+        /**
+         * Base settings for Fetch Request
+         */
+        /**
+         * List of processors that parse response from server.
+         */
+        /**
+         * List of formatter you can use to process content of body request.
+         */
+        /**
+         * Constructor.
+         *
+         * @param apiUrl - Base api url
+         * @param processors - List of processors that parse response from server.
+         * @param defaultHeaders - Base settings for Fetch Request
+         * @param defaultOptions - List of processors that parse response from server.
+         */
+        constructor(apiUrl, processors = [], defaultHeaders = {}, defaultOptions = {}) {
+          this.apiUrl = void 0;
+          this.defaultHeaders = void 0;
+          this.defaultOptions = void 0;
+          this.processors = void 0;
+          this.apiUrl = apiUrl;
+          this.defaultHeaders = defaultHeaders;
+          this.defaultOptions = defaultOptions;
+          this.processors = processors;
+        }
+        /**
+         * Convert data in object to format of Fetch body.
+         *
+         * @param data - Data to convert
+         * @param to - Format to which convert the data. Default is JSON.
+         * @returns Converted data
+         *
+         * @example
+         * const body = Api.convertData({ a: 'b' }, Api.FORMATS.JSON);
+         * // output is {"a":"b"}
+         */
+        static convertData(data, to = dataFormats.JSON) {
+          if (to === dataFormats.FORM_DATA) {
+            const formData = new FormData();
+            Object.entries(data).forEach(([key, value]) => {
+              formData.append(key, value);
+            });
+            return formData;
+          }
+          if (to === dataFormats.URL_ENCODED) {
+            return Api.convertParametersToUrl(data).slice(1);
+          }
+          return JSON.stringify(data);
+        }
+        /**
+         * Convert object to url parameters string.
+         *
+         * @param parameters - List of parameters
+         * @returns Encoded string with ? prefix and variables separated by &
+         *
+         * @example
+         * const parameters = Api.convertData({ a: '%b%' });
+         * // output is ?a=%25b%25
+         */
+        static convertParametersToUrl(parameters) {
+          const keys4 = Object.keys(parameters);
+          if (keys4.length === 0) {
+            return "";
+          }
+          return `?${keys4.map((key) => {
+            return `${key}=${encodeURIComponent(parameters[key])}`;
+          }).join("&")}`;
+        }
+        /**
+         * Set default headers.
+         *
+         * @param headers - HTTP headers
+         */
+        setDefaultHeaders(headers) {
+          this.defaultHeaders = headers;
+        }
+        /**
+         * Add default HTTP header.
+         *
+         * @param name - Name of header
+         * @param value - Value for header
+         * @example
+         * api.setDefaultHeader('content-type', 'application/json');
+         */
+        setDefaultHeader(name2, value) {
+          this.defaultHeaders[name2] = value;
+        }
+        /**
+         * Remove default header.
+         *
+         * @param name - Name of header
+         */
+        removeDefaultHeader(name2) {
+          delete this.defaultHeaders[name2];
+        }
+        /**
+         * Get default headers.
+         *
+         * @returns Get Default headers
+         */
+        getDefaultHeaders() {
+          return this.defaultHeaders;
+        }
+        /**
+         * Fetch API url.
+         *
+         * @protected
+         * @param request - Fetch request
+         * @returns Fetch response
+         */
+        fetchRequest(request) {
+          return fetch(request);
+        }
+        /**
+         * Request given API endpoint.
+         *
+         * @param namespace - Api endpoint or full url
+         * @param method - Request method eg. POST or GET
+         * @param options - Fetch options
+         * @param headers - Custom headers
+         * @returns processed response
+         * @example
+         * const { data } = await api.request('ad', 'POST', {
+         *     body: '{"ad":1}'
+         * })
+         *
+         * const { data } = await api.request('http://i-can-request-full-url.com/?a=b', 'GET')
+         */
+        async request(namespace, method, options = {}, headers = {}) {
+          const urlToRequest = namespace.indexOf("http") === 0 ? namespace : `${this.apiUrl}/${namespace}`;
+          const request = new Request(urlToRequest, _objectSpread(_objectSpread({}, this.defaultOptions), {}, {
+            method,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            // eslint-disable-next-line compat/compat
+            headers: new Headers(_objectSpread(_objectSpread({}, this.getDefaultHeaders()), headers))
+          }, options));
+          const response = await this.fetchRequest(request);
+          return resolveProcessors(response, this.processors, request);
+        }
+        /**
+         * Send a request with body.
+         *
+         * @protected
+         * @param namespace - api endpoint
+         * @param method - api method
+         * @param data - body JSON parameters
+         * @param format - format of body request
+         * @param headers - custom headers
+         * @returns processed response
+         */
+        requestWithBody(namespace, method, data, format, headers = {}) {
+          return this.request(namespace, method, {
+            body: Api.convertData(data, format)
+          }, headers);
+        }
+        /**
+         * Send a GET request.
+         *
+         * @param namespace - api endpoint
+         * @param parameters - get parameters
+         * @param headers - custom headers
+         * @returns processed response
+         *
+         * @example
+         * const { data } = await api.get('brand', { id: 5 })
+         * // will call YOUR_URI/brand?id=5
+         * console.log(data);
+         */
+        get(namespace, parameters = {}, headers = {}) {
+          return this.request(`${namespace}${Api.convertParametersToUrl(parameters)}`, "GET", {}, headers);
+        }
+        /**
+         * Send a POST request.
+         *
+         * @param namespace - Api endpoint
+         * @param data - Request object
+         * @param format - Format of body request
+         * @param headers - custom headers
+         * @returns Processed response
+         */
+        post(namespace, data = {}, format = dataFormats.JSON, headers = {}) {
+          return this.requestWithBody(namespace, "POST", data, format, headers);
+        }
+        /**
+         * Send a PUT request.
+         *
+         * @param namespace - Api endpoint
+         * @param data - Request object
+         * @param format - Format of body request
+         * @param headers - custom headers
+         * @returns Processed response
+         */
+        put(namespace, data = {}, format = dataFormats.JSON, headers = {}) {
+          return this.requestWithBody(namespace, "PUT", data, format, headers);
+        }
+        /**
+         * Send a DELETE request.
+         *
+         * @param namespace - Api endpoint
+         * @param headers - custom headers
+         * @returns Processed response
+         */
+        delete(namespace, headers = {}) {
+          return this.request(namespace, "DELETE", {}, headers);
+        }
+      };
+      Api.FORMATS = dataFormats;
+      module2.exports = Api;
+    }
+  });
+
+  // node_modules/rest-api-handler/dist/DefaultResponseProcessor.js
+  var require_DefaultResponseProcessor = __commonJS({
+    "node_modules/rest-api-handler/dist/DefaultResponseProcessor.js"(exports, module2) {
+      "use strict";
+      var DefaultResponseProcessor = class {
+        /**
+         * Constructor.
+         *
+         * @param Exception - Exception class that will be throwed if request fails.
+         * @param decoder - Define custom response body decoder.
+         */
+        constructor(Exception, decoder3) {
+          this.Exception = void 0;
+          this.decoder = void 0;
+          this.Exception = Exception;
+          this.decoder = decoder3 || DefaultResponseProcessor.decodeResponse;
+        }
+        async processResponse(response, request) {
+          const decodedResponse = await this.decoder(response);
+          const toRespond = {
+            data: decodedResponse,
+            status: response.status,
+            source: response,
+            request
+          };
+          if (!response.ok) {
+            throw new this.Exception(toRespond, request);
+          }
+          return toRespond;
+        }
+        static decodeResponse(response) {
+          const contentType = response.headers.get("content-type");
+          if (!contentType) {
+            return response.text();
+          }
+          if (contentType.includes("json")) {
+            return response.json();
+          }
+          if (contentType.includes("text") || contentType.includes("xml")) {
+            return response.text();
+          }
+          return response.blob();
+        }
+      };
+      module2.exports = DefaultResponseProcessor;
+    }
+  });
+
+  // node_modules/rest-api-handler/dist/DefaultApiException.js
+  var require_DefaultApiException = __commonJS({
+    "node_modules/rest-api-handler/dist/DefaultApiException.js"(exports, module2) {
+      "use strict";
+      var DefaultApiException = class extends Error {
+        /**
+         * Response from server that throwed an error.
+         */
+        /**
+         * Constructor.
+         *
+         * @param response - Processed response from server.
+         */
+        constructor(response) {
+          super(`Api exception: ${JSON.stringify(response.data)}`);
+          this.response = void 0;
+          this.response = response;
+        }
+        getResponse() {
+          return this.response;
+        }
+        getRequest() {
+          return this.response.request;
+        }
+      };
+      module2.exports = DefaultApiException;
+    }
+  });
+
+  // node_modules/rest-api-handler/dist/index.js
+  var require_dist4 = __commonJS({
+    "node_modules/rest-api-handler/dist/index.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var Api = require_Api();
+      var DefaultResponseProcessor = require_DefaultResponseProcessor();
+      var DefaultApiException = require_DefaultApiException();
+      exports.Api = Api;
+      exports.DefaultResponseProcessor = DefaultResponseProcessor;
+      exports.DefaultApiException = DefaultApiException;
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/fitbit.api.js
+  var require_fitbit_api = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/fitbit.api.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.FitbitApi = exports.dictToUrlParams = void 0;
+      var tslib_1 = (init_tslib_es62(), __toCommonJS(tslib_es6_exports2));
+      var util_lib_1 = require_dist3();
+      var rest_api_handler_1 = require_dist4();
+      function dictToUrlParams(dict) {
+        let search = "";
+        (0, util_lib_1.objKeyVals)(dict).forEach(({ key, val }, i4) => !(0, util_lib_1.nonValue)(val) && (search += `${i4 ? "&" : "?"}${key}=${val}`));
+        return search;
+      }
+      exports.dictToUrlParams = dictToUrlParams;
+      var fromDateObj = (o) => new Date(o.y, (o.m || 1) - 1, o.d || 1, o.hr || 0, o.min || 0, o.sec || 0, o.ms || 0);
+      var toDate = (anyDate) => {
+        const dt = anyDate instanceof Date ? anyDate : anyDate === "now" ? /* @__PURE__ */ new Date() : anyDate === "today" ? (0, util_lib_1.getDayStartEnd)(/* @__PURE__ */ new Date()).start : anyDate === "yesterday" ? (0, util_lib_1.getDayStartEnd)(Date.now() - (0, util_lib_1.days)(1)).start : (0, util_lib_1.isType)(anyDate, "number") || (0, util_lib_1.isType)(anyDate, "string") ? new Date(anyDate) : fromDateObj(anyDate);
+        if (dt.toDateString() === "Invalid Date") {
+          console.error(`date: "${anyDate.toString()}" is an invalid date`);
+          throw new Error("Invalid Date");
+        }
+        return dt;
+      };
+      function dayAndTime(time, useSeconds = false) {
+        const dt = toDate(time);
+        const dayStr = `${dt.getFullYear()}-${(0, util_lib_1.minAppend)(dt.getMonth() + 1, 2, "0")}-${(0, util_lib_1.minAppend)(dt.getDate(), 2, "0")}`;
+        const timeStr = `${(0, util_lib_1.minAppend)(dt.getHours(), 2, "0")}:${(0, util_lib_1.minAppend)(dt.getMinutes(), 2, "0")}` + (useSeconds ? ":" + (0, util_lib_1.minAppend)(dt.getSeconds(), 2, "0") : "");
+        return [dayStr, timeStr];
+      }
+      var FitbitApi2 = class {
+        constructor(accessToken, fitBitUserId = "-", getToken) {
+          this.accessToken = accessToken;
+          this.fitBitUserId = fitBitUserId;
+          this.getToken = getToken;
+          this.api = new rest_api_handler_1.Api("https://api.fitbit.com");
+          this.url = (version2, namespace, noUser = false) => noUser ? `${version2}/${namespace}` : `${version2}/user/${this.fitBitUserId}/${namespace}`;
+          this.getApiInfo = () => ({
+            accessToken: this.accessToken,
+            fitBitUserId: this.fitBitUserId
+          });
+          this.sleep = {
+            /** Returns a list of a user's sleep log entries before `beforeDate` or after `afterDate` a given date specifying offset, limit and sort order.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/sleep/get-sleep-log-list/
+             */
+            getLogList: (opts) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+              const params2 = Object.assign({ limit: opts.limit || 100, offset: opts.offset || 0 }, (0, util_lib_1.hasKey)(opts, "afterDate") ? { afterDate: dayAndTime(opts.afterDate)[0], sort: opts.sort || "asc" } : { beforeDate: dayAndTime(opts.beforeDate)[0], sort: opts.sort || "desc" });
+              if (params2.limit > 100 || params2.limit < 1)
+                throw new Error(`Invalid limit: ${params2.limit}, needs to be between 1 to 100`);
+              const url4 = this.url(1.2, `sleep/list.json${dictToUrlParams(params2)}`);
+              return this.pageGenerator(url4, "sleep");
+            }),
+            /** Deletes a sleep log with the given log id.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/sleep/delete-sleep-log/
+             */
+            deleteLog: (sleepLogId) => this.handleData(() => this.api.delete(this.url(1.2, `sleep/${sleepLogId}.json`))),
+            /** Creates a log entry for a sleep event and returns a response in the format requested.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/sleep/create-sleep-log/
+             */
+            createLog: ({ time, duration }) => {
+              const [date, startTime] = dayAndTime(time);
+              const url4 = this.url(1.2, `sleep.json${dictToUrlParams({ duration, date, startTime })}`);
+              return this.handleData(() => this.api.post(url4));
+            },
+            /** Returns a list of a user's sleep log entries for a given date.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/sleep/get-sleep-log-by-date/
+             */
+            getByDate: ({ date }) => this.handleData(() => this.api.get(this.url(1.2, `sleep/date/${dayAndTime(date)[0]}.json`))),
+            /** Returns a list of a user's sleep log entries for a given date range.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/sleep/get-sleep-log-by-date-range/
+             */
+            getByDateRange: (opts) => {
+              const url4 = this.url(1.2, `sleep/date/${dayAndTime(opts.startDate)[0]}/${dayAndTime(opts.endDate)[0]}.json`);
+              return this.handleData(() => this.api.get(url4));
+            },
+            /** Create or update a user's sleep goal.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/sleep/create-sleep-goals/
+             */
+            createGoal: (opts) => this.handleData(() => this.api.post(this.url(1.2, `sleep/goal.json${dictToUrlParams(opts)}`))),
+            /** Returns a user's current sleep goal.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/sleep/get-sleep-goals/
+             */
+            getGoal: () => this.handleData(() => this.api.get(this.url(1.2, "sleep/goal.json")))
+          };
+          this.heartRate = {
+            /** Retrieves the heart rate time series data over a period of time by specifying a date and time period or a date range. The response will include only the daily summary values.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/heartrate-timeseries/get-heartrate-timeseries-by-date/
+             */
+            getTimeSeries: (opts) => {
+              const url4 = this.url(1, opts.type === "By_Date" ? `activities/heart/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `activities/heart/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
+              return this.handleData(() => this.api.get(url4));
+            },
+            /** Retrieves the heart rate intraday time series data on a specific date or date range for a 24 hour period.
+             *
+             * Can't exceed 24 hours, or an error will be given.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/intraday/get-heartrate-intraday-by-date/
+             */
+            getIntraday: (opts) => {
+              let url4;
+              if (opts.type === "By_Date") {
+                url4 = this.url(1, `activities/heart/date/${dayAndTime(opts.date)[0]}/1d/${opts.detailLevel}.json`);
+              } else {
+                const start = dayAndTime(opts.fromTime);
+                const end = dayAndTime(opts.toTime);
+                url4 = this.url(1, `activities/heart/date/${start[0]}/${end[0]}/${opts.detailLevel}/time/${start[1]}/${end[1]}.json`);
+              }
+              return this.handleData(() => this.api.get(url4));
+            }
+          };
+          this.user = {
+            /** Retrieves a list of the user’s badges.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/user/get-badges/
+             */
+            getBadges: () => this.handleData(() => this.api.get(this.url(1, `badges.json`))),
+            /** Retrieves the user's profile data.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/user/get-profile/
+             */
+            getProfile: () => this.handleData(() => this.api.get(this.url(1, `profile.json`))),
+            /** Modifies a user's profile data.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/user/update-profile/
+             */
+            updateProfile: (opts) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+              return this.handleData(() => this.api.post(this.url(1, `profile.json${dictToUrlParams(opts)}`)));
+            })
+          };
+          this.body = {
+            /** Retrieves a list of all user's weight or fat log entries for a given date or date range.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body/get-weight-log/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body/get-bodyfat-log/
+             */
+            getLogs: (opts) => {
+              const url4 = this.url(1, opts.type === "By_Date" ? `body/log/${opts.data}/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `body/log/${opts.data}/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
+              return this.handleData(() => this.api.get(url4));
+            },
+            /** Returns time series data in the specified range for weight, fat, or bmi.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body-timeseries/
+            */
+            getTimeSeries: (opts) => {
+              const url4 = this.url(1, opts.type === "By_Date" ? `body/${opts.data}/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `body/${opts.data}/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
+              return this.handleData(() => this.api.get(url4));
+            },
+            /** Retrieves a user's body fat and weight goals.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body/get-body-goals/
+             */
+            getGoals: (opts) => this.handleData(() => this.api.get(this.url(1, `body/log/${opts.data}/goal.json`))),
+            /** Updates a user's body fat and weight goals.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body/create-weight-goal/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body/create-bodyfat-goal/
+             */
+            createGoals: (opts) => this.handleData(() => this.api.post(this.url(1, `body/log/${opts.data}/goal.json`))),
+            /** Creates a body fat or weight log entry.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body/create-bodyfat-log/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body/create-weight-log/
+             */
+            createLog: (opts) => {
+              const [date, time] = dayAndTime(opts.time, true);
+              const url4 = this.url(1, `body/log/${opts.data}.json${dictToUrlParams({ [opts.data]: opts.unit, date, time })}`);
+              return this.handleData(() => this.api.post(url4));
+            },
+            /** Deletes a body fat or weight log entry
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body/delete-bodyfat-log/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body/delete-weight-log/
+             */
+            deleteLog: ({ logId, data }) => this.handleData(() => this.api.delete(this.url(1, `body/log/${data}/${logId}.json`)))
+          };
+          this.activity = {
+            /** Retrieves the user's activity statistics.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/get-lifetime-stats/
+             */
+            getLifetimeStats: () => this.handleData(() => this.api.get(this.url(1, `activities.json`))),
+            /** Retrieves a user's current daily or weekly activity goals.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/get-activity-goals/
+             */
+            getGoals: (opts) => this.handleData(() => this.api.get(this.url(1, `activities/goals/${opts.period}.json`))),
+            /** Creates or updates a user's daily or weekly activity goal.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/create-activity-goals/
+             */
+            createGoals: ({ period, type, value }) => this.handleData(() => this.api.post(this.url(1, `activities/goals/${period}.json${dictToUrlParams({ type, value })}`))),
+            /** Creates a log entry containing the Fitbit user's activity or private custom activity.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/create-activity-log/
+             */
+            createLog: (opts) => {
+              const [date, startTime] = dayAndTime(opts.startTime);
+              const url4 = this.url(1, `activities.json${dictToUrlParams(Object.assign(Object.assign({}, opts), { date, startTime }))}`);
+              return this.handleData(() => this.api.post(url4));
+            },
+            /** Deletes a user’s activity log entry with the given ID.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/delete-activity-log/
+             */
+            deleteLog: (activityLogId) => this.handleData(() => this.api.delete(this.url(1, `activities/${activityLogId}.json`))),
+            /** Retrieves a list of a user's activity log entries before or after a given day.
+             *
+             * @returns generator, call .next() to get data, keep calling .next() to continue loading data beforeDate or afterDate offset by data already loaded.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/get-activity-log-list/
+             */
+            getLogList: (opts) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+              const params2 = Object.assign({ limit: opts.limit || 100, offset: opts.offset || 0 }, (0, util_lib_1.hasKey)(opts, "afterDate") ? { afterDate: dayAndTime(opts.afterDate)[0], sort: opts.sort || "asc" } : { beforeDate: dayAndTime(opts.beforeDate)[0], sort: opts.sort || "desc" });
+              if (params2.limit > 100 || params2.limit < 1)
+                throw new Error(`Invalid limit: ${opts.limit}, needs to be a number between 1 to 100`);
+              const url4 = this.url(1, `activities/list.json${dictToUrlParams(params2)}`);
+              return this.pageGenerator(url4, "activities");
+            }),
+            /** Retrieves a list of all valid Fitbit public activities and private, user-created activities. If available, activity level details will display.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/get-all-activity-types/
+             */
+            getAllTypes: () => this.handleData(() => this.api.get(this.url(1, `activities.json`))),
+            /** Retrieves the details for a single activity. If available, activity level details will display.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/get-activity-type/
+             */
+            getType: (activityId) => this.handleData(() => this.api.get(this.url(1, `activities/${activityId}.json`))),
+            /** Retrieves a list of a user's favorite activities.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/get-favorite-activities/
+             */
+            getFavorite: () => this.handleData(() => this.api.get(this.url(1, `activities/favorite.json`))),
+            /** Adds the activity with the given ID to user's list of favorite activities.
+             *
+             * For the list of available ids use: `.activity.getAllTypes()`
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/create-favorite-activity/
+             */
+            createFavorite: (activityId) => this.handleData(() => this.api.post(this.url(1, `activities/favorite/${activityId}.json`))),
+            /** Adds the activity with the given ID to user's list of favorite activities.
+             *
+             * For the list of available ids use: `.activity.getAllTypes()`
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/create-favorite-activity/
+             */
+            deleteFavorite: (activityId) => this.handleData(() => this.api.delete(this.url(1, `activities/favorite/${activityId}.json`))),
+            /** Retrieves a list of a user's recent activities types logged with some details of the last activity log of that type.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/get-recent-activity-types/
+             */
+            getRecent: () => this.handleData(() => this.api.get(this.url(1, `activities/recent.json`))),
+            /** Retrieves a summary and list of a user’s activities and activity log entries for a given day.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/get-daily-activity-summary/
+             */
+            getDailySummary: () => this.handleData(() => this.api.get(this.url(1, `activities/recent.json`))),
+            /** Retrieves a list of a user's frequent activities.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/activity/get-frequent-activities/
+             */
+            getFrequent: () => this.handleData(() => this.api.get(this.url(1, `activities/frequent.json`))),
+            /** Returns time series data in the specified range for weight, fat, or bmi.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/body-timeseries/
+            */
+            getTimeSeries: (opts) => {
+              const url4 = this.url(1, opts.type === "By_Date" ? `activities/${opts.data}/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `activities/${opts.data}/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
+              return this.handleData(() => this.api.get(url4));
+            },
+            /** Retrieves the activity intraday time series data for a given resource on a specific date or 24 hour period.
+             *
+             * Can't exceed 24 hours, or an error will be given.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/intraday/get-activity-intraday-by-date/
+             */
+            getIntraday: (opts) => {
+              let url4;
+              if (opts.type === "By_Date") {
+                url4 = this.url(1, `activities/${opts.data}/date/${dayAndTime(opts.date)[0]}/1d/${opts.detailLevel}.json`);
+              } else {
+                const start = dayAndTime(opts.fromTime);
+                const end = dayAndTime(opts.toTime);
+                url4 = this.url(1, `activities/${opts.data}/date/${start[0]}/${end[0]}/${opts.detailLevel}/time/${start[1]}/${end[1]}.json`);
+              }
+              return this.handleData(() => this.api.get(url4));
+            }
+          };
+          this.devices = {
+            /** Get Devices retrieves a list of devices paired to the user's account.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/devices/get-devices/
+             */
+            getList: () => this.handleData(() => this.api.get(this.url(1, `devices.json`))),
+            /** Create Alarm creates an alarm for the given device.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/devices/create-alarm/
+             */
+            createAlarm: (opts) => {
+              const params2 = (0, util_lib_1.objRemoveKeys)(opts, ["deviceTrackerId"]);
+              const url4 = this.url(1, `devices/tracker/${opts.deviceTrackerId}/alarms.json${dictToUrlParams(params2)}`);
+              return this.handleData(() => this.api.post(url4));
+            },
+            /** Update Alarm updates an alarm for the given device.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/devices/update-alarm/
+             */
+            updateAlarm: ({ deviceTrackerId, alarmId }, update) => this.handleData(() => this.api.post(this.url(1, `devices/tracker/${deviceTrackerId}/alarms/${alarmId}.json${dictToUrlParams(Object.assign(Object.assign({}, update), { weekDays: update.weekDays.join() }))}`))),
+            /** Retrieves the alarms enabled for a specific device. This endpoint is supported for trackers that support alarms.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/devices/get-alarms/
+             */
+            getAlarms: (deviceTrackerId) => this.handleData(() => this.api.get(this.url(1, `devices/tracker/${deviceTrackerId}/alarms.json`))),
+            /** Delete Alarm deletes an alarm for the given device.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/devices/delete-alarm/
+             */
+            deleteAlarm: ({ deviceTrackerId, alarmId }) => this.handleData(() => this.api.delete(this.url(1, `devices/tracker/${deviceTrackerId}/alarms/${alarmId}.json`)))
+          };
+          this.friends = {
+            /** Retrieves a list of the Fitbit user's friends.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/friends/get-friends/
+             */
+            getList: () => this.handleData(() => this.api.get(this.url(1.1, `friends.json`))),
+            /** Retrieves the user's friends leaderboard in the format requested using units in the unit system which corresponds to the Accept-Language header provided.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/friends/get-friends-leaderboard/
+             */
+            getLeaderboard: () => this.handleData(() => this.api.get(this.url(1.1, `leaderboard/friends.json`)))
+          };
+          this.nutrition = {
+            // --- // FOODS INFO // --- //
+            /** Retrieves a list of public foods from the Fitbit foods database and private foods the user created in the format requested.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/search-foods/
+             */
+            searchFood: (query) => this.handleData(() => this.api.get(this.url(1, `foods/search.json${dictToUrlParams({ query })}`, true))),
+            /** Retrieves the details of a specific food stored in the Fitbit food database or a private food the authorized user has entered.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food/
+             */
+            getFood: (foodId) => this.handleData(() => this.api.get(this.url(1, `${foodId}.json`, true))),
+            /** Retrieves the food locales used to search, log or create food.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food-locales/
+             */
+            getFoodLocales: () => this.handleData(() => this.api.get(this.url(1, `foods/locales.json`, true))),
+            /** Retrieves a list of all valid Fitbit food units in the format requested.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food-units/
+             */
+            getFoodUnits: () => this.handleData(() => this.api.get(this.url(1, `foods/units.json`, true))),
+            /** Creates a new private food for a user.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-food/
+             */
+            createFood: (params2, addNutritionInfo = "") => this.handleData(() => this.api.post(this.url(1, `foods.json${dictToUrlParams(params2)}${addNutritionInfo}`))),
+            /** Deletes a custom food created by the user.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-custom-food/
+             */
+            deleteFood: (foodId) => this.handleData(() => this.api.delete(this.url(1, `foods/${foodId}.json`))),
+            // --- // FOOD // --- //
+            /** Retrieves a list of user-specific frequent consumed foods.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-frequent-foods/
+             */
+            getFrequentFoods: () => this.handleData(() => this.api.get(this.url(1, `foods/log/frequent.json`))),
+            /** Retrieves a list of user-specific recently consumed foods.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-recent-foods/
+             */
+            getRecentFoods: () => this.handleData(() => this.api.get(this.url(1, `foods/log/recent.json`))),
+            // --- // LOGS FOOD & WATER // --- //
+            /** Creates a food log entry for a given day. (OR) Create a user's water log entry.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-food-log/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-water-log/
+             */
+            createLog: (opts) => {
+              const [date] = dayAndTime(opts.date)[0];
+              const params2 = Object.assign(Object.assign({}, (0, util_lib_1.objRemoveKeys)(opts, ["data", "date"])), { date });
+              const url4 = this.url(1, `foods/log${opts.data === "water" ? "/water" : ""}.json${dictToUrlParams(params2)}`);
+              return this.handleData(() => this.api.post(url4));
+            },
+            /** Retrieves a summary of the user's food log entry for a given day. (OR) Retrieves a summary and list of a user's water log entries for a given day.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food-log/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-water-log/
+             */
+            getLog: (opts) => {
+              const [date] = dayAndTime(opts.date)[0];
+              const params2 = Object.assign(Object.assign({}, (0, util_lib_1.objRemoveKeys)(opts, ["data", "date"])), { date });
+              const url4 = this.url(1, `foods/log${opts.data === "water" ? "/water" : ""}.json${dictToUrlParams(params2)}`);
+              return this.handleData(() => this.api.get(url4));
+            },
+            /** Deletes a user's food log entry using the given log ID. (OR) Deleted a user's water log entry using the given log ID.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-food-log/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-water-log/
+             */
+            deleteLog: ({ logId, data }) => this.handleData(() => this.api.delete(this.url(1, `foods/log${data === "water" ? "/water" : ""}/${logId}.json`))),
+            /** Update food or water log.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/update-food-log/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/update-water-log/
+             */
+            updateLog: (opts) => {
+              const { logId, data } = opts;
+              const params2 = (0, util_lib_1.objRemoveKeys)(opts, ["data", "logId"]);
+              this.handleData(() => this.api.post(this.url(1, `foods/log${data === "water" ? "/water" : ""}/${logId}.json${dictToUrlParams(params2)}`)));
+            },
+            // --- // MEALS // --- //
+            /** Creates a meal with the given food.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-meal/
+             *
+             * Endpoint doesn't match the documentation:
+             * https://community.fitbit.com/t5/Web-API-Development/Create-a-meal-using-the-API-return-emtpy-array-and-I-don-t-understand-why/m-p/4839132#M13151
+             *
+             * To get the correct input use the type definitions in opts.
+             */
+            createMeal: (opts) => this.handleData(() => this.api.post(this.url(1, `meals.json`), opts)),
+            /** Retrieves a single meal created by the user from their food log given the meal id.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-meal/
+             */
+            getMeal: (mealId) => this.handleData(() => this.api.get(this.url(1, `meals/${mealId}.json`))),
+            /** Retrieves a list of meals created by the user from their food log.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-meals/
+             */
+            getMealList: () => this.handleData(() => this.api.get(this.url(1, `meals.json`))),
+            /** Updates an existing meal with the contents of the request.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/update-meal/
+             */
+            updateMeal: (opts) => this.handleData(() => this.api.post(this.url(1, `meals/${opts.mealId}.json`), (0, util_lib_1.objRemoveKeys)(opts, ["mealId"]))),
+            /** Deletes an existing meal of the given meal ID.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-meal/
+             */
+            deleteMeal: (mealId) => this.handleData(() => this.api.delete(this.url(1, `meals/${mealId}.json`))),
+            // --- // FAVORITE FOODS // --- //
+            /** Adds a food with the given ID to the user's list of favorite foods.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/add-favorite-foods/
+             */
+            addFavoriteFood: (foodId) => this.handleData(() => this.api.post(this.url(1, `foods/log/favorite/${foodId}.json`))),
+            /** Retrieves a list of user-specific favorite consumed foods.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-favorite-foods/
+             */
+            getFavoriteFoodList: () => this.handleData(() => this.api.get(this.url(1, `foods/log/favorite.json`))),
+            /** Deletes a food with the given ID from the user's list of favorite foods.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/delete-favorite-foods/
+             */
+            deleteFavoriteFood: (foodId) => this.handleData(() => this.api.delete(this.url(1, `foods/log/favorite/${foodId}.json`))),
+            // Delete Favorite Foods deletes a food from the user's favorite food list.
+            // --- // GOALS FOOD & WATER // --- //
+            /** Creates or updates a user's daily calorie consumption or food plan goals. (OR) Creates or updates a user's daily water consumption goal.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-food-goal/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/create-water-goal/
+             */
+            createGoal: (opts) => this.handleData(() => this.api.post(this.url(1, `foods/log${opts.data === "water" ? "/water" : ""}/goal.json${dictToUrlParams(opts)}`))),
+            /** Retrieves the user's current daily calorie consumption goal and/or food plan. (OR) Retrieves a user's daily water consumption goal.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-food-goals/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition/get-water-goal/
+             */
+            getGoal: (data) => this.handleData(() => this.api.get(this.url(1, `foods/log${data === "water" ? "/water" : ""}/goal.json`))),
+            // --- // TIME SERIES // --- //
+            /** Retrieves the food and water consumption data for a given resource over a period of time by specifying a date or date range. The response will include only the daily summary values.
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition-timeseries/get-nutrition-timeseries-by-date/
+             *
+             * https://dev.fitbit.com/build/reference/web-api/nutrition-timeseries/get-nutrition-timeseries-by-date-range/
+            */
+            getTimeSeries: (opts) => {
+              const resource = opts.data === "food" ? "caloriesIn" : "water";
+              const url4 = this.url(1, opts.type === "By_Date" ? `foods/log/${resource}/date/${dayAndTime(opts.date)[0]}/${opts.period || "1d"}.json` : `foods/log/${resource}/date/${dayAndTime(opts.fromDate)[0]}/${dayAndTime(opts.toDate)[0]}.json`);
+              return this.handleData(() => this.api.get(url4));
+            }
+          };
+          this.subscription = {
+            create: ({ collection, subscriptionId, subscriberId }) => {
+              const url4 = this.subUrl(collection, subscriptionId);
+              return this.handleData(() => this.api.post(url4, void 0, void 0, subscriberId ? { "X-Fitbit-Subscriber-Id": subscriberId } : {}));
+            },
+            getList: ({ collection, subscriberId }) => this.handleData(() => this.api.get(this.subUrl(collection), void 0, subscriberId ? { "X-Fitbit-Subscriber-Id": subscriberId } : {})),
+            delete: ({ collection, subscriptionId, subscriberId }) => this.handleData(() => this.api.delete(this.subUrl(collection, subscriptionId), subscriberId ? { "X-Fitbit-Subscriber-Id": subscriberId } : {}))
+          };
+          this.subUrl = (cl, id) => this.url(1, `${cl === "all" ? "" : `${cl}/`}apiSubscriptions${id ? `/${id}` : ""}.json`);
+          this.setAccessToken(accessToken);
+        }
+        setAccessToken(token) {
+          this.accessToken = token;
+          this.api.setDefaultHeader("Authorization", `Bearer ${this.accessToken}`);
+        }
+        handleData(dataCall, nRecur = 0) {
+          return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            const response = yield dataCall();
+            const headers = {};
+            const iter = response.headers.entries();
+            for (const [key, val] of iter)
+              headers[key] = val;
+            let json;
+            try {
+              json = yield response.json();
+            } catch (_a) {
+              if (!response.ok) {
+                const code2 = response.status;
+                console.error(`${code2 === 500 ? "Fitbit Internal" : "Unhandled"} Error.`);
+                if (code2 !== 500)
+                  throw new Error("Unhandled Error");
+              }
+              json = null;
+            }
+            if (!response.ok || json && (0, util_lib_1.hasKey)(json, "errors")) {
+              let error = null;
+              if ((0, util_lib_1.hasKey)(json, "errors")) {
+                error = json;
+                const { errorType: err } = json.errors[0];
+                if ((err === "expired_token" || err === "invalid_token") && this.getToken && nRecur < 2) {
+                  try {
+                    const token = yield this.getToken();
+                    this.setAccessToken(token);
+                    return yield this.handleData(dataCall, nRecur + 1);
+                  } catch (err2) {
+                    console.error(err2);
+                  }
+                }
+              }
+              return {
+                type: "ERROR",
+                isSuccess: false,
+                code: response.status,
+                error,
+                response,
+                headers
+              };
+            }
+            return {
+              type: "SUCCESS",
+              isSuccess: true,
+              code: response.status,
+              data: json,
+              response,
+              headers
+            };
+          });
+        }
+        pageGenerator(startingUrl, dataKey) {
+          return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            let lastResponse = yield this.handleData(() => this.api.get(startingUrl));
+            return function(self2) {
+              return (0, tslib_1.__asyncGenerator)(this, arguments, function* () {
+                let allData = lastResponse.isSuccess ? [...lastResponse.data[dataKey]] : [];
+                let totalCalls = 1;
+                const getObj = () => ({ lastResponse, allData, totalCalls });
+                if (lastResponse.type === "ERROR")
+                  return yield (0, tslib_1.__await)(getObj());
+                yield yield (0, tslib_1.__await)(getObj());
+                let nextUrl = lastResponse.data.pagination.next;
+                while (nextUrl) {
+                  lastResponse = yield (0, tslib_1.__await)(self2.handleData(() => self2.api.get(nextUrl)));
+                  totalCalls++;
+                  if (lastResponse.type === "ERROR")
+                    return yield (0, tslib_1.__await)(getObj());
+                  nextUrl = lastResponse.data.pagination.next;
+                  allData = [...allData, ...lastResponse.data[dataKey]];
+                  if (nextUrl)
+                    yield yield (0, tslib_1.__await)(getObj());
+                }
+                return yield (0, tslib_1.__await)(getObj());
+              });
+            }(this);
+          });
+        }
+      };
+      exports.FitbitApi = FitbitApi2;
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/Activity.type.js
+  var require_Activity_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/Activity.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/Badges.type.js
+  var require_Badges_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/Badges.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.BadgeType = void 0;
+      var BadgeType;
+      (function(BadgeType2) {
+        BadgeType2["DailyFloors"] = "DAILY_FLOORS";
+        BadgeType2["DailySteps"] = "DAILY_STEPS";
+        BadgeType2["LifetimeDistance"] = "LIFETIME_DISTANCE";
+      })(BadgeType = exports.BadgeType || (exports.BadgeType = {}));
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/Devices.type.js
+  var require_Devices_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/Devices.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/FitbitError.type.js
+  var require_FitbitError_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/FitbitError.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/Friends.type.js
+  var require_Friends_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/Friends.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/General.type.js
+  var require_General_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/General.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/HeartRate.type.js
+  var require_HeartRate_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/HeartRate.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/Nutrition.type.js
+  var require_Nutrition_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/Nutrition.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/Profile.type.js
+  var require_Profile_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/Profile.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/Sleep.type.js
+  var require_Sleep_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/Sleep.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/Subscription.type.js
+  var require_Subscription_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/Subscription.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/types/Weight.type.js
+  var require_Weight_type = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/types/Weight.type.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+    }
+  });
+
+  // node_modules/@giveback007/fitbit-api/dist/index.js
+  var require_dist5 = __commonJS({
+    "node_modules/@giveback007/fitbit-api/dist/index.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      var tslib_1 = (init_tslib_es62(), __toCommonJS(tslib_es6_exports2));
+      (0, tslib_1.__exportStar)(require_fitbit_api(), exports);
+      (0, tslib_1.__exportStar)(require_Activity_type(), exports);
+      (0, tslib_1.__exportStar)(require_Badges_type(), exports);
+      (0, tslib_1.__exportStar)(require_Devices_type(), exports);
+      (0, tslib_1.__exportStar)(require_FitbitError_type(), exports);
+      (0, tslib_1.__exportStar)(require_Friends_type(), exports);
+      (0, tslib_1.__exportStar)(require_General_type(), exports);
+      (0, tslib_1.__exportStar)(require_HeartRate_type(), exports);
+      (0, tslib_1.__exportStar)(require_Nutrition_type(), exports);
+      (0, tslib_1.__exportStar)(require_Profile_type(), exports);
+      (0, tslib_1.__exportStar)(require_Sleep_type(), exports);
+      (0, tslib_1.__exportStar)(require_Subscription_type(), exports);
+      (0, tslib_1.__exportStar)(require_Weight_type(), exports);
+    }
+  });
+
   // index.tsx
-  var import_react10 = __toESM(require_react(), 1);
-  var import_client7 = __toESM(require_client(), 1);
+  var import_react9 = __toESM(require_react(), 1);
+  var import_client6 = __toESM(require_client(), 1);
 
   // src/app.tsx
-  var import_react9 = __toESM(require_react(), 1);
+  var import_react8 = __toESM(require_react(), 1);
 
   // node_modules/graphscript/dist/index.esm.js
   var __create2 = Object.create;
@@ -57452,79 +57452,13 @@
 
   // src/app.tsx
   var import_my_alyce_component_lib = __toESM(require_dist2(), 1);
-
-  // src/components/SettingsView.tsx
-  var import_react2 = __toESM(require_react(), 1);
-
-  // src/scripts/fitbit.ts
-  var import_fitbit_api = __toESM(require_dist5(), 1);
-  function setupFitbitApi(accesstoken, fitbitId, syncRate = 5 * 60 * 1e3, parentUser) {
-    let api2 = new import_fitbit_api.FitbitApi(
-      accesstoken,
-      fitbitId
-    );
-    return api2;
-  }
-  async function authorizeRedirect() {
-    const appRedirect = "https://app.myalyce.com";
-    const clientId = "22C7QK";
-    const scope = ["activity", "heartrate", "location", "nutrition", "profile", "settings", "sleep", "social", "weight"];
-    let reState = `is_fitbit=true,path=${window.location.pathname}`;
-    if (window.location.hostname === "localhost") {
-      const { hostname, port } = window.location;
-      reState = reState + `,localhost_redirect=${hostname}:${port}`;
-    }
-    const redirectUrl = `https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${appRedirect}&scope=${scope.join("%20")}&expires_in=604800&${reState ? "state=" + reState : ""}`;
-    window.location.replace(redirectUrl);
-  }
-  async function authorizeCode(userId, fitbitCode) {
-    if (!userId || !fitbitCode)
-      return void 0;
-    let res2 = await usersocket.run("authorizeFitbit", [userId, fitbitCode]);
-    console.log(res2);
-    if (res2 && !res2.errors && !res2.html)
-      client.baseServerCallback(res2);
-    return res2;
-  }
-  async function refreshToken(userId) {
-    if (!userId)
-      return void 0;
-    let res2 = await usersocket.run("refreshFitbit", userId);
-    if (res2 && !res2.errors && !res2.html)
-      client.baseServerCallback(res2);
-    return res2;
-  }
-
-  // src/components/SettingsView.tsx
-  var SettingsView = class extends sComponent {
-    constructor() {
-      super(...arguments);
-      this.state = {
-        //synced with global state
-        viewingId: void 0
-      };
-    }
-    setupFitbit() {
-      authorizeRedirect();
-    }
-    render() {
-      let viewing = client.getLocalData("profile", { _id: this.state.viewingId });
-      let fbreg = false;
-      if (viewing?.data?.fitbit?.access_token) {
-        fbreg = true;
-      }
-      return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement("div", null, "Profile Deets + Editing"), /* @__PURE__ */ import_react2.default.createElement("div", null, "More fine grained permissions and opt-in stuff", /* @__PURE__ */ import_react2.default.createElement("br", null), /* @__PURE__ */ import_react2.default.createElement("span", null, "Register Fitbit: ", /* @__PURE__ */ import_react2.default.createElement("button", { style: { border: "1px solid black", borderRadius: "5px" }, onClick: this.setupFitbit }, "Authorize Fitbit")), /* @__PURE__ */ import_react2.default.createElement("div", null, "Fitbit Registered: ", fbreg)));
-    }
-  };
-
-  // src/app.tsx
   var import_react_burger_menu = __toESM(require_BurgerMenu(), 1);
 
   // src/components/WebRTC.tsx
-  var import_react5 = __toESM(require_react(), 1);
-
-  // src/components/Device.tsx
   var import_react4 = __toESM(require_react(), 1);
+
+  // src/components/device.tsx
+  var import_react3 = __toESM(require_react(), 1);
 
   // src/scripts/webglplot/canvas.worker.ts
   var str2 = String('(()=>{var mouseEventHandler=makeSendPropertiesHandler(["ctrlKey","metaKey","altKey","shiftKey","button","which","pointerType","clientX","clientY","pageX","pageY","movementX","movementY","x","y","which","timeStamp"]);var wheelEventHandlerImpl=makeSendPropertiesHandler(["deltaX","deltaY"]);var keydownEventHandler=makeSendPropertiesHandler(["ctrlKey","metaKey","shiftKey","altKey","isComposing","keyCode","key","code","repeat","timeStamp"]);function focusEventHandler(event,sendFn){const data={type:event.type};data.isTrusted=event.isTrusted;data.bubbles=event.bubbles;data.cancelBubble=event.cancelBubble;data.cancelable=event.cancelable;data.composed=event.composed;data.defaultPrevent=event.defaultPrevented;data.eventPhase=event.eventPhase;data.returnValue=event.returnValue;data.currentTarget=event.currentTarget.id?event.currentTarget.id:event.currentTarget.constructor.name;data.target=data.currentTarget;data.srcElement=data.currentTarget;sendFn(data)}function wheelEventHandler(event,sendFn){if(event.preventDefault)event.preventDefault();wheelEventHandlerImpl(event,sendFn)}function preventDefaultHandler(event){if(event.preventDefault)event.preventDefault()}function copyProperties(src,properties,dst){for(const name of properties){dst[name]=src[name]}}function makeSendPropertiesHandler(properties){return function sendProperties(event,sendFn){const data={type:event.type};copyProperties(event,properties,data);sendFn(data)}}function touchEventHandler(event,sendFn){const touches=[];const data={type:event.type,touches};for(let i2=0;i2<event.touches.length;++i2){const touch=event.touches[i2];touches.push({pageX:touch.pageX,pageY:touch.pageY})}sendFn(data)}var i=1;var keys={};while(i<222){keys[i]=true;i++}function filteredKeydownEventHandler(event,sendFn){let{keyCode}=event;if(keys[keyCode]){if(event.preventDefault&&(keyCode<110||keyCode>123))event.preventDefault();keydownEventHandler(event,sendFn)}}var eventHandlers={contextmenu:preventDefaultHandler,mousedown:mouseEventHandler,mousemove:mouseEventHandler,mouseup:mouseEventHandler,pointerdown:mouseEventHandler,pointermove:mouseEventHandler,pointerup:mouseEventHandler,pointerlockchange:mouseEventHandler,webkitpointerlockchange:mouseEventHandler,focus:focusEventHandler,blur:focusEventHandler,pointerout:mouseEventHandler,touchstart:touchEventHandler,touchmove:touchEventHandler,touchend:touchEventHandler,wheel:wheelEventHandler,keydown:filteredKeydownEventHandler,keyup:filteredKeydownEventHandler};function initProxyElement(element,worker,id){if(!id)id="proxy"+Math.floor(Math.random()*1e15);const sendEvent=data=>{if(!worker){handleProxyEvent(data,id)}else worker.postMessage({route:"handleProxyEvent",args:[data,id]})};let entries=Object.entries(eventHandlers);for(const[eventName,handler]of entries){element.addEventListener(eventName,function(event){handler(event,sendEvent)})}if(eventHandlers.keydown){globalThis.addEventListener("keydown",function(ev){eventHandlers.keydown(ev,sendEvent)})}if(eventHandlers.keyup){globalThis.addEventListener("keyup",function(ev){eventHandlers.keyup(ev,sendEvent)})}const sendSize=()=>{const rect=element.getBoundingClientRect();sendEvent({type:"resize",left:rect.left,top:rect.top,width:element.clientWidth,height:element.clientHeight})};sendSize();globalThis.addEventListener("resize",sendSize);return id}var EventDispatcher=class{addEventListener(type,listener){if(this.__listeners===void 0)this.__listeners={};const listeners=this.__listeners;if(listeners[type]===void 0){listeners[type]=[]}if(listeners[type].indexOf(listener)===-1){listeners[type].push(listener)}}hasEventListener(type,listener){if(this.__listeners===void 0)return false;const listeners=this.__listeners;return listeners[type]!==void 0&&listeners[type].indexOf(listener)!==-1}removeEventListener(type,listener){if(this.__listeners===void 0)return;const listeners=this.__listeners;const listenerArray=listeners[type];if(listenerArray!==void 0){const index=listenerArray.indexOf(listener);if(index!==-1){listenerArray.splice(index,1)}}}dispatchEvent(event,target){if(this.__listeners===void 0)return;const listeners=this.__listeners;const listenerArray=listeners[event.type];if(listenerArray!==void 0){if(!target)event.target=this;else event.target=target;const array=listenerArray.slice(0);for(let i2=0,l=array.length;i2<l;i2++){array[i2].call(this,event)}}}};function noop(){}var ElementProxyReceiver=class extends EventDispatcher{constructor(){super();this.__listeners={};this.style={};this.setPointerCapture=()=>{};this.releasePointerCapture=()=>{};this.getBoundingClientRect=()=>{return{left:this.left,top:this.top,width:this.width,height:this.height,right:this.left+this.width,bottom:this.top+this.height}};this.handleEvent=data=>{if(data.type==="resize"){this.left=data.left;this.top=data.top;this.width=data.width;this.height=data.height;if(typeof this.proxied==="object"){this.proxied.style.width=this.width+"px";this.proxied.style.height=this.height+"px";this.proxied.clientWidth=this.width;this.proxied.clientHeight=this.height}}data.preventDefault=noop;data.stopPropagation=noop;this.dispatchEvent(data,this.proxied)};this.style={}}get clientWidth(){return this.width}get clientHeight(){return this.height}focus(){}blur(){}};var ProxyManager=class{constructor(){this.targets={};this.makeProxy=(id,addTo=void 0)=>{if(!id)id=`proxyReceiver${Math.floor(Math.random()*1e15)}`;let proxy;if(this.targets[id])proxy=this.targets[id];else{proxy=new ElementProxyReceiver;this.targets[id]=proxy}if(typeof addTo==="object"){addTo.proxy=proxy;proxy.proxied=addTo;if(typeof WorkerGlobalScope!=="undefined")addTo.style=proxy.style;if(proxy.width){addTo.style.width=proxy.width+"px";addTo.clientWidth=proxy.width}if(proxy.height){addTo.style.height=proxy.height+"px";addTo.clientHeight=proxy.height}addTo.setPointerCapture=proxy.setPointerCapture.bind(proxy);addTo.releasePointerCapture=proxy.releasePointerCapture.bind(proxy);addTo.getBoundingClientRect=proxy.getBoundingClientRect.bind(proxy);addTo.addEventListener=proxy.addEventListener.bind(proxy);addTo.removeEventListener=proxy.removeEventListener.bind(proxy);addTo.handleEvent=proxy.handleEvent.bind(proxy);addTo.dispatchEvent=proxy.dispatchEvent.bind(proxy);addTo.focus=proxy.focus.bind(proxy);addTo.blur=proxy.blur.bind(proxy)}};this.getProxy=id=>{return this.targets[id]};this.handleEvent=(data,id)=>{if(!this.targets[id])this.makeProxy(id);if(this.targets[id]){this.targets[id].handleEvent(data);return true}return void 0};if(!globalThis.document)globalThis.document={elementFromPoint:(...args)=>{return this.targets[Object.keys(this.targets)[0]].proxied}}}};function makeProxy(id,elm){if(this?.__node?.graph){if(!this.__node.graph.ProxyManager)this.__node.graph.ProxyManager=new ProxyManager;this.__node.graph.ProxyManager.makeProxy(id,elm)}else{if(!globalThis.ProxyManager)globalThis.ProxyManager=new ProxyManager;globalThis.ProxyManager.makeProxy(id,elm)}return id}function handleProxyEvent(data,id){if(this?.__node?.graph){if(!this.__node.graph.ProxyManager)this.__node.graph.ProxyManager=new ProxyManager;if(this.__node.graph.ProxyManager.handleEvent(data,id))return data}else{if(!globalThis.ProxyManager)globalThis.ProxyManager=new ProxyManager;if(globalThis.ProxyManager.handleEvent(data,id))return data}}var proxyElementWorkerRoutes={initProxyElement,makeProxy,handleProxyEvent};function Renderer(options){if(options.worker){let worker=options.worker;let route=options.route;if(worker instanceof Blob||typeof worker==="string"){worker=new Worker(worker)}delete options.worker;delete options.route;return transferCanvas(worker,options,route)}else{initProxyElement(options.canvas,void 0,options._id);return setupCanvas(options)}}function transferCanvas(worker,options,route){console.log(options);if(!options)return void 0;if(!options._id)options._id=`canvas${Math.floor(Math.random()*1e15)}`;let offscreen=options.canvas.transferControlToOffscreen();if(!options.width)options.width=options.canvas.clientWidth;if(!options.height)options.height=options.canvas.clientHeight;let message={route:route?route:"setupCanvas",args:{...options,canvas:offscreen}};if(this?.__node?.graph)this.__node.graph.run("initProxyElement",options.canvas,worker,options._id);else initProxyElement(options.canvas,worker,options._id);if(options.draw){if(typeof options.draw==="function")message.args.draw=options.draw.toString();else message.args.draw=options.draw}if(options.update){if(typeof options.update==="function")message.args.update=options.update.toString();else message.args.update=options.update}if(options.init){if(typeof options.init==="function")message.args.init=options.init.toString();else message.args.init=options.init}if(options.clear){if(typeof options.clear==="function")message.args.clear=options.clear.toString();else message.args.clear=options.clear}let tr=[offscreen];if(options.transfer){tr.push(...options.transfer);delete options.transfer}worker.postMessage(message,tr);const canvascontrols={_id:options._id,width:options.width,height:options.height,worker,draw:(props,transfer)=>{worker.postMessage({route:"drawFrame",args:[props,options._id]},transfer)},update:(props,transfer)=>{worker.postMessage({route:"updateCanvas",args:[props,options._id]},transfer)},clear:()=>{worker.postMessage({route:"clearCanvas",args:options._id})},init:()=>{worker.postMessage({route:"initCanvas",args:options._id})},stop:()=>{worker.postMessage({route:"stopAnim",args:options._id})},start:()=>{worker.postMessage({route:"startAnim",args:options._id})},set:(newDrawProps,transfer)=>{worker.postMessage({route:"setDraw",args:[newDrawProps,options._id]},transfer)},terminate:()=>{worker.terminate()}};return canvascontrols}function setDraw(settings,_id){let canvasopts;if(this?.__node?.graph){if(_id)canvasopts=this.__node.graph.CANVASES?.[settings._id];else if(settings._id)canvasopts=this.__node.graph.CANVASES?.[settings._id];else canvasopts=this.__node.graph.CANVASES?.[Object.keys(this.__node.graph.CANVASES)[0]]}else{if(_id)canvasopts=globalThis.CANVASES?.[settings._id];else if(settings._id)canvasopts=globalThis.CANVASES?.[settings._id];else canvasopts=globalThis.CANVASES?.[Object.keys(globalThis.CANVASES)[0]]}if(canvasopts){if(settings.canvas){canvasopts.canvas=settings.canvas;if(this?.__node?.graph)this.__node.graph.run("makeProxy",canvasopts._id,canvasopts.canvas);else proxyElementWorkerRoutes.makeProxy(canvasopts._id,canvasopts.canvas)}if(typeof settings.context==="string")canvasopts.context=canvasopts.canvas.getContext(settings.context);else if(settings.context)canvasopts.context=settings.context;if(settings.width)canvasopts.canvas.width=settings.width;if(settings.height)canvasopts.canvas.height=settings.height;if(typeof settings.draw==="string")settings.draw=parseFunctionFromText(settings.draw);if(typeof settings.draw==="function"){canvasopts.draw=settings.draw.bind(settings)}if(typeof settings.update==="string")settings.update=parseFunctionFromText(settings.update);if(typeof settings.update==="function"){canvasopts.update=settings.update.bind(settings)}if(typeof settings.init==="string")settings.init=parseFunctionFromText(settings.init);if(typeof settings.init==="function"){canvasopts.init=settings.init.bind(settings)}if(typeof settings.clear==="string")settings.clear=parseFunctionFromText(settings.clear);if(typeof settings.clear==="function"){canvasopts.clear=settings.clear.bind(settings)}return settings._id}return void 0}function setupCanvas(options){if(this?.__node?.graph){if(!this.__node.graph.CANVASES)this.__node.graph.CANVASES={}}else if(!globalThis.CANVASES)globalThis.CANVASES={};let canvasOptions=options;options._id?canvasOptions._id=options._id:canvasOptions._id=`canvas${Math.floor(Math.random()*1e15)}`;typeof options.context==="string"?canvasOptions.context=options.canvas.getContext(options.context):canvasOptions.context=options.context;"animating"in options?canvasOptions.animating=options.animating:canvasOptions.animating=true;if(this?.__node?.graph?.CANVASES[canvasOptions._id]){this.__node.graph.run("setDraw",canvasOptions)}else if(globalThis.CANVASES?.[canvasOptions._id]){setDraw(canvasOptions)}else{if(this?.__node?.graph){canvasOptions.graph=this.__node.graph;if(!canvasOptions.__node){canvasOptions.__node={}}if(!canvasOptions.__node.tag)canvasOptions.__node.tag=canvasOptions._id;canvasOptions=this.__node.graph.add(canvasOptions);canvasOptions.__addOndisconnected=()=>{canvasOptions.stop();delete this.__node.graph.CANVASES[canvasOptions._id]}}if(this?.__node?.graph)this.__node.graph.CANVASES[canvasOptions._id]=canvasOptions;else globalThis.CANVASES[canvasOptions._id]=canvasOptions;if(this?.__node?.graph)this.__node.graph.run("makeProxy",canvasOptions._id,canvasOptions.canvas);else proxyElementWorkerRoutes.makeProxy(canvasOptions._id,canvasOptions.canvas);if(options.width)canvasOptions.canvas.width=options.width;if(options.height)canvasOptions.canvas.height=options.height;if(typeof canvasOptions.draw==="string"){canvasOptions.draw=parseFunctionFromText(canvasOptions.draw)}else if(typeof canvasOptions.draw==="function"){canvasOptions.draw=canvasOptions.draw.bind(canvasOptions)}if(typeof canvasOptions.update==="string"){canvasOptions.update=parseFunctionFromText(canvasOptions.update)}else if(typeof canvasOptions.update==="function"){canvasOptions.update=canvasOptions.update.bind(canvasOptions)}if(typeof canvasOptions.init==="string"){canvasOptions.init=parseFunctionFromText(canvasOptions.init)}else if(typeof canvasOptions.init==="function"){canvasOptions.init=canvasOptions.init.bind(canvasOptions)}if(typeof canvasOptions.clear==="string"){canvasOptions.clear=parseFunctionFromText(canvasOptions.clear)}else if(typeof canvasOptions.clear==="function"){canvasOptions.clear=canvasOptions.clear.bind(canvasOptions)}if(typeof canvasOptions.init==="function")canvasOptions.init(canvasOptions,canvasOptions.canvas,canvasOptions.context);canvasOptions.stop=()=>{stopAnim(canvasOptions._id)};canvasOptions.start=draw=>{startAnim(canvasOptions._id,draw)};canvasOptions.set=settings=>{setDraw(settings,canvasOptions._id)};if(typeof canvasOptions.draw==="function"&&canvasOptions.animating){let draw=(s,canvas,context)=>{if(s.animating){s.draw(s,canvas,context);requestAnimationFrame(()=>{draw(s,canvas,context)})}};draw(canvasOptions,canvasOptions.canvas,canvasOptions.context)}}if(typeof WorkerGlobalScope!=="undefined"&&self instanceof WorkerGlobalScope)return canvasOptions._id;else{const canvascontrols={_id:options._id,width:options.width,height:options.height,draw:props=>{drawFrame(props,options._id)},update:props=>{updateCanvas(props,options._id)},clear:()=>{clearCanvas(options._id)},init:()=>{initCanvas(options._id)},stop:()=>{stopAnim(options._id)},start:()=>{startAnim(options._id)},set:newDrawProps=>{setDraw(newDrawProps,options._id)},terminate:()=>{if(this.__node?.graph)this.__node.graph.remove(options._id);else{stopAnim(options._id);if(this?.__node?.graph)delete this.__node.graph.CANVASES[canvasOptions._id];else delete globalThis.CANVASES[canvasOptions._id]}}};return canvascontrols}}function drawFrame(props,_id){let canvasopts=getCanvas.call(this,_id);if(canvasopts){if(props)Object.assign(canvasopts,props);if(canvasopts.draw){canvasopts.draw(canvasopts,canvasopts.canvas,canvasopts.context);return _id}}return void 0}function clearCanvas(_id){let canvasopts=getCanvas.call(this,_id);if(canvasopts?.clear){canvasopts.clear(canvasopts,canvasopts.canvas,canvasopts.context);return _id}return void 0}function initCanvas(_id){let canvasopts=getCanvas.call(this,_id);if(canvasopts?.init){canvasopts.init(canvasopts,canvasopts.canvas,canvasopts.context);return _id}return void 0}function updateCanvas(input,_id){let canvasopts=getCanvas.call(this,_id);if(canvasopts?.update){canvasopts.update(canvasopts,canvasopts.canvas,canvasopts.context,input);return _id}return void 0}function setProps(props,_id){let canvasopts=getCanvas.call(this,_id);if(canvasopts){Object.assign(canvasopts,props);if(props.width)canvasopts.canvas.width=props.width;if(props.height)canvasopts.canvas.height=props.height;return _id}return void 0}function startAnim(_id,draw){let canvasopts=getCanvas.call(this,_id);canvasopts.animating=true;if(canvasopts&&draw){if(typeof draw==="string")draw=parseFunctionFromText(draw);if(typeof draw==="function"){canvasopts.draw=draw}return _id}if(typeof canvasopts?.draw==="function"){let draw2=(s,canvas,context)=>{if(s.animating){s.draw(s,canvas,context);requestAnimationFrame(()=>{draw2(s,canvas,context)})}};if(typeof canvasopts.clear==="function")canvasopts.clear(canvasopts,canvasopts.canvas,canvasopts.context);if(typeof canvasopts.init==="function")canvasopts.init(canvasopts,canvasopts.canvas,canvasopts.context);draw2(canvasopts,canvasopts.canvas,canvasopts.context);return _id}return void 0}function stopAnim(_id){let canvasopts=getCanvas.call(this,_id);if(canvasopts){canvasopts.animating=false;if(typeof canvasopts.clear==="function")requestAnimationFrame(canvasopts.clear(canvasopts,canvasopts.canvas,canvasopts.context));return _id}return void 0}function getCanvas(_id){let canvasopts;if(this?.__node?.graph){if(!_id)canvasopts=this.__node.graph.CANVASES?.[Object.keys(this.__node.graph.CANVASES)[0]];else canvasopts=this.__node.graph.CANVASES?.[_id]}else{if(!_id)canvasopts=globalThis.CANVASES?.[Object.keys(globalThis.CANVASES)[0]];else canvasopts=globalThis.CANVASES?.[_id]}return canvasopts}var workerCanvasRoutes={...proxyElementWorkerRoutes,Renderer,transferCanvas,setupCanvas,setDraw,drawFrame,clearCanvas,initCanvas,updateCanvas,setProps,startAnim,stopAnim,getCanvas};function parseFunctionFromText(method=""){let getFunctionBody=methodString=>{return methodString.replace(/^\\W*(function[^{]+\\{([\\s\\S]*)\\}|[^=]+=>[^{]*\\{([\\s\\S]*)\\}|[^=]+=>(.+))/i,"$2$3$4")};let getFunctionHead=methodString=>{let startindex=methodString.indexOf("=>")+1;if(startindex<=0){startindex=methodString.indexOf("){")}if(startindex<=0){startindex=methodString.indexOf(") {")}return methodString.slice(0,methodString.indexOf("{",startindex)+1)};let newFuncHead=getFunctionHead(method);let newFuncBody=getFunctionBody(method);let newFunc;if(newFuncHead.includes("function")){let varName=newFuncHead.split("(")[1].split(")")[0];newFunc=new Function(varName,newFuncBody)}else{if(newFuncHead.substring(0,6)===newFuncBody.substring(0,6)){let varName=newFuncHead.split("(")[1].split(")")[0];newFunc=new Function(varName,newFuncBody.substring(newFuncBody.indexOf("{")+1,newFuncBody.length-1))}else{try{newFunc=(0,eval)(newFuncHead+newFuncBody+"}")}catch{}}}return newFunc}var v=class{constructor(e,t,s,h){this.r=e,this.g=t,this.b=s,this.a=h}};var A=class{constructor(){this.scaleX=1,this.scaleY=1,this.offsetX=0,this.offsetY=0,this.loop=false,this._vbuffer=0,this._coord=0,this.visible=true,this.intensity=1,this.xy=new Float32Array([]),this.numPoints=0,this.color=new v(0,0,0,1),this.webglNumPoints=0}};var d=class extends A{constructor(e,t){super(),this.currentIndex=0,this.webglNumPoints=t,this.numPoints=t,this.color=e,this.xy=new Float32Array(2*this.webglNumPoints)}setX(e,t){this.xy[e*2]=t}setY(e,t){this.xy[e*2+1]=t}getX(e){return this.xy[e*2]}getY(e){return this.xy[e*2+1]}lineSpaceX(e,t){for(let s=0;s<this.numPoints;s++)this.setX(s,e+t*s)}arrangeX(){this.lineSpaceX(-1,2/this.numPoints)}constY(e){for(let t=0;t<this.numPoints;t++)this.setY(t,e)}shiftAdd(e){let t=e.length;for(let s=0;s<this.numPoints-t;s++)this.setY(s,this.getY(s+t));for(let s=0;s<t;s++)this.setY(s+this.numPoints-t,e[s])}addArrayY(e){if(this.currentIndex+e.length<=this.numPoints)for(let t=0;t<e.length;t++)this.setY(this.currentIndex,e[t]),this.currentIndex++}replaceArrayY(e){if(e.length==this.numPoints)for(let t=0;t<this.numPoints;t++)this.setY(t,e[t])}};var M=(c,e,t)=>{let s={x:0,y:0};return s.x=c.x+e.x*t,s.y=c.y+e.y*t,s};var P=c=>Y(-c.y,c.x);var x=(c,e)=>{let t=T(c,e);return t=S(t),t};var C=(c,e)=>{let t={x:0,y:0};return t.x=c.x+e.x,t.y=c.y+e.y,t};var R=(c,e)=>c.x*e.x+c.y*e.y;var S=c=>{let e={x:0,y:0},t=c.x*c.x+c.y*c.y;return t>0&&(t=1/Math.sqrt(t),e.x=c.x*t,e.y=c.y*t),e};var Y=(c,e)=>{let t={x:0,y:0};return t.x=c,t.y=e,t};var T=(c,e)=>{let t={x:0,y:0};return t.x=c.x-e.x,t.y=c.y-e.y,t};var F=c=>{let e,t={x:0,y:0},s={x:0,y:0},h=[],o=(n,l)=>{h.push({vec2:n,miterLength:l})},a=n=>({x:c[n*2],y:c[n*2+1]});t=x(a(1),a(0)),e=P(t),o(e,1);let r=c.length/2;for(let n=1;n<r-1;n++){let l=a(n-1),i2=a(n),u=a(n+1);t=x(i2,l),e=P(t),s=x(u,i2);let g=N(t,s),f=X(t,g,1);o(g,f)}return t=x(a(r-1),a(r-2)),e=P(t),o(e,1),h};var N=(c,e)=>{let t=C(c,e);return t=S(t),Y(-t.y,t.x)};var X=(c,e,t)=>{let s=Y(-c.y,c.x);return t/R(e,s)};var p=class extends A{constructor(e,t,s){super(),this.currentIndex=0,this._thicknessRequested=0,this._actualThickness=0,this.webglNumPoints=t*2,this.numPoints=t,this.color=e,this._thicknessRequested=s,this._linePoints=new Float32Array(t*2),this.xy=new Float32Array(2*this.webglNumPoints)}convertToTriPoints(){let e=this._actualThickness/2,t=F(this._linePoints);for(let s=0;s<this.numPoints;s++){let h=this._linePoints[2*s],o=this._linePoints[2*s+1],a={x:h,y:o},r=M(a,t[s].vec2,t[s].miterLength*e),n=M(a,t[s].vec2,-t[s].miterLength*e);this.xy[s*4]=r.x,this.xy[s*4+1]=r.y,this.xy[s*4+2]=n.x,this.xy[s*4+3]=n.y}}setX(e,t){this._linePoints[e*2]=t}setY(e,t){this._linePoints[e*2+1]=t}lineSpaceX(e,t){for(let s=0;s<this.numPoints;s++)this.setX(s,e+t*s)}setThickness(e){this._thicknessRequested=e}getThickness(){return this._thicknessRequested}setActualThickness(e){this._actualThickness=e}};var L=class{constructor(e,t){this.debug=false,this.addLine=this.addDataLine,t==null?this.webgl=e.getContext("webgl",{antialias:true,transparent:false}):(this.webgl=e.getContext("webgl",{antialias:t.antialias,transparent:t.transparent,desynchronized:t.deSync,powerPerformance:t.powerPerformance,preserveDrawing:t.preserveDrawing}),this.debug=t.debug==null?false:t.debug),this.log("canvas type is: "+e.constructor.name),this.log(`[webgl-plot]:width=${e.width}, height=${e.height}`),this._linesData=[],this._linesAux=[],this._thickLines=[],this._surfaces=[],this.gScaleX=1,this.gScaleY=1,this.gXYratio=1,this.gOffsetX=0,this.gOffsetY=0,this.gLog10X=false,this.gLog10Y=false,this.webgl.clear(this.webgl.COLOR_BUFFER_BIT),this.webgl.viewport(0,0,e.width,e.height),this._progLine=this.webgl.createProgram(),this.initThinLineProgram(),this.webgl.enable(this.webgl.BLEND),this.webgl.blendFunc(this.webgl.SRC_ALPHA,this.webgl.ONE_MINUS_SRC_ALPHA)}get linesData(){return this._linesData}get linesAux(){return this._linesAux}get thickLines(){return this._thickLines}get surfaces(){return this._surfaces}_drawLines(e){let t=this.webgl;e.forEach(s=>{if(s.visible){t.useProgram(this._progLine);let h=t.getUniformLocation(this._progLine,"uscale");t.uniformMatrix2fv(h,false,new Float32Array([s.scaleX*this.gScaleX*(this.gLog10X?1/Math.log(10):1),0,0,s.scaleY*this.gScaleY*this.gXYratio*(this.gLog10Y?1/Math.log(10):1)]));let o=t.getUniformLocation(this._progLine,"uoffset");t.uniform2fv(o,new Float32Array([s.offsetX+this.gOffsetX,s.offsetY+this.gOffsetY]));let a=t.getUniformLocation(this._progLine,"is_log");t.uniform2iv(a,new Int32Array([this.gLog10X?1:0,this.gLog10Y?1:0]));let r=t.getUniformLocation(this._progLine,"uColor");t.uniform4fv(r,[s.color.r,s.color.g,s.color.b,s.color.a]),t.bufferData(t.ARRAY_BUFFER,s.xy,t.STREAM_DRAW),t.drawArrays(s.loop?t.LINE_LOOP:t.LINE_STRIP,0,s.webglNumPoints)}})}_drawSurfaces(e){let t=this.webgl;e.forEach(s=>{if(s.visible){t.useProgram(this._progLine);let h=t.getUniformLocation(this._progLine,"uscale");t.uniformMatrix2fv(h,false,new Float32Array([s.scaleX*this.gScaleX*(this.gLog10X?1/Math.log(10):1),0,0,s.scaleY*this.gScaleY*this.gXYratio*(this.gLog10Y?1/Math.log(10):1)]));let o=t.getUniformLocation(this._progLine,"uoffset");t.uniform2fv(o,new Float32Array([s.offsetX+this.gOffsetX,s.offsetY+this.gOffsetY]));let a=t.getUniformLocation(this._progLine,"is_log");t.uniform2iv(a,new Int32Array([this.gLog10X?1:0,this.gLog10Y?1:0]));let r=t.getUniformLocation(this._progLine,"uColor");t.uniform4fv(r,[s.color.r,s.color.g,s.color.b,s.color.a]),t.bufferData(t.ARRAY_BUFFER,s.xy,t.STREAM_DRAW),t.drawArrays(t.TRIANGLE_STRIP,0,s.webglNumPoints)}})}_drawTriangles(e){let t=this.webgl;t.bufferData(t.ARRAY_BUFFER,e.xy,t.STREAM_DRAW),t.useProgram(this._progLine);let s=t.getUniformLocation(this._progLine,"uscale");t.uniformMatrix2fv(s,false,new Float32Array([e.scaleX*this.gScaleX*(this.gLog10X?1/Math.log(10):1),0,0,e.scaleY*this.gScaleY*this.gXYratio*(this.gLog10Y?1/Math.log(10):1)]));let h=t.getUniformLocation(this._progLine,"uoffset");t.uniform2fv(h,new Float32Array([e.offsetX+this.gOffsetX,e.offsetY+this.gOffsetY]));let o=t.getUniformLocation(this._progLine,"is_log");t.uniform2iv(o,new Int32Array([0,0]));let a=t.getUniformLocation(this._progLine,"uColor");t.uniform4fv(a,[e.color.r,e.color.g,e.color.b,e.color.a]),t.drawArrays(t.TRIANGLE_STRIP,0,e.xy.length/2)}_drawThickLines(){this._thickLines.forEach(e=>{if(e.visible){let t=Math.min(this.gScaleX,this.gScaleY);e.setActualThickness(e.getThickness()/t),e.convertToTriPoints(),this._drawTriangles(e)}})}update(){this.clear(),this.draw()}draw(){this._drawLines(this.linesData),this._drawLines(this.linesAux),this._drawThickLines(),this._drawSurfaces(this.surfaces)}clear(){this.webgl.clear(this.webgl.COLOR_BUFFER_BIT)}_addLine(e){e._vbuffer=this.webgl.createBuffer(),this.webgl.bindBuffer(this.webgl.ARRAY_BUFFER,e._vbuffer),this.webgl.bufferData(this.webgl.ARRAY_BUFFER,e.xy,this.webgl.STREAM_DRAW),e._coord=this.webgl.getAttribLocation(this._progLine,"coordinates"),this.webgl.vertexAttribPointer(e._coord,2,this.webgl.FLOAT,false,0,0),this.webgl.enableVertexAttribArray(e._coord)}addDataLine(e){this._addLine(e),this.linesData.push(e)}addAuxLine(e){this._addLine(e),this.linesAux.push(e)}addThickLine(e){this._addLine(e),this._thickLines.push(e)}addSurface(e){this._addLine(e),this.surfaces.push(e)}initThinLineProgram(){let e=`\n      attribute vec2 coordinates;\n      uniform mat2 uscale;\n      uniform vec2 uoffset;\n      uniform ivec2 is_log;\n\n      void main(void) {\n         float x = (is_log[0]==1) ? log(coordinates.x) : coordinates.x;\n         float y = (is_log[1]==1) ? log(coordinates.y) : coordinates.y;\n         vec2 line = vec2(x, y);\n         gl_Position = vec4(uscale*line + uoffset, 0.0, 1.0);\n      }`,t=this.webgl.createShader(this.webgl.VERTEX_SHADER);this.webgl.shaderSource(t,e),this.webgl.compileShader(t);let s=`\n         precision mediump float;\n         uniform highp vec4 uColor;\n         void main(void) {\n            gl_FragColor =  uColor;\n         }`,h=this.webgl.createShader(this.webgl.FRAGMENT_SHADER);this.webgl.shaderSource(h,s),this.webgl.compileShader(h),this._progLine=this.webgl.createProgram(),this.webgl.attachShader(this._progLine,t),this.webgl.attachShader(this._progLine,h),this.webgl.linkProgram(this._progLine)}popDataLine(){this.linesData.pop()}removeAllLines(){this._linesData=[],this._linesAux=[],this._thickLines=[],this._surfaces=[]}removeDataLines(){this._linesData=[]}removeAuxLines(){this._linesAux=[]}viewport(e,t,s,h){this.webgl.viewport(e,t,s,h)}log(e){this.debug&&console.log("[webgl-plot]:"+e)}};var y=class{constructor(){this.plots={}}initPlot(e,t){if(t||(t=new L(e.canvas,e.webglOptions)),!e._id)e._id=`plot${Math.floor(Math.random()*1e15)}`;else if(this.plots[e._id]){let l=this.plots[e._id].initial;if(e.lines){for(let i2 in e.lines)if(l.lines[i2]&&Array.isArray(e.lines[i2])){let u=e.lines[i2];e.lines[i2]=l.lines[i2]}}e=Object.assign(l,e)}e.overlay&&(typeof e.overlay!="object"&&(e.overlay=document.createElement("canvas"),e.overlay.style.position="absolute",e.overlay.width=e.canvas.width,e.overlay.height=e.canvas.height,e.canvas.appendChild(e.overlay)),e.overlayCtx||(e.overlayCtx=e.overlay.getContext("2d"))),e.width&&(e.canvas.width=e.width,e.canvas.style&&(e.canvas.style.width=e.width+"px"),typeof e.overlay=="object"&&(e.overlay.width=e.width,e.overlay.style&&(e.overlay.style.width=e.width+"px"))),e.height&&(e.canvas.height=e.height,e.canvas.style&&(e.canvas.style.height=e.height+"px"),typeof e.overlay=="object"&&(e.overlay.height=e.height,e.overlay.style&&(e.overlay.style.height=e.height+"px"))),e.lines?.timestamp&&delete e.lines.timestamp,e.lines||(e.lines={});let s={};for(let l in e.lines)s[l]=Object.assign({},s[l]),"viewing"in e.lines[l]||(e.lines[l].viewing=true),s[l].viewing=e.lines[l].viewing,s[l].sps=e.lines[l].sps,s[l].nSec=e.lines[l].nSec,s[l].nPoints=e.lines[l].nPoints,s[l].ymin=e.lines[l].ymin,s[l].ymax=e.lines[l].ymax,s[l].units=e.lines[l].units;let h={plot:t,settings:e,initial:Object.assign(Object.assign({},e),{lines:s}),anim:()=>{t.update()}};this.plots[e._id]=h;let o=0,a=0;Object.keys(e.lines).forEach(l=>{e.lines[l]?.viewing!==false&&a++}),e.nLines=a;let r,n;typeof e.overlay=="object"&&(r=e.overlay,n=e.overlayCtx,n.clearRect(0,0,e.overlay.width,e.overlay.height),n.font=e.overlayFont?e.overlayFont:"1em Courier",n.fillStyle=e.overlayColor?e.overlayColor:"white");for(let l in e.lines){let i2=e.lines[l];if(Array.isArray(i2)&&(i2={values:i2},e.lines[l]=i2),"viewing"in i2||(i2.viewing=true),i2.color)Array.isArray(i2.color)&&(i2.color=new v(...i2.color));else{let m=y.HSLToRGB(360*(o/a)%360,100,50,1);h.initial.lines[l].color=[...m,1],i2.color=new v(...m,1)}let u;if(i2.nSec&&i2.sps?u=Math.ceil(i2.nSec*i2.sps):i2.nPoints?u=i2.nPoints:i2.points?u=i2.points:e.linePoints?u=e.linePoints:i2.values?u=i2.values.length:u=1e3,i2.points=u,e.lines[l].viewing===false)continue;if((i2.width||e.lineWidth)&&i2.width!==0){let m=e.lineWidth;m||(m=i2.width),i2.width?i2.line=new p(i2.color,u,i2.width):e.lineWidth&&(i2.line=new p(i2.color,u,e.lineWidth)),i2.line.lineSpaceX(-1,2/i2.line.numPoints)}else i2.line=new d(i2.color,u),i2.line.arrangeX();i2.values?.length===i2.points?i2.values.length!==u&&(i2.interpolate?i2.values.length>u?i2.values=y.downsample(i2.values,u):i2.values.length<u&&(i2.values=y.upsample(i2.values,u)):i2.values.length>i2.points?i2.values=i2.values.slice(i2.values.length-i2.points):i2.values=[...new Array(i2.points-i2.values.length).fill(0),...i2.values]):Array.isArray(i2.values)?i2.values.length>u?i2.values=i2.values.slice(i2.values.length-u):i2.values.length<u&&(i2.values=[...new Array(u-i2.values.length).fill(0),...i2.values]):i2.values=new Array(i2.points).fill(0);let g=i2.ymin,f=i2.ymax,b=i2.values.length<=1e5;if(g===f?(f=b?Math.max(...i2.values):1,g=b?Math.min(...i2.values):0):isNaN(f)&&(f=b?Math.max(...i2.values):1),isNaN(g)&&(g=b?Math.min(...i2.values):0),g>f){let m=g;f=g,g=m}let w=Math.abs(g);if(i2.absmax=w>f?w:f,"autoscale"in i2||(i2.autoscale=true),i2.position||(i2.position=e.nLines-o-1),i2.autoscale?i2.autoscale===2?("clamp"in i2||(i2.clamp=true),i2.scaled=y.autoscale(i2.values,i2.position,a,i2.centerZero,g,f,i2.clamp)):(i2.scaled=i2.values,i2.line.scaleY=y.getYScalar(i2.values,a,i2.centerZero,g,f),i2.line.offsetY=y.getYOffset(i2.position,a,g,i2.line.scaleY)):i2.scaled=i2.values,i2.scaled.forEach((m,_)=>i2.line.setY(_,m)),i2.line instanceof p?t.addThickLine(i2.line):i2.line instanceof d&&t.addDataLine(i2.line),"xAxis"in i2||(i2.xAxis=true),i2.xAxis){i2.xColor?Array.isArray(i2.xColor)&&(i2.xColor=new v(...i2.xColor)):i2.xColor=new v(1,1,1,.3);let m=new d(i2.xColor,2),_=i2.autoscale?(o+1)*2/a-1-1/a:0;m.constY(_),m.arrangeX(),m.xy[2]=1,i2.x=m,t.addAuxLine(m)}if(a>1&&i2.autoscale&&o!==a-1){e.dividerColor?Array.isArray(e.dividerColor)&&(e.dividerColor=new v(...e.dividerColor)):e.dividerColor=new v(1,1,1,1);let m=new d(e.dividerColor,2);m.constY(i2.autoscale?(o+1)*2/a-1:1),m.arrangeX(),m.xy[2]=1,i2.divider=m,t.addAuxLine(m)}if(typeof e.overlay=="object"&&(i2.useOverlay||!("useOverlay"in i2))){let m=e.nLines-i2.position-1;n.fillText(l,20,r.height*(m+.2)/e.nLines),n.fillText(`${Math.floor(f)===f?f:f?.toFixed(5)} ${i2.units?i2.units:""}`,r.width-100,r.height*(m+.2)/e.nLines),n.fillText(`${Math.floor(g)===g?g:g?.toFixed(5)} ${i2.units?i2.units:""}`,r.width-100,r.height*(m+.9)/e.nLines)}o++}return requestAnimationFrame(h.anim),this.plots[e._id]}deinitPlot(e){return typeof e=="string"&&(e=this.plots[e]),e.plot.clear(),e.plot.removeAllLines(),true}reinitPlot(e,t){if(typeof e=="string"){let s=e;e=this.plots[e],t._id||(t._id=s)}if(e.plot)return e.plot.clear(),e.plot.removeAllLines(),e.settings.overlayCtx&&e.settings.overlayCtx.clearRect(0,0,e.settings.overlay?.width,e.settings.overlay?.height),this.initPlot(t,e.plot)}getChartSettings(e,t){let s=this.plots[e];if(s){let h=Object.assign({},s.initial);for(let o in s.initial.lines)typeof s.initial.lines[o]?.ymax!="number"&&(h.lines[o].ymax=s.settings.lines[o]?.ymax),typeof s.initial.lines[o]?.ymin!="number"&&(h.lines[o].ymin=s.settings.lines[o]?.ymin),t&&(h.lines[o].values=s.settings.lines[o].values);return delete h.canvas,delete h.overlay,delete h.overlayCtx,h}}update(e,t,s=true){if(typeof e=="string"&&(e=this.plots[e]),!e)return false;if(t){let h=false,o,a;typeof e.settings.overlay=="object"&&(o=e.settings.overlay,a=e.settings.overlayCtx,a.font=e.settings.overlayFont?e.settings.overlayFont:"1em Courier",a.fillStyle=e.settings.overlayColor?e.settings.overlayColor:"white");for(let r in t)if(e.settings.lines[r]&&e.settings.lines[r].line){if(e.settings.lines[r]?.viewing===false)continue;let n=e.settings.lines[r];if(n.values){if(e.settings.mode&&e.settings.mode==="sweep"){"ct"in n||(n.ct=0);let f=b=>{n.ct>n.values.length&&(n.ct=0),n.values[n.ct]=b,n.ct++};Array.isArray(t[r])?t[r].forEach(f):typeof t[r]=="number"?f(t[r]):t[r].values&&t[r].values.forEach(f)}else Array.isArray(t[r])&&n.values?.length<1e5?(n.values.length===0&&(n.values.length=n.points?n.points:1e3),t[r].length===n.values.length?n.values=t[r]:y.circularBuffer(n.values,t[r])):typeof t[r]=="number"?(n.values.push(t[r]),n.values.shift()):t[r]?.values&&(n.values.length===0&&(n.values.length=n.points?n.points:1e3),t[r].values.length===n.values.length?n.values=t[r].values:y.circularBuffer(n.values,t[r].values));n.values.length!==n.points&&(n.interpolate?n.values.length>n.points?n.values=y.downsample(n.values,n.points):n.scaled.length<n.points&&(n.values=y.upsample(n.values,n.points)):n.values.length>n.points?n.values.splice(0,n.values.length-n.points):n.values=new Array(n.points).fill(0).splice(n.points-n.values.length,0,n.values));let l=n.ymin,i2=n.ymax,u=n.values.length<=1e5;if(l===i2?(i2=u?Math.max(...n.values):1,l=u?Math.min(...n.values):0):isNaN(i2)&&(i2=u?Math.max(...n.values):1),isNaN(l)&&(l=u?Math.min(...n.values):0),l>i2){let f=l;i2=l,l=f}let g=Math.abs(l);if(n.absmax=g>i2?g:i2,n.autoscale?n.autoscale===2?n.scaled=y.autoscale(n.values,n.position,e.settings.nLines,n.centerZero,l,i2,n.clamp):(n.scaled=n.values,n.line.scaleY=y.getYScalar(n.values,e.settings.nLines,n.centerZero,l,i2),n.line.offsetY=y.getYOffset(n.position,e.settings.nLines,l,n.line.scaleY)):n.scaled=n.values,n.scaled.forEach((f,b)=>{!n.autoscale&&n.absmax>1?n.line.setY(b,f/n.absmax):n.line.setY(b,f)}),typeof e.settings.overlay=="object"&&(n.useOverlay||!("useOverlay"in n))){let f=e.settings.nLines-n.position-1,b=o.height*f/e.settings.nLines,w=o.height/e.settings.nLines;if(a.clearRect(0,b,o.width,w),e.settings.mode&&e.settings.mode==="sweep"){a.fillStyle=e.settings.sweepColor?e.settings.sweepColor:"rgba(0,255,0,0.25)",a.beginPath();let m=o.width*n.ct/n.values.length;a.moveTo(m,b),a.lineTo(m,w),a.stroke()}a.fillStyle=e.settings.overlayColor?e.settings.overlayColor:"white",a.fillText(r,20,o.height*(f+.2)/e.settings.nLines),a.fillText(`${Math.floor(i2)===i2?i2:i2?.toFixed(5)} ${n.units?n.units:""}`,o.width-100,o.height*(f+.2)/e.settings.nLines),a.fillText(`${Math.floor(l)===l?l:l?.toFixed(5)} ${n.units?n.units:""}`,o.width-100,o.height*(f+.9)/e.settings.nLines)}}}else e.settings.generateNewLines&&!r.includes("timestamp")&&(Array.isArray(t[r])&&(t[r]={values:t[r]}),!t[r].nSec&&!t[r].nPoints&&!e.settings.linePoints&&(t[r].nPoints=1e3),h=true);if(h)return e.settings.cleanGeneration||Object.keys(e.initial.lines).forEach(r=>{t[r]?t[r]=Object.assign(e.initial.lines[r],t[r]):t[r]=e.initial.lines[r]}),this.reinitPlot(e,{_id:e.settings._id,lines:t}),true}return s&&requestAnimationFrame(e.anim),true}updateLine(e,t,s,h,o,a,r){return e.numPoints!==t.length&&(s?e.numPoints>t.length?t=y.downsample(t,e.numPoints):e.numPoints<t.length&&(t=y.upsample(t,e.numPoints)):t.length>e.numPoints?t=t.slice(t.length-e.numPoints):t=[...new Array(t.length).fill(0),...t]),h&&(t=y.autoscale(t,o,a,r)),t.forEach((n,l)=>e.setY(l,n)),true}static autoscale(e,t=0,s=1,h=false,o,a,r){if(e?.length===0)return e;let n=typeof a=="number"?a:e.length<=1e5?Math.max(...e):1,l=typeof o=="number"?o:e.length<=1e5?Math.min(...e):0,i2=1/s,u=1;if(h){let g=Math.max(Math.abs(l),Math.abs(n));return g!==0&&(u=i2/g),e.map(f=>(r&&(f<l&&(f=l),f>n&&(f=n)),f*u+(i2*(t+1)*2-1-i2)))}else return n===l?n!==0?u=i2/n:l!==0&&(u=i2/Math.abs(l)):u=i2/(n-l),e.map(g=>(r&&(g<l&&(g=l),g>n&&(g=n)),2*((g-l)*u-1/(2*s))+(i2*(t+1)*2-1-i2)))}static getYScalar(e,t=1,s=false,h,o){if(e?.length===0)return e;let a=typeof o=="number"?o:e.length<=1e5?Math.max(...e):1,r=typeof h=="number"?h:e.length<=1e5?Math.min(...e):0,n=1/t,l=1;if(s){let i2=Math.max(Math.abs(r),Math.abs(a));return i2!==0&&(l=n/i2),2*l}else return a===r?a!==0?l=n/a:r!==0&&(l=n/Math.abs(r)):l=n/(a-r),2*l}static getYOffset(e=0,t=1,s=0,h=1){let o=1/t,a=o*(e+1)*2-1-o;return s!==0?a-=s*h+1/t:a-=h+1/t,a}static absmax(e){return Math.max(Math.abs(Math.min(...e)),Math.max(...e))}static downsample(e,t,s=1){if(e.length>t){let h=new Array(t),o=e.length/t,a=e.length-1,r=0,n=0;for(let l=o;l<e.length;l+=o){let i2=Math.round(l);i2>a&&(i2=a);for(let u=r;u<i2;u++)h[n]+=e[u];h[n]/=(i2-r)*s,n++,r=i2}return h}else return e}static upsample(e,t,s=1){var h=function(g,f,b){return(g+(f-g)*b)*s},o=new Array(t),a=(e.length-1)/(t-1);o[0]=e[0];for(var r=1;r<t-1;r++){var n=r*a,l=Math.floor(n),i2=Math.ceil(n),u=n-l;o[r]=h(e[l],e[i2],u)}return o[t-1]=e[e.length-1],o}static interpolate(e,t,s=1){return e.length>t?y.downsample(e,t,s):e.length<t?y.upsample(e,t,s):e}static HSLToRGB(e,t,s,h=255){t/=100,s/=100;let o=(1-Math.abs(2*s-1))*t,a=o*(1-Math.abs(e/60%2-1)),r=s-o/2,n=0,l=0,i2=0;return 0<=e&&e<60?(n=o,l=a,i2=0):60<=e&&e<120?(n=a,l=o,i2=0):120<=e&&e<180?(n=0,l=o,i2=a):180<=e&&e<240?(n=0,l=a,i2=o):240<=e&&e<300?(n=a,l=0,i2=o):300<=e&&e<360&&(n=o,l=0,i2=a),n=(n+r)*h,l=(l+r)*h,i2=(i2+r)*h,[n,l,i2]}static circularBuffer(e,t){if(t.length<e.length){let s=e.slice(t.length),h=e.length;e.splice(0,h,...s,...t)}else if(t.length>e.length){let s=e.length;e.splice(0,s,...t.slice(t.length-s))}else e.splice(0,e.length,...t);return e}static formatDataForCharts(e,t){if(Array.isArray(e)){if(Array.isArray(e[0])){let s={};if(e.forEach((h,o)=>{s[o]=h}),e=s,isNaN(e[0][0]))return}else if(t){if(e={[t]:e},isNaN(e[t][0]))return}else if(e={0:e},isNaN(e[0][0]))return}else if(typeof e=="object"){for(let s in e)if(typeof e[s]=="number"?e[s]=[e[s]]:e[s]?.values&&typeof e[s].values=="number"&&(e[s].values=[e[s].values]),isNaN(e[s][0]))return}else if(typeof e=="string"){let s;if(e.includes(`\\r\n`)){let h=e.split(`\\r\n`);e={},h.forEach((o,a)=>{o.includes("	")?s=o.split("	"):o.includes(",")?s=o.split(","):o.includes("|")&&(s=o.split("|")),s&&s.forEach((r,n)=>{if(r.includes(":")){let[l,i2]=r.split(":"),u=parseFloat(i2);isNaN(u)||(e[l]=[u])}else{let l=parseFloat(r);isNaN(l)||(e[n]=[l])}})})}else e.includes("	")?s=e.split("	"):e.includes(",")?s=e.split(","):e.includes("|")&&(s=e.split("|"));e={},s&&s.forEach((h,o)=>{if(h.includes(":")){let[a,r]=h.split(":"),n=parseFloat(r);isNaN(n)||(e[a]=[n])}else{let a=parseFloat(h);isNaN(a)||(e[o]=[a])}})}else typeof e=="number"&&(t?e={[t]:[e]}:e={0:[e]});return e}static padTime(e,t,s,h){let o=(e[0]-t)/s/h;return[...new Array(h-e.length).map((r,n)=>t+o*(n+1)),...e]}static interpolateForTime(e,t,s){return y.interpolate(e,Math.ceil(s*t))}};if(typeof WorkerGlobalScope!=="undefined"){globalThis.plotter=new y;const routes={...workerCanvasRoutes};self.onmessage=ev=>{if(ev.data.route){if(Array.isArray(ev.data.args)){routes[ev.data.route](...ev.data.args)}else routes[ev.data.route](ev.data.args)}}}var canvas_worker_default=self;})();\n');
@@ -59081,7 +59015,7 @@
   };
 
   // src/components/DeviceConnect.tsx
-  var import_react3 = __toESM(require_react(), 1);
+  var import_react2 = __toESM(require_react(), 1);
 
   // node_modules/device-decoder/dist/device.frontend.esm.js
   var __create4 = Object.create;
@@ -66321,12 +66255,12 @@
     }
     render() {
       console.log(this.state.deviceConnected);
-      return /* @__PURE__ */ import_react3.default.createElement("div", null, !this.state.deviceConnected ? /* @__PURE__ */ import_react3.default.createElement("button", { onClick: connectDevice }, "Connect") : /* @__PURE__ */ import_react3.default.createElement("button", { onClick: disconnectDevice }, "Disconnect"));
+      return /* @__PURE__ */ import_react2.default.createElement("div", null, !this.state.deviceConnected ? /* @__PURE__ */ import_react2.default.createElement("button", { onClick: connectDevice }, "Connect") : /* @__PURE__ */ import_react2.default.createElement("button", { onClick: disconnectDevice }, "Disconnect"));
     }
   };
 
-  // src/components/Device.tsx
-  var DeviceComponent = class extends sComponent {
+  // src/components/device.tsx
+  var Device = class extends sComponent {
     constructor(props) {
       super(props);
       this.state = {
@@ -66404,7 +66338,7 @@
       }
     }
     render() {
-      return /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement("div", null, "Device Connect"), !this.state.remote && /* @__PURE__ */ import_react4.default.createElement(DeviceConnect, null), /* @__PURE__ */ import_react4.default.createElement("div", { className: "chartContainer", ref: (ref) => {
+      return /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("div", null, "Device Connect"), !this.state.remote && /* @__PURE__ */ import_react3.default.createElement(DeviceConnect, null), /* @__PURE__ */ import_react3.default.createElement("div", { className: "chartContainer", ref: (ref) => {
         ref?.appendChild(this.canvas);
         ref?.appendChild(this.overlay);
       } }));
@@ -66507,7 +66441,7 @@
           };
           divs.push(
             //turn into a dropdown or something
-            /* @__PURE__ */ import_react5.default.createElement("div", null, /* @__PURE__ */ import_react5.default.createElement("div", null, "User: ", user.firstName, " ", user.lastName), /* @__PURE__ */ import_react5.default.createElement("button", { id: `voicecall${user._id}`, onClick: voicecall }, "\u{1F4DE}"), /* @__PURE__ */ import_react5.default.createElement("button", { id: `videocall${user._id}`, onClick: videocall }, "\u{1F4FD}\uFE0F"), /* @__PURE__ */ import_react5.default.createElement("button", { id: `view${user._id}`, onClick: view }, "\u{1F493}"))
+            /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement("div", null, "User: ", user.firstName, " ", user.lastName), /* @__PURE__ */ import_react4.default.createElement("button", { id: `voicecall${user._id}`, onClick: voicecall }, "\u{1F4DE}"), /* @__PURE__ */ import_react4.default.createElement("button", { id: `videocall${user._id}`, onClick: videocall }, "\u{1F4FD}\uFE0F"), /* @__PURE__ */ import_react4.default.createElement("button", { id: `view${user._id}`, onClick: view }, "\u{1F493}"))
           );
         });
         this.setState({
@@ -66573,8 +66507,8 @@
             }
           };
           this.setState({
-            chartDataDiv: /* @__PURE__ */ import_react5.default.createElement("div", null, /* @__PURE__ */ import_react5.default.createElement(
-              DeviceComponent,
+            chartDataDiv: /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement(
+              Device,
               {
                 remote: false,
                 deviceId: call._id
@@ -66584,11 +66518,11 @@
         };
         call.ontrack = (ev2) => {
           this.setState({
-            videoTrackDiv: /* @__PURE__ */ import_react5.default.createElement("div", null)
+            videoTrackDiv: /* @__PURE__ */ import_react4.default.createElement("div", null)
           });
         };
         let divId = `call${call._id}`;
-        return /* @__PURE__ */ import_react5.default.createElement("div", { id: divId }, /* @__PURE__ */ import_react5.default.createElement("div", null, "User: ", caller.firstName, " ", caller.lastName), /* @__PURE__ */ import_react5.default.createElement("button", { onClick: () => {
+        return /* @__PURE__ */ import_react4.default.createElement("div", { id: divId }, /* @__PURE__ */ import_react4.default.createElement("div", null, "User: ", caller.firstName, " ", caller.lastName), /* @__PURE__ */ import_react4.default.createElement("button", { onClick: () => {
           answerCall(call);
         } }, "Join Call"));
       });
@@ -66633,15 +66567,15 @@
       }
     }
     render() {
-      return /* @__PURE__ */ import_react5.default.createElement("div", null, /* @__PURE__ */ import_react5.default.createElement("div", { id: "receivedCalls" }, "Received Calls", this.state.unansweredCallDivs && this.state.unansweredCallDivs.map((div) => div)), /* @__PURE__ */ import_react5.default.createElement("hr", null), /* @__PURE__ */ import_react5.default.createElement("div", { id: "availableUsers" }, "Available Users", this.state.availableUsers && this.state.availableUsers.map((div) => div)), /* @__PURE__ */ import_react5.default.createElement("hr", null), "Stream:", /* @__PURE__ */ import_react5.default.createElement("div", { id: "webrtcstream" }, this.state.videoTrackDiv, this.state.chartDataDiv));
+      return /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement("div", { id: "receivedCalls" }, "Received Calls", this.state.unansweredCallDivs && this.state.unansweredCallDivs.map((div) => div)), /* @__PURE__ */ import_react4.default.createElement("hr", null), /* @__PURE__ */ import_react4.default.createElement("div", { id: "availableUsers" }, "Available Users", this.state.availableUsers && this.state.availableUsers.map((div) => div)), /* @__PURE__ */ import_react4.default.createElement("hr", null), "Stream:", /* @__PURE__ */ import_react4.default.createElement("div", { id: "webrtcstream" }, this.state.videoTrackDiv, this.state.chartDataDiv));
     }
   };
 
   // src/components/Dashboard.tsx
-  var import_react7 = __toESM(require_react(), 1);
+  var import_react6 = __toESM(require_react(), 1);
 
   // src/components/StreamSelect.tsx
-  var import_react6 = __toESM(require_react(), 1);
+  var import_react5 = __toESM(require_react(), 1);
   var StreamSelect = class extends sComponent {
     constructor() {
       super(...arguments);
@@ -66656,8 +66590,8 @@
         let value = ev2.target.value;
         this.setState({ streamId: value });
       };
-      return /* @__PURE__ */ import_react6.default.createElement("div", null, "Select Stream:", /* @__PURE__ */ import_react6.default.createElement("select", { onChange: onchange }, /* @__PURE__ */ import_react6.default.createElement("option", { value: void 0 }, "My Device"), Object.keys(this.state.availableStreams).length > 0 && Object.keys(this.state.availableStreams).map((key) => {
-        return /* @__PURE__ */ import_react6.default.createElement("option", { value: key }, this.state.availableStreams[key].firstName, " ", this.state.availableStreams[key].lastName ? this.state.availableStreams[key].lastName : "");
+      return /* @__PURE__ */ import_react5.default.createElement("div", null, "Select Stream:", /* @__PURE__ */ import_react5.default.createElement("select", { onChange: onchange }, /* @__PURE__ */ import_react5.default.createElement("option", { value: void 0 }, "My Device"), Object.keys(this.state.availableStreams).length > 0 && Object.keys(this.state.availableStreams).map((key) => {
+        return /* @__PURE__ */ import_react5.default.createElement("option", { value: key }, this.state.availableStreams[key].firstName, " ", this.state.availableStreams[key].lastName ? this.state.availableStreams[key].lastName : "");
       })));
     }
   };
@@ -66675,8 +66609,8 @@
       };
     }
     render() {
-      return /* @__PURE__ */ import_react7.default.createElement("div", null, "Dashboard:", /* @__PURE__ */ import_react7.default.createElement("hr", null), /* @__PURE__ */ import_react7.default.createElement("div", null, /* @__PURE__ */ import_react7.default.createElement(StreamSelect, null)), /* @__PURE__ */ import_react7.default.createElement("div", null, /* @__PURE__ */ import_react7.default.createElement(
-        DeviceComponent,
+      return /* @__PURE__ */ import_react6.default.createElement("div", null, "Dashboard:", /* @__PURE__ */ import_react6.default.createElement("hr", null), /* @__PURE__ */ import_react6.default.createElement("div", null, /* @__PURE__ */ import_react6.default.createElement(StreamSelect, null)), /* @__PURE__ */ import_react6.default.createElement("div", null, /* @__PURE__ */ import_react6.default.createElement(
+        Device,
         {
           remote: !!this.state.streamSelected,
           deviceId: this.state.streamSelected
@@ -66686,7 +66620,7 @@
   };
 
   // src/components/Recordings.tsx
-  var import_react8 = __toESM(require_react(), 1);
+  var import_react7 = __toESM(require_react(), 1);
   var Recordings = class extends sComponent {
     //list from db
     listRecordings() {
@@ -66700,13 +66634,13 @@
         let backup = () => {
         };
         recordings.push(
-          /* @__PURE__ */ import_react8.default.createElement("div", null, /* @__PURE__ */ import_react8.default.createElement("span", null, file), /* @__PURE__ */ import_react8.default.createElement("button", { onClick: download }, "Download"), /* @__PURE__ */ import_react8.default.createElement("button", { onClick: deleteFile }, "Delete"), /* @__PURE__ */ import_react8.default.createElement("button", { onClick: backup }, "Backup"))
+          /* @__PURE__ */ import_react7.default.createElement("div", null, /* @__PURE__ */ import_react7.default.createElement("span", null, file), /* @__PURE__ */ import_react7.default.createElement("button", { onClick: download }, "Download"), /* @__PURE__ */ import_react7.default.createElement("button", { onClick: deleteFile }, "Delete"), /* @__PURE__ */ import_react7.default.createElement("button", { onClick: backup }, "Backup"))
         );
       });
       return recordings;
     }
     render() {
-      return /* @__PURE__ */ import_react8.default.createElement("div", null, /* @__PURE__ */ import_react8.default.createElement("button", null, "Record"), "Recordings:", /* @__PURE__ */ import_react8.default.createElement("div", null, this.listRecordings().map((d2) => d2)));
+      return /* @__PURE__ */ import_react7.default.createElement("div", null, /* @__PURE__ */ import_react7.default.createElement("button", null, "Record"), "Recordings:", /* @__PURE__ */ import_react7.default.createElement("div", null, this.listRecordings().map((d2) => d2)));
     }
   };
 
@@ -66743,7 +66677,7 @@
       this.setState({ navOpen: b });
     }
     render() {
-      return /* @__PURE__ */ import_react9.default.createElement("div", null, !this.state.isLoggedIn && !TESTVIEWS && /* @__PURE__ */ import_react9.default.createElement(
+      return /* @__PURE__ */ import_react8.default.createElement("div", null, !this.state.isLoggedIn && !TESTVIEWS && /* @__PURE__ */ import_react8.default.createElement(
         import_my_alyce_component_lib.Login,
         {
           useRegularLogin: true,
@@ -66751,14 +66685,14 @@
           thirdPartyLogins: [
             {
               name: "google",
-              logo: /* @__PURE__ */ import_react9.default.createElement("img", { src: "dist/assets/google.png", width: "50px" }),
+              logo: /* @__PURE__ */ import_react8.default.createElement("img", { src: "dist/assets/google.png", width: "50px" }),
               onClick: this.onGoogleLoginClick
             }
           ]
         }
-      ), (this.state.isLoggedIn || TESTVIEWS) && /* @__PURE__ */ import_react9.default.createElement("div", null, /* @__PURE__ */ import_react9.default.createElement(import_react_burger_menu.slide, null, /* @__PURE__ */ import_react9.default.createElement("button", { onClick: () => {
+      ), (this.state.isLoggedIn || TESTVIEWS) && /* @__PURE__ */ import_react8.default.createElement("div", null, /* @__PURE__ */ import_react8.default.createElement(import_react_burger_menu.slide, null, /* @__PURE__ */ import_react8.default.createElement("button", { onClick: () => {
         this.setState({ "route": "/dashboard", navOpen: false });
-      }, id: "home", className: "menu-item" }, "Dash"), /* @__PURE__ */ import_react9.default.createElement("button", { onClick: () => this.setState({ "route": "/peers", navOpen: false }), className: "menu-item" }, "Peers"), /* @__PURE__ */ import_react9.default.createElement("button", { onClick: () => this.setState({ "route": "/history", navOpen: false }), className: "menu-item" }, "History"), /* @__PURE__ */ import_react9.default.createElement("button", { onClick: () => this.setState({ "route": "/device", navOpen: false }), className: "menu-item--small" }, "Device")), /* @__PURE__ */ import_react9.default.createElement("div", { id: "view" }, /* @__PURE__ */ import_react9.default.createElement(
+      }, id: "home", className: "menu-item" }, "Dash"), /* @__PURE__ */ import_react8.default.createElement("button", { onClick: () => this.setState({ "route": "/peers", navOpen: false }), className: "menu-item" }, "Peers"), /* @__PURE__ */ import_react8.default.createElement("button", { onClick: () => this.setState({ "route": "/history", navOpen: false }), className: "menu-item" }, "History"), /* @__PURE__ */ import_react8.default.createElement("button", { onClick: () => this.setState({ "route": "/device", navOpen: false }), className: "menu-item--small" }, "Device")), /* @__PURE__ */ import_react8.default.createElement("div", { id: "view" }, /* @__PURE__ */ import_react8.default.createElement(
         import_my_alyce_component_lib.TopBar,
         {
           zIndex: 0,
@@ -66768,7 +66702,7 @@
           },
           rightNavItems: [
             {
-              children: /* @__PURE__ */ import_react9.default.createElement(
+              children: /* @__PURE__ */ import_react8.default.createElement(
                 import_my_alyce_component_lib.Avatar,
                 {
                   dataState: "done",
@@ -66786,15 +66720,42 @@
               }
             },
             {
-              children: /* @__PURE__ */ import_react9.default.createElement("p", { style: { fontSize: "16px" } }, "logout"),
+              children: /* @__PURE__ */ import_react8.default.createElement("p", { style: { fontSize: "16px" } }, "logout"),
               onClick: () => {
               }
             }
           ]
         }
-      ), /* @__PURE__ */ import_react9.default.createElement("div", { id: "viewcontent" }, /* @__PURE__ */ import_react9.default.createElement("div", { id: "route" }, (this.state.route.includes("dashboard") || this.state.route === "/" || this.state.route === "") && /* @__PURE__ */ import_react9.default.createElement(Dashboard, null), this.state.route.includes("peers") && /* @__PURE__ */ import_react9.default.createElement(WebRTCComponent, null), this.state.route.includes("settings") && /* @__PURE__ */ import_react9.default.createElement(Recordings, null), this.state.route.includes("device") && /* @__PURE__ */ import_react9.default.createElement(SettingsView, null))))));
+      ), /* @__PURE__ */ import_react8.default.createElement("div", { id: "viewcontent" }, /* @__PURE__ */ import_react8.default.createElement("div", { id: "route" }, (this.state.route.includes("dashboard") || this.state.route === "/" || this.state.route === "") && /* @__PURE__ */ import_react8.default.createElement(Dashboard, null), this.state.route.includes("peers") && /* @__PURE__ */ import_react8.default.createElement(WebRTCComponent, null), this.state.route.includes("settings") && /* @__PURE__ */ import_react8.default.createElement(Recordings, null), this.state.route.includes("device") && /* @__PURE__ */ import_react8.default.createElement(Device, null))))));
     }
   };
+
+  // src/scripts/fitbit.ts
+  var import_fitbit_api = __toESM(require_dist5(), 1);
+  function setupFitbitApi(accesstoken, fitbitId, syncRate = 5 * 60 * 1e3, parentUser) {
+    let api2 = new import_fitbit_api.FitbitApi(
+      accesstoken,
+      fitbitId
+    );
+    return api2;
+  }
+  async function authorizeCode(userId, fitbitCode) {
+    if (!userId || !fitbitCode)
+      return void 0;
+    let res2 = await usersocket.run("authorizeFitbit", [userId, fitbitCode]);
+    console.log(res2);
+    if (res2 && !res2.errors && !res2.html)
+      client.baseServerCallback(res2);
+    return res2;
+  }
+  async function refreshToken(userId) {
+    if (!userId)
+      return void 0;
+    let res2 = await usersocket.run("refreshFitbit", userId);
+    if (res2 && !res2.errors && !res2.html)
+      client.baseServerCallback(res2);
+    return res2;
+  }
 
   // src/scripts/gapi.js
   (function initGapiAuth() {
@@ -66891,9 +66852,9 @@
   }
   var container = document.createElement("div");
   document.body.appendChild(container);
-  var root = (0, import_client7.createRoot)(container);
+  var root = (0, import_client6.createRoot)(container);
   root.render(
-    /* @__PURE__ */ import_react10.default.createElement(App2, null)
+    /* @__PURE__ */ import_react9.default.createElement(App2, null)
   );
 })();
 /*! Bundled license information:
@@ -66967,22 +66928,6 @@ classnames/index.js:
   	http://jedwatson.github.io/classnames
   *)
 
-tslib/tslib.es6.js:
-  (*! *****************************************************************************
-  Copyright (c) Microsoft Corporation.
-  
-  Permission to use, copy, modify, and/or distribute this software for any
-  purpose with or without fee is hereby granted.
-  
-  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-  PERFORMANCE OF THIS SOFTWARE.
-  ***************************************************************************** *)
-
 react-is/cjs/react-is.development.js:
   (** @license React v16.13.1
    * react-is.development.js
@@ -66999,6 +66944,22 @@ object-assign/index.js:
   (c) Sindre Sorhus
   @license MIT
   *)
+
+tslib/tslib.es6.js:
+  (*! *****************************************************************************
+  Copyright (c) Microsoft Corporation.
+  
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted.
+  
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  PERFORMANCE OF THIS SOFTWARE.
+  ***************************************************************************** *)
 
 bson/dist/bson.browser.esm.js:
   (*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> *)

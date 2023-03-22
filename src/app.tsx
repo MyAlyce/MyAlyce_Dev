@@ -11,7 +11,7 @@ import {slide as Menu} from 'react-burger-menu'
 import { WebRTCComponent } from './components/WebRTC';
 import { Dashboard } from './components/Dashboard';
 import { Recordings } from './components/Recordings';
-import { Device } from './components/device';
+import { Device } from './components/Device';
 
 state.subscribeEvent('route', (route:string) => {
     window.history.pushState(undefined, route, location.origin + route); //uhh
