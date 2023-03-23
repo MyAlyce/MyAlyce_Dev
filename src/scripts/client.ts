@@ -14,7 +14,7 @@ import {
 
 import { BFSRoutes } from 'graphscript-services.storage'
 
-import { StructFrontend } from '../../../graphscript/src/extras/index.services'//'graphscript-services' //'../../../graphscript/src/extras/index.services'//
+import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//'graphscript-services' //'../../../graphscript/src/extras/index.services'//
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
 
 import { RealmUser } from './login'

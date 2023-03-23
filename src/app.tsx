@@ -99,7 +99,7 @@ export class App extends sComponent {
                             {
                                 children:<Avatar
                                   dataState='done'
-                                  imgSrc='src/assets/person.png'
+                                  imgSrc={client.currentUser.pictureUrl ? client.currentUser.pictureUrl : './dist/assets/person.jpg'}
                                   size='xs'
                                   status='online'
                                   name={
