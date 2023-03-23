@@ -23,7 +23,7 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "graphscript-node": "^0.2.88",
-    "graphscript-services-node": "^0.2.88",
+    "graphscript-services-node": "^0.2.90",
     "mongoose": "~7.0.0"
   },
   "nodemonConfig": {

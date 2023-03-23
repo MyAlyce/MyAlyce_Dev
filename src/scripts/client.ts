@@ -14,7 +14,7 @@ import {
 
 import { BFSRoutes } from 'graphscript-services.storage'
 
-import { StructFrontend } from 'graphscript-services' //'../../../graphscript/src/extras/index.services'//
+import { StructFrontend } from '../../../graphscript/src/extras/index.services'//'graphscript-services' //'../../../graphscript/src/extras/index.services'//
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
 
 import { RealmUser } from './login'
@@ -83,17 +83,22 @@ export const onLogin = async (
   ): Promise<Partial<ProfileStruct|undefined>> => {
     let resultHasUser = false;
 
+    let profile = {
+        ...result.data.profile.data,
+        _id:result.data.id
+    }
+
     let p;
     if(result && result?.type !== 'FAIL') {
-        if(result?.data?._id) {
+        if(profile._id) {
 
             client.currentUser = {
                 ...usersocket,
-                _id:result.data._id
+                _id:profile._id
             } as any;
 
-            await usersocket.run('addUser', [result.data, {[usersocket._id as string]:usersocket._id }]);  //associate user id with connection (needs to be unique)
-            p = client.setupUser(result.data); //see struct router (formerly UserPlatform)
+            await usersocket.run('addUser', [profile, {[usersocket._id as string]:usersocket._id }]);  //associate user id with connection (needs to be unique)
+            p = client.setupUser(profile); //see struct router (formerly UserPlatform)
         }
     }
   

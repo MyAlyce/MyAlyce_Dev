@@ -7,6 +7,10 @@ var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
+var __export = (target, all) => {
+  for (var name2 in all)
+    __defProp(target, name2, { get: all[name2], enumerable: true });
+};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -23,6 +27,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // node_modules/graphscript-node/dist/index.node.js
 var require_index_node = __commonJS({
@@ -36,7 +41,7 @@ var require_index_node = __commonJS({
     var __commonJS2 = (cb, mod) => function __require() {
       return mod || (0, cb[__getOwnPropNames2(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
     };
-    var __export = (target, all) => {
+    var __export2 = (target, all) => {
       for (var name2 in all)
         __defProp2(target, name2, { get: all[name2], enumerable: true });
     };
@@ -49,7 +54,7 @@ var require_index_node = __commonJS({
       return to;
     };
     var __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(isNodeMode || !mod || !mod.__esModule ? __defProp2(target, "default", { value: mod, enumerable: true }) : target, mod));
-    var __toCommonJS = (mod) => __copyProps2(__defProp2({}, "__esModule", { value: true }), mod);
+    var __toCommonJS2 = (mod) => __copyProps2(__defProp2({}, "__esModule", { value: true }), mod);
     var require_build2 = __commonJS2({ "node_modules/better-sse/build/index.js"(exports2, module22) {
       !function(e, t2) {
         if ("object" == typeof exports2 && "object" == typeof module22)
@@ -2458,9 +2463,9 @@ var require_index_node = __commonJS({
       }
     } });
     var index_node_exports = {};
-    __export(index_node_exports, { CMDService: () => CMDService, E2EEService: () => E2EEService, ECSService: () => ECSService, EventHandler: () => EventHandler, Graph: () => Graph, GraphNode: () => GraphNode, HTTPbackend: () => HTTPbackend2, Router: () => Router2, SSEbackend: () => SSEbackend, Service: () => Service, SessionsService: () => SessionsService2, WSSbackend: () => WSSbackend2, animate: () => animate, backprop: () => backprop, bindListener: () => bindListener, branching: () => branching, connectionHasId: () => connectionHasId, getAllProperties: () => getAllProperties, htmlBodyBoilerPlate: () => htmlBodyBoilerPlate, instanceObject: () => instanceObject, isFunction: () => isFunction, isNativeClass: () => isNativeClass, isTypedArray: () => isTypedArray, loaders: () => loaders, loop: () => loop, methodstrings: () => methodstrings, nodeTemplates: () => nodeTemplates, recursivelyAssign: () => recursivelyAssign2, remoteGraphRoutes: () => remoteGraphRoutes, scriptBoilerPlate: () => scriptBoilerPlate2, spliceTypedArray: () => spliceTypedArray, state: () => state, substitute__operator: () => substitute__operator, transformListenerResult: () => transformListenerResult, triggerListenerOncreate: () => triggerListenerOncreate, wrapArgs: () => wrapArgs });
-    module2.exports = __toCommonJS(index_node_exports);
-    var EventHandler = class {
+    __export2(index_node_exports, { CMDService: () => CMDService, E2EEService: () => E2EEService, ECSService: () => ECSService, EventHandler: () => EventHandler2, Graph: () => Graph3, GraphNode: () => GraphNode2, HTTPbackend: () => HTTPbackend2, Router: () => Router2, SSEbackend: () => SSEbackend, Service: () => Service2, SessionsService: () => SessionsService2, WSSbackend: () => WSSbackend2, animate: () => animate2, backprop: () => backprop2, bindListener: () => bindListener2, branching: () => branching2, connectionHasId: () => connectionHasId, getAllProperties: () => getAllProperties2, htmlBodyBoilerPlate: () => htmlBodyBoilerPlate, instanceObject: () => instanceObject, isFunction: () => isFunction2, isNativeClass: () => isNativeClass2, isTypedArray: () => isTypedArray2, loaders: () => loaders2, loop: () => loop2, methodstrings: () => methodstrings, nodeTemplates: () => nodeTemplates, recursivelyAssign: () => recursivelyAssign22, remoteGraphRoutes: () => remoteGraphRoutes, scriptBoilerPlate: () => scriptBoilerPlate2, spliceTypedArray: () => spliceTypedArray2, state: () => state2, substitute__operator: () => substitute__operator2, transformListenerResult: () => transformListenerResult2, triggerListenerOncreate: () => triggerListenerOncreate2, wrapArgs: () => wrapArgs2 });
+    module2.exports = __toCommonJS2(index_node_exports);
+    var EventHandler2 = class {
       constructor(data) {
         this.pushToState = {};
         this.data = {};
@@ -2472,11 +2477,11 @@ var require_index_node = __commonJS({
           for (const prop of props) {
             this.triggerEvent(prop, this.data[prop]);
           }
-          if (this.triggers[statesubKey]) {
+          if (this.triggers[statesubKey2]) {
             let run = (fn) => {
               fn(updateObj);
             };
-            this.triggers[statesubKey].forEach((v) => {
+            this.triggers[statesubKey2].forEach((v) => {
               run(v.onchange);
             });
           }
@@ -2493,10 +2498,10 @@ var require_index_node = __commonJS({
           }
         };
         this.subscribeState = (onchange) => {
-          return this.subscribeEvent(statesubKey, onchange);
+          return this.subscribeEvent(statesubKey2, onchange);
         };
         this.unsubscribeState = (sub) => {
-          return this.unsubscribeEvent(statesubKey, sub);
+          return this.unsubscribeEvent(statesubKey2, sub);
         };
         this.subscribeEvent = (key, onchange, refObject, refKey) => {
           if (key) {
@@ -2567,18 +2572,18 @@ var require_index_node = __commonJS({
           this.data = data;
       }
     };
-    var statesubKey = "*s";
-    var state = new EventHandler();
-    var GraphNode = class {
+    var statesubKey2 = "*s";
+    var state2 = new EventHandler2();
+    var GraphNode2 = class {
       constructor(properties, parent, graph) {
-        this.__node = { tag: `node${Math.floor(Math.random() * 1e15)}`, unique: `${Math.floor(Math.random() * 1e15)}`, state };
+        this.__node = { tag: `node${Math.floor(Math.random() * 1e15)}`, unique: `${Math.floor(Math.random() * 1e15)}`, state: state2 };
         this.__setProperties = (properties2, parent2, graph2) => {
           let enforceProperties = () => {
             let orig = properties2;
             if (!("__node" in properties2))
               properties2.__node = {};
             if (typeof properties2 === "function") {
-              if (isNativeClass(properties2)) {
+              if (isNativeClass2(properties2)) {
                 properties2 = new properties2();
               } else
                 properties2 = { __operator: properties2, __node: { forward: true, tag: properties2.name } };
@@ -2624,15 +2629,15 @@ var require_index_node = __commonJS({
               if (graph2) {
                 properties2.__node.graph = graph2;
               }
-              if (properties2 instanceof Graph)
+              if (properties2 instanceof Graph3)
                 properties2.__node.source = properties2;
             };
             let setParent = () => {
               if (!properties2.__parent && parent2)
                 properties2.__parent = parent2;
-              if (parent2?.__node && !(parent2 instanceof Graph || properties2 instanceof Graph))
+              if (parent2?.__node && !(parent2 instanceof Graph3 || properties2 instanceof Graph3))
                 properties2.__node.tag = parent2.__node.tag + "." + properties2.__node.tag;
-              if (parent2 instanceof Graph && properties2 instanceof Graph) {
+              if (parent2 instanceof Graph3 && properties2 instanceof Graph3) {
                 if (properties2.__node.loaders)
                   Object.assign(parent2.__node.loaders ? parent2.__node.loaders : {}, properties2.__node.loaders);
                 if (parent2.__node.mapGraphs) {
@@ -2797,7 +2802,7 @@ var require_index_node = __commonJS({
         this.__setOperator = (fn) => {
           fn = fn.bind(this);
           if (this.__args && this.__node.graph) {
-            fn = wrapArgs(fn, this.__args, this.__node.graph);
+            fn = wrapArgs2(fn, this.__args, this.__node.graph);
           }
           let inpstr = `${this.__node.unique}input`;
           this.__operator = (...args) => {
@@ -2815,7 +2820,7 @@ var require_index_node = __commonJS({
             }
             return result;
           };
-          if (this.__parent instanceof GraphNode && !this.__subscribedToParent) {
+          if (this.__parent instanceof GraphNode2 && !this.__subscribedToParent) {
             if (this.__parent.__operator) {
               let sub = this.__parent.__subscribe(this);
               let ondelete = () => {
@@ -2895,7 +2900,7 @@ var require_index_node = __commonJS({
           }
         };
         this.__proxyObject = (obj) => {
-          const allProps = getAllProperties(obj);
+          const allProps = getAllProperties2(obj);
           for (const k of allProps) {
             if (typeof obj[k] === "function") {
               this[k] = (...args) => {
@@ -2958,14 +2963,14 @@ var require_index_node = __commonJS({
         }
       }
     };
-    var Graph = class {
+    var Graph3 = class {
       constructor(options) {
-        this.__node = { tag: `graph${Math.floor(Math.random() * 1e15)}`, unique: `${Math.random()}`, nodes: /* @__PURE__ */ new Map(), state, roots: {} };
+        this.__node = { tag: `graph${Math.floor(Math.random() * 1e15)}`, unique: `${Math.random()}`, nodes: /* @__PURE__ */ new Map(), state: state2, roots: {} };
         this.init = (options2) => {
           if (options2) {
             let cpy = Object.assign({}, options2);
             delete cpy.roots;
-            recursivelyAssign(this.__node, cpy);
+            recursivelyAssign3(this.__node, cpy);
             if (options2.roots)
               this.load(options2.roots);
           }
@@ -3007,7 +3012,7 @@ var require_index_node = __commonJS({
             if (!roots.__node.tag)
               roots.__node._tag = `roots${Math.floor(Math.random() * 1e15)}`;
             else if (!this.get(roots.__node.tag)) {
-              let node = new GraphNode(roots, this, this);
+              let node = new GraphNode2(roots, this, this);
               this.set(node.__node.tag, node);
               this.runLoaders(node, this, roots, roots.__node.tag);
               if (node.__listeners) {
@@ -3020,11 +3025,11 @@ var require_index_node = __commonJS({
           this.setListeners(listeners);
           return cpy;
         };
-        this.setLoaders = (loaders2, replace) => {
+        this.setLoaders = (loaders22, replace) => {
           if (replace)
-            this.__node.loaders = loaders2;
+            this.__node.loaders = loaders22;
           else
-            Object.assign(this.__node.loaders, loaders2);
+            Object.assign(this.__node.loaders, loaders22);
           return this.__node.loaders;
         };
         this.runLoaders = (node, parent, properties, key) => {
@@ -3046,8 +3051,8 @@ var require_index_node = __commonJS({
             parent = this.get(parent);
           let instanced;
           if (typeof properties === "function") {
-            if (isNativeClass(properties)) {
-              if (properties.prototype instanceof GraphNode) {
+            if (isNativeClass2(properties)) {
+              if (properties.prototype instanceof GraphNode2) {
                 properties = properties.prototype.constructor(properties, parent, this);
                 instanced = true;
               } else
@@ -3075,7 +3080,7 @@ var require_index_node = __commonJS({
             if (instanced)
               node = properties;
             else
-              node = new GraphNode(properties, parent, this);
+              node = new GraphNode2(properties, parent, this);
             this.set(node.__node.tag, node);
             this.runLoaders(node, parent, properties, node.__node.tag);
             this.__node.roots[node.__node.tag] = properties;
@@ -3094,7 +3099,7 @@ var require_index_node = __commonJS({
                 if (typeof listener === "string") {
                   if (node.__children?.[listener]) {
                     listeners[node.__node.tag][key] = node.__node.tag + "." + listener;
-                  } else if (parent instanceof GraphNode && (parent.__node.tag === listener || parent.__node.tag.includes(".") && parent.__node.tag.split(".").pop() === listener)) {
+                  } else if (parent instanceof GraphNode2 && (parent.__node.tag === listener || parent.__node.tag.includes(".") && parent.__node.tag.split(".").pop() === listener)) {
                     listeners[node.__node.tag][key] = parent.__node.tag;
                   }
                 }
@@ -3116,9 +3121,9 @@ var require_index_node = __commonJS({
               continue;
             let instanced;
             if (typeof p === "function") {
-              if (isNativeClass(p)) {
+              if (isNativeClass2(p)) {
                 p = new p();
-                if (p instanceof GraphNode) {
+                if (p instanceof GraphNode2) {
                   p = p.prototype.constructor(p, parent, this);
                   instanced = true;
                 }
@@ -3136,7 +3141,7 @@ var require_index_node = __commonJS({
                 p = this.__node.roots[key];
             }
             if (typeof p === "object") {
-              if (!instanced && !(p instanceof GraphNode)) {
+              if (!instanced && !(p instanceof GraphNode2)) {
                 let keys2 = Object.getOwnPropertyNames(p);
                 let cpy = {};
                 for (const key2 of keys2) {
@@ -3150,17 +3155,17 @@ var require_index_node = __commonJS({
                 p.__node.tag = key;
               if (!p.__node.initial)
                 p.__node.initial = t2[key];
-              if (this.get(p.__node.tag) && !(!(parent instanceof Graph) && parent?.__node) || parent?.__node && this.get(parent.__node.tag + "." + p.__node.tag))
+              if (this.get(p.__node.tag) && !(!(parent instanceof Graph3) && parent?.__node) || parent?.__node && this.get(parent.__node.tag + "." + p.__node.tag))
                 continue;
               let node;
               let newnode = false;
-              if (instanced || p instanceof GraphNode) {
+              if (instanced || p instanceof GraphNode2) {
                 node = p;
               } else {
-                node = new GraphNode(p, parent, this);
+                node = new GraphNode2(p, parent, this);
                 newnode = true;
               }
-              if (!newnode && p instanceof GraphNode && !instanced && parent instanceof GraphNode) {
+              if (!newnode && p instanceof GraphNode2 && !instanced && parent instanceof GraphNode2) {
                 let sub = this.subscribe(parent.__node.tag, node.__node.tag);
                 let ondelete = (node2) => {
                   this.unsubscribe(parent.__node.tag, sub);
@@ -3188,7 +3193,7 @@ var require_index_node = __commonJS({
                     if (typeof listener === "string") {
                       if (node.__children?.[listener]) {
                         listeners[node.__node.tag][k] = node.__node.tag + "." + listener;
-                      } else if (parent instanceof GraphNode && (parent.__node.tag === listener || parent.__node.tag.includes(".") && parent.__node.tag.split(".").pop() === listener)) {
+                      } else if (parent instanceof GraphNode2 && (parent.__node.tag === listener || parent.__node.tag.includes(".") && parent.__node.tag.split(".").pop() === listener)) {
                         listeners[node.__node.tag][k] = parent.__node.tag;
                       }
                     }
@@ -3204,7 +3209,7 @@ var require_index_node = __commonJS({
           this.unsubscribe(node);
           if (typeof node === "string")
             node = this.get(node);
-          if (node instanceof GraphNode) {
+          if (node instanceof GraphNode2) {
             this.delete(node.__node.tag);
             delete this.__node.roots[node.__node.tag];
             if (clearListeners) {
@@ -3371,7 +3376,7 @@ var require_index_node = __commonJS({
         this.getProps = (node, getInitial) => {
           if (typeof node === "string")
             node = this.get(node);
-          if (node instanceof GraphNode) {
+          if (node instanceof GraphNode2) {
             let cpy;
             if (getInitial)
               cpy = Object.assign({}, this.__node.roots[node.__node.tag]);
@@ -3393,7 +3398,7 @@ var require_index_node = __commonJS({
               key = nodeEvent.substring(nodeEvent.lastIndexOf(".") + 1);
             }
           }
-          if (target instanceof GraphNode)
+          if (target instanceof GraphNode2)
             target = target.__node.tag;
           if (typeof onEvent === "string") {
             let key2 = onEvent;
@@ -3407,7 +3412,7 @@ var require_index_node = __commonJS({
                 let n = this.get(onEvent2.substring(0, onEvent2.lastIndexOf(".")));
                 let key3 = onEvent2.substring(onEvent2.lastIndexOf(".") + 1);
                 if (typeof n[key3] === "function") {
-                  if (n[key3] instanceof GraphNode)
+                  if (n[key3] instanceof GraphNode2)
                     onEvent2 = n[key3];
                   else
                     onEvent2 = function(...inp) {
@@ -3429,7 +3434,7 @@ var require_index_node = __commonJS({
                   return node[key2](...inp);
                 };
               } else if (node[key2]) {
-                if (node[key2] instanceof GraphNode)
+                if (node[key2] instanceof GraphNode2)
                   onEvent = node[key2];
                 else
                   onEvent = function(inp) {
@@ -3443,15 +3448,15 @@ var require_index_node = __commonJS({
               onEvent = setOnEventFromString(onEvent);
             }
           }
-          if ((typeof onEvent === "function" || onEvent instanceof GraphNode) && args) {
-            if (onEvent instanceof GraphNode && onEvent.__operator)
+          if ((typeof onEvent === "function" || onEvent instanceof GraphNode2) && args) {
+            if (onEvent instanceof GraphNode2 && onEvent.__operator)
               onEvent = function(inp) {
                 return onEvent.__operator(inp);
               };
-            onEvent = wrapArgs(onEvent, args, this);
+            onEvent = wrapArgs2(onEvent, args, this);
           }
           let sub;
-          if (nd instanceof GraphNode) {
+          if (nd instanceof GraphNode2) {
             const doSub = () => {
               sub = nd.__subscribe(onEvent, key, subInput, target, bound);
               if (target && this.get(target) && this.get(target).__listeners[bound]) {
@@ -3474,7 +3479,7 @@ var require_index_node = __commonJS({
               });
               if (typeof onEvent === "string" && this.get(onEvent))
                 onEvent = this.get(onEvent);
-              if (onEvent instanceof GraphNode) {
+              if (onEvent instanceof GraphNode2) {
                 onEvent.__addOndisconnected(() => {
                   ondelete();
                 });
@@ -3484,7 +3489,7 @@ var require_index_node = __commonJS({
           } else if (typeof nodeEvent === "string") {
             let node = this.get(nodeEvent);
             if (node) {
-              if (onEvent instanceof GraphNode && onEvent.__operator) {
+              if (onEvent instanceof GraphNode2 && onEvent.__operator) {
                 const doSub = () => {
                   sub = node.__subscribe(onEvent.__operator, key, subInput, target, bound);
                   if (target && this.get(target) && this.get(target).__listeners[bound]) {
@@ -3544,7 +3549,7 @@ var require_index_node = __commonJS({
           return sub;
         };
         this.unsubscribe = (node, sub, key, subInput) => {
-          if (node instanceof GraphNode) {
+          if (node instanceof GraphNode2) {
             return node.__unsubscribe(sub, key, subInput);
           } else
             return this.get(node)?.__unsubscribe(sub, key, subInput);
@@ -3555,20 +3560,20 @@ var require_index_node = __commonJS({
         this.init(options);
       }
     };
-    function recursivelyAssign(target, obj) {
+    function recursivelyAssign3(target, obj) {
       for (const key in obj) {
         if (obj[key]?.constructor.name === "Object") {
           if (target[key]?.constructor.name === "Object")
-            recursivelyAssign(target[key], obj[key]);
+            recursivelyAssign3(target[key], obj[key]);
           else
-            target[key] = recursivelyAssign({}, obj[key]);
+            target[key] = recursivelyAssign3({}, obj[key]);
         } else {
           target[key] = obj[key];
         }
       }
       return target;
     }
-    function getAllProperties(obj) {
+    function getAllProperties2(obj) {
       var allProps = [], curr = obj;
       do {
         var props = Object.getOwnPropertyNames(curr);
@@ -3581,21 +3586,21 @@ var require_index_node = __commonJS({
       return allProps;
     }
     function instanceObject(obj) {
-      let props = getAllProperties(obj);
+      let props = getAllProperties2(obj);
       let instance = {};
       for (const key of props) {
         instance[key] = obj[key];
       }
       return instance;
     }
-    function isNativeClass(thing) {
-      return isFunction(thing) === "class";
+    function isNativeClass2(thing) {
+      return isFunction2(thing) === "class";
     }
-    function isFunction(x2) {
-      const res = typeof x2 === "function" ? x2.prototype ? Object.getOwnPropertyDescriptor(x2, "prototype")?.writable ? "function" : "class" : x2.constructor.name === "AsyncFunction" ? "async" : "arrow" : "";
+    function isFunction2(x) {
+      const res = typeof x === "function" ? x.prototype ? Object.getOwnPropertyDescriptor(x, "prototype")?.writable ? "function" : "class" : x.constructor.name === "AsyncFunction" ? "async" : "arrow" : "";
       return res;
     }
-    var wrapArgs = (callback2, argOrder, graph) => {
+    var wrapArgs2 = (callback2, argOrder, graph) => {
       let args = [];
       let getCallbackFromString = (a) => {
         if (graph.get(a)?.__operator) {
@@ -3647,7 +3652,7 @@ var require_index_node = __commonJS({
               input = getCallbackFromString(c.__input);
             }
             if (c.__args) {
-              input = wrapArgs(input, c.__args, graph);
+              input = wrapArgs2(input, c.__args, graph);
             }
             if (c.__output) {
               let output = c.__output;
@@ -3685,12 +3690,12 @@ var require_index_node = __commonJS({
       };
       return callback2;
     };
-    var backprop = (node, parent, graph) => {
-      if (node.__node.backward && parent instanceof GraphNode) {
+    var backprop2 = (node, parent, graph) => {
+      if (node.__node.backward && parent instanceof GraphNode2) {
         graph.setListeners({ [parent.__node.tag]: { [node.__node.tag]: parent } });
       }
     };
-    var loop = (node, parent, graph) => {
+    var loop2 = (node, parent, graph) => {
       if (node.__operator && !node.__node.looperSet) {
         if (typeof node.__node.delay === "number") {
           let fn = node.__operator;
@@ -3768,7 +3773,7 @@ var require_index_node = __commonJS({
         }
       }
     };
-    var animate = (node, parent, graph) => {
+    var animate2 = (node, parent, graph) => {
       if (node.__node.animate === true || node.__animation) {
         let fn = node.__operator;
         node.__setOperator((...args) => {
@@ -3795,7 +3800,7 @@ var require_index_node = __commonJS({
         node.__addOndisconnected(ondelete);
       }
     };
-    var branching = (node, parent, graph) => {
+    var branching2 = (node, parent, graph) => {
       if (typeof node.__branch === "object" && node.__operator && !node.__branchApplied) {
         let fn = node.__operator;
         node.__branchApplied = true;
@@ -3805,7 +3810,7 @@ var require_index_node = __commonJS({
             let triggered = () => {
               if (typeof node.__branch[key].then === "function") {
                 node.__branch[key].then(result);
-              } else if (node.__branch[key].then instanceof GraphNode && node.__branch[key].then.__operator) {
+              } else if (node.__branch[key].then instanceof GraphNode2 && node.__branch[key].then.__operator) {
                 node.__branch[key].then.__operator(result);
               } else
                 result = node.__branch[key].then;
@@ -3831,7 +3836,7 @@ var require_index_node = __commonJS({
                 let triggered = () => {
                   if (typeof node.__listeners[key].branch.then === "function") {
                     ret = node.__listeners[key].branch.then(ret);
-                  } else if (node.__listeners[key].branch.then instanceof GraphNode && node.__listeners[key].branch.then.__operator) {
+                  } else if (node.__listeners[key].branch.then instanceof GraphNode2 && node.__listeners[key].branch.then.__operator) {
                     ret = node.__listeners[key].branch.then.__operator(ret);
                   } else
                     ret = node.__listeners[key].branch.then;
@@ -3850,7 +3855,7 @@ var require_index_node = __commonJS({
         }
       }
     };
-    var triggerListenerOncreate = (node, parent, graph) => {
+    var triggerListenerOncreate2 = (node, parent, graph) => {
       if (node.__listeners) {
         for (const key in node.__listeners) {
           if (typeof node.__listeners[key] === "object") {
@@ -3861,7 +3866,7 @@ var require_index_node = __commonJS({
         }
       }
     };
-    var bindListener = (node, parent, graph) => {
+    var bindListener2 = (node, parent, graph) => {
       if (node.__listeners) {
         for (const key in node.__listeners) {
           if (typeof node.__listeners[key] === "object") {
@@ -3872,7 +3877,7 @@ var require_index_node = __commonJS({
         }
       }
     };
-    var transformListenerResult = (node, parent, graph) => {
+    var transformListenerResult2 = (node, parent, graph) => {
       if (node.__listeners) {
         for (const key in node.__listeners) {
           if (typeof node.__listeners[key] === "object") {
@@ -3888,7 +3893,7 @@ var require_index_node = __commonJS({
         }
       }
     };
-    var substitute__operator = (node, parent, graph) => {
+    var substitute__operator2 = (node, parent, graph) => {
       if (node.post && !node.__operator) {
         node.__setOperator(node.post);
       } else if (!node.__operator && typeof node.get == "function") {
@@ -3909,7 +3914,7 @@ var require_index_node = __commonJS({
       if (typeof graph.__node.roots?.[node.__node.tag] === "object" && node.get)
         graph.__node.roots[node.__node.tag].get = node.get;
     };
-    var loaders = { backprop, loop, animate, branching, triggerListenerOncreate, bindListener, transformListenerResult, substitute__operator };
+    var loaders2 = { backprop: backprop2, loop: loop2, animate: animate2, branching: branching2, triggerListenerOncreate: triggerListenerOncreate2, bindListener: bindListener2, transformListenerResult: transformListenerResult2, substitute__operator: substitute__operator2 };
     var recursivelyStringifyFunctions = (obj) => {
       let cpy = {};
       for (const key in obj) {
@@ -4155,9 +4160,9 @@ var require_index_node = __commonJS({
         }
       }
     }
-    var Service = class extends Graph {
+    var Service2 = class extends Graph3 {
       constructor(options) {
-        super({ ...options, loaders: options?.loaders ? Object.assign({ ...loaders }, options.loaders) : { ...loaders } });
+        super({ ...options, loaders: options?.loaders ? Object.assign({ ...loaders2 }, options.loaders) : { ...loaders2 } });
         this.name = `service${Math.floor(Math.random() * 1e15)}`;
         this.addServices = (services) => {
           for (const s in services) {
@@ -4267,7 +4272,7 @@ var require_index_node = __commonJS({
             return args;
         };
         this.pipe = (source, destination, endpoint, method, callback2) => {
-          if (source instanceof GraphNode) {
+          if (source instanceof GraphNode2) {
             if (callback2)
               return this.subscribe(source, (res) => {
                 let mod = callback2(res);
@@ -4286,7 +4291,7 @@ var require_index_node = __commonJS({
             });
         };
         this.pipeOnce = (source, destination, endpoint, method, callback2) => {
-          if (source instanceof GraphNode) {
+          if (source instanceof GraphNode2) {
             if (callback2)
               return source.__node.state.subscribeEventOnce(source.__node.unique, (res) => {
                 let mod = callback2(res);
@@ -4306,9 +4311,9 @@ var require_index_node = __commonJS({
         };
         this.terminate = (...args) => {
         };
-        this.isTypedArray = isTypedArray;
-        this.recursivelyAssign = recursivelyAssign2;
-        this.spliceTypedArray = spliceTypedArray;
+        this.isTypedArray = isTypedArray2;
+        this.recursivelyAssign = recursivelyAssign22;
+        this.spliceTypedArray = spliceTypedArray2;
         this.ping = () => {
           console.log("pinged!");
           return "pong";
@@ -4356,22 +4361,22 @@ var require_index_node = __commonJS({
           return this.run(route, args);
       }
     };
-    function isTypedArray(x2) {
-      return ArrayBuffer.isView(x2) && Object.prototype.toString.call(x2) !== "[object DataView]";
+    function isTypedArray2(x) {
+      return ArrayBuffer.isView(x) && Object.prototype.toString.call(x) !== "[object DataView]";
     }
-    var recursivelyAssign2 = (target, obj) => {
+    var recursivelyAssign22 = (target, obj) => {
       for (const key in obj) {
         if (obj[key]?.constructor.name === "Object" && !Array.isArray(obj[key])) {
           if (target[key]?.constructor.name === "Object" && !Array.isArray(target[key]))
-            recursivelyAssign2(target[key], obj[key]);
+            recursivelyAssign22(target[key], obj[key]);
           else
-            target[key] = recursivelyAssign2({}, obj[key]);
+            target[key] = recursivelyAssign22({}, obj[key]);
         } else
           target[key] = obj[key];
       }
       return target;
     };
-    function spliceTypedArray(arr, start, end) {
+    function spliceTypedArray2(arr, start, end) {
       let s = arr.subarray(0, start);
       let e;
       if (end) {
@@ -4523,7 +4528,7 @@ var require_index_node = __commonJS({
         return false;
     }, loadFromTemplate: function(templateName, name2, properties) {
       if (nodeTemplates[templateName]) {
-        let cpy = recursivelyAssign2({}, nodeTemplates[templateName]);
+        let cpy = recursivelyAssign22({}, nodeTemplates[templateName]);
         if (name2) {
           if (!cpy.__node)
             cpy.__node = {};
@@ -4644,7 +4649,7 @@ var require_index_node = __commonJS({
       }
       return false;
     } };
-    var ECSService = class extends Service {
+    var ECSService = class extends Service2 {
       constructor(options) {
         super(options);
         this.entities = {};
@@ -4962,11 +4967,11 @@ var require_index_node = __commonJS({
       var h, k, l, n = d.length / 4 - 2, m, p = 4, r = [0, 0, 0, 0];
       h = a.s[c];
       a = h[0];
-      var q = h[1], v = h[2], w = h[3], x2 = h[4];
+      var q = h[1], v = h[2], w = h[3], x = h[4];
       for (m = 0; m < n; m++)
         h = a[e >>> 24] ^ q[f >> 16 & 255] ^ v[g >> 8 & 255] ^ w[b & 255] ^ d[p], k = a[f >>> 24] ^ q[g >> 16 & 255] ^ v[b >> 8 & 255] ^ w[e & 255] ^ d[p + 1], l = a[g >>> 24] ^ q[b >> 16 & 255] ^ v[e >> 8 & 255] ^ w[f & 255] ^ d[p + 2], b = a[b >>> 24] ^ q[e >> 16 & 255] ^ v[f >> 8 & 255] ^ w[g & 255] ^ d[p + 3], p += 4, e = h, f = k, g = l;
       for (m = 0; 4 > m; m++)
-        r[c ? 3 & -m : m] = x2[e >>> 24] << 24 ^ x2[f >> 16 & 255] << 16 ^ x2[g >> 8 & 255] << 8 ^ x2[b & 255] ^ d[p++], h = e, e = f, f = g, g = b, b = h;
+        r[c ? 3 & -m : m] = x[e >>> 24] << 24 ^ x[f >> 16 & 255] << 16 ^ x[g >> 8 & 255] << 8 ^ x[b & 255] ^ d[p++], h = e, e = f, f = g, g = b, b = h;
       return r;
     }
     sjcl.bitArray = { bitSlice: function(a, b, c) {
@@ -5715,7 +5720,7 @@ var require_index_node = __commonJS({
       return { key: d[c].slice(0), salt: c.slice(0) };
     };
     var sjcl_default = sjcl;
-    var E2EEService = class extends Service {
+    var E2EEService = class extends Service2 {
       constructor(options, keys, secureKeys, secret) {
         super(options);
         this.name = "e2ee";
@@ -5819,7 +5824,7 @@ var require_index_node = __commonJS({
               return this.handleMethod(message.route, message.method, message.args);
             } else if (typeof message.route === "string") {
               return this.handleServiceMessage(message);
-            } else if (typeof message.node === "string" || message.node instanceof GraphNode) {
+            } else if (typeof message.node === "string" || message.node instanceof GraphNode2) {
               return this.handleGraphNodeCall(message.node, message.args);
             } else if (this.__node.keepState) {
               if (message.route)
@@ -5880,7 +5885,7 @@ var require_index_node = __commonJS({
       template += `</body></html>`;
       return template;
     }
-    var HTTPbackend2 = class extends Service {
+    var HTTPbackend2 = class extends Service2 {
       constructor(options, settings) {
         super(options);
         this.name = "http";
@@ -6521,7 +6526,7 @@ var require_index_node = __commonJS({
       return pageOptions;
     }
     var import_better_sse = __toESM2(require_build2());
-    var SSEbackend = class extends Service {
+    var SSEbackend = class extends Service2 {
       constructor(options) {
         super(options);
         this.name = "sse";
@@ -6854,7 +6859,7 @@ var require_index_node = __commonJS({
     var import_websocket = __toESM2(require_websocket(), 1);
     var import_websocket_server = __toESM2(require_websocket_server(), 1);
     var wrapper_default = import_websocket.default;
-    var WSSbackend2 = class extends Service {
+    var WSSbackend2 = class extends Service2 {
       constructor(options) {
         super(options);
         this.name = "wss";
@@ -7113,8 +7118,8 @@ var require_index_node = __commonJS({
               let req = { route: "runRequest", args: [{ route, args }, this.sockets[address]._id, callbackId] };
               if (method)
                 req.args[0].method = method;
-              let onmessage = (ev2) => {
-                let data = ev2.data;
+              let onmessage = (ev) => {
+                let data = ev.data;
                 if (typeof data === "string" && data.indexOf("{") > -1)
                   data = JSON.parse(data);
                 if (typeof data === "object") {
@@ -7234,8 +7239,8 @@ var require_index_node = __commonJS({
           if (method)
             req.method = method;
           return new Promise((res, rej) => {
-            let onmessage = (ev2) => {
-              let data = ev2.data;
+            let onmessage = (ev) => {
+              let data = ev.data;
               if (typeof data === "string") {
                 if (data.includes("callbackId"))
                   data = JSON.parse(data);
@@ -7330,7 +7335,7 @@ var require_index_node = __commonJS({
     };
     var import_child_process = require("child_process");
     var import_path = __toESM2(require("path"));
-    var CMDService = class extends Service {
+    var CMDService = class extends Service2 {
       constructor(options) {
         super(options);
         this.connections = { processes: void 0 };
@@ -7507,7 +7512,7 @@ var require_index_node = __commonJS({
         }
       }
     };
-    var SessionsService2 = class extends Service {
+    var SessionsService2 = class extends Service2 {
       constructor(options, users) {
         super(options);
         this.name = "sessions";
@@ -8254,7 +8259,7 @@ var require_index_node = __commonJS({
         this.streamLoop = { __operator: this.getAllStreamUpdates, __node: { loop: 10 } };
         this.userUpdateLoop = { __operator: this.userUpdateCheck, __node: { loop: 10 } };
         this.sessionLoop = { __operator: this.sessionUpdateCheck, __node: { loop: 10 } };
-        this.setLoaders(loaders);
+        this.setLoaders(loaders2);
         this.load(this);
         if (users)
           this.users = users;
@@ -8269,7 +8274,7 @@ var require_index_node = __commonJS({
         return false;
       }
     };
-    var Router2 = class extends Service {
+    var Router2 = class extends Service2 {
       constructor(options) {
         super(options);
         this.name = "router";
@@ -8585,7 +8590,7 @@ var require_index_node = __commonJS({
             return void 0;
           if (source)
             settings.source = source;
-          if (options2.connection instanceof GraphNode) {
+          if (options2.connection instanceof GraphNode2) {
             settings.connection = options2.connection;
             let node = settings.connection;
             settings.send = async (message) => {
@@ -8664,7 +8669,7 @@ var require_index_node = __commonJS({
                   settings.onclose(settings, n);
               });
             }
-          } else if (options2.connection instanceof Graph) {
+          } else if (options2.connection instanceof Graph3) {
             if (options2.connection.__node.nodes.get("open"))
               settings.service = options2.connection;
             let graph = settings.connection;
@@ -8798,7 +8803,7 @@ var require_index_node = __commonJS({
             settings.source = options2.source;
           } else if (!settings.source && options2.service) {
             settings.source = typeof options2.service === "object" ? options2.service?.name : void 0;
-          } else if (!settings.source && (settings.connection instanceof GraphNode || settings.connection instanceof Graph)) {
+          } else if (!settings.source && (settings.connection instanceof GraphNode2 || settings.connection instanceof Graph3)) {
             settings.source = "local";
             if (!this.order.indexOf("local"))
               this.order.unshift("local");
@@ -9078,9532 +9083,9 @@ var require_index_node = __commonJS({
   }
 });
 
-// node_modules/graphscript-services-node/dist/index.services.node.js
-var require_index_services_node = __commonJS({
-  "node_modules/graphscript-services-node/dist/index.services.node.js"(exports, module2) {
-    var __create2 = Object.create;
-    var __defProp2 = Object.defineProperty;
-    var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
-    var __getOwnPropNames2 = Object.getOwnPropertyNames;
-    var __getProtoOf2 = Object.getPrototypeOf;
-    var __hasOwnProp2 = Object.prototype.hasOwnProperty;
-    var __defNormalProp = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-    var __commonJS2 = (cb, mod) => function __require() {
-      return mod || (0, cb[__getOwnPropNames2(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-    };
-    var __export = (target, all) => {
-      for (var name2 in all)
-        __defProp2(target, name2, { get: all[name2], enumerable: true });
-    };
-    var __copyProps2 = (to, from, except, desc) => {
-      if (from && typeof from === "object" || typeof from === "function") {
-        for (let key of __getOwnPropNames2(from))
-          if (!__hasOwnProp2.call(to, key) && key !== except)
-            __defProp2(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
-      }
-      return to;
-    };
-    var __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(isNodeMode || !mod || !mod.__esModule ? __defProp2(target, "default", { value: mod, enumerable: true }) : target, mod));
-    var __toCommonJS = (mod) => __copyProps2(__defProp2({}, "__esModule", { value: true }), mod);
-    var __publicField = (obj, key, value) => {
-      __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-      return value;
-    };
-    var require_objectid4 = __commonJS2({ "node_modules/bson-objectid/objectid.js"(exports2, module22) {
-      var MACHINE_ID = Math.floor(Math.random() * 16777215);
-      var index = ObjectID2.index = parseInt(Math.random() * 16777215, 10);
-      var pid = (typeof process === "undefined" || typeof process.pid !== "number" ? Math.floor(Math.random() * 1e5) : process.pid) % 65535;
-      var BufferCtr = (() => {
-        try {
-          return _Buffer;
-        } catch (_) {
-          try {
-            return Buffer;
-          } catch (_2) {
-            return null;
-          }
-        }
-      })();
-      var isBuffer = function(obj) {
-        return !!(obj != null && obj.constructor && typeof obj.constructor.isBuffer === "function" && obj.constructor.isBuffer(obj));
-      };
-      var hexTable = [];
-      for (i = 0; i < 256; i++) {
-        hexTable[i] = (i <= 15 ? "0" : "") + i.toString(16);
-      }
-      var i;
-      var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
-      var decodeLookup = [];
-      i = 0;
-      while (i < 10)
-        decodeLookup[48 + i] = i++;
-      while (i < 16)
-        decodeLookup[65 - 10 + i] = decodeLookup[97 - 10 + i] = i++;
-      function ObjectID2(id) {
-        if (!(this instanceof ObjectID2))
-          return new ObjectID2(id);
-        if (id && (id instanceof ObjectID2 || id._bsontype === "ObjectID"))
-          return id;
-        this._bsontype = "ObjectID";
-        if (id == null || typeof id === "number") {
-          this.id = this.generate(id);
-          return;
-        }
-        var valid = ObjectID2.isValid(id);
-        if (!valid && id != null) {
-          throw new Error("Argument passed in must be a single String of 12 bytes or a string of 24 hex characters");
-        } else if (valid && typeof id === "string" && id.length === 24) {
-          return ObjectID2.createFromHexString(id);
-        } else if (id != null && id.length === 12) {
-          this.id = id;
-        } else if (id != null && typeof id.toHexString === "function") {
-          return id;
-        } else {
-          throw new Error("Argument passed in must be a single String of 12 bytes or a string of 24 hex characters");
-        }
-      }
-      module22.exports = ObjectID2;
-      ObjectID2.default = ObjectID2;
-      ObjectID2.createFromTime = function(time) {
-        time = parseInt(time, 10) % 4294967295;
-        return new ObjectID2(hex(8, time) + "0000000000000000");
-      };
-      ObjectID2.createFromHexString = function(hexString) {
-        if (typeof hexString === "undefined" || hexString != null && hexString.length !== 24) {
-          throw new Error("Argument passed in must be a single String of 12 bytes or a string of 24 hex characters");
-        }
-        var data = "";
-        var i2 = 0;
-        while (i2 < 24) {
-          data += String.fromCharCode(decodeLookup[hexString.charCodeAt(i2++)] << 4 | decodeLookup[hexString.charCodeAt(i2++)]);
-        }
-        return new ObjectID2(data);
-      };
-      ObjectID2.isValid = function(id) {
-        if (id == null)
-          return false;
-        if (typeof id === "number") {
-          return true;
-        }
-        if (typeof id === "string") {
-          return id.length === 12 || id.length === 24 && checkForHexRegExp.test(id);
-        }
-        if (id instanceof ObjectID2) {
-          return true;
-        }
-        if (isBuffer(id)) {
-          return ObjectID2.isValid(id.toString("hex"));
-        }
-        if (typeof id.toHexString === "function") {
-          if (BufferCtr && (id.id instanceof BufferCtr || typeof id.id === "string")) {
-            return id.id.length === 12 || id.id.length === 24 && checkForHexRegExp.test(id.id);
-          }
-        }
-        return false;
-      };
-      ObjectID2.prototype = { constructor: ObjectID2, toHexString: function() {
-        if (!this.id || !this.id.length) {
-          throw new Error("invalid ObjectId, ObjectId.id must be either a string or a Buffer, but is [" + JSON.stringify(this.id) + "]");
-        }
-        if (this.id.length === 24) {
-          return this.id;
-        }
-        if (isBuffer(this.id)) {
-          return this.id.toString("hex");
-        }
-        var hexString = "";
-        for (var i2 = 0; i2 < this.id.length; i2++) {
-          hexString += hexTable[this.id.charCodeAt(i2)];
-        }
-        return hexString;
-      }, equals: function(otherId) {
-        if (otherId instanceof ObjectID2) {
-          return this.toString() === otherId.toString();
-        } else if (typeof otherId === "string" && ObjectID2.isValid(otherId) && otherId.length === 12 && isBuffer(this.id)) {
-          return otherId === this.id.toString("binary");
-        } else if (typeof otherId === "string" && ObjectID2.isValid(otherId) && otherId.length === 24) {
-          return otherId.toLowerCase() === this.toHexString();
-        } else if (typeof otherId === "string" && ObjectID2.isValid(otherId) && otherId.length === 12) {
-          return otherId === this.id;
-        } else if (otherId != null && (otherId instanceof ObjectID2 || otherId.toHexString)) {
-          return otherId.toHexString() === this.toHexString();
-        } else {
-          return false;
-        }
-      }, getTimestamp: function() {
-        var timestamp = /* @__PURE__ */ new Date();
-        var time;
-        if (isBuffer(this.id)) {
-          time = this.id[3] | this.id[2] << 8 | this.id[1] << 16 | this.id[0] << 24;
-        } else {
-          time = this.id.charCodeAt(3) | this.id.charCodeAt(2) << 8 | this.id.charCodeAt(1) << 16 | this.id.charCodeAt(0) << 24;
-        }
-        timestamp.setTime(Math.floor(time) * 1e3);
-        return timestamp;
-      }, generate: function(time) {
-        if ("number" !== typeof time) {
-          time = ~~(Date.now() / 1e3);
-        }
-        time = parseInt(time, 10) % 4294967295;
-        var inc = next();
-        return String.fromCharCode(time >> 24 & 255, time >> 16 & 255, time >> 8 & 255, time & 255, MACHINE_ID >> 16 & 255, MACHINE_ID >> 8 & 255, MACHINE_ID & 255, pid >> 8 & 255, pid & 255, inc >> 16 & 255, inc >> 8 & 255, inc & 255);
-      } };
-      function next() {
-        return index = (index + 1) % 16777215;
-      }
-      function hex(length, n) {
-        n = n.toString(16);
-        return n.length === length ? n : "00000000".substring(n.length, length) + n;
-      }
-      var inspect = Symbol && Symbol.for && Symbol.for("nodejs.util.inspect.custom") || "inspect";
-      ObjectID2.prototype[inspect] = function() {
-        return "ObjectID(" + this + ")";
-      };
-      ObjectID2.prototype.toJSON = ObjectID2.prototype.toHexString;
-      ObjectID2.prototype.toString = ObjectID2.prototype.toHexString;
-    } });
-    var index_services_exports = {};
-    __export(index_services_exports, { StructBackend: () => StructBackend2, StructFrontend: () => StructFrontend, Systems: () => Systems, WebglLinePlotInfo: () => void 0, WebglLinePlotProps: () => void 0, WebglLinePlotUtil: () => void 0, WebglLineProps: () => void 0, algorithms: () => algorithms, getStringId: () => getStringId, pseudoObjectId: () => pseudoObjectId, randomId: () => randomId, setSignalControls: () => setSignalControls, toObjectID: () => toObjectID, webglPlotRoutes: () => webglPlotRoutes });
-    module2.exports = __toCommonJS(index_services_exports);
-    var DataStructures_exports = {};
-    __export(DataStructures_exports, { AuthorizationStruct: () => AuthorizationStruct, ChatroomStruct: () => ChatroomStruct, CoherenceMap: () => CoherenceMap, CoherenceStruct: () => CoherenceStruct, CommentStruct: () => CommentStruct, Data: () => Data, DataStruct: () => DataStruct, DateStruct: () => DateStruct, ECGStruct: () => ECGStruct, EDAStruct: () => EDAStruct, EEGCoordinates: () => EEGCoordinates, EEGStruct: () => EEGStruct, EMGStruct: () => EMGStruct, EventStruct: () => EventStruct, EyeTrackerStruct: () => EyeTrackerStruct, FNIRSStruct: () => FNIRSStruct, FrequencyBandsStruct: () => FrequencyBandsStruct, GroupStruct: () => GroupStruct, HRVStruct: () => HRVStruct, IMUStruct: () => IMUStruct, NotificationStruct: () => NotificationStruct, PPGStruct: () => PPGStruct, ProfileStruct: () => ProfileStruct, ScheduleStruct: () => ScheduleStruct, Struct: () => Struct, eegCoordinates: () => eegCoordinates, setCoordinate: () => setCoordinate, structRegistry: () => structRegistry });
-    function Struct(structType = "struct", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      function randomId3(tag = "") {
-        return `${tag + Math.floor(Math.random() + Math.random() * Math.random() * 1e16)}`;
-      }
-      let struct = { _id: randomId3(structType + "defaultId"), structType, ownerId: parentUser?._id, timestamp: Date.now(), parent: { structType: parentStruct?.structType, _id: parentStruct?._id } };
-      if (!struct.ownerId)
-        delete struct.ownerId;
-      if (!struct?.parent?._id)
-        delete struct.parent;
-      if (Object.keys(assignProps).length > 0)
-        Object.assign(struct, assignProps);
-      return struct;
-    }
-    var eegCoordinates = { FP1: [-21.2, 66.9, 12.1], FPZ: [1.4, 65.1, 11.3], FP2: [24.3, 66.3, 12.5], AF7: [-41.7, 52.8, 11.3], AF3: [-32.7, 48.4, 32.8], AFZ: [1.8, 54.8, 37.9], AF4: [35.1, 50.1, 31.1], AF8: [43.9, 52.7, 9.3], F5: [-51.4, 26.7, 24.7], F3: [-39.7, 25.3, 44.7], F1: [-22.1, 26.8, 54.9], FZ: [0, 26.8, 60.6], F2: [23.6, 28.2, 55.6], F4: [41.9, 27.5, 43.9], F6: [52.9, 28.7, 25.2], F7: [-52.1, 28.6, 3.8], F8: [53.2, 28.4, 3.1], FC5: [-59.1, 3, 26.1], FC3: [-45.5, 2.4, 51.3], FC1: [-24.7, 0.3, 66.4], FCZ: [1, 1, 72.8], FC2: [26.1, 3.2, 66], FC4: [47.5, 4.6, 49.7], FC6: [60.5, 4.9, 25.5], FT9: [-53.8, -2.1, -29.1], FT7: [-59.2, 3.4, -2.1], FT8: [60.2, 4.7, -2.8], FT10: [55, -3.6, -31], T7: [-65.8, -17.8, -2.9], T5: [-61.5, -65.3, 1.1], T3: [-70.2, -21.3, -10.7], T4: [71.9, -25.2, -8.2], T6: [59.3, -67.6, 3.8], T8: [67.4, -18.5, -3.4], C5: [-63.6, -18.9, 25.8], C3: [-49.1, -20.7, 53.2], C1: [-25.1, -22.5, 70.1], CZ: [0.8, -21.9, 77.4], C2: [26.7, -20.9, 69.5], C4: [50.3, -18.8, 53], C6: [65.2, -18, 26.4], CP5: [-61.8, -46.2, 22.5], CP3: [-46.9, -47.7, 49.7], CP1: [-24, -49.1, 66.1], CPZ: [0.7, -47.9, 72.6], CP2: [25.8, -47.1, 66], CP4: [49.5, -45.5, 50.7], CP6: [62.9, -44.6, 24.4], TP9: [-73.6, -46.7, -4], TP7: [-63.6, -44.7, -4], TP8: [64.6, -45.4, -3.7], TP10: [74.6, -47.4, -3.7], P9: [-50.8, -51.3, -37.7], P7: [-55.9, -64.8, 0], P5: [-52.7, -67.1, 19.9], P3: [-41.4, -67.8, 42.4], P1: [-21.6, -71.3, 52.6], PZ: [0.7, -69.3, 56.9], P2: [24.4, -69.9, 53.5], P4: [44.2, -65.8, 42.7], P6: [54.4, -65.3, 20.2], P8: [56.4, -64.4, 0.1], P10: [51, -53.9, -36.5], PO7: [-44, -81.7, 1.6], PO3: [-33.3, -84.3, 26.5], POZ: [0, -87.9, 33.5], PO4: [35.2, -82.6, 26.1], PO8: [43.3, -82, 0.7], O1: [-25.8, -93.3, 7.7], OZ: [0.3, -97.1, 8.7], O2: [25, -95.2, 6.2] };
-    function setCoordinate(channelDict, assignTo = {}) {
-      if (!eegCoordinates[channelDict.tag] && channelDict.position) {
-        eegCoordinates[channelDict.tag] = [channelDict.position.x, channelDict.position.y, channelDict.position.z];
-      }
-      if (eegCoordinates[channelDict.tag]) {
-        let props = { channel: "", position: { x: eegCoordinates[channelDict.tag][0], y: eegCoordinates[channelDict.tag][1], z: eegCoordinates[channelDict.tag][2] } };
-        return Object.assign(assignTo, props);
-      } else
-        return Object.assign(assignTo, channelDict);
-    }
-    function EEGCoordinates(channelDicts = [], genCoherenceMap = true) {
-      let structs = [];
-      for (let channelDict of channelDicts) {
-        let struct = EEGStruct(channelDict);
-        structs.push(struct);
-      }
-      if (genCoherenceMap) {
-        structs.push(...CoherenceMap({ channelDicts }));
-      }
-      return structs;
-    }
-    function FrequencyBandsStruct(additionalBands = [], assignTo = {}) {
-      let bands = { scp: [], delta: [], theta: [], alpha1: [], alpha2: [], beta: [], lowgamma: [], highgamma: [] };
-      additionalBands.forEach((band) => bands[band] = []);
-      return Object.assign(assignTo, bands);
-    }
-    function EEGStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let bands = FrequencyBandsStruct();
-      let props = { tag, position: { x: 0, y: 0, z: 0 }, count: 0, times: [], raw: [], filtered: [], fftCount: 0, fftTimes: [], ffts: [], slices: JSON.parse(JSON.stringify(bands)), means: JSON.parse(JSON.stringify(bands)), startTime: Date.now() };
-      let struct = Struct("eeg", props, parentUser, parentStruct);
-      if (tag)
-        setCoordinate(props, struct);
-      return Object.assign(struct, assignProps);
-    }
-    function CoherenceStruct(coords = { 0: EEGStruct("FP1"), 1: EEGStruct("FP2") }, assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let bands = FrequencyBandsStruct();
-      let props = { tag: coords[0]?.tag + "::" + coords[1]?.tag, x0: coords[0]?.position?.x, y0: coords[0]?.position?.y, z0: coords[0]?.position?.z, x1: coords[1]?.position?.x, y1: coords[1]?.position?.y, z1: coords[1]?.position?.z, fftCount: 0, fftTimes: [], ffts: [], slices: JSON.parse(JSON.stringify(bands)), means: JSON.parse(JSON.stringify(bands)), startTime: Date.now() };
-      let struct = Struct("coherence", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function CoherenceMap(opts = { channelDicts: [{ ch: 0, tag: "FP1", analyze: false }, { ch: 1, tag: "FP2", analyze: false }], taggedOnly: true }, _ = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      var cmap = [];
-      var l = 1, k = 0;
-      for (var i = 0; i < opts.channelDicts.length * (opts.channelDicts.length + 1) / 2 - opts.channelDicts.length; i++) {
-        if (opts.taggedOnly === false || opts.taggedOnly === true && (opts.channelDicts[k].tag !== null && opts.channelDicts[k + l].tag !== null && (opts.channelDicts[k].tag !== "other" && opts.channelDicts[k + l].tag !== "other") && (opts.channelDicts[k].analyze === true && opts.channelDicts[k + l].analyze === true))) {
-          var coord0 = EEGStruct(opts.channelDicts[k].tag);
-          var coord1 = EEGStruct(opts.channelDicts[k + l].tag);
-          cmap.push(CoherenceStruct({ 0: coord0, 1: coord1 }, {}, parentUser, parentStruct));
-        }
-        l++;
-        if (l + k === opts.channelDicts.length) {
-          k++;
-          l = 1;
-        }
-      }
-      return cmap;
-    }
-    function FNIRSStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, position: { x: 0, y: 0, z: 0 }, count: 0, times: [], red: [], ir: [], ir2: [], ambient: [], ratio: [], temp: [], beat_detect: { beats: [], breaths: [], rir: [], rir2: [], drir_dt: [], localmins: [], localmaxs: [], val_dists: [], peak_dists: [], localmins2: [], localmaxs2: [], val_dists2: [], peak_dists2: [] }, startTime: Date.now() };
-      let struct = Struct("fnirs", props, parentUser, parentStruct);
-      if (tag)
-        setCoordinate(props, struct);
-      return Object.assign(struct, assignProps);
-    }
-    function IMUStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, Ax: [], Ay: [], Az: [], Gx: [], Gy: [], Gz: [], startTime: Date.now() };
-      let struct = Struct("imu", props, parentUser, parentStruct);
-      if (tag)
-        setCoordinate(props, struct);
-      return Object.assign(struct, assignProps);
-    }
-    function EyeTrackerStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, count: 0, times: [], x: [], y: [], smax: [], smay: [], startTime: Date.now() };
-      let struct = Struct("eyetracker", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function ECGStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, count: 0, times: [], raw: [], filtered: [], bpm: [], hrv: [], startTime: Date.now() };
-      let struct = Struct("ecg", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function EDAStruct(_ = "", __ = {}, ___ = { _id: "" }, ____ = { structType: "struct", _id: "" }) {
-    }
-    function PPGStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let struct = FNIRSStruct(tag, parentUser, parentStruct, assignProps);
-      struct.structType = "ppg";
-      return struct;
-    }
-    function HRVStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let struct = ECGStruct(tag, parentUser, parentStruct, assignProps);
-      struct.structType = "hrv";
-      return struct;
-    }
-    function EMGStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let struct = EEGStruct(tag, parentUser, parentStruct, assignProps);
-      struct.structType = "emg";
-      return struct;
-    }
-    function ProfileStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, name: "", username: "", firstName: "", lastName: "", email: "", phone: "", sex: "", birthday: "", type: "", userRoles: {}, socials: {}, data: {}, id: "" };
-      let struct = Struct("profile", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function AuthorizationStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, authorizedId: "", authorizedName: "", authorizerId: "", authorizerName: "", authorizations: {}, structs: {}, excluded: {}, groups: {}, status: "PENDING", expires: false, associatedAuthId: "" };
-      let struct = Struct("authorization", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function GroupStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, name: "", details: "", admins: {}, peers: {}, clients: {}, users: {} };
-      let struct = Struct("group", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function Data(type, data) {
-      return { type, data, timestamp: Date.now() };
-    }
-    function DataStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, title: "", author: "", expires: false, type: "", data: new Array() };
-      let struct = Struct("data", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function EventStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, event: "", author: "", startTime: "", endTime: "", grade: 0, notes: "", attachments: new Array(), users: {} };
-      let struct = Struct("event", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function ChatroomStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, message: "", topic: "", author: "", attachments: new Array(), comments: new Array(), replies: new Array(), users: {}, audioChatActive: false, videoChatActive: false };
-      let struct = Struct("chatroom", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function CommentStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, author: "", replyTo: "", message: "", rating: 0, replies: new Array(), users: {}, attachments: new Array() };
-      let struct = Struct("comment", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function NotificationStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, note: "", parentUserId: "" };
-      let struct = Struct("notification", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function ScheduleStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, title: "", author: "", attachments: new Array(), dates: new Array() };
-      let struct = Struct("schedule", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    function DateStruct(tag = "", assignProps = {}, parentUser = { _id: "" }, parentStruct = { structType: "struct", _id: "" }) {
-      let props = { tag, timeSet: "", notes: "", recurs: "NEVER", attachments: new Array() };
-      let struct = Struct("date", props, parentUser, parentStruct);
-      return Object.assign(struct, assignProps);
-    }
-    var structRegistry = { Struct, EEGStruct, FNIRSStruct, CoherenceStruct, CoherenceMap, FrequencyBandsStruct, IMUStruct, EyeTrackerStruct, ECGStruct, EDAStruct, PPGStruct, HRVStruct, EMGStruct, ProfileStruct, AuthorizationStruct, GroupStruct, DataStruct, EventStruct, ChatroomStruct, CommentStruct, NotificationStruct, ScheduleStruct, DateStruct };
-    var DataTablet = class {
-      constructor(props = {}) {
-        this.DS = DataStructures_exports;
-        this.collections = /* @__PURE__ */ new Map();
-        this.data = { byTime: {}, notes: {}, events: {}, sleep: {}, food: {}, rx: {}, hr: {}, ppg: {}, hrv: {}, ecg: {}, emg: {}, eeg: {}, fnirs: {} };
-        this.rolloverLimit = 5e4;
-        this.dataSorts = /* @__PURE__ */ new Map();
-        this.watches = {};
-        this.onCollectionSet = (type, collection) => {
-        };
-        Object.assign(this.data, props);
-        this.dataSorts = /* @__PURE__ */ new Map();
-        this.watches = {};
-        this.setSort("event", (dataObj) => {
-          if (!this.data.events[dataObj.timestamp])
-            this.data.events[dataObj.timestamp] = [dataObj];
-          else
-            this.data.events[dataObj.timestamp].push(dataObj);
-          if (dataObj.event === "sleep") {
-            if (!this.data.sleep[dataObj.timestamp])
-              this.data.sleep[dataObj.timestamp] = [dataObj];
-            else
-              this.data.sleep[dataObj.timestamp].push(dataObj);
-          }
-          return dataObj;
-        });
-        this.setSort(["notes", "note", "link"], (dataObj) => {
-          if (!this.data.notes[dataObj.timestamp])
-            this.data.notes[dataObj.timestamp] = [dataObj];
-          else
-            this.data.notes[dataObj.timestamp].push(dataObj);
-          if (!this.data.byTime[dataObj.timestamp])
-            this.data.byTime[dataObj.timestamp] = [dataObj];
-          else
-            this.data.byTime[dataObj.timestamp].push(dataObj);
-          return dataObj;
-        });
-        this.id = this.randomId("dataTablet");
-      }
-      randomId(tag = "") {
-        return `${tag + Math.floor(Math.random() + Math.random() * Math.random() * 1e16)}`;
-      }
-      setLocalData(structs) {
-        let setInCollection = (s) => {
-          let type = s.structType;
-          let collection = this.collections.get(type);
-          if (!collection) {
-            collection = /* @__PURE__ */ new Map();
-            this.collections.set(type, collection);
-          }
-          collection.set(s._id, s);
-          this.onCollectionSet(type, collection);
-        };
-        if (Array.isArray(structs)) {
-          structs.forEach((s) => {
-            setInCollection(s);
-          });
-        } else
-          setInCollection(structs);
-      }
-      getLocalData(collection, query) {
-        let ownerId = "";
-        let key = "";
-        let value = "";
-        if (typeof query === "object") {
-          ownerId = query.ownerId;
-          const keys = Object.keys(query).filter((k) => k != "ownerId");
-          key = keys[0];
-          value = query[key];
-        } else
-          value = query;
-        if (!collection && !ownerId && !key && !value)
-          return [];
-        let result = [];
-        if (!collection && (ownerId || key)) {
-          this.collections.forEach((c) => {
-            if ((key === "_id" || key === "id") && value) {
-              let found = c.get(value);
-              if (found)
-                result.push(found);
-            } else {
-              c.forEach((struct) => {
-                if (key && value) {
-                  if (struct[key] === value && struct.ownerId === ownerId) {
-                    result.push(struct);
-                  }
-                } else if (struct.ownerId === ownerId) {
-                  result.push(struct);
-                }
-              });
-            }
-          });
-          return result;
-        } else {
-          let c = this.collections.get(collection);
-          if (!c)
-            return result;
-          if (!key && !ownerId) {
-            c.forEach((struct) => {
-              result.push(struct);
-            });
-            return result;
-          }
-          if ((key === "_id" || key === "id") && value)
-            return c.get(value);
-          else {
-            c.forEach((struct, _) => {
-              if (key && value && !ownerId) {
-                if (struct[key] === value)
-                  result.push(struct);
-              } else if (ownerId && !key) {
-                if (struct.ownerId === ownerId)
-                  result.push(struct);
-              } else if (ownerId && key && value) {
-                if (struct.ownerId === ownerId && struct[key]) {
-                  if (struct[key] === value)
-                    result.push(struct);
-                }
-              }
-            });
-          }
-        }
-        return result;
-      }
-      runSort(key, dataObj = {}, newdata = [], tablet = this) {
-        let result;
-        let sort = this.getSort(key);
-        if (sort)
-          result = sort(dataObj, newdata, tablet);
-        else
-          return false;
-        return result;
-      }
-      setSort(key, response = (data, newdata = [], tablet = this) => {
-      }) {
-        if (Array.isArray(key))
-          key.forEach((k) => {
-            this.dataSorts.set(k, response);
-          });
-        else
-          this.dataSorts.set(key, response);
-      }
-      getSort(key) {
-        return this.dataSorts.get(key);
-      }
-      checkWatches(sorted = {}) {
-        for (const prop in this.watches) {
-          let triggered = this.watches[prop].ondata(sorted, this.watches[prop].accum, this.watches[prop].ownerId);
-          if (triggered) {
-            this.watches[prop].ontrigger(this.watches[prop].accum);
-            this.watches[prop].triggered = false;
-          }
-        }
-      }
-      setWatch(name2, ownerId, ondata = (sorted, accum, ownerId2) => {
-        if (sorted.ownerId === ownerId2)
-          accum.data[sorted._id] = sorted;
-        if (Object.keys(accum.data).length > 10) {
-          return true;
-        } else
-          return false;
-      }, ontrigger = (accum) => {
-        console.log(accum);
-        let alert = Struct("alert", { alert: true, data: accum }, { _id: accum[Object.keys(accum)[0]].ownerId });
-        accum = {};
-      }) {
-        this.watches[name2] = { accum: {}, ownerId, ondata, ontrigger };
-      }
-      getWatch(name2) {
-        return this.watches[name2];
-      }
-      async sortStructsIntoTable(datastructs = []) {
-        let ascending = function(a, b) {
-          if (a.timestamp && b.timestamp)
-            return a.timestamp - b.timestamp;
-        };
-        datastructs.sort(ascending);
-        let newdata = [];
-        for (let i = 0; i < datastructs.length; i++) {
-          let struct = datastructs[i];
-          if (!struct.timestamp)
-            continue;
-          let timestamp = struct.timestamp;
-          if (!this.data.byTime[timestamp])
-            this.data.byTime[timestamp] = [struct];
-          else
-            this.data.byTime[timestamp].push(struct);
-          if (struct.structType === "data" && struct.data) {
-            struct.data.forEach(async (dat) => {
-              if (typeof dat === "object" && !Array.isArray(dat)) {
-                let typ = dat.dataType;
-                dat.ownerId = struct.ownerId;
-                if (!dat.timestamp)
-                  dat.timestamp = timestamp;
-                if (typ) {
-                  let sorted = this.runSort(typ, dat, newdata, this);
-                  if (!sorted) {
-                    if (!this.data[typ])
-                      this.data[typ] = {};
-                    dat.timestamp = timestamp;
-                    if (!this.data[typ][timestamp])
-                      this.data[typ][timestamp] = [dat];
-                    else
-                      this.data[typ][timestamp].push(dat);
-                    if (!this.data.byTime[timestamp])
-                      this.data.byTime[timestamp] = [dat];
-                    else
-                      this.data.byTime[timestamp].push(dat);
-                    this.checkWatches(dat);
-                    this.onUpdate(timestamp, dat);
-                    newdata.push(dat);
-                  } else {
-                    if (sorted.constructor?.name !== "Promise") {
-                      this.checkWatches(sorted);
-                      this.onUpdate(timestamp, sorted);
-                      newdata.push(sorted);
-                    }
-                  }
-                }
-              }
-            });
-          } else {
-            let sorted = this.runSort(struct.structType, struct, newdata, this);
-            if (!sorted) {
-              let typ = struct.structType;
-              if (!this.data[typ])
-                this.data[typ] = {};
-              if (!this.data[typ][timestamp])
-                this.data[typ][timestamp] = [struct];
-              else
-                this.data[typ][timestamp].push(struct);
-              this.checkWatches(struct);
-              this.onUpdate(timestamp, struct);
-              newdata.push(struct);
-            } else {
-              this.checkWatches(sorted);
-              this.onUpdate(timestamp, sorted);
-              newdata.push(sorted);
-            }
-          }
-        }
-        for (const prop in this.data) {
-          this.data[prop] = this.sortObjectByPropName(this.data[prop]);
-        }
-        this.onSorted(newdata);
-      }
-      onUpdate(_, __, ___ = this.data) {
-      }
-      onSorted(_ = []) {
-      }
-      getDataByTimestamp(timestamp, ownerId) {
-        let result = this.data.byTime[timestamp];
-        if (ownerId && result)
-          result = result.filter((o) => {
-            if (!ownerId)
-              return true;
-            else if (ownerId === o.ownerId)
-              return true;
-            else
-              return false;
-          });
-        return result;
-      }
-      getDataByTimeRange(begin, end, type, ownerId) {
-        let result = {};
-        if (type) {
-          for (const key in this.data[type]) {
-            let t = parseInt(key);
-            if (t > begin && t < end) {
-              result[key] = [...this.data[type][key]];
-            }
-          }
-          if (type === "sleep") {
-            result = this.filterSleepResults(result);
-          }
-        } else {
-          for (const key in this.data.byTime) {
-            let t = parseInt(key);
-            if (t > begin && t < end) {
-              result[key] = [...this.data.byTime[key]];
-            }
-          }
-        }
-        if (ownerId && result) {
-          for (const key in result) {
-            let popidx = [];
-            result[key] = result[key];
-            result[key].forEach((o, i) => {
-              if (o.ownerId !== ownerId) {
-                popidx.push(i);
-              }
-            });
-            popidx.reverse().forEach((idx) => {
-              result[key].splice(idx, 1);
-            });
-            if (result[key].length === 0)
-              delete result[key];
-          }
-        }
-        return result;
-      }
-      getDataByType(type, timestamp, ownerId) {
-        if (!this.data[type])
-          return void 0;
-        let result = { ...this.data[type] };
-        if (timestamp)
-          result = [...result[timestamp]];
-        if (ownerId && result) {
-          for (const key in result) {
-            let popidx = [];
-            result[key] = [...result[key]];
-            result[key].forEach((o, i) => {
-              if (o.ownerId !== ownerId) {
-                popidx.push(i);
-              }
-            });
-            popidx.reverse().forEach((idx) => {
-              result[key].splice(idx, 1);
-            });
-            if (result[key].length === 0)
-              delete result[key];
-          }
-        }
-        if (type === "sleep") {
-          result = this.filterSleepResults(result);
-        }
-        return result;
-      }
-      filterSleepResults(unfiltered = {}) {
-        let events = [];
-        for (const key in unfiltered) {
-          unfiltered[key] = [...unfiltered[key]];
-          events.push(...unfiltered[key].filter((o) => {
-            if (o.structType === "event")
-              return true;
-            else
-              return false;
-          }));
-        }
-        events.forEach((ev2) => {
-          let foundidx;
-          for (const key in unfiltered) {
-            unfiltered[key].forEach((o, i) => {
-              if (o.structType === "fitbitsleep" && ev2.startTime && ev2.endTime) {
-                if (Math.abs(o.startTime - ev2.startTime) < 1e3 * 12 * 3600 && Math.abs(o.endTime - ev2.endTime) < 1e3 * 12 * 3600 && ev2.endTime - ev2.startTime > 1e3 * 2 * 3600) {
-                  foundidx = i;
-                  return true;
-                } else
-                  return false;
-              } else
-                return false;
-            });
-            if (foundidx)
-              unfiltered[key].splice(foundidx, 1);
-          }
-        });
-        let result = unfiltered;
-        return result;
-      }
-      sortObjectByPropName(object) {
-        const ordered = Object.keys(object).sort().reduce((obj, key) => {
-          obj[key] = object[key];
-          return obj;
-        }, {});
-        return ordered;
-      }
-      checkRollover(collection, limit = this.rolloverLimit) {
-        if (!collection)
-          return false;
-        let c = this.collections.get(collection);
-        if (!c)
-          return false;
-        c.forEach((struct) => {
-          for (const prop in struct) {
-            if (Array.isArray(struct[prop])) {
-              if (struct[prop].length > limit) {
-                struct[prop].slice(struct[prop].length - limit);
-                if (prop === "ffts") {
-                  struct.fftCount = struct[prop].length;
-                } else if (prop === "times") {
-                  struct.count = struct[prop].length;
-                }
-              }
-            } else if (typeof struct[prop] === "object") {
-              this.checkRollover(struct[prop]);
-            }
-          }
-        });
-        return true;
-      }
-    };
-    var EventHandler = class {
-      constructor(data) {
-        this.pushToState = {};
-        this.data = {};
-        this.triggers = {};
-        this.ctr = 0;
-        this.setState = (updateObj) => {
-          Object.assign(this.data, updateObj);
-          let props = Object.getOwnPropertyNames(updateObj);
-          for (const prop of props) {
-            this.triggerEvent(prop, this.data[prop]);
-          }
-          if (this.triggers[statesubKey]) {
-            let run = (fn) => {
-              fn(updateObj);
-            };
-            this.triggers[statesubKey].forEach((v) => {
-              run(v.onchange);
-            });
-          }
-          return this.data;
-        };
-        this.setValue = (key, value) => {
-          this.data[key] = value;
-          this.triggerEvent(key, value);
-        };
-        this.triggerEvent = (key, value) => {
-          if (this.triggers[key]) {
-            let fn = (obj) => obj.onchange(value, this.triggers[key]);
-            this.triggers[key].forEach(fn);
-          }
-        };
-        this.subscribeState = (onchange) => {
-          return this.subscribeEvent(statesubKey, onchange);
-        };
-        this.unsubscribeState = (sub) => {
-          return this.unsubscribeEvent(statesubKey, sub);
-        };
-        this.subscribeEvent = (key, onchange, refObject, refKey) => {
-          if (key) {
-            if (refObject && refKey && !this.triggers[key]) {
-              Object.defineProperty(this.data, key, { get: () => {
-                return refObject[refKey];
-              }, set: (value) => {
-                refObject[refKey] = value;
-              }, enumerable: true, configurable: true });
-            }
-            if (!this.triggers[key]) {
-              this.triggers[key] = [];
-            }
-            let l = this.ctr;
-            this.ctr++;
-            this.triggers[key].push({ sub: l, onchange });
-            return l;
-          } else
-            return void 0;
-        };
-        this.unsubscribeEvent = (key, sub) => {
-          let triggers = this.triggers[key];
-          if (triggers) {
-            if (sub === void 0) {
-              delete this.triggers[key];
-              delete this.data[key];
-            } else {
-              let idx = void 0;
-              let obj = triggers.find((o, i) => {
-                if (o.sub === sub) {
-                  idx = i;
-                  return true;
-                }
-              });
-              if (obj)
-                triggers.splice(idx, 1);
-              if (Object.keys(triggers).length === 0) {
-                delete this.triggers[key];
-                delete this.data[key];
-              }
-              if (this.onRemoved)
-                this.onRemoved(obj);
-              return true;
-            }
-          }
-        };
-        this.subscribeEventOnce = (key, onchange) => {
-          let sub;
-          let changed = (value) => {
-            onchange(value);
-            this.unsubscribeEvent(key, sub);
-          };
-          sub = this.subscribeEvent(key, changed);
-        };
-        this.getEvent = (key, sub) => {
-          for (const s in this.triggers[key]) {
-            if (this.triggers[key][s].sub === sub)
-              return this.triggers[key][s];
-          }
-        };
-        this.getSnapshot = () => {
-          const snapshot = {};
-          for (const key in this.data) {
-            snapshot[key] = this.data[key];
-          }
-        };
-        if (typeof data === "object")
-          this.data = data;
-      }
-    };
-    var statesubKey = "*s";
-    var state = new EventHandler();
-    var GraphNode = class {
-      constructor(properties, parent, graph) {
-        this.__node = { tag: `node${Math.floor(Math.random() * 1e15)}`, unique: `${Math.floor(Math.random() * 1e15)}`, state };
-        this.__setProperties = (properties2, parent2, graph2) => {
-          let enforceProperties = () => {
-            let orig = properties2;
-            if (!("__node" in properties2))
-              properties2.__node = {};
-            if (typeof properties2 === "function") {
-              if (isNativeClass(properties2)) {
-                properties2 = new properties2();
-              } else
-                properties2 = { __operator: properties2, __node: { forward: true, tag: properties2.name } };
-            } else if (typeof properties2 === "string") {
-              if (graph2?.get(properties2)) {
-                properties2 = graph2.get(properties2);
-              }
-            }
-            if (!properties2.__node.initial)
-              properties2.__node.initial = orig;
-          };
-          enforceProperties();
-          if (typeof properties2 === "object") {
-            let assignState = () => {
-              if (properties2.__node?.state)
-                this.__node.state = properties2.__node.state;
-            };
-            let setProps = () => {
-              if (properties2.__props) {
-                if (typeof properties2.__props === "function")
-                  properties2.__props = new properties2.__props();
-                if (typeof properties2.__props === "object") {
-                  this.__proxyObject(properties2.__props);
-                }
-              }
-            };
-            let setTag = () => {
-              if (!properties2.__node.tag) {
-                if (properties2.__operator?.name)
-                  properties2.__node.tag = properties2.__operator.name;
-                else
-                  properties2.__node.tag = `node${Math.floor(Math.random() * 1e15)}`;
-              }
-            };
-            let setNode = () => {
-              if (typeof properties2.__node === "string") {
-                if (graph2?.get(properties2.__node.tag)) {
-                  properties2 = graph2.get(properties2.__node.tag);
-                } else
-                  properties2.__node = {};
-              } else if (!properties2.__node)
-                properties2.__node = {};
-              if (graph2) {
-                properties2.__node.graph = graph2;
-              }
-              if (properties2 instanceof Graph)
-                properties2.__node.source = properties2;
-            };
-            let setParent = () => {
-              if (!properties2.__parent && parent2)
-                properties2.__parent = parent2;
-              if (parent2?.__node && !(parent2 instanceof Graph || properties2 instanceof Graph))
-                properties2.__node.tag = parent2.__node.tag + "." + properties2.__node.tag;
-              if (parent2 instanceof Graph && properties2 instanceof Graph) {
-                if (properties2.__node.loaders)
-                  Object.assign(parent2.__node.loaders ? parent2.__node.loaders : {}, properties2.__node.loaders);
-                if (parent2.__node.mapGraphs) {
-                  properties2.__node.nodes.forEach((n) => {
-                    parent2.set(properties2.__node.tag + "." + n.__node.tag, n);
-                  });
-                  let ondelete = () => {
-                    properties2.__node.nodes.forEach((n) => {
-                      parent2.__node.nodes.delete(properties2.__node.tag + "." + n.__node.tag);
-                    });
-                  };
-                  this.__addOndisconnected(ondelete);
-                }
-              }
-            };
-            let setOp = () => {
-              if (typeof properties2.default === "function" && !properties2.__operator) {
-                properties2.__operator = properties2.default;
-              }
-              if (properties2.__operator) {
-                if (typeof properties2.__operator === "string") {
-                  if (graph2) {
-                    let n = graph2.get(properties2.__operator);
-                    if (n)
-                      properties2.__operator = n.__operator;
-                    if (!properties2.__node.tag && properties2.__operator.name)
-                      properties2.__node.tag = properties2.__operator.name;
-                  }
-                }
-                if (typeof properties2.__operator === "function")
-                  properties2.__operator = this.__setOperator(properties2.__operator);
-                if (properties2.default)
-                  properties2.default = properties2.__operator;
-              }
-            };
-            let assignProps = () => {
-              properties2.__node = Object.assign(this.__node, properties2.__node);
-              let keys = Object.getOwnPropertyNames(properties2);
-              for (const key of keys) {
-                this[key] = properties2[key];
-              }
-            };
-            let bindCallbacks = () => {
-              if (this.__onconnected) {
-                if (typeof this.__onconnected === "function") {
-                  this.__onconnected = this.__onconnected.bind(this);
-                } else if (Array.isArray(this.__onconnected)) {
-                  this.__onconnected = this.__onconnected.map((f) => {
-                    return f.bind(this);
-                  });
-                }
-                if (typeof this.__ondisconnected === "function") {
-                  this.__ondisconnected = this.__ondisconnected.bind(this);
-                } else if (Array.isArray(this.__ondisconnected)) {
-                  this.__ondisconnected = this.__ondisconnected.map((f) => {
-                    return f.bind(this);
-                  });
-                }
-              }
-            };
-            assignState();
-            setTag();
-            setProps();
-            setNode();
-            setParent();
-            assignProps();
-            bindCallbacks();
-            setOp();
-          }
-        };
-        this.__subscribe = (callback2, key, subInput, bound, target) => {
-          const subscribeToFunction = (k, setTarget = (callback22, target2) => callback22, triggerCallback = callback2) => {
-            let sub = this.__node.state.subscribeEvent(k, triggerCallback, this, key);
-            let trigger = this.__node.state.getEvent(k, sub);
-            if (!trigger)
-              return sub;
-            trigger.source = this.__node.tag;
-            if (key)
-              trigger.key = key;
-            trigger.target = setTarget(callback2);
-            if (bound)
-              trigger.bound = bound;
-            return sub;
-          };
-          const subscribeToGraph = (callback22) => {
-            let fn = this.__node.graph.get(callback22);
-            if (!fn && callback22.includes(".")) {
-              let n = this.__node.graph.get(callback22.substring(0, callback22.lastIndexOf(".")));
-              let key2 = callback22.substring(callback22.lastIndexOf(".") + 1);
-              if (n && typeof n[key2] === "function")
-                callback22 = (...args) => {
-                  return n[key2](...args);
-                };
-            }
-          };
-          if (key) {
-            if (!this.__node.localState || !this.__node.localState[key]) {
-              this.__addLocalState(this, key);
-            }
-            if (typeof callback2 === "string") {
-              if (target) {
-                if (this.__node.graph?.get(target)) {
-                  let n = this.__node.graph?.get(target);
-                  if (typeof n[callback2] === "function") {
-                    let fn = n[callback2];
-                    callback2 = (...inp) => {
-                      fn(...inp);
-                    };
-                  } else {
-                    let k2 = callback2;
-                    let setter = (inp) => {
-                      n[k2] = inp;
-                    };
-                    callback2 = setter;
-                  }
-                }
-              } else if (typeof this[callback2] === "function") {
-                let fn = this[callback2];
-                callback2 = (...inp) => {
-                  fn(...inp);
-                };
-              } else if (this.__node.graph?.get(callback2))
-                subscribeToGraph(callback2);
-              if (typeof callback2 !== "function")
-                return void 0;
-            }
-            let sub;
-            let k = subInput ? this.__node.unique + "." + key + "input" : this.__node.unique + "." + key;
-            if (typeof callback2 === "function")
-              sub = subscribeToFunction(k);
-            else if (callback2?.__node)
-              sub = subscribeToFunction(k, (callback22, target2) => target2 ? target2 : callback22.__node.unique, (...inp) => {
-                if (callback2.__operator)
-                  callback2.__operator(...inp);
-              });
-            return sub;
-          } else {
-            if (typeof callback2 === "string") {
-              if (this.__node.graph.get(callback2))
-                callback2 = this.__node.graph.get(callback2);
-              if (typeof callback2 !== "object")
-                return void 0;
-            }
-            let sub;
-            let k = subInput ? this.__node.unique + "input" : this.__node.unique;
-            if (typeof callback2 === "function")
-              sub = subscribeToFunction(k);
-            else if (callback2?.__node)
-              sub = subscribeToFunction(k, (callback22, target2) => target2 ? target2 : callback22.__node.unique, (...inp) => {
-                if (callback2.__operator)
-                  callback2.__operator(...inp);
-              });
-            return sub;
-          }
-        };
-        this.__unsubscribe = (sub, key, unsubInput) => {
-          if (key) {
-            return this.__node.state.unsubscribeEvent(unsubInput ? this.__node.unique + "." + key + "input" : this.__node.unique + "." + key, sub);
-          } else
-            return this.__node.state.unsubscribeEvent(unsubInput ? this.__node.unique + "input" : this.__node.unique, sub);
-        };
-        this.__setOperator = (fn) => {
-          fn = fn.bind(this);
-          if (this.__args && this.__node.graph) {
-            fn = wrapArgs(fn, this.__args, this.__node.graph);
-          }
-          let inpstr = `${this.__node.unique}input`;
-          this.__operator = (...args) => {
-            if (this.__node.state.triggers[inpstr])
-              this.__node.state.setValue(inpstr, args);
-            let result = fn(...args);
-            if (this.__node.state.triggers[this.__node.unique]) {
-              if (typeof result?.then === "function") {
-                result.then((res) => {
-                  if (res !== void 0)
-                    this.__node.state.setValue(this.__node.unique, res);
-                }).catch(console.error);
-              } else if (result !== void 0)
-                this.__node.state.setValue(this.__node.unique, result);
-            }
-            return result;
-          };
-          if (this.__parent instanceof GraphNode && !this.__subscribedToParent) {
-            if (this.__parent.__operator) {
-              let sub = this.__parent.__subscribe(this);
-              let ondelete = () => {
-                this.__parent?.__unsubscribe(sub);
-                delete this.__subscribedToParent;
-              };
-              this.__addOndisconnected(ondelete);
-              this.__subscribedToParent = true;
-            }
-          }
-          return this.__operator;
-        };
-        this.__addLocalState = (props, key) => {
-          if (!props)
-            return;
-          if (!this.__node.localState) {
-            this.__node.localState = {};
-          }
-          const localState = this.__node.localState;
-          const initState = (props2, k) => {
-            let str2 = this.__node.unique + "." + k;
-            let inpstr = `${str2}input`;
-            if (typeof props2[k] === "function" && k !== "__operator") {
-              let fn = props2[k].bind(this);
-              props2[k] = (...args) => {
-                if (this.__node.state.triggers[inpstr])
-                  this.__node.state.setValue(inpstr, args);
-                let result = fn(...args);
-                if (this.__node.state.triggers[str2]) {
-                  if (typeof result?.then === "function") {
-                    result.then((res) => {
-                      this.__node.state.triggerEvent(str2, res);
-                    }).catch(console.error);
-                  } else
-                    this.__node.state.triggerEvent(str2, result);
-                }
-                return result;
-              };
-            } else {
-              let get, set;
-              if (this.__props?.[k]) {
-                get = () => {
-                  return this.__props[k];
-                };
-                set = (v) => {
-                  this.__props[k] = v;
-                  if (this.__node.state.triggers[str2])
-                    this.__node.state.triggerEvent(str2, v);
-                };
-              } else {
-                localState[k] = props2[k];
-                get = () => {
-                  return localState[k];
-                };
-                set = (v) => {
-                  localState[k] = v;
-                  if (this.__node.state.triggers[str2])
-                    this.__node.state.triggerEvent(str2, v);
-                };
-              }
-              const descriptor = { get, set, enumerable: true, configurable: true };
-              Object.defineProperty(props2, k, descriptor);
-              if (typeof this.__node.initial === "object") {
-                let dec = Object.getOwnPropertyDescriptor(this.__node.initial, k);
-                if (dec === void 0 || dec?.configurable) {
-                  Object.defineProperty(this.__node.initial, k, descriptor);
-                }
-              }
-            }
-          };
-          if (key)
-            initState(props, key);
-          else {
-            for (let k in props) {
-              initState(props, k);
-            }
-          }
-        };
-        this.__proxyObject = (obj) => {
-          const allProps = getAllProperties(obj);
-          for (const k of allProps) {
-            if (typeof obj[k] === "function") {
-              this[k] = (...args) => {
-                return obj[k](...args);
-              };
-            } else {
-              const descriptor = { get: () => {
-                return obj[k];
-              }, set: (value) => {
-                obj[k] = value;
-              }, enumerable: true, configurable: true };
-              Object.defineProperty(this, k, descriptor);
-              if (typeof this.__node.initial === "object") {
-                let dec = Object.getOwnPropertyDescriptor(this.__node.initial, k);
-                if (dec === void 0 || dec?.configurable) {
-                  Object.defineProperty(this.__node.initial, k, descriptor);
-                }
-              }
-            }
-          }
-        };
-        this.__setProperties(properties, parent, graph);
-      }
-      __addOnconnected(callback2) {
-        callback2 = callback2.bind(this);
-        if (Array.isArray(this.__onconnected)) {
-          this.__onconnected.push(callback2);
-        } else if (typeof this.__onconnected === "function") {
-          this.__onconnected = [callback2, this.__onconnected];
-        } else
-          this.__onconnected = callback2;
-      }
-      __addOndisconnected(callback2) {
-        callback2 = callback2.bind(this);
-        if (Array.isArray(this.__ondisconnected)) {
-          this.__ondisconnected.push(callback2);
-        } else if (typeof this.__ondisconnected === "function") {
-          this.__ondisconnected = [callback2, this.__ondisconnected];
-        } else
-          this.__ondisconnected = callback2;
-      }
-      __callConnected(node = this) {
-        if (typeof this.__onconnected === "function") {
-          this.__onconnected(this);
-        } else if (Array.isArray(this.__onconnected)) {
-          let fn = (o) => {
-            o(this);
-          };
-          this.__onconnected.forEach(fn);
-        }
-      }
-      __callDisconnected(node = this) {
-        if (typeof this.__ondisconnected === "function")
-          this.__ondisconnected(this);
-        else if (Array.isArray(this.__ondisconnected)) {
-          let fn = (o) => {
-            o(this);
-          };
-          this.__ondisconnected.forEach(fn);
-        }
-      }
-    };
-    var Graph = class {
-      constructor(options) {
-        this.__node = { tag: `graph${Math.floor(Math.random() * 1e15)}`, unique: `${Math.random()}`, nodes: /* @__PURE__ */ new Map(), state, roots: {} };
-        this.init = (options2) => {
-          if (options2) {
-            let cpy = Object.assign({}, options2);
-            delete cpy.roots;
-            recursivelyAssign(this.__node, cpy);
-            if (options2.roots)
-              this.load(options2.roots);
-          }
-        };
-        this.load = (roots) => {
-          function recursivelyAssignChildren(target, obj, inChildren = true, top = true) {
-            if (top) {
-              if (target)
-                Object.assign(target, obj);
-              else
-                target = Object.assign({}, obj);
-              recursivelyAssignChildren(target, obj, true, false);
-            }
-            if (obj.__children && !inChildren) {
-              if (obj.__children?.constructor.name === "Object") {
-                if (target.__children?.constructor.name === "Object")
-                  recursivelyAssignChildren(target.__children, obj.__children, true, false);
-                else
-                  target.__children = recursivelyAssignChildren({}, obj.__children, true, false);
-              } else {
-                target.__children = obj.__children;
-              }
-            } else if (inChildren) {
-              for (const key in obj) {
-                target[key] = Object.assign({}, obj[key]);
-                if (obj[key].__children) {
-                  recursivelyAssignChildren({}, obj[key].__children, false, false);
-                }
-              }
-            }
-            return target;
-          }
-          this.__node.roots = recursivelyAssignChildren(this.__node.roots ? this.__node.roots : {}, roots);
-          let cpy = Object.assign({}, roots);
-          if (cpy.__node)
-            delete cpy.__node;
-          let listeners = this.recursiveSet(cpy, this, void 0, roots);
-          if (roots.__node) {
-            if (!roots.__node.tag)
-              roots.__node._tag = `roots${Math.floor(Math.random() * 1e15)}`;
-            else if (!this.get(roots.__node.tag)) {
-              let node = new GraphNode(roots, this, this);
-              this.set(node.__node.tag, node);
-              this.runLoaders(node, this, roots, roots.__node.tag);
-              if (node.__listeners) {
-                listeners[node.__node.tag] = node.__listeners;
-              }
-            }
-          } else if (roots.__listeners) {
-            this.setListeners(roots.__listeners);
-          }
-          this.setListeners(listeners);
-          return cpy;
-        };
-        this.setLoaders = (loaders2, replace) => {
-          if (replace)
-            this.__node.loaders = loaders2;
-          else
-            Object.assign(this.__node.loaders, loaders2);
-          return this.__node.loaders;
-        };
-        this.runLoaders = (node, parent, properties, key) => {
-          for (const l in this.__node.loaders) {
-            if (typeof this.__node.loaders[l] === "object") {
-              if (this.__node.loaders[l].init)
-                this.__node.loaders[l](node, parent, this, this.__node.roots, properties, key);
-              if (this.__node.loaders[l].connected)
-                node.__addOnconnected(this.__node.loaders[l].connect);
-              if (this.__node.loaders[l].disconnected)
-                node.__addOndisconnected(this.__node.loaders[l].disconnect);
-            } else if (typeof this.__node.loaders[l] === "function")
-              this.__node.loaders[l](node, parent, this, this.__node.roots, properties, key);
-          }
-        };
-        this.add = (properties, parent) => {
-          let listeners = {};
-          if (typeof parent === "string")
-            parent = this.get(parent);
-          let instanced;
-          if (typeof properties === "function") {
-            if (isNativeClass(properties)) {
-              if (properties.prototype instanceof GraphNode) {
-                properties = properties.prototype.constructor(properties, parent, this);
-                instanced = true;
-              } else
-                properties = new properties();
-            } else
-              properties = { __operator: properties };
-          } else if (typeof properties === "string") {
-            properties = this.__node.roots[properties];
-          }
-          if (!properties)
-            return;
-          if (!instanced) {
-            let keys = Object.getOwnPropertyNames(properties);
-            let cpy = {};
-            for (const key of keys) {
-              cpy[key] = properties[key];
-            }
-            properties = cpy;
-          }
-          if (!properties.__node)
-            properties.__node = {};
-          properties.__node.initial = properties;
-          if (typeof properties === "object" && (!properties?.__node?.tag || !this.get(properties.__node.tag))) {
-            let node;
-            if (instanced)
-              node = properties;
-            else
-              node = new GraphNode(properties, parent, this);
-            this.set(node.__node.tag, node);
-            this.runLoaders(node, parent, properties, node.__node.tag);
-            this.__node.roots[node.__node.tag] = properties;
-            if (node.__children) {
-              node.__children = Object.assign({}, node.__children);
-              this.recursiveSet(node.__children, node, listeners, node.__children);
-            }
-            if (node.__listeners) {
-              listeners[node.__node.tag] = Object.assign({}, node.__listeners);
-              for (const key in node.__listeners) {
-                let listener = node.__listeners[key];
-                if (node[key]) {
-                  delete listeners[node.__node.tag][key];
-                  listeners[node.__node.tag][node.__node.tag + "." + key] = listener;
-                }
-                if (typeof listener === "string") {
-                  if (node.__children?.[listener]) {
-                    listeners[node.__node.tag][key] = node.__node.tag + "." + listener;
-                  } else if (parent instanceof GraphNode && (parent.__node.tag === listener || parent.__node.tag.includes(".") && parent.__node.tag.split(".").pop() === listener)) {
-                    listeners[node.__node.tag][key] = parent.__node.tag;
-                  }
-                }
-              }
-            }
-            this.setListeners(listeners);
-            node.__callConnected();
-            return node;
-          }
-          return;
-        };
-        this.recursiveSet = (t, parent, listeners = {}, origin) => {
-          let keys = Object.getOwnPropertyNames(origin);
-          for (const key of keys) {
-            if (key.includes("__"))
-              continue;
-            let p = origin[key];
-            if (Array.isArray(p))
-              continue;
-            let instanced;
-            if (typeof p === "function") {
-              if (isNativeClass(p)) {
-                p = new p();
-                if (p instanceof GraphNode) {
-                  p = p.prototype.constructor(p, parent, this);
-                  instanced = true;
-                }
-              } else
-                p = { __operator: p };
-            } else if (typeof p === "string") {
-              if (this.__node.nodes.get(p))
-                p = this.__node.nodes.get(p);
-              else
-                p = this.__node.roots[p];
-            } else if (typeof p === "boolean") {
-              if (this.__node.nodes.get(key))
-                p = this.__node.nodes.get(key);
-              else
-                p = this.__node.roots[key];
-            }
-            if (typeof p === "object") {
-              if (!instanced && !(p instanceof GraphNode)) {
-                let keys2 = Object.getOwnPropertyNames(p);
-                let cpy = {};
-                for (const key2 of keys2) {
-                  cpy[key2] = p[key2];
-                }
-                p = cpy;
-              }
-              if (!p.__node)
-                p.__node = {};
-              if (!p.__node.tag)
-                p.__node.tag = key;
-              if (!p.__node.initial)
-                p.__node.initial = t[key];
-              if (this.get(p.__node.tag) && !(!(parent instanceof Graph) && parent?.__node) || parent?.__node && this.get(parent.__node.tag + "." + p.__node.tag))
-                continue;
-              let node;
-              let newnode = false;
-              if (instanced || p instanceof GraphNode) {
-                node = p;
-              } else {
-                node = new GraphNode(p, parent, this);
-                newnode = true;
-              }
-              if (!newnode && p instanceof GraphNode && !instanced && parent instanceof GraphNode) {
-                let sub = this.subscribe(parent.__node.tag, node.__node.tag);
-                let ondelete = (node2) => {
-                  this.unsubscribe(parent.__node.tag, sub);
-                };
-                node.__addOndisconnected(ondelete);
-              } else {
-                this.set(node.__node.tag, node);
-                this.runLoaders(node, parent, t[key], key);
-                t[key] = node;
-                this.__node.roots[node.__node.tag] = p;
-                if (node.__children) {
-                  node.__children = Object.assign({}, node.__children);
-                  this.recursiveSet(node.__children, node, listeners, node.__children);
-                }
-                if (node.__listeners) {
-                  listeners[node.__node.tag] = Object.assign({}, node.__listeners);
-                  for (const key2 in node.__listeners) {
-                    let listener = node.__listeners[key2];
-                    let k = key2;
-                    if (node[key2]) {
-                      delete listeners[node.__node.tag][key2];
-                      k = node.__node.tag + "." + key2;
-                      listeners[node.__node.tag][k] = listener;
-                    }
-                    if (typeof listener === "string") {
-                      if (node.__children?.[listener]) {
-                        listeners[node.__node.tag][k] = node.__node.tag + "." + listener;
-                      } else if (parent instanceof GraphNode && (parent.__node.tag === listener || parent.__node.tag.includes(".") && parent.__node.tag.split(".").pop() === listener)) {
-                        listeners[node.__node.tag][k] = parent.__node.tag;
-                      }
-                    }
-                  }
-                }
-                node.__callConnected();
-              }
-            }
-          }
-          return listeners;
-        };
-        this.remove = (node, clearListeners = true) => {
-          this.unsubscribe(node);
-          if (typeof node === "string")
-            node = this.get(node);
-          if (node instanceof GraphNode) {
-            this.delete(node.__node.tag);
-            delete this.__node.roots[node.__node.tag];
-            if (clearListeners) {
-              this.clearListeners(node);
-            }
-            node.__callDisconnected();
-            const recursiveRemove = (t) => {
-              for (const key in t) {
-                this.unsubscribe(t[key]);
-                this.delete(t[key].__node.tag);
-                delete this.__node.roots[t[key].__node.tag];
-                this.delete(key);
-                delete this.__node.roots[key];
-                t[key].__node.tag = t[key].__node.tag.substring(t[key].__node.tag.lastIndexOf(".") + 1);
-                if (clearListeners) {
-                  this.clearListeners(t[key]);
-                }
-                t[key].__callDisconnected();
-                if (t[key].__children) {
-                  recursiveRemove(t[key].__children);
-                }
-              }
-            };
-            if (node.__children) {
-              recursiveRemove(node.__children);
-            }
-          }
-          if (node?.__node.tag && node?.__parent) {
-            delete node?.__parent;
-            node.__node.tag = node.__node.tag.substring(node.__node.tag.indexOf(".") + 1);
-          }
-          if (node?.__node.graph)
-            node.__node.graph = void 0;
-          return node;
-        };
-        this.run = (node, ...args) => {
-          if (typeof node === "string") {
-            let nd = this.get(node);
-            if (!nd && node.includes(".")) {
-              nd = this.get(node.substring(0, node.lastIndexOf(".")));
-              if (typeof nd?.[node.substring(node.lastIndexOf(".") + 1)] === "function")
-                return nd[node.substring(node.lastIndexOf(".") + 1)](...args);
-            } else if (nd?.__operator)
-              return nd.__operator(...args);
-          }
-          if (node?.__operator) {
-            return node?.__operator(...args);
-          }
-        };
-        this.setListeners = (listeners) => {
-          for (const key in listeners) {
-            let node = this.get(key);
-            if (!node)
-              continue;
-            if (typeof listeners[key] === "object") {
-              for (const k in listeners[key]) {
-                let n = this.get(k);
-                let sub;
-                if (typeof listeners[key][k] !== "object")
-                  listeners[key][k] = { __callback: listeners[key][k] };
-                else if (!listeners[key][k].__callback) {
-                  for (const kk in listeners[key][k]) {
-                    if (typeof listeners[key][k][kk] !== "object") {
-                      listeners[key][k][kk] = { __callback: listeners[key][k][kk] };
-                      if (node.__operator && (listeners[key][k][kk].__callback === true || typeof listeners[key][k][kk].__callback === "undefined"))
-                        listeners[key][k][kk].__callback = node.__operator;
-                    }
-                    let nn = this.get(kk);
-                    if (!nn) {
-                      let tag = k.substring(0, k.lastIndexOf("."));
-                      nn = this.get(tag);
-                      if (nn) {
-                        let prop = k.substring(k.lastIndexOf(".") + 1);
-                        if (typeof node.__listeners[k][kk] !== "object")
-                          node.__listeners[k][kk] = { __callback: listeners[key][k][kk].__callback, inputState: listeners[key][k][kk]?.inputState, target: key, bound: k };
-                        sub = this.subscribe(nn, listeners[key][k][kk].__callback, listeners[key][k][kk].__args, prop, listeners[key][k][kk].inputState, key, k);
-                        node.__listeners[k][kk].sub = sub;
-                      }
-                    } else {
-                      if (typeof node.__listeners[k][kk] !== "object")
-                        node.__listeners[k][kk] = { __callback: listeners[key][k][kk].__callback, inputState: listeners[key][k][kk]?.inputState, target: key, bound: k };
-                      sub = this.subscribe(nn, listeners[key][k][kk].__callback, listeners[key][k].__args, void 0, listeners[key][k].inputState, key, k);
-                      node.__listeners[k][kk].sub = sub;
-                    }
-                  }
-                }
-                if ("__callback" in listeners[key][k]) {
-                  if (listeners[key][k].__callback === true || typeof listeners[key][k].__callback === "undefined")
-                    listeners[key][k].__callback = node.__operator;
-                  if (typeof listeners[key][k].__callback === "function")
-                    listeners[key][k].__callback = listeners[key][k].__callback.bind(node);
-                  if (typeof node.__listeners !== "object")
-                    node.__listeners = {};
-                  if (!n) {
-                    let tag = k.substring(0, k.lastIndexOf("."));
-                    n = this.get(tag);
-                    if (n) {
-                      if (typeof node.__listeners[k] !== "object")
-                        node.__listeners[k] = { __callback: listeners[key][k].__callback, inputState: listeners[key][k]?.inputState, target: key, bound: k };
-                      sub = this.subscribe(n, listeners[key][k].__callback, listeners[key][k].__args, k.substring(k.lastIndexOf(".") + 1), listeners[key][k].inputState, key, k);
-                      node.__listeners[k].sub = sub;
-                    }
-                  } else {
-                    if (typeof node.__listeners[k] !== "object")
-                      node.__listeners[k] = { __callback: listeners[key][k].__callback, inputState: listeners[key][k]?.inputState, target: key, bound: k };
-                    sub = this.subscribe(n, listeners[key][k].__callback, listeners[key][k].__args, void 0, listeners[key][k].inputState, key, k);
-                    node.__listeners[k].sub = sub;
-                  }
-                }
-              }
-            }
-          }
-        };
-        this.clearListeners = (node, listener) => {
-          if (typeof node === "string")
-            node = this.get(node);
-          if (node?.__listeners) {
-            for (const key in node.__listeners) {
-              if (listener && key !== listener)
-                continue;
-              if (typeof node.__listeners[key]?.sub !== "number")
-                continue;
-              let n = this.get(key);
-              if (!n) {
-                n = this.get(key.substring(0, key.lastIndexOf(".")));
-                if (n) {
-                  if (typeof node.__listeners[key] === "object" && !node.__listeners[key]?.__callback) {
-                    for (const k in node.__listeners[key]) {
-                      if (typeof node.__listeners[key][k]?.sub === "number") {
-                        this.unsubscribe(n, node.__listeners[key][k].sub, key.substring(key.lastIndexOf(".") + 1), node.__listeners[key][k].inputState);
-                        node.__listeners[key][k].sub = void 0;
-                      }
-                    }
-                  } else if (typeof node.__listeners[key]?.sub === "number") {
-                    this.unsubscribe(n, node.__listeners[key].sub, key.substring(key.lastIndexOf(".") + 1), node.__listeners[key].inputState);
-                    node.__listeners[key].sub = void 0;
-                  }
-                }
-              } else {
-                if (typeof !node.__listeners[key]?.__callback === "number") {
-                  for (const k in node.__listeners[key]) {
-                    if (node.__listeners[key][k]?.sub) {
-                      this.unsubscribe(n, node.__listeners[key][k].sub, void 0, node.__listeners[key][k].inputState);
-                      node.__listeners[key][k].sub = void 0;
-                    }
-                  }
-                } else if (typeof node.__listeners[key]?.sub === "number") {
-                  this.unsubscribe(n, node.__listeners[key].sub, void 0, node.__listeners[key].inputState);
-                  node.__listeners[key].sub = void 0;
-                }
-              }
-            }
-          }
-        };
-        this.get = (tag) => {
-          return this.__node.nodes.get(tag);
-        };
-        this.set = (tag, node) => {
-          return this.__node.nodes.set(tag, node);
-        };
-        this.delete = (tag) => {
-          return this.__node.nodes.delete(tag);
-        };
-        this.getProps = (node, getInitial) => {
-          if (typeof node === "string")
-            node = this.get(node);
-          if (node instanceof GraphNode) {
-            let cpy;
-            if (getInitial)
-              cpy = Object.assign({}, this.__node.roots[node.__node.tag]);
-            else {
-              cpy = Object.assign({}, node);
-              for (const key in cpy) {
-                if (key.includes("__"))
-                  delete cpy[key];
-              }
-            }
-          }
-        };
-        this.subscribe = (nodeEvent, onEvent, args, key, subInput, target, bound) => {
-          let nd = nodeEvent;
-          if (typeof nodeEvent === "string") {
-            nd = this.get(nodeEvent);
-            if (!nd && nodeEvent.includes(".")) {
-              nd = this.get(nodeEvent.substring(0, nodeEvent.lastIndexOf(".")));
-              key = nodeEvent.substring(nodeEvent.lastIndexOf(".") + 1);
-            }
-          }
-          if (target instanceof GraphNode)
-            target = target.__node.tag;
-          if (typeof onEvent === "string") {
-            let key2 = onEvent;
-            let setOnEventFromString = (onEvent2) => {
-              if (this.get(onEvent2)?.__operator) {
-                let node = this.get(onEvent2);
-                onEvent2 = function(...inp) {
-                  return node.__operator(...inp);
-                };
-              } else if (onEvent2.includes(".")) {
-                let n = this.get(onEvent2.substring(0, onEvent2.lastIndexOf(".")));
-                let key3 = onEvent2.substring(onEvent2.lastIndexOf(".") + 1);
-                if (typeof n[key3] === "function") {
-                  if (n[key3] instanceof GraphNode)
-                    onEvent2 = n[key3];
-                  else
-                    onEvent2 = function(...inp) {
-                      return n[key3](...inp);
-                    };
-                } else {
-                  onEvent2 = function(inp) {
-                    n[key3] = inp;
-                    return n[key3];
-                  };
-                }
-              }
-              return onEvent2;
-            };
-            if (target) {
-              let node = this.get(target);
-              if (typeof node?.[onEvent] === "function") {
-                onEvent = function(...inp) {
-                  return node[key2](...inp);
-                };
-              } else if (node[key2]) {
-                if (node[key2] instanceof GraphNode)
-                  onEvent = node[key2];
-                else
-                  onEvent = function(inp) {
-                    node[key2] = inp;
-                    return node[key2];
-                  };
-              } else {
-                onEvent = setOnEventFromString(onEvent);
-              }
-            } else {
-              onEvent = setOnEventFromString(onEvent);
-            }
-          }
-          if ((typeof onEvent === "function" || onEvent instanceof GraphNode) && args) {
-            if (onEvent instanceof GraphNode && onEvent.__operator)
-              onEvent = function(inp) {
-                return onEvent.__operator(inp);
-              };
-            onEvent = wrapArgs(onEvent, args, this);
-          }
-          let sub;
-          if (nd instanceof GraphNode) {
-            const doSub = () => {
-              sub = nd.__subscribe(onEvent, key, subInput, target, bound);
-              if (target && this.get(target) && this.get(target).__listeners[bound]) {
-                if (typeof this.get(target).__listeners[bound] !== "object") {
-                  this.get(target).__listeners[bound] = this.get(target).__node.state.getEvent(bound);
-                }
-              }
-              this.get(target).__listeners[bound].sub = sub;
-              let ondelete = () => {
-                if (sub !== void 0)
-                  nd.__unsubscribe(sub, key, subInput);
-                sub = void 0;
-              };
-              nd.__addOndisconnected(() => {
-                ondelete();
-                nd.__addOnconnected(() => {
-                  if (sub === void 0 && nd.__node.graph.__node.tag === this.__node.tag)
-                    doSub();
-                });
-              });
-              if (typeof onEvent === "string" && this.get(onEvent))
-                onEvent = this.get(onEvent);
-              if (onEvent instanceof GraphNode) {
-                onEvent.__addOndisconnected(() => {
-                  ondelete();
-                });
-              }
-            };
-            doSub();
-          } else if (typeof nodeEvent === "string") {
-            let node = this.get(nodeEvent);
-            if (node) {
-              if (onEvent instanceof GraphNode && onEvent.__operator) {
-                const doSub = () => {
-                  sub = node.__subscribe(onEvent.__operator, key, subInput, target, bound);
-                  if (target && this.get(target) && this.get(target).__listeners[bound]) {
-                    if (typeof this.get(target).__listeners[bound] !== "object") {
-                      this.get(target).__listeners[bound] = this.get(target).__node.state.getEvent(bound);
-                    }
-                    this.get(target).__listeners[bound].sub = sub;
-                  }
-                  let ondelete = () => {
-                    if (sub !== void 0)
-                      node.__unsubscribe(sub, key, subInput);
-                  };
-                  node.__addOndisconnected(() => {
-                    ondelete();
-                    node.__addOnconnected(() => {
-                      if (sub === void 0 && node.__node.graph.__node.tag === this.__node.tag)
-                        doSub();
-                    });
-                  });
-                  onEvent.__addOndisconnected(ondelete);
-                };
-                doSub();
-              } else if (typeof onEvent === "function" || typeof onEvent === "string") {
-                const doSub = () => {
-                  sub = node.__subscribe(onEvent, key, subInput, target, bound);
-                  if (target && this.get(target) && this.get(target).__listeners[bound]) {
-                    if (typeof this.get(target).__listeners[bound] !== "object") {
-                      this.get(target).__listeners[bound] = this.get(target).__node.state.getEvent(bound);
-                    }
-                    this.get(target).__listeners[bound].sub = sub;
-                  }
-                  let ondelete = () => {
-                    if (sub !== void 0)
-                      node.__unsubscribe(sub, key, subInput);
-                    sub = void 0;
-                  };
-                  node.__addOndisconnected(() => {
-                    ondelete();
-                    node.__addOnconnected(() => {
-                      if (sub === void 0 && node.__node.graph.__node.tag === this.__node.tag)
-                        doSub();
-                    });
-                  });
-                  if (typeof onEvent === "string" && this.get(onEvent))
-                    this.get(onEvent).__addOndisconnected(ondelete);
-                  this.__node.state.getEvent(node.__node.unique, sub).source = nodeEvent;
-                };
-                doSub();
-              }
-            } else {
-              if (typeof onEvent === "string")
-                onEvent = this.__node.nodes.get(onEvent).__operator;
-              if (typeof onEvent === "function")
-                sub = this.__node.state.subscribeEvent(nodeEvent, onEvent);
-            }
-          }
-          return sub;
-        };
-        this.unsubscribe = (node, sub, key, subInput) => {
-          if (node instanceof GraphNode) {
-            return node.__unsubscribe(sub, key, subInput);
-          } else
-            return this.get(node)?.__unsubscribe(sub, key, subInput);
-        };
-        this.setState = (update) => {
-          this.__node.state.setState(update);
-        };
-        this.init(options);
-      }
-    };
-    function recursivelyAssign(target, obj) {
-      for (const key in obj) {
-        if (obj[key]?.constructor.name === "Object") {
-          if (target[key]?.constructor.name === "Object")
-            recursivelyAssign(target[key], obj[key]);
-          else
-            target[key] = recursivelyAssign({}, obj[key]);
-        } else {
-          target[key] = obj[key];
-        }
-      }
-      return target;
-    }
-    function getAllProperties(obj) {
-      var allProps = [], curr = obj;
-      do {
-        var props = Object.getOwnPropertyNames(curr);
-        let fn = function(prop) {
-          if (allProps.indexOf(prop) === -1)
-            allProps.push(prop);
-        };
-        props.forEach(fn);
-      } while (curr = Object.getPrototypeOf(curr));
-      return allProps;
-    }
-    function isNativeClass(thing) {
-      return isFunction(thing) === "class";
-    }
-    function isFunction(x2) {
-      const res = typeof x2 === "function" ? x2.prototype ? Object.getOwnPropertyDescriptor(x2, "prototype")?.writable ? "function" : "class" : x2.constructor.name === "AsyncFunction" ? "async" : "arrow" : "";
-      return res;
-    }
-    var wrapArgs = (callback2, argOrder, graph) => {
-      let args = [];
-      let getCallbackFromString = (a) => {
-        if (graph.get(a)?.__operator) {
-          let node = graph.get(a);
-          return (...inp) => {
-            node.__operator(...inp);
-          };
-        } else if (a.includes(".")) {
-          let split = a.split(".");
-          let popped = split.pop();
-          let joined = split.join(".");
-          let node = graph.get(joined);
-          if (typeof graph.get(joined)?.[popped] === "function") {
-            return (...inp) => {
-              return node[popped](...inp);
-            };
-          } else
-            return () => {
-              return node[popped];
-            };
-        } else if (graph.get(a)) {
-          let node = graph.get(a);
-          return () => {
-            return node;
-          };
-        } else {
-          let arg = a;
-          return () => {
-            return arg;
-          };
-        }
-      };
-      let forArg = (a, i) => {
-        if (a === "__output" || a === "__input") {
-          args[i] = (inp) => {
-            return inp;
-          };
-        } else if (typeof a === "string") {
-          args[i] = getCallbackFromString(a);
-        } else if (typeof a === "function") {
-          let fn2 = a;
-          args[i] = (...inp) => {
-            return fn2(...inp);
-          };
-        } else if (typeof a === "object" && a.__input) {
-          let recursivelyCreateCallback = function(c) {
-            let input = c.__input;
-            if (typeof c.__input === "string") {
-              input = getCallbackFromString(c.__input);
-            }
-            if (c.__args) {
-              input = wrapArgs(input, c.__args, graph);
-            }
-            if (c.__output) {
-              let output = c.__output;
-              if (typeof c.__output === "string") {
-                output = getCallbackFromString(output);
-              } else if (typeof a.__output === "object") {
-                output = recursivelyCreateCallback(output);
-              }
-              if (typeof output === "function") {
-                let fn2 = input;
-                input = (...inp) => {
-                  return output(fn2(...inp));
-                };
-              }
-            }
-            return input;
-          };
-          args[i] = recursivelyCreateCallback(a);
-        } else {
-          let arg = a;
-          args[i] = () => {
-            return arg;
-          };
-        }
-      };
-      argOrder.forEach(forArg);
-      if (typeof callback2 === "string")
-        callback2 = getCallbackFromString(callback2);
-      let fn = callback2;
-      callback2 = function(...inp) {
-        let mapArg = (arg) => {
-          return arg(...inp);
-        };
-        return fn(...args.map(mapArg));
-      };
-      return callback2;
-    };
-    var backprop = (node, parent, graph) => {
-      if (node.__node.backward && parent instanceof GraphNode) {
-        graph.setListeners({ [parent.__node.tag]: { [node.__node.tag]: parent } });
-      }
-    };
-    var loop = (node, parent, graph) => {
-      if (node.__operator && !node.__node.looperSet) {
-        if (typeof node.__node.delay === "number") {
-          let fn = node.__operator;
-          node.__setOperator((...args) => {
-            return new Promise((res, rej) => {
-              setTimeout(async () => {
-                res(await fn(...args));
-              }, node.__node.delay);
-            });
-          });
-        } else if (node.__node.frame === true) {
-          let fn = node.__operator;
-          node.__setOperator((...args) => {
-            return new Promise((res, rej) => {
-              requestAnimationFrame(async () => {
-                res(await fn(...args));
-              });
-            });
-          });
-        }
-        if (typeof node.__node.repeat === "number" || typeof node.__node.recursive === "number") {
-          let fn = node.__operator;
-          node.__setOperator(async (...args) => {
-            let i = node.__node.repeat ? node.__node.repeat : node.__node.recursive;
-            let result;
-            let repeater = async (tick, ...inp) => {
-              while (tick > 0) {
-                if (node.__node.delay || node.__node.frame) {
-                  fn(...inp).then(async (res) => {
-                    if (node.__node.recursive) {
-                      await repeater(tick, res);
-                    } else
-                      await repeater(tick, ...inp);
-                  });
-                  break;
-                } else
-                  result = await fn(...args);
-                tick--;
-              }
-            };
-            await repeater(i, ...args);
-            return result;
-          });
-        }
-        if (node.__node.loop && typeof node.__node.loop === "number") {
-          node.__node.looperSet = true;
-          let fn = node.__operator;
-          let time = node.__node.loop;
-          node.__setOperator((...args) => {
-            if (!("looping" in node.__node))
-              node.__node.looping = true;
-            if (node.__node.looping) {
-              let last = performance.now();
-              fn(...args);
-              setTimeout(() => {
-                let now = performance.now();
-                let overshoot = now - last - node.__node.loop;
-                if (overshoot > 0)
-                  time = node.__node.loop - overshoot;
-                else
-                  time = node.__node.loop;
-                if (time <= 0)
-                  time = node.__node.loop;
-                node.__operator(...args);
-              }, time);
-            }
-          });
-          if (node.__node.looping)
-            node.__operator();
-          let ondelete = (node2) => {
-            if (node2.__node.looping)
-              node2.__node.looping = false;
-          };
-          node.__addOndisconnected(ondelete);
-        }
-      }
-    };
-    var animate = (node, parent, graph) => {
-      if (node.__node.animate === true || node.__animation) {
-        let fn = node.__operator;
-        node.__setOperator((...args) => {
-          if (!("animating" in node.__node))
-            node.__node.animating = true;
-          if (node.__node.animating) {
-            if (typeof node.__animation === "function")
-              node.__animation(...args);
-            else
-              fn(...args);
-            requestAnimationFrame(() => {
-              node.__operator(...args);
-            });
-          }
-        });
-        if (node.__node.animating || (!("animating" in node.__node) || node.__node.animating) && node.__animation)
-          setTimeout(() => {
-            requestAnimationFrame(node.__operator);
-          }, 10);
-        let ondelete = (node2) => {
-          if (node2.__node.animating)
-            node2.__node.animating = false;
-        };
-        node.__addOndisconnected(ondelete);
-      }
-    };
-    var branching = (node, parent, graph) => {
-      if (typeof node.__branch === "object" && node.__operator && !node.__branchApplied) {
-        let fn = node.__operator;
-        node.__branchApplied = true;
-        node.__operator = (...args) => {
-          let result = fn(...args);
-          for (const key in node.__branch) {
-            let triggered = () => {
-              if (typeof node.__branch[key].then === "function") {
-                node.__branch[key].then(result);
-              } else if (node.__branch[key].then instanceof GraphNode && node.__branch[key].then.__operator) {
-                node.__branch[key].then.__operator(result);
-              } else
-                result = node.__branch[key].then;
-            };
-            if (typeof node.__branch[key].if === "function") {
-              if (node.__branch[key].if(result) == true) {
-                triggered();
-              }
-            } else if (node.__branch[key].if === result) {
-              triggered();
-            }
-          }
-          return result;
-        };
-      }
-      if (node.__listeners) {
-        for (const key in node.__listeners) {
-          if (typeof node.__listeners[key] === "object") {
-            if (node.__listeners[key].branch && !node.__listeners[key].branchApplied) {
-              let fn = node.__listeners[key].callback;
-              node.__listeners[key].branchApplied = true;
-              node.__listeners.callback = (ret) => {
-                let triggered = () => {
-                  if (typeof node.__listeners[key].branch.then === "function") {
-                    ret = node.__listeners[key].branch.then(ret);
-                  } else if (node.__listeners[key].branch.then instanceof GraphNode && node.__listeners[key].branch.then.__operator) {
-                    ret = node.__listeners[key].branch.then.__operator(ret);
-                  } else
-                    ret = node.__listeners[key].branch.then;
-                };
-                if (typeof node.__listeners[key].branch.if === "function") {
-                  if (node.__listeners[key].branch.if(ret)) {
-                    triggered();
-                  }
-                } else if (node.__listeners[key].branch.if === ret) {
-                  triggered();
-                }
-                return fn(ret);
-              };
-            }
-          }
-        }
-      }
-    };
-    var triggerListenerOncreate = (node, parent, graph) => {
-      if (node.__listeners) {
-        for (const key in node.__listeners) {
-          if (typeof node.__listeners[key] === "object") {
-            if (node.__listeners[key].oncreate) {
-              node.__listeners[key].callback(node.__listeners[key].oncreate);
-            }
-          }
-        }
-      }
-    };
-    var bindListener = (node, parent, graph) => {
-      if (node.__listeners) {
-        for (const key in node.__listeners) {
-          if (typeof node.__listeners[key] === "object") {
-            if (typeof node.__listeners[key].binding === "object") {
-              node.__listeners.callback = node.__listeners.callback.bind(node.__listeners[key].binding);
-            }
-          }
-        }
-      }
-    };
-    var transformListenerResult = (node, parent, graph) => {
-      if (node.__listeners) {
-        for (const key in node.__listeners) {
-          if (typeof node.__listeners[key] === "object") {
-            if (typeof node.__listeners[key].transform === "function" && !node.__listeners[key].transformApplied) {
-              let fn = node.__listeners[key].callback;
-              node.__listeners[key].transformApplied = true;
-              node.__listeners.callback = (ret) => {
-                ret = node.__listeners[key].transform(ret);
-                return fn(ret);
-              };
-            }
-          }
-        }
-      }
-    };
-    var substitute__operator = (node, parent, graph) => {
-      if (node.post && !node.__operator) {
-        node.__setOperator(node.post);
-      } else if (!node.__operator && typeof node.get == "function") {
-        node.__setOperator(node.get);
-      }
-      if (!node.get && node.__operator) {
-        node.get = node.__operator;
-      }
-      if (node.aliases) {
-        node.aliases.forEach((a) => {
-          graph.set(a, node);
-          let ondelete = (node2) => {
-            graph.__node.nodes.delete(a);
-          };
-          node.__addOndisconnected(ondelete);
-        });
-      }
-      if (typeof graph.__node.roots?.[node.__node.tag] === "object" && node.get)
-        graph.__node.roots[node.__node.tag].get = node.get;
-    };
-    var loaders = { backprop, loop, animate, branching, triggerListenerOncreate, bindListener, transformListenerResult, substitute__operator };
-    var Service = class extends Graph {
-      constructor(options) {
-        super({ ...options, loaders: options?.loaders ? Object.assign({ ...loaders }, options.loaders) : { ...loaders } });
-        this.name = `service${Math.floor(Math.random() * 1e15)}`;
-        this.addServices = (services) => {
-          for (const s in services) {
-            if (typeof services[s] === "function")
-              services[s] = new services[s]();
-            if (services[s]?.__node?.loaders)
-              Object.assign(this.__node.loaders, services[s].__node.loaders);
-            if (services[s]?.__node?.nodes) {
-              services[s].__node.nodes.forEach((n, tag) => {
-                if (!this.get(tag)) {
-                  this.set(tag, n);
-                } else
-                  this.set(s + "." + tag, n);
-              });
-              this.__node.nodes.forEach((n, k) => {
-                if (!services[s].__node.nodes.get(k))
-                  services[s].__node.nodes.set(k, n);
-              });
-              let set = this.set;
-              this.set = (tag, node) => {
-                services[s].set(tag, node);
-                return set(tag, node);
-              };
-              let del = this.delete;
-              this.delete = (tag) => {
-                services[s].delete(tag);
-                return del(tag);
-              };
-            } else if (typeof services[s] === "object") {
-              this.load(services[s]);
-            }
-          }
-        };
-        this.handleMethod = (route, method, args) => {
-          let m = method.toLowerCase();
-          let src = this.__node.nodes.get(route);
-          if (!src) {
-            src = this.__node.roots[route];
-          }
-          if (src?.[m]) {
-            if (typeof src[m] !== "function") {
-              if (args) {
-                if (Array.isArray(args) && args.length === 1)
-                  src[m] = args[0];
-                else
-                  src[m] = args;
-                return;
-              }
-              return src[m];
-            } else {
-              if (Array.isArray(args))
-                return src[m](...args);
-              else
-                return src[m](args);
-            }
-          } else
-            return this.handleServiceMessage({ route, args, method });
-        };
-        this.transmit = (...args) => {
-          if (typeof args[0] === "object") {
-            if (args[0].method) {
-              return this.handleMethod(args[0].route, args[0].method, args[0].args);
-            } else if (args[0].route) {
-              return this.handleServiceMessage(args[0]);
-            } else if (args[0].node) {
-              return this.handleGraphNodeCall(args[0].node, args[0].args);
-            } else if (this.__node.keepState) {
-              if (args[0].route)
-                this.setState({ [args[0].route]: args[0].args });
-              if (args[0].node)
-                this.setState({ [args[0].node]: args[0].args });
-            }
-            return args;
-          } else
-            return args;
-        };
-        this.receive = (...args) => {
-          if (args[0]) {
-            if (typeof args[0] === "string") {
-              let substr = args[0].substring(0, 8);
-              if (substr.includes("{") || substr.includes("[")) {
-                if (substr.includes("\\"))
-                  args[0] = args[0].replace(/\\/g, "");
-                if (args[0][0] === '"') {
-                  args[0] = args[0].substring(1, args[0].length - 1);
-                }
-                ;
-                args[0] = JSON.parse(args[0]);
-              }
-            }
-          }
-          if (typeof args[0] === "object") {
-            if (args[0].method) {
-              return this.handleMethod(args[0].route, args[0].method, args[0].args);
-            } else if (args[0].route) {
-              return this.handleServiceMessage(args[0]);
-            } else if (args[0].node) {
-              return this.handleGraphNodeCall(args[0].node, args[0].args);
-            } else if (this.__node.keepState) {
-              if (args[0].route)
-                this.setState({ [args[0].route]: args[0].args });
-              if (args[0].node)
-                this.setState({ [args[0].node]: args[0].args });
-            }
-            return args;
-          } else
-            return args;
-        };
-        this.pipe = (source, destination, endpoint, method, callback2) => {
-          if (source instanceof GraphNode) {
-            if (callback2)
-              return this.subscribe(source, (res) => {
-                let mod = callback2(res);
-                if (mod !== void 0)
-                  this.transmit({ route: destination, args: mod, method });
-                else
-                  this.transmit({ route: destination, args: res, method }, endpoint);
-              });
-            else
-              return this.subscribe(source, (res) => {
-                this.transmit({ route: destination, args: res, method }, endpoint);
-              });
-          } else if (typeof source === "string")
-            return this.subscribe(source, (res) => {
-              this.transmit({ route: destination, args: res, method }, endpoint);
-            });
-        };
-        this.pipeOnce = (source, destination, endpoint, method, callback2) => {
-          if (source instanceof GraphNode) {
-            if (callback2)
-              return source.__node.state.subscribeEventOnce(source.__node.unique, (res) => {
-                let mod = callback2(res);
-                if (mod !== void 0)
-                  this.transmit({ route: destination, args: mod, method });
-                else
-                  this.transmit({ route: destination, args: res, method }, endpoint);
-              });
-            else
-              return this.__node.state.subscribeEventOnce(source.__node.unique, (res) => {
-                this.transmit({ route: destination, args: res, method }, endpoint);
-              });
-          } else if (typeof source === "string")
-            return this.__node.state.subscribeEventOnce(this.__node.nodes.get(source).__node.unique, (res) => {
-              this.transmit({ route: destination, args: res, method }, endpoint);
-            });
-        };
-        this.terminate = (...args) => {
-        };
-        this.isTypedArray = isTypedArray;
-        this.recursivelyAssign = recursivelyAssign2;
-        this.spliceTypedArray = spliceTypedArray;
-        this.ping = () => {
-          console.log("pinged!");
-          return "pong";
-        };
-        this.echo = (...args) => {
-          this.transmit(...args);
-          return args;
-        };
-        this.log = (...args) => {
-          console.log(...args);
-          return true;
-        };
-        this.error = (...args) => {
-          console.error(...args);
-          return true;
-        };
-        if (options?.services)
-          this.addServices(options.services);
-        this.load(this);
-      }
-      handleServiceMessage(message) {
-        let call;
-        if (typeof message === "object") {
-          if (message.route)
-            call = message.route;
-          else if (message.node)
-            call = message.node;
-        }
-        if (call) {
-          if (Array.isArray(message.args))
-            return this.run(call, ...message.args);
-          else
-            return this.run(call, message.args);
-        } else
-          return message;
-      }
-      handleGraphNodeCall(route, args) {
-        if (!route)
-          return args;
-        if (args?.args) {
-          this.handleServiceMessage(args);
-        } else if (Array.isArray(args))
-          return this.run(route, ...args);
-        else
-          return this.run(route, args);
-      }
-    };
-    function isTypedArray(x2) {
-      return ArrayBuffer.isView(x2) && Object.prototype.toString.call(x2) !== "[object DataView]";
-    }
-    var recursivelyAssign2 = (target, obj) => {
-      for (const key in obj) {
-        if (obj[key]?.constructor.name === "Object" && !Array.isArray(obj[key])) {
-          if (target[key]?.constructor.name === "Object" && !Array.isArray(target[key]))
-            recursivelyAssign2(target[key], obj[key]);
-          else
-            target[key] = recursivelyAssign2({}, obj[key]);
-        } else
-          target[key] = obj[key];
-      }
-      return target;
-    };
-    function spliceTypedArray(arr, start, end) {
-      let s = arr.subarray(0, start);
-      let e;
-      if (end) {
-        e = arr.subarray(end + 1);
-      }
-      let ta;
-      if (s.length > 0 || e?.length > 0)
-        ta = new arr.constructor(s.length + e.length);
-      if (ta) {
-        if (s.length > 0)
-          ta.set(s);
-        if (e && e.length > 0)
-          ta.set(e, s.length);
-      }
-      return ta;
-    }
-    var randomId = (prefix) => (prefix ? `${prefix}` : "") + Math.floor(1e15 * Math.random());
-    var pseudoObjectId = (m = Math, d = Date, h = 16, s = (s2) => m.floor(s2).toString(h)) => s(d.now() / 1e3) + " ".repeat(h).replace(/./g, () => s(m.random() * h));
-    var StructFrontend = class extends Service {
-      constructor(options, user) {
-        super(options);
-        this.name = "structs";
-        this.tablet = new DataTablet();
-        this.collections = this.tablet.collections;
-        this.id = randomId();
-        this.baseServerCallback = (data) => {
-          let structs = data;
-          if (typeof data === "object" && data?.structType)
-            structs = [data];
-          if (Array.isArray(structs)) {
-            let filtered = structs.filter((o) => {
-              if (o.structType !== "notification")
-                return true;
-            });
-            if (this.tablet)
-              this.tablet.sortStructsIntoTable(filtered);
-            structs.forEach((struct) => {
-              if (typeof struct === "object") {
-                if (!struct.structType || struct.structType === "USER") {
-                  if (struct.email)
-                    struct.structType = "user";
-                  else
-                    struct.structType = "uncategorized";
-                }
-                if (struct.structType === "user" || struct.structType === "authorization" || struct.structType === "group") {
-                  if (struct.structType === "user") {
-                    struct._id = struct.id;
-                  } else if (struct.structType === "group") {
-                    if (this.currentUser) {
-                      let uset = false;
-                      if (struct.admins[this.currentUser?._id] && !this.currentUser.userRoles?.[struct.name + "_admin"]) {
-                        this.currentUser.userRoles[struct.name + "_admin"] = true;
-                        uset = true;
-                      } else if (!struct.admins[this.currentUser?._id] && this.currentUser.userRoles?.[struct.name + "_admin"]) {
-                        delete this.currentUser.userRoles[struct.name + "_admin"];
-                        uset = true;
-                      }
-                      if (struct.admins[this.currentUser?._id] && !this.currentUser.userRoles?.[struct.name + "_peer"]) {
-                        this.currentUser.userRoles[struct.name + "_peer"] = true;
-                        uset = true;
-                      } else if (!struct.admins[this.currentUser?._id] && this.currentUser.userRoles?.[struct.name + "_peer"]) {
-                        delete this.currentUser.userRoles[struct.name + "_peer"];
-                        uset = true;
-                      }
-                      if (struct.admins[this.currentUser?._id] && !this.currentUser.userRoles?.[struct.name + "_client"]) {
-                        this.currentUser.userRoles[struct.name + "_client"] = true;
-                        uset = true;
-                      } else if (!struct.admins[this.currentUser?._id] && this.currentUser.userRoles?.[struct.name + "_client"]) {
-                        delete this.currentUser.userRoles[struct.name + "_client"];
-                        uset = true;
-                      }
-                      if (uset)
-                        this.setUser(this.currentUser);
-                    }
-                  }
-                  this.setLocalData(struct);
-                } else {
-                  if (struct.structType === "notification") {
-                    let found = this.getLocalData("notification", { "ownerId": struct.ownerId, "_id": struct.parent._id });
-                    if (found) {
-                      this.setLocalData(struct);
-                    } else {
-                      if (this.getLocalData(struct.structType, { "_id": struct.parent._id })) {
-                      } else {
-                        this.overwriteLocalData(struct);
-                      }
-                    }
-                    if (struct.ownerId === this.currentUser?._id && (struct.parent.structType === "user" || struct.parent.structType === "dataInstance" || struct.parent.structType === "schedule" || struct.parent.structType === "authorization")) {
-                      this.resolveNotifications([struct], true);
-                    }
-                  } else {
-                    this.overwriteLocalData(struct);
-                  }
-                }
-              }
-            });
-          }
-          if (data?.message === "notifications") {
-            this.checkForNotifications();
-          }
-          if (data?.message === "deleted") {
-            this.deleteLocalData(data.data);
-          }
-          this.onResult(data);
-        };
-        this.getUser = async (info = "", callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "getUser", args: [this.currentUser._id, info] });
-            callback2(res);
-            return res;
-          }
-        };
-        this.getUsers = async (ids = [], callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "getUsersByIds", args: [this.currentUser._id, ids] });
-            callback2(res);
-            return res;
-          }
-        };
-        this.getUsersByRole = async (userRole, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "getUsersByRole", args: [this.currentUser._id, userRole] });
-            callback2(res);
-            return res;
-          }
-        };
-        this.getAllUserData = async (ownerId, excluded = [], callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "getAllData", args: [ownerId, excluded] });
-            callback2(res);
-            return res;
-          }
-        };
-        this.query = async (collection, queryObj = {}, findOne = false, skip = 0, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            if (!collection || !queryObj)
-              return void 0;
-            let res = await this.currentUser.request({ route: "query", args: [this.currentUser._id, collection, queryObj, findOne, skip] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.getData = async (collection, ownerId, searchDict, limit = 0, skip = 0, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "getData", args: [this.currentUser._id, collection, ownerId, searchDict, limit, skip] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.getDataByIds = async (structIds = [], ownerId, collection, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "getDataByIds", args: [this.currentUser._id, structIds, ownerId, collection] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.getStructParentData = async (struct, callback2 = this.baseServerCallback) => {
-          if (!struct.parent)
-            return;
-          if (this.currentUser?.request) {
-            let args = [this.currentUser._id, struct.parent?.structType, "_id", struct.parent?._id];
-            let res = (await this.currentUser.request({ route: "getData", args }))?.[0];
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.setUser = async (userStruct = {}, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "setUser", args: [this.currentUser._id, this.stripStruct(userStruct)] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.checkUserToken = async (usertoken, user2 = this.currentUser, callback2 = this.baseServerCallback) => {
-          if (!usertoken)
-            return false;
-          let changed = false;
-          for (const prop in usertoken) {
-            let dummystruct = this.userStruct();
-            if (user2[prop] && prop !== "_id") {
-              if (Array.isArray(usertoken[prop])) {
-                for (let i = 0; i < user2[prop].length; i++) {
-                  if (usertoken[prop].indexOf(user2[prop][i]) < 0) {
-                    user2[prop] = usertoken[prop];
-                    changed = true;
-                    break;
-                  }
-                }
-                if (!changed)
-                  for (let i = 0; i < usertoken[prop].length; i++) {
-                    if (user2[prop].indexOf(usertoken[prop][i]) < 0) {
-                      user2[prop] = usertoken[prop];
-                      changed = true;
-                      break;
-                    }
-                  }
-              } else if (user2[prop] !== usertoken[prop]) {
-                user2[prop] = usertoken[prop];
-                changed = true;
-              }
-            } else if (!user2[prop] && dummystruct[prop]) {
-              user2[prop] = usertoken[prop];
-              changed = true;
-            }
-          }
-          if (changed)
-            return await this.setUser(user2, callback2);
-          return changed;
-        };
-        this.setData = async (structs = [], notify = true, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            const copies = new Array();
-            if (!Array.isArray(structs) && typeof structs === "object")
-              structs = [structs];
-            structs.forEach((struct) => {
-              copies.push(this.stripStruct(struct));
-            });
-            let res = await this.currentUser.request({ route: "setData", args: [this.currentUser._id, copies, notify] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.updateServerData = this.setData;
-        this.deleteData = async (structs = [], callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let toDelete = [];
-            structs.forEach((struct) => {
-              if (typeof struct === "object") {
-                if (struct?.structType && struct?._id) {
-                  toDelete.push({ structType: struct.structType, _id: struct._id });
-                  this.deleteLocalData(struct);
-                }
-              } else if (typeof struct === "string") {
-                let localstruct = this.getLocalData(void 0, { _id: struct });
-                if (localstruct && !Array.isArray(localstruct)) {
-                  toDelete.push({ structType: localstruct.structType, _id: localstruct._id });
-                } else {
-                  toDelete.push({ _id: struct });
-                }
-              }
-            });
-            let res = await this.currentUser.request({ route: "deleteData", args: [this.currentUser._id, toDelete] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.deleteUser = async (userId, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            if (!userId)
-              return;
-            let res = await this.currentUser.request({ route: "deleteUser", args: [this.currentUser._id, userId] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.setGroup = async (groupStruct = {}, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "setGroup", args: [this.currentUser._id, this.stripStruct(groupStruct)] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.getUserGroups = async (userId = this.currentUser._id, groupId = "", callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "getUserGroups", args: [this.currentUser._id, userId, groupId] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.deleteGroup = async (groupId, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            if (!groupId)
-              return;
-            this.deleteLocalData(groupId);
-            let res = await this.currentUser.request({ route: "deleteGroup", args: [this.currentUser._id, groupId] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.setAuthorization = async (authorizationStruct = {}, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            let res = await this.currentUser.request({ route: "setAuthorization", args: [this.currentUser._id, this.stripStruct(authorizationStruct)] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.getAuthorizations = async (userId = this.currentUser?._id, authorizationId = "", callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            if (userId === void 0)
-              return;
-            let res = await this.currentUser.request({ route: "getAuthorizations", args: [this.currentUser._id, userId, authorizationId] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.deleteAuthorization = async (authorizationId, callback2 = this.baseServerCallback) => {
-          if (this.currentUser?.request) {
-            if (!authorizationId)
-              return;
-            this.deleteLocalData(authorizationId);
-            let res = await this.currentUser.request({ route: "deleteAuthorization", args: [authorizationId] });
-            if (typeof callback2 === "function")
-              callback2(res);
-            return res;
-          }
-        };
-        this.checkForNotifications = async (userId = this.currentUser?._id) => {
-          return await this.getData("notification", userId);
-        };
-        this.resolveNotifications = async (notifications = [], pull = true, user2 = this.currentUser) => {
-          if (!user2 || notifications.length === 0)
-            return;
-          let structIds = [];
-          let notificationIds = [];
-          let nTypes = [];
-          let unote = false;
-          if (notifications.length === 0)
-            notifications = this.getLocalData("notification", { "ownerId": user2._id });
-          notifications.forEach((struct) => {
-            if (struct.parent.structType === "user")
-              unote = true;
-            nTypes.push(struct.parent.structType);
-            structIds.push(struct.parent._id);
-            notificationIds.push(struct._id);
-            this.deleteLocalData(struct);
-          });
-          this.deleteData(notifications);
-          if (pull) {
-            nTypes.reverse().forEach((note, i) => {
-              if (note === "user") {
-                this.getUser(structIds[i]);
-                structIds.splice(structIds.length - i - 1, 1);
-              }
-            });
-            if (structIds.length === 1)
-              return await this.getDataByIds(structIds, void 0, notifications[0].parent.structType);
-            if (structIds.length > 0)
-              return await this.getDataByIds(structIds);
-          }
-          return true;
-        };
-        this.setAuthorizationsByGroup = async (user2 = this.currentUser) => {
-          let auths = this.getLocalData("authorization", { "ownerId": user2._id });
-          let newauths = [];
-          if (user2.userRoles)
-            await Promise.all(Object.keys(user2.userRoles).map(async (role) => {
-              let split = role.split("_");
-              let team = split[0];
-              let otherrole;
-              if (role.includes("client")) {
-                otherrole = team + "_peer";
-              } else if (role.includes("peer")) {
-                otherrole = team + "_client";
-              } else if (role.includes("admin")) {
-                otherrole = team + "_owner";
-              }
-              if (otherrole) {
-                let users = await this.getUsersByRole(otherrole);
-                if (users)
-                  await Promise.all(users.map(async (groupie) => {
-                    let theirname = groupie.username;
-                    if (!theirname)
-                      theirname = groupie.email;
-                    if (!theirname)
-                      theirname = groupie._id;
-                    let myname = user2.username;
-                    if (!myname)
-                      myname = user2.email;
-                    if (!myname)
-                      myname = user2._id;
-                    if (theirname !== myname) {
-                      if (role.includes("client")) {
-                        let found = auths.find((a) => {
-                          if (a.authorizerId === groupie._id && a.authorizedId === user2._id)
-                            return true;
-                        });
-                        if (!found) {
-                          let auth = await this.authorizeUser(DataStructures_exports.ProfileStruct("user", user2, user2), groupie._id, theirname, user2._id, myname, { "peer": true }, void 0, { group: team });
-                          newauths.push(auth);
-                        }
-                      } else if (role.includes("peer")) {
-                        let found = auths.find((a) => {
-                          if (a.authorizedId === groupie._id && a.authorizerId === user2._id)
-                            return true;
-                        });
-                        if (!found) {
-                          let auth = await this.authorizeUser(DataStructures_exports.ProfileStruct("user", user2, user2), user2._id, myname, groupie._id, theirname, { "peer": true }, void 0, { group: team });
-                          newauths.push(auth);
-                        }
-                      }
-                    }
-                  }));
-              }
-            }));
-          if (newauths.length > 0)
-            return newauths;
-          return void 0;
-        };
-        this.deleteRoom = async (roomStruct) => {
-          if (!roomStruct)
-            return false;
-          let toDelete = [roomStruct];
-          roomStruct.comments?.forEach((id) => {
-            let struct = this.getLocalData("comment", { "_id": id });
-            toDelete.push(struct);
-          });
-          if (roomStruct)
-            return await this.deleteData(toDelete);
-          else
-            return false;
-        };
-        this.deleteComment = async (commentStruct) => {
-          let allReplies = [commentStruct];
-          let getRepliesRecursive = (head = commentStruct) => {
-            if (head?.replies) {
-              head.replies.forEach((replyId) => {
-                let reply = this.getLocalData("comment", { "_id": replyId });
-                if (reply) {
-                  if (reply.replies.length > 0) {
-                    reply.replies.forEach((replyId2) => {
-                      getRepliesRecursive(replyId2);
-                    });
-                  }
-                  allReplies.push(reply);
-                }
-              });
-            }
-          };
-          getRepliesRecursive(commentStruct);
-          let parent = this.getLocalData(commentStruct.parent?.structType, { "_id": commentStruct.parent?._id });
-          let toUpdate = [];
-          if (parent) {
-            toUpdate = [parent];
-            allReplies.forEach((r) => {
-              let idx = parent.replies?.indexOf(r._id);
-              if (idx > -1)
-                parent.replies.splice(idx, 1);
-              let idx2 = parent.comments?.indexOf(r._id);
-              if (idx2 > -1)
-                parent.comments.splice(idx2, 1);
-            });
-          }
-          let replyTo = this.getLocalData("comment", { "_id": commentStruct.replyTo });
-          if (replyTo?._id !== parent?._id) {
-            let idx = replyTo.replies?.indexOf(parent._id);
-            if (idx > -1)
-              replyTo.replies.splice(idx, 1);
-            toUpdate.push(replyTo);
-          }
-          if (toUpdate.length > 0)
-            await this.updateServerData(toUpdate);
-          return await this.deleteData(allReplies);
-        };
-        this.getUserDataByAuthorization = async (authorizationStruct, collection, searchDict, limit = 0, skip = 0, callback2 = this.baseServerCallback) => {
-          let u = authorizationStruct.authorizerId;
-          if (u) {
-            return new Promise(async (resolve) => {
-              this.getUser(u, async (data) => {
-                if (!collection)
-                  await this.getAllUserData(u, ["notification"], callback2);
-                else
-                  await this.getData(collection, u, searchDict, limit, skip, callback2);
-                resolve(data);
-                callback2(data);
-              });
-            });
-          } else
-            return void 0;
-        };
-        this.getUserDataByAuthorizationGroup = async (groupId = "", collection, searchDict, limit = 0, skip = 0, callback2 = this.baseServerCallback) => {
-          let auths = this.getLocalData("authorization");
-          let results = [];
-          await Promise.all(auths.map(async (o) => {
-            if (o.groups?.includes(groupId)) {
-              let u = o.authorizerId;
-              if (u) {
-                let data;
-                let user2 = await this.getUser(u, callback2);
-                if (user2)
-                  results.push(user2);
-                if (!collection)
-                  data = await this.getAllUserData(u, ["notification"], callback2);
-                else
-                  data = await this.getData(collection, u, searchDict, limit, skip, callback2);
-                if (data)
-                  results.push(data);
-              }
-              return true;
-            }
-          }));
-          return results;
-        };
-        this.getLocalUserPeerIds = (user2 = this.currentUser) => {
-          if (!user2)
-            return [];
-          let result = [];
-          let authorizations = this.getLocalData("authorization", user2._id);
-          authorizations.forEach((a) => {
-            if (a.authorizations["peer"] && a.authorizerId === user2._id)
-              result.push(a.authorizedId);
-          });
-          return result;
-        };
-        this.authorizeUser = async (parentUser, authorizerUserId = "", authorizerUserName = "", authorizedUserId = "", authorizedUserName = "", authorizations = {}, structs = {}, excluded = {}, groups = {}, expires = false) => {
-          if (!parentUser)
-            return void 0;
-          let newAuthorization = this.createStruct("authorization", void 0, parentUser, void 0);
-          newAuthorization.authorizedId = authorizedUserId;
-          newAuthorization.authorizedName = authorizedUserName;
-          newAuthorization.authorizerId = authorizerUserId;
-          newAuthorization.authorizerName = authorizerUserName;
-          newAuthorization.authorizations = authorizations;
-          newAuthorization.structs = structs;
-          newAuthorization.excluded = excluded;
-          newAuthorization.groups = groups;
-          newAuthorization.expires = expires;
-          newAuthorization.status = "PENDING";
-          newAuthorization.associatedAuthId = "";
-          newAuthorization.ownerId = parentUser._id;
-          newAuthorization = await this.setAuthorization(newAuthorization);
-          return newAuthorization;
-        };
-        this.addGroup = async (parentUser, name2 = "", details = "", admins = {}, peers = {}, clients = {}, updateServer = true) => {
-          if (!parentUser)
-            return void 0;
-          let newGroup = this.createStruct("group", void 0, parentUser);
-          newGroup.name = name2;
-          newGroup.details = details;
-          newGroup.admins = admins;
-          newGroup.peers = peers;
-          newGroup.clients = clients;
-          newGroup.users = {};
-          Object.assign(newGroup.users, newGroup.admins);
-          Object.assign(newGroup.users, newGroup.peers);
-          Object.assign(newGroup.users, newGroup.clients);
-          newGroup.ownerId = parentUser._id;
-          if (updateServer) {
-            newGroup = await this.setGroup(newGroup);
-          }
-          return newGroup;
-        };
-        this.addData = async (parentUser, author = "", title = "", type = "", data = [], expires = false, updateServer = true) => {
-          if (!parentUser)
-            return void 0;
-          let newDataInstance = this.createStruct("dataInstance", void 0, parentUser);
-          newDataInstance.author = author;
-          newDataInstance.title = title;
-          newDataInstance.type = type;
-          newDataInstance.data = data;
-          newDataInstance.expires = expires;
-          newDataInstance.ownerId = parentUser._id;
-          if (updateServer)
-            newDataInstance = await this.updateServerData([newDataInstance])[0];
-          return newDataInstance;
-        };
-        this.addEvent = async (parentUser, author = "", event = "", notes = "", startTime = 0, endTime = 0, grade = 0, attachments = [], users = {}, updateServer = true) => {
-          if (!parentUser)
-            return void 0;
-          if (Object.keys(users).length === 0)
-            users = this.getLocalUserPeerIds(parentUser);
-          let newEvent = this.createStruct("event", void 0, parentUser);
-          newEvent.author = author;
-          newEvent.event = event;
-          newEvent.notes = notes;
-          newEvent.startTime = startTime;
-          newEvent.endTime = endTime;
-          newEvent.grade = grade;
-          newEvent.attachments = attachments;
-          newEvent.users = users;
-          newEvent.ownerId = parentUser._id;
-          if (updateServer)
-            newEvent = await this.updateServerData([newEvent])[0];
-          return newEvent;
-        };
-        this.addChatroom = async (parentUser, authorId = "", message = "", attachments = [], users = {}, updateServer = true) => {
-          if (!parentUser)
-            return void 0;
-          if (Object.keys(users).length === 0)
-            users = this.getLocalUserPeerIds(parentUser);
-          let newChatroom = this.createStruct("chatroom", void 0, parentUser);
-          newChatroom.message = message;
-          newChatroom.attachments = attachments;
-          newChatroom.authorId = authorId;
-          newChatroom.users = users;
-          newChatroom.replies = [];
-          newChatroom.comments = [];
-          newChatroom.ownerId = parentUser._id;
-          let update = [newChatroom];
-          if (updateServer)
-            newChatroom = await this.updateServerData(update)[0];
-          return newChatroom;
-        };
-        this.addComment = async (parentUser, roomStruct, replyTo, authorId = "", message = "", attachments = [], updateServer = true) => {
-          if (!roomStruct)
-            return void 0;
-          if (!replyTo)
-            replyTo = roomStruct;
-          if (!parentUser)
-            return void 0;
-          let newComment = this.createStruct("comment", void 0, parentUser, roomStruct);
-          newComment.authorId = authorId;
-          newComment.replyTo = replyTo?._id;
-          newComment.message = message;
-          newComment.attachments = attachments;
-          newComment.users = roomStruct?.users;
-          newComment.replies = [];
-          newComment.ownerId = parentUser._id;
-          if (!updateServer)
-            replyTo?.replies.push(newComment._id);
-          if (!updateServer)
-            roomStruct?.comments.push(newComment._id);
-          let update = [newComment, roomStruct];
-          if (replyTo?._id !== roomStruct._id)
-            update.push(replyTo);
-          let res;
-          if (updateServer)
-            res = await this.updateServerData(update);
-          let updatedComment;
-          if (typeof res === "object") {
-            updatedComment = res.find((s) => {
-              if (newComment.ownerId === s.ownerId && newComment.timestamp === s.timestamp && newComment.message === s.message) {
-                return true;
-              }
-            });
-          }
-          if (updatedComment)
-            return updatedComment;
-          return res;
-        };
-        this.load(this);
-        if (user instanceof Object && Object.keys(user).length > 0)
-          this.setupUser(user);
-      }
-      async setupUser(userinfo, callback2 = (currentUser) => {
-      }) {
-        if (!userinfo) {
-          console.error('must provide a minimum info object! e.g. {_id:"abc123"}');
-          callback2(void 0);
-          return void 0;
-        }
-        let changed = false;
-        if (userinfo.id && !userinfo._id)
-          userinfo._id = userinfo.id;
-        else if (userinfo._id)
-          userinfo.id = userinfo._id;
-        let res = await this.getUser(userinfo._id);
-        let user = res?.user;
-        let u;
-        let newu = false;
-        if (!user || !user._id) {
-          u = this.userStruct(userinfo, false);
-          newu = true;
-          let wasSet = await this.setUser(u);
-          let structs = this.getLocalData(void 0, { "ownerId": u._id });
-          if (structs?.length > 0)
-            this.updateServerData(structs);
-          this.setAuthorizationsByGroup(u);
-        } else {
-          u = user;
-          if (res?.authorizations) {
-            if (Array.isArray(res.authorizations)) {
-              this.setLocalData(res.authorizations);
-            }
-          }
-          if (res?.groups) {
-            if (Array.isArray(res.groups)) {
-              this.setLocalData(res.groups);
-            }
-          }
-        }
-        if (newu) {
-          this.setLocalData(u);
-        } else {
-          let data = await this.getAllUserData(u._id, void 0);
-          if (!data || data.length === 0) {
-          } else {
-            this.setLocalData(data);
-            let notes = data.filter((s) => {
-              if (s.structType === "notification") {
-                if (this.getLocalData("authorization", s.parent._id)) {
-                  return true;
-                }
-                if (s.parent.structType === "user" || s.parent.structType === "authorization") {
-                  return true;
-                }
-                if (!this.getLocalData(s.parent.structType, s.parent._id))
-                  return true;
-              }
-            });
-            let comments = data.filter((s) => {
-              if (s.structType === "comment") {
-                return true;
-              }
-            });
-            let toDelete = [];
-            comments.forEach((comment) => {
-              if (!this.getLocalData("comment", { "_id": comment._id }))
-                toDelete.push(comment._id);
-            });
-            if (toDelete.length > 0)
-              this.deleteData(toDelete);
-            if (notes.length > 0) {
-              this.resolveNotifications(notes, false, void 0);
-              changed = true;
-            }
-            let filtered = data.filter((o) => {
-              if (o.structType !== "notification")
-                return true;
-            });
-            if (this.tablet)
-              this.tablet.sortStructsIntoTable(filtered);
-          }
-          this.setLocalData(u);
-        }
-        if (u) {
-          if (this.currentUser)
-            Object.assign(this.currentUser, u);
-          else
-            this.currentUser = u;
-          callback2(this.currentUser);
-          return this.currentUser;
-        } else {
-          callback2(u);
-          return u;
-        }
-      }
-      onResult(data) {
-      }
-      randomId(tag = "") {
-        return `${tag + Math.floor(Math.random() + Math.random() * Math.random() * 1e16)}`;
-      }
-      async addStruct(structType = "struct", props = {}, parentUser, parentStruct, updateServer = true) {
-        let newStruct = DataStructures_exports.Struct(structType, props, parentUser, parentStruct);
-        if (updateServer)
-          newStruct = await this.updateServerData([newStruct])[0];
-        return newStruct;
-      }
-      overwriteLocalData(structs) {
-        if (Array.isArray(structs)) {
-          structs.forEach((struct) => {
-            let localdat = this.getLocalData(struct.structType, { "ownerId": struct.ownerId, "_id": struct._id });
-            if (!localdat || localdat?.length === 0) {
-              this.setLocalData(struct);
-            } else
-              Object.assign(localdat, struct);
-          });
-        } else {
-          let localdat = this.getLocalData(structs.structType, { "ownerId": structs.ownerId, "_id": structs._id });
-          if (!localdat || localdat?.length === 0) {
-            this.setLocalData(structs);
-          } else
-            Object.assign(localdat, structs);
-        }
-      }
-      setLocalData(structs) {
-        this.tablet.setLocalData(structs);
-      }
-      getLocalData(collection, query) {
-        return this.tablet.getLocalData(collection, query);
-      }
-      getLocalReplies(struct) {
-        let replies = [];
-        if (!struct.replies)
-          return replies;
-        else if (struct.replies.reduce((a, b) => a * (typeof b === "object" ? 1 : 0), 1))
-          return struct.replies;
-        replies = this.getLocalData("comment", { "replyTo": struct._id });
-        return replies;
-      }
-      hasLocalAuthorization(otherUserId, ownerId = this.currentUser._id) {
-        let auths = this.getLocalData("authorization", { ownerId });
-        let found = auths.find((a) => {
-          if (a.authorizedId === ownerId && a.authorizerId === otherUserId)
-            return true;
-          if (a.authorizerId === ownerId && a.authorizedId === otherUserId)
-            return true;
-        });
-        if (found) {
-          return found;
-        } else
-          return false;
-      }
-      deleteLocalData(structs) {
-        if (Array.isArray(structs))
-          structs.forEach((s) => this.deleteStruct(s));
-        else
-          this.deleteStruct(structs);
-        return true;
-      }
-      deleteStruct(struct) {
-        if (typeof struct === "string")
-          struct = this.getLocalData(struct);
-        if (!struct)
-          throw new Error("Struct not supplied");
-        if (!struct.structType || !struct._id)
-          return false;
-        this.tablet.collections.get(struct.structType).delete(struct._id);
-        return true;
-      }
-      stripStruct(struct = {}) {
-        const copy = Object.assign({}, struct);
-        for (const prop in copy) {
-          if (copy[prop] === void 0 || copy[prop].constructor.name === "Map" || typeof copy[prop] === "function")
-            delete copy[prop];
-        }
-        return copy;
-      }
-      createStruct(structType, props, parentUser = this.currentUser, parentStruct) {
-        let struct = DataStructures_exports.Struct(structType, props, parentUser, parentStruct);
-        return struct;
-      }
-      userStruct(props = {}, currentUser = false) {
-        let user = DataStructures_exports.ProfileStruct(void 0, props, props);
-        if (props._id)
-          user.id = props._id;
-        else if (props.id)
-          user.id = props.id;
-        else
-          user.id = "user" + Math.floor(Math.random() * 1e15);
-        user._id = user.id;
-        user.ownerId = user.id;
-        for (const prop in props) {
-          if (Object.keys(DataStructures_exports.ProfileStruct()).indexOf(prop) < 0) {
-            delete user[prop];
-          }
-        }
-        if (currentUser)
-          this.currentUser = user;
-        return user;
-      }
-      dataObject(data = void 0, type = "any", timestamp = Date.now()) {
-        return { type, data, timestamp };
-      }
-    };
-    var import_bson_objectid = __toESM2(require_objectid4());
-    var randomId2 = (prefix) => (prefix ? `${prefix}_` : "") + Math.floor(1e15 * Math.random());
-    var toObjectID = (str2) => {
-      return typeof str2 === "string" && str2.length === 24 ? (0, import_bson_objectid.default)(str2) : str2;
-    };
-    var getStringId = (mongoid) => {
-      if (typeof mongoid === "object")
-        return mongoid.toString();
-      else
-        return mongoid;
-    };
-    var defaultCollections = ["profile", "group", "authorization", "discussion", "chatroom", "comment", "dataInstance", "event", "notification", "schedule", "date"];
-    var StructBackend2 = class extends Service {
-      constructor(options, dboptions) {
-        super(options);
-        this.name = "structs";
-        this.debug = false;
-        this.users = {};
-        this.collections = {};
-        this.useAuths = true;
-        this.query = async (requestingUserId, collection, queryObj, findOne, skip) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          if (this.mode.indexOf("mongo") > -1) {
-            return await this.queryMongo(user, collection, queryObj, findOne, skip);
-          } else {
-            let res = this.getLocalData(user, collection);
-            if (res && !Array.isArray(res)) {
-              let passed = !this.useAuths;
-              if (!res?.ownerId)
-                passed = true;
-              else if (this.useAuths)
-                passed = await this.checkAuthorization(user, res);
-            }
-            if (typeof skip === "number" && Array.isArray(res)) {
-              if (res.length > skip)
-                res.splice(0, skip);
-            }
-            let data = [];
-            if (res)
-              await Promise.all(res.map(async (s) => {
-                let struct = this.getLocalData(getStringId(s._id));
-                let passed = !this.useAuths;
-                if (!struct?.ownerId)
-                  passed = true;
-                else if (this.useAuths)
-                  passed = await this.checkAuthorization(user, struct);
-                if (passed)
-                  data.push(struct);
-              }));
-            return data;
-          }
-        };
-        this.getUser = async (requestingUserId, lookupId) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.indexOf("mongo") > -1) {
-            data = await this.getMongoUser(user, lookupId);
-          } else {
-            let struct = this.getLocalData("profile", { _id: lookupId });
-            if (!struct)
-              data = { user: void 0 };
-            else {
-              let passed = !this.useAuths;
-              if (!struct?.ownerId)
-                passed = true;
-              else if (this.useAuths)
-                passed = await this.checkAuthorization(user, struct);
-              if (passed) {
-                let groups = this.getLocalData("group", { ownerId: lookupId });
-                let auths = this.getLocalData("authorization", { ownerId: lookupId });
-                data = { user: struct, groups, authorizations: auths };
-              } else
-                data = { user: {} };
-            }
-          }
-          if (this.debug)
-            console.log("getUser: user:", user, "input:", lookupId, "output", data);
-          return data;
-        };
-        this.setUser = async (requestingUserId, struct) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.indexOf("mongo") > -1) {
-            data = await this.setMongoUser(user, struct);
-          } else {
-            let passed = !this.useAuths;
-            if (!struct?.ownerId)
-              passed = true;
-            else if (this.useAuths)
-              passed = await this.checkAuthorization(user, struct, "WRITE");
-            if (passed)
-              this.setLocalData(struct);
-            return true;
-          }
-          if (this.debug)
-            console.log("setUser user:", user, "input:", struct, "output", data);
-          return data;
-        };
-        this.getUsersByIds = async (requestingUserId, userIds) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.getMongoUsersByIds(user, userIds);
-          } else {
-            data = [];
-            if (Array.isArray(userIds)) {
-              let struct = this.getLocalData("profile", { _id: userIds });
-              if (struct)
-                data.push(struct);
-            }
-          }
-          if (this.debug)
-            console.log("getUserByIds: user:", user, "input:", userIds, "output", data);
-          return data;
-        };
-        this.getUsersByRole = async (requestingUserId, role) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.getMongoUsersByRole(user, role);
-          } else {
-            let profiles = this.getLocalData("profile");
-            data = [];
-            profiles.forEach((struct) => {
-              if (struct.userRoles[role]) {
-                data.push(struct);
-              }
-            });
-          }
-          if (this.debug)
-            console.log("getUserByRoles: user:", user, "input:", role, "output", data);
-          return data;
-        };
-        this.deleteUser = async (requestingUserId, userId) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.deleteMongoUser(user, userId);
-          } else {
-            data = false;
-            let struct = this.getLocalData(userId);
-            if (struct) {
-              let passed = !this.useAuths;
-              if (!struct?.ownerId)
-                passed = true;
-              else if (this.useAuths)
-                passed = await this.checkAuthorization(user, struct, "WRITE");
-              if (passed)
-                data = this.deleteLocalData(struct);
-            }
-          }
-          if (this.debug)
-            console.log("deleteUser: user:", user, "input:", userId, "output", data);
-          return data;
-        };
-        this.setData = async (requestingUserId, structs, notify) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.setMongoData(user, structs, notify);
-          } else {
-            let non_notes = [];
-            data = [];
-            await Promise.all(structs.map(async (structId) => {
-              let struct = this.getLocalData(structId);
-              let passed = !this.useAuths;
-              if (!struct?.ownerId)
-                passed = true;
-              else if (this.useAuths)
-                passed = await this.checkAuthorization(user, struct, "WRITE");
-              if (passed) {
-                if (!this.collections[struct.structType]) {
-                  this.collections[struct.structType] = this.db ? { instance: this.db.collection(struct.structType) } : {};
-                  this.collections[struct.structType].reference = {};
-                }
-                this.setLocalData(struct);
-                data.push(struct);
-                if (struct.structType !== "notification")
-                  non_notes.push(struct);
-              }
-            }));
-            if (non_notes.length > 0 && (notify === true || typeof notify === "undefined"))
-              this.checkToNotify(user, non_notes, this.mode);
-            if (this.debug)
-              console.log("setData:", user, structs, data);
-            return true;
-          }
-          if (this.debug)
-            console.log("setData: user:", user, "input:", structs, notify, "output", data);
-          return data;
-        };
-        this.getData = async (requestingUserId, collection, ownerId, dict, limit, skip) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.getMongoData(user, collection, ownerId, dict, limit, skip);
-          } else {
-            data = [];
-            let structs;
-            if (collection)
-              structs = this.getLocalData(collection);
-            if (structs && ownerId)
-              structs = structs.filter((o) => {
-                if (o.ownerId === ownerId)
-                  return true;
-              });
-            if (structs)
-              await Promise.all(structs.map(async (s) => {
-                let struct = this.getLocalData(getStringId(s._id));
-                let passed = !this.useAuths;
-                if (!struct?.ownerId)
-                  passed = true;
-                else if (this.useAuths)
-                  passed = await this.checkAuthorization(user, struct);
-                if (passed)
-                  data.push(struct);
-              }));
-          }
-          if (this.debug)
-            console.log("getData: user:", user, "input:", collection, ownerId, dict, limit, skip, "output", data);
-          return data;
-        };
-        this.getDataByIds = async (requestingUserId, structIds, ownerId, collection) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.getMongoDataByIds(user, structIds, ownerId, collection);
-          } else {
-            data = [];
-            let structs;
-            if (collection)
-              structs = this.getLocalData(collection);
-            if (structs && ownerId)
-              structs = structs.filter((o) => {
-                if (o.ownerId === ownerId)
-                  return true;
-              });
-            if (structs)
-              await Promise.all(structs.map(async (s) => {
-                let struct = this.getLocalData(getStringId(s._id));
-                let passed = !this.useAuths;
-                if (!struct?.ownerId)
-                  passed = true;
-                else if (this.useAuths)
-                  passed = await this.checkAuthorization(user, struct);
-                if (passed)
-                  data.push(struct);
-              }));
-          }
-          if (this.debug)
-            console.log("getDataByIds: user:", user, "input:", structIds, ownerId, collection, "output", data);
-          return data;
-        };
-        this.getAllData = async (requestingUserId, ownerId, excludedCollections) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.getAllUserMongoData(user, ownerId, excludedCollections);
-          } else {
-            let result = this.getLocalData(void 0, { ownerId });
-            data = [];
-            await Promise.all(result.map(async (struct) => {
-              if (excludedCollections) {
-                if (excludedCollections.indexOf(struct.structType) < 0) {
-                  let passed = !this.useAuths;
-                  if (!struct?.ownerId)
-                    passed = true;
-                  else if (this.useAuths)
-                    passed = await this.checkAuthorization(user, struct);
-                  if (passed)
-                    data.push(struct);
-                }
-              } else {
-                let passed = !this.useAuths;
-                if (!struct?.ownerId)
-                  passed = true;
-                else if (this.useAuths)
-                  passed = await this.checkAuthorization(user, struct);
-                if (passed)
-                  data.push(struct);
-              }
-            }));
-          }
-          if (this.debug)
-            console.log("getAllData: user:", user, "input:", ownerId, excludedCollections, "output", data);
-          return data;
-        };
-        this.deleteData = async (requestingUserId, structIds) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.deleteMongoData(user, structIds);
-          } else {
-            data = false;
-            await Promise.all(structIds.map(async (structId) => {
-              let struct = this.getLocalData(structId);
-              let passed = !this.useAuths;
-              if (!struct?.ownerId)
-                passed = true;
-              else if (this.useAuths)
-                passed = await this.checkAuthorization(user, struct, "WRITE");
-              if (passed)
-                this.deleteLocalData(struct);
-              data = true;
-            }));
-          }
-          if (this.debug)
-            console.log("deleteData: user:", user, "input:", structIds, "output", data);
-          return data;
-        };
-        this.getUserGroups = async (requestingUserId, userId, groupId) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.getMongoGroups(user, userId, groupId);
-          } else {
-            if (typeof groupId === "string") {
-              data = this.getLocalData("group", { _id: groupId });
-            } else {
-              data = [];
-              let result = this.getLocalData("group");
-              if (userId) {
-                result.forEach((struct) => {
-                  if (Object.keys(struct.users).includes(userId))
-                    data.push(struct);
-                });
-              } else {
-                result.forEach((struct) => {
-                  if (Object.keys(struct.users).includes(getStringId(user._id)))
-                    data.push(struct);
-                });
-              }
-            }
-          }
-          if (this.debug)
-            console.log("getGroups: user:", user, "input:", userId, groupId, "output", data);
-          return data;
-        };
-        this.deleteGroup = async (requestingUserId, groupId) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.deleteMongoGroup(user, groupId);
-          } else {
-            let struct = this.getLocalData("group", groupId);
-            let passed = !this.useAuths;
-            if (struct) {
-              if (!struct?.ownerId)
-                passed = true;
-              else if (this.useAuths)
-                passed = await this.checkAuthorization(user, struct, "WRITE");
-            }
-            if (passed) {
-              data = true;
-            }
-          }
-          if (this.debug)
-            console.log("deleteGroup: user:", user, "input:", groupId, "output", data);
-          return data;
-        };
-        this.getAuthorizations = async (requestingUserId, ownerId, authId) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.getMongoAuthorizations(user, ownerId, authId);
-          } else {
-            if (authId) {
-              let result = this.getLocalData("authorization", { _id: authId });
-              if (result)
-                data = [result];
-            } else {
-              data = this.getLocalData("authorization", { ownerId });
-            }
-          }
-          if (this.debug)
-            console.log("getAuthorizations: user:", user, "input:", ownerId, authId, "output", data);
-          return data;
-        };
-        this.deleteAuthorization = async (requestingUserId, authId) => {
-          let user = this.users[requestingUserId];
-          if (!user)
-            return false;
-          let data;
-          if (this.mode.includes("mongo")) {
-            data = await this.deleteMongoAuthorization(user, authId);
-          } else {
-            data = true;
-            let struct = this.getLocalData("authorization", { _id: authId });
-            if (struct) {
-              let passed = !this.useAuths;
-              if (!struct?.ownerId)
-                passed = true;
-              else if (this.useAuths)
-                passed = await this.checkAuthorization(user, struct, "WRITE");
-              if (passed)
-                data = this.deleteLocalData(struct);
-            }
-          }
-          if (this.debug)
-            console.log("deleteAuthorization: user:", user, "input:", authId, "output", data);
-          return data;
-        };
-        this.wipeDB = async () => {
-          await Promise.all(Object.values(this.collections).map((c) => {
-            try {
-              c.instance.remove({});
-            } catch (err) {
-            }
-          }));
-          return true;
-        };
-        this.load(this);
-        if (dboptions) {
-          this.initDB(dboptions);
-        }
-      }
-      initDB(dboptions) {
-        if (dboptions?.users)
-          this.users = dboptions.users;
-        this.db = dboptions.db;
-        if (!this.mode && dboptions?.db)
-          this.mode = this.db ? dboptions.mode ? dboptions.mode : "local" : "local";
-        if (dboptions?.collections)
-          this.collections = dboptions.collections;
-        if ("useAuths" in dboptions)
-          this.useAuths = dboptions.useAuths;
-        defaultCollections.forEach((k) => {
-          if (!this.collections[k]) {
-            this.collections[k] = this.db ? { instance: this.db.collection(k) } : {};
-            this.collections[k].reference = {};
-          }
-        });
-      }
-      notificationStruct(parentStruct = {}) {
-        let structType = "notification";
-        let struct = { structType, timestamp: Date.now(), _id: randomId2(structType), note: "", alert: false, ownerId: "", parentUserId: "", parent: { structType: parentStruct?.structType, _id: getStringId(parentStruct?._id) } };
-        return struct;
-      }
-      async checkToNotify(user, structs = [], mode = this.mode) {
-        if (structs.length === 0)
-          return false;
-        if (typeof user === "string") {
-          for (let key in this.users) {
-            const obj = this.users[key];
-            if (getStringId(obj._id) === user)
-              user = obj;
-          }
-        }
-        if (typeof user === "string" || user == null)
-          return false;
-        let usersToNotify = {};
-        let newNotifications = [];
-        structs.forEach(async (struct) => {
-          if (struct?._id) {
-            if (user?._id !== struct.ownerId) {
-              let newNotification = this.notificationStruct(struct);
-              newNotification._id = "notification_" + getStringId(struct._id);
-              newNotification.ownerId = struct.ownerId;
-              newNotification.note = struct.structType;
-              newNotification.parentUserId = struct.ownerId;
-              if (struct.alert)
-                newNotification.alert = struct.alert;
-              newNotifications.push(newNotification);
-              usersToNotify[struct.ownerId] = struct.ownerId;
-            }
-            if (struct.users) {
-              Object.keys(struct.users).forEach((usr) => {
-                if (usr !== user._id) {
-                  let newNotification = this.notificationStruct(struct);
-                  newNotification._id = "notification_" + getStringId(struct._id);
-                  newNotification.ownerId = usr;
-                  newNotification.note = struct.structType;
-                  if (struct.alert)
-                    newNotification.alert = struct.alert;
-                  newNotification.parentUserId = struct.ownerId;
-                  newNotifications.push(newNotification);
-                  usersToNotify[usr] = usr;
-                }
-              });
-            } else {
-              let auths = [];
-              if (mode.includes("mongo")) {
-                let s = this.collections.authorization.instance.find({ $or: [{ authorizedId: user._id }, { authorizerId: user._id }] });
-                let arr = s.toArray();
-                if (arr.length > 0) {
-                  arr.forEach((d) => auths.push(d));
-                }
-              } else {
-                auths = this.getLocalData("authorization", { authorizedId: user._id });
-                auths.push(...this.getLocalData("authorization", { authorizerId: user._id }));
-              }
-              if (auths.length > 0) {
-                auths.forEach((auth) => {
-                  if (struct.authorizerId === struct.ownerId && !usersToNotify[struct.authorizedId]) {
-                    if (auth.status === "OKAY" && auth.authorizations["peer"]) {
-                      let newNotification = this.notificationStruct(struct);
-                      newNotification.ownerId = auth.authorizedId;
-                      newNotification._id = "notification_" + getStringId(struct._id);
-                      newNotification.note = struct.structType;
-                      newNotification.parentUserId = struct.ownerId;
-                      if (struct.alert)
-                        newNotification.alert = struct.alert;
-                      newNotifications.push(newNotification);
-                      usersToNotify[newNotification.ownerId] = newNotification.ownerId;
-                    }
-                  }
-                });
-              }
-            }
-          }
-        });
-        if (newNotifications.length > 0) {
-          if (mode.includes("mongo")) {
-            await this.setMongoData(user, newNotifications);
-          } else {
-            this.setLocalData(newNotifications);
-          }
-          for (const uid in usersToNotify) {
-            this.users[uid].sendAll({ route: "structNotification", args: true });
-          }
-          return true;
-        } else
-          return false;
-      }
-      async queryMongo(user, collection, queryObj = {}, findOne = false, skip = 0) {
-        if (!collection && !queryObj)
-          return void 0;
-        else if (findOne) {
-          let res = this.db.collection(collection).findOne(queryObj);
-          if (!res)
-            return void 0;
-          let passed = !this.useAuths;
-          if (!res?.ownerId) {
-            passed = true;
-          } else if (getStringId(user._id) !== res.ownerId || getStringId(user._id) === res.ownerId && user.userRoles?.admincontrol) {
-            if (this.useAuths)
-              passed = await this.checkAuthorization(user, res);
-          }
-          if (passed)
-            return res;
-          else
-            return void 0;
-        } else {
-          let res = await this.db.collection(collection).find(queryObj).sort({ $natural: -1 }).skip(skip);
-          let structs = [];
-          let arr = res.toArray();
-          if (arr.length > 0) {
-            let passed = !this.useAuths;
-            let checkedAuth = "";
-            for (const s of arr) {
-              if (!s?.ownerId) {
-                passed = true;
-              } else if ((getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) && checkedAuth !== s.ownerId) {
-                if (this.useAuths)
-                  passed = await this.checkAuthorization(user, s);
-                checkedAuth = s.ownerId;
-              }
-              if (passed)
-                structs.push(s);
-            }
-          }
-          return structs;
-        }
-      }
-      async setMongoData(user, structs = [], notify = true) {
-        let firstwrite = false;
-        if (structs.length > 0) {
-          let passed = !this.useAuths;
-          let checkedAuth = "";
-          await Promise.all(structs.map(async (struct) => {
-            let secondary = {};
-            if (Array.isArray(struct)) {
-              secondary = struct[1];
-              struct = struct[0];
-            }
-            if (!struct?.ownerId)
-              passed = true;
-            else if ((getStringId(user._id) !== struct.ownerId || getStringId(user._id) === struct.ownerId && user.userRoles?.admincontrol) && checkedAuth !== struct.ownerId) {
-              if (this.useAuths)
-                passed = await this.checkAuthorization(user, struct, "WRITE");
-              checkedAuth = struct.ownerId;
-            }
-            if (passed) {
-              if (struct.structType) {
-                if (!this.collections[struct.structType]) {
-                  this.collections[struct.structType] = this.db ? { instance: this.db.collection(struct.structType) } : {};
-                  this.collections[struct.structType].reference = {};
-                }
-                let copy = JSON.parse(JSON.stringify(struct));
-                if (copy._id)
-                  delete copy._id;
-                if (struct._id) {
-                  if (getStringId(struct._id).includes("defaultId")) {
-                    await this.db.collection(struct.structType).insertOne(copy);
-                    firstwrite = true;
-                  } else if (struct.structType === "notification")
-                    await this.db.collection(struct.structType).updateOne({ parent: struct.parent, _id: struct._id }, { $set: copy, ...secondary }, { upsert: true, unique: false });
-                  else
-                    await this.db.collection(struct.structType).updateOne({ _id: toObjectID(struct._id) }, { $set: copy, ...secondary }, { upsert: true });
-                } else if (struct.structType) {
-                  this.db.collection(struct.structType).insertOne(copy);
-                }
-              }
-            }
-          }));
-          if (firstwrite === true) {
-            let toReturn = [];
-            await Promise.all(structs.map(async (struct, j) => {
-              let copy = JSON.parse(JSON.stringify(struct));
-              if (copy._id && copy.structType !== "profile")
-                delete copy._id;
-              if (struct.structType !== "comment") {
-                let pulled;
-                if (struct.structType !== "notification")
-                  pulled = await this.db.collection(copy.structType).findOne(copy);
-                if (pulled) {
-                  pulled._id = getStringId(pulled._id);
-                  toReturn.push(pulled);
-                }
-              } else if (struct.structType === "comment") {
-                let comment = struct;
-                let copy2 = JSON.parse(JSON.stringify(comment));
-                if (copy2._id)
-                  delete copy2._id;
-                let pulledComment = await this.db.collection("comment").findOne(copy2);
-                let replyToId = pulledComment?.replyTo;
-                let replyTo = structs.find((s) => {
-                  if (getStringId(s._id) === replyToId)
-                    return true;
-                });
-                if (replyTo) {
-                  let copy3 = JSON.parse(JSON.stringify(replyTo));
-                  if (copy3._id)
-                    delete copy3._id;
-                  let pulledReply;
-                  await Promise.all(["discussion", "chatroom", "comment"].map(async (name2) => {
-                    let found = await this.db.collection(name2).findOne({ _id: toObjectID(replyToId) });
-                    if (found)
-                      pulledReply = found;
-                  }));
-                  if (pulledReply) {
-                    let roomId = getStringId(pulledComment.parent._id);
-                    let room, pulledRoom;
-                    if (roomId !== replyToId) {
-                      room = structs.find((s) => {
-                        if (getStringId(s._id) === roomId)
-                          return true;
-                      });
-                      if (room) {
-                        delete room._id;
-                        await Promise.all(["discussion", "chatroom"].map(async (name2) => {
-                          let found = await this.db.collection(name2).findOne(room);
-                          if (found)
-                            pulledRoom = found;
-                        }));
-                      }
-                    } else
-                      pulledRoom = pulledReply;
-                    let toUpdate = [pulledComment];
-                    if (pulledReply) {
-                      let i = pulledReply.replies.indexOf(getStringId(pulledComment._id));
-                      if (i < 0) {
-                        pulledReply.replies.push(getStringId(pulledComment._id));
-                        pulledComment.replyTo = getStringId(pulledReply._id);
-                      }
-                      toUpdate.push(pulledReply);
-                    }
-                    if (pulledRoom) {
-                      let i = pulledRoom.comments.indexOf(pulledComment._id);
-                      if (i < 0) {
-                        pulledRoom.comments.push(getStringId(pulledComment._id));
-                        pulledComment.parent._id = getStringId(pulledRoom._id);
-                      }
-                    }
-                    await Promise.all(toUpdate.map(async (s) => {
-                      let copy4 = JSON.parse(JSON.stringify(s));
-                      delete copy4._id;
-                      await this.db.collection(s.structType).updateOne({ _id: toObjectID(s._id) }, { $set: copy4 }, { upsert: false });
-                    }));
-                    [...toReturn].reverse().forEach((s, j2) => {
-                      if (toUpdate.find((o) => {
-                        if (getStringId(s._id) === getStringId(o._id))
-                          return true;
-                      })) {
-                        toReturn.splice(toReturn.length - j2 - 1, 1);
-                      }
-                    });
-                    toReturn.push(...toUpdate);
-                  }
-                } else if (pulledComment) {
-                  toReturn.push(pulledComment);
-                }
-              }
-            }));
-            if (notify)
-              this.checkToNotify(user, toReturn);
-            return toReturn;
-          } else {
-            let non_notes = [];
-            structs.forEach((s) => {
-              if (s.structType !== "notification")
-                non_notes.push(s);
-            });
-            if (notify)
-              this.checkToNotify(user, non_notes);
-            return true;
-          }
-        } else
-          return false;
-      }
-      async setMongoUser(user, struct) {
-        if (struct._id) {
-          const _id = toObjectID(struct._id);
-          let usersearch = _id !== struct._id ? { _id } : { id: struct._id };
-          let userexists = await this.collections.profile.instance.findOne(usersearch);
-          if (userexists) {
-            if (getStringId(user._id) !== struct.ownerId || getStringId(user._id) === struct.ownerId && user.userRoles?.admincontrol) {
-              let passed = !this.useAuths;
-              if (!struct?.ownerId)
-                passed = true;
-              else if (this.useAuths)
-                passed = await this.checkAuthorization(user, struct, "WRITE");
-              if (!passed)
-                return false;
-            }
-          }
-          let copy = JSON.parse(JSON.stringify(struct));
-          if (this.debug)
-            console.log("RETURNS PROFILE", struct);
-          await this.collections.profile.instance.updateOne(usersearch, { $set: copy }, { upsert: true });
-          user = await this.collections.profile.instance.findOne(usersearch);
-          this.checkToNotify(user, [struct]);
-          return user;
-        } else
-          return false;
-      }
-      async setGroup(user, struct, mode = this.mode) {
-        if (struct?._id) {
-          let exists = void 0;
-          if (mode.includes("mongo")) {
-            exists = await this.collections.group.instance.findOne({ name: struct.name });
-          } else {
-            exists = this.getLocalData("group", { _id: getStringId(struct._id) });
-          }
-          if (exists && (exists.ownerId !== struct.ownerId || struct.admins.indexOf(getStringId(user._id)) < 0))
-            return false;
-          if (getStringId(user._id) !== struct.ownerId) {
-            let passed = !this.useAuths;
-            if (!struct?.ownerId)
-              passed = true;
-            else if (this.useAuths)
-              passed = await this.checkAuthorization(user, struct, "WRITE");
-            if (!passed)
-              return false;
-          }
-          let allusers = [];
-          Object.keys(struct.users).forEach((u) => {
-            allusers.push({ email: u }, { id: u }, { username: u });
-          });
-          let users = {};
-          let ids = {};
-          if (mode.includes("mongo")) {
-            let cursor = this.collections.profile.instance.find({ $or: allusers });
-            let arr = cursor.toArray();
-            if (arr.length > 0) {
-              await cursor.forEach((user2) => {
-                users[getStringId(user2._id)] = user2;
-                ids[getStringId(user2._id)] = true;
-              });
-            }
-          } else {
-            allusers.forEach((search) => {
-              let result = this.getLocalData("profile", search);
-              if (result.length > 0) {
-                users[getStringId(result[0]._id)] = result[0];
-                ids[getStringId(result[0]._id)] = true;
-              }
-            });
-          }
-          struct.users = ids;
-          let admins = {};
-          let peers = {};
-          let clients = {};
-          Object.keys(users).forEach((id) => {
-            let u = users[id];
-            if (struct.admins[getStringId(u._id)] || struct.admins[u.email] || struct.admins[u.username] || struct.admins[struct.ownerId]) {
-              if (!admins[getStringId(u._id)])
-                admins[getStringId(u._id)] = true;
-            }
-            if (struct.peers[getStringId(u._id)] || struct.peers[u.email] || struct.peers[u.username] || struct.peers[struct.ownerId]) {
-              if (!peers[getStringId(u._id)])
-                peers[getStringId(u._id)] = true;
-            }
-            if (struct.clients[getStringId(u._id)] || struct.clients[u.email] || struct.clients[u.username] || struct.clients[struct.ownerId]) {
-              if (!clients[getStringId(u._id)])
-                clients[getStringId(u._id)] = true;
-            }
-          });
-          struct.admins = admins;
-          struct.peers = peers;
-          struct.clients = clients;
-          let copy = JSON.parse(JSON.stringify(struct));
-          if (copy._id)
-            delete copy._id;
-          if (mode.includes("mongo")) {
-            if (getStringId(struct._id).includes("defaultId")) {
-              await this.db.collection(struct.structType).insertOne(copy);
-              delete struct._id;
-              struct = await this.db.collection(struct.structType).findOne(struct);
-              struct._id = getStringId(struct._id);
-            } else
-              await this.collections.group.instance.updateOne({ _id: toObjectID(struct._id) }, { $set: copy }, { upsert: true });
-          } else {
-            this.setLocalData(struct);
-          }
-          this.checkToNotify(user, [struct], this.mode);
-          if (this.debug)
-            console.log("setGroup: user:", user, "output", struct);
-          return struct;
-        } else
-          return false;
-      }
-      async getMongoUser(user, info = "", bypassAuth = false) {
-        return new Promise(async (resolve) => {
-          const query = [{ email: info }, { id: info }, { username: info }];
-          try {
-            query.push({ _id: toObjectID(info) });
-          } catch (e) {
-          }
-          let u = await this.collections.profile.instance.findOne({ $or: query });
-          if (!u || u == null)
-            resolve(void 0);
-          else {
-            u._id = getStringId(u._id);
-            if (!u.ownerId)
-              u.ownerId = u._id;
-            if (u && bypassAuth === false) {
-              if (getStringId(user._id) !== u._id || getStringId(user._id) === u._id && user.userRoles?.admincontrol) {
-                let passed = !this.useAuths;
-                if (this.useAuths)
-                  passed = await this.checkAuthorization(user, u);
-                if (!passed)
-                  resolve(void 0);
-              }
-              let authorizations = [];
-              let auths = this.collections.authorization.instance.find({ ownerId: u._id });
-              if (auths.toArray().length > 0) {
-                await auths.forEach((d) => authorizations.push(d));
-              }
-              let gs = this.collections.group.instance.find({ users: { $all: [u._id] } });
-              let groups = [];
-              if (gs.toArray().length > 0) {
-                await gs.forEach((d) => groups.push(d));
-              }
-              resolve({ user: u, authorizations, groups });
-            } else
-              resolve({ user: u });
-          }
-        });
-      }
-      async getMongoUsersByIds(user, userIds = []) {
-        let usrs = [];
-        userIds.forEach((u) => {
-          try {
-            usrs.push({ _id: toObjectID(u) });
-          } catch {
-          }
-        });
-        let found = [];
-        if (usrs.length > 0) {
-          let users = this.collections.profile.instance.find({ $or: usrs });
-          if (users.toArray().length > 0) {
-            await users.forEach((u) => {
-              found.push(u);
-            });
-          }
-        }
-        return found;
-      }
-      async getMongoUsersByRole(user, role) {
-        let users = this.collections.profile.instance.find({ userRoles: { $all: { [role]: true } } });
-        let found = [];
-        if (users.toArray().length > 0) {
-          await users.forEach((u) => {
-            found.push(u);
-          });
-        }
-        return found;
-      }
-      async getMongoDataByIds(user, structIds, ownerId, collection) {
-        if (structIds.length > 0) {
-          let query = [];
-          structIds.forEach((_id) => {
-            let q = { _id: toObjectID(_id) };
-            if (ownerId)
-              q.ownerId = ownerId;
-            query.push(q);
-          });
-          let found = [];
-          if (!collection) {
-            await Promise.all(Object.keys(this.collections).map(async (name2) => {
-              let cursor = await this.db.collection(name2).find({ $or: query });
-              if (cursor.toArray().length > 0) {
-                let passed = true;
-                let checkedAuth = "";
-                await cursor.forEach(async (s) => {
-                  if (!s?.ownerId)
-                    passed = true;
-                  else if ((getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) && checkedAuth !== s.ownerId) {
-                    if (this.useAuths)
-                      passed = await this.checkAuthorization(user, s);
-                    checkedAuth = s.ownerId;
-                  }
-                  if (passed)
-                    found.push(s);
-                });
-              }
-            }));
-          } else {
-            let cursor = await this.db.collection(collection).find({ $or: query });
-            if (cursor.toArray().length > 0) {
-              let passed = true;
-              let checkedAuth = "";
-              await cursor.forEach(async (s) => {
-                if (!s?.ownerId)
-                  passed = true;
-                else if ((getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) && checkedAuth !== s.ownerId) {
-                  if (this.useAuths)
-                    passed = await this.checkAuthorization(user, s);
-                  checkedAuth = s.ownerId;
-                }
-                if (passed)
-                  found.push(s);
-              });
-            }
-          }
-          return found;
-        }
-      }
-      async getMongoData(user, collection, ownerId, dict = {}, limit = 0, skip = 0) {
-        if (!ownerId)
-          ownerId = dict?.ownerId;
-        if (!dict)
-          dict = {};
-        if (dict._id)
-          dict._id = toObjectID(dict._id);
-        let structs = [];
-        let passed = true;
-        let checkedAuth = "";
-        if (!collection && !ownerId && !dict)
-          return [];
-        else if (!collection && ownerId && Object.keys(dict).length === 0)
-          return await this.getAllUserMongoData(user, ownerId);
-        else if ((!dict || Object.keys(dict).length === 0) && ownerId && collection) {
-          let cursor = this.db.collection(collection).find({ ownerId }).sort({ $natural: -1 }).skip(skip);
-          if (limit > 0)
-            cursor.limit(limit);
-          if (cursor.toArray().length > 0) {
-            await cursor.forEach(async (s) => {
-              if (!s?.ownerId)
-                passed = true;
-              else if ((getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) && checkedAuth !== s.ownerId) {
-                if (this.useAuths)
-                  passed = await this.checkAuthorization(user, s);
-                checkedAuth = s.ownerId;
-              }
-              if (passed === true)
-                structs.push(s);
-            });
-          }
-        } else if (Object.keys(dict).length > 0 && ownerId) {
-          let found = await this.db.collection(collection).findOne({ ownerId, ...dict });
-          if (found)
-            structs.push(found);
-        } else if (Object.keys(dict).length > 0 && !ownerId) {
-          await Promise.all(Object.keys(this.collections).map(async (name2) => {
-            let found = await this.db.collection(name2).findOne(dict);
-            if (found) {
-              if (!found?.ownerId)
-                passed = true;
-              else if ((getStringId(user._id) !== found.ownerId || getStringId(user._id) === found.ownerId && user.userRoles?.admincontrol) && checkedAuth !== found.ownerId) {
-                if (this.useAuths)
-                  passed = await this.checkAuthorization(user, found);
-                checkedAuth = found.ownerId;
-              }
-              structs.push(found);
-              return;
-            }
-          }));
-        }
-        if (!passed)
-          return [];
-        return structs;
-      }
-      async getAllUserMongoData(user, ownerId, excluded = []) {
-        let structs = [];
-        let passed = true;
-        let checkedId = "";
-        await Promise.all(Object.keys(this.collections).map(async (name2, j) => {
-          if (passed && excluded.indexOf(name2) < 0) {
-            let cursor = this.db.collection(name2).find({ ownerId });
-            let count = cursor.toArray().length;
-            for (let k = 0; k < count; k++) {
-              let struct = await cursor.next();
-              if (!ownerId)
-                passed = true;
-              else if ((getStringId(user._id) !== ownerId || getStringId(user._id) === ownerId && user.userRoles?.admincontrol) && checkedId !== ownerId) {
-                if (this.useAuths)
-                  passed = await this.checkAuthorization(user, struct);
-                checkedId = ownerId;
-              }
-              if (passed)
-                structs.push(struct);
-            }
-          }
-        }));
-        if (!passed)
-          return [];
-        return structs;
-      }
-      async getMongoDataByRefs(user, structRefs = []) {
-        let structs = [];
-        if (structs.length > 0) {
-          let checkedAuth = "";
-          structRefs.forEach(async (ref) => {
-            if (ref.structType && getStringId(ref._id)) {
-              let struct = await this.db.collection(ref.structType).findOne({ _id: toObjectID(ref._id) });
-              if (struct) {
-                let passed = true;
-                if (!struct?.ownerId)
-                  passed = true;
-                else if ((getStringId(user._id) !== struct.ownerId || getStringId(user._id) === struct.ownerId && user.userRoles?.admincontrol) && checkedAuth !== struct.ownerId) {
-                  if (this.useAuths)
-                    passed = await this.checkAuthorization(user, struct);
-                  checkedAuth = struct.ownerId;
-                }
-                if (passed === true) {
-                  structs.push(struct);
-                }
-              }
-            }
-          });
-        }
-        return structs;
-      }
-      async getMongoAuthorizations(user, ownerId = getStringId(user._id), authId = "") {
-        let auths = [];
-        if (authId.length === 0) {
-          let cursor = this.collections.authorization.instance.find({ ownerId });
-          if (await cursor.count > 0) {
-            await cursor.forEach((a) => {
-              auths.push(a);
-            });
-          }
-        } else
-          auths.push(await this.collections.authorization.instance.findOne({ _id: toObjectID(authId), ownerId }));
-        if (!auths[0]?.ownerId)
-          true;
-        else if (getStringId(user._id) !== auths[0]?.ownerId) {
-          let passed = !this.useAuths;
-          if (this.useAuths)
-            passed = await this.checkAuthorization(user, auths[0]);
-          if (!passed)
-            return void 0;
-        }
-        return auths;
-      }
-      async getMongoGroups(user, userId = getStringId(user._id), groupId = "") {
-        let groups = [];
-        if (groupId.length === 0) {
-          let cursor = this.collections.group.instance.find({ users: { $all: [userId] } });
-          if (await cursor.count > 0) {
-            await cursor.forEach((a) => {
-              groups.push(a);
-            });
-          }
-        } else {
-          try {
-            groups.push(await this.collections.group.instance.findOne({ _id: toObjectID(groupId), users: { $all: [userId] } }));
-          } catch {
-          }
-        }
-        return groups;
-      }
-      async deleteMongoData(user, structRefs = []) {
-        let structs = [];
-        await Promise.all(structRefs.map(async (ref) => {
-          try {
-            let _id = toObjectID(ref._id);
-            let struct = await this.db.collection(ref.structType).findOne({ _id });
-            if (struct) {
-              structs.push(struct);
-              let notifications = await this.collections.notifications.instance.find({ parent: { structType: ref.structType, _id: getStringId(ref._id) } });
-              let count = notifications.toArray().length;
-              for (let i = 0; i < count; i++) {
-                let note = await notifications.next();
-                if (note)
-                  structs.push(note);
-              }
-            }
-          } catch {
-          }
-        }));
-        let checkedOwner = "";
-        await Promise.all(structs.map(async (struct, i) => {
-          let passed = true;
-          if (!struct?.ownerId)
-            passed = true;
-          else if ((struct.ownerId !== getStringId(user._id) || getStringId(user._id) === struct.ownerId && user.userRoles?.admincontrol) && struct.ownerId !== checkedOwner) {
-            checkedOwner = struct.ownerId;
-            if (this.useAuths)
-              passed = await this.checkAuthorization(user, struct, "WRITE");
-          }
-          if (passed) {
-            await this.db.collection(struct.structType).deleteOne({ _id: toObjectID(struct._id) });
-            if (struct.users) {
-              Object.keys(struct.users).forEach((uid) => {
-                if (uid !== getStringId(user._id) && uid !== struct.ownerId && this.users[uid])
-                  this.users[uid].sendAll({ route: "structDeleted", args: getStringId(struct._id) });
-              });
-            }
-            if (struct.ownerId !== user._id && this.users[struct.ownerId]) {
-              this.users[struct.ownerId].sendAll({ route: "structDeleted", args: getStringId(struct._id) });
-            }
-          }
-        }));
-        return true;
-      }
-      async deleteMongoUser(user, userId) {
-        if (getStringId(user._id) !== userId || getStringId(user._id) === userId && user.userRoles?.admincontrol) {
-          let u = await this.collections.profile.instance.findOne({ id: userId });
-          let passed = !this.useAuths;
-          if (!u?.ownerId)
-            passed = true;
-          else if (this.useAuths)
-            passed = await this.checkAuthorization(user, u, "WRITE");
-          if (!passed)
-            return false;
-        }
-        await this.collections.profile.instance.deleteOne({ id: userId });
-        if (getStringId(user._id) !== userId && this.users[userId])
-          this.users[userId].sendAll({ route: "structDeleted", args: userId });
-        return true;
-      }
-      async deleteMongoGroup(user, groupId) {
-        let s = await this.collections.group.instance.findOne({ _id: toObjectID(groupId) });
-        if (s) {
-          if (!s?.ownerId)
-            true;
-          else if (getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) {
-            let passed = !this.useAuths;
-            if (this.useAuths)
-              passed = await this.checkAuthorization(user, s, "WRITE");
-            if (!passed)
-              return false;
-          }
-          if (s.users) {
-            Object.keys(s.users).forEach((u) => {
-              this.users[s.authorizerId].sendAll({ route: "structDeleted", args: getStringId(s._id) });
-            });
-          }
-          await this.collections.group.instance.deleteOne({ _id: toObjectID(groupId) });
-          return true;
-        } else
-          return false;
-      }
-      async deleteMongoAuthorization(user, authId) {
-        let s = await this.collections.authorization.instance.findOne({ _id: toObjectID(authId) });
-        if (s) {
-          if (getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) {
-            let passed = !this.useAuths;
-            if (!s?.ownerId)
-              passed = true;
-            else if (this.useAuths)
-              passed = await this.checkAuthorization(user, s, "WRITE");
-            if (!passed)
-              return false;
-          }
-          if (s.associatedAuthId) {
-            if (this.debug)
-              console.log(s);
-            await this.collections.authorization.instance.deleteOne({ _id: toObjectID(s.associatedAuthId) });
-            if (s.authorizerId && s.authorizerId !== getStringId(user._id))
-              this.users[s.authorizerId].sendAll({ route: "structDeleted", args: getStringId(s._id) });
-            else if (s.authorizedId && s.authorizedId !== getStringId(user._id))
-              this.users[s.authorizerId].sendAll({ route: "structDeleted", args: getStringId(s._id) });
-          }
-          await this.collections.authorization.instance.deleteOne({ _id: toObjectID(authId) });
-          return true;
-        } else
-          return false;
-      }
-      async setAuthorization(user, authStruct, mode = this.mode) {
-        let u1, u2;
-        if (mode.includes("mongo")) {
-          u1 = (await this.getMongoUser(user, authStruct.authorizedId, true)).user;
-          u2 = (await this.getMongoUser(user, authStruct.authorizerId, true)).user;
-        } else {
-          u1 = this.getLocalData("profile", { "_id": authStruct.authorizedId })[0];
-          u2 = this.getLocalData("profile", { "_id": authStruct.authorizerId })[0];
-        }
-        if (!u1 || !u2)
-          return false;
-        if (authStruct.authorizedId !== getStringId(u1._id))
-          authStruct.authorizedId = getStringId(u1._id);
-        if (authStruct.authorizerId !== getStringId(u2._id))
-          authStruct.authorizerId = getStringId(u2._id);
-        if (!authStruct.authorizedName) {
-          if (u1.username)
-            authStruct.authorizedName = u1.username;
-          else if (u1.email)
-            authStruct.authorizedName = u1.email;
-        }
-        if (!authStruct.authorizerName) {
-          if (u2.username)
-            authStruct.authorizerName = u2.username;
-          else if (u2.email)
-            authStruct.authorizerName = u2.email;
-        }
-        if (!authStruct?.ownerId)
-          true;
-        else if ((getStringId(user._id) !== authStruct.ownerId || getStringId(user._id) === authStruct.ownerId && user.userRoles?.admincontrol) && (getStringId(user._id) !== authStruct.authorizedId && getStringId(user._id) !== authStruct.authorizerId)) {
-          let passed = !this.useAuths;
-          if (this.useAuths)
-            passed = await this.checkAuthorization(user, authStruct, "WRITE");
-          if (!passed)
-            return false;
-        }
-        let auths = [];
-        if (mode.includes("mongo")) {
-          let s = this.collections.authorization.instance.find({ $and: [{ authorizedId: authStruct.authorizedId }, { authorizerId: authStruct.authorizerId }] });
-          if (s.toArray().length > 0) {
-            await s.forEach((d) => auths.push(d));
-          }
-        } else {
-          let s = this.getLocalData("authorization", { authorizedId: authStruct.authorizedId });
-          if (Array.isArray(s)) {
-            s.forEach((d) => {
-              if (d.authorizerId === authStruct.authorizerId)
-                auths.push(d);
-            });
-          }
-        }
-        let otherAuthset;
-        if (Array.isArray(auths)) {
-          auths.forEach(async (auth) => {
-            if (auth.ownerId === getStringId(user._id)) {
-            } else {
-              if (authStruct.authorizerId === getStringId(user._id)) {
-                auth.authorizations = authStruct.authorizations;
-                auth.structs = authStruct.structs;
-                auth.excluded = authStruct.excluded;
-                auth.expires = authStruct.expires;
-                auth.status = "OKAY";
-                authStruct.status = "OKAY";
-              } else {
-                authStruct.authorizations = auth.authorizations;
-                authStruct.structs = auth.structs;
-                authStruct.excluded = auth.excluded;
-                authStruct.expires = auth.expires;
-                auth.status = "OKAY";
-                authStruct.status = "OKAY";
-              }
-              authStruct.associatedAuthId = getStringId(auth._id);
-              auth.associatedAuthId = getStringId(authStruct._id);
-              otherAuthset = auth;
-              let copy2 = JSON.parse(JSON.stringify(auth));
-              if (mode.includes("mongo")) {
-                delete copy2._id;
-                await this.collections.authorization.instance.updateOne({ $and: [{ authorizedId: authStruct.authorizedId }, { authorizerId: authStruct.authorizerId }, { ownerId: auth.ownerId }] }, { $set: copy2 }, { upsert: true });
-              } else {
-                this.setLocalData(copy2);
-              }
-            }
-          });
-        }
-        let copy = JSON.parse(JSON.stringify(authStruct));
-        if (mode.includes("mongo")) {
-          delete copy._id;
-          await this.collections.authorization.instance.updateOne({ $and: [{ authorizedId: authStruct.authorizedId }, { authorizerId: authStruct.authorizerId }, { ownerId: authStruct.ownerId }] }, { $set: copy }, { upsert: true });
-        } else {
-          this.setLocalData(copy);
-        }
-        if (getStringId(authStruct._id).includes("defaultId") && mode.includes("mongo")) {
-          let replacedAuth = await this.collections.authorization.instance.findOne(copy);
-          if (replacedAuth) {
-            authStruct._id = getStringId(replacedAuth._id);
-            if (otherAuthset) {
-              let otherAuth = await this.collections.authorization.instance.findOne({ $and: [{ authorizedId: otherAuthset.authorizedId }, { authorizerId: otherAuthset.authorizerId }, { ownerId: otherAuthset.ownerId }] });
-              if (otherAuth) {
-                otherAuth.associatedAuthId = getStringId(authStruct._id);
-                let copy2 = JSON.parse(JSON.stringify(otherAuth));
-                delete copy2._id;
-                await this.collections.authorization.instance.updateOne({ $and: [{ authorizedId: otherAuth.authorizedId }, { authorizerId: otherAuth.authorizerId }, { ownerId: otherAuth.ownerId }] }, { $set: copy2 }, { upsert: true });
-                this.checkToNotify(user, [otherAuth]);
-              }
-            }
-          }
-        }
-        return authStruct;
-      }
-      async checkAuthorization(user, struct, request = "READ", mode = this.mode) {
-        if (!user || !struct)
-          return false;
-        if (!struct.ownerId)
-          return true;
-        if (typeof user === "object") {
-          if (struct.ownerId === getStringId(user._id)) {
-            if (user.userRoles?.["admincontrol"]) {
-            } else
-              return true;
-          }
-        } else if (typeof user === "string") {
-          if (struct.ownerId === user) {
-            return true;
-          } else
-            user = { _id: user };
-        }
-        let auth1, auth2;
-        if (mode.includes("mongo")) {
-          auth1 = await this.collections.authorization.instance.findOne({ $or: [{ authorizedId: getStringId(user._id), authorizerId: struct.ownerId, ownerId: getStringId(user._id) }, { authorizedId: struct.ownerId, authorizerId: getStringId(user._id), ownerId: getStringId(user._id) }] });
-          auth2 = await this.collections.authorization.instance.findOne({ $or: [{ authorizedId: getStringId(user._id), authorizerId: struct.ownerId, ownerId: struct.ownerId }, { authorizedId: struct.ownerId, authorizerId: getStringId(user._id), ownerId: struct.ownerId }] });
-        } else {
-          auth1 = this.getLocalData("authorization", { ownerId: getStringId(user._id) }).find((o) => {
-            if (o.authorizedId === getStringId(user._id) && o.authorizerId === struct.ownerId)
-              return true;
-          });
-          auth2 = this.getLocalData("authorization", { ownerId: struct.ownerId }).find((o) => {
-            if (o.authorizedId === getStringId(user._id) && o.authorizerId === struct.ownerId)
-              return true;
-          });
-        }
-        if (!auth1 || !auth2) {
-          return false;
-        }
-        let passed = false;
-        if (auth1.status === "OKAY" && auth2.status === "OKAY") {
-          if (struct.structType === "group") {
-            if (auth1.authorizations[struct.name + "_admin"] && auth2.authorizations[struct.name + "_admin"])
-              passed = true;
-            else
-              passed = false;
-          } else if (auth1.authorizations["peer"] && auth2.authorizations["peer"])
-            passed = true;
-          else if (auth1.authorizations["admincontrol"] && auth2.authorizations["admincontrol"])
-            passed = true;
-          else if (auth1.structIds[getStringId(struct._id)] && auth2.structIds[getStringId(struct._id)])
-            passed = true;
-          else if (auth1.excluded[struct.structType] && struct.ownerId === getStringId(user._id) && request === "WRITE")
-            passed = false;
-        }
-        return passed;
-      }
-      overwriteLocalData(structs) {
-        if (Array.isArray(structs)) {
-          structs.forEach((struct) => {
-            let localdat = this.getLocalData(struct.structType, { "ownerId": struct.ownerId, "_id": getStringId(struct._id) });
-            if (!localdat || localdat?.length === 0) {
-              this.setLocalData(struct);
-            } else
-              Object.assign(localdat, struct);
-          });
-        } else {
-          let localdat = this.getLocalData(structs.structType, { "ownerId": structs.ownerId, "_id": getStringId(structs._id) });
-          if (!localdat || localdat?.length === 0) {
-            this.setLocalData(structs);
-          } else
-            Object.assign(localdat, structs);
-        }
-      }
-      setLocalData(structs) {
-        let setInCollection = (s) => {
-          let type = s.structType;
-          let collection = this.collections[type]?.reference;
-          if (!collection) {
-            collection = {};
-            if (!this.collections[type])
-              this.collections[type] = {};
-            this.collections[type].reference = collection;
-          }
-          collection[getStringId(s._id)] = s;
-        };
-        if (Array.isArray(structs)) {
-          structs.forEach((s) => {
-            setInCollection(s);
-          });
-        } else
-          setInCollection(structs);
-      }
-      getLocalData(collection, query) {
-        let ownerId, key, value;
-        if (typeof query === "object") {
-          ownerId = query.ownerId;
-          const keys = Object.keys(query).filter((k) => k != "ownerId");
-          key = keys[0];
-          value = query[key];
-        } else
-          value = query;
-        if (!collection && !ownerId && !key && !value)
-          return [];
-        let result = [];
-        if (!collection && (ownerId || key)) {
-          Object.values(this.collections).forEach((c) => {
-            c = c.reference;
-            if ((key === "_id" || key === "id") && value) {
-              let found = c[value];
-              if (found)
-                result.push(found);
-            } else {
-              Object.values(c).forEach((struct) => {
-                if (key && value) {
-                  if (struct[key] === value && struct.ownerId === ownerId) {
-                    result.push(struct);
-                  }
-                } else if (struct.ownerId === ownerId) {
-                  result.push(struct);
-                }
-              });
-            }
-          });
-          return result;
-        } else {
-          let c = this.collections[collection]?.reference;
-          if (!c)
-            return result;
-          if (!key && !ownerId) {
-            Object.values(c).forEach((struct) => {
-              result.push(struct);
-            });
-            return result;
-          }
-          if ((key === "_id" || key === "id") && value)
-            return getStringId(c[value]);
-          else {
-            Object.keys(c).forEach((k) => {
-              const struct = c[k];
-              if (key && value && !ownerId) {
-                if (struct[key] === value)
-                  result.push(struct);
-              } else if (ownerId && !key) {
-                if (struct.ownerId === ownerId)
-                  result.push(struct);
-              } else if (ownerId && key && value) {
-                if (struct.ownerId === ownerId && struct[key]) {
-                  if (struct[key] === value)
-                    result.push(struct);
-                }
-              }
-            });
-          }
-        }
-        return result;
-      }
-      deleteLocalData(struct) {
-        if (!struct)
-          throw new Error("Struct not supplied");
-        if (!struct.structType || !struct._id)
-          return false;
-        if (this.collections[struct.structType])
-          delete this.collections[struct.structType].reference[struct._id];
-        return true;
-      }
-    };
-    var Systems = { collision: { setupEntities: function(entities) {
-      for (const key in entities) {
-        const entity = entities[key];
-        if (entity.components) {
-          if (!entity.components[this.__node.tag])
-            continue;
-        }
-        this.setupEntity(entity);
-      }
-      return entities;
-    }, setupEntity: function(entity) {
-      if (!("collisionEnabled" in entity))
-        entity.collisionEnabled = true;
-      if (!entity.collisionType)
-        entity.collisionType = "sphere";
-      if (!entity.collisionRadius)
-        entity.collisionRadius = 1;
-      if (!entity.collisionBoundsScale)
-        entity.collisionBoundsScale = { x: 1, y: 1, z: 1 };
-      if (!entity.colliding)
-        entity.colliding = {};
-      if (!entity.position)
-        entity.position = { x: 0, y: 0, z: 0 };
-      return entity;
-    }, __node: { tag: "collision" }, __operator: function(entities) {
-      let keys = this.entityKeys;
-      for (let i = 0; i < keys.length; i++) {
-        const entity1 = entities[keys[i]];
-        if (entity1.components) {
-          if (!entity1.components[this.__node.tag] || !entity1.collisionEnabled)
-            continue;
-        }
-        if (!entity1.collisionEnabled)
-          continue;
-        for (let j = 0; j < keys.length; j++) {
-          if (i === j)
-            continue;
-          const entity2 = entities[keys[j]];
-          if (entity2.components) {
-            if (!entity2.components[this.__node.tag])
-              continue;
-          }
-          if (!entity2.collisionEnabled)
-            continue;
-          let colliding = Systems.collision.collisionCheck(entity1, entity2);
-          if (colliding !== false) {
-            if (!entity1.colliding)
-              entity1.colliding = {};
-            if (!entity2.colliding)
-              entity2.colliding = {};
-            entity1.colliding[entity2.__node.tag] = colliding;
-            entity2.colliding[entity1.__node.tag] = colliding;
-          }
-        }
-      }
-      return entities;
-    }, collisionCheck: (body1, body2) => {
-      if (body1.collisionEnabled === false || body2.collisionEnabled === false)
-        return false;
-      const dist = Systems.collision.distance(body1.position, body2.position);
-      if (dist < Math.max(...Object.values(body1.collisionBoundsScale)) * body1.collisionRadius + Math.max(...Object.values(body2.collisionBoundsScale)) * body2.collisionRadius) {
-        let isColliding = false;
-        if (body1.collisionType === "sphere") {
-          if (body2.collisionType === "sphere") {
-            isColliding = Systems.collision.sphereCollisionCheck(body1, body2, dist);
-          } else if (body2.collisionType === "box") {
-            isColliding = Systems.collision.sphereBoxCollisionCheck(body1, body2, dist);
-          } else if (body2.collisionType === "point") {
-            isColliding = Systems.collision.isPointInsideSphere(body2.position, body1, dist);
-          }
-        } else if (body1.collisionType === "box") {
-          if (body2.collisionType === "sphere") {
-            isColliding = Systems.collision.sphereBoxCollisionCheck(body2, body1, dist);
-          } else if (body2.collisionType === "box") {
-            isColliding = Systems.collision.boxCollisionCheck(body1, body2);
-          } else if (body2.collisionType === "point") {
-            isColliding = Systems.collision.isPointInsideBox(body1.position, body1);
-          }
-        } else if (body1.collisionType === "point") {
-          if (body2.collisionType === "sphere") {
-            isColliding = Systems.collision.isPointInsideSphere(body1.position, body2, dist);
-          } else if (body2.collisionType === "box") {
-            isColliding = Systems.collision.isPointInsideBox(body1.position, body2);
-          }
-        }
-        if (isColliding)
-          return dist;
-      }
-      return false;
-    }, sphereCollisionCheck: (body1, body2, dist) => {
-      if (dist === void 0)
-        dist = Systems.collision.distance(body1.position, body2.position);
-      return dist < body1.collisionRadius + body2.collisionRadius;
-    }, boxCollisionCheck: (body1, body2) => {
-      let body1minX = (body1.position.x - body1.collisionRadius) * body1.collisionBoundsScale.x;
-      let body1maxX = (body1.position.x + body1.collisionRadius) * body1.collisionBoundsScale.x;
-      let body1minY = (body1.position.y - body1.collisionRadius) * body1.collisionBoundsScale.y;
-      let body1maxY = (body1.position.y + body1.collisionRadius) * body1.collisionBoundsScale.y;
-      let body1minZ = (body1.position.z - body1.collisionRadius) * body1.collisionBoundsScale.z;
-      let body1maxZ = (body1.position.z + body1.collisionRadius) * body1.collisionBoundsScale.z;
-      let body2minX = (body2.position.x - body2.collisionRadius) * body1.collisionBoundsScale.x;
-      let body2maxX = (body2.position.x + body2.collisionRadius) * body1.collisionBoundsScale.x;
-      let body2minY = (body2.position.y - body2.collisionRadius) * body1.collisionBoundsScale.y;
-      let body2maxY = (body2.position.y + body2.collisionRadius) * body1.collisionBoundsScale.y;
-      let body2minZ = (body2.position.z - body2.collisionRadius) * body1.collisionBoundsScale.z;
-      let body2maxZ = (body2.position.z + body2.collisionRadius) * body1.collisionBoundsScale.z;
-      return (body1maxX <= body2maxX && body1maxX >= body2minX || body1minX <= body2maxX && body1minX >= body2minX) && (body1maxY <= body2maxY && body1maxY >= body2minY || body1minY <= body2maxY && body1minY >= body2minY) && (body1maxZ <= body2maxZ && body1maxZ >= body2minZ || body1minZ <= body2maxZ && body1minZ >= body2minZ);
-    }, sphereBoxCollisionCheck: (sphere, box, dist) => {
-      let boxMinX = (box.position.x - box.collisionRadius) * box.collisionBoundsScale.x;
-      let boxMaxX = (box.position.x + box.collisionRadius) * box.collisionBoundsScale.x;
-      let boxMinY = (box.position.y - box.collisionRadius) * box.collisionBoundsScale.y;
-      let boxMaxY = (box.position.y + box.collisionRadius) * box.collisionBoundsScale.y;
-      let boxMinZ = (box.position.z - box.collisionRadius) * box.collisionBoundsScale.z;
-      let boxMaxZ = (box.position.z + box.collisionRadius) * box.collisionBoundsScale.z;
-      let clamp = { x: Math.max(boxMinX, Math.min(sphere.position.x, boxMaxX)), y: Math.max(boxMinY, Math.min(sphere.position.y, boxMaxY)), z: Math.max(boxMinZ, Math.min(sphere.position.z, boxMaxZ)) };
-      if (dist === void 0)
-        dist = Systems.collision.distance(sphere.position, clamp);
-      return dist > sphere.collisionRadius;
-    }, isPointInsideSphere: (point, sphere, dist) => {
-      if (dist === void 0)
-        dist = Systems.collision.distance(point, sphere.position);
-      return dist < sphere.collisionRadius;
-    }, isPointInsideBox: (point, box) => {
-      let boxminX = (box.position.x - box.collisionRadius) * box.collisionBoundsScale.x;
-      let boxmaxX = (box.position.x + box.collisionRadius) * box.collisionBoundsScale.x;
-      let boxminY = (box.position.y - box.collisionRadius) * box.collisionBoundsScale.x;
-      let boxmaxY = (box.position.y + box.collisionRadius) * box.collisionBoundsScale.x;
-      let boxminZ = (box.position.z - box.collisionRadius) * box.collisionBoundsScale.x;
-      let boxmaxZ = (box.position.z + box.collisionRadius) * box.collisionBoundsScale.x;
-      return point.x >= boxminX && point.x <= boxmaxX && (point.y >= boxminY && point.y <= boxmaxY) && (point.z >= boxminZ && point.z <= boxmaxZ);
-    }, closestPointOnLine: (point, lineStart, lineEnd) => {
-      let a = { x: lineEnd.x - lineStart.x, y: lineEnd.y - lineStart.y, z: lineEnd.z - lineStart.z };
-      let b = { x: lineStart.x - point.x, y: lineStart.y - point.y, z: lineStart.z - point.z };
-      let c = { x: lineEnd.x - point.x, y: lineEnd.y - point.y, z: lineEnd.z - point.z };
-      let bdota = Systems.collision.dot(b, a);
-      if (bdota <= 0)
-        return lineStart;
-      let cdota = Systems.collision.dot(c, a);
-      if (cdota <= 0)
-        return lineEnd;
-      let _bdotapluscdota = 1 / (bdota + cdota);
-      return { x: lineStart.x + (lineEnd.x - lineStart.x) * bdota * _bdotapluscdota, y: lineStart.y + (lineEnd.y - lineStart.y) * bdota * _bdotapluscdota, z: lineStart.z + (lineEnd.z - lineStart.z) * bdota * _bdotapluscdota };
-    }, closestPointOnPolygon: (point, t0, t1, t2) => {
-      let n = Systems.collision.calcNormal(t0, t1, t2);
-      let dist = Systems.collision.dot(point, n) - Systems.collision.dot(t0, n);
-      let projection = Systems.collision.vecadd(point, Systems.collision.vecscale(n, -dist));
-      let v0x = t2[0] - t0[0];
-      let v0y = t2[1] - t0[1];
-      let v0z = t2[2] - t0[2];
-      let v1x = t1[0] - t0[0];
-      let v1y = t1[1] - t0[1];
-      let v1z = t1[2] - t0[2];
-      let v2x = projection[0] - t0[0];
-      let v2y = projection[1] - t0[1];
-      let v2z = projection[2] - t0[2];
-      let dot00 = v0x * v0x + v0y * v0y + v0z * v0z;
-      let dot01 = v0x * v1x + v0y * v1y + v0z * v1z;
-      let dot02 = v0x * v2x + v0y * v2y + v0z * v2z;
-      let dot11 = v1x * v1x + v1y * v1y + v1z * v1z;
-      let dot12 = v1x * v2x + v1y * v2y + v1z * v2z;
-      let denom = dot00 * dot11 - dot01 * dot01;
-      if (Math.abs(denom) < 1e-30) {
-        return void 0;
-      }
-      let _denom = 1 / denom;
-      let u = (dot11 * dot02 - dot01 * dot12) * _denom;
-      let v = (dot00 * dot12 - dot01 * dot02) * _denom;
-      if (u >= 0 && v >= 0 && u + v < 1) {
-        return projection;
-      } else
-        return void 0;
-    }, calcNormal: (t0, t1, t2, positive = true) => {
-      var QR = Systems.collision.makeVec(t0, t1);
-      var QS = Systems.collision.makeVec(t0, t2);
-      if (positive === true) {
-        return Systems.collision.normalize(Systems.collision.cross3D(QR, QS));
-      } else {
-        return Systems.collision.normalize(Systems.collision.cross3D(QS, QR));
-      }
-    }, dot: (v1, v2) => {
-      let dot = 0;
-      for (const key in v1) {
-        dot += v1[key] * v2[key];
-      }
-      return dot;
-    }, makeVec(p1, p2) {
-      return { x: p2.x - p1.x, y: p2.y - p1.y, z: p2.z - p1.z };
-    }, vecadd: (v1, v2) => {
-      let result = Object.assign({}, v1);
-      for (const key in result) {
-        result[key] += v2[key];
-      }
-      return result;
-    }, vecsub: (v1, v2) => {
-      let result = Object.assign({}, v1);
-      for (const key in result) {
-        result[key] -= v2[key];
-      }
-      return result;
-    }, vecmul: (v1, v2) => {
-      let result = Object.assign({}, v1);
-      for (const key in result) {
-        result[key] *= v2[key];
-      }
-      return result;
-    }, vecdiv: (v1, v2) => {
-      let result = Object.assign({}, v1);
-      for (const key in result) {
-        result[key] /= v2[key];
-      }
-      return result;
-    }, vecscale: (v1, scalar) => {
-      let result = Object.assign({}, v1);
-      for (const key in result) {
-        result[key] *= scalar;
-      }
-      return result;
-    }, distance: (v1, v2) => {
-      let distance = 0;
-      for (const key in v1) {
-        distance += Math.pow(v1[key] - v2[key], 2);
-      }
-      return Math.sqrt(distance);
-    }, magnitude: (v) => {
-      let magnitude = 0;
-      for (const key in v) {
-        magnitude += v[key] * v[key];
-      }
-      return Math.sqrt(magnitude);
-    }, normalize: (v) => {
-      let magnitude = Systems.collision.magnitude(v);
-      let _mag = magnitude ? 1 / magnitude : 0;
-      let vn = {};
-      for (const key in v) {
-        vn[key] = v[key] * _mag;
-      }
-      return vn;
-    }, distance3D(v1, v2) {
-      return Math.sqrt((v1.x - v2.x) * (v1.x - v2.x) + (v1.y - v2.y) * (v1.y - v2.y) + (v1.z - v2.z) * (v1.z - v2.z));
-    }, cross3D(v1, v2) {
-      return { x: v1.y * v2.z - v1.z * v2.y, y: v1.z * v2.x - v1.x * v2.z, z: v1.x * v2.y - v1.y * v2.x };
-    }, nearestNeighborSearch(entities, isWithinRadius = 1e15) {
-      var tree = {};
-      ;
-      for (const key in entities) {
-        let newnode = { tag: key, position: void 0, neighbors: [] };
-        newnode.position = entities[key].position;
-        tree[key] = newnode;
-      }
-      for (const i in tree) {
-        for (const j in tree) {
-          var dist = Systems.collision.distance3D(tree[i].position, tree[j].position);
-          if (dist < isWithinRadius) {
-            var newNeighbori = { tag: j, position: entities[j].position, dist };
-            tree[i].neighbors.push(newNeighbori);
-            var newNeighborj = { tag: j, position: entities[i].position, dist };
-            tree[j].neighbors.push(newNeighborj);
-          }
-        }
-        tree[i].neighbors.sort(function(a, b) {
-          return a.dist - b.dist;
-        });
-      }
-      return tree;
-    }, generateBoundingVolumeTree(entities, mode = "octree", withinRadius = 1e15, minEntities = 3) {
-      let dynamicBoundingVolumeTree = { proto: { parent: void 0, children: {}, entities: {}, collisionType: "box", collisionRadius: 1, collisionBoundsScale: { x: 1, y: 1, z: 1 }, position: { x: 0, y: 0, z: 0 } }, tree: {} };
-      let maxX, maxY, maxZ;
-      let minX = 0, minY = 0, minZ = 0;
-      let positions = {};
-      let minRadius = withinRadius;
-      for (const key in entities) {
-        const body = entities[key];
-        let xx = body.position.x + body.collisionRadius * body.collisionBoundsScale.x;
-        let yy = body.position.y + body.collisionRadius * body.collisionBoundsScale.y;
-        let zz = body.position.z + body.collisionRadius * body.collisionBoundsScale.z;
-        if (maxX < xx)
-          maxX = xx;
-        if (minX > xx)
-          minX = xx;
-        if (maxY < yy)
-          maxY = yy;
-        if (minY > yy)
-          minY = yy;
-        if (maxZ < zz)
-          maxZ = zz;
-        if (minZ > zz)
-          minZ = zz;
-        if (minRadius > body.collisionRadius)
-          minRadius = body.collisionRadius;
-        positions[key] = body.position;
-      }
-      ;
-      let head = JSON.parse(JSON.stringify(dynamicBoundingVolumeTree.proto));
-      let boxpos = { x: (maxX + minX) * 0.5, y: (maxY + minY) * 0.5, z: (maxZ + minZ) * 0.5 };
-      let boxbounds = { x: maxX - boxpos.x, y: maxY - boxpos.y, z: maxZ - boxpos.z };
-      head.position = boxpos;
-      head.collisionBoundsScale = boxbounds;
-      head.entities = entities;
-      dynamicBoundingVolumeTree.tree = head;
-      minRadius *= 2;
-      if (mode === "octree") {
-        let genOct = function(parentPos, halfbounds) {
-          let oct1 = { x: parentPos.x + halfbounds.x, y: parentPos.y + halfbounds.y, z: parentPos.z + halfbounds.z };
-          let oct2 = { x: parentPos.x - halfbounds.x, y: parentPos.y + halfbounds.y, z: parentPos.z + halfbounds.z };
-          let oct3 = { x: parentPos.x + halfbounds.x, y: parentPos.y - halfbounds.y, z: parentPos.z + halfbounds.z };
-          let oct4 = { x: parentPos.x + halfbounds.x, y: parentPos.y + halfbounds.y, z: parentPos.z - halfbounds.z };
-          let oct5 = { x: parentPos.x - halfbounds.x, y: parentPos.y - halfbounds.y, z: parentPos.z + halfbounds.z };
-          let oct6 = { x: parentPos.x - halfbounds.x, y: parentPos.y + halfbounds.y, z: parentPos.z - halfbounds.z };
-          let oct7 = { x: parentPos.x + halfbounds.x, y: parentPos.y - halfbounds.y, z: parentPos.z - halfbounds.z };
-          let oct8 = { x: parentPos.x - halfbounds.x, y: parentPos.y - halfbounds.y, z: parentPos.z - halfbounds.z };
-          return [oct1, oct2, oct3, oct4, oct5, oct6, oct7, oct8];
-        }, genOctTree = function(head2) {
-          let halfbounds = { x: head2.collisionBoundsScale.x * 0.5, y: head2.collisionBoundsScale.y * 0.5, z: head2.collisionBoundsScale.z * 0.5 };
-          let octPos = genOct(head2.position, halfbounds);
-          let check = Object.assign({}, head2.bodies);
-          for (let i = 0; i < 8; i++) {
-            let octquadrant = Object.assign(JSON.parse(JSON.stringify(dynamicBoundingVolumeTree.proto)), { position: octPos[i], collisionBoundsScale: halfbounds });
-            octquadrant.parent = head2;
-            for (const j in check) {
-              let collided = Systems.collision.collisionCheck(check[j], octquadrant);
-              if (collided) {
-                octquadrant.entities[j] = check[j];
-                delete check[j];
-              }
-            }
-            if (Object.keys(octquadrant.entities).length > minEntities - 1) {
-              head2.children[i] = octquadrant;
-              octquadrant.parent = head2;
-              if (Object.keys(octquadrant.entities).length > minEntities && octquadrant.collisionRadius * 0.5 > minRadius) {
-                genOctTree(octquadrant);
-              }
-            }
-          }
-        };
-        genOctTree(head);
-        return head;
-      } else {
-        let tree = Systems.collision.nearestNeighborSearch(positions, withinRadius);
-        let keys = Object.keys(tree);
-        let tag = keys[Math.floor(Math.random() * keys.length)];
-        let searching = true;
-        let count = 0;
-        let genBoundingBoxLevel = (tree2, volumes) => {
-          let newVolumes = {};
-          let foundidxs = {};
-          let treekeys = Object.keys(tree2);
-          while (searching && count < treekeys.length) {
-            let node = tree2[tag];
-            let i = 0;
-            let j = 0;
-            let ux = positions[node.tag].x - volumes[node.tag].collisionBoundsScale.x, uy = positions[node.tag].y - volumes[node.tag].collisionBoundsScale.y, uz = positions[node.tag].z - volumes[node.tag].collisionBoundsScale.z, mx = positions[node.tag].x + volumes[node.tag].collisionBoundsScale.x, my = positions[node.tag].y + volumes[node.tag].collisionBoundsScale.y, mz = positions[node.tag].z + volumes[node.tag].collisionBoundsScale.z;
-            let newvolume = JSON.parse(JSON.stringify(dynamicBoundingVolumeTree.proto));
-            newvolume.tag = `bound${Math.floor(Math.random() * 1e15)}`;
-            newvolume.children[node.tag] = volumes[node.tag];
-            newvolume.bodies[node.tag] = entities[node.tag];
-            volumes[node.tag].parent = newvolume;
-            foundidxs[node.tag] = true;
-            i++;
-            j++;
-            let nkeys = Object.keys(node.neighbors);
-            while (i < nkeys.length && j < 3) {
-              if (foundidxs[node.neighbors[i].tag]) {
-                i++;
-                continue;
-              }
-              let uxn = positions[node.neighbors[i].tag].x - volumes[node.neighbors[i].tag].collisionBoundsScale.x, uyn = positions[node.neighbors[i].tag].y - volumes[node.neighbors[i].tag].collisionBoundsScale.y, uzn = positions[node.neighbors[i].tag].z - volumes[node.neighbors[i].tag].collisionBoundsScale.z, mxn = positions[node.neighbors[i].tag].x + volumes[node.neighbors[i].tag].collisionBoundsScale.x, myn = positions[node.neighbors[i].tag].y + volumes[node.neighbors[i].tag].collisionBoundsScale.y, mzn = positions[node.neighbors[i].tag].z + volumes[node.neighbors[i].tag].collisionBoundsScale.z;
-              if (ux > uxn)
-                ux = uxn;
-              if (mx < mxn)
-                mx = mxn;
-              if (uy > uyn)
-                uy = uyn;
-              if (my < myn)
-                my = myn;
-              if (uz > uzn)
-                uz = uzn;
-              if (mz < mzn)
-                mz = mzn;
-              newvolume.children[node.neighbors[i].tag] = volumes[node.neighbors[i].tag];
-              newvolume.entities[node.neighbors[i].tag] = entities[node.neighbors[i].tag];
-              volumes[node.neighbors[i].tag].parent = newvolume;
-              foundidxs[node.neighbors[i].tag] = true;
-              i++;
-              j++;
-            }
-            let pos = { x: (mx + ux) * 0.5, y: (my + uy) * 0.5, z: (mz + uz) * 0.5 };
-            let bounds = { x: mx - pos.x, y: my - pos.y, z: mz - pos.z };
-            newvolume.position = pos;
-            newvolume.collisionBoundsScale = bounds;
-            if (newvolume.bodies.length === 1)
-              newvolume = node;
-            newVolumes[newvolume.tag] = newvolume;
-            while (i < node.neighbors.length) {
-              if (!foundidxs[node.neighbors[i].tag])
-                break;
-              i++;
-            }
-            if (i < node.neighbors.length) {
-              tag = node.neighbors[i].tag;
-            } else if (Object.keys(foundidxs).length < Object.keys(tree2).length) {
-              tag = keys[0];
-            } else
-              searching = false;
-            count++;
-          }
-          return newVolumes;
-        };
-        let result = genBoundingBoxLevel(tree, entities);
-        while (Object.keys(result).length > 2) {
-          let nextTree = Systems.collision.nearestNeighborSearch(result, withinRadius);
-          result = genBoundingBoxLevel(nextTree, result);
-        }
-        head.children = result;
-        head.children.forEach((n) => {
-          n.parent = head;
-        });
-        return head;
-      }
-    } }, collider: { lastTime: performance.now(), setupEntities: function(entities) {
-      for (const key in entities) {
-        const entity = entities[key];
-        if (entity.components) {
-          if (!entity.components[this.__node.tag])
-            continue;
-        }
-        this.setupEntity(entity);
-      }
-      return entities;
-    }, setupEntity: function(entity) {
-      if (!("collisionEnabled" in entity))
-        Systems.collision.setupEntity(entity);
-      if (!("boundingBox" in entity))
-        entity.boundingBox = { bot: 0, top: 100, left: 0, right: 100, front: 0, back: 100 };
-      if (!("position" in entity)) {
-        Systems.movement.setupEntity(entity);
-      }
-      if (!("restitution" in entity))
-        entity.restitution = 1;
-      if (!("useBoundingBox" in entity))
-        entity.useBoundingBox = true;
-      if (!entity.position.x && !entity.position.y && !entity.position.z) {
-        entity.position.x = Math.random() * entity.boundingBox.right;
-        entity.position.y = Math.random() * entity.boundingBox.back;
-        entity.position.z = Math.random() * entity.boundingBox.top;
-      }
-      return entity;
-    }, __operator: function(entities) {
-      let keys = this.entityKeys;
-      for (let i = 0; i < keys.length; i++) {
-        const entity1 = entities[keys[i]];
-        if (entity1.components) {
-          if (!entity1.components[this.__node.tag] || !entity1.collisionEnabled)
-            continue;
-        }
-        if (entity1.useBoundingBox)
-          this.checkBoundingBox(entity1);
-        if (!entity1.collisionEnabled)
-          continue;
-        if (entity1.colliding) {
-          for (const key2 in entity1.colliding) {
-            const entity2 = entities[key2];
-            if (entity1.colliding[key2] === false) {
-              delete entity1.colliding[key2];
-              delete entity2.colliding[entity1.__node.tag];
-              continue;
-            }
-            if (!entity2.collisionEnabled)
-              continue;
-            if (entity2.collisionType === "box") {
-              this.resolveBoxCollision(entity1, entity2, entity1.colliding[key2]);
-            } else {
-              if (entity1.collisionType === "box") {
-                entity1.fixed = true;
-                this.resolveSphereCollisions(entity1, entity2, entity1.colliding[key2]);
-                entity1.fixed = false;
-              } else {
-                this.resolveSphereCollisions(entity1, entity2, entity1.colliding[key2]);
-                delete entity2.colliding[entity1.__node.tag];
-              }
-            }
-            delete entity1.colliding[entity2.__node.tag];
-          }
-          delete entity1.colliding;
-        }
-      }
-      return entities;
-    }, __node: { tag: "collider" }, checkBoundingBox: (entity) => {
-      const xsize = entity.collisionRadius * entity.collisionBoundsScale.x;
-      const ysize = entity.collisionRadius * entity.collisionBoundsScale.y;
-      const zsize = entity.collisionRadius * entity.collisionBoundsScale.z;
-      if (entity.position.y - ysize <= entity.boundingBox.front) {
-        entity.velocity.y *= -entity.restitution;
-        entity.position.y = entity.boundingBox.front + ysize;
-      }
-      if (entity.position.y + ysize >= entity.boundingBox.back) {
-        entity.velocity.y *= -entity.restitution;
-        entity.position.y = entity.boundingBox.back - ysize;
-      }
-      if (entity.position.x - xsize <= entity.boundingBox.left) {
-        entity.velocity.x *= -entity.restitution;
-        entity.position.x = entity.boundingBox.left + xsize;
-      }
-      if (entity.position.x + xsize >= entity.boundingBox.right) {
-        entity.velocity.x *= -entity.restitution;
-        entity.position.x = entity.boundingBox.right - xsize;
-      }
-      if (entity.position.z - zsize <= entity.boundingBox.bot) {
-        entity.velocity.z *= -entity.restitution;
-        entity.position.z = entity.boundingBox.bot + zsize;
-      }
-      if (entity.position.z + zsize >= entity.boundingBox.top) {
-        entity.velocity.z *= -entity.restitution;
-        entity.position.z = entity.boundingBox.top - zsize;
-      }
-    }, resolveBoxCollision: (body1, box, negate) => {
-      let positionVec = Systems.collision.makeVec(body1.position, box.position);
-      var directionVec = Object.values(positionVec);
-      let closestSide;
-      let closestDist = Infinity;
-      let mul = -1;
-      if (directionVec[idx] < 0)
-        mul = 1;
-      if (negate)
-        mul = -mul;
-      for (const key in body1.position) {
-        let dist = Math.abs(box.position[key] - body1.position[key]);
-        if (dist < closestDist && Math.abs(box.position[key] - body1.position[key] + body1.velocity[key] * 1e-17) < dist) {
-          closestSide = key;
-          closestDist = dist;
-        }
-      }
-      var idx = directionVec.indexOf(closestSide);
-      if (idx === 0)
-        idx = "x";
-      if (idx === 1)
-        idx = "y";
-      if (idx === 2)
-        idx = "z";
-      if (idx === 3)
-        idx = "w";
-      let boxEdgeAxisPosition = box.position[idx] + box.collisionRadius * box.collisionBoundsScale[idx] * mul;
-      if (negate) {
-        let body1Offset = boxEdgeAxisPosition - body1.collisionRadius * body1.collisionBoundsScale[idx] * mul;
-        body1.position[idx] = body1Offset;
-      } else {
-        let body1Offset = boxEdgeAxisPosition + body1.collisionRadius * body1.collisionBoundsScale[idx] * mul;
-        body1.position[idx] = body1Offset;
-      }
-      body1.velocity[idx] = -body1.velocity[idx] * body1.restitution;
-      if (negate)
-        body1.force[idx] = -body1.velocity[idx];
-      var body2AccelMag = Systems.collision.magnitude(box.acceleration);
-      var body2AccelNormal = Systems.collision.normalize(box.acceleration);
-      body1.force[idx] = -body2AccelNormal[idx] * body2AccelMag * box.mass;
-      if (negate)
-        body1.force[idx] = -body1.force[idx];
-    }, resolveSphereCollisions: (entity1, entity2, dist) => {
-      if (dist === void 0)
-        dist = Systems.collision.distance(entity1.position, entity2.position);
-      let vecn = Systems.collision.normalize(Systems.collision.makeVec(entity1.position, entity2.position));
-      let sumMass = entity1.mass + entity2.mass;
-      let ratio = entity1.mass / sumMass;
-      let rmin = 1 - ratio;
-      if (entity1.fixed === false) {
-        entity1.position.x += vecn.x * rmin * 1.01;
-        entity1.position.y += vecn.y * rmin * 1.01;
-        entity1.position.z += vecn.z * rmin * 1.001;
-      } else {
-        entity2.position.x -= vecn.x * 1.01;
-        entity2.position.y -= vecn.y * 1.01;
-        entity2.position.z -= vecn.z * 1.01;
-      }
-      if (entity2.fixed === false) {
-        entity2.position.x += vecn.x * ratio * 1.01;
-        entity2.position.y += vecn.y * ratio * 1.01;
-        entity2.position.z += vecn.z * ratio * 1.01;
-      } else {
-        entity1.position.x += vecn.x * 1.01;
-        entity1.position.y += vecn.y * 1.01;
-        entity1.position.z += vecn.z * 1.01;
-      }
-      dist = Systems.collision.distance(entity1.position, entity2.position);
-      let vrel = { x: entity1.velocity.x - entity2.velocity.x, y: entity1.velocity.y - entity2.velocity.y, z: entity1.velocity.z - entity2.velocity.z };
-      let speed = vrel.x * vecn.x + vrel.y * vecn.y + vrel.z * vecn.z;
-      if (speed > 0) {
-        let impulse = 2 * speed / sumMass;
-        if (entity1.fixed === false) {
-          entity1.velocity.x -= impulse * vecn.x * entity2.mass * entity1.restitution;
-          entity1.velocity.y -= impulse * vecn.y * entity2.mass * entity1.restitution;
-          entity1.velocity.z -= impulse * vecn.z * entity2.mass * entity1.restitution;
-        }
-        if (entity2.fixed === false) {
-          entity2.velocity.x += impulse * vecn.x * entity2.mass * entity2.restitution / entity2.mass;
-          entity2.velocity.y += impulse * vecn.y * entity2.mass * entity2.restitution / entity2.mass;
-          entity2.velocity.z += impulse * vecn.z * entity2.mass * entity2.restitution / entity2.mass;
-        }
-      }
-    } }, nbody: { lastTime: performance.now(), G: 6674e-14, setupEntities: function(entities) {
-      for (const key in entities) {
-        const entity = entities[key];
-        if (entity.components) {
-          if (!entity.components[this.__node.tag])
-            continue;
-        }
-        this.setupEntity(entity);
-      }
-      return entities;
-    }, setupEntity: function(entity) {
-      if (!("collisionEnabled" in entity))
-        Systems.collider.setupEntity(entity);
-      entity.isAttractor = true;
-      if (!("attractorGroup" in entity))
-        entity.attractorGroup = 0;
-      if (!("attractorFrameSearchMax" in entity))
-        entity.attractorFrameSearchMax = 10;
-      if (!("attractorGroupRules" in entity))
-        entity.attractorGroupRules = { 0: { G: this.G, maxDist: void 0 } };
-      return entity;
-    }, __operator: function(entities) {
-      let keys = this.entityKeys;
-      for (let i = 0; i < keys.length; i++) {
-        const entity = entities[keys[i]];
-        if (entity.components) {
-          if (!entity.components[this.__node.tag])
-            continue;
-        }
-        if (!entity.mass)
-          continue;
-        let nSearched = 0;
-        nested:
-          for (let j = 0; j < keys.length; j++) {
-            let randKey = keys[Math.floor(Math.random() * keys.length)];
-            nSearched++;
-            const entity2 = entities[randKey];
-            if (entity2.components) {
-              if (!entity2.components[this.__node.tag])
-                continue nested;
-            }
-            if (!entity2.mass || !entity2.isAttractor)
-              continue nested;
-            this.attract(entity, entity2, void 0, this.G);
-            if (nSearched > entity.attractorFrameSearchMax)
-              break nested;
-          }
-      }
-      return entities;
-    }, __node: { tag: "nbody" }, attract: function(body1, body2, dist, G = this.G, vecn) {
-      if (dist === void 0)
-        dist = Systems.collision.distance3D(body1.position, body2.position);
-      if (vecn === void 0)
-        vecn = Systems.collision.normalize(Systems.collision.makeVec(body1.position, body2.position));
-      let Fg = 0;
-      if (dist < 0.01)
-        dist = 0.01;
-      if (body1.attractorGroupRules[body2.attractorGroup]) {
-        if (typeof body1.attractorGroupRules[body2.attractorGroup] === "object") {
-          if (body1.attractorGroupRules[body2.attractorGroup].maxDist && body1.attractorGroupRules[body2.attractorGroup].maxDist < dist) {
-          } else
-            Fg = body1.attractorGroupRules[body2.attractorGroup].G * body1.mass * body2.mass / (dist * dist);
-        } else
-          Fg = body1.attractorGroupRules[body2.attractorGroup] * body1.mass * body2.mass / (dist * dist);
-      } else
-        Fg = G * body1.mass * body2.mass / (dist * dist);
-      body1.force.x += vecn.x * Fg;
-      body1.force.y += vecn.y * Fg;
-      body1.force.z += vecn.z * Fg;
-      body2.force.x -= vecn.x * Fg;
-      body2.force.y -= vecn.y * Fg;
-      body2.force.z -= vecn.z * Fg;
-    } }, boid: { lastTime: performance.now(), defaultAnchor: { x: Math.random(), y: Math.random(), z: Math.random(), mul: 6e-3 }, setupEntities: function(entities) {
-      for (const key in entities) {
-        const entity = entities[key];
-        this.setupEntity(entity);
-      }
-      return entities;
-    }, setupEntity: function(entity) {
-      if (!entity.position) {
-        Systems.collider.setupEntity(entity);
-      }
-      let adjustedAnchor = Object.assign({}, this.defaultAnchor);
-      adjustedAnchor.x *= entity.boundingBox.right;
-      adjustedAnchor.y *= entity.boundingBox.back;
-      adjustedAnchor.z *= entity.boundingBox.top;
-      let boidDefaults = { cohesion: 1e-5, separation: 1e-4, alignment: 6e-3, swirl: adjustedAnchor, attractor: Object.assign(adjustedAnchor, { mul: 2e-3 }), useCohesion: true, useSeparation: true, useAlignment: true, useSwirl: true, useAttractor: true, useAttraction: false, groupRadius: 200, groupSize: 5, searchLimit: 5 };
-      if (!entity.boid) {
-        entity.boid = boidDefaults;
-      } else
-        entity.boid = Object.assign(boidDefaults, entity.boid);
-      if (this.entityKeys.length > 1e3) {
-        entity.boid.groupSize = 1;
-        entity.boid.searchLimit = 1;
-      }
-      return entity;
-    }, __operator: function(entities) {
-      let now = performance.now();
-      let timeStep = now - this.lastTime;
-      this.lastTime = now;
-      let keys = this.entityKeys;
-      let length = keys.length;
-      let _timeStep = 1 / timeStep;
-      let w = -1;
-      outer:
-        for (let i = 0; i < keys.length; i++) {
-          w++;
-          let p0 = entities[keys[i]];
-          const inRange = [];
-          const distances = [];
-          const boidVelocities = [p0.position.x, p0.position.y, p0.position.z, 0, 0, 0, p0.velocity.x, p0.velocity.y, p0.velocity.z, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-          let groupCount = 1;
-          let k = -1;
-          nested:
-            for (let j = 0; j < keys.length; j++) {
-              k++;
-              if (distances.length > p0.boid.groupSize || k > p0.boid.searchLimit) {
-                break nested;
-              }
-              let randj = keys[Math.floor(Math.random() * length)];
-              if (k === w || randj === keys[i] || inRange.indexOf(randj) > -1) {
-                continue nested;
-              } else {
-                let pr = entities[randj];
-                let disttemp = Math.sqrt((p0.position.x - pr.position.x) * (p0.position.x - pr.position.x) + (p0.position.y - pr.position.y) * (p0.position.y - pr.position.y) + (p0.position.z - pr.position.z) * (p0.position.z - pr.position.z));
-                if (disttemp > p0.boid.groupRadius) {
-                  continue nested;
-                } else {
-                  distances.push(disttemp);
-                  inRange.push(randj);
-                  let distInv;
-                  if (p0.boid.useSeparation || p0.boid.useAlignment) {
-                    distInv = p0.boid.groupRadius / (disttemp * disttemp);
-                    if (distInv > p0.maxSpeed)
-                      distInv = p0.maxSpeed;
-                    else if (distInv < -p0.maxSpeed)
-                      distInv = -p0.maxSpeed;
-                  }
-                  if (p0.boid.useCohesion) {
-                    boidVelocities[0] += (pr.position.x - p0.position.x) * 0.5 * disttemp * _timeStep;
-                    boidVelocities[1] += (pr.position.y - p0.position.y) * 0.5 * disttemp * _timeStep;
-                    boidVelocities[2] += (pr.position.z - p0.position.z) * 0.5 * disttemp * _timeStep;
-                  }
-                  if (isNaN(disttemp) || isNaN(boidVelocities[0]) || isNaN(pr.position.x)) {
-                    console.log(disttemp, i, randj, p0.position, pr.position, boidVelocities);
-                    p0.position.x = NaN;
-                    return;
-                  }
-                  if (p0.boid.useSeparation) {
-                    boidVelocities[3] = boidVelocities[3] + (p0.position.x - pr.position.x) * distInv;
-                    boidVelocities[4] = boidVelocities[4] + (p0.position.y - pr.position.y) * distInv;
-                    boidVelocities[5] = boidVelocities[5] + (p0.position.z - pr.position.z) * distInv;
-                  }
-                  if (p0.boid.useAttraction && pr.boid.useAttraction) {
-                    Systems.nbody.attract(p0, pr, disttemp);
-                  }
-                  if (p0.boid.useAlignment) {
-                    boidVelocities[6] = boidVelocities[6] + pr.velocity.x * distInv;
-                    boidVelocities[7] = boidVelocities[7] + pr.velocity.y * distInv;
-                    boidVelocities[8] = boidVelocities[8] + pr.velocity.z * distInv;
-                  }
-                  groupCount++;
-                }
-              }
-            }
-          let _groupCount = 1 / groupCount;
-          if (p0.boid.useCohesion) {
-            boidVelocities[0] = p0.boid.cohesion * (boidVelocities[0] * _groupCount);
-            boidVelocities[1] = p0.boid.cohesion * (boidVelocities[1] * _groupCount);
-            boidVelocities[2] = p0.boid.cohesion * (boidVelocities[2] * _groupCount);
-          } else {
-            boidVelocities[0] = 0;
-            boidVelocities[1] = 0;
-            boidVelocities[2] = 0;
-          }
-          if (p0.boid.useSeparation) {
-            boidVelocities[3] = p0.boid.separation * boidVelocities[3];
-            boidVelocities[4] = p0.boid.separation * boidVelocities[4];
-            boidVelocities[5] = p0.boid.separation * boidVelocities[5];
-          } else {
-            boidVelocities[3] = 0;
-            boidVelocities[4] = 0;
-            boidVelocities[5] = 0;
-          }
-          if (p0.boid.useAlignment) {
-            boidVelocities[6] = -(p0.boid.alignment * boidVelocities[6] * _groupCount);
-            boidVelocities[7] = p0.boid.alignment * boidVelocities[7] * _groupCount;
-            boidVelocities[8] = p0.boid.alignment * boidVelocities[8] * _groupCount;
-          } else {
-            boidVelocities[6] = 0;
-            boidVelocities[7] = 0;
-            boidVelocities[8] = 0;
-          }
-          const swirlVec = [0, 0, 0];
-          if (p0.boid.useSwirl == true) {
-            boidVelocities[9] = -(p0.position.y - p0.boid.swirl.y) * p0.boid.swirl.mul;
-            boidVelocities[10] = (p0.position.z - p0.boid.swirl.z) * p0.boid.swirl.mul;
-            boidVelocities[11] = (p0.position.x - p0.boid.swirl.x) * p0.boid.swirl.mul;
-          }
-          const attractorVec = [0, 0, 0];
-          if (p0.boid.useAttractor == true) {
-            boidVelocities[12] = (p0.boid.attractor.x - p0.position.x) * p0.boid.attractor.mul;
-            if (p0.position.x > p0.boundingBox.left || p0.position.x < p0.boundingBox.right) {
-              boidVelocities[12] *= 3;
-            }
-            boidVelocities[13] = (p0.boid.attractor.y - p0.position.y) * p0.boid.attractor.mul;
-            if (p0.position.y > p0.boundingBox.top || p0.position.y < p0.boundingBox.bottom) {
-              boidVelocities[13] *= 3;
-            }
-            boidVelocities[14] = (p0.boid.attractor.z - p0.position.z) * p0.boid.attractor.mul;
-            if (p0.position.z > p0.boundingBox.front || p0.position.z < p0.boundingBox.back) {
-              boidVelocities[14] *= 3;
-            }
-          }
-          p0.velocity.x = p0.velocity.x + boidVelocities[0] + boidVelocities[3] + boidVelocities[6] + boidVelocities[9] + boidVelocities[12] + boidVelocities[15], p0.velocity.y = p0.velocity.y + boidVelocities[1] + boidVelocities[4] + boidVelocities[7] + boidVelocities[10] + boidVelocities[13] + boidVelocities[16], p0.velocity.z = p0.velocity.z + boidVelocities[2] + boidVelocities[5] + boidVelocities[8] + boidVelocities[11] + boidVelocities[14] + boidVelocities[17];
-          if (isNaN(p0.velocity.x))
-            console.error(p0, i, groupCount, p0.position, p0.velocity, swirlVec, attractorVec);
-        }
-      return entities;
-    }, __node: { tag: "boid" } }, movement: { __node: { tag: "movement" }, lastTime: performance.now(), setupEntities: function(entities) {
-      for (const key in entities) {
-        const entity = entities[key];
-        if (entity.components) {
-          if (!entity.components[this.__node.tag])
-            continue;
-        }
-        this.setupEntity(entity);
-      }
-    }, setupEntity: function(entity) {
-      if (!("mass" in entity))
-        entity.mass = 1;
-      if (!("fixed" in entity))
-        entity.fixed = false;
-      if (!entity.force)
-        entity.force = { x: 0, y: 0, z: 0 };
-      if (!("mass" in entity))
-        entity.mass = 1;
-      if (!("gravity" in entity))
-        entity.gravity = -9.81;
-      if (!entity.acceleration)
-        entity.acceleration = { x: 0, y: 0, z: 0 };
-      if (!entity.velocity)
-        entity.velocity = { x: 0, y: 0, z: 0 };
-      if (!("maxSpeed" in entity))
-        entity.maxSpeed = 10;
-      if (!entity.position)
-        entity.position = { x: 0, y: 0, z: 0 };
-      return entity;
-    }, __operator: function(entities) {
-      let now = performance.now();
-      let timeStep = (now - this.lastTime) * 1e-3;
-      this.lastTime = now;
-      let keys = this.entityKeys;
-      for (let i = 0; i < keys.length; i++) {
-        const entity = entities[keys[i]];
-        if (entity.components) {
-          if (!entity.components[this.__node.tag])
-            continue;
-        }
-        if (entity.fixed)
-          continue;
-        if (entity.mass) {
-          if (entity.force.x) {
-            entity.acceleration.x += entity.force.x / entity.mass;
-            entity.force.x = 0;
-          }
-          if (entity.force.y) {
-            entity.acceleration.y += entity.force.y / entity.mass;
-            entity.force.y = 0;
-          }
-          if (entity.force.z) {
-            entity.acceleration.z += entity.force.z / entity.mass + entity.gravity;
-            entity.force.z = 0;
-          }
-        }
-        if (entity.drag) {
-          if (entity.acceleration.x)
-            entity.acceleration.x -= entity.acceleration.x * entity.drag * timeStep;
-          if (entity.acceleration.y)
-            entity.acceleration.y -= entity.acceleration.y * entity.drag * timeStep;
-          if (entity.acceleration.z)
-            entity.acceleration.z -= entity.acceleration.z * entity.drag * timeStep;
-        }
-        if (entity.acceleration.x)
-          entity.velocity.x += entity.acceleration.x * timeStep;
-        if (entity.acceleration.y)
-          entity.velocity.y += entity.acceleration.y * timeStep;
-        if (entity.acceleration.z)
-          entity.velocity.z += entity.acceleration.z * timeStep;
-        if (entity.maxSpeed > 0) {
-          let magnitude = Systems.collision.magnitude(entity.velocity);
-          if (magnitude > entity.maxSpeed) {
-            let scalar = entity.maxSpeed / magnitude;
-            entity.velocity.x *= scalar;
-            entity.velocity.y *= scalar;
-            entity.velocity.z *= scalar;
-          }
-        }
-        if (entity.velocity.x)
-          entity.position.x += entity.velocity.x * timeStep;
-        if (entity.velocity.y)
-          entity.position.y += entity.velocity.y * timeStep;
-        if (entity.velocity.z)
-          entity.position.z += entity.velocity.z * timeStep;
-      }
-      return entities;
-    } } };
-    (() => {
-      var v = class {
-        constructor(e, t, s, h) {
-          this.r = e, this.g = t, this.b = s, this.a = h;
-        }
-      }, A = class {
-        constructor() {
-          this.scaleX = 1, this.scaleY = 1, this.offsetX = 0, this.offsetY = 0, this.loop = false, this._vbuffer = 0, this._coord = 0, this.visible = true, this.intensity = 1, this.xy = new Float32Array([]), this.numPoints = 0, this.color = new v(0, 0, 0, 1), this.webglNumPoints = 0;
-        }
-      }, d = class extends A {
-        constructor(e, t) {
-          super(), this.currentIndex = 0, this.webglNumPoints = t, this.numPoints = t, this.color = e, this.xy = new Float32Array(2 * this.webglNumPoints);
-        }
-        setX(e, t) {
-          this.xy[e * 2] = t;
-        }
-        setY(e, t) {
-          this.xy[e * 2 + 1] = t;
-        }
-        getX(e) {
-          return this.xy[e * 2];
-        }
-        getY(e) {
-          return this.xy[e * 2 + 1];
-        }
-        lineSpaceX(e, t) {
-          for (let s = 0; s < this.numPoints; s++)
-            this.setX(s, e + t * s);
-        }
-        arrangeX() {
-          this.lineSpaceX(-1, 2 / this.numPoints);
-        }
-        constY(e) {
-          for (let t = 0; t < this.numPoints; t++)
-            this.setY(t, e);
-        }
-        shiftAdd(e) {
-          let t = e.length;
-          for (let s = 0; s < this.numPoints - t; s++)
-            this.setY(s, this.getY(s + t));
-          for (let s = 0; s < t; s++)
-            this.setY(s + this.numPoints - t, e[s]);
-        }
-        addArrayY(e) {
-          if (this.currentIndex + e.length <= this.numPoints)
-            for (let t = 0; t < e.length; t++)
-              this.setY(this.currentIndex, e[t]), this.currentIndex++;
-        }
-        replaceArrayY(e) {
-          if (e.length == this.numPoints)
-            for (let t = 0; t < this.numPoints; t++)
-              this.setY(t, e[t]);
-        }
-      };
-      var M = (c, e, t) => {
-        let s = { x: 0, y: 0 };
-        return s.x = c.x + e.x * t, s.y = c.y + e.y * t, s;
-      }, P = (c) => Y(-c.y, c.x), x2 = (c, e) => {
-        let t = T(c, e);
-        return t = S(t), t;
-      }, C = (c, e) => {
-        let t = { x: 0, y: 0 };
-        return t.x = c.x + e.x, t.y = c.y + e.y, t;
-      }, R = (c, e) => c.x * e.x + c.y * e.y, S = (c) => {
-        let e = { x: 0, y: 0 }, t = c.x * c.x + c.y * c.y;
-        return t > 0 && (t = 1 / Math.sqrt(t), e.x = c.x * t, e.y = c.y * t), e;
-      }, Y = (c, e) => {
-        let t = { x: 0, y: 0 };
-        return t.x = c, t.y = e, t;
-      }, T = (c, e) => {
-        let t = { x: 0, y: 0 };
-        return t.x = c.x - e.x, t.y = c.y - e.y, t;
-      }, F = (c) => {
-        let e, t = { x: 0, y: 0 }, s = { x: 0, y: 0 }, h = [], o = (n, l) => {
-          h.push({ vec2: n, miterLength: l });
-        }, a = (n) => ({ x: c[n * 2], y: c[n * 2 + 1] });
-        t = x2(a(1), a(0)), e = P(t), o(e, 1);
-        let r = c.length / 2;
-        for (let n = 1; n < r - 1; n++) {
-          let l = a(n - 1), i = a(n), u = a(n + 1);
-          t = x2(i, l), e = P(t), s = x2(u, i);
-          let g = N(t, s), f = X(t, g, 1);
-          o(g, f);
-        }
-        return t = x2(a(r - 1), a(r - 2)), e = P(t), o(e, 1), h;
-      }, N = (c, e) => {
-        let t = C(c, e);
-        return t = S(t), Y(-t.y, t.x);
-      }, X = (c, e, t) => {
-        let s = Y(-c.y, c.x);
-        return t / R(e, s);
-      }, p = class extends A {
-        constructor(e, t, s) {
-          super(), this.currentIndex = 0, this._thicknessRequested = 0, this._actualThickness = 0, this.webglNumPoints = t * 2, this.numPoints = t, this.color = e, this._thicknessRequested = s, this._linePoints = new Float32Array(t * 2), this.xy = new Float32Array(2 * this.webglNumPoints);
-        }
-        convertToTriPoints() {
-          let e = this._actualThickness / 2, t = F(this._linePoints);
-          for (let s = 0; s < this.numPoints; s++) {
-            let h = this._linePoints[2 * s], o = this._linePoints[2 * s + 1], a = { x: h, y: o }, r = M(a, t[s].vec2, t[s].miterLength * e), n = M(a, t[s].vec2, -t[s].miterLength * e);
-            this.xy[s * 4] = r.x, this.xy[s * 4 + 1] = r.y, this.xy[s * 4 + 2] = n.x, this.xy[s * 4 + 3] = n.y;
-          }
-        }
-        setX(e, t) {
-          this._linePoints[e * 2] = t;
-        }
-        setY(e, t) {
-          this._linePoints[e * 2 + 1] = t;
-        }
-        lineSpaceX(e, t) {
-          for (let s = 0; s < this.numPoints; s++)
-            this.setX(s, e + t * s);
-        }
-        setThickness(e) {
-          this._thicknessRequested = e;
-        }
-        getThickness() {
-          return this._thicknessRequested;
-        }
-        setActualThickness(e) {
-          this._actualThickness = e;
-        }
-      }, L = class {
-        constructor(e, t) {
-          this.debug = false, this.addLine = this.addDataLine, t == null ? this.webgl = e.getContext("webgl", { antialias: true, transparent: false }) : (this.webgl = e.getContext("webgl", { antialias: t.antialias, transparent: t.transparent, desynchronized: t.deSync, powerPerformance: t.powerPerformance, preserveDrawing: t.preserveDrawing }), this.debug = t.debug == null ? false : t.debug), this.log("canvas type is: " + e.constructor.name), this.log(`[webgl-plot]:width=${e.width}, height=${e.height}`), this._linesData = [], this._linesAux = [], this._thickLines = [], this._surfaces = [], this.gScaleX = 1, this.gScaleY = 1, this.gXYratio = 1, this.gOffsetX = 0, this.gOffsetY = 0, this.gLog10X = false, this.gLog10Y = false, this.webgl.clear(this.webgl.COLOR_BUFFER_BIT), this.webgl.viewport(0, 0, e.width, e.height), this._progLine = this.webgl.createProgram(), this.initThinLineProgram(), this.webgl.enable(this.webgl.BLEND), this.webgl.blendFunc(this.webgl.SRC_ALPHA, this.webgl.ONE_MINUS_SRC_ALPHA);
-        }
-        get linesData() {
-          return this._linesData;
-        }
-        get linesAux() {
-          return this._linesAux;
-        }
-        get thickLines() {
-          return this._thickLines;
-        }
-        get surfaces() {
-          return this._surfaces;
-        }
-        _drawLines(e) {
-          let t = this.webgl;
-          e.forEach((s) => {
-            if (s.visible) {
-              t.useProgram(this._progLine);
-              let h = t.getUniformLocation(this._progLine, "uscale");
-              t.uniformMatrix2fv(h, false, new Float32Array([s.scaleX * this.gScaleX * (this.gLog10X ? 1 / Math.log(10) : 1), 0, 0, s.scaleY * this.gScaleY * this.gXYratio * (this.gLog10Y ? 1 / Math.log(10) : 1)]));
-              let o = t.getUniformLocation(this._progLine, "uoffset");
-              t.uniform2fv(o, new Float32Array([s.offsetX + this.gOffsetX, s.offsetY + this.gOffsetY]));
-              let a = t.getUniformLocation(this._progLine, "is_log");
-              t.uniform2iv(a, new Int32Array([this.gLog10X ? 1 : 0, this.gLog10Y ? 1 : 0]));
-              let r = t.getUniformLocation(this._progLine, "uColor");
-              t.uniform4fv(r, [s.color.r, s.color.g, s.color.b, s.color.a]), t.bufferData(t.ARRAY_BUFFER, s.xy, t.STREAM_DRAW), t.drawArrays(s.loop ? t.LINE_LOOP : t.LINE_STRIP, 0, s.webglNumPoints);
-            }
-          });
-        }
-        _drawSurfaces(e) {
-          let t = this.webgl;
-          e.forEach((s) => {
-            if (s.visible) {
-              t.useProgram(this._progLine);
-              let h = t.getUniformLocation(this._progLine, "uscale");
-              t.uniformMatrix2fv(h, false, new Float32Array([s.scaleX * this.gScaleX * (this.gLog10X ? 1 / Math.log(10) : 1), 0, 0, s.scaleY * this.gScaleY * this.gXYratio * (this.gLog10Y ? 1 / Math.log(10) : 1)]));
-              let o = t.getUniformLocation(this._progLine, "uoffset");
-              t.uniform2fv(o, new Float32Array([s.offsetX + this.gOffsetX, s.offsetY + this.gOffsetY]));
-              let a = t.getUniformLocation(this._progLine, "is_log");
-              t.uniform2iv(a, new Int32Array([this.gLog10X ? 1 : 0, this.gLog10Y ? 1 : 0]));
-              let r = t.getUniformLocation(this._progLine, "uColor");
-              t.uniform4fv(r, [s.color.r, s.color.g, s.color.b, s.color.a]), t.bufferData(t.ARRAY_BUFFER, s.xy, t.STREAM_DRAW), t.drawArrays(t.TRIANGLE_STRIP, 0, s.webglNumPoints);
-            }
-          });
-        }
-        _drawTriangles(e) {
-          let t = this.webgl;
-          t.bufferData(t.ARRAY_BUFFER, e.xy, t.STREAM_DRAW), t.useProgram(this._progLine);
-          let s = t.getUniformLocation(this._progLine, "uscale");
-          t.uniformMatrix2fv(s, false, new Float32Array([e.scaleX * this.gScaleX * (this.gLog10X ? 1 / Math.log(10) : 1), 0, 0, e.scaleY * this.gScaleY * this.gXYratio * (this.gLog10Y ? 1 / Math.log(10) : 1)]));
-          let h = t.getUniformLocation(this._progLine, "uoffset");
-          t.uniform2fv(h, new Float32Array([e.offsetX + this.gOffsetX, e.offsetY + this.gOffsetY]));
-          let o = t.getUniformLocation(this._progLine, "is_log");
-          t.uniform2iv(o, new Int32Array([0, 0]));
-          let a = t.getUniformLocation(this._progLine, "uColor");
-          t.uniform4fv(a, [e.color.r, e.color.g, e.color.b, e.color.a]), t.drawArrays(t.TRIANGLE_STRIP, 0, e.xy.length / 2);
-        }
-        _drawThickLines() {
-          this._thickLines.forEach((e) => {
-            if (e.visible) {
-              let t = Math.min(this.gScaleX, this.gScaleY);
-              e.setActualThickness(e.getThickness() / t), e.convertToTriPoints(), this._drawTriangles(e);
-            }
-          });
-        }
-        update() {
-          this.clear(), this.draw();
-        }
-        draw() {
-          this._drawLines(this.linesData), this._drawLines(this.linesAux), this._drawThickLines(), this._drawSurfaces(this.surfaces);
-        }
-        clear() {
-          this.webgl.clear(this.webgl.COLOR_BUFFER_BIT);
-        }
-        _addLine(e) {
-          e._vbuffer = this.webgl.createBuffer(), this.webgl.bindBuffer(this.webgl.ARRAY_BUFFER, e._vbuffer), this.webgl.bufferData(this.webgl.ARRAY_BUFFER, e.xy, this.webgl.STREAM_DRAW), e._coord = this.webgl.getAttribLocation(this._progLine, "coordinates"), this.webgl.vertexAttribPointer(e._coord, 2, this.webgl.FLOAT, false, 0, 0), this.webgl.enableVertexAttribArray(e._coord);
-        }
-        addDataLine(e) {
-          this._addLine(e), this.linesData.push(e);
-        }
-        addAuxLine(e) {
-          this._addLine(e), this.linesAux.push(e);
-        }
-        addThickLine(e) {
-          this._addLine(e), this._thickLines.push(e);
-        }
-        addSurface(e) {
-          this._addLine(e), this.surfaces.push(e);
-        }
-        initThinLineProgram() {
-          let e = `
-      attribute vec2 coordinates;
-      uniform mat2 uscale;
-      uniform vec2 uoffset;
-      uniform ivec2 is_log;
-
-      void main(void) {
-         float x = (is_log[0]==1) ? log(coordinates.x) : coordinates.x;
-         float y = (is_log[1]==1) ? log(coordinates.y) : coordinates.y;
-         vec2 line = vec2(x, y);
-         gl_Position = vec4(uscale*line + uoffset, 0.0, 1.0);
-      }`, t = this.webgl.createShader(this.webgl.VERTEX_SHADER);
-          this.webgl.shaderSource(t, e), this.webgl.compileShader(t);
-          let s = `
-         precision mediump float;
-         uniform highp vec4 uColor;
-         void main(void) {
-            gl_FragColor =  uColor;
-         }`, h = this.webgl.createShader(this.webgl.FRAGMENT_SHADER);
-          this.webgl.shaderSource(h, s), this.webgl.compileShader(h), this._progLine = this.webgl.createProgram(), this.webgl.attachShader(this._progLine, t), this.webgl.attachShader(this._progLine, h), this.webgl.linkProgram(this._progLine);
-        }
-        popDataLine() {
-          this.linesData.pop();
-        }
-        removeAllLines() {
-          this._linesData = [], this._linesAux = [], this._thickLines = [], this._surfaces = [];
-        }
-        removeDataLines() {
-          this._linesData = [];
-        }
-        removeAuxLines() {
-          this._linesAux = [];
-        }
-        viewport(e, t, s, h) {
-          this.webgl.viewport(e, t, s, h);
-        }
-        log(e) {
-          this.debug && console.log("[webgl-plot]:" + e);
-        }
-      };
-      var y = class {
-        constructor() {
-          this.plots = {};
-        }
-        initPlot(e, t) {
-          if (t || (t = new L(e.canvas, e.webglOptions)), !e._id)
-            e._id = `plot${Math.floor(Math.random() * 1e15)}`;
-          else if (this.plots[e._id]) {
-            let l = this.plots[e._id].initial;
-            if (e.lines) {
-              for (let i in e.lines)
-                if (l.lines[i] && Array.isArray(e.lines[i])) {
-                  let u = e.lines[i];
-                  e.lines[i] = l.lines[i];
-                }
-            }
-            e = Object.assign(l, e);
-          }
-          e.overlay && (typeof e.overlay != "object" && (e.overlay = document.createElement("canvas"), e.overlay.style.position = "absolute", e.overlay.width = e.canvas.width, e.overlay.height = e.canvas.height, e.canvas.appendChild(e.overlay)), e.overlayCtx || (e.overlayCtx = e.overlay.getContext("2d"))), e.width && (e.canvas.width = e.width, e.canvas.style && (e.canvas.style.width = e.width + "px"), typeof e.overlay == "object" && (e.overlay.width = e.width, e.overlay.style && (e.overlay.style.width = e.width + "px"))), e.height && (e.canvas.height = e.height, e.canvas.style && (e.canvas.style.height = e.height + "px"), typeof e.overlay == "object" && (e.overlay.height = e.height, e.overlay.style && (e.overlay.style.height = e.height + "px"))), e.lines?.timestamp && delete e.lines.timestamp, e.lines || (e.lines = {});
-          let s = {};
-          for (let l in e.lines)
-            s[l] = Object.assign({}, s[l]), "viewing" in e.lines[l] || (e.lines[l].viewing = true), s[l].viewing = e.lines[l].viewing, s[l].sps = e.lines[l].sps, s[l].nSec = e.lines[l].nSec, s[l].nPoints = e.lines[l].nPoints, s[l].ymin = e.lines[l].ymin, s[l].ymax = e.lines[l].ymax, s[l].units = e.lines[l].units;
-          let h = { plot: t, settings: e, initial: Object.assign(Object.assign({}, e), { lines: s }), anim: () => {
-            t.update();
-          } };
-          this.plots[e._id] = h;
-          let o = 0, a = 0;
-          Object.keys(e.lines).forEach((l) => {
-            e.lines[l]?.viewing !== false && a++;
-          }), e.nLines = a;
-          let r, n;
-          typeof e.overlay == "object" && (r = e.overlay, n = e.overlayCtx, n.clearRect(0, 0, e.overlay.width, e.overlay.height), n.font = e.overlayFont ? e.overlayFont : "1em Courier", n.fillStyle = e.overlayColor ? e.overlayColor : "white");
-          for (let l in e.lines) {
-            let i = e.lines[l];
-            if (Array.isArray(i) && (i = { values: i }, e.lines[l] = i), "viewing" in i || (i.viewing = true), i.color)
-              Array.isArray(i.color) && (i.color = new v(...i.color));
-            else {
-              let m = y.HSLToRGB(360 * (o / a) % 360, 100, 50, 1);
-              h.initial.lines[l].color = [...m, 1], i.color = new v(...m, 1);
-            }
-            let u;
-            if (i.nSec && i.sps ? u = Math.ceil(i.nSec * i.sps) : i.nPoints ? u = i.nPoints : i.points ? u = i.points : e.linePoints ? u = e.linePoints : i.values ? u = i.values.length : u = 1e3, i.points = u, e.lines[l].viewing === false)
-              continue;
-            if ((i.width || e.lineWidth) && i.width !== 0) {
-              let m = e.lineWidth;
-              m || (m = i.width), i.width ? i.line = new p(i.color, u, i.width) : e.lineWidth && (i.line = new p(i.color, u, e.lineWidth)), i.line.lineSpaceX(-1, 2 / i.line.numPoints);
-            } else
-              i.line = new d(i.color, u), i.line.arrangeX();
-            i.values?.length === i.points ? i.values.length !== u && (i.interpolate ? i.values.length > u ? i.values = y.downsample(i.values, u) : i.values.length < u && (i.values = y.upsample(i.values, u)) : i.values.length > i.points ? i.values = i.values.slice(i.values.length - i.points) : i.values = [...new Array(i.points - i.values.length).fill(0), ...i.values]) : Array.isArray(i.values) ? i.values.length > u ? i.values = i.values.slice(i.values.length - u) : i.values.length < u && (i.values = [...new Array(u - i.values.length).fill(0), ...i.values]) : i.values = new Array(i.points).fill(0);
-            let g = i.ymin, f = i.ymax, b = i.values.length <= 1e5;
-            if (g === f ? (f = b ? Math.max(...i.values) : 1, g = b ? Math.min(...i.values) : 0) : isNaN(f) && (f = b ? Math.max(...i.values) : 1), isNaN(g) && (g = b ? Math.min(...i.values) : 0), g > f) {
-              let m = g;
-              f = g, g = m;
-            }
-            let w = Math.abs(g);
-            if (i.absmax = w > f ? w : f, "autoscale" in i || (i.autoscale = true), i.position || (i.position = e.nLines - o - 1), i.autoscale ? i.autoscale === 2 ? ("clamp" in i || (i.clamp = true), i.scaled = y.autoscale(i.values, i.position, a, i.centerZero, g, f, i.clamp)) : (i.scaled = i.values, i.line.scaleY = y.getYScalar(i.values, a, i.centerZero, g, f), i.line.offsetY = y.getYOffset(i.position, a, g, i.line.scaleY)) : i.scaled = i.values, i.scaled.forEach((m, _) => i.line.setY(_, m)), i.line instanceof p ? t.addThickLine(i.line) : i.line instanceof d && t.addDataLine(i.line), "xAxis" in i || (i.xAxis = true), i.xAxis) {
-              i.xColor ? Array.isArray(i.xColor) && (i.xColor = new v(...i.xColor)) : i.xColor = new v(1, 1, 1, 0.3);
-              let m = new d(i.xColor, 2), _ = i.autoscale ? (o + 1) * 2 / a - 1 - 1 / a : 0;
-              m.constY(_), m.arrangeX(), m.xy[2] = 1, i.x = m, t.addAuxLine(m);
-            }
-            if (a > 1 && i.autoscale && o !== a - 1) {
-              e.dividerColor ? Array.isArray(e.dividerColor) && (e.dividerColor = new v(...e.dividerColor)) : e.dividerColor = new v(1, 1, 1, 1);
-              let m = new d(e.dividerColor, 2);
-              m.constY(i.autoscale ? (o + 1) * 2 / a - 1 : 1), m.arrangeX(), m.xy[2] = 1, i.divider = m, t.addAuxLine(m);
-            }
-            if (typeof e.overlay == "object" && (i.useOverlay || !("useOverlay" in i))) {
-              let m = e.nLines - i.position - 1;
-              n.fillText(l, 20, r.height * (m + 0.2) / e.nLines), n.fillText(`${Math.floor(f) === f ? f : f?.toFixed(5)} ${i.units ? i.units : ""}`, r.width - 100, r.height * (m + 0.2) / e.nLines), n.fillText(`${Math.floor(g) === g ? g : g?.toFixed(5)} ${i.units ? i.units : ""}`, r.width - 100, r.height * (m + 0.9) / e.nLines);
-            }
-            o++;
-          }
-          return requestAnimationFrame(h.anim), this.plots[e._id];
-        }
-        deinitPlot(e) {
-          return typeof e == "string" && (e = this.plots[e]), e.plot.clear(), e.plot.removeAllLines(), true;
-        }
-        reinitPlot(e, t) {
-          if (typeof e == "string") {
-            let s = e;
-            e = this.plots[e], t._id || (t._id = s);
-          }
-          if (e.plot)
-            return e.plot.clear(), e.plot.removeAllLines(), e.settings.overlayCtx && e.settings.overlayCtx.clearRect(0, 0, e.settings.overlay?.width, e.settings.overlay?.height), this.initPlot(t, e.plot);
-        }
-        getChartSettings(e, t) {
-          let s = this.plots[e];
-          if (s) {
-            let h = Object.assign({}, s.initial);
-            for (let o in s.initial.lines)
-              typeof s.initial.lines[o]?.ymax != "number" && (h.lines[o].ymax = s.settings.lines[o]?.ymax), typeof s.initial.lines[o]?.ymin != "number" && (h.lines[o].ymin = s.settings.lines[o]?.ymin), t && (h.lines[o].values = s.settings.lines[o].values);
-            return delete h.canvas, delete h.overlay, delete h.overlayCtx, h;
-          }
-        }
-        update(e, t, s = true) {
-          if (typeof e == "string" && (e = this.plots[e]), !e)
-            return false;
-          if (t) {
-            let h = false, o, a;
-            typeof e.settings.overlay == "object" && (o = e.settings.overlay, a = e.settings.overlayCtx, a.font = e.settings.overlayFont ? e.settings.overlayFont : "1em Courier", a.fillStyle = e.settings.overlayColor ? e.settings.overlayColor : "white");
-            for (let r in t)
-              if (e.settings.lines[r] && e.settings.lines[r].line) {
-                if (e.settings.lines[r]?.viewing === false)
-                  continue;
-                let n = e.settings.lines[r];
-                if (n.values) {
-                  if (e.settings.mode && e.settings.mode === "sweep") {
-                    "ct" in n || (n.ct = 0);
-                    let f = (b) => {
-                      n.ct > n.values.length && (n.ct = 0), n.values[n.ct] = b, n.ct++;
-                    };
-                    Array.isArray(t[r]) ? t[r].forEach(f) : typeof t[r] == "number" ? f(t[r]) : t[r].values && t[r].values.forEach(f);
-                  } else
-                    Array.isArray(t[r]) && n.values?.length < 1e5 ? (n.values.length === 0 && (n.values.length = n.points ? n.points : 1e3), t[r].length === n.values.length ? n.values = t[r] : y.circularBuffer(n.values, t[r])) : typeof t[r] == "number" ? (n.values.push(t[r]), n.values.shift()) : t[r]?.values && (n.values.length === 0 && (n.values.length = n.points ? n.points : 1e3), t[r].values.length === n.values.length ? n.values = t[r].values : y.circularBuffer(n.values, t[r].values));
-                  n.values.length !== n.points && (n.interpolate ? n.values.length > n.points ? n.values = y.downsample(n.values, n.points) : n.scaled.length < n.points && (n.values = y.upsample(n.values, n.points)) : n.values.length > n.points ? n.values.splice(0, n.values.length - n.points) : n.values = new Array(n.points).fill(0).splice(n.points - n.values.length, 0, n.values));
-                  let l = n.ymin, i = n.ymax, u = n.values.length <= 1e5;
-                  if (l === i ? (i = u ? Math.max(...n.values) : 1, l = u ? Math.min(...n.values) : 0) : isNaN(i) && (i = u ? Math.max(...n.values) : 1), isNaN(l) && (l = u ? Math.min(...n.values) : 0), l > i) {
-                    let f = l;
-                    i = l, l = f;
-                  }
-                  let g = Math.abs(l);
-                  if (n.absmax = g > i ? g : i, n.autoscale ? n.autoscale === 2 ? n.scaled = y.autoscale(n.values, n.position, e.settings.nLines, n.centerZero, l, i, n.clamp) : (n.scaled = n.values, n.line.scaleY = y.getYScalar(n.values, e.settings.nLines, n.centerZero, l, i), n.line.offsetY = y.getYOffset(n.position, e.settings.nLines, l, n.line.scaleY)) : n.scaled = n.values, n.scaled.forEach((f, b) => {
-                    !n.autoscale && n.absmax > 1 ? n.line.setY(b, f / n.absmax) : n.line.setY(b, f);
-                  }), typeof e.settings.overlay == "object" && (n.useOverlay || !("useOverlay" in n))) {
-                    let f = e.settings.nLines - n.position - 1, b = o.height * f / e.settings.nLines, w = o.height / e.settings.nLines;
-                    if (a.clearRect(0, b, o.width, w), e.settings.mode && e.settings.mode === "sweep") {
-                      a.fillStyle = e.settings.sweepColor ? e.settings.sweepColor : "rgba(0,255,0,0.25)", a.beginPath();
-                      let m = o.width * n.ct / n.values.length;
-                      a.moveTo(m, b), a.lineTo(m, w), a.stroke();
-                    }
-                    a.fillStyle = e.settings.overlayColor ? e.settings.overlayColor : "white", a.fillText(r, 20, o.height * (f + 0.2) / e.settings.nLines), a.fillText(`${Math.floor(i) === i ? i : i?.toFixed(5)} ${n.units ? n.units : ""}`, o.width - 100, o.height * (f + 0.2) / e.settings.nLines), a.fillText(`${Math.floor(l) === l ? l : l?.toFixed(5)} ${n.units ? n.units : ""}`, o.width - 100, o.height * (f + 0.9) / e.settings.nLines);
-                  }
-                }
-              } else
-                e.settings.generateNewLines && !r.includes("timestamp") && (Array.isArray(t[r]) && (t[r] = { values: t[r] }), !t[r].nSec && !t[r].nPoints && !e.settings.linePoints && (t[r].nPoints = 1e3), h = true);
-            if (h)
-              return e.settings.cleanGeneration || Object.keys(e.initial.lines).forEach((r) => {
-                t[r] ? t[r] = Object.assign(e.initial.lines[r], t[r]) : t[r] = e.initial.lines[r];
-              }), this.reinitPlot(e, { _id: e.settings._id, lines: t }), true;
-          }
-          return s && requestAnimationFrame(e.anim), true;
-        }
-        updateLine(e, t, s, h, o, a, r) {
-          return e.numPoints !== t.length && (s ? e.numPoints > t.length ? t = y.downsample(t, e.numPoints) : e.numPoints < t.length && (t = y.upsample(t, e.numPoints)) : t.length > e.numPoints ? t = t.slice(t.length - e.numPoints) : t = [...new Array(t.length).fill(0), ...t]), h && (t = y.autoscale(t, o, a, r)), t.forEach((n, l) => e.setY(l, n)), true;
-        }
-        static autoscale(e, t = 0, s = 1, h = false, o, a, r) {
-          if (e?.length === 0)
-            return e;
-          let n = typeof a == "number" ? a : e.length <= 1e5 ? Math.max(...e) : 1, l = typeof o == "number" ? o : e.length <= 1e5 ? Math.min(...e) : 0, i = 1 / s, u = 1;
-          if (h) {
-            let g = Math.max(Math.abs(l), Math.abs(n));
-            return g !== 0 && (u = i / g), e.map((f) => (r && (f < l && (f = l), f > n && (f = n)), f * u + (i * (t + 1) * 2 - 1 - i)));
-          } else
-            return n === l ? n !== 0 ? u = i / n : l !== 0 && (u = i / Math.abs(l)) : u = i / (n - l), e.map((g) => (r && (g < l && (g = l), g > n && (g = n)), 2 * ((g - l) * u - 1 / (2 * s)) + (i * (t + 1) * 2 - 1 - i)));
-        }
-        static getYScalar(e, t = 1, s = false, h, o) {
-          if (e?.length === 0)
-            return e;
-          let a = typeof o == "number" ? o : e.length <= 1e5 ? Math.max(...e) : 1, r = typeof h == "number" ? h : e.length <= 1e5 ? Math.min(...e) : 0, n = 1 / t, l = 1;
-          if (s) {
-            let i = Math.max(Math.abs(r), Math.abs(a));
-            return i !== 0 && (l = n / i), 2 * l;
-          } else
-            return a === r ? a !== 0 ? l = n / a : r !== 0 && (l = n / Math.abs(r)) : l = n / (a - r), 2 * l;
-        }
-        static getYOffset(e = 0, t = 1, s = 0, h = 1) {
-          let o = 1 / t, a = o * (e + 1) * 2 - 1 - o;
-          return s !== 0 ? a -= s * h + 1 / t : a -= h + 1 / t, a;
-        }
-        static absmax(e) {
-          return Math.max(Math.abs(Math.min(...e)), Math.max(...e));
-        }
-        static downsample(e, t, s = 1) {
-          if (e.length > t) {
-            let h = new Array(t), o = e.length / t, a = e.length - 1, r = 0, n = 0;
-            for (let l = o; l < e.length; l += o) {
-              let i = Math.round(l);
-              i > a && (i = a);
-              for (let u = r; u < i; u++)
-                h[n] += e[u];
-              h[n] /= (i - r) * s, n++, r = i;
-            }
-            return h;
-          } else
-            return e;
-        }
-        static upsample(e, t, s = 1) {
-          var h = function(g, f, b) {
-            return (g + (f - g) * b) * s;
-          }, o = new Array(t), a = (e.length - 1) / (t - 1);
-          o[0] = e[0];
-          for (var r = 1; r < t - 1; r++) {
-            var n = r * a, l = Math.floor(n), i = Math.ceil(n), u = n - l;
-            o[r] = h(e[l], e[i], u);
-          }
-          return o[t - 1] = e[e.length - 1], o;
-        }
-        static interpolate(e, t, s = 1) {
-          return e.length > t ? y.downsample(e, t, s) : e.length < t ? y.upsample(e, t, s) : e;
-        }
-        static HSLToRGB(e, t, s, h = 255) {
-          t /= 100, s /= 100;
-          let o = (1 - Math.abs(2 * s - 1)) * t, a = o * (1 - Math.abs(e / 60 % 2 - 1)), r = s - o / 2, n = 0, l = 0, i = 0;
-          return 0 <= e && e < 60 ? (n = o, l = a, i = 0) : 60 <= e && e < 120 ? (n = a, l = o, i = 0) : 120 <= e && e < 180 ? (n = 0, l = o, i = a) : 180 <= e && e < 240 ? (n = 0, l = a, i = o) : 240 <= e && e < 300 ? (n = a, l = 0, i = o) : 300 <= e && e < 360 && (n = o, l = 0, i = a), n = (n + r) * h, l = (l + r) * h, i = (i + r) * h, [n, l, i];
-        }
-        static circularBuffer(e, t) {
-          if (t.length < e.length) {
-            let s = e.slice(t.length), h = e.length;
-            e.splice(0, h, ...s, ...t);
-          } else if (t.length > e.length) {
-            let s = e.length;
-            e.splice(0, s, ...t.slice(t.length - s));
-          } else
-            e.splice(0, e.length, ...t);
-          return e;
-        }
-        static formatDataForCharts(e, t) {
-          if (Array.isArray(e)) {
-            if (Array.isArray(e[0])) {
-              let s = {};
-              if (e.forEach((h, o) => {
-                s[o] = h;
-              }), e = s, isNaN(e[0][0]))
-                return;
-            } else if (t) {
-              if (e = { [t]: e }, isNaN(e[t][0]))
-                return;
-            } else if (e = { 0: e }, isNaN(e[0][0]))
-              return;
-          } else if (typeof e == "object") {
-            for (let s in e)
-              if (typeof e[s] == "number" ? e[s] = [e[s]] : e[s]?.values && typeof e[s].values == "number" && (e[s].values = [e[s].values]), isNaN(e[s][0]))
-                return;
-          } else if (typeof e == "string") {
-            let s;
-            if (e.includes(`\r
-`)) {
-              let h = e.split(`\r
-`);
-              e = {}, h.forEach((o, a) => {
-                o.includes("	") ? s = o.split("	") : o.includes(",") ? s = o.split(",") : o.includes("|") && (s = o.split("|")), s && s.forEach((r, n) => {
-                  if (r.includes(":")) {
-                    let [l, i] = r.split(":"), u = parseFloat(i);
-                    isNaN(u) || (e[l] = [u]);
-                  } else {
-                    let l = parseFloat(r);
-                    isNaN(l) || (e[n] = [l]);
-                  }
-                });
-              });
-            } else
-              e.includes("	") ? s = e.split("	") : e.includes(",") ? s = e.split(",") : e.includes("|") && (s = e.split("|"));
-            e = {}, s && s.forEach((h, o) => {
-              if (h.includes(":")) {
-                let [a, r] = h.split(":"), n = parseFloat(r);
-                isNaN(n) || (e[a] = [n]);
-              } else {
-                let a = parseFloat(h);
-                isNaN(a) || (e[o] = [a]);
-              }
-            });
-          } else
-            typeof e == "number" && (t ? e = { [t]: [e] } : e = { 0: [e] });
-          return e;
-        }
-        static padTime(e, t, s, h) {
-          let o = (e[0] - t) / s / h;
-          return [...new Array(h - e.length).map((r, n) => t + o * (n + 1)), ...e];
-        }
-        static interpolateForTime(e, t, s) {
-          return y.interpolate(e, Math.ceil(s * t));
-        }
-      };
-    })();
-    var webglPlotRoutes = { setupChart: function setupChart(settings) {
-      console.log("initializing chart", settings);
-      if (!this?.__node?.graph?.plotter) {
-        this.__node.graph.plotter = new (void 0)();
-        return this.__node.graph.plotter.initPlot(settings).settings._id;
-      } else {
-        globalThis.plotter = new (void 0)();
-        return globalThis.plotter.initPlot(settings).settings._id;
-      }
-    }, updateChartData: function updateChartData(plot, lines, draw = true) {
-      if (typeof lines === "object") {
-        if (globalThis.plotter)
-          globalThis.plotter.update(plot, lines, draw);
-        else if (this?.__node?.graph?.plotter)
-          this.__node.graph.plotter.update(plot, lines, draw);
-        return true;
-      }
-      return false;
-    }, clearChart: function clearChart(plot) {
-      if (globalThis.plotter)
-        globalThis.plotter.deinitPlot(plot);
-      else if (this?.__node?.graph?.plotter)
-        this.__node.graph.plotter.deinitPlot(plot);
-      return true;
-    }, resetChart: function resetChart(plot, settings) {
-      if (globalThis.plotter)
-        globalThis.plotter.reinitPlot(plot, settings);
-      else if (this?.__node?.graph?.plotter)
-        this.__node.graph.plotter.reinitPlot(plot, settings);
-      return settings._id;
-    }, getChartSettings: function getChartSettings(plotId) {
-      let settings;
-      if (globalThis.plotter)
-        settings = globalThis.plotter.getChartSettings(plotId);
-      else if (this?.__node?.graph?.plotter)
-        settings = this.__node.graph.plotter.getChartSettings(plotId);
-      return settings;
-    } };
-    async function setSignalControls(controlsDiv, plotId, streamworker, chartworker, chartSettings, filterSettings) {
-      let controls = controlsDiv;
-      if (!controls)
-        return false;
-      if (!chartSettings && chartworker)
-        chartSettings = await chartworker.run("getChartSettings", plotId);
-      if (!filterSettings && streamworker)
-        filterSettings = await streamworker.run("getFilterSettings");
-      if (chartSettings?.lines) {
-        let body = ``;
-        let viewingall = true;
-        let scalingall = true;
-        let n50all = true;
-        let n60all = true;
-        let dcall = true;
-        let lpall = true;
-        let bpall = true;
-        for (const prop in chartSettings.lines) {
-          let line = chartSettings.lines[prop];
-          body += `
-            <tr>
-                <td id='${plotId}${prop}name'><input id='${plotId}${prop}viewing' type='checkbox' ${line.viewing ? "checked" : ""}>${prop}</td>
-                <td><input id='${plotId}${prop}sps' type='number' step='1' value='${line.sps ? line.sps : 100}'></td>
-                <td><input id='${plotId}${prop}nSec' type='number' step='1' value='${line.nSec ? line.nSec : line.nPoints ? Math.floor(line.nPoints / (line.sps ? line.sps : 100)) : 10}'></td>
-                <td><input id='${plotId}${prop}scalar'  type='number' value='${filterSettings[prop]?.scalar ? filterSettings[prop].scalar : 1}'><input id='${plotId}${prop}useScaling' type='checkbox' ${filterSettings[prop]?.useScaling ? "checked" : ""}></td>
-                <td><input id='${plotId}${prop}units' type='text' value='${line.units ? line.units : ""}'></td>
-                <td><input id='${plotId}${prop}ymin' type='number' value='${line.ymin ? line.ymin : "0"}'></td>
-                <td><input id='${plotId}${prop}ymax' type='number' value='${line.ymax ? line.ymax : "1"}'></td>
-                <td><input id='${plotId}${prop}useNotch50' type='checkbox' ${filterSettings[prop]?.useNotch50 ? "checked" : ""}></td>
-                <td><input id='${plotId}${prop}useNotch60' type='checkbox' ${filterSettings[prop]?.useNotch60 ? "checked" : ""}></td>
-                <td><input id='${plotId}${prop}useDCBlock' type='checkbox' ${filterSettings[prop]?.useDCBlock ? "checked" : ""}></td>
-                <td><input id='${plotId}${prop}lowpassHz'  type='number' value='${filterSettings[prop]?.lowpassHz ? filterSettings[prop].lowpassHz : 100}'>Hz<input id='${plotId}${prop}useLowpass' type='checkbox' ${filterSettings[prop]?.useLowpass ? "checked" : ""}></td>
-                <td><input id='${plotId}${prop}bandpassLower'  type='number' value='${filterSettings[prop]?.bandpassLower ? filterSettings[prop].bandpassLower : 3}'>Hz to <input id='${plotId}${prop}bandpassUpper'  type='number' value='${filterSettings[prop]?.bandpassUpper ? filterSettings[prop].bandpassUpper : 45}'>Hz<input id='${plotId}${prop}useBandpass' type='checkbox' ${filterSettings[prop]?.useBandpass ? "checked" : ""}></td>
-            </tr>`;
-          if (!line.viewing)
-            viewingall = false;
-          if (!filterSettings[prop]?.useScaling)
-            scalingall = false;
-          if (!filterSettings[prop]?.useNotch50)
-            n50all = false;
-          if (!filterSettings[prop]?.useNotch60)
-            n60all = false;
-          if (!filterSettings[prop]?.useDCBlock)
-            dcall = false;
-          if (!filterSettings[prop]?.useLowpass)
-            lpall = false;
-          if (!filterSettings[prop]?.useBandpass)
-            bpall = false;
-        }
-        let head = `
-        <tr>
-            <th>Name <input type='checkbox' id='${plotId}viewing' ${viewingall ? "checked" : ""}></th>
-            <th>SPS</th>
-            <th>Plot nSec</th>
-            <th>Scalar <input type='checkbox' id='${plotId}useScaling' ${scalingall ? "checked" : ""}></th>
-            <th>Units</th>
-            <th>Lower Bound</th>
-            <th>Upper Bound</th>
-            <th>50Hz Notch <input type='checkbox' id='${plotId}useNotch50' ${n50all ? "checked" : ""}></th>
-            <th>60Hz Notch <input type='checkbox' id='${plotId}useNotch60' ${n60all ? "checked" : ""}></th>
-            <th>DC Block <input type='checkbox' id='${plotId}useDCBlock' ${dcall ? "checked" : ""}></th>
-            <th>Lowpass <input type='checkbox' id='${plotId}useLowpass' ${lpall ? "checked" : ""}></th>
-            <th>Bandpass <input type='checkbox' id='${plotId}useBandpass' ${bpall ? "checked" : ""}></th>
-        </tr>
-        `;
-        controls.innerHTML = head + body;
-        let viewall = document.getElementById(plotId + "viewing");
-        let usescalar = document.getElementById(plotId + "useScaling");
-        let usen50 = document.getElementById(plotId + "useNotch50");
-        let usen60 = document.getElementById(plotId + "useNotch60");
-        let usedcb = document.getElementById(plotId + "useDCBlock");
-        let uselp = document.getElementById(plotId + "useLowpass");
-        let usebp = document.getElementById(plotId + "useBandpass");
-        let headeronchange = (checked, idsuffix) => {
-          for (const prop in chartSettings.lines) {
-            let elm = document.getElementById(plotId + prop + idsuffix);
-            if (elm?.checked !== checked)
-              elm.click();
-          }
-        };
-        viewall.onchange = (ev2) => {
-          headeronchange(ev2.target.checked, "viewing");
-        };
-        usescalar.onchange = (ev2) => {
-          headeronchange(ev2.target.checked, "useScaling");
-        };
-        usen50.onchange = (ev2) => {
-          headeronchange(ev2.target.checked, "useNotch50");
-        };
-        usen60.onchange = (ev2) => {
-          headeronchange(ev2.target.checked, "useNotch60");
-        };
-        usedcb.onchange = (ev2) => {
-          headeronchange(ev2.target.checked, "useDCBlock");
-        };
-        uselp.onchange = (ev2) => {
-          headeronchange(ev2.target.checked, "useLowpass");
-        };
-        usebp.onchange = (ev2) => {
-          headeronchange(ev2.target.checked, "useBandpass");
-        };
-        for (const prop in chartSettings.lines) {
-          let viewing = document.getElementById(plotId + prop + "viewing");
-          let sps = document.getElementById(plotId + prop + "sps");
-          let nSec = document.getElementById(plotId + prop + "nSec");
-          let useScaling = document.getElementById(plotId + prop + "useScaling");
-          let scalar = document.getElementById(plotId + prop + "scalar");
-          let units = document.getElementById(plotId + prop + "units");
-          let ymin = document.getElementById(plotId + prop + "ymin");
-          let ymax = document.getElementById(plotId + prop + "ymax");
-          let useNotch50 = document.getElementById(plotId + prop + "useNotch50");
-          let useNotch60 = document.getElementById(plotId + prop + "useNotch60");
-          let useDCBlock = document.getElementById(plotId + prop + "useDCBlock");
-          let useLowpass = document.getElementById(plotId + prop + "useLowpass");
-          let lowpassHz = document.getElementById(plotId + prop + "lowpassHz");
-          let useBandpass = document.getElementById(plotId + prop + "useBandpass");
-          let bandpassLower = document.getElementById(plotId + prop + "bandpassLower");
-          let bandpassUpper = document.getElementById(plotId + prop + "bandpassUpper");
-          viewing.onchange = () => {
-            if (!Array.isArray(chartSettings.lines?.[prop])) {
-              (chartSettings.lines?.[prop]).viewing = viewing.checked;
-              chartSettings.generateNewLines = false;
-              chartworker.run("resetChart", [plotId, chartSettings]);
-            }
-          };
-          let filteronchange = () => {
-            let setting = { [prop]: { sps: sps.value ? parseFloat(sps.value) : 100, useScaling: useScaling.checked, scalar: scalar.value ? parseFloat(scalar.value) : 1, useNotch50: useNotch50.checked, useNotch60: useNotch60.checked, useDCBlock: useDCBlock.checked, useLowpass: useLowpass.checked, lowpassHz: lowpassHz.value ? parseFloat(lowpassHz.value) : 100, useBandpass: useBandpass.checked, bandpassLower: bandpassLower.value ? parseFloat(bandpassLower.value) : 3, bandpassUpper: bandpassUpper.value ? parseFloat(bandpassUpper.value) : 45, trimOutliers: filterSettings[prop]?.trimOutliers, outlierTolerance: filterSettings[prop]?.outlierTolerance } };
-            streamworker.post("setFilters", setting);
-          };
-          sps.onchange = () => {
-            filteronchange();
-            (chartSettings.lines?.[prop]).sps = parseFloat(sps.value);
-            (chartSettings.lines?.[prop]).nSec = parseFloat(nSec.value);
-            delete (chartSettings.lines?.[prop]).points;
-            delete (chartSettings.lines?.[prop]).nPoints;
-            chartworker.run("resetChart", [plotId, chartSettings]);
-          };
-          units.onchange = () => {
-            if (!Array.isArray(chartSettings.lines?.[prop])) {
-              (chartSettings.lines?.[prop]).units = units.value;
-              chartworker.run("resetChart", [plotId, chartSettings]);
-            }
-          };
-          ymax.onchange = () => {
-            if (!Array.isArray(chartSettings.lines?.[prop])) {
-              (chartSettings.lines?.[prop]).ymax = ymax.value ? parseFloat(ymax.value) : 1;
-              (chartSettings.lines?.[prop]).ymin = ymin.value ? parseFloat(ymin.value) : 0;
-              chartworker.run("resetChart", [plotId, chartSettings]);
-            }
-          };
-          ymin.onchange = () => {
-            if (!Array.isArray(chartSettings.lines?.[prop])) {
-              (chartSettings.lines?.[prop]).ymax = ymax.value ? parseFloat(ymax.value) : 1;
-              (chartSettings.lines?.[prop]).ymin = ymin.value ? parseFloat(ymin.value) : 0;
-              chartworker.run("resetChart", [plotId, chartSettings]);
-            }
-          };
-          nSec.onchange = () => {
-            if (!Array.isArray(chartSettings.lines?.[prop])) {
-              (chartSettings.lines?.[prop]).sps = parseFloat(sps.value);
-              (chartSettings.lines?.[prop]).nSec = parseFloat(nSec.value);
-              delete (chartSettings.lines?.[prop]).points;
-              delete (chartSettings.lines?.[prop]).nPoints;
-              chartworker.run("resetChart", [plotId, chartSettings]);
-            }
-          };
-          useScaling.onchange = filteronchange;
-          useNotch50.onchange = filteronchange;
-          useNotch60.onchange = filteronchange;
-          useDCBlock.onchange = filteronchange;
-          useLowpass.onchange = filteronchange;
-          useBandpass.onchange = filteronchange;
-          lowpassHz.onchange = filteronchange;
-          scalar.onchange = filteronchange;
-          bandpassLower.onchange = filteronchange;
-          bandpassUpper.onchange = filteronchange;
-        }
-      }
-    }
-    var _Math2 = class {
-      constructor() {
-      }
-      static genSineWave(freq = 20, peakAmp = 1, nSec = 1, fs2 = 512, freq2 = 0, peakAmp2 = 1) {
-        var sineWave = [];
-        var t = [];
-        var increment = 1 / fs2;
-        for (var ti = 0; ti < nSec; ti += increment) {
-          var amplitude = Math.sin(2 * Math.PI * freq * ti) * peakAmp;
-          amplitude += Math.sin(2 * Math.PI * freq2 * ti) * peakAmp2;
-          sineWave.push(amplitude);
-          t.push(ti);
-        }
-        return [t, sineWave];
-      }
-      static getSineAmplitude(frequency = 20, peakAmplitude = 1, ti = 0, tOffset = 0) {
-        return Math.sin(this.TWO_PI * frequency * ti + tOffset) * peakAmplitude;
-      }
-      static mean(arr) {
-        var sum = arr.reduce((prev, curr) => curr += prev);
-        return sum / arr.length;
-      }
-      static mode(arr) {
-        return arr.sort((a, b) => arr.filter((v) => v === a).length - arr.filter((v) => v === b).length).pop();
-      }
-      static std(arr, mean = void 0) {
-        let avg = mean;
-        if (!mean)
-          avg = this.mean(arr);
-        let summed = 0;
-        for (let i = 0; i < arr.length; i++) {
-          let subbed = arr[i] - avg;
-          summed += subbed * subbed;
-        }
-        return Math.sqrt(summed / arr.length);
-      }
-      static relError(actual = [], forecast = [], abs = true) {
-        if (actual.length !== forecast.length)
-          throw new Error("Input arrays of same length!");
-        let i = actual.length;
-        let d = new Array(actual.length);
-        for (let j = 0; j < i; j++) {
-          let dd = (actual[j] - forecast[j]) / actual[j];
-          if (abs)
-            dd = Math.abs(dd);
-          d[j] = dd;
-        }
-        return d;
-      }
-      static informationEntropy(probabilities = []) {
-        let len = probabilities.length;
-        let entropy = new Array(len);
-        for (let i = 0; i < len; i++) {
-          let ent = probabilities[i] * Math.log(probabilities[i]);
-          if (isNaN(ent))
-            ent = 0;
-          entropy[i] = ent;
-        }
-        return entropy;
-      }
-      static zscore(arr) {
-        let mean = this.mean(arr);
-        let std = this.std(arr, mean);
-        let z = new Array().length(arr.length);
-        for (let i = 0; i < arr.length; i++) {
-          z[i] = (arr[i] - mean) / std;
-        }
-        return z;
-      }
-      static variance(arr) {
-        var mean = this.mean(arr);
-        return arr.reduce((a, b) => a + (b - mean) ** 2, 0) / arr.length;
-      }
-      static dot(vec1, vec2) {
-        var dot = 0;
-        for (var i = 0; i < vec1.length; i++) {
-          dot += vec1[i] * vec2[i];
-        }
-        return dot;
-      }
-      static cross3D(vec1, vec2) {
-        return [vec1[1] * vec2[2] - vec1[2] * vec2[1], vec1[2] * vec2[0] - vec1[0] * vec2[2], vec1[0] * vec2[1] - vec1[1] * vec2[0]];
-      }
-      static magnitude(vec) {
-        var sqrd = 0;
-        vec.forEach((c) => {
-          sqrd += c * c;
-        });
-        return Math.sqrt(sqrd);
-      }
-      static distance(point1, point2) {
-        var dsqrd = 0;
-        point1.forEach((c, i) => {
-          dsqrd += (point2[i] - c) * (point2[i] - c);
-        });
-        return Math.sqrt(dsqrd);
-      }
-      static midpoint(point1 = [1, 2, 3], point2 = [3, 4, 5]) {
-        return point1.map((c, i) => {
-          return (c + point2[i]) * 0.5;
-        });
-      }
-      static normalize(vec) {
-        var norm = 0;
-        norm = this.magnitude(vec);
-        var vecn = new Array(vec.length);
-        vec.forEach((c, i) => {
-          vecn[i] = c * norm;
-        });
-        return vecn;
-      }
-      static normalizeSeries(arr = [], fromZero = true) {
-        let max = Math.max(...arr);
-        let min = Math.min(...arr);
-        if (fromZero == false) {
-          max = Math.max(max, Math.abs(min));
-          min = 0;
-        }
-        if (max - min === 0) {
-          min = 0;
-          if (max === 0)
-            max = 1e-13;
-        }
-        return arr.map((v) => (v - min) / (max - min));
-      }
-      static quadraticFormula(a, b, c) {
-        let bbmac4 = Math.sqrt(b * b - 4 * a * c);
-        if (!isNaN(bbmac4))
-          return ["complex", "complex"];
-        let _a2 = 1 / (2 * a);
-        if (bbmac4 === 0)
-          return [b * _a2];
-        let nb = -b;
-        return [(nb + bbmac4) * _a2, (nb - bbmac4) * _a2];
-      }
-      static newtonsMethod(foo = (x2) => {
-        return Math.pow(x2, 5) + x2 * x2 - x2 - 0.2;
-      }, start = 0, end = 1, precision = 0.01, attempts = 10) {
-        let roots = [];
-        for (let i = 0; i < attempts; i++) {
-          let seedx = Math.random() * (end - start);
-          let guess = foo(seedx);
-          let guess2 = foo(seedx + precision);
-          let slope = (guess2 - guess) / precision;
-          let xn = seedx + precision;
-          while (Math.abs(slope) > precision) {
-            let step = -guess / slope2;
-            let xn12 = xn + step;
-            guess = guess2;
-            guess2 = foo(xn12);
-            let slope2 = (guess2 - guess) / (xn12 - xn);
-          }
-          let idx;
-          let f = roots.find((root, i2) => {
-            if (Math.abs(xn1 - root) < precision) {
-              idx = i2;
-              return true;
-            }
-          });
-          if (f)
-            roots[idx] = (xn1 + f) * 0.5;
-          else
-            roots.push(xn1);
-        }
-        return roots;
-      }
-      static makeVec(point1, point2) {
-        var vec = [];
-        point1.forEach((c, i) => {
-          vec.push(point2[i] - c);
-        });
-        return vec;
-      }
-      static getBufferedValueByCoordinates(vb = new Array(300).fill(1), dims = [10, 10, 2], coordinate = [1, 2, 1], cardinal = void 0) {
-        let getIdx = (foundIdx = 0, dimIdx = 0) => {
-          if (dimIdx === dims.length)
-            return foundIdx;
-          if (dimIdx == 0)
-            foundIdx += coordinate[dimIdx];
-          else if (dims[dimIdx] == 0)
-            dimsAt0++;
-          else {
-            let reMul = (val = coordinate[dimIdx], di = dimIdx - 1) => {
-              val *= dims[di];
-              di--;
-              if (di == 0)
-                return val;
-              else
-                return reMul(val, di);
-            };
-            foundIdx += reMul(coordinate[dimIdx] + 1, dimIdx - 1);
-          }
-          dimIdx++;
-          return getIdx(foundIdx, dimIdx);
-        };
-        let found = getIdx();
-        if (cardinal) {
-          if (coordinate[coordinate.length - 1] === 0) {
-            let lastnonzero = 0;
-            let idx = 0;
-            while (idx !== coordinate.length - 1) {
-              if (coordinate[idx] !== 0)
-                lastnonzero = idx;
-              idx++;
-            }
-            return vb[found - lastnonzero + cardinal];
-          }
-          return vb[found - dims.length + cardinal];
-        } else {
-          if (coordinate[coordinate.length - 1] === 0) {
-            let lastnonzero = 0;
-            let idx = 0;
-            while (idx !== coordinate.length - 1) {
-              if (coordinate[idx] !== 0)
-                lastnonzero = idx;
-              idx++;
-            }
-            return vb.slice(found - lastnonzero, found + 1);
-          }
-          return vb.slice(found - dims.length, found + 1);
-        }
-      }
-      static forBufferedMat(vb = new Array(100).fill(1), dims = [10, 10], asIndex = (v, i, x2, y) => {
-        return v + x2 + y;
-      }) {
-        let coordinate = [];
-        let idx = 0;
-        let recurseFor = (depth = 0, nextDepth = depth + 1) => {
-          let result = new Array(vb.length);
-          for (let di = 0; di < dims[depth]; di++) {
-            coordinate[depth] = di;
-            if (dims[nextDepth])
-              recurseFor(nextDepth);
-            else {
-              result[idx] = asIndex(vb[idx], idx, ...coordinate);
-              idx++;
-            }
-          }
-          return result;
-        };
-        let recurseForArrFuncs = (depth, nextDepth = depth + 1) => {
-          let result = new Array(vb.length);
-          for (let di = 0; di < dims[depth]; di++) {
-            coordinate[depth] = di;
-            if (dims[nextDepth])
-              recurseFor(nextDepth);
-            else {
-              for (let dj = 0; dj < dims.length; dj++) {
-                result[idx] = asIndex[dj](vb[idx], idx, ...coordinate);
-                idx++;
-              }
-            }
-          }
-          return result;
-        };
-        if (typeof asIndex === "function") {
-          return recurseFor();
-        } else if (Array.isArray(asIndex)) {
-          return recurseForArrFuncs();
-        }
-      }
-      static mapBufferedMat(buffer = new Array(100).fill(1), dimensions = [10, 10], asIndex = (v, idx, i, j) => {
-        console.log(`value:${v}, idx:${idx}, x:${i},y:${j}`);
-        return v + i + j;
-      }) {
-        let coordinate = new Array(dimensions.length).fill(0);
-        const iterateCoordinate = (coord, idx = 0) => {
-          if (coord[idx] >= dimensions[idx]) {
-            coord[idx] = 0;
-            idx++;
-            if (idx === dimensions.length)
-              return;
-            iterateCoordinate(coord, idx);
-          } else
-            coord[idx]++;
-        };
-        let result = new Array(buffer.length);
-        let i = 0;
-        if (typeof asIndex === "function") {
-          while (i < buffer.length) {
-            result[i] = asIndex(buffer[i], i, ...coordinate);
-            i += dimensions.length;
-            iterateCoordinate(coordinate);
-          }
-        } else if (Array.isArray(asIndex)) {
-          while (i < buffer.length) {
-            asIndex.forEach((func) => {
-              result[i] = func(buffer[i], i, ...coordinate);
-              i++;
-              iterateCoordinate(coordinate);
-            });
-          }
-        }
-        return result;
-      }
-      static combinations(choices = ["a", "b", "c"], vecsize = 3) {
-        var result = [];
-        if (vecsize <= 0) {
-          result.push([]);
-        } else {
-          _Math2.combinations(choices, vecsize - 1).forEach(function(previousComb) {
-            choices.forEach(function(element) {
-              result.push([element].concat(previousComb));
-            });
-          });
-        }
-        return result;
-      }
-      static generateCoordinateSpace(upperBounds = [10, 10, 10], lowerBounds = [-10, -10, -10], steps = [1, 1, 1], mutater = void 0) {
-        for (let i = 0; i < upperBounds.length; i++) {
-          if (lowerBounds[i] > upperBounds[i]) {
-            let temp = upperBounds[i];
-            upperBounds[i] = lowerBounds[i];
-            lowerBounds[i] = temp;
-          }
-        }
-        let result = [];
-        let copy = [...upperBounds];
-        let lastindex = copy.length - 1;
-        result.push([...copy]);
-        while (copy[0] >= lowerBounds[0]) {
-          let checkNextIndex = (decrIdx2) => {
-            if (copy[decrIdx2] <= lowerBounds[decrIdx2]) {
-              if (decrIdx2 === 0)
-                return;
-              copy[decrIdx2] = upperBounds[decrIdx2];
-              decrIdx2--;
-              if (decrIdx2 < 0)
-                return;
-              if (typeof steps[decrIdx2] == "function")
-                copy[decrIdx2] -= steps[decrIdx2](copy[decrIdx2]);
-              else
-                copy[decrIdx2] -= steps[decrIdx2];
-              checkNextIndex(decrIdx2);
-            }
-          };
-          let decrIdx = lastindex;
-          if (typeof steps[decrIdx] == "function")
-            copy[decrIdx] -= steps[decrIdx](copy[decrIdx]);
-          else
-            copy[decrIdx] -= steps[decrIdx];
-          result.push([...copy]);
-          checkNextIndex(decrIdx);
-          if (mutater)
-            result[result.length - 1] = mutater(result[result.length - 1]);
-        }
-        return result;
-      }
-      static calcVectorField(coordinates = [[0, 0], [0, 1], [1, 0], [1, 1]], formula = (x2, y) => {
-        return [x2 * 10, y * 10];
-      }) {
-        return coordinates.map((vec) => formula(...vec));
-      }
-      static transpose(mat) {
-        return mat[0].map((_, colIndex) => mat.map((row) => row[colIndex]));
-      }
-      static matmul(a, b) {
-        var aNumRows = a.length, aNumCols = a[0].length, bNumRows = b.length, bNumCols = b[0].length, m = new Array(aNumRows);
-        for (var r = 0; r < aNumRows; ++r) {
-          m[r] = new Array(bNumCols);
-          for (var c = 0; c < bNumCols; ++c) {
-            m[r][c] = 0;
-            for (var i = 0; i < aNumCols; ++i) {
-              m[r][c] += a[r][i] * b[i][c];
-            }
-          }
-        }
-        return m;
-      }
-      static matscale(mat, scalar) {
-        let m = [];
-        for (var i = 0; i < mat.length; i++) {
-          m[i] = [];
-          for (let j = 0; j < mat[0].length; j++) {
-            m[i][j] = mat[i][j] * scalar;
-          }
-        }
-        return m;
-      }
-      static matadd(a, b) {
-        let m = [];
-        for (let i = 0; i < a.length; i++) {
-          m[i] = [];
-          for (var j = 0; j < a[0].length; j++) {
-            m[i][j] = a[i][j] + b[i][j];
-          }
-        }
-        return m;
-      }
-      static matsub(a, b) {
-        let m = [];
-        for (let i = 0; i < a.length; i++) {
-          m[i] = [];
-          for (var j = 0; j < a[0].length; j++) {
-            m[i][j] = a[i][j] - b[i][j];
-          }
-        }
-        return m;
-      }
-      static histogram(arr = [], binSize = 1, nBins = void 0) {
-        let copy = [...arr];
-        copy.sort(function(a, b) {
-          return a - b;
-        });
-        let binStart = Math.min(...copy);
-        if (typeof nBins === "number") {
-          let binEnd = Math.max(...copy);
-          binSize = Math.abs((binEnd - binStart) / (nBins - 1));
-        }
-        let j = binStart;
-        let binx = [];
-        let biny = [];
-        for (let i = 0; i < copy.length; i++) {
-          let binidx = binSize * j;
-          if (copy[i] > binStart + binidx) {
-            j++;
-            binidx += binSize;
-            let binmin = binStart + binidx;
-            let binmid = binmin + binidx * 0.5;
-            binx.push(binmid);
-            biny.push(0);
-          }
-          biny[biny.length - 1]++;
-        }
-        return [binx, biny];
-      }
-      static normalDistribution(samples = [], normalize = true, cutoff = 1e-4) {
-        let m = this.mean(samples);
-        let vari = this.variance(samples);
-        let nSamples = samples.length;
-        let probabilities = [];
-        let denom = 1 / (this.TWO_PI * vari);
-        let _variance = 1 / vari;
-        let sum = 0;
-        for (let i = 0; i < nSamples; i++) {
-          let px = Math.exp(-0.5 * Math.pow((samples[i] - m) * _variance, 2)) * denom;
-          if (px < cutoff)
-            px = 0;
-          probabilities.push(px);
-          sum += px;
-        }
-        if (normalize) {
-          let _sum = 1 / sum;
-          probabilities = probabilities.map((x2) => x2 * _sum);
-        }
-        return probabilities;
-      }
-      static expectedValue(samples = [], probabilities = this.normalDistribution(samples)) {
-        return samples.reduce((sum, item, idx) => sum + item * probabilities[idx]);
-      }
-      static originMoment(samples = [], probabilities = this.normalDistribution(samples), order = 1) {
-        return samples.reduce((sum, item, idx) => sum + Math.pow(item, order) * probabilities[idx]);
-      }
-      static centralMoment(samples = [], probabilities = this.normalDistribution(samples), order = 1) {
-        let m = this.mean(samples);
-        return samples.reduce((sum, item, idx) => sum + Math.pow(item - m, order) * probabilities[idx] / samples.length);
-      }
-      static linearDiscriminantAnalysis(samples = [], classifier = []) {
-        let mean = this.mean(samples);
-        let meank = this.mean(classifier);
-        let covariance = this.cov1d(samples, classifier);
-        let probs = this.normalDistribution(samples);
-        let dk = [];
-        for (let i = 0; i < samples.length; i++) {
-          dk.push(x[i] * covariance * meank - 0.5 * mean * covariance * meank + Math.log10(probs[i]));
-        }
-        return dk;
-      }
-      static conv1D(arr = [], kern = [1 / 3, 1 / 3, 1 / 3], pad = Math.floor(kern.length * 0.5)) {
-        let result = [];
-        let _n = 1 / kern.length;
-        if (pad > 0) {
-          let pads = new Array(pad).fill(0);
-          arr = [...pads, ...arr, ...pads];
-        }
-        let start = Math.floor(kern.length * 0.5);
-        let end = arr.length - kern.length + start;
-        for (let i = start; i < end; i++) {
-          let acc = 0;
-          for (let j = 0; j < kern.length; j++) {
-            acc += arr[i - start] * kern[j];
-          }
-          result.push(acc * _n);
-        }
-        return result;
-      }
-      static conv2D(mat = [[], [], []], kern = [[], [], []], pad = 0) {
-        let result = new Array(mat.length - Math.ceil(kern.length * 0.5)).fill([]);
-        let mat_t;
-        let kern_t = _Math2.transpose(kern_t);
-        if (pad > 0) {
-          let pads = new Array(pad).fill(0);
-          mat_t = _Math2.transpose(mat);
-          for (let i2 = 0; i2 < mat_t.length; i2++) {
-            mat_t[i2] = [...pads, ...mat_t[i2], ...pads];
-          }
-          mat = _Math2.transpose(mat_t);
-          for (let j = 0; j < mat.length; j++) {
-            mat[j] = [...pads, ...mat[j], ...pads];
-          }
-        }
-        let startr = Math.floor(kern[0].length * 0.5);
-        let startl = Math.floor(kern_t[0].length * 0.5);
-        let endr = mat[0].length - kern[0].length + startr;
-        let endl = mat_t[0].length - kern_t[0].length + startl;
-        let _n = 1 / (kern[0].length * kern_t[0].length);
-        let iters = endr * endl;
-        let i = startr;
-        let x2;
-        let y = startl;
-        while (i < iters) {
-          let acc = 0;
-          x2 = i % mat[0].length;
-          if (x2 === 0) {
-            y++;
-          }
-          for (let j = 0; j < kern[0].length; j++) {
-            for (let k = 0; k < kern_t[0].length; j++) {
-              acc += mat[y - startl + k][x2 - startr + j] * kern[k][j];
-            }
-            result[y].push(acc * _n);
-          }
-          i++;
-        }
-        return result;
-      }
-      static cov2d(mat) {
-        var mattransposed = this.transpose(mat);
-        var matproducts = [];
-        var rowmeans = [];
-        var colmeans = [];
-        mat.forEach((row, idx) => {
-          rowmeans.push(this.mean(row));
-        });
-        mattransposed.forEach((col, idx) => {
-          colmeans.push(this.mean(col));
-        });
-        mat.forEach((row, idx) => {
-          matproducts.push([]);
-          for (var col = 0; col < row.length; col++) {
-            matproducts[idx].push((mat[idx][col] - rowmeans[idx]) * (mat[idx][col] - colmeans[col]) / (row.length - 1));
-          }
-        });
-        var matproductstransposed = this.transpose(matproducts);
-        var aNumRows = matproducts.length, aNumCols = matproducts[0].length, bNumRows = matproductstransposed.length, bNumCols = matproductstransposed[0].length, m = new Array(aNumRows);
-        for (var r = 0; r < aNumRows; ++r) {
-          m[r] = new Array(bNumCols);
-          for (var c = 0; c < bNumCols; ++c) {
-            m[r][c] = 0;
-            for (var i = 0; i < aNumCols; ++i) {
-              m[r][c] += matproducts[r][i] * matproductstransposed[i][c] / (mat[0].length - 1);
-            }
-          }
-        }
-        return m;
-      }
-      static cov1d(arr1 = [], arr2 = []) {
-        return this.cov2d([arr1, arr2]);
-      }
-      static cov3d(x2 = [], y = [], z = []) {
-        return [[this.cov1d(x2, x2), this.cov1d(x2, y), this.cov1d(x2, z)], [this.cov1d(y, x2), this.cov1d(y, y), this.cov1d(y, z)], [this.cov1d(z, x2), this.cov1d(z, y), this.cov1d(z, z)]];
-      }
-      static covNd(dimensionalData = []) {
-        let covariance = [];
-        dimensionalData.forEach((arr, i) => {
-          covariance.push([]);
-          dimensionalData.forEach((arr2, j) => {
-            covariance[i].push(this.cov1d(arr, arr2));
-          });
-        });
-      }
-      static eigens2x2(mat = [[1, 2], [3, 4]]) {
-        let det = mat[0][0] * mat[1][1] - mat[0][1] * mat[1][0];
-        let mean = (mat[0][0] + mat[1][1]) * 0.5;
-        let sqrt = Math.sqrt(mean * mean - det);
-        let eig1 = mean + sqrt;
-        let eig2 = mean - sqrt;
-        return [eig1, eig2];
-      }
-      static eigenvectors2x2(mat = [[1, 2], [3, 4]], eigens = [1, 2]) {
-        let v1 = [-mat[0][1], mat[0][0] - eigens[0]];
-        if (v1[0] === 0 && v1[1] === 0) {
-          v1[0] = mat[1][1] - eigens[0];
-          v1[1] = -mat[1][0];
-        }
-        let v2 = [-mat[0][1], mat[0][0] - eigens[1]];
-        if (v2[0] === 0 && v2[1] === 0) {
-          v2[0] = mat[1][1] - eigens[1];
-          v2[1] = -mat[1][0];
-        }
-        return [v1, v2];
-      }
-      static fastpca2d(xarr, yarr) {
-        let cov1d = this.cov1d(xarr, yarr);
-        let eigs = this.eigens2x2(cov1d);
-        if (eigs[1] > eigs[0])
-          eigs.reverse();
-        let evs = this.eigenvectors2x2(cov1d, eigs);
-        console.log(eigs, evs);
-        return [eigs, evs];
-      }
-      static crosscorrelation(arr1, arr2) {
-        var arr2buf = [...arr2, ...Array(arr2.length).fill(0)];
-        var mean1 = this.mean(arr1);
-        var mean2 = this.mean(arr2);
-        var arr1Est = arr1.reduce((sum, item) => sum += Math.pow(item - mean1, 2));
-        arr1Est = Math.sqrt(Math.abs(arr1Est));
-        var arr2Est2 = arr2.reduce((sum, item) => sum += Math.pow(item - mean1, 2));
-        arr2Est2 = Math.sqrt(Math.abs(arr2Est2));
-        let denom = arr1Est * arr2Est2;
-        if (denom === 0)
-          denom = 1e-26;
-        var _arrEstsMul = 1 / denom;
-        var correlations = new Array(arr1.length).fill(0);
-        for (var delay = 0; delay < arr1.length; delay++) {
-          var r = arr1.reduce((sum, item, i) => sum += (item - mean1) * (arr2buf[delay + i] - mean2));
-          correlations[delay] = r * _arrEstsMul;
-        }
-        return correlations;
-      }
-      static autocorrelation(arr1) {
-        var delaybuf = [...arr1, ...Array(arr1.length).fill(0)];
-        var mean1 = this.mean(arr1);
-        var arr1Est = arr1.reduce((sum, item) => sum += Math.pow(item - mean1, 2));
-        arr1Est = Math.sqrt(Math.abs(arr1Est));
-        let denom = arr1Est * arr2Est;
-        if (denom === 0)
-          denom = 1e-26;
-        var _arr1estsqrd = 1 / denom;
-        var correlations = new Array(arr1.length).fill(0);
-        for (var delay = 0; delay < arr1.length; delay++) {
-          var r = arr1.reduce((sum, item, i) => sum += (item - mean1) * (delaybuf[delay + i] - mean1));
-          correlations[delay] = r * _arr1estsqrd;
-        }
-        return correlations;
-      }
-      static autocorrelation2dNormalized(mat2d2) {
-        let result = [];
-        for (let y = 0; y < mat2d2.length; y++) {
-          result.push([]);
-          for (let x2 = 0; x2 < mat2d2[y].length; x2++) {
-            let G = 0;
-            let _G = 0;
-            for (let b = 0; b < mat2d2.length; b++) {
-              for (let a = 0; a < mat2d2[b].length; a++) {
-                G += mat2d2[y][x2] * mat2d2[mat2d2.length - 1 - b][mat2d2[y].length - 1 - a];
-                _G += mat2d2[y][x2] * mat2d2[mat2d2.length - 1][mat2d2[y].length - 1];
-              }
-            }
-            result[y][x2] = G / _G - 1;
-          }
-        }
-        return result;
-      }
-      static crosscorrelation2d(mat2d1, mat2d2) {
-        let result = [];
-        for (let y = 0; y < mat2d1.length; y++) {
-          result.push([]);
-          for (let x2 = 0; x2 < mat2d1[y].length; x2++) {
-            let G = 0;
-            for (let b = 0; b < mat2d2.length; b++) {
-              for (let a = 0; a < mat2d2[b].length; a++) {
-                G += mat2d1[y][x2] * mat2d2[mat2d2.length - 1 - b][mat2d2[y].length - 1 - a];
-              }
-            }
-            result[y][x2] = G;
-          }
-        }
-        return result;
-      }
-      static crosscorrelation2dNormalized(mat2d1, mat2d2) {
-        let result = [];
-        for (let y = 0; y < mat2d1.length; y++) {
-          result.push([]);
-          for (let x2 = 0; x2 < mat2d1[y].length; x2++) {
-            let G = 0;
-            let _G = 0;
-            for (let b = 0; b < mat2d2.length; b++) {
-              for (let a = 0; a < mat2d2[b].length; a++) {
-                G += mat2d1[y][x2] * mat2d2[mat2d.length - 1 - b][mat2d2[y].length - 1 - a];
-                _G += mat2d1[y][x2] * mat2d2[mat2d2.length - 1][mat2d2[y].length - 1];
-              }
-            }
-            result[y][x2] = G / _G - 1;
-          }
-        }
-        return result;
-      }
-      static correlograms(dat = [[], []]) {
-        var correlograms = [];
-        dat.forEach((row1, i) => {
-          dat.forEach((row2, j) => {
-            if (j >= i) {
-              correlograms.push(_Math2.crosscorrelation(row1, row2));
-            }
-          });
-        });
-        return correlograms;
-      }
-      static dft(sineWave = []) {
-        var TWOPI = 2 * 3.141592653589793;
-        var real = [];
-        var imag = [];
-        var mags = [];
-        for (var k = 0; k < sineWave.length; k++) {
-          real.push(0);
-          imag.push(0);
-          for (var j = 0; j < sineWave.length; j++) {
-            var shared = TWOPI * k * j / sineWave.length;
-            real[k] = real[k] + sineWave[j] * Math.cos(shared);
-            imag[k] = imag[k] - sineWave[j] * Math.sin(shared);
-          }
-          mags.push(Math.sqrt(real[k] * real[k] + imag[k] * imag[k]));
-        }
-        function orderMagnitudes(unorderedMags) {
-          return [...unorderedMags.slice(Math.ceil(unorderedMags.length * 0.5), unorderedMags.length), ...unorderedMags.slice(0, Math.ceil(unorderedMags.length * 0.5))];
-        }
-        mags = orderMagnitudes(mags);
-        let halflen = mags.length * 0.5;
-        let freqs = mags.map((m, i) => {
-          return i - halflen;
-        });
-        return { real, imag, freqs, mags };
-      }
-      static sma(arr = [], window2) {
-        var smaArr = [];
-        for (var i = 0; i < arr.length; i++) {
-          if (i == 0) {
-            smaArr.push(arr[0]);
-          } else if (i < window2) {
-            var arrslice = arr.slice(0, i + 1);
-            smaArr.push(arrslice.reduce((previous, current) => current += previous) / (i + 1));
-          } else {
-            var arrslice = arr.slice(i - window2, i);
-            smaArr.push(arrslice.reduce((previous, current) => current += previous) / window2);
-          }
-        }
-        return smaArr;
-      }
-      static sum(arr = []) {
-        if (arr.length > 0) {
-          var sum = arr.reduce((prev, curr) => curr += prev);
-          return sum;
-        } else {
-          return 0;
-        }
-      }
-      static reduceArrByFactor(arr, factor = 2) {
-        let x2 = arr.filter((element, index) => {
-          return index % factor === 0;
-        });
-        return x2;
-      }
-      static makeArr(startValue, stopValue, nSteps) {
-        var arr = [];
-        var step = (stopValue - startValue) / (nSteps - 1);
-        for (var i = 0; i < nSteps; i++) {
-          arr.push(startValue + step * i);
-        }
-        return arr;
-      }
-      static autoscale(array, stackedLines = 1, stackPosition = 0, centerZero = false) {
-        if (array?.length === 0)
-          return array;
-        let max = Math.max(...array);
-        let min = Math.min(...array);
-        let _lines = 1 / stackedLines;
-        let scalar;
-        if (centerZero) {
-          let absmax = Math.max(Math.abs(min), Math.abs(max));
-          scalar = _lines / absmax;
-          return array.map((y) => y * scalar + (_lines * (stackPosition + 1) * 2 - 1 - _lines));
-        } else {
-          scalar = _lines / (max - min);
-          return array.map((y) => 2 * ((y - min) * scalar - 1 / (2 * stackedLines)) + (_lines * (stackPosition + 1) * 2 - 1 - _lines));
-        }
-      }
-      static absmax(array) {
-        return Math.max(Math.abs(Math.min(...array)), Math.max(...array));
-      }
-      static downsample(array, fitCount, scalar = 1) {
-        if (array.length > fitCount) {
-          let output = new Array(fitCount);
-          let incr = array.length / fitCount;
-          let lastIdx = array.length - 1;
-          let last = 0;
-          let counter = 0;
-          for (let i = incr; i < array.length; i += incr) {
-            let rounded = Math.round(i);
-            if (rounded > lastIdx)
-              rounded = lastIdx;
-            for (let j = last; j < rounded; j++) {
-              output[counter] += array[j];
-            }
-            output[counter] /= (rounded - last) * scalar;
-            counter++;
-            last = rounded;
-          }
-          return output;
-        } else
-          return array;
-      }
-      static interpolateArray(data, fitCount, scalar = 1) {
-        var linearInterpolate = function(before2, after2, atPoint2) {
-          return (before2 + (after2 - before2) * atPoint2) * scalar;
-        };
-        var newData = new Array();
-        var springFactor = (data.length - 1) / (fitCount - 1);
-        newData[0] = data[0];
-        for (var i = 1; i < fitCount - 1; i++) {
-          var tmp = i * springFactor;
-          var before = Math.floor(tmp);
-          var after = Math.ceil(tmp);
-          var atPoint = tmp - before;
-          newData[i] = linearInterpolate(data[before], data[after], atPoint);
-        }
-        newData[fitCount - 1] = data[data.length - 1];
-        return newData;
-      }
-      static isExtrema(arr, critical = "peak") {
-        let ref = [...arr];
-        if (ref.length % 2 === 0)
-          ref.pop();
-        if (arr.length > 1) {
-          let pass = true;
-          for (let i = 0; i < ref.length; i++) {
-            let val = ref[i];
-            if (critical === "peak") {
-              if (i < Math.floor(ref.length * 0.5) && val >= ref[Math.floor(ref.length * 0.5)]) {
-                pass = false;
-                break;
-              } else if (i > Math.floor(ref.length * 0.5) && val >= ref[Math.floor(ref.length * 0.5)]) {
-                pass = false;
-                break;
-              }
-            } else if (critical === "valley") {
-              if (i < Math.floor(ref.length * 0.5) && val <= ref[Math.floor(ref.length * 0.5)]) {
-                pass = false;
-                break;
-              } else if (i > Math.floor(ref.length * 0.5) && val <= ref[Math.floor(ref.length * 0.5)]) {
-                pass = false;
-                break;
-              }
-            } else {
-              if (i < Math.floor(ref.length * 0.5) && val <= ref[Math.floor(ref.length * 0.5)]) {
-                pass = false;
-                break;
-              } else if (i > Math.floor(ref.length * 0.5) && val <= ref[Math.floor(ref.length * 0.5)]) {
-                pass = false;
-                break;
-              }
-            }
-          }
-          if (critical !== "peak" && critical !== "valley" && pass === false) {
-            pass = true;
-            for (let i = 0; i < ref.length; i++) {
-              let val = ref[i];
-              if (i < Math.floor(ref.length * 0.5) && val >= ref[Math.floor(ref.length * 0.5)]) {
-                pass = false;
-                break;
-              } else if (i > Math.floor(ref.length * 0.5) && val >= ref[Math.floor(ref.length * 0.5)]) {
-                pass = false;
-                break;
-              }
-            }
-          }
-          return pass;
-        } else
-          return void 0;
-      }
-      static isCriticalPoint(arr, critical = "peak") {
-        let ref = [...arr];
-        if (ref.length % 2 === 0)
-          ref.pop();
-        if (arr.length > 1) {
-          let pass = true;
-          for (let i = 0; i < ref.length; i++) {
-            let val = ref[i];
-            if (critical === "peak") {
-              if (i < ref.length * 0.5 && val <= 0) {
-                pass = false;
-                break;
-              } else if (i > ref.length * 0.5 && val > 0) {
-                pass = false;
-                break;
-              }
-            } else if (critical === "valley") {
-              if (i < ref.length * 0.5 && val >= 0) {
-                pass = false;
-                break;
-              } else if (i > ref.length * 0.5 && val < 0) {
-                pass = false;
-                break;
-              }
-            } else {
-              if (i < ref.length * 0.5 && val >= 0) {
-                pass = false;
-                break;
-              } else if (i > ref.length * 0.5 && val < 0) {
-                pass = false;
-                break;
-              }
-            }
-          }
-          if (critical !== "peak" && critical !== "valley" && pass === false) {
-            pass = true;
-            for (let i = 0; i < ref.length; i++) {
-              let val = ref[i];
-              if (i < ref.length * 0.5 && val <= 0) {
-                pass = false;
-                break;
-              } else if (i > ref.length * 0.5 && val > 0) {
-                pass = false;
-                break;
-              }
-            }
-          }
-          return pass;
-        } else
-          return void 0;
-      }
-      static getPeakThreshold(arr, peakIndices, thresholdVar) {
-        let threshold;
-        let filtered = arr.filter((o, i) => {
-          if (peakIndices.indexOf(i) > -1)
-            return true;
-        });
-        if (thresholdVar === 0) {
-          threshold = this.mean(filtered);
-        } else
-          threshold = (thresholdVar + this.mean(filtered)) * 0.5;
-        return threshold;
-      }
-      static column(mat, x2) {
-        let col = new Array(mat.length).fill(0).map(() => new Array(1).fill(0));
-        for (let i = 0; i < mat.length; i++) {
-          col[i][0] = mat[i][x2];
-        }
-        return col;
-      }
-      static flatten_vector(v) {
-        let v_new = [];
-        for (let i = 0; i < v.length; i++) {
-          v_new[i] = v[i][0];
-        }
-        return v_new;
-      }
-      static squared_difference(v1, v2) {
-        let sum = 0;
-        for (let i = 0; i < v1.length; i++) {
-          sum = sum + Math.pow(v1[i] - v2[i], 2);
-        }
-        return sum;
-      }
-      static shift_deflate(mat, eigenvalue, eigenvector) {
-        let len = Math.sqrt(this.matmul(this.transpose(eigenvector), eigenvector));
-        let U = this.matscale(eigenvector, 1 / len);
-        let delta = this.matscale(this.matmul(U, this.transpose(U)), eigenvalue);
-        let M_new = this.matsub(mat, delta);
-        return M_new;
-      }
-      static eigenvalue_of_vector(mat, eigenvector) {
-        ev = this.matmul(this.matmul(this.transpose(eigenvector), mat), eigenvector);
-        return ev;
-      }
-      static power_iteration(mat, tolerance = 1e-5, max_iterations = 1e3) {
-        let rank = mat.length;
-        let eigenvector = new Array(rank).fill(0).map(() => new Array(1).fill(Math.sqrt(rank)));
-        let eigenvalue = this.eigenvalue_of_vector(mat, eigenvector);
-        let epsilon = 1;
-        let iter = 0;
-        while (epsilon > tolerance && iter < max_iterations) {
-          let old_eigenvalue = JSON.parse(JSON.stringify(eigenvalue));
-          let Mv = this.matmul(mat, eigenvector);
-          eigenvector = this.normalize(Mv);
-          eigenvalue = this.eigenvalue_of_vector(mat, eigenvector);
-          epsilon = Math.abs(eigenvalue - old_eigenvalue);
-          iter++;
-        }
-        ;
-        return [eigenvalue, eigenvector];
-      }
-      static eigens(mat, tolerance = 1e-4, max_iterations = 1e3) {
-        let eigenvalues = [];
-        let eigenvectors = [];
-        for (let i = 0; i < mat.length; i++) {
-          let result = this.power_iteration(mat, tolerance, max_iterations);
-          let eigenvalue = result[0];
-          let eigenvector = result[1];
-          eigenvalues[i] = eigenvalue;
-          eigenvectors[i] = this.flatten_vector(eigenvector);
-          mat = this.shift_deflate(mat, eigenvalue, eigenvector);
-        }
-        return [eigenvalues, eigenvectors];
-      }
-      static pca(mat, tolerance = 1e-5) {
-        let dims = mat.length;
-        let t = new Array(dims);
-        let p = new Array(dims);
-        let mat_t = this.transpose(mat);
-        t[0] = this.column(mat, 0);
-        let epsilon = 1;
-        let iter = 0;
-        while (espilon > tolerance) {
-          iter++;
-          p[0] = this.matmul(mat_t, t[0]);
-          let tp = this.matmul(this.transpose(t[0]), t[0]);
-          p[0] = this.matscale(p[0], 1 / tp);
-          let p_length = Math.sqrt(this.matmul(this.transpose(p[0]), p[0]));
-          p[0] = this.matscale(p[0], 1 / p_length);
-          let t_new = this.matmul(mat, p[0]);
-          let pp = this.matmul(this.transpose(p[0]), p[0]);
-          t_new = this.matscale(t_new, 1 / pp);
-          epsilon = this.squared_difference(t[0], t_new);
-          t[0] = JSON.parse(JSON.stringify(t_new));
-        }
-        let components = this.matmul(this.transpose(t[0]), t[0]);
-        return components;
-      }
-      static circularBuffer(arr, newEntries) {
-        if (Array.isArray(newEntries)) {
-          if (newEntries.length < arr.length) {
-            let slice = arr.slice(newEntries.length);
-            let len = arr.length;
-            arr.splice(0, len, ...slice, ...newEntries);
-          } else if (newEntries.length > arr.length) {
-            let len = arr.length;
-            arr.splice(0, len, newEntries.slice(len - newEntries.length));
-          } else {
-            arr.splice(0, arr.length, ...newEntries);
-          }
-        } else {
-          arr.push(newEntries);
-          arr.shift();
-        }
-        return arr;
-      }
-      static HSLToRGB(h, s, l, scalar = 255) {
-        s /= 100;
-        l /= 100;
-        let c = (1 - Math.abs(2 * l - 1)) * s, x2 = c * (1 - Math.abs(h / 60 % 2 - 1)), m = l - c / 2, r = 0, g = 0, b = 0;
-        if (0 <= h && h < 60) {
-          r = c;
-          g = x2;
-          b = 0;
-        } else if (60 <= h && h < 120) {
-          r = x2;
-          g = c;
-          b = 0;
-        } else if (120 <= h && h < 180) {
-          r = 0;
-          g = c;
-          b = x2;
-        } else if (180 <= h && h < 240) {
-          r = 0;
-          g = x2;
-          b = c;
-        } else if (240 <= h && h < 300) {
-          r = x2;
-          g = 0;
-          b = c;
-        } else if (300 <= h && h < 360) {
-          r = c;
-          g = 0;
-          b = x2;
-        }
-        r = (r + m) * scalar;
-        g = (g + m) * scalar;
-        b = (b + m) * scalar;
-        return [r, g, b];
-      }
-      static p300(event_timestamps = [], raw_signal = [], signal_timestamps = [], sps = 256) {
-        let smoothingstep = Math.floor(sps / 10);
-        let smoothed = this.sma(raw_signal, smoothingstep);
-        let peaks = this.peakDetect(smoothed, "peak", smoothingstep);
-        let mean = this.mean(smoothed);
-        let std = this.std(smoothed, mean);
-        let p_idx = 0;
-        let candidates = [];
-        if (peaks.length > 0) {
-          event_timestamps.forEach((t, j) => {
-            while (signal_timestamps[peaks[p_idx]] < t + 200) {
-              p_idx++;
-              if (!peaks[p_idx])
-                break;
-            }
-            let tempi = 0;
-            let tempcandidates = [];
-            while (signal_timestamps[peaks[p_idx + tempi]] < t + 600) {
-              tempcandidates.push(p_idx + tempi);
-              tempi++;
-              if (!peaks[p_idx + tempi])
-                break;
-            }
-            if (tempcandidates.length > 1) {
-              let peakvals = [];
-              tempcandidates.forEach((tc) => {
-                peakvals.push(smoothed[peaks[tc]]);
-              });
-              let max = Math.max(...peakvals);
-              let maxi = tempcandidates[peakvals.indexOf(max)];
-              candidates.push({ event_timestamp: t, event_index: j, peak_timestamp: signal_timestamps[[peaks[maxi]]], signal_index: [peaks[maxi]], signal_amplitude: raw_signal[[peaks[maxi]]], zscore: (smoothed[peaks[maxi]] - mean) / std });
-            } else if (tempcandidates.length === 1)
-              candidates.push({ event_timestamp: t, event_index: j, peak_timestamp: signal_timestamps[peaks[tempcandidates[0]]], signal_index: peaks[tempcandidates[0]], signal_amplitude: raw_signal[[peaks[tempcandidates[0]]]], zscore: (smoothed[peaks[tempcandidates[0]]] - mean) / std });
-          });
-        }
-        return candidates;
-      }
-    };
-    var Math2 = _Math2;
-    __publicField(Math2, "TWO_PI", Math.PI * 2);
-    __publicField(Math2, "C", 299792458);
-    __publicField(Math2, "G", 66743e-15);
-    __publicField(Math2, "h", 662607015e-42);
-    __publicField(Math2, "R", 8314.32);
-    __publicField(Math2, "Ra", 287);
-    __publicField(Math2, "H", 69.3);
-    __publicField(Math2, "kbar", 1054571817e-43);
-    __publicField(Math2, "kB", 1380649e-29);
-    __publicField(Math2, "ke", 89875517923e-1);
-    __publicField(Math2, "me", 91093837015e-41);
-    __publicField(Math2, "mp", 167262192369e-38);
-    __publicField(Math2, "mn", 167492749804e-38);
-    __publicField(Math2, "P0", 101325);
-    __publicField(Math2, "T0", 288.15);
-    __publicField(Math2, "p0", 1.225);
-    __publicField(Math2, "Na", 60220978e16);
-    __publicField(Math2, "y", 1.405);
-    __publicField(Math2, "M0", 28.96643);
-    __publicField(Math2, "g0", 9.80665);
-    __publicField(Math2, "Re", 6378100);
-    __publicField(Math2, "B", 1458e-9);
-    __publicField(Math2, "S", 110.4);
-    __publicField(Math2, "Sigma", 365e-12);
-    __publicField(Math2, "imgkernels", { edgeDetection: [[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]], boxBlur: [[1 / 9, 1 / 9, 1 / 9], [1 / 9, 1 / 9, 1 / 9], [1 / 9, 1 / 9, 1 / 9]], sobelLeft: [[1, 0, -1], [2, 0, -2], [1, 0, -1]], sobelRight: [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], sobelTop: [[1, 2, 1], [0, 0, 0], [-1, -2, -1]], sobelBottom: [[-1, 2, 1], [0, 0, 0], [1, 2, 1]], identity: [[0, 0, 0], [0, 1, 0], [0, 0, 0]], gaussian3x3: [[1, 2, 1], [2, 4, 2], [1, 2, 1]], guassian7x7: [[0, 0, 0, 5, 0, 0, 0], [0, 5, 18, 32, 18, 5, 0], [0, 18, 64, 100, 64, 18, 0], [5, 32, 100, 100, 100, 32, 5], [0, 18, 64, 100, 64, 18, 0], [0, 5, 18, 32, 18, 5, 0], [0, 0, 0, 5, 0, 0, 0]], emboss: [[-2, -1, 0], [-1, 1, 1], [0, 1, 2]], sharpen: [[0, -1, 0], [-1, 5, -1], [0, -1, 0]] });
-    __publicField(Math2, "integral", (func = (x2) => {
-      let y = x2;
-      return y;
-    }, range = [], stepx = 0.01) => {
-      let area = 0;
-      for (let i = range[0]; i < range[1]; i += stepx) {
-        let y = func(i);
-        area += y * stepx;
-      }
-      return area;
-    });
-    __publicField(Math2, "dintegral", (func = (x2, y) => {
-      let z = x2 + y;
-      return z;
-    }, range = [[], []], stepx = 0.01, stepy = stepx) => {
-      let volume = 0;
-      for (let i = range[0][0] + stepx; i < range[0][1]; i += stepx) {
-        for (let j = range[1][0] + stepy; j < range[1][1]; j += stepy) {
-          let z = func(i, j);
-          volume += z * stepx * stepy;
-        }
-      }
-      return volume;
-    });
-    __publicField(Math2, "tintegral", (func = (x2, y, z) => {
-      let w = x2 + y + z;
-      return w;
-    }, range = [[], [], []], stepx = 0.01, stepy = stepx, stepz = stepx) => {
-      let volume = 0;
-      for (let i = range[0][0] + stepx; i < range[0][1]; i += stepx) {
-        for (let j = range[1][0] + stepy; j < range[1][1]; j += stepy) {
-          for (let k = range[2][0] + stepz; k < range[2][1]; k += stepz) {
-            let w = func(i, j, k);
-            volume += w * stepx * stepy * stepz;
-          }
-        }
-      }
-      return volume;
-    });
-    __publicField(Math2, "pintegral", (func = (x2) => {
-      let y = x2;
-      return y;
-    }, range = [], stepx = 0.01) => {
-      let length = 0;
-      let y0 = void 0;
-      let yi = void 0;
-      for (let i = range[0]; i < range[1]; i += stepx) {
-        y0 = yi;
-        yi = func(i);
-        if (y0)
-          length += _Math2.distance([0, y0], [stepx, yi]);
-      }
-      return length;
-    });
-    __publicField(Math2, "meshgrid", _Math2.generateCoordinateSpace);
-    __publicField(Math2, "autocorrelation2d", (mat2d2) => {
-      let result = [];
-      for (let y = 0; y < mat2d2.length; y++) {
-        result.push([]);
-        for (let x2 = 0; x2 < mat2d2[y].length; x2++) {
-          let G = 0;
-          for (let b = 0; b < mat2d2.length; b++) {
-            for (let a = 0; a < mat2d2[b].length; a++) {
-              G += mat2d2[y][x2] * mat2d2[mat2d2.length - 1 - b][mat2d2[y].length - 1 - a];
-            }
-          }
-          result[y][x2] = G;
-        }
-      }
-      return result;
-    });
-    __publicField(Math2, "lerp", _Math2.makeArr);
-    __publicField(Math2, "upsample", _Math2.interpolateArray);
-    __publicField(Math2, "lerp", (v0, v1, fit, floor = true) => {
-      function lerp(v02, v12, t) {
-        return (1 - t) * v02 + t * v12;
-      }
-      function interpolerp(v02, v12, fit2, floor2 = true) {
-        if (fit2 <= 2)
-          return [v02, v12];
-        let a = 1 / fit2;
-        let result = new Array(fit2);
-        result[0] = v02;
-        for (let i = 1; i <= fit2; i++) {
-          result[i] = lerp(v02, v12, a * i);
-          if (floor2)
-            result[i] = Math.floor(result[i]);
-        }
-        return result;
-      }
-    });
-    __publicField(Math2, "peakDetect", (smoothedArray, type = "peak", window2 = 49) => {
-      let mid = Math.floor(window2 * 0.5);
-      let peaks = [];
-      for (let i = 0; i < smoothedArray.length - window2; i++) {
-        let isPeak = _Math2.isExtrema(smoothedArray.slice(i, i + window2), type);
-        if (isPeak) {
-          peaks.push(i + mid - 1);
-        }
-      }
-      return peaks;
-    });
-    Object.assign(Math, Math2);
-    var accel_gyro = { accelConstant: 1 / 8192, gyroConstant: 1 / 65.5, gyroXAngle: 0, gyroYAngle: 0, gyroZAngle: 0, px: 0, py: 0, pz: 0, sps: 100, lastAccelTime: Date.now(), lastGyroTime: Date.now(), __operator: function(data) {
-      if (!("ax" in data) && !("gx" in data))
-        return void 0;
-      if (!data.timestamp) {
-        if (data.ax && Array.isArray(data.ax) || data.gx && Array.isArray(data.gx)) {
-          let len = data.ax ? data.ax.length : data.gx.length;
-          let now = Date.now();
-          let toInterp = [now - len * this.sps * 1e3, now];
-          data.timestamp = Math2.upsample(toInterp, len);
-        } else {
-          data.timestamp = Date.now();
-        }
-      }
-      let result;
-      if (data.ax) {
-        let apass = (timestamp, ax, ay, az) => {
-          ax = ax * this.accelConstant;
-          ay = ay * this.accelConstant;
-          az = az * this.accelConstant;
-          const accelXAngle = Math.atan(ay / Math.sqrt(ax * ax) + az * az * 180 / Math.PI) + this.accelXError;
-          const accelYAngle = Math.atan(-ax / Math.sqrt(ay * ay) + az * az * 180 / Math.PI) + this.accelYError;
-          return { ax, ay, az, roll: accelXAngle, pitch: accelYAngle };
-        };
-        if (Array.isArray(data.timestamp)) {
-          result = data.timestamp.map((v, i) => {
-            return apass(v, data.ax[i], data.ay[i], data.az[i]);
-          });
-        } else
-          result = apass(data.timestamp, data.ax, data.ay, data.az);
-      }
-      if (data.gx) {
-        let gpass = (timestamp, gx, gy, gz) => {
-          const elapsed = timestamp - this.lastGyroTime;
-          this.lastGyroTime = timestamp;
-          gx = gx * this.gyroConstant + this.gyroXError;
-          gy = gy * this.gyroConstant + this.gyroYError;
-          gz = gz * this.gyroConstant + this.gyroZError;
-          this.gyroXAngle += gx * elapsed;
-          this.gyroYAngle += gy * elapsed;
-          this.gyroZAngle += gz * elapsed;
-          return { gx, gy, gz, roll: this.gyroXAngle, pitch: this.gyroYAngle, yaw: this.gyroZAngle };
-        };
-        let res;
-        if (Array.isArray(data.timestamp)) {
-          res = data.timestamp.map((v, i) => {
-            if (result) {
-              let r = gpass(v, data.gx[i], data.gy[i], data.gz[i]);
-              result.roll = result.roll * 0.04 + r.roll * 0.96;
-              result.pitch = result.pitch * 0.04 + r.pitch * 0.96;
-              result.yaw = res.yaw;
-            } else
-              return gpass(v, data.gx[i], data.gy[i], data.gz[i]);
-          });
-          if (!result)
-            result = res;
-        } else {
-          res = gpass(data.timestamp, data.gx, data.gy, data.gz);
-          if (result) {
-            result.roll = result.roll * 0.04 + res.roll * 0.96;
-            result.pitch = result.pitch * 0.04 + res.pitch * 0.96;
-            result.yaw = res.yaw;
-          } else
-            result = res;
-        }
-      } else if (this.gyroXAngle || this.gyroYAngle || this.gyroZAngle) {
-        result.roll = result.roll * 0.04 + this.gyroXAngle * 0.96;
-        result.pitch = result.pitch * 0.04 + this.gyroYAngle * 0.96;
-        result.yaw = this.gyroXAngle;
-      }
-      if (result.ax) {
-        const setPositionOffset = (timestamp, result2) => {
-          const elapsed = timestamp - this.lastAccelTime;
-          this.lastAccelTime = timestamp;
-          this.px += result2.ax * elapsed * elapsed * Math.cos(this.pitch * Math.PI * 0.005555555555);
-          this.py += result2.ay * elapsed * elapsed * Math.cos(this.roll * Math.PI * 0.005555555555);
-          this.pz += result2.az * elapsed * elapsed * Math.sin(this.pitch * Math.PI * 0.005555555555);
-          result2.px = this.px;
-          result2.py = this.py;
-          result2.pz = this.pz;
-          return result2;
-        };
-        if (Array.isArray(data.timestamp)) {
-          data.timestamp.map((timestamp, i) => {
-            setPositionOffset(timestamp, result);
-          });
-        } else {
-          setPositionOffset(data.timestamp, result);
-        }
-      }
-      return result;
-    } };
-    var Biquad = class {
-      constructor(type, freq, sps, Q = 1 / Math.sqrt(2), dbGain = 0) {
-        this.a0 = 0;
-        this.a1 = 0;
-        this.a2 = 0;
-        this.b0 = 0;
-        this.b1 = 0;
-        this.b2 = 0;
-        this.x1 = 0;
-        this.x2 = 0;
-        this.y1 = 0;
-        this.y2 = 0;
-        let types = ["lowpass", "highpass", "bandpass", "notch", "peak", "lowshelf", "highshelf"];
-        if (types.indexOf(type) < 0) {
-          console.error("Valid types: 'lowpass','highpass','bandpass','notch','peak','lowshelf','highshelf'");
-          return;
-        }
-        this.type = type;
-        this.freq = freq;
-        this.sps = sps;
-        this.Q = Q;
-        this.dbGain = dbGain;
-        let A = Math.pow(10, dbGain / 40);
-        let omega = 2 * Math.PI * freq / sps;
-        let sn = Math.sin(omega);
-        let cs = Math.cos(omega);
-        let alpha = sn / (2 * Q);
-        let beta = Math.sqrt(A + A);
-        this[type](A, sn, cs, alpha, beta);
-        this.b0 /= this.a0;
-        this.b1 /= this.a0;
-        this.b2 /= this.a0;
-        this.a1 /= this.a0;
-        this.a2 /= this.a0;
-      }
-      lowpass(A, sn, cs, alpha, beta) {
-        this.b0 = (1 - cs) * 0.5;
-        this.b1 = 1 - cs;
-        this.b2 = (1 - cs) * 0.5;
-        this.a0 = 1 + alpha;
-        this.a1 = -2 * cs;
-        this.a2 = 1 - alpha;
-      }
-      highpass(A, sn, cs, alpha, beta) {
-        this.b0 = (1 + cs) * 0.5;
-        this.b1 = -(1 + cs);
-        this.b2 = (1 + cs) * 0.5;
-        this.a0 = 1 + alpha;
-        this.a1 = -2 * cs;
-        this.a2 = 1 - alpha;
-      }
-      bandpass(A, sn, cs, alpha, beta) {
-        this.b0 = alpha;
-        this.b1 = 0;
-        this.b2 = -alpha;
-        this.a0 = 1 + alpha;
-        this.a1 = -2 * cs;
-        this.a2 = 1 - alpha;
-      }
-      notch(A, sn, cs, alpha, beta) {
-        this.b0 = 1;
-        this.b1 = -2 * cs;
-        this.b2 = 1;
-        this.a0 = 1 + alpha;
-        this.a1 = -2 * cs;
-        this.a2 = 1 - alpha;
-      }
-      peak(A, sn, cs, alpha, beta) {
-        this.b0 = 1 + alpha * A;
-        this.b1 = -2 * cs;
-        this.b2 = 1 - alpha * A;
-        this.a0 = 1 + alpha / A;
-        this.a1 = -2 * cs;
-        this.a2 = 1 - alpha / A;
-      }
-      lowshelf(A, sn, cs, alpha, beta) {
-        this.b0 = A * (A + 1 - (A - 1) * cs + beta * sn);
-        this.b1 = 2 * A * (A - 1 - (A + 1) * cs);
-        this.b2 = A * (A + 1 - (A - 1) * cs - beta * sn);
-        this.a0 = A + 1 + (A + 1) * cs + beta * sn;
-        this.a1 = 2 * (A - 1 + (A + 1) * cs);
-        this.a2 = A + 1 + (A - 1) * cs - beta * sn;
-      }
-      highshelf(A, sn, cs, alpha, beta) {
-        this.b0 = A * (A + 1 + (A - 1) * cs + beta * sn);
-        this.b1 = 2 * A * (A - 1 + (A + 1) * cs);
-        this.b2 = A * (A + 1 - (A - 1) * cs - beta * sn);
-        this.a0 = A + 1 - (A + 1) * cs - beta * sn;
-        this.a1 = 2 * (A - 1 - (A + 1) * cs);
-        this.a2 = A + 1 - (A - 1) * cs - beta * sn;
-      }
-      applyFilter(signal_step) {
-        let y = this.b0 * signal_step + this.b1 * this.x1 + this.b2 * this.x2 - this.a1 * this.y1 - this.a2 * this.y2;
-        this.x2 = this.x1;
-        this.x1 = signal_step;
-        this.y2 = this.y1;
-        this.y1 = y;
-        return y;
-      }
-      zResult(freq) {
-        try {
-          let phi = Math.pow(Math.sin(Math.PI * freq * 2 / (2 * this.sps)), 2);
-          let result = (Math.pow(this.b0 + this.b1 + this.b2, 2) - 4 * (this.b0 * this.b1 + 4 * this.b0 * this.b2 + this.b1 * this.b2) * phi + 16 * this.b0 * this.b2 * phi * phi) / (Math.pow(1 + this.a1 + this.a2, 2) - 4 * (this.a1 + 4 * this.a2 + this.a1 * this.a2) * phi + 16 * this.a2 * phi * phi);
-          return result;
-        } catch (err) {
-          return -200;
-        }
-      }
-      static calcCenterFrequency(freqStart, freqEnd) {
-        return (freqStart + freqEnd) / 2;
-      }
-      static calcBandwidth(freqStart, freqEnd) {
-        return freqEnd - this.calcCenterFrequency(freqStart, freqEnd);
-      }
-      static calcBandpassQ(frequency, bandwidth, resonance = Math.pow(10, Math.floor(Math.log10(frequency)))) {
-        let Q = resonance * Math.sqrt((frequency - bandwidth) * (frequency + bandwidth)) / (2 * bandwidth);
-        return Q;
-      }
-      static calcNotchQ(frequency, bandwidth, resonance = Math.pow(10, Math.floor(Math.log10(frequency)))) {
-        let Q = resonance * frequency * bandwidth / Math.sqrt((frequency - bandwidth) * (frequency + bandwidth));
-        return Q;
-      }
-    };
-    var beat_detect = { refdata: [], lowpass: void 0, smoothed: [], timestamp: [], peaks: [], valleys: [], peak_distances: [], valley_distances: [], beats: [], lastPeak: 0, lastValley: 0, sps: 100, maxFreq: 4, limit: 10, __onconnected: function() {
-      if (!this.lowpass) {
-        let freq = this.maxFreq;
-        if (!freq)
-          freq = 1;
-        if (freq > 1)
-          freq *= 0.5;
-        this.lowpass = new Biquad("lowpass", this.maxFreq, this.sps);
-        this.peakFinderWindow = Math.floor(this.sps / this.maxFreq);
-        if (this.peakFinderWindow % 2 === 0)
-          this.peakFinderWindow += 1;
-        if (this.peakFinderWindow < 5)
-          this.peakFinderWindow = 5;
-        this.midpoint = Math.round(this.peakFinderWindow * 0.5);
-      }
-    }, __operator: function(data) {
-      if (!("red" in data) && !("heg" in data) && !("raw" in data))
-        return void 0;
-      let refdata = data.red ? data.red : data.heg ? data.heg : data.raw;
-      if (!("timestamp" in data)) {
-        if (Array.isArray(refdata)) {
-          let now = Date.now();
-          let len;
-          if (refdata)
-            len = refdata.length;
-          let toInterp = [now - refdata.length * this.sps * 1e3, now];
-          data.timestamp = Math2.upsample(toInterp, refdata.length);
-        } else {
-          data.timestamp = Date.now();
-        }
-      }
-      let pass = (amplitude, timestamp) => {
-        if (amplitude) {
-          this.refdata.push(amplitude);
-        }
-        this.timestamp.push(timestamp);
-        let beat;
-        if (this.refdata.length > this.peakFinderWindow) {
-          this.refdata.shift();
-          this.timestamp.shift();
-        }
-        this.smoothed.push(this.lowpass.applyFilter(this.refdata[this.refdata.length - 1]));
-        if (this.smoothed.length > this.peakFinderWindow) {
-          this.smoothed.shift();
-        }
-        if (this.smoothed.length === this.peakFinderWindow) {
-          if (Math2.isExtrema(this.smoothed, "valley")) {
-            this.valleys.push({ value: this.smoothed[this.smoothed.length - this.midpoint ? this.midpoint : 1], timestamp: this.timestamp[this.timestamp.length - this.midpoint ? this.midpoint : 1] });
-          } else if (Math2.isExtrema(this.smoothed, "peak")) {
-            this.peaks.push({ value: this.smoothed[this.smoothed.length - this.midpoint ? this.midpoint : 1], timestamp: this.timestamp[this.timestamp.length - this.midpoint ? this.midpoint : 1] });
-          }
-          if (this.valleys.length > 2 && this.peaks.length > 2) {
-            if (this.valleys[this.valleys.length - 1].timestamp < this.peaks[this.peaks.length - 2].timestamp)
-              this.peaks.splice(this.peaks.length - 1);
-            if (this.peaks[this.peaks.length - 1].timestamp < this.valleys[this.valleys.length - 2].timestamp)
-              this.valleys.splice(this.valleys.length - 1);
-            this.valley_distances.push({ distance: this.valleys[this.valleys.length - 1].timestamp - this.valleys[this.valleys.length - 2].timestamp, timestamp: this.valleys[this.valleys.length - 1].timestamp, peak0: this.valleys[this.valleys.length - 1].value, peak1: this.valleys[this.valleys.length - 2].value });
-            this.peak_distances.push({ distance: this.peaks[this.peaks.length - 1].timestamp - this.peaks[this.peaks.length - 2].timestamp, timestamp: this.peaks[this.peaks.length - 1].timestamp, peak0: this.peaks[this.peaks.length - 1].value, peak1: this.peaks[this.peaks.length - 2].value });
-            if (this.peak_distances.length > 1 && this.valley_distances.length > 1) {
-              if (this.lastPeak < this.peaks[this.peaks.length - 1].timestamp && this.lastValley < this.peaks[this.peaks.length - 1].timestamp) {
-                if (this.valley_distances[this.valley_distances.length - 1].timestamp > this.peak_distances[this.peak_distances.length - 1].timestamp) {
-                  let bpm, change = 0;
-                  if (this.beats.length < 1) {
-                    bpm = 60 / (5e-4 * (this.peak_distances[this.peak_distances.length - 1].distance + this.valley_distances[this.valley_distances.length - 1].distance));
-                  } else if (this.beats[this.beats.length - 1].timestamp !== this.peak_distances[this.peak_distances.length - 1].timestamp) {
-                    bpm = 60 / (5e-4 * (this.peak_distances[this.peak_distances.length - 1].dt + this.valley_distances[this.valley_distances.length - 1].dt));
-                    change = Math.abs(bpm - this.beats[this.beats.length - 1].bpm);
-                  }
-                  beat = { timestamp: this.peak_distances[this.peak_distances.length - 1].timestamp, change, bpm, height0: this.peak_distances[this.peak_distances.length - 1].peak0 - this.valley_distances[this.valley_distances.length - 1].peak0, height1: this.peak_distances[this.peak_distances.length - 1].peak1 - this.valley_distances[this.valley_distances.length - 1].peak1 };
-                  this.beats.push(beat);
-                  this.lastPeak = this.peaks[this.peaks.length - 1].timestamp;
-                  this.lastValley = this.peaks[this.peaks.length - 1].timestamp;
-                } else {
-                  let bpm, change = 0;
-                  if (this.beats.length < 2) {
-                    bpm = 60 / (5e-4 * (this.peak_distances[this.peak_distances.length - 2].distance + this.valley_distances[this.valley_distances.length - 2].distance));
-                  } else if (this.beats[this.beats.length - 1].timestamp !== this.peak_distances[this.peak_distances.length - 2].timestamp) {
-                    bpm = 60 / (5e-4 * (this.peak_distances[this.peak_distances.length - 2].distance + this.valley_distances[this.valley_distances.length - 2].distance));
-                    change = Math.abs(bpm - this.beats[this.beats.length - 2].bpm);
-                  }
-                  beat = { timestamp: this.peak_distances[this.peak_distances.length - 2].timestamp, change, bpm, height0: this.peak_distances[this.peak_distances.length - 2].peak0 - this.valley_distances[this.valley_distances.length - 2].peak0, height1: this.peak_distances[this.peak_distances.length - 2].peak1 - this.valley_distances[this.valley_distances.length - 2].peak1 };
-                  this.beats.push(beat);
-                  this.lastPeak = this.peaks[this.peaks.length - 1].timestamp;
-                  this.lastValley = this.peaks[this.peaks.length - 1].timestamp;
-                }
-              }
-            }
-            if (this.peaks.length > this.limit) {
-              this.peaks.shift();
-            }
-            if (this.valleys.length > this.limit) {
-              this.valleys.shift();
-            }
-            if (this.peak_distances.length > this.limit) {
-              this.peak_distances.shift();
-            }
-            if (this.valley_distances.length > this.limit) {
-              this.valley_distances.shift();
-            }
-            if (this.beats.length > this.limit) {
-              this.beats.shift();
-            }
-          }
-        }
-        return beat;
-      };
-      if (data.red) {
-        if ("ir" in data && !Array.isArray(data.red))
-          return pass(data.red + data.ir, data.timestamp);
-        let result;
-        if (data.ir)
-          result = data.red.map((v, i) => {
-            return pass(v + data.ir[i], data.timestamp[i]);
-          });
-        else
-          result = data.red.map((v, i) => {
-            return pass(v, data.timestamp[i]);
-          });
-        return result;
-      } else if (data.raw) {
-        if (!Array.isArray(data.raw))
-          return pass(data.raw, data.timestamp);
-        let result = data.raw.map((v, i) => {
-          return pass(v, data.timestamp[i]);
-        });
-        return result;
-      } else if (Array.isArray(data.heg)) {
-        if (!Array.isArray(data.heg))
-          return pass(data.heg, data.timestamp);
-        let result = data.heg.map((v, i) => {
-          return pass(v, data.timestamp[i]);
-        });
-        return result;
-      }
-    } };
-    var blink_detect = { sps: 250, intervals: {}, watch: ["0"], tolerance: 0.2, __onconnected: (node) => {
-      node.watch.forEach((ch) => node.intervals[ch] = { lowpass: new Biquad("lowpass", 20, node.sps), filtered: [], averaged: [] });
-    }, __operator: function(data) {
-      let checkCt = 5;
-      let averageCt = 50;
-      let found = {};
-      let passed = false;
-      let pass = (key, n) => {
-        let next = this.intervals[key].lowpass.applyFilter(n);
-        this.intervals[key].filtered.push(next);
-        this.intervals[key].averaged.push(next);
-        if (this.intervals[key].filtered.length > checkCt) {
-          if (this.intervals[key].averaged.length > averageCt) {
-            this.intervals[key].averaged.splice(0, checkCt);
-            let mean = Math2.mean(this.intervals[key].averaged);
-            if (Math.abs(Math.min(...this.intervals[key].filtered)) > Math.abs(mean) + this.tolerance) {
-              this.intervals[key].filtered.length = 0;
-              passed = true;
-              found[key] = true;
-            }
-          } else
-            this.intervals[key].filtered.shift();
-        }
-      };
-      for (const key in this.intervals) {
-        if (data[key]) {
-          if (Array.isArray(data[key])) {
-            data[key].forEach((n) => {
-              pass(key, n);
-            });
-          } else if (typeof data[key] === "number")
-            pass(key, data[key]);
-        }
-      }
-      if (passed)
-        return found;
-    } };
-    var _ArrayManip = class {
-      constructor() {
-        this.recursivelyAssign = (target, obj) => {
-          for (const key in obj) {
-            if (typeof obj[key] === "object") {
-              if (typeof target[key] === "object")
-                this.recursivelyAssign(target[key], obj[key]);
-              else
-                target[key] = this.recursivelyAssign({}, obj[key]);
-            } else
-              target[key] = obj[key];
-          }
-          return target;
-        };
-      }
-      static autoscale(array, lineIdx = 0, nLines = 1, centerZero = false, ymin, ymax, clamp) {
-        if (array?.length === 0)
-          return array;
-        let max = ymax ? ymax : Math.max(...array);
-        let min = ymin ? ymin : Math.min(...array);
-        let _lines = 1 / nLines;
-        let scalar = 1;
-        if (centerZero) {
-          let absmax = Math.max(Math.abs(min), Math.abs(max));
-          if (absmax !== 0)
-            scalar = _lines / absmax;
-          return array.map((y) => {
-            if (clamp) {
-              if (y < min)
-                y = min;
-              if (y > max)
-                y = max;
-            }
-            return y * scalar + (_lines * (lineIdx + 1) * 2 - 1 - _lines);
-          });
-        } else {
-          if (max === min) {
-            if (max !== 0) {
-              scalar = _lines / max;
-            } else if (min !== 0) {
-              scalar = _lines / Math.abs(min);
-            }
-          } else
-            scalar = _lines / (max - min);
-          return array.map((y) => {
-            if (clamp) {
-              if (y < min)
-                y = min;
-              if (y > max)
-                y = max;
-            }
-            return 2 * ((y - min) * scalar - 1 / (2 * nLines)) + (_lines * (lineIdx + 1) * 2 - 1 - _lines);
-          });
-        }
-      }
-      static genTimestamps(ct, sps) {
-        let now = Date.now();
-        let toInterp = [now - ct * 1e3 / sps, now];
-        return _ArrayManip.upsample(toInterp, ct);
-      }
-      static absmax(array) {
-        return Math.max(Math.abs(Math.min(...array)), Math.max(...array));
-      }
-      static downsample(array, fitCount, scalar = 1) {
-        if (array.length > fitCount) {
-          let output = new Array(fitCount);
-          let incr = array.length / fitCount;
-          let lastIdx = array.length - 1;
-          let last = 0;
-          let counter = 0;
-          for (let i = incr; i < array.length; i += incr) {
-            let rounded = Math.round(i);
-            if (rounded > lastIdx)
-              rounded = lastIdx;
-            for (let j = last; j < rounded; j++) {
-              output[counter] += array[j];
-            }
-            output[counter] /= (rounded - last) * scalar;
-            counter++;
-            last = rounded;
-          }
-          return output;
-        } else
-          return array;
-      }
-      static upsample(array, fitCount, scalar = 1) {
-        var linearInterpolate = function(before2, after2, atPoint2) {
-          return (before2 + (after2 - before2) * atPoint2) * scalar;
-        };
-        var newData = new Array(fitCount);
-        var springFactor = (array.length - 1) / (fitCount - 1);
-        newData[0] = array[0];
-        for (var i = 1; i < fitCount - 1; i++) {
-          var tmp = i * springFactor;
-          var before = Math.floor(tmp);
-          var after = Math.ceil(tmp);
-          var atPoint = tmp - before;
-          newData[i] = linearInterpolate(array[before], array[after], atPoint);
-        }
-        newData[fitCount - 1] = array[array.length - 1];
-        return newData;
-      }
-      static interpolate(array, fitCount, scalar = 1) {
-        if (array.length > fitCount) {
-          return _ArrayManip.downsample(array, fitCount, scalar);
-        } else if (array.length < fitCount) {
-          return _ArrayManip.upsample(array, fitCount, scalar);
-        }
-        return array;
-      }
-      static HSLToRGB(h, s, l, scalar = 255) {
-        s /= 100;
-        l /= 100;
-        let c = (1 - Math.abs(2 * l - 1)) * s, x2 = c * (1 - Math.abs(h / 60 % 2 - 1)), m = l - c / 2, r = 0, g = 0, b = 0;
-        if (0 <= h && h < 60) {
-          r = c;
-          g = x2;
-          b = 0;
-        } else if (60 <= h && h < 120) {
-          r = x2;
-          g = c;
-          b = 0;
-        } else if (120 <= h && h < 180) {
-          r = 0;
-          g = c;
-          b = x2;
-        } else if (180 <= h && h < 240) {
-          r = 0;
-          g = x2;
-          b = c;
-        } else if (240 <= h && h < 300) {
-          r = x2;
-          g = 0;
-          b = c;
-        } else if (300 <= h && h < 360) {
-          r = c;
-          g = 0;
-          b = x2;
-        }
-        r = (r + m) * scalar;
-        g = (g + m) * scalar;
-        b = (b + m) * scalar;
-        return [r, g, b];
-      }
-      static circularBuffer(arr, newEntries) {
-        if (newEntries.length < arr.length) {
-          let slice = arr.slice(newEntries.length);
-          let len = arr.length;
-          arr.splice(0, len, ...slice, ...newEntries);
-        } else if (newEntries.length > arr.length) {
-          let len = arr.length;
-          arr.splice(0, len, ...newEntries.slice(newEntries.length - len));
-        } else {
-          arr.splice(0, arr.length, ...newEntries);
-        }
-        return arr;
-      }
-      static reformatData(data, key) {
-        if (Array.isArray(data)) {
-          if (Array.isArray(data[0])) {
-            let d = {};
-            data.forEach((arr, i) => {
-              d[i] = arr;
-            });
-            data = d;
-            if (isNaN(data[0][0]))
-              return void 0;
-          } else if (key) {
-            data = { [key]: data };
-            if (isNaN(data[key][0]))
-              return void 0;
-          } else {
-            data = { 0: data };
-            if (isNaN(data[0][0]))
-              return void 0;
-          }
-        } else if (typeof data === "object") {
-          for (const key2 in data) {
-            if (typeof data[key2] === "number")
-              data[key2] = [data[key2]];
-            else if (data[key2]?.values) {
-              if (typeof data[key2].values === "number")
-                data[key2].values = [data[key2].values];
-            }
-            if (isNaN(data[key2][0]))
-              return void 0;
-          }
-        } else if (typeof data === "string") {
-          let split;
-          if (data.includes("\r\n")) {
-            let lines = data.split("\r\n");
-            data = {};
-            lines.forEach((l, j) => {
-              if (l.includes("	")) {
-                split = l.split("	");
-              } else if (l.includes(",")) {
-                split = l.split(",");
-              } else if (l.includes("|")) {
-                split = l.split("|");
-              }
-              if (Array.isArray(split)) {
-                split.forEach((val, i) => {
-                  if (val.includes(":")) {
-                    let [key2, v] = val.split(":");
-                    let fl = parseFloat(v);
-                    if (fl)
-                      data[key2] = [fl];
-                    else
-                      return void 0;
-                  } else {
-                    let fl = parseFloat(val);
-                    if (fl)
-                      data[i] = [fl];
-                    else
-                      return void 0;
-                  }
-                });
-              }
-            });
-          } else if (data.includes("	")) {
-            split = data.split("	");
-          } else if (data.includes(",")) {
-            split = data.split(",");
-          } else if (data.includes("|")) {
-            split = data.split("|");
-          }
-          data = {};
-          if (Array.isArray(split)) {
-            split.forEach((val, i) => {
-              if (val.includes(":")) {
-                let [key2, v] = val.split(":");
-                let fl = parseFloat(v);
-                if (fl)
-                  data[key2] = [fl];
-                else
-                  return void 0;
-              } else {
-                let fl = parseFloat(val);
-                if (fl)
-                  data[i] = [fl];
-                else
-                  return void 0;
-              }
-            });
-          }
-        } else if (typeof data === "number") {
-          if (key)
-            data = { [key]: [data] };
-          else
-            data = { 0: [data] };
-        }
-        return data;
-      }
-      static padTime(data, lastValue, time, targetFit) {
-        let slopeIncr = (data[0] - lastValue) / time / targetFit;
-        let padded = [...new Array(targetFit - data.length).map((_, i) => lastValue + slopeIncr * (i + 1)), ...data];
-        return padded;
-      }
-      static interpolateForTime(data, time, targetSPS) {
-        return _ArrayManip.interpolate(data, Math.ceil(targetSPS * time));
-      }
-      isTypedArray(x2) {
-        return ArrayBuffer.isView(x2) && Object.prototype.toString.call(x2) !== "[object DataView]";
-      }
-      spliceTypedArray(arr, start, end) {
-        let s = arr.subarray(0, start);
-        let e;
-        if (end) {
-          e = arr.subarray(end + 1);
-        }
-        let n;
-        if (s.length > 0 || e?.length > 0)
-          n = new arr.constructor(s.length + e.length);
-        if (s.length > 0)
-          n.set(s);
-        if (e && e.length > 0)
-          n.set(e, s.length);
-        return n;
-      }
-    };
-    var ArrayManip = _ArrayManip;
-    ArrayManip.bufferValues = (objects, property, keys, buffer) => {
-      if (!Array.isArray(keys) && typeof keys === "object")
-        keys = Object.keys(keys);
-      if (!buffer) {
-        let object_keys = Object.keys(objects);
-        if (keys)
-          buffer = new Float32Array(object_keys.length * keys.length);
-        else {
-          if (typeof objects[object_keys[0]][property] === "object") {
-            keys = Object.keys(objects[object_keys[0]][property]);
-            buffer = new Float32Array(object_keys.length * keys.length);
-          } else
-            buffer = new Float32Array(object_keys.length);
-        }
-      }
-      let i = 0;
-      for (const key in objects) {
-        if (objects[key][property]) {
-          if (keys) {
-            for (let j = 0; j < keys.length; j++) {
-              buffer[i] = objects[key][property][keys[j]];
-              i++;
-            }
-          } else {
-            buffer[i] = objects[key][property];
-            i++;
-          }
-        }
-      }
-      return buffer;
-    };
-    var rechk = /^([<>])?(([1-9]\d*)?([xcbB?hHiIfdsp]))*$/;
-    var refmt = /([1-9]\d*)?([xcbB?hHiIfdsp])/g;
-    var str = (v, o, c) => String.fromCharCode(...new Uint8Array(v.buffer, v.byteOffset + o, c));
-    var rts = (v, o, c, s) => new Uint8Array(v.buffer, v.byteOffset + o, c).set(s.split("").map((str2) => str2.charCodeAt(0)));
-    var pst = (v, o, c) => str(v, o + 1, Math.min(v.getUint8(o), c - 1));
-    var tsp = (v, o, c, s) => {
-      v.setUint8(o, s.length);
-      rts(v, o + 1, c - 1, s);
-    };
-    var lut = (le) => ({ x: (c) => [1, c, 0], c: (c) => [c, 1, (o) => ({ u: (v) => str(v, o, 1), p: (v, c2) => rts(v, o, 1, c2) })], "?": (c) => [c, 1, (o) => ({ u: (v) => Boolean(v.getUint8(o)), p: (v, B) => v.setUint8(o, B) })], b: (c) => [c, 1, (o) => ({ u: (v) => v.getInt8(o), p: (v, b) => v.setInt8(o, b) })], B: (c) => [c, 1, (o) => ({ u: (v) => v.getUint8(o), p: (v, B) => v.setUint8(o, B) })], h: (c) => [c, 2, (o) => ({ u: (v) => v.getInt16(o, le), p: (v, h) => v.setInt16(o, h, le) })], H: (c) => [c, 2, (o) => ({ u: (v) => v.getUint16(o, le), p: (v, H) => v.setUint16(o, H, le) })], i: (c) => [c, 4, (o) => ({ u: (v) => v.getInt32(o, le), p: (v, i) => v.setInt32(o, i, le) })], I: (c) => [c, 4, (o) => ({ u: (v) => v.getUint32(o, le), p: (v, I) => v.setUint32(o, I, le) })], f: (c) => [c, 4, (o) => ({ u: (v) => v.getFloat32(o, le), p: (v, f) => v.setFloat32(o, f, le) })], d: (c) => [c, 8, (o) => ({ u: (v) => v.getFloat64(o, le), p: (v, d) => v.setFloat64(o, d, le) })], s: (c) => [1, c, (o) => ({ u: (v) => str(v, o, c), p: (v, s) => rts(v, o, c, s.slice(0, c)) })], p: (c) => [1, c, (o) => ({ u: (v) => pst(v, o, c), p: (v, s) => tsp(v, o, c, s.slice(0, c - 1)) })] });
-    var errbuf = new RangeError("Structure larger than remaining buffer");
-    var errval = new RangeError("Not enough values for structure");
-    var _ByteParser = class extends ArrayManip {
-      static toDataView(value) {
-        if (!(value instanceof DataView)) {
-          if (typeof value === "string" && parseInt(value))
-            value = parseInt(value);
-          if (typeof value === "string") {
-            let enc = new TextEncoder();
-            let hascodes = {};
-            for (const code in _ByteParser.codes) {
-              while (value.indexOf(code) > -1) {
-                let idx = value.indexOf(code);
-                value = value.replace(code, "");
-                hascodes[idx] = code;
-              }
-            }
-            let encoded = Array.from(enc.encode(value));
-            for (const key in hascodes) {
-              encoded.splice(parseInt(key), 0, _ByteParser.codes[hascodes[key]]);
-            }
-            value = new DataView(new Uint8Array(encoded).buffer);
-          } else if (typeof value === "number") {
-            let tmp = value;
-            if (value < 256) {
-              value = new DataView(new ArrayBuffer(1));
-              value.setUint8(0, tmp);
-            } else if (value < 65536) {
-              value = new DataView(new ArrayBuffer(2));
-              value.setInt16(0, tmp);
-            } else {
-              value = new DataView(new ArrayBuffer(4));
-              value.setUint32(0, tmp);
-            }
-          } else if (value instanceof ArrayBuffer || typeof SharedArrayBuffer !== "undefined" && value instanceof SharedArrayBuffer) {
-            value = new DataView(value);
-          } else if (Array.isArray(value)) {
-            value = new DataView(Uint8Array.from(value).buffer);
-          } else if (typeof value === "object") {
-            value = new TextEncoder().encode(JSON.stringify(value));
-          }
-        }
-        return value;
-      }
-      static searchBuffer(buffer, searchString, limit) {
-        var needle = searchString;
-        var haystack = buffer;
-        var search = _ByteParser.boyerMoore(needle);
-        var skip = search.byteLength;
-        var indices = [];
-        for (var i = search(haystack); i !== -1; i = search(haystack, i + skip)) {
-          indices.push(i);
-          if (limit) {
-            if (indices.length >= limit)
-              break;
-          }
-        }
-        return indices;
-      }
-      static bytesToInt16(x0, x1) {
-        let int16 = (255 & x0) << 8 | 255 & x1;
-        if ((int16 & 32768) > 0) {
-          int16 |= 4294901760;
-        } else {
-          int16 &= 65535;
-        }
-        return int16;
-      }
-      static bytesToUInt16(x0, x1) {
-        return x0 * 256 + x1;
-      }
-      static Uint16ToBytes(y) {
-        return [y & 255, y >> 8 & 255];
-      }
-      static bytesToInt24(x0, x1, x2) {
-        let int24 = (255 & x0) << 16 | (255 & x1) << 8 | 255 & x2;
-        if ((int24 & 8388608) > 0) {
-          int24 |= 4278190080;
-        } else {
-          int24 &= 16777215;
-        }
-        return int24;
-      }
-      static bytesToUInt24(x0, x1, x2) {
-        return x0 * 65536 + x1 * 256 + x2;
-      }
-      static Uint24ToBytes(y) {
-        return [y & 255, y >> 8 & 255, y >> 16 & 255];
-      }
-      static bytesToInt32(x0, x1, x2, x3) {
-        let int32 = (255 & x0) << 24 | (255 & x1) << 16 | (255 & x2) << 8 | 255 & x3;
-        if ((int32 & 2147483648) > 0) {
-          int32 |= 0;
-        } else {
-          int32 &= 4294967295;
-        }
-        return int32;
-      }
-      static bytesToUInt32(x0, x1, x2, x3) {
-        return x0 * 16777216 + x1 * 65536 + x2 * 256 + x3;
-      }
-      static Uint32ToBytes(y) {
-        return [y & 255, y >> 8 & 255, y >> 16 & 255, y >> 24 & 255];
-      }
-      static get2sCompliment(val, nbits) {
-        if (val > 4294967296)
-          return null;
-        return val << 32 - nbits >> 32 - nbits;
-      }
-      static getSignedInt(...args) {
-        let pos = 0;
-        function getInt(size) {
-          var value = 0;
-          var first = true;
-          while (size--) {
-            if (first) {
-              let byte = args[pos++];
-              value += byte & 127;
-              if (byte & 128) {
-                value -= 128;
-              }
-              first = false;
-            } else {
-              value *= 256;
-              value += args[pos++];
-            }
-          }
-          return value;
-        }
-        return getInt(args.length);
-      }
-      static asUint8Array(input) {
-        if (input instanceof Uint8Array) {
-          return input;
-        } else if (typeof input === "string") {
-          var arr = new Uint8Array(input.length);
-          for (var i = 0; i < input.length; i++) {
-            var c = input.charCodeAt(i);
-            if (c > 127) {
-              throw new TypeError("Only ASCII patterns are supported");
-            }
-            arr[i] = c;
-          }
-          return arr;
-        } else {
-          return new Uint8Array(input);
-        }
-      }
-      static boyerMoore(patternBuffer) {
-        var pattern = _ByteParser.asUint8Array(patternBuffer);
-        var M = pattern.length;
-        if (M === 0) {
-          throw new TypeError("patternBuffer must be at least 1 byte long");
-        }
-        var R = 256;
-        var rightmost_positions = new Int32Array(R);
-        for (var c = 0; c < R; c++) {
-          rightmost_positions[c] = -1;
-        }
-        for (var j = 0; j < M; j++) {
-          rightmost_positions[pattern[j]] = j;
-        }
-        var boyerMooreSearch = (txtBuffer, start, end) => {
-          var txt = _ByteParser.asUint8Array(txtBuffer);
-          if (start === void 0)
-            start = 0;
-          if (end === void 0)
-            end = txt.length;
-          var pat = pattern;
-          var right = rightmost_positions;
-          var lastIndex = end - pat.length;
-          var lastPatIndex = pat.length - 1;
-          var skip;
-          for (var i = start; i <= lastIndex; i += skip) {
-            skip = 0;
-            for (var j2 = lastPatIndex; j2 >= 0; j2--) {
-              var c2 = txt[i + j2];
-              if (pat[j2] !== c2) {
-                skip = Math.max(1, j2 - right[c2]);
-                break;
-              }
-            }
-            if (skip === 0) {
-              return i;
-            }
-          }
-          return -1;
-        };
-        boyerMooreSearch.byteLength = pattern.byteLength;
-        return boyerMooreSearch;
-      }
-      static struct(format) {
-        let fns = [], size = 0, m = rechk.exec(format);
-        if (!m) {
-          throw new RangeError("Invalid format string");
-        }
-        const t = lut("<" === m[1]), lu = (n, c) => t[c](n ? parseInt(n, 10) : 1);
-        while (m = refmt.exec(format)) {
-          ((r, s, f) => {
-            for (let i = 0; i < r; ++i, size += s) {
-              if (f) {
-                fns.push(f(size));
-              }
-            }
-          })(...lu(...m.slice(1)));
-        }
-        const unpack_from = (arrb, offs) => {
-          if (arrb.byteLength < (offs | 0) + size) {
-            throw errbuf;
-          }
-          let v = new DataView(arrb, offs | 0);
-          return fns.map((f) => f.u(v));
-        };
-        const pack_into = (arrb, offs, ...values) => {
-          if (values.length < fns.length) {
-            throw errval;
-          }
-          if (arrb.byteLength < offs + size) {
-            throw errbuf;
-          }
-          const v = new DataView(arrb, offs);
-          new Uint8Array(arrb, offs, size).fill(0);
-          fns.forEach((f, i) => f.p(v, values[i]));
-        };
-        const pack = (...values) => {
-          let b = new ArrayBuffer(size);
-          pack_into(b, 0, ...values);
-          return b;
-        };
-        const unpack = (arrb) => unpack_from(arrb, 0);
-        function* iter_unpack(arrb) {
-          for (let offs = 0; offs + size <= arrb.byteLength; offs += size) {
-            yield unpack_from(arrb, offs);
-          }
-        }
-        return Object.freeze({ unpack, pack, unpack_from, pack_into, iter_unpack, format, size });
-      }
-    };
-    var ByteParser = _ByteParser;
-    ByteParser.codes = { "\\n": 10, "\\r": 13, "\\t": 9, "\\s": 32, "\\b": 8, "\\f": 12, "\\": 92 };
-    var rms = { sps: 250, nSec: 1, watch: ["0", "1", "2", "3"], data: {}, rms: {}, __operator: function(data) {
-      this.watch.forEach((key) => {
-        if (data[key]) {
-          if (!this.data[key]) {
-            if (Array.isArray(data[key])) {
-              this.data[key] = new Array(Math.floor(this.sps * this.nSec)).fill(data[key][0]);
-            } else
-              this.data[key] = new Array(Math.floor(this.sps * this.nSec)).fill(data[key]);
-          }
-          ByteParser.circularBuffer(this.data[key], data[key]);
-        }
-      });
-      if (data.timestamp) {
-        if (Array.isArray(data.timestamp)) {
-          this.rms.timestamp = data.timestamp[data.timestamp.length - 1];
-        } else
-          this.rms.timestamp = data.timestamp;
-      } else
-        this.rms.timestamp = Date.now();
-      return new Promise(async (res) => {
-        await Promise.all(this.watch.map(async (key) => {
-          if (this.data[key])
-            this.rms[key] = Math.sqrt(Math.abs(this.data[key].reduce((p, v, i) => p + v * v) / this.data[key].length));
-          else
-            delete this.rms[key];
-        }));
-        res(this.rms);
-      });
-    } };
-    var circularBuffer2d = { bufferSize: 250, watch: ["0", "1", "2", "3"], data: {}, blocking: false, __onconnected: function(node) {
-      for (const key in node.watch) {
-        node.data[key] = new Array(node.bufferSize).fill(0);
-      }
-    }, __operator: function(data) {
-      let buffer2d = [];
-      this.watch.forEach((key) => {
-        if (data[key]) {
-          ByteParser.circularBuffer(this.data[key], data[key]);
-          buffer2d.push(this.data[key]);
-        }
-      });
-      return buffer2d;
-    } };
-    var algorithms = { beat_detect, accel_gyro, heartrate: beat_detect, breath: Object.assign({}, beat_detect), blink_detect, rms, circularBuffer2d };
-    algorithms["breath"].maxFreq = 0.2;
-  }
-});
-
-// node_modules/dotenv/package.json
-var require_package = __commonJS({
-  "node_modules/dotenv/package.json"(exports, module2) {
-    module2.exports = {
-      name: "dotenv",
-      version: "16.0.3",
-      description: "Loads environment variables from .env file",
-      main: "lib/main.js",
-      types: "lib/main.d.ts",
-      exports: {
-        ".": {
-          require: "./lib/main.js",
-          types: "./lib/main.d.ts",
-          default: "./lib/main.js"
-        },
-        "./config": "./config.js",
-        "./config.js": "./config.js",
-        "./lib/env-options": "./lib/env-options.js",
-        "./lib/env-options.js": "./lib/env-options.js",
-        "./lib/cli-options": "./lib/cli-options.js",
-        "./lib/cli-options.js": "./lib/cli-options.js",
-        "./package.json": "./package.json"
-      },
-      scripts: {
-        "dts-check": "tsc --project tests/types/tsconfig.json",
-        lint: "standard",
-        "lint-readme": "standard-markdown",
-        pretest: "npm run lint && npm run dts-check",
-        test: "tap tests/*.js --100 -Rspec",
-        prerelease: "npm test",
-        release: "standard-version"
-      },
-      repository: {
-        type: "git",
-        url: "git://github.com/motdotla/dotenv.git"
-      },
-      keywords: [
-        "dotenv",
-        "env",
-        ".env",
-        "environment",
-        "variables",
-        "config",
-        "settings"
-      ],
-      readmeFilename: "README.md",
-      license: "BSD-2-Clause",
-      devDependencies: {
-        "@types/node": "^17.0.9",
-        decache: "^4.6.1",
-        dtslint: "^3.7.0",
-        sinon: "^12.0.1",
-        standard: "^16.0.4",
-        "standard-markdown": "^7.1.0",
-        "standard-version": "^9.3.2",
-        tap: "^15.1.6",
-        tar: "^6.1.11",
-        typescript: "^4.5.4"
-      },
-      engines: {
-        node: ">=12"
-      }
-    };
-  }
-});
-
-// node_modules/dotenv/lib/main.js
-var require_main = __commonJS({
-  "node_modules/dotenv/lib/main.js"(exports, module2) {
-    var fs2 = require("fs");
-    var path = require("path");
-    var os = require("os");
-    var packageJson = require_package();
-    var version = packageJson.version;
-    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
-    function parse(src) {
-      const obj = {};
-      let lines = src.toString();
-      lines = lines.replace(/\r\n?/mg, "\n");
-      let match;
-      while ((match = LINE.exec(lines)) != null) {
-        const key = match[1];
-        let value = match[2] || "";
-        value = value.trim();
-        const maybeQuote = value[0];
-        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
-        if (maybeQuote === '"') {
-          value = value.replace(/\\n/g, "\n");
-          value = value.replace(/\\r/g, "\r");
-        }
-        obj[key] = value;
-      }
-      return obj;
-    }
-    function _log(message) {
-      console.log(`[dotenv@${version}][DEBUG] ${message}`);
-    }
-    function _resolveHome(envPath) {
-      return envPath[0] === "~" ? path.join(os.homedir(), envPath.slice(1)) : envPath;
-    }
-    function config2(options) {
-      let dotenvPath = path.resolve(process.cwd(), ".env");
-      let encoding = "utf8";
-      const debug = Boolean(options && options.debug);
-      const override = Boolean(options && options.override);
-      if (options) {
-        if (options.path != null) {
-          dotenvPath = _resolveHome(options.path);
-        }
-        if (options.encoding != null) {
-          encoding = options.encoding;
-        }
-      }
-      try {
-        const parsed = DotenvModule.parse(fs2.readFileSync(dotenvPath, { encoding }));
-        Object.keys(parsed).forEach(function(key) {
-          if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
-            process.env[key] = parsed[key];
-          } else {
-            if (override === true) {
-              process.env[key] = parsed[key];
-            }
-            if (debug) {
-              if (override === true) {
-                _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
-              } else {
-                _log(`"${key}" is already defined in \`process.env\` and was NOT overwritten`);
-              }
-            }
-          }
-        });
-        return { parsed };
-      } catch (e) {
-        if (debug) {
-          _log(`Failed to load ${dotenvPath} ${e.message}`);
-        }
-        return { error: e };
-      }
-    }
-    var DotenvModule = {
-      config: config2,
-      parse
-    };
-    module2.exports.config = DotenvModule.config;
-    module2.exports.parse = DotenvModule.parse;
-    module2.exports = DotenvModule;
-  }
-});
-
-// node_modules/mongoose/lib/driver.js
-var require_driver = __commonJS({
-  "node_modules/mongoose/lib/driver.js"(exports, module2) {
-    "use strict";
-    var driver = null;
-    module2.exports.get = function() {
-      return driver;
-    };
-    module2.exports.set = function(v) {
-      driver = v;
-    };
-  }
-});
-
-// node_modules/mongoose/lib/connectionstate.js
-var require_connectionstate = __commonJS({
-  "node_modules/mongoose/lib/connectionstate.js"(exports, module2) {
-    "use strict";
-    var STATES = module2.exports = exports = /* @__PURE__ */ Object.create(null);
-    var disconnected = "disconnected";
-    var connected = "connected";
-    var connecting = "connecting";
-    var disconnecting = "disconnecting";
-    var uninitialized = "uninitialized";
-    STATES[0] = disconnected;
-    STATES[1] = connected;
-    STATES[2] = connecting;
-    STATES[3] = disconnecting;
-    STATES[99] = uninitialized;
-    STATES[disconnected] = 0;
-    STATES[connected] = 1;
-    STATES[connecting] = 2;
-    STATES[disconnecting] = 3;
-    STATES[uninitialized] = 99;
-  }
-});
-
-// node_modules/mongoose/lib/helpers/immediate.js
-var require_immediate = __commonJS({
-  "node_modules/mongoose/lib/helpers/immediate.js"(exports, module2) {
-    "use strict";
-    var nextTick = typeof process !== "undefined" && typeof process.nextTick === "function" ? process.nextTick.bind(process) : (cb) => setTimeout(cb, 0);
-    module2.exports = function immediate(cb) {
-      return nextTick(cb);
-    };
-  }
-});
-
-// node_modules/mongoose/lib/collection.js
-var require_collection = __commonJS({
-  "node_modules/mongoose/lib/collection.js"(exports, module2) {
-    "use strict";
-    var EventEmitter = require("events").EventEmitter;
-    var STATES = require_connectionstate();
-    var immediate = require_immediate();
-    function Collection(name2, conn, opts) {
-      if (opts === void 0) {
-        opts = {};
-      }
-      this.opts = opts;
-      this.name = name2;
-      this.collectionName = name2;
-      this.conn = conn;
-      this.queue = [];
-      this.buffer = true;
-      this.emitter = new EventEmitter();
-      if (STATES.connected === this.conn.readyState) {
-        this.onOpen();
-      }
-    }
-    Collection.prototype.name;
-    Collection.prototype.collectionName;
-    Collection.prototype.conn;
-    Collection.prototype.onOpen = function() {
-      this.buffer = false;
-      immediate(() => this.doQueue());
-    };
-    Collection.prototype.onClose = function() {
-    };
-    Collection.prototype.addQueue = function(name2, args) {
-      this.queue.push([name2, args]);
-      return this;
-    };
-    Collection.prototype.removeQueue = function(name2, args) {
-      const index = this.queue.findIndex((v) => v[0] === name2 && v[1] === args);
-      if (index === -1) {
-        return false;
-      }
-      this.queue.splice(index, 1);
-      return true;
-    };
-    Collection.prototype.doQueue = function() {
-      for (const method of this.queue) {
-        if (typeof method[0] === "function") {
-          method[0].apply(this, method[1]);
-        } else {
-          this[method[0]].apply(this, method[1]);
-        }
-      }
-      this.queue = [];
-      const _this = this;
-      immediate(function() {
-        _this.emitter.emit("queue");
-      });
-      return this;
-    };
-    Collection.prototype.ensureIndex = function() {
-      throw new Error("Collection#ensureIndex unimplemented by driver");
-    };
-    Collection.prototype.createIndex = function() {
-      throw new Error("Collection#createIndex unimplemented by driver");
-    };
-    Collection.prototype.findAndModify = function() {
-      throw new Error("Collection#findAndModify unimplemented by driver");
-    };
-    Collection.prototype.findOneAndUpdate = function() {
-      throw new Error("Collection#findOneAndUpdate unimplemented by driver");
-    };
-    Collection.prototype.findOneAndDelete = function() {
-      throw new Error("Collection#findOneAndDelete unimplemented by driver");
-    };
-    Collection.prototype.findOneAndReplace = function() {
-      throw new Error("Collection#findOneAndReplace unimplemented by driver");
-    };
-    Collection.prototype.findOne = function() {
-      throw new Error("Collection#findOne unimplemented by driver");
-    };
-    Collection.prototype.find = function() {
-      throw new Error("Collection#find unimplemented by driver");
-    };
-    Collection.prototype.insert = function() {
-      throw new Error("Collection#insert unimplemented by driver");
-    };
-    Collection.prototype.insertOne = function() {
-      throw new Error("Collection#insertOne unimplemented by driver");
-    };
-    Collection.prototype.insertMany = function() {
-      throw new Error("Collection#insertMany unimplemented by driver");
-    };
-    Collection.prototype.save = function() {
-      throw new Error("Collection#save unimplemented by driver");
-    };
-    Collection.prototype.updateOne = function() {
-      throw new Error("Collection#updateOne unimplemented by driver");
-    };
-    Collection.prototype.updateMany = function() {
-      throw new Error("Collection#updateMany unimplemented by driver");
-    };
-    Collection.prototype.deleteOne = function() {
-      throw new Error("Collection#deleteOne unimplemented by driver");
-    };
-    Collection.prototype.deleteMany = function() {
-      throw new Error("Collection#deleteMany unimplemented by driver");
-    };
-    Collection.prototype.getIndexes = function() {
-      throw new Error("Collection#getIndexes unimplemented by driver");
-    };
-    Collection.prototype.watch = function() {
-      throw new Error("Collection#watch unimplemented by driver");
-    };
-    Collection.prototype._shouldBufferCommands = function _shouldBufferCommands() {
-      const opts = this.opts;
-      if (opts.bufferCommands != null) {
-        return opts.bufferCommands;
-      }
-      if (opts && opts.schemaUserProvidedOptions != null && opts.schemaUserProvidedOptions.bufferCommands != null) {
-        return opts.schemaUserProvidedOptions.bufferCommands;
-      }
-      return this.conn._shouldBufferCommands();
-    };
-    Collection.prototype._getBufferTimeoutMS = function _getBufferTimeoutMS() {
-      const conn = this.conn;
-      const opts = this.opts;
-      if (opts.bufferTimeoutMS != null) {
-        return opts.bufferTimeoutMS;
-      }
-      if (opts && opts.schemaUserProvidedOptions != null && opts.schemaUserProvidedOptions.bufferTimeoutMS != null) {
-        return opts.schemaUserProvidedOptions.bufferTimeoutMS;
-      }
-      if (conn.config.bufferTimeoutMS != null) {
-        return conn.config.bufferTimeoutMS;
-      }
-      if (conn.base != null && conn.base.get("bufferTimeoutMS") != null) {
-        return conn.base.get("bufferTimeoutMS");
-      }
-      return 1e4;
-    };
-    module2.exports = Collection;
-  }
-});
-
-// node_modules/mongoose/lib/error/mongooseError.js
-var require_mongooseError = __commonJS({
-  "node_modules/mongoose/lib/error/mongooseError.js"(exports, module2) {
-    "use strict";
-    var MongooseError = class extends Error {
-    };
-    Object.defineProperty(MongooseError.prototype, "name", {
-      value: "MongooseError"
-    });
-    module2.exports = MongooseError;
-  }
-});
-
-// node_modules/mongodb/lib/error.js
-var require_error = __commonJS({
-  "node_modules/mongodb/lib/error.js"(exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.isResumableError = exports.isNetworkTimeoutError = exports.isSDAMUnrecoverableError = exports.isNodeShuttingDownError = exports.isRetryableReadError = exports.isRetryableWriteError = exports.needsRetryableWriteLabel = exports.MongoWriteConcernError = exports.MongoServerSelectionError = exports.MongoSystemError = exports.MongoMissingDependencyError = exports.MongoMissingCredentialsError = exports.MongoCompatibilityError = exports.MongoInvalidArgumentError = exports.MongoParseError = exports.MongoNetworkTimeoutError = exports.MongoNetworkError = exports.isNetworkErrorBeforeHandshake = exports.MongoTopologyClosedError = exports.MongoCursorExhaustedError = exports.MongoServerClosedError = exports.MongoCursorInUseError = exports.MongoUnexpectedServerResponseError = exports.MongoGridFSChunkError = exports.MongoGridFSStreamError = exports.MongoTailableCursorError = exports.MongoChangeStreamError = exports.MongoAWSError = exports.MongoKerberosError = exports.MongoExpiredSessionError = exports.MongoTransactionError = exports.MongoNotConnectedError = exports.MongoDecompressionError = exports.MongoBatchReExecutionError = exports.MongoRuntimeError = exports.MongoAPIError = exports.MongoDriverError = exports.MongoServerError = exports.MongoError = exports.MongoErrorLabel = exports.GET_MORE_RESUMABLE_CODES = exports.MONGODB_ERROR_CODES = exports.NODE_IS_RECOVERING_ERROR_MESSAGE = exports.LEGACY_NOT_PRIMARY_OR_SECONDARY_ERROR_MESSAGE = exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE = void 0;
-    var kErrorLabels = Symbol("errorLabels");
-    exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE = new RegExp("not master", "i");
-    exports.LEGACY_NOT_PRIMARY_OR_SECONDARY_ERROR_MESSAGE = new RegExp("not master or secondary", "i");
-    exports.NODE_IS_RECOVERING_ERROR_MESSAGE = new RegExp("node is recovering", "i");
-    exports.MONGODB_ERROR_CODES = Object.freeze({
-      HostUnreachable: 6,
-      HostNotFound: 7,
-      NetworkTimeout: 89,
-      ShutdownInProgress: 91,
-      PrimarySteppedDown: 189,
-      ExceededTimeLimit: 262,
-      SocketException: 9001,
-      NotWritablePrimary: 10107,
-      InterruptedAtShutdown: 11600,
-      InterruptedDueToReplStateChange: 11602,
-      NotPrimaryNoSecondaryOk: 13435,
-      NotPrimaryOrSecondary: 13436,
-      StaleShardVersion: 63,
-      StaleEpoch: 150,
-      StaleConfig: 13388,
-      RetryChangeStream: 234,
-      FailedToSatisfyReadPreference: 133,
-      CursorNotFound: 43,
-      LegacyNotPrimary: 10058,
-      WriteConcernFailed: 64,
-      NamespaceNotFound: 26,
-      IllegalOperation: 20,
-      MaxTimeMSExpired: 50,
-      UnknownReplWriteConcern: 79,
-      UnsatisfiableWriteConcern: 100
-    });
-    exports.GET_MORE_RESUMABLE_CODES = /* @__PURE__ */ new Set([
-      exports.MONGODB_ERROR_CODES.HostUnreachable,
-      exports.MONGODB_ERROR_CODES.HostNotFound,
-      exports.MONGODB_ERROR_CODES.NetworkTimeout,
-      exports.MONGODB_ERROR_CODES.ShutdownInProgress,
-      exports.MONGODB_ERROR_CODES.PrimarySteppedDown,
-      exports.MONGODB_ERROR_CODES.ExceededTimeLimit,
-      exports.MONGODB_ERROR_CODES.SocketException,
-      exports.MONGODB_ERROR_CODES.NotWritablePrimary,
-      exports.MONGODB_ERROR_CODES.InterruptedAtShutdown,
-      exports.MONGODB_ERROR_CODES.InterruptedDueToReplStateChange,
-      exports.MONGODB_ERROR_CODES.NotPrimaryNoSecondaryOk,
-      exports.MONGODB_ERROR_CODES.NotPrimaryOrSecondary,
-      exports.MONGODB_ERROR_CODES.StaleShardVersion,
-      exports.MONGODB_ERROR_CODES.StaleEpoch,
-      exports.MONGODB_ERROR_CODES.StaleConfig,
-      exports.MONGODB_ERROR_CODES.RetryChangeStream,
-      exports.MONGODB_ERROR_CODES.FailedToSatisfyReadPreference,
-      exports.MONGODB_ERROR_CODES.CursorNotFound
-    ]);
-    exports.MongoErrorLabel = Object.freeze({
-      RetryableWriteError: "RetryableWriteError",
-      TransientTransactionError: "TransientTransactionError",
-      UnknownTransactionCommitResult: "UnknownTransactionCommitResult",
-      ResumableChangeStreamError: "ResumableChangeStreamError",
-      HandshakeError: "HandshakeError",
-      ResetPool: "ResetPool",
-      InterruptInUseConnections: "InterruptInUseConnections",
-      NoWritesPerformed: "NoWritesPerformed"
-    });
-    var MongoError = class extends Error {
-      constructor(message) {
-        if (message instanceof Error) {
-          super(message.message);
-          this.cause = message;
-        } else {
-          super(message);
-        }
-        this[kErrorLabels] = /* @__PURE__ */ new Set();
-      }
-      get name() {
-        return "MongoError";
-      }
-      /** Legacy name for server error responses */
-      get errmsg() {
-        return this.message;
-      }
-      /**
-       * Checks the error to see if it has an error label
-       *
-       * @param label - The error label to check for
-       * @returns returns true if the error has the provided error label
-       */
-      hasErrorLabel(label) {
-        return this[kErrorLabels].has(label);
-      }
-      addErrorLabel(label) {
-        this[kErrorLabels].add(label);
-      }
-      get errorLabels() {
-        return Array.from(this[kErrorLabels]);
-      }
-    };
-    exports.MongoError = MongoError;
-    var MongoServerError = class extends MongoError {
-      constructor(message) {
-        super(message.message || message.errmsg || message.$err || "n/a");
-        if (message.errorLabels) {
-          this[kErrorLabels] = new Set(message.errorLabels);
-        }
-        for (const name2 in message) {
-          if (name2 !== "errorLabels" && name2 !== "errmsg" && name2 !== "message")
-            this[name2] = message[name2];
-        }
-      }
-      get name() {
-        return "MongoServerError";
-      }
-    };
-    exports.MongoServerError = MongoServerError;
-    var MongoDriverError = class extends MongoError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoDriverError";
-      }
-    };
-    exports.MongoDriverError = MongoDriverError;
-    var MongoAPIError = class extends MongoDriverError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoAPIError";
-      }
-    };
-    exports.MongoAPIError = MongoAPIError;
-    var MongoRuntimeError = class extends MongoDriverError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoRuntimeError";
-      }
-    };
-    exports.MongoRuntimeError = MongoRuntimeError;
-    var MongoBatchReExecutionError = class extends MongoAPIError {
-      constructor(message = "This batch has already been executed, create new batch to execute") {
-        super(message);
-      }
-      get name() {
-        return "MongoBatchReExecutionError";
-      }
-    };
-    exports.MongoBatchReExecutionError = MongoBatchReExecutionError;
-    var MongoDecompressionError = class extends MongoRuntimeError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoDecompressionError";
-      }
-    };
-    exports.MongoDecompressionError = MongoDecompressionError;
-    var MongoNotConnectedError = class extends MongoAPIError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoNotConnectedError";
-      }
-    };
-    exports.MongoNotConnectedError = MongoNotConnectedError;
-    var MongoTransactionError = class extends MongoAPIError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoTransactionError";
-      }
-    };
-    exports.MongoTransactionError = MongoTransactionError;
-    var MongoExpiredSessionError = class extends MongoAPIError {
-      constructor(message = "Cannot use a session that has ended") {
-        super(message);
-      }
-      get name() {
-        return "MongoExpiredSessionError";
-      }
-    };
-    exports.MongoExpiredSessionError = MongoExpiredSessionError;
-    var MongoKerberosError = class extends MongoRuntimeError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoKerberosError";
-      }
-    };
-    exports.MongoKerberosError = MongoKerberosError;
-    var MongoAWSError = class extends MongoRuntimeError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoAWSError";
-      }
-    };
-    exports.MongoAWSError = MongoAWSError;
-    var MongoChangeStreamError = class extends MongoRuntimeError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoChangeStreamError";
-      }
-    };
-    exports.MongoChangeStreamError = MongoChangeStreamError;
-    var MongoTailableCursorError = class extends MongoAPIError {
-      constructor(message = "Tailable cursor does not support this operation") {
-        super(message);
-      }
-      get name() {
-        return "MongoTailableCursorError";
-      }
-    };
-    exports.MongoTailableCursorError = MongoTailableCursorError;
-    var MongoGridFSStreamError = class extends MongoRuntimeError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoGridFSStreamError";
-      }
-    };
-    exports.MongoGridFSStreamError = MongoGridFSStreamError;
-    var MongoGridFSChunkError = class extends MongoRuntimeError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoGridFSChunkError";
-      }
-    };
-    exports.MongoGridFSChunkError = MongoGridFSChunkError;
-    var MongoUnexpectedServerResponseError = class extends MongoRuntimeError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoUnexpectedServerResponseError";
-      }
-    };
-    exports.MongoUnexpectedServerResponseError = MongoUnexpectedServerResponseError;
-    var MongoCursorInUseError = class extends MongoAPIError {
-      constructor(message = "Cursor is already initialized") {
-        super(message);
-      }
-      get name() {
-        return "MongoCursorInUseError";
-      }
-    };
-    exports.MongoCursorInUseError = MongoCursorInUseError;
-    var MongoServerClosedError = class extends MongoAPIError {
-      constructor(message = "Server is closed") {
-        super(message);
-      }
-      get name() {
-        return "MongoServerClosedError";
-      }
-    };
-    exports.MongoServerClosedError = MongoServerClosedError;
-    var MongoCursorExhaustedError = class extends MongoAPIError {
-      constructor(message) {
-        super(message || "Cursor is exhausted");
-      }
-      get name() {
-        return "MongoCursorExhaustedError";
-      }
-    };
-    exports.MongoCursorExhaustedError = MongoCursorExhaustedError;
-    var MongoTopologyClosedError = class extends MongoAPIError {
-      constructor(message = "Topology is closed") {
-        super(message);
-      }
-      get name() {
-        return "MongoTopologyClosedError";
-      }
-    };
-    exports.MongoTopologyClosedError = MongoTopologyClosedError;
-    var kBeforeHandshake = Symbol("beforeHandshake");
-    function isNetworkErrorBeforeHandshake(err) {
-      return err[kBeforeHandshake] === true;
-    }
-    exports.isNetworkErrorBeforeHandshake = isNetworkErrorBeforeHandshake;
-    var MongoNetworkError = class extends MongoError {
-      constructor(message, options) {
-        super(message);
-        if (options && typeof options.beforeHandshake === "boolean") {
-          this[kBeforeHandshake] = options.beforeHandshake;
-        }
-      }
-      get name() {
-        return "MongoNetworkError";
-      }
-    };
-    exports.MongoNetworkError = MongoNetworkError;
-    var MongoNetworkTimeoutError = class extends MongoNetworkError {
-      constructor(message, options) {
-        super(message, options);
-      }
-      get name() {
-        return "MongoNetworkTimeoutError";
-      }
-    };
-    exports.MongoNetworkTimeoutError = MongoNetworkTimeoutError;
-    var MongoParseError = class extends MongoDriverError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoParseError";
-      }
-    };
-    exports.MongoParseError = MongoParseError;
-    var MongoInvalidArgumentError = class extends MongoAPIError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoInvalidArgumentError";
-      }
-    };
-    exports.MongoInvalidArgumentError = MongoInvalidArgumentError;
-    var MongoCompatibilityError = class extends MongoAPIError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoCompatibilityError";
-      }
-    };
-    exports.MongoCompatibilityError = MongoCompatibilityError;
-    var MongoMissingCredentialsError = class extends MongoAPIError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoMissingCredentialsError";
-      }
-    };
-    exports.MongoMissingCredentialsError = MongoMissingCredentialsError;
-    var MongoMissingDependencyError = class extends MongoAPIError {
-      constructor(message) {
-        super(message);
-      }
-      get name() {
-        return "MongoMissingDependencyError";
-      }
-    };
-    exports.MongoMissingDependencyError = MongoMissingDependencyError;
-    var MongoSystemError = class extends MongoError {
-      constructor(message, reason) {
-        if (reason && reason.error) {
-          super(reason.error.message || reason.error);
-        } else {
-          super(message);
-        }
-        if (reason) {
-          this.reason = reason;
-        }
-        this.code = reason.error?.code;
-      }
-      get name() {
-        return "MongoSystemError";
-      }
-    };
-    exports.MongoSystemError = MongoSystemError;
-    var MongoServerSelectionError = class extends MongoSystemError {
-      constructor(message, reason) {
-        super(message, reason);
-      }
-      get name() {
-        return "MongoServerSelectionError";
-      }
-    };
-    exports.MongoServerSelectionError = MongoServerSelectionError;
-    function makeWriteConcernResultObject(input) {
-      const output = Object.assign({}, input);
-      if (output.ok === 0) {
-        output.ok = 1;
-        delete output.errmsg;
-        delete output.code;
-        delete output.codeName;
-      }
-      return output;
-    }
-    var MongoWriteConcernError = class extends MongoServerError {
-      constructor(message, result) {
-        if (result && Array.isArray(result.errorLabels)) {
-          message.errorLabels = result.errorLabels;
-        }
-        super(message);
-        this.errInfo = message.errInfo;
-        if (result != null) {
-          this.result = makeWriteConcernResultObject(result);
-        }
-      }
-      get name() {
-        return "MongoWriteConcernError";
-      }
-    };
-    exports.MongoWriteConcernError = MongoWriteConcernError;
-    var RETRYABLE_READ_ERROR_CODES = /* @__PURE__ */ new Set([
-      exports.MONGODB_ERROR_CODES.HostUnreachable,
-      exports.MONGODB_ERROR_CODES.HostNotFound,
-      exports.MONGODB_ERROR_CODES.NetworkTimeout,
-      exports.MONGODB_ERROR_CODES.ShutdownInProgress,
-      exports.MONGODB_ERROR_CODES.PrimarySteppedDown,
-      exports.MONGODB_ERROR_CODES.SocketException,
-      exports.MONGODB_ERROR_CODES.NotWritablePrimary,
-      exports.MONGODB_ERROR_CODES.InterruptedAtShutdown,
-      exports.MONGODB_ERROR_CODES.InterruptedDueToReplStateChange,
-      exports.MONGODB_ERROR_CODES.NotPrimaryNoSecondaryOk,
-      exports.MONGODB_ERROR_CODES.NotPrimaryOrSecondary
-    ]);
-    var RETRYABLE_WRITE_ERROR_CODES = /* @__PURE__ */ new Set([
-      ...RETRYABLE_READ_ERROR_CODES,
-      exports.MONGODB_ERROR_CODES.ExceededTimeLimit
-    ]);
-    function needsRetryableWriteLabel(error, maxWireVersion) {
-      if (error instanceof MongoNetworkError) {
-        return true;
-      }
-      if (error instanceof MongoError) {
-        if ((maxWireVersion >= 9 || error.hasErrorLabel(exports.MongoErrorLabel.RetryableWriteError)) && !error.hasErrorLabel(exports.MongoErrorLabel.HandshakeError)) {
-          return false;
-        }
-      }
-      if (error instanceof MongoWriteConcernError) {
-        return RETRYABLE_WRITE_ERROR_CODES.has(error.result?.code ?? error.code ?? 0);
-      }
-      if (error instanceof MongoError && typeof error.code === "number") {
-        return RETRYABLE_WRITE_ERROR_CODES.has(error.code);
-      }
-      const isNotWritablePrimaryError2 = exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE.test(error.message);
-      if (isNotWritablePrimaryError2) {
-        return true;
-      }
-      const isNodeIsRecoveringError = exports.NODE_IS_RECOVERING_ERROR_MESSAGE.test(error.message);
-      if (isNodeIsRecoveringError) {
-        return true;
-      }
-      return false;
-    }
-    exports.needsRetryableWriteLabel = needsRetryableWriteLabel;
-    function isRetryableWriteError(error) {
-      return error.hasErrorLabel(exports.MongoErrorLabel.RetryableWriteError);
-    }
-    exports.isRetryableWriteError = isRetryableWriteError;
-    function isRetryableReadError(error) {
-      const hasRetryableErrorCode = typeof error.code === "number" ? RETRYABLE_READ_ERROR_CODES.has(error.code) : false;
-      if (hasRetryableErrorCode) {
-        return true;
-      }
-      if (error instanceof MongoNetworkError) {
-        return true;
-      }
-      const isNotWritablePrimaryError2 = exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE.test(error.message);
-      if (isNotWritablePrimaryError2) {
-        return true;
-      }
-      const isNodeIsRecoveringError = exports.NODE_IS_RECOVERING_ERROR_MESSAGE.test(error.message);
-      if (isNodeIsRecoveringError) {
-        return true;
-      }
-      return false;
-    }
-    exports.isRetryableReadError = isRetryableReadError;
-    var SDAM_RECOVERING_CODES = /* @__PURE__ */ new Set([
-      exports.MONGODB_ERROR_CODES.ShutdownInProgress,
-      exports.MONGODB_ERROR_CODES.PrimarySteppedDown,
-      exports.MONGODB_ERROR_CODES.InterruptedAtShutdown,
-      exports.MONGODB_ERROR_CODES.InterruptedDueToReplStateChange,
-      exports.MONGODB_ERROR_CODES.NotPrimaryOrSecondary
-    ]);
-    var SDAM_NOT_PRIMARY_CODES = /* @__PURE__ */ new Set([
-      exports.MONGODB_ERROR_CODES.NotWritablePrimary,
-      exports.MONGODB_ERROR_CODES.NotPrimaryNoSecondaryOk,
-      exports.MONGODB_ERROR_CODES.LegacyNotPrimary
-    ]);
-    var SDAM_NODE_SHUTTING_DOWN_ERROR_CODES = /* @__PURE__ */ new Set([
-      exports.MONGODB_ERROR_CODES.InterruptedAtShutdown,
-      exports.MONGODB_ERROR_CODES.ShutdownInProgress
-    ]);
-    function isRecoveringError(err) {
-      if (typeof err.code === "number") {
-        return SDAM_RECOVERING_CODES.has(err.code);
-      }
-      return exports.LEGACY_NOT_PRIMARY_OR_SECONDARY_ERROR_MESSAGE.test(err.message) || exports.NODE_IS_RECOVERING_ERROR_MESSAGE.test(err.message);
-    }
-    function isNotWritablePrimaryError(err) {
-      if (typeof err.code === "number") {
-        return SDAM_NOT_PRIMARY_CODES.has(err.code);
-      }
-      if (isRecoveringError(err)) {
-        return false;
-      }
-      return exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE.test(err.message);
-    }
-    function isNodeShuttingDownError(err) {
-      return !!(typeof err.code === "number" && SDAM_NODE_SHUTTING_DOWN_ERROR_CODES.has(err.code));
-    }
-    exports.isNodeShuttingDownError = isNodeShuttingDownError;
-    function isSDAMUnrecoverableError(error) {
-      if (error instanceof MongoParseError || error == null) {
-        return true;
-      }
-      return isRecoveringError(error) || isNotWritablePrimaryError(error);
-    }
-    exports.isSDAMUnrecoverableError = isSDAMUnrecoverableError;
-    function isNetworkTimeoutError(err) {
-      return !!(err instanceof MongoNetworkError && err.message.match(/timed out/));
-    }
-    exports.isNetworkTimeoutError = isNetworkTimeoutError;
-    function isResumableError(error, wireVersion) {
-      if (error == null || !(error instanceof MongoError)) {
-        return false;
-      }
-      if (error instanceof MongoNetworkError) {
-        return true;
-      }
-      if (wireVersion != null && wireVersion >= 9) {
-        if (error.code === exports.MONGODB_ERROR_CODES.CursorNotFound) {
-          return true;
-        }
-        return error.hasErrorLabel(exports.MongoErrorLabel.ResumableChangeStreamError);
-      }
-      if (typeof error.code === "number") {
-        return exports.GET_MORE_RESUMABLE_CODES.has(error.code);
-      }
-      return false;
-    }
-    exports.isResumableError = isResumableError;
-  }
-});
-
-// node_modules/bson/lib/bson.cjs
+// ../../graphscript/src/extras/struct/datastructures/bson.cjs
 var require_bson = __commonJS({
-  "node_modules/bson/lib/bson.cjs"(exports) {
+  "../../graphscript/src/extras/struct/datastructures/bson.cjs"(exports) {
     "use strict";
     var BSON_MAJOR_VERSION = 5;
     var BSON_INT32_MAX = 2147483647;
@@ -19205,16 +9687,16 @@ var require_bson = __commonJS({
       get _bsontype() {
         return "DBRef";
       }
-      constructor(collection, oid, db, fields) {
+      constructor(collection, oid, db2, fields) {
         super();
         const parts = collection.split(".");
         if (parts.length === 2) {
-          db = parts.shift();
+          db2 = parts.shift();
           collection = parts.shift();
         }
         this.collection = collection;
         this.oid = oid;
-        this.db = db;
+        this.db = db2;
         this.fields = fields || {};
       }
       get namespace() {
@@ -20511,7 +10993,7 @@ var require_bson = __commonJS({
     var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
     var PROCESS_UNIQUE = null;
     var kId = Symbol("id");
-    var ObjectId2 = class extends BSONValue {
+    var ObjectId3 = class extends BSONValue {
       get _bsontype() {
         return "ObjectId";
       }
@@ -20531,7 +11013,7 @@ var require_bson = __commonJS({
           workingId = inputId;
         }
         if (workingId == null || typeof workingId === "number") {
-          this[kId] = ObjectId2.generate(typeof workingId === "number" ? workingId : void 0);
+          this[kId] = ObjectId3.generate(typeof workingId === "number" ? workingId : void 0);
         } else if (ArrayBuffer.isView(workingId) && workingId.byteLength === 12) {
           this[kId] = ByteUtils.toLocalBufferType(workingId);
         } else if (typeof workingId === "string") {
@@ -20550,7 +11032,7 @@ var require_bson = __commonJS({
         } else {
           throw new BSONError("Argument passed in does not match the accepted types");
         }
-        if (ObjectId2.cacheHexString) {
+        if (ObjectId3.cacheHexString) {
           this.__id = ByteUtils.toHex(this.id);
         }
       }
@@ -20559,28 +11041,28 @@ var require_bson = __commonJS({
       }
       set id(value) {
         this[kId] = value;
-        if (ObjectId2.cacheHexString) {
+        if (ObjectId3.cacheHexString) {
           this.__id = ByteUtils.toHex(value);
         }
       }
       toHexString() {
-        if (ObjectId2.cacheHexString && this.__id) {
+        if (ObjectId3.cacheHexString && this.__id) {
           return this.__id;
         }
         const hexString = ByteUtils.toHex(this.id);
-        if (ObjectId2.cacheHexString && !this.__id) {
+        if (ObjectId3.cacheHexString && !this.__id) {
           this.__id = hexString;
         }
         return hexString;
       }
       static getInc() {
-        return ObjectId2.index = (ObjectId2.index + 1) % 16777215;
+        return ObjectId3.index = (ObjectId3.index + 1) % 16777215;
       }
       static generate(time) {
         if ("number" !== typeof time) {
           time = Math.floor(Date.now() / 1e3);
         }
-        const inc = ObjectId2.getInc();
+        const inc = ObjectId3.getInc();
         const buffer2 = ByteUtils.allocate(12);
         BSONDataView.fromUint8Array(buffer2).setUint32(0, time, false);
         if (PROCESS_UNIQUE === null) {
@@ -20610,16 +11092,16 @@ var require_bson = __commonJS({
         if (otherId === void 0 || otherId === null) {
           return false;
         }
-        if (otherId instanceof ObjectId2) {
+        if (otherId instanceof ObjectId3) {
           return this[kId][11] === otherId[kId][11] && ByteUtils.equals(this[kId], otherId[kId]);
         }
-        if (typeof otherId === "string" && ObjectId2.isValid(otherId) && otherId.length === 12 && isUint8Array(this.id)) {
+        if (typeof otherId === "string" && ObjectId3.isValid(otherId) && otherId.length === 12 && isUint8Array(this.id)) {
           return ByteUtils.equals(this.id, ByteUtils.fromISO88591(otherId));
         }
-        if (typeof otherId === "string" && ObjectId2.isValid(otherId) && otherId.length === 24) {
+        if (typeof otherId === "string" && ObjectId3.isValid(otherId) && otherId.length === 24) {
           return otherId.toLowerCase() === this.toHexString();
         }
-        if (typeof otherId === "string" && ObjectId2.isValid(otherId) && otherId.length === 12) {
+        if (typeof otherId === "string" && ObjectId3.isValid(otherId) && otherId.length === 12) {
           return ByteUtils.equals(ByteUtils.fromUTF8(otherId), this.id);
         }
         if (typeof otherId === "object" && "toHexString" in otherId && typeof otherId.toHexString === "function") {
@@ -20636,24 +11118,24 @@ var require_bson = __commonJS({
         return timestamp;
       }
       static createPk() {
-        return new ObjectId2();
+        return new ObjectId3();
       }
       static createFromTime(time) {
         const buffer2 = ByteUtils.fromNumberArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         BSONDataView.fromUint8Array(buffer2).setUint32(0, time, false);
-        return new ObjectId2(buffer2);
+        return new ObjectId3(buffer2);
       }
       static createFromHexString(hexString) {
         if (typeof hexString === "undefined" || hexString != null && hexString.length !== 24) {
           throw new BSONError("Argument passed in must be a single String of 12 bytes or a string of 24 hex characters");
         }
-        return new ObjectId2(ByteUtils.fromHex(hexString));
+        return new ObjectId3(ByteUtils.fromHex(hexString));
       }
       static isValid(id) {
         if (id == null)
           return false;
         try {
-          new ObjectId2(id);
+          new ObjectId3(id);
           return true;
         } catch {
           return false;
@@ -20665,7 +11147,7 @@ var require_bson = __commonJS({
         return { $oid: this.toString("hex") };
       }
       static fromExtendedJSON(doc) {
-        return new ObjectId2(doc.$oid);
+        return new ObjectId3(doc.$oid);
       }
       [Symbol.for("nodejs.util.inspect.custom")]() {
         return this.inspect();
@@ -20674,7 +11156,7 @@ var require_bson = __commonJS({
         return `new ObjectId("${this.toHexString()}")`;
       }
     };
-    ObjectId2.index = Math.floor(Math.random() * 16777215);
+    ObjectId3.index = Math.floor(Math.random() * 16777215);
     function internalCalculateObjectSize(object, serializeFunctions, ignoreUndefined) {
       let totalLength = 4 + 1;
       if (Array.isArray(object)) {
@@ -21062,7 +11544,7 @@ var require_bson = __commonJS({
         } else if (elementType === BSON_DATA_OID) {
           const oid = ByteUtils.allocate(12);
           oid.set(buffer2.subarray(index, index + 12));
-          value = new ObjectId2(oid);
+          value = new ObjectId3(oid);
           index = index + 12;
         } else if (elementType === BSON_DATA_INT && promoteValues === false) {
           value = new Int32(buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24);
@@ -21293,7 +11775,7 @@ var require_bson = __commonJS({
           index = index + stringSize;
           const oidBuffer = ByteUtils.allocate(12);
           oidBuffer.set(buffer2.subarray(index, index + 12), 0);
-          const oid = new ObjectId2(oidBuffer);
+          const oid = new ObjectId3(oidBuffer);
           index = index + 12;
           value = new DBRef(namespace, oid);
         } else {
@@ -21914,7 +12396,4607 @@ var require_bson = __commonJS({
       return value != null && typeof value === "object" && "_bsontype" in value && typeof value._bsontype === "string";
     }
     var keysToCodecs = {
-      $oid: ObjectId2,
+      $oid: ObjectId3,
+      $binary: Binary,
+      $uuid: Binary,
+      $symbol: BSONSymbol,
+      $numberInt: Int32,
+      $numberDecimal: Decimal128,
+      $numberDouble: Double,
+      $numberLong: Long,
+      $minKey: MinKey,
+      $maxKey: MaxKey,
+      $regex: BSONRegExp,
+      $regularExpression: BSONRegExp,
+      $timestamp: Timestamp
+    };
+    function deserializeValue(value, options = {}) {
+      if (typeof value === "number") {
+        const in32BitRange = value <= BSON_INT32_MAX && value >= BSON_INT32_MIN;
+        const in64BitRange = value <= BSON_INT64_MAX && value >= BSON_INT64_MIN;
+        if (options.relaxed || options.legacy) {
+          return value;
+        }
+        if (Number.isInteger(value) && !Object.is(value, -0)) {
+          if (in32BitRange) {
+            return new Int32(value);
+          }
+          if (in64BitRange) {
+            if (options.useBigInt64) {
+              return BigInt(value);
+            }
+            return Long.fromNumber(value);
+          }
+        }
+        return new Double(value);
+      }
+      if (value == null || typeof value !== "object")
+        return value;
+      if (value.$undefined)
+        return null;
+      const keys = Object.keys(value).filter((k) => k.startsWith("$") && value[k] != null);
+      for (let i = 0; i < keys.length; i++) {
+        const c = keysToCodecs[keys[i]];
+        if (c)
+          return c.fromExtendedJSON(value, options);
+      }
+      if (value.$date != null) {
+        const d = value.$date;
+        const date = /* @__PURE__ */ new Date();
+        if (options.legacy) {
+          if (typeof d === "number")
+            date.setTime(d);
+          else if (typeof d === "string")
+            date.setTime(Date.parse(d));
+          else if (typeof d === "bigint")
+            date.setTime(Number(d));
+          else
+            throw new BSONRuntimeError(`Unrecognized type for EJSON date: ${typeof d}`);
+        } else {
+          if (typeof d === "string")
+            date.setTime(Date.parse(d));
+          else if (Long.isLong(d))
+            date.setTime(d.toNumber());
+          else if (typeof d === "number" && options.relaxed)
+            date.setTime(d);
+          else if (typeof d === "bigint")
+            date.setTime(Number(d));
+          else
+            throw new BSONRuntimeError(`Unrecognized type for EJSON date: ${typeof d}`);
+        }
+        return date;
+      }
+      if (value.$code != null) {
+        const copy = Object.assign({}, value);
+        if (value.$scope) {
+          copy.$scope = deserializeValue(value.$scope);
+        }
+        return Code.fromExtendedJSON(value);
+      }
+      if (isDBRefLike(value) || value.$dbPointer) {
+        const v = value.$ref ? value : value.$dbPointer;
+        if (v instanceof DBRef)
+          return v;
+        const dollarKeys = Object.keys(v).filter((k) => k.startsWith("$"));
+        let valid = true;
+        dollarKeys.forEach((k) => {
+          if (["$ref", "$id", "$db"].indexOf(k) === -1)
+            valid = false;
+        });
+        if (valid)
+          return DBRef.fromExtendedJSON(v);
+      }
+      return value;
+    }
+    function serializeArray(array, options) {
+      return array.map((v, index) => {
+        options.seenObjects.push({ propertyName: `index ${index}`, obj: null });
+        try {
+          return serializeValue(v, options);
+        } finally {
+          options.seenObjects.pop();
+        }
+      });
+    }
+    function getISOString(date) {
+      const isoStr = date.toISOString();
+      return date.getUTCMilliseconds() !== 0 ? isoStr : isoStr.slice(0, -5) + "Z";
+    }
+    function serializeValue(value, options) {
+      if (value instanceof Map || isMap(value)) {
+        const obj = /* @__PURE__ */ Object.create(null);
+        for (const [k, v] of value) {
+          if (typeof k !== "string") {
+            throw new BSONError("Can only serialize maps with string keys");
+          }
+          obj[k] = v;
+        }
+        return serializeValue(obj, options);
+      }
+      if ((typeof value === "object" || typeof value === "function") && value !== null) {
+        const index = options.seenObjects.findIndex((entry) => entry.obj === value);
+        if (index !== -1) {
+          const props = options.seenObjects.map((entry) => entry.propertyName);
+          const leadingPart = props.slice(0, index).map((prop) => `${prop} -> `).join("");
+          const alreadySeen = props[index];
+          const circularPart = " -> " + props.slice(index + 1, props.length - 1).map((prop) => `${prop} -> `).join("");
+          const current = props[props.length - 1];
+          const leadingSpace = " ".repeat(leadingPart.length + alreadySeen.length / 2);
+          const dashes = "-".repeat(circularPart.length + (alreadySeen.length + current.length) / 2 - 1);
+          throw new BSONError(`Converting circular structure to EJSON:
+    ${leadingPart}${alreadySeen}${circularPart}${current}
+    ${leadingSpace}\\${dashes}/`);
+        }
+        options.seenObjects[options.seenObjects.length - 1].obj = value;
+      }
+      if (Array.isArray(value))
+        return serializeArray(value, options);
+      if (value === void 0)
+        return null;
+      if (value instanceof Date || isDate(value)) {
+        const dateNum = value.getTime(), inRange = dateNum > -1 && dateNum < 2534023188e5;
+        if (options.legacy) {
+          return options.relaxed && inRange ? { $date: value.getTime() } : { $date: getISOString(value) };
+        }
+        return options.relaxed && inRange ? { $date: getISOString(value) } : { $date: { $numberLong: value.getTime().toString() } };
+      }
+      if (typeof value === "number" && (!options.relaxed || !isFinite(value))) {
+        if (Number.isInteger(value) && !Object.is(value, -0)) {
+          if (value >= BSON_INT32_MIN && value <= BSON_INT32_MAX) {
+            return { $numberInt: value.toString() };
+          }
+          if (value >= BSON_INT64_MIN && value <= BSON_INT64_MAX) {
+            return { $numberLong: value.toString() };
+          }
+        }
+        return { $numberDouble: Object.is(value, -0) ? "-0.0" : value.toString() };
+      }
+      if (typeof value === "bigint") {
+        if (!options.relaxed) {
+          return { $numberLong: BigInt.asIntN(64, value).toString() };
+        }
+        return Number(BigInt.asIntN(64, value));
+      }
+      if (value instanceof RegExp || isRegExp(value)) {
+        let flags = value.flags;
+        if (flags === void 0) {
+          const match = value.toString().match(/[gimuy]*$/);
+          if (match) {
+            flags = match[0];
+          }
+        }
+        const rx = new BSONRegExp(value.source, flags);
+        return rx.toExtendedJSON(options);
+      }
+      if (value != null && typeof value === "object")
+        return serializeDocument(value, options);
+      return value;
+    }
+    var BSON_TYPE_MAPPINGS = {
+      Binary: (o) => new Binary(o.value(), o.sub_type),
+      Code: (o) => new Code(o.code, o.scope),
+      DBRef: (o) => new DBRef(o.collection || o.namespace, o.oid, o.db, o.fields),
+      Decimal128: (o) => new Decimal128(o.bytes),
+      Double: (o) => new Double(o.value),
+      Int32: (o) => new Int32(o.value),
+      Long: (o) => Long.fromBits(o.low != null ? o.low : o.low_, o.low != null ? o.high : o.high_, o.low != null ? o.unsigned : o.unsigned_),
+      MaxKey: () => new MaxKey(),
+      MinKey: () => new MinKey(),
+      ObjectId: (o) => new ObjectId3(o),
+      BSONRegExp: (o) => new BSONRegExp(o.pattern, o.options),
+      BSONSymbol: (o) => new BSONSymbol(o.value),
+      Timestamp: (o) => Timestamp.fromBits(o.low, o.high)
+    };
+    function serializeDocument(doc, options) {
+      if (doc == null || typeof doc !== "object")
+        throw new BSONError("not an object instance");
+      const bsontype = doc._bsontype;
+      if (typeof bsontype === "undefined") {
+        const _doc = {};
+        for (const name2 of Object.keys(doc)) {
+          options.seenObjects.push({ propertyName: name2, obj: null });
+          try {
+            const value = serializeValue(doc[name2], options);
+            if (name2 === "__proto__") {
+              Object.defineProperty(_doc, name2, {
+                value,
+                writable: true,
+                enumerable: true,
+                configurable: true
+              });
+            } else {
+              _doc[name2] = value;
+            }
+          } finally {
+            options.seenObjects.pop();
+          }
+        }
+        return _doc;
+      } else if (doc != null && typeof doc === "object" && typeof doc._bsontype === "string" && doc[Symbol.for("@@mdb.bson.version")] !== BSON_MAJOR_VERSION) {
+        throw new BSONVersionError();
+      } else if (isBSONType(doc)) {
+        let outDoc = doc;
+        if (typeof outDoc.toExtendedJSON !== "function") {
+          const mapper = BSON_TYPE_MAPPINGS[doc._bsontype];
+          if (!mapper) {
+            throw new BSONError("Unrecognized or invalid _bsontype: " + doc._bsontype);
+          }
+          outDoc = mapper(outDoc);
+        }
+        if (bsontype === "Code" && outDoc.scope) {
+          outDoc = new Code(outDoc.code, serializeValue(outDoc.scope, options));
+        } else if (bsontype === "DBRef" && outDoc.oid) {
+          outDoc = new DBRef(serializeValue(outDoc.collection, options), serializeValue(outDoc.oid, options), serializeValue(outDoc.db, options), serializeValue(outDoc.fields, options));
+        }
+        return outDoc.toExtendedJSON(options);
+      } else {
+        throw new BSONError("_bsontype must be a string, but was: " + typeof bsontype);
+      }
+    }
+    function parse(text, options) {
+      const ejsonOptions = {
+        useBigInt64: options?.useBigInt64 ?? false,
+        relaxed: options?.relaxed ?? true,
+        legacy: options?.legacy ?? false
+      };
+      return JSON.parse(text, (key, value) => {
+        if (key.indexOf("\0") !== -1) {
+          throw new BSONError(`BSON Document field names cannot contain null bytes, found: ${JSON.stringify(key)}`);
+        }
+        return deserializeValue(value, ejsonOptions);
+      });
+    }
+    function stringify(value, replacer, space, options) {
+      if (space != null && typeof space === "object") {
+        options = space;
+        space = 0;
+      }
+      if (replacer != null && typeof replacer === "object" && !Array.isArray(replacer)) {
+        options = replacer;
+        replacer = void 0;
+        space = 0;
+      }
+      const serializeOptions = Object.assign({ relaxed: true, legacy: false }, options, {
+        seenObjects: [{ propertyName: "(root)", obj: null }]
+      });
+      const doc = serializeValue(value, serializeOptions);
+      return JSON.stringify(doc, replacer, space);
+    }
+    function EJSONserialize(value, options) {
+      options = options || {};
+      return JSON.parse(stringify(value, options));
+    }
+    function EJSONdeserialize(ejson, options) {
+      options = options || {};
+      return parse(JSON.stringify(ejson), options);
+    }
+    var EJSON = /* @__PURE__ */ Object.create(null);
+    EJSON.parse = parse;
+    EJSON.stringify = stringify;
+    EJSON.serialize = EJSONserialize;
+    EJSON.deserialize = EJSONdeserialize;
+    Object.freeze(EJSON);
+    var MAXSIZE = 1024 * 1024 * 17;
+    var buffer = ByteUtils.allocate(MAXSIZE);
+    function setInternalBufferSize(size) {
+      if (buffer.length < size) {
+        buffer = ByteUtils.allocate(size);
+      }
+    }
+    function serialize(object, options = {}) {
+      const checkKeys = typeof options.checkKeys === "boolean" ? options.checkKeys : false;
+      const serializeFunctions = typeof options.serializeFunctions === "boolean" ? options.serializeFunctions : false;
+      const ignoreUndefined = typeof options.ignoreUndefined === "boolean" ? options.ignoreUndefined : true;
+      const minInternalBufferSize = typeof options.minInternalBufferSize === "number" ? options.minInternalBufferSize : MAXSIZE;
+      if (buffer.length < minInternalBufferSize) {
+        buffer = ByteUtils.allocate(minInternalBufferSize);
+      }
+      const serializationIndex = serializeInto(buffer, object, checkKeys, 0, 0, serializeFunctions, ignoreUndefined, null);
+      const finishedBuffer = ByteUtils.allocate(serializationIndex);
+      finishedBuffer.set(buffer.subarray(0, serializationIndex), 0);
+      return finishedBuffer;
+    }
+    function serializeWithBufferAndIndex(object, finalBuffer, options = {}) {
+      const checkKeys = typeof options.checkKeys === "boolean" ? options.checkKeys : false;
+      const serializeFunctions = typeof options.serializeFunctions === "boolean" ? options.serializeFunctions : false;
+      const ignoreUndefined = typeof options.ignoreUndefined === "boolean" ? options.ignoreUndefined : true;
+      const startIndex = typeof options.index === "number" ? options.index : 0;
+      const serializationIndex = serializeInto(buffer, object, checkKeys, 0, 0, serializeFunctions, ignoreUndefined, null);
+      finalBuffer.set(buffer.subarray(0, serializationIndex), startIndex);
+      return startIndex + serializationIndex - 1;
+    }
+    function deserialize(buffer2, options = {}) {
+      return internalDeserialize(ByteUtils.toLocalBufferType(buffer2), options);
+    }
+    function calculateObjectSize(object, options = {}) {
+      options = options || {};
+      const serializeFunctions = typeof options.serializeFunctions === "boolean" ? options.serializeFunctions : false;
+      const ignoreUndefined = typeof options.ignoreUndefined === "boolean" ? options.ignoreUndefined : true;
+      return internalCalculateObjectSize(object, serializeFunctions, ignoreUndefined);
+    }
+    function deserializeStream(data, startIndex, numberOfDocuments, documents, docStartIndex, options) {
+      const internalOptions = Object.assign({ allowObjectSmallerThanBufferSize: true, index: 0 }, options);
+      const bufferData = ByteUtils.toLocalBufferType(data);
+      let index = startIndex;
+      for (let i = 0; i < numberOfDocuments; i++) {
+        const size = bufferData[index] | bufferData[index + 1] << 8 | bufferData[index + 2] << 16 | bufferData[index + 3] << 24;
+        internalOptions.index = index;
+        documents[docStartIndex + i] = internalDeserialize(bufferData, internalOptions);
+        index = index + size;
+      }
+      return index;
+    }
+    var bson = /* @__PURE__ */ Object.freeze({
+      __proto__: null,
+      Code,
+      BSONSymbol,
+      DBRef,
+      Binary,
+      ObjectId: ObjectId3,
+      UUID,
+      Long,
+      Timestamp,
+      Double,
+      Int32,
+      MinKey,
+      MaxKey,
+      BSONRegExp,
+      Decimal128,
+      setInternalBufferSize,
+      serialize,
+      serializeWithBufferAndIndex,
+      deserialize,
+      calculateObjectSize,
+      deserializeStream,
+      BSONValue,
+      BSONError,
+      BSONVersionError,
+      BSONRuntimeError,
+      BSONType,
+      EJSON
+    });
+    exports.BSON = bson;
+    exports.BSONError = BSONError;
+    exports.BSONRegExp = BSONRegExp;
+    exports.BSONRuntimeError = BSONRuntimeError;
+    exports.BSONSymbol = BSONSymbol;
+    exports.BSONType = BSONType;
+    exports.BSONValue = BSONValue;
+    exports.BSONVersionError = BSONVersionError;
+    exports.Binary = Binary;
+    exports.Code = Code;
+    exports.DBRef = DBRef;
+    exports.Decimal128 = Decimal128;
+    exports.Double = Double;
+    exports.EJSON = EJSON;
+    exports.Int32 = Int32;
+    exports.Long = Long;
+    exports.MaxKey = MaxKey;
+    exports.MinKey = MinKey;
+    exports.ObjectId = ObjectId3;
+    exports.Timestamp = Timestamp;
+    exports.UUID = UUID;
+    exports.calculateObjectSize = calculateObjectSize;
+    exports.deserialize = deserialize;
+    exports.deserializeStream = deserializeStream;
+    exports.serialize = serialize;
+    exports.serializeWithBufferAndIndex = serializeWithBufferAndIndex;
+    exports.setInternalBufferSize = setInternalBufferSize;
+  }
+});
+
+// node_modules/dotenv/package.json
+var require_package = __commonJS({
+  "node_modules/dotenv/package.json"(exports, module2) {
+    module2.exports = {
+      name: "dotenv",
+      version: "16.0.3",
+      description: "Loads environment variables from .env file",
+      main: "lib/main.js",
+      types: "lib/main.d.ts",
+      exports: {
+        ".": {
+          require: "./lib/main.js",
+          types: "./lib/main.d.ts",
+          default: "./lib/main.js"
+        },
+        "./config": "./config.js",
+        "./config.js": "./config.js",
+        "./lib/env-options": "./lib/env-options.js",
+        "./lib/env-options.js": "./lib/env-options.js",
+        "./lib/cli-options": "./lib/cli-options.js",
+        "./lib/cli-options.js": "./lib/cli-options.js",
+        "./package.json": "./package.json"
+      },
+      scripts: {
+        "dts-check": "tsc --project tests/types/tsconfig.json",
+        lint: "standard",
+        "lint-readme": "standard-markdown",
+        pretest: "npm run lint && npm run dts-check",
+        test: "tap tests/*.js --100 -Rspec",
+        prerelease: "npm test",
+        release: "standard-version"
+      },
+      repository: {
+        type: "git",
+        url: "git://github.com/motdotla/dotenv.git"
+      },
+      keywords: [
+        "dotenv",
+        "env",
+        ".env",
+        "environment",
+        "variables",
+        "config",
+        "settings"
+      ],
+      readmeFilename: "README.md",
+      license: "BSD-2-Clause",
+      devDependencies: {
+        "@types/node": "^17.0.9",
+        decache: "^4.6.1",
+        dtslint: "^3.7.0",
+        sinon: "^12.0.1",
+        standard: "^16.0.4",
+        "standard-markdown": "^7.1.0",
+        "standard-version": "^9.3.2",
+        tap: "^15.1.6",
+        tar: "^6.1.11",
+        typescript: "^4.5.4"
+      },
+      engines: {
+        node: ">=12"
+      }
+    };
+  }
+});
+
+// node_modules/dotenv/lib/main.js
+var require_main = __commonJS({
+  "node_modules/dotenv/lib/main.js"(exports, module2) {
+    var fs2 = require("fs");
+    var path = require("path");
+    var os = require("os");
+    var packageJson = require_package();
+    var version = packageJson.version;
+    var LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg;
+    function parse(src) {
+      const obj = {};
+      let lines = src.toString();
+      lines = lines.replace(/\r\n?/mg, "\n");
+      let match;
+      while ((match = LINE.exec(lines)) != null) {
+        const key = match[1];
+        let value = match[2] || "";
+        value = value.trim();
+        const maybeQuote = value[0];
+        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, "$2");
+        if (maybeQuote === '"') {
+          value = value.replace(/\\n/g, "\n");
+          value = value.replace(/\\r/g, "\r");
+        }
+        obj[key] = value;
+      }
+      return obj;
+    }
+    function _log(message) {
+      console.log(`[dotenv@${version}][DEBUG] ${message}`);
+    }
+    function _resolveHome(envPath) {
+      return envPath[0] === "~" ? path.join(os.homedir(), envPath.slice(1)) : envPath;
+    }
+    function config2(options) {
+      let dotenvPath = path.resolve(process.cwd(), ".env");
+      let encoding = "utf8";
+      const debug = Boolean(options && options.debug);
+      const override = Boolean(options && options.override);
+      if (options) {
+        if (options.path != null) {
+          dotenvPath = _resolveHome(options.path);
+        }
+        if (options.encoding != null) {
+          encoding = options.encoding;
+        }
+      }
+      try {
+        const parsed = DotenvModule.parse(fs2.readFileSync(dotenvPath, { encoding }));
+        Object.keys(parsed).forEach(function(key) {
+          if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
+            process.env[key] = parsed[key];
+          } else {
+            if (override === true) {
+              process.env[key] = parsed[key];
+            }
+            if (debug) {
+              if (override === true) {
+                _log(`"${key}" is already defined in \`process.env\` and WAS overwritten`);
+              } else {
+                _log(`"${key}" is already defined in \`process.env\` and was NOT overwritten`);
+              }
+            }
+          }
+        });
+        return { parsed };
+      } catch (e) {
+        if (debug) {
+          _log(`Failed to load ${dotenvPath} ${e.message}`);
+        }
+        return { error: e };
+      }
+    }
+    var DotenvModule = {
+      config: config2,
+      parse
+    };
+    module2.exports.config = DotenvModule.config;
+    module2.exports.parse = DotenvModule.parse;
+    module2.exports = DotenvModule;
+  }
+});
+
+// node_modules/mongoose/lib/driver.js
+var require_driver = __commonJS({
+  "node_modules/mongoose/lib/driver.js"(exports, module2) {
+    "use strict";
+    var driver = null;
+    module2.exports.get = function() {
+      return driver;
+    };
+    module2.exports.set = function(v) {
+      driver = v;
+    };
+  }
+});
+
+// node_modules/mongoose/lib/connectionstate.js
+var require_connectionstate = __commonJS({
+  "node_modules/mongoose/lib/connectionstate.js"(exports, module2) {
+    "use strict";
+    var STATES = module2.exports = exports = /* @__PURE__ */ Object.create(null);
+    var disconnected = "disconnected";
+    var connected = "connected";
+    var connecting = "connecting";
+    var disconnecting = "disconnecting";
+    var uninitialized = "uninitialized";
+    STATES[0] = disconnected;
+    STATES[1] = connected;
+    STATES[2] = connecting;
+    STATES[3] = disconnecting;
+    STATES[99] = uninitialized;
+    STATES[disconnected] = 0;
+    STATES[connected] = 1;
+    STATES[connecting] = 2;
+    STATES[disconnecting] = 3;
+    STATES[uninitialized] = 99;
+  }
+});
+
+// node_modules/mongoose/lib/helpers/immediate.js
+var require_immediate = __commonJS({
+  "node_modules/mongoose/lib/helpers/immediate.js"(exports, module2) {
+    "use strict";
+    var nextTick = typeof process !== "undefined" && typeof process.nextTick === "function" ? process.nextTick.bind(process) : (cb) => setTimeout(cb, 0);
+    module2.exports = function immediate(cb) {
+      return nextTick(cb);
+    };
+  }
+});
+
+// node_modules/mongoose/lib/collection.js
+var require_collection = __commonJS({
+  "node_modules/mongoose/lib/collection.js"(exports, module2) {
+    "use strict";
+    var EventEmitter = require("events").EventEmitter;
+    var STATES = require_connectionstate();
+    var immediate = require_immediate();
+    function Collection(name2, conn, opts) {
+      if (opts === void 0) {
+        opts = {};
+      }
+      this.opts = opts;
+      this.name = name2;
+      this.collectionName = name2;
+      this.conn = conn;
+      this.queue = [];
+      this.buffer = true;
+      this.emitter = new EventEmitter();
+      if (STATES.connected === this.conn.readyState) {
+        this.onOpen();
+      }
+    }
+    Collection.prototype.name;
+    Collection.prototype.collectionName;
+    Collection.prototype.conn;
+    Collection.prototype.onOpen = function() {
+      this.buffer = false;
+      immediate(() => this.doQueue());
+    };
+    Collection.prototype.onClose = function() {
+    };
+    Collection.prototype.addQueue = function(name2, args) {
+      this.queue.push([name2, args]);
+      return this;
+    };
+    Collection.prototype.removeQueue = function(name2, args) {
+      const index = this.queue.findIndex((v) => v[0] === name2 && v[1] === args);
+      if (index === -1) {
+        return false;
+      }
+      this.queue.splice(index, 1);
+      return true;
+    };
+    Collection.prototype.doQueue = function() {
+      for (const method of this.queue) {
+        if (typeof method[0] === "function") {
+          method[0].apply(this, method[1]);
+        } else {
+          this[method[0]].apply(this, method[1]);
+        }
+      }
+      this.queue = [];
+      const _this = this;
+      immediate(function() {
+        _this.emitter.emit("queue");
+      });
+      return this;
+    };
+    Collection.prototype.ensureIndex = function() {
+      throw new Error("Collection#ensureIndex unimplemented by driver");
+    };
+    Collection.prototype.createIndex = function() {
+      throw new Error("Collection#createIndex unimplemented by driver");
+    };
+    Collection.prototype.findAndModify = function() {
+      throw new Error("Collection#findAndModify unimplemented by driver");
+    };
+    Collection.prototype.findOneAndUpdate = function() {
+      throw new Error("Collection#findOneAndUpdate unimplemented by driver");
+    };
+    Collection.prototype.findOneAndDelete = function() {
+      throw new Error("Collection#findOneAndDelete unimplemented by driver");
+    };
+    Collection.prototype.findOneAndReplace = function() {
+      throw new Error("Collection#findOneAndReplace unimplemented by driver");
+    };
+    Collection.prototype.findOne = function() {
+      throw new Error("Collection#findOne unimplemented by driver");
+    };
+    Collection.prototype.find = function() {
+      throw new Error("Collection#find unimplemented by driver");
+    };
+    Collection.prototype.insert = function() {
+      throw new Error("Collection#insert unimplemented by driver");
+    };
+    Collection.prototype.insertOne = function() {
+      throw new Error("Collection#insertOne unimplemented by driver");
+    };
+    Collection.prototype.insertMany = function() {
+      throw new Error("Collection#insertMany unimplemented by driver");
+    };
+    Collection.prototype.save = function() {
+      throw new Error("Collection#save unimplemented by driver");
+    };
+    Collection.prototype.updateOne = function() {
+      throw new Error("Collection#updateOne unimplemented by driver");
+    };
+    Collection.prototype.updateMany = function() {
+      throw new Error("Collection#updateMany unimplemented by driver");
+    };
+    Collection.prototype.deleteOne = function() {
+      throw new Error("Collection#deleteOne unimplemented by driver");
+    };
+    Collection.prototype.deleteMany = function() {
+      throw new Error("Collection#deleteMany unimplemented by driver");
+    };
+    Collection.prototype.getIndexes = function() {
+      throw new Error("Collection#getIndexes unimplemented by driver");
+    };
+    Collection.prototype.watch = function() {
+      throw new Error("Collection#watch unimplemented by driver");
+    };
+    Collection.prototype._shouldBufferCommands = function _shouldBufferCommands() {
+      const opts = this.opts;
+      if (opts.bufferCommands != null) {
+        return opts.bufferCommands;
+      }
+      if (opts && opts.schemaUserProvidedOptions != null && opts.schemaUserProvidedOptions.bufferCommands != null) {
+        return opts.schemaUserProvidedOptions.bufferCommands;
+      }
+      return this.conn._shouldBufferCommands();
+    };
+    Collection.prototype._getBufferTimeoutMS = function _getBufferTimeoutMS() {
+      const conn = this.conn;
+      const opts = this.opts;
+      if (opts.bufferTimeoutMS != null) {
+        return opts.bufferTimeoutMS;
+      }
+      if (opts && opts.schemaUserProvidedOptions != null && opts.schemaUserProvidedOptions.bufferTimeoutMS != null) {
+        return opts.schemaUserProvidedOptions.bufferTimeoutMS;
+      }
+      if (conn.config.bufferTimeoutMS != null) {
+        return conn.config.bufferTimeoutMS;
+      }
+      if (conn.base != null && conn.base.get("bufferTimeoutMS") != null) {
+        return conn.base.get("bufferTimeoutMS");
+      }
+      return 1e4;
+    };
+    module2.exports = Collection;
+  }
+});
+
+// node_modules/mongoose/lib/error/mongooseError.js
+var require_mongooseError = __commonJS({
+  "node_modules/mongoose/lib/error/mongooseError.js"(exports, module2) {
+    "use strict";
+    var MongooseError = class extends Error {
+    };
+    Object.defineProperty(MongooseError.prototype, "name", {
+      value: "MongooseError"
+    });
+    module2.exports = MongooseError;
+  }
+});
+
+// node_modules/mongodb/lib/error.js
+var require_error = __commonJS({
+  "node_modules/mongodb/lib/error.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.isResumableError = exports.isNetworkTimeoutError = exports.isSDAMUnrecoverableError = exports.isNodeShuttingDownError = exports.isRetryableReadError = exports.isRetryableWriteError = exports.needsRetryableWriteLabel = exports.MongoWriteConcernError = exports.MongoServerSelectionError = exports.MongoSystemError = exports.MongoMissingDependencyError = exports.MongoMissingCredentialsError = exports.MongoCompatibilityError = exports.MongoInvalidArgumentError = exports.MongoParseError = exports.MongoNetworkTimeoutError = exports.MongoNetworkError = exports.isNetworkErrorBeforeHandshake = exports.MongoTopologyClosedError = exports.MongoCursorExhaustedError = exports.MongoServerClosedError = exports.MongoCursorInUseError = exports.MongoUnexpectedServerResponseError = exports.MongoGridFSChunkError = exports.MongoGridFSStreamError = exports.MongoTailableCursorError = exports.MongoChangeStreamError = exports.MongoAWSError = exports.MongoKerberosError = exports.MongoExpiredSessionError = exports.MongoTransactionError = exports.MongoNotConnectedError = exports.MongoDecompressionError = exports.MongoBatchReExecutionError = exports.MongoRuntimeError = exports.MongoAPIError = exports.MongoDriverError = exports.MongoServerError = exports.MongoError = exports.MongoErrorLabel = exports.GET_MORE_RESUMABLE_CODES = exports.MONGODB_ERROR_CODES = exports.NODE_IS_RECOVERING_ERROR_MESSAGE = exports.LEGACY_NOT_PRIMARY_OR_SECONDARY_ERROR_MESSAGE = exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE = void 0;
+    var kErrorLabels = Symbol("errorLabels");
+    exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE = new RegExp("not master", "i");
+    exports.LEGACY_NOT_PRIMARY_OR_SECONDARY_ERROR_MESSAGE = new RegExp("not master or secondary", "i");
+    exports.NODE_IS_RECOVERING_ERROR_MESSAGE = new RegExp("node is recovering", "i");
+    exports.MONGODB_ERROR_CODES = Object.freeze({
+      HostUnreachable: 6,
+      HostNotFound: 7,
+      NetworkTimeout: 89,
+      ShutdownInProgress: 91,
+      PrimarySteppedDown: 189,
+      ExceededTimeLimit: 262,
+      SocketException: 9001,
+      NotWritablePrimary: 10107,
+      InterruptedAtShutdown: 11600,
+      InterruptedDueToReplStateChange: 11602,
+      NotPrimaryNoSecondaryOk: 13435,
+      NotPrimaryOrSecondary: 13436,
+      StaleShardVersion: 63,
+      StaleEpoch: 150,
+      StaleConfig: 13388,
+      RetryChangeStream: 234,
+      FailedToSatisfyReadPreference: 133,
+      CursorNotFound: 43,
+      LegacyNotPrimary: 10058,
+      WriteConcernFailed: 64,
+      NamespaceNotFound: 26,
+      IllegalOperation: 20,
+      MaxTimeMSExpired: 50,
+      UnknownReplWriteConcern: 79,
+      UnsatisfiableWriteConcern: 100
+    });
+    exports.GET_MORE_RESUMABLE_CODES = /* @__PURE__ */ new Set([
+      exports.MONGODB_ERROR_CODES.HostUnreachable,
+      exports.MONGODB_ERROR_CODES.HostNotFound,
+      exports.MONGODB_ERROR_CODES.NetworkTimeout,
+      exports.MONGODB_ERROR_CODES.ShutdownInProgress,
+      exports.MONGODB_ERROR_CODES.PrimarySteppedDown,
+      exports.MONGODB_ERROR_CODES.ExceededTimeLimit,
+      exports.MONGODB_ERROR_CODES.SocketException,
+      exports.MONGODB_ERROR_CODES.NotWritablePrimary,
+      exports.MONGODB_ERROR_CODES.InterruptedAtShutdown,
+      exports.MONGODB_ERROR_CODES.InterruptedDueToReplStateChange,
+      exports.MONGODB_ERROR_CODES.NotPrimaryNoSecondaryOk,
+      exports.MONGODB_ERROR_CODES.NotPrimaryOrSecondary,
+      exports.MONGODB_ERROR_CODES.StaleShardVersion,
+      exports.MONGODB_ERROR_CODES.StaleEpoch,
+      exports.MONGODB_ERROR_CODES.StaleConfig,
+      exports.MONGODB_ERROR_CODES.RetryChangeStream,
+      exports.MONGODB_ERROR_CODES.FailedToSatisfyReadPreference,
+      exports.MONGODB_ERROR_CODES.CursorNotFound
+    ]);
+    exports.MongoErrorLabel = Object.freeze({
+      RetryableWriteError: "RetryableWriteError",
+      TransientTransactionError: "TransientTransactionError",
+      UnknownTransactionCommitResult: "UnknownTransactionCommitResult",
+      ResumableChangeStreamError: "ResumableChangeStreamError",
+      HandshakeError: "HandshakeError",
+      ResetPool: "ResetPool",
+      InterruptInUseConnections: "InterruptInUseConnections",
+      NoWritesPerformed: "NoWritesPerformed"
+    });
+    var MongoError = class extends Error {
+      constructor(message) {
+        if (message instanceof Error) {
+          super(message.message);
+          this.cause = message;
+        } else {
+          super(message);
+        }
+        this[kErrorLabels] = /* @__PURE__ */ new Set();
+      }
+      get name() {
+        return "MongoError";
+      }
+      /** Legacy name for server error responses */
+      get errmsg() {
+        return this.message;
+      }
+      /**
+       * Checks the error to see if it has an error label
+       *
+       * @param label - The error label to check for
+       * @returns returns true if the error has the provided error label
+       */
+      hasErrorLabel(label) {
+        return this[kErrorLabels].has(label);
+      }
+      addErrorLabel(label) {
+        this[kErrorLabels].add(label);
+      }
+      get errorLabels() {
+        return Array.from(this[kErrorLabels]);
+      }
+    };
+    exports.MongoError = MongoError;
+    var MongoServerError = class extends MongoError {
+      constructor(message) {
+        super(message.message || message.errmsg || message.$err || "n/a");
+        if (message.errorLabels) {
+          this[kErrorLabels] = new Set(message.errorLabels);
+        }
+        for (const name2 in message) {
+          if (name2 !== "errorLabels" && name2 !== "errmsg" && name2 !== "message")
+            this[name2] = message[name2];
+        }
+      }
+      get name() {
+        return "MongoServerError";
+      }
+    };
+    exports.MongoServerError = MongoServerError;
+    var MongoDriverError = class extends MongoError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoDriverError";
+      }
+    };
+    exports.MongoDriverError = MongoDriverError;
+    var MongoAPIError = class extends MongoDriverError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoAPIError";
+      }
+    };
+    exports.MongoAPIError = MongoAPIError;
+    var MongoRuntimeError = class extends MongoDriverError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoRuntimeError";
+      }
+    };
+    exports.MongoRuntimeError = MongoRuntimeError;
+    var MongoBatchReExecutionError = class extends MongoAPIError {
+      constructor(message = "This batch has already been executed, create new batch to execute") {
+        super(message);
+      }
+      get name() {
+        return "MongoBatchReExecutionError";
+      }
+    };
+    exports.MongoBatchReExecutionError = MongoBatchReExecutionError;
+    var MongoDecompressionError = class extends MongoRuntimeError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoDecompressionError";
+      }
+    };
+    exports.MongoDecompressionError = MongoDecompressionError;
+    var MongoNotConnectedError = class extends MongoAPIError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoNotConnectedError";
+      }
+    };
+    exports.MongoNotConnectedError = MongoNotConnectedError;
+    var MongoTransactionError = class extends MongoAPIError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoTransactionError";
+      }
+    };
+    exports.MongoTransactionError = MongoTransactionError;
+    var MongoExpiredSessionError = class extends MongoAPIError {
+      constructor(message = "Cannot use a session that has ended") {
+        super(message);
+      }
+      get name() {
+        return "MongoExpiredSessionError";
+      }
+    };
+    exports.MongoExpiredSessionError = MongoExpiredSessionError;
+    var MongoKerberosError = class extends MongoRuntimeError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoKerberosError";
+      }
+    };
+    exports.MongoKerberosError = MongoKerberosError;
+    var MongoAWSError = class extends MongoRuntimeError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoAWSError";
+      }
+    };
+    exports.MongoAWSError = MongoAWSError;
+    var MongoChangeStreamError = class extends MongoRuntimeError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoChangeStreamError";
+      }
+    };
+    exports.MongoChangeStreamError = MongoChangeStreamError;
+    var MongoTailableCursorError = class extends MongoAPIError {
+      constructor(message = "Tailable cursor does not support this operation") {
+        super(message);
+      }
+      get name() {
+        return "MongoTailableCursorError";
+      }
+    };
+    exports.MongoTailableCursorError = MongoTailableCursorError;
+    var MongoGridFSStreamError = class extends MongoRuntimeError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoGridFSStreamError";
+      }
+    };
+    exports.MongoGridFSStreamError = MongoGridFSStreamError;
+    var MongoGridFSChunkError = class extends MongoRuntimeError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoGridFSChunkError";
+      }
+    };
+    exports.MongoGridFSChunkError = MongoGridFSChunkError;
+    var MongoUnexpectedServerResponseError = class extends MongoRuntimeError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoUnexpectedServerResponseError";
+      }
+    };
+    exports.MongoUnexpectedServerResponseError = MongoUnexpectedServerResponseError;
+    var MongoCursorInUseError = class extends MongoAPIError {
+      constructor(message = "Cursor is already initialized") {
+        super(message);
+      }
+      get name() {
+        return "MongoCursorInUseError";
+      }
+    };
+    exports.MongoCursorInUseError = MongoCursorInUseError;
+    var MongoServerClosedError = class extends MongoAPIError {
+      constructor(message = "Server is closed") {
+        super(message);
+      }
+      get name() {
+        return "MongoServerClosedError";
+      }
+    };
+    exports.MongoServerClosedError = MongoServerClosedError;
+    var MongoCursorExhaustedError = class extends MongoAPIError {
+      constructor(message) {
+        super(message || "Cursor is exhausted");
+      }
+      get name() {
+        return "MongoCursorExhaustedError";
+      }
+    };
+    exports.MongoCursorExhaustedError = MongoCursorExhaustedError;
+    var MongoTopologyClosedError = class extends MongoAPIError {
+      constructor(message = "Topology is closed") {
+        super(message);
+      }
+      get name() {
+        return "MongoTopologyClosedError";
+      }
+    };
+    exports.MongoTopologyClosedError = MongoTopologyClosedError;
+    var kBeforeHandshake = Symbol("beforeHandshake");
+    function isNetworkErrorBeforeHandshake(err) {
+      return err[kBeforeHandshake] === true;
+    }
+    exports.isNetworkErrorBeforeHandshake = isNetworkErrorBeforeHandshake;
+    var MongoNetworkError = class extends MongoError {
+      constructor(message, options) {
+        super(message);
+        if (options && typeof options.beforeHandshake === "boolean") {
+          this[kBeforeHandshake] = options.beforeHandshake;
+        }
+      }
+      get name() {
+        return "MongoNetworkError";
+      }
+    };
+    exports.MongoNetworkError = MongoNetworkError;
+    var MongoNetworkTimeoutError = class extends MongoNetworkError {
+      constructor(message, options) {
+        super(message, options);
+      }
+      get name() {
+        return "MongoNetworkTimeoutError";
+      }
+    };
+    exports.MongoNetworkTimeoutError = MongoNetworkTimeoutError;
+    var MongoParseError = class extends MongoDriverError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoParseError";
+      }
+    };
+    exports.MongoParseError = MongoParseError;
+    var MongoInvalidArgumentError = class extends MongoAPIError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoInvalidArgumentError";
+      }
+    };
+    exports.MongoInvalidArgumentError = MongoInvalidArgumentError;
+    var MongoCompatibilityError = class extends MongoAPIError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoCompatibilityError";
+      }
+    };
+    exports.MongoCompatibilityError = MongoCompatibilityError;
+    var MongoMissingCredentialsError = class extends MongoAPIError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoMissingCredentialsError";
+      }
+    };
+    exports.MongoMissingCredentialsError = MongoMissingCredentialsError;
+    var MongoMissingDependencyError = class extends MongoAPIError {
+      constructor(message) {
+        super(message);
+      }
+      get name() {
+        return "MongoMissingDependencyError";
+      }
+    };
+    exports.MongoMissingDependencyError = MongoMissingDependencyError;
+    var MongoSystemError = class extends MongoError {
+      constructor(message, reason) {
+        if (reason && reason.error) {
+          super(reason.error.message || reason.error);
+        } else {
+          super(message);
+        }
+        if (reason) {
+          this.reason = reason;
+        }
+        this.code = reason.error?.code;
+      }
+      get name() {
+        return "MongoSystemError";
+      }
+    };
+    exports.MongoSystemError = MongoSystemError;
+    var MongoServerSelectionError = class extends MongoSystemError {
+      constructor(message, reason) {
+        super(message, reason);
+      }
+      get name() {
+        return "MongoServerSelectionError";
+      }
+    };
+    exports.MongoServerSelectionError = MongoServerSelectionError;
+    function makeWriteConcernResultObject(input) {
+      const output = Object.assign({}, input);
+      if (output.ok === 0) {
+        output.ok = 1;
+        delete output.errmsg;
+        delete output.code;
+        delete output.codeName;
+      }
+      return output;
+    }
+    var MongoWriteConcernError = class extends MongoServerError {
+      constructor(message, result) {
+        if (result && Array.isArray(result.errorLabels)) {
+          message.errorLabels = result.errorLabels;
+        }
+        super(message);
+        this.errInfo = message.errInfo;
+        if (result != null) {
+          this.result = makeWriteConcernResultObject(result);
+        }
+      }
+      get name() {
+        return "MongoWriteConcernError";
+      }
+    };
+    exports.MongoWriteConcernError = MongoWriteConcernError;
+    var RETRYABLE_READ_ERROR_CODES = /* @__PURE__ */ new Set([
+      exports.MONGODB_ERROR_CODES.HostUnreachable,
+      exports.MONGODB_ERROR_CODES.HostNotFound,
+      exports.MONGODB_ERROR_CODES.NetworkTimeout,
+      exports.MONGODB_ERROR_CODES.ShutdownInProgress,
+      exports.MONGODB_ERROR_CODES.PrimarySteppedDown,
+      exports.MONGODB_ERROR_CODES.SocketException,
+      exports.MONGODB_ERROR_CODES.NotWritablePrimary,
+      exports.MONGODB_ERROR_CODES.InterruptedAtShutdown,
+      exports.MONGODB_ERROR_CODES.InterruptedDueToReplStateChange,
+      exports.MONGODB_ERROR_CODES.NotPrimaryNoSecondaryOk,
+      exports.MONGODB_ERROR_CODES.NotPrimaryOrSecondary
+    ]);
+    var RETRYABLE_WRITE_ERROR_CODES = /* @__PURE__ */ new Set([
+      ...RETRYABLE_READ_ERROR_CODES,
+      exports.MONGODB_ERROR_CODES.ExceededTimeLimit
+    ]);
+    function needsRetryableWriteLabel(error, maxWireVersion) {
+      if (error instanceof MongoNetworkError) {
+        return true;
+      }
+      if (error instanceof MongoError) {
+        if ((maxWireVersion >= 9 || error.hasErrorLabel(exports.MongoErrorLabel.RetryableWriteError)) && !error.hasErrorLabel(exports.MongoErrorLabel.HandshakeError)) {
+          return false;
+        }
+      }
+      if (error instanceof MongoWriteConcernError) {
+        return RETRYABLE_WRITE_ERROR_CODES.has(error.result?.code ?? error.code ?? 0);
+      }
+      if (error instanceof MongoError && typeof error.code === "number") {
+        return RETRYABLE_WRITE_ERROR_CODES.has(error.code);
+      }
+      const isNotWritablePrimaryError2 = exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE.test(error.message);
+      if (isNotWritablePrimaryError2) {
+        return true;
+      }
+      const isNodeIsRecoveringError = exports.NODE_IS_RECOVERING_ERROR_MESSAGE.test(error.message);
+      if (isNodeIsRecoveringError) {
+        return true;
+      }
+      return false;
+    }
+    exports.needsRetryableWriteLabel = needsRetryableWriteLabel;
+    function isRetryableWriteError(error) {
+      return error.hasErrorLabel(exports.MongoErrorLabel.RetryableWriteError);
+    }
+    exports.isRetryableWriteError = isRetryableWriteError;
+    function isRetryableReadError(error) {
+      const hasRetryableErrorCode = typeof error.code === "number" ? RETRYABLE_READ_ERROR_CODES.has(error.code) : false;
+      if (hasRetryableErrorCode) {
+        return true;
+      }
+      if (error instanceof MongoNetworkError) {
+        return true;
+      }
+      const isNotWritablePrimaryError2 = exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE.test(error.message);
+      if (isNotWritablePrimaryError2) {
+        return true;
+      }
+      const isNodeIsRecoveringError = exports.NODE_IS_RECOVERING_ERROR_MESSAGE.test(error.message);
+      if (isNodeIsRecoveringError) {
+        return true;
+      }
+      return false;
+    }
+    exports.isRetryableReadError = isRetryableReadError;
+    var SDAM_RECOVERING_CODES = /* @__PURE__ */ new Set([
+      exports.MONGODB_ERROR_CODES.ShutdownInProgress,
+      exports.MONGODB_ERROR_CODES.PrimarySteppedDown,
+      exports.MONGODB_ERROR_CODES.InterruptedAtShutdown,
+      exports.MONGODB_ERROR_CODES.InterruptedDueToReplStateChange,
+      exports.MONGODB_ERROR_CODES.NotPrimaryOrSecondary
+    ]);
+    var SDAM_NOT_PRIMARY_CODES = /* @__PURE__ */ new Set([
+      exports.MONGODB_ERROR_CODES.NotWritablePrimary,
+      exports.MONGODB_ERROR_CODES.NotPrimaryNoSecondaryOk,
+      exports.MONGODB_ERROR_CODES.LegacyNotPrimary
+    ]);
+    var SDAM_NODE_SHUTTING_DOWN_ERROR_CODES = /* @__PURE__ */ new Set([
+      exports.MONGODB_ERROR_CODES.InterruptedAtShutdown,
+      exports.MONGODB_ERROR_CODES.ShutdownInProgress
+    ]);
+    function isRecoveringError(err) {
+      if (typeof err.code === "number") {
+        return SDAM_RECOVERING_CODES.has(err.code);
+      }
+      return exports.LEGACY_NOT_PRIMARY_OR_SECONDARY_ERROR_MESSAGE.test(err.message) || exports.NODE_IS_RECOVERING_ERROR_MESSAGE.test(err.message);
+    }
+    function isNotWritablePrimaryError(err) {
+      if (typeof err.code === "number") {
+        return SDAM_NOT_PRIMARY_CODES.has(err.code);
+      }
+      if (isRecoveringError(err)) {
+        return false;
+      }
+      return exports.LEGACY_NOT_WRITABLE_PRIMARY_ERROR_MESSAGE.test(err.message);
+    }
+    function isNodeShuttingDownError(err) {
+      return !!(typeof err.code === "number" && SDAM_NODE_SHUTTING_DOWN_ERROR_CODES.has(err.code));
+    }
+    exports.isNodeShuttingDownError = isNodeShuttingDownError;
+    function isSDAMUnrecoverableError(error) {
+      if (error instanceof MongoParseError || error == null) {
+        return true;
+      }
+      return isRecoveringError(error) || isNotWritablePrimaryError(error);
+    }
+    exports.isSDAMUnrecoverableError = isSDAMUnrecoverableError;
+    function isNetworkTimeoutError(err) {
+      return !!(err instanceof MongoNetworkError && err.message.match(/timed out/));
+    }
+    exports.isNetworkTimeoutError = isNetworkTimeoutError;
+    function isResumableError(error, wireVersion) {
+      if (error == null || !(error instanceof MongoError)) {
+        return false;
+      }
+      if (error instanceof MongoNetworkError) {
+        return true;
+      }
+      if (wireVersion != null && wireVersion >= 9) {
+        if (error.code === exports.MONGODB_ERROR_CODES.CursorNotFound) {
+          return true;
+        }
+        return error.hasErrorLabel(exports.MongoErrorLabel.ResumableChangeStreamError);
+      }
+      if (typeof error.code === "number") {
+        return exports.GET_MORE_RESUMABLE_CODES.has(error.code);
+      }
+      return false;
+    }
+    exports.isResumableError = isResumableError;
+  }
+});
+
+// node_modules/bson/lib/bson.cjs
+var require_bson2 = __commonJS({
+  "node_modules/bson/lib/bson.cjs"(exports) {
+    "use strict";
+    var BSON_MAJOR_VERSION = 5;
+    var BSON_INT32_MAX = 2147483647;
+    var BSON_INT32_MIN = -2147483648;
+    var BSON_INT64_MAX = Math.pow(2, 63) - 1;
+    var BSON_INT64_MIN = -Math.pow(2, 63);
+    var JS_INT_MAX = Math.pow(2, 53);
+    var JS_INT_MIN = -Math.pow(2, 53);
+    var BSON_DATA_NUMBER = 1;
+    var BSON_DATA_STRING = 2;
+    var BSON_DATA_OBJECT = 3;
+    var BSON_DATA_ARRAY = 4;
+    var BSON_DATA_BINARY = 5;
+    var BSON_DATA_UNDEFINED = 6;
+    var BSON_DATA_OID = 7;
+    var BSON_DATA_BOOLEAN = 8;
+    var BSON_DATA_DATE = 9;
+    var BSON_DATA_NULL = 10;
+    var BSON_DATA_REGEXP = 11;
+    var BSON_DATA_DBPOINTER = 12;
+    var BSON_DATA_CODE = 13;
+    var BSON_DATA_SYMBOL = 14;
+    var BSON_DATA_CODE_W_SCOPE = 15;
+    var BSON_DATA_INT = 16;
+    var BSON_DATA_TIMESTAMP = 17;
+    var BSON_DATA_LONG = 18;
+    var BSON_DATA_DECIMAL128 = 19;
+    var BSON_DATA_MIN_KEY = 255;
+    var BSON_DATA_MAX_KEY = 127;
+    var BSON_BINARY_SUBTYPE_DEFAULT = 0;
+    var BSON_BINARY_SUBTYPE_UUID_NEW = 4;
+    var BSONType = Object.freeze({
+      double: 1,
+      string: 2,
+      object: 3,
+      array: 4,
+      binData: 5,
+      undefined: 6,
+      objectId: 7,
+      bool: 8,
+      date: 9,
+      null: 10,
+      regex: 11,
+      dbPointer: 12,
+      javascript: 13,
+      symbol: 14,
+      javascriptWithScope: 15,
+      int: 16,
+      timestamp: 17,
+      long: 18,
+      decimal: 19,
+      minKey: -1,
+      maxKey: 127
+    });
+    var BSONError = class extends Error {
+      get bsonError() {
+        return true;
+      }
+      get name() {
+        return "BSONError";
+      }
+      constructor(message) {
+        super(message);
+      }
+      static isBSONError(value) {
+        return value != null && typeof value === "object" && "bsonError" in value && value.bsonError === true && "name" in value && "message" in value && "stack" in value;
+      }
+    };
+    var BSONVersionError = class extends BSONError {
+      get name() {
+        return "BSONVersionError";
+      }
+      constructor() {
+        super(`Unsupported BSON version, bson types must be from bson ${BSON_MAJOR_VERSION}.0 or later`);
+      }
+    };
+    var BSONRuntimeError = class extends BSONError {
+      get name() {
+        return "BSONRuntimeError";
+      }
+      constructor(message) {
+        super(message);
+      }
+    };
+    function nodejsMathRandomBytes(byteLength) {
+      return nodeJsByteUtils.fromNumberArray(Array.from({ length: byteLength }, () => Math.floor(Math.random() * 256)));
+    }
+    var nodejsRandomBytes = (() => {
+      try {
+        return require("crypto").randomBytes;
+      } catch {
+        return nodejsMathRandomBytes;
+      }
+    })();
+    var nodeJsByteUtils = {
+      toLocalBufferType(potentialBuffer) {
+        if (Buffer.isBuffer(potentialBuffer)) {
+          return potentialBuffer;
+        }
+        if (ArrayBuffer.isView(potentialBuffer)) {
+          return Buffer.from(potentialBuffer.buffer, potentialBuffer.byteOffset, potentialBuffer.byteLength);
+        }
+        const stringTag = potentialBuffer?.[Symbol.toStringTag] ?? Object.prototype.toString.call(potentialBuffer);
+        if (stringTag === "ArrayBuffer" || stringTag === "SharedArrayBuffer" || stringTag === "[object ArrayBuffer]" || stringTag === "[object SharedArrayBuffer]") {
+          return Buffer.from(potentialBuffer);
+        }
+        throw new BSONError(`Cannot create Buffer from ${String(potentialBuffer)}`);
+      },
+      allocate(size) {
+        return Buffer.alloc(size);
+      },
+      equals(a, b) {
+        return nodeJsByteUtils.toLocalBufferType(a).equals(b);
+      },
+      fromNumberArray(array) {
+        return Buffer.from(array);
+      },
+      fromBase64(base64) {
+        return Buffer.from(base64, "base64");
+      },
+      toBase64(buffer2) {
+        return nodeJsByteUtils.toLocalBufferType(buffer2).toString("base64");
+      },
+      fromISO88591(codePoints) {
+        return Buffer.from(codePoints, "binary");
+      },
+      toISO88591(buffer2) {
+        return nodeJsByteUtils.toLocalBufferType(buffer2).toString("binary");
+      },
+      fromHex(hex) {
+        return Buffer.from(hex, "hex");
+      },
+      toHex(buffer2) {
+        return nodeJsByteUtils.toLocalBufferType(buffer2).toString("hex");
+      },
+      fromUTF8(text) {
+        return Buffer.from(text, "utf8");
+      },
+      toUTF8(buffer2) {
+        return nodeJsByteUtils.toLocalBufferType(buffer2).toString("utf8");
+      },
+      utf8ByteLength(input) {
+        return Buffer.byteLength(input, "utf8");
+      },
+      encodeUTF8Into(buffer2, source, byteOffset) {
+        return nodeJsByteUtils.toLocalBufferType(buffer2).write(source, byteOffset, void 0, "utf8");
+      },
+      randomBytes: nodejsRandomBytes
+    };
+    function isReactNative() {
+      const { navigator: navigator2 } = globalThis;
+      return typeof navigator2 === "object" && navigator2.product === "ReactNative";
+    }
+    function webMathRandomBytes(byteLength) {
+      if (byteLength < 0) {
+        throw new RangeError(`The argument 'byteLength' is invalid. Received ${byteLength}`);
+      }
+      return webByteUtils.fromNumberArray(Array.from({ length: byteLength }, () => Math.floor(Math.random() * 256)));
+    }
+    var webRandomBytes = (() => {
+      const { crypto } = globalThis;
+      if (crypto != null && typeof crypto.getRandomValues === "function") {
+        return (byteLength) => {
+          return crypto.getRandomValues(webByteUtils.allocate(byteLength));
+        };
+      } else {
+        if (isReactNative()) {
+          const { console: console2 } = globalThis;
+          console2?.warn?.("BSON: For React Native please polyfill crypto.getRandomValues, e.g. using: https://www.npmjs.com/package/react-native-get-random-values.");
+        }
+        return webMathRandomBytes;
+      }
+    })();
+    var HEX_DIGIT = /(\d|[a-f])/i;
+    var webByteUtils = {
+      toLocalBufferType(potentialUint8array) {
+        const stringTag = potentialUint8array?.[Symbol.toStringTag] ?? Object.prototype.toString.call(potentialUint8array);
+        if (stringTag === "Uint8Array") {
+          return potentialUint8array;
+        }
+        if (ArrayBuffer.isView(potentialUint8array)) {
+          return new Uint8Array(potentialUint8array.buffer.slice(potentialUint8array.byteOffset, potentialUint8array.byteOffset + potentialUint8array.byteLength));
+        }
+        if (stringTag === "ArrayBuffer" || stringTag === "SharedArrayBuffer" || stringTag === "[object ArrayBuffer]" || stringTag === "[object SharedArrayBuffer]") {
+          return new Uint8Array(potentialUint8array);
+        }
+        throw new BSONError(`Cannot make a Uint8Array from ${String(potentialUint8array)}`);
+      },
+      allocate(size) {
+        if (typeof size !== "number") {
+          throw new TypeError(`The "size" argument must be of type number. Received ${String(size)}`);
+        }
+        return new Uint8Array(size);
+      },
+      equals(a, b) {
+        if (a.byteLength !== b.byteLength) {
+          return false;
+        }
+        for (let i = 0; i < a.byteLength; i++) {
+          if (a[i] !== b[i]) {
+            return false;
+          }
+        }
+        return true;
+      },
+      fromNumberArray(array) {
+        return Uint8Array.from(array);
+      },
+      fromBase64(base64) {
+        return Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+      },
+      toBase64(uint8array) {
+        return btoa(webByteUtils.toISO88591(uint8array));
+      },
+      fromISO88591(codePoints) {
+        return Uint8Array.from(codePoints, (c) => c.charCodeAt(0) & 255);
+      },
+      toISO88591(uint8array) {
+        return Array.from(Uint16Array.from(uint8array), (b) => String.fromCharCode(b)).join("");
+      },
+      fromHex(hex) {
+        const evenLengthHex = hex.length % 2 === 0 ? hex : hex.slice(0, hex.length - 1);
+        const buffer2 = [];
+        for (let i = 0; i < evenLengthHex.length; i += 2) {
+          const firstDigit = evenLengthHex[i];
+          const secondDigit = evenLengthHex[i + 1];
+          if (!HEX_DIGIT.test(firstDigit)) {
+            break;
+          }
+          if (!HEX_DIGIT.test(secondDigit)) {
+            break;
+          }
+          const hexDigit = Number.parseInt(`${firstDigit}${secondDigit}`, 16);
+          buffer2.push(hexDigit);
+        }
+        return Uint8Array.from(buffer2);
+      },
+      toHex(uint8array) {
+        return Array.from(uint8array, (byte) => byte.toString(16).padStart(2, "0")).join("");
+      },
+      fromUTF8(text) {
+        return new TextEncoder().encode(text);
+      },
+      toUTF8(uint8array) {
+        return new TextDecoder("utf8", { fatal: false }).decode(uint8array);
+      },
+      utf8ByteLength(input) {
+        return webByteUtils.fromUTF8(input).byteLength;
+      },
+      encodeUTF8Into(buffer2, source, byteOffset) {
+        const bytes = webByteUtils.fromUTF8(source);
+        buffer2.set(bytes, byteOffset);
+        return bytes.byteLength;
+      },
+      randomBytes: webRandomBytes
+    };
+    var hasGlobalBuffer = typeof Buffer === "function" && Buffer.prototype?._isBuffer !== true;
+    var ByteUtils = hasGlobalBuffer ? nodeJsByteUtils : webByteUtils;
+    var BSONDataView = class extends DataView {
+      static fromUint8Array(input) {
+        return new DataView(input.buffer, input.byteOffset, input.byteLength);
+      }
+    };
+    var VALIDATION_REGEX = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|[0-9a-f]{12}4[0-9a-f]{3}[89ab][0-9a-f]{15})$/i;
+    var uuidValidateString = (str) => typeof str === "string" && VALIDATION_REGEX.test(str);
+    var uuidHexStringToBuffer = (hexString) => {
+      if (!uuidValidateString(hexString)) {
+        throw new BSONError('UUID string representations must be a 32 or 36 character hex string (dashes excluded/included). Format: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" or "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".');
+      }
+      const sanitizedHexString = hexString.replace(/-/g, "");
+      return ByteUtils.fromHex(sanitizedHexString);
+    };
+    function bufferToUuidHexString(buffer2, includeDashes = true) {
+      if (includeDashes) {
+        return [
+          ByteUtils.toHex(buffer2.subarray(0, 4)),
+          ByteUtils.toHex(buffer2.subarray(4, 6)),
+          ByteUtils.toHex(buffer2.subarray(6, 8)),
+          ByteUtils.toHex(buffer2.subarray(8, 10)),
+          ByteUtils.toHex(buffer2.subarray(10, 16))
+        ].join("-");
+      }
+      return ByteUtils.toHex(buffer2);
+    }
+    function isAnyArrayBuffer(value) {
+      return ["[object ArrayBuffer]", "[object SharedArrayBuffer]"].includes(Object.prototype.toString.call(value));
+    }
+    function isUint8Array(value) {
+      return Object.prototype.toString.call(value) === "[object Uint8Array]";
+    }
+    function isRegExp(d) {
+      return Object.prototype.toString.call(d) === "[object RegExp]";
+    }
+    function isMap(d) {
+      return Object.prototype.toString.call(d) === "[object Map]";
+    }
+    function isDate(d) {
+      return Object.prototype.toString.call(d) === "[object Date]";
+    }
+    var BSONValue = class {
+      get [Symbol.for("@@mdb.bson.version")]() {
+        return BSON_MAJOR_VERSION;
+      }
+    };
+    var Binary = class extends BSONValue {
+      get _bsontype() {
+        return "Binary";
+      }
+      constructor(buffer2, subType) {
+        super();
+        if (!(buffer2 == null) && !(typeof buffer2 === "string") && !ArrayBuffer.isView(buffer2) && !(buffer2 instanceof ArrayBuffer) && !Array.isArray(buffer2)) {
+          throw new BSONError("Binary can only be constructed from string, Buffer, TypedArray, or Array<number>");
+        }
+        this.sub_type = subType ?? Binary.BSON_BINARY_SUBTYPE_DEFAULT;
+        if (buffer2 == null) {
+          this.buffer = ByteUtils.allocate(Binary.BUFFER_SIZE);
+          this.position = 0;
+        } else {
+          if (typeof buffer2 === "string") {
+            this.buffer = ByteUtils.fromISO88591(buffer2);
+          } else if (Array.isArray(buffer2)) {
+            this.buffer = ByteUtils.fromNumberArray(buffer2);
+          } else {
+            this.buffer = ByteUtils.toLocalBufferType(buffer2);
+          }
+          this.position = this.buffer.byteLength;
+        }
+      }
+      put(byteValue) {
+        if (typeof byteValue === "string" && byteValue.length !== 1) {
+          throw new BSONError("only accepts single character String");
+        } else if (typeof byteValue !== "number" && byteValue.length !== 1)
+          throw new BSONError("only accepts single character Uint8Array or Array");
+        let decodedByte;
+        if (typeof byteValue === "string") {
+          decodedByte = byteValue.charCodeAt(0);
+        } else if (typeof byteValue === "number") {
+          decodedByte = byteValue;
+        } else {
+          decodedByte = byteValue[0];
+        }
+        if (decodedByte < 0 || decodedByte > 255) {
+          throw new BSONError("only accepts number in a valid unsigned byte range 0-255");
+        }
+        if (this.buffer.byteLength > this.position) {
+          this.buffer[this.position++] = decodedByte;
+        } else {
+          const newSpace = ByteUtils.allocate(Binary.BUFFER_SIZE + this.buffer.length);
+          newSpace.set(this.buffer, 0);
+          this.buffer = newSpace;
+          this.buffer[this.position++] = decodedByte;
+        }
+      }
+      write(sequence, offset) {
+        offset = typeof offset === "number" ? offset : this.position;
+        if (this.buffer.byteLength < offset + sequence.length) {
+          const newSpace = ByteUtils.allocate(this.buffer.byteLength + sequence.length);
+          newSpace.set(this.buffer, 0);
+          this.buffer = newSpace;
+        }
+        if (ArrayBuffer.isView(sequence)) {
+          this.buffer.set(ByteUtils.toLocalBufferType(sequence), offset);
+          this.position = offset + sequence.byteLength > this.position ? offset + sequence.length : this.position;
+        } else if (typeof sequence === "string") {
+          const bytes = ByteUtils.fromISO88591(sequence);
+          this.buffer.set(bytes, offset);
+          this.position = offset + sequence.length > this.position ? offset + sequence.length : this.position;
+        }
+      }
+      read(position, length) {
+        length = length && length > 0 ? length : this.position;
+        return this.buffer.slice(position, position + length);
+      }
+      value(asRaw) {
+        asRaw = !!asRaw;
+        if (asRaw && this.buffer.length === this.position) {
+          return this.buffer;
+        }
+        if (asRaw) {
+          return this.buffer.slice(0, this.position);
+        }
+        return ByteUtils.toISO88591(this.buffer.subarray(0, this.position));
+      }
+      length() {
+        return this.position;
+      }
+      toJSON() {
+        return ByteUtils.toBase64(this.buffer);
+      }
+      toString(encoding) {
+        if (encoding === "hex")
+          return ByteUtils.toHex(this.buffer);
+        if (encoding === "base64")
+          return ByteUtils.toBase64(this.buffer);
+        if (encoding === "utf8" || encoding === "utf-8")
+          return ByteUtils.toUTF8(this.buffer);
+        return ByteUtils.toUTF8(this.buffer);
+      }
+      toExtendedJSON(options) {
+        options = options || {};
+        const base64String = ByteUtils.toBase64(this.buffer);
+        const subType = Number(this.sub_type).toString(16);
+        if (options.legacy) {
+          return {
+            $binary: base64String,
+            $type: subType.length === 1 ? "0" + subType : subType
+          };
+        }
+        return {
+          $binary: {
+            base64: base64String,
+            subType: subType.length === 1 ? "0" + subType : subType
+          }
+        };
+      }
+      toUUID() {
+        if (this.sub_type === Binary.SUBTYPE_UUID) {
+          return new UUID(this.buffer.slice(0, this.position));
+        }
+        throw new BSONError(`Binary sub_type "${this.sub_type}" is not supported for converting to UUID. Only "${Binary.SUBTYPE_UUID}" is currently supported.`);
+      }
+      static fromExtendedJSON(doc, options) {
+        options = options || {};
+        let data;
+        let type;
+        if ("$binary" in doc) {
+          if (options.legacy && typeof doc.$binary === "string" && "$type" in doc) {
+            type = doc.$type ? parseInt(doc.$type, 16) : 0;
+            data = ByteUtils.fromBase64(doc.$binary);
+          } else {
+            if (typeof doc.$binary !== "string") {
+              type = doc.$binary.subType ? parseInt(doc.$binary.subType, 16) : 0;
+              data = ByteUtils.fromBase64(doc.$binary.base64);
+            }
+          }
+        } else if ("$uuid" in doc) {
+          type = 4;
+          data = uuidHexStringToBuffer(doc.$uuid);
+        }
+        if (!data) {
+          throw new BSONError(`Unexpected Binary Extended JSON format ${JSON.stringify(doc)}`);
+        }
+        return type === BSON_BINARY_SUBTYPE_UUID_NEW ? new UUID(data) : new Binary(data, type);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return `new Binary(Buffer.from("${ByteUtils.toHex(this.buffer)}", "hex"), ${this.sub_type})`;
+      }
+    };
+    Binary.BSON_BINARY_SUBTYPE_DEFAULT = 0;
+    Binary.BUFFER_SIZE = 256;
+    Binary.SUBTYPE_DEFAULT = 0;
+    Binary.SUBTYPE_FUNCTION = 1;
+    Binary.SUBTYPE_BYTE_ARRAY = 2;
+    Binary.SUBTYPE_UUID_OLD = 3;
+    Binary.SUBTYPE_UUID = 4;
+    Binary.SUBTYPE_MD5 = 5;
+    Binary.SUBTYPE_ENCRYPTED = 6;
+    Binary.SUBTYPE_COLUMN = 7;
+    Binary.SUBTYPE_USER_DEFINED = 128;
+    var UUID_BYTE_LENGTH = 16;
+    var UUID = class extends Binary {
+      constructor(input) {
+        let bytes;
+        let hexStr;
+        if (input == null) {
+          bytes = UUID.generate();
+        } else if (input instanceof UUID) {
+          bytes = ByteUtils.toLocalBufferType(new Uint8Array(input.buffer));
+          hexStr = input.__id;
+        } else if (ArrayBuffer.isView(input) && input.byteLength === UUID_BYTE_LENGTH) {
+          bytes = ByteUtils.toLocalBufferType(input);
+        } else if (typeof input === "string") {
+          bytes = uuidHexStringToBuffer(input);
+        } else {
+          throw new BSONError("Argument passed in UUID constructor must be a UUID, a 16 byte Buffer or a 32/36 character hex string (dashes excluded/included, format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).");
+        }
+        super(bytes, BSON_BINARY_SUBTYPE_UUID_NEW);
+        this.__id = hexStr;
+      }
+      get id() {
+        return this.buffer;
+      }
+      set id(value) {
+        this.buffer = value;
+        if (UUID.cacheHexString) {
+          this.__id = bufferToUuidHexString(value);
+        }
+      }
+      toHexString(includeDashes = true) {
+        if (UUID.cacheHexString && this.__id) {
+          return this.__id;
+        }
+        const uuidHexString = bufferToUuidHexString(this.id, includeDashes);
+        if (UUID.cacheHexString) {
+          this.__id = uuidHexString;
+        }
+        return uuidHexString;
+      }
+      toString(encoding) {
+        if (encoding === "hex")
+          return ByteUtils.toHex(this.id);
+        if (encoding === "base64")
+          return ByteUtils.toBase64(this.id);
+        return this.toHexString();
+      }
+      toJSON() {
+        return this.toHexString();
+      }
+      equals(otherId) {
+        if (!otherId) {
+          return false;
+        }
+        if (otherId instanceof UUID) {
+          return ByteUtils.equals(otherId.id, this.id);
+        }
+        try {
+          return ByteUtils.equals(new UUID(otherId).id, this.id);
+        } catch {
+          return false;
+        }
+      }
+      toBinary() {
+        return new Binary(this.id, Binary.SUBTYPE_UUID);
+      }
+      static generate() {
+        const bytes = ByteUtils.randomBytes(UUID_BYTE_LENGTH);
+        bytes[6] = bytes[6] & 15 | 64;
+        bytes[8] = bytes[8] & 63 | 128;
+        return bytes;
+      }
+      static isValid(input) {
+        if (!input) {
+          return false;
+        }
+        if (input instanceof UUID) {
+          return true;
+        }
+        if (typeof input === "string") {
+          return uuidValidateString(input);
+        }
+        if (isUint8Array(input)) {
+          if (input.byteLength !== UUID_BYTE_LENGTH) {
+            return false;
+          }
+          return (input[6] & 240) === 64 && (input[8] & 128) === 128;
+        }
+        return false;
+      }
+      static createFromHexString(hexString) {
+        const buffer2 = uuidHexStringToBuffer(hexString);
+        return new UUID(buffer2);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return `new UUID("${this.toHexString()}")`;
+      }
+    };
+    var Code = class extends BSONValue {
+      get _bsontype() {
+        return "Code";
+      }
+      constructor(code, scope) {
+        super();
+        this.code = code.toString();
+        this.scope = scope ?? null;
+      }
+      toJSON() {
+        if (this.scope != null) {
+          return { code: this.code, scope: this.scope };
+        }
+        return { code: this.code };
+      }
+      toExtendedJSON() {
+        if (this.scope) {
+          return { $code: this.code, $scope: this.scope };
+        }
+        return { $code: this.code };
+      }
+      static fromExtendedJSON(doc) {
+        return new Code(doc.$code, doc.$scope);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        const codeJson = this.toJSON();
+        return `new Code("${String(codeJson.code)}"${codeJson.scope != null ? `, ${JSON.stringify(codeJson.scope)}` : ""})`;
+      }
+    };
+    function isDBRefLike(value) {
+      return value != null && typeof value === "object" && "$id" in value && value.$id != null && "$ref" in value && typeof value.$ref === "string" && (!("$db" in value) || "$db" in value && typeof value.$db === "string");
+    }
+    var DBRef = class extends BSONValue {
+      get _bsontype() {
+        return "DBRef";
+      }
+      constructor(collection, oid, db2, fields) {
+        super();
+        const parts = collection.split(".");
+        if (parts.length === 2) {
+          db2 = parts.shift();
+          collection = parts.shift();
+        }
+        this.collection = collection;
+        this.oid = oid;
+        this.db = db2;
+        this.fields = fields || {};
+      }
+      get namespace() {
+        return this.collection;
+      }
+      set namespace(value) {
+        this.collection = value;
+      }
+      toJSON() {
+        const o = Object.assign({
+          $ref: this.collection,
+          $id: this.oid
+        }, this.fields);
+        if (this.db != null)
+          o.$db = this.db;
+        return o;
+      }
+      toExtendedJSON(options) {
+        options = options || {};
+        let o = {
+          $ref: this.collection,
+          $id: this.oid
+        };
+        if (options.legacy) {
+          return o;
+        }
+        if (this.db)
+          o.$db = this.db;
+        o = Object.assign(o, this.fields);
+        return o;
+      }
+      static fromExtendedJSON(doc) {
+        const copy = Object.assign({}, doc);
+        delete copy.$ref;
+        delete copy.$id;
+        delete copy.$db;
+        return new DBRef(doc.$ref, doc.$id, doc.$db, copy);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        const oid = this.oid === void 0 || this.oid.toString === void 0 ? this.oid : this.oid.toString();
+        return `new DBRef("${this.namespace}", new ObjectId("${String(oid)}")${this.db ? `, "${this.db}"` : ""})`;
+      }
+    };
+    var wasm = void 0;
+    try {
+      wasm = new WebAssembly.Instance(new WebAssembly.Module(new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 13, 2, 96, 0, 1, 127, 96, 4, 127, 127, 127, 127, 1, 127, 3, 7, 6, 0, 1, 1, 1, 1, 1, 6, 6, 1, 127, 1, 65, 0, 11, 7, 50, 6, 3, 109, 117, 108, 0, 1, 5, 100, 105, 118, 95, 115, 0, 2, 5, 100, 105, 118, 95, 117, 0, 3, 5, 114, 101, 109, 95, 115, 0, 4, 5, 114, 101, 109, 95, 117, 0, 5, 8, 103, 101, 116, 95, 104, 105, 103, 104, 0, 0, 10, 191, 1, 6, 4, 0, 35, 0, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 126, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 127, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 128, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 129, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11, 36, 1, 1, 126, 32, 0, 173, 32, 1, 173, 66, 32, 134, 132, 32, 2, 173, 32, 3, 173, 66, 32, 134, 132, 130, 34, 4, 66, 32, 135, 167, 36, 0, 32, 4, 167, 11])), {}).exports;
+    } catch {
+    }
+    var TWO_PWR_16_DBL = 1 << 16;
+    var TWO_PWR_24_DBL = 1 << 24;
+    var TWO_PWR_32_DBL = TWO_PWR_16_DBL * TWO_PWR_16_DBL;
+    var TWO_PWR_64_DBL = TWO_PWR_32_DBL * TWO_PWR_32_DBL;
+    var TWO_PWR_63_DBL = TWO_PWR_64_DBL / 2;
+    var INT_CACHE = {};
+    var UINT_CACHE = {};
+    var MAX_INT64_STRING_LENGTH = 20;
+    var DECIMAL_REG_EX = /^(\+?0|(\+|-)?[1-9][0-9]*)$/;
+    var Long = class extends BSONValue {
+      get _bsontype() {
+        return "Long";
+      }
+      get __isLong__() {
+        return true;
+      }
+      constructor(low = 0, high, unsigned) {
+        super();
+        if (typeof low === "bigint") {
+          Object.assign(this, Long.fromBigInt(low, !!high));
+        } else if (typeof low === "string") {
+          Object.assign(this, Long.fromString(low, !!high));
+        } else {
+          this.low = low | 0;
+          this.high = high | 0;
+          this.unsigned = !!unsigned;
+        }
+      }
+      static fromBits(lowBits, highBits, unsigned) {
+        return new Long(lowBits, highBits, unsigned);
+      }
+      static fromInt(value, unsigned) {
+        let obj, cachedObj, cache;
+        if (unsigned) {
+          value >>>= 0;
+          if (cache = 0 <= value && value < 256) {
+            cachedObj = UINT_CACHE[value];
+            if (cachedObj)
+              return cachedObj;
+          }
+          obj = Long.fromBits(value, (value | 0) < 0 ? -1 : 0, true);
+          if (cache)
+            UINT_CACHE[value] = obj;
+          return obj;
+        } else {
+          value |= 0;
+          if (cache = -128 <= value && value < 128) {
+            cachedObj = INT_CACHE[value];
+            if (cachedObj)
+              return cachedObj;
+          }
+          obj = Long.fromBits(value, value < 0 ? -1 : 0, false);
+          if (cache)
+            INT_CACHE[value] = obj;
+          return obj;
+        }
+      }
+      static fromNumber(value, unsigned) {
+        if (isNaN(value))
+          return unsigned ? Long.UZERO : Long.ZERO;
+        if (unsigned) {
+          if (value < 0)
+            return Long.UZERO;
+          if (value >= TWO_PWR_64_DBL)
+            return Long.MAX_UNSIGNED_VALUE;
+        } else {
+          if (value <= -TWO_PWR_63_DBL)
+            return Long.MIN_VALUE;
+          if (value + 1 >= TWO_PWR_63_DBL)
+            return Long.MAX_VALUE;
+        }
+        if (value < 0)
+          return Long.fromNumber(-value, unsigned).neg();
+        return Long.fromBits(value % TWO_PWR_32_DBL | 0, value / TWO_PWR_32_DBL | 0, unsigned);
+      }
+      static fromBigInt(value, unsigned) {
+        return Long.fromString(value.toString(), unsigned);
+      }
+      static fromString(str, unsigned, radix) {
+        if (str.length === 0)
+          throw new BSONError("empty string");
+        if (str === "NaN" || str === "Infinity" || str === "+Infinity" || str === "-Infinity")
+          return Long.ZERO;
+        if (typeof unsigned === "number") {
+          radix = unsigned, unsigned = false;
+        } else {
+          unsigned = !!unsigned;
+        }
+        radix = radix || 10;
+        if (radix < 2 || 36 < radix)
+          throw new BSONError("radix");
+        let p;
+        if ((p = str.indexOf("-")) > 0)
+          throw new BSONError("interior hyphen");
+        else if (p === 0) {
+          return Long.fromString(str.substring(1), unsigned, radix).neg();
+        }
+        const radixToPower = Long.fromNumber(Math.pow(radix, 8));
+        let result = Long.ZERO;
+        for (let i = 0; i < str.length; i += 8) {
+          const size = Math.min(8, str.length - i), value = parseInt(str.substring(i, i + size), radix);
+          if (size < 8) {
+            const power = Long.fromNumber(Math.pow(radix, size));
+            result = result.mul(power).add(Long.fromNumber(value));
+          } else {
+            result = result.mul(radixToPower);
+            result = result.add(Long.fromNumber(value));
+          }
+        }
+        result.unsigned = unsigned;
+        return result;
+      }
+      static fromBytes(bytes, unsigned, le) {
+        return le ? Long.fromBytesLE(bytes, unsigned) : Long.fromBytesBE(bytes, unsigned);
+      }
+      static fromBytesLE(bytes, unsigned) {
+        return new Long(bytes[0] | bytes[1] << 8 | bytes[2] << 16 | bytes[3] << 24, bytes[4] | bytes[5] << 8 | bytes[6] << 16 | bytes[7] << 24, unsigned);
+      }
+      static fromBytesBE(bytes, unsigned) {
+        return new Long(bytes[4] << 24 | bytes[5] << 16 | bytes[6] << 8 | bytes[7], bytes[0] << 24 | bytes[1] << 16 | bytes[2] << 8 | bytes[3], unsigned);
+      }
+      static isLong(value) {
+        return value != null && typeof value === "object" && "__isLong__" in value && value.__isLong__ === true;
+      }
+      static fromValue(val, unsigned) {
+        if (typeof val === "number")
+          return Long.fromNumber(val, unsigned);
+        if (typeof val === "string")
+          return Long.fromString(val, unsigned);
+        return Long.fromBits(val.low, val.high, typeof unsigned === "boolean" ? unsigned : val.unsigned);
+      }
+      add(addend) {
+        if (!Long.isLong(addend))
+          addend = Long.fromValue(addend);
+        const a48 = this.high >>> 16;
+        const a32 = this.high & 65535;
+        const a16 = this.low >>> 16;
+        const a00 = this.low & 65535;
+        const b48 = addend.high >>> 16;
+        const b32 = addend.high & 65535;
+        const b16 = addend.low >>> 16;
+        const b00 = addend.low & 65535;
+        let c48 = 0, c32 = 0, c16 = 0, c00 = 0;
+        c00 += a00 + b00;
+        c16 += c00 >>> 16;
+        c00 &= 65535;
+        c16 += a16 + b16;
+        c32 += c16 >>> 16;
+        c16 &= 65535;
+        c32 += a32 + b32;
+        c48 += c32 >>> 16;
+        c32 &= 65535;
+        c48 += a48 + b48;
+        c48 &= 65535;
+        return Long.fromBits(c16 << 16 | c00, c48 << 16 | c32, this.unsigned);
+      }
+      and(other) {
+        if (!Long.isLong(other))
+          other = Long.fromValue(other);
+        return Long.fromBits(this.low & other.low, this.high & other.high, this.unsigned);
+      }
+      compare(other) {
+        if (!Long.isLong(other))
+          other = Long.fromValue(other);
+        if (this.eq(other))
+          return 0;
+        const thisNeg = this.isNegative(), otherNeg = other.isNegative();
+        if (thisNeg && !otherNeg)
+          return -1;
+        if (!thisNeg && otherNeg)
+          return 1;
+        if (!this.unsigned)
+          return this.sub(other).isNegative() ? -1 : 1;
+        return other.high >>> 0 > this.high >>> 0 || other.high === this.high && other.low >>> 0 > this.low >>> 0 ? -1 : 1;
+      }
+      comp(other) {
+        return this.compare(other);
+      }
+      divide(divisor) {
+        if (!Long.isLong(divisor))
+          divisor = Long.fromValue(divisor);
+        if (divisor.isZero())
+          throw new BSONError("division by zero");
+        if (wasm) {
+          if (!this.unsigned && this.high === -2147483648 && divisor.low === -1 && divisor.high === -1) {
+            return this;
+          }
+          const low = (this.unsigned ? wasm.div_u : wasm.div_s)(this.low, this.high, divisor.low, divisor.high);
+          return Long.fromBits(low, wasm.get_high(), this.unsigned);
+        }
+        if (this.isZero())
+          return this.unsigned ? Long.UZERO : Long.ZERO;
+        let approx, rem, res;
+        if (!this.unsigned) {
+          if (this.eq(Long.MIN_VALUE)) {
+            if (divisor.eq(Long.ONE) || divisor.eq(Long.NEG_ONE))
+              return Long.MIN_VALUE;
+            else if (divisor.eq(Long.MIN_VALUE))
+              return Long.ONE;
+            else {
+              const halfThis = this.shr(1);
+              approx = halfThis.div(divisor).shl(1);
+              if (approx.eq(Long.ZERO)) {
+                return divisor.isNegative() ? Long.ONE : Long.NEG_ONE;
+              } else {
+                rem = this.sub(divisor.mul(approx));
+                res = approx.add(rem.div(divisor));
+                return res;
+              }
+            }
+          } else if (divisor.eq(Long.MIN_VALUE))
+            return this.unsigned ? Long.UZERO : Long.ZERO;
+          if (this.isNegative()) {
+            if (divisor.isNegative())
+              return this.neg().div(divisor.neg());
+            return this.neg().div(divisor).neg();
+          } else if (divisor.isNegative())
+            return this.div(divisor.neg()).neg();
+          res = Long.ZERO;
+        } else {
+          if (!divisor.unsigned)
+            divisor = divisor.toUnsigned();
+          if (divisor.gt(this))
+            return Long.UZERO;
+          if (divisor.gt(this.shru(1)))
+            return Long.UONE;
+          res = Long.UZERO;
+        }
+        rem = this;
+        while (rem.gte(divisor)) {
+          approx = Math.max(1, Math.floor(rem.toNumber() / divisor.toNumber()));
+          const log2 = Math.ceil(Math.log(approx) / Math.LN2);
+          const delta = log2 <= 48 ? 1 : Math.pow(2, log2 - 48);
+          let approxRes = Long.fromNumber(approx);
+          let approxRem = approxRes.mul(divisor);
+          while (approxRem.isNegative() || approxRem.gt(rem)) {
+            approx -= delta;
+            approxRes = Long.fromNumber(approx, this.unsigned);
+            approxRem = approxRes.mul(divisor);
+          }
+          if (approxRes.isZero())
+            approxRes = Long.ONE;
+          res = res.add(approxRes);
+          rem = rem.sub(approxRem);
+        }
+        return res;
+      }
+      div(divisor) {
+        return this.divide(divisor);
+      }
+      equals(other) {
+        if (!Long.isLong(other))
+          other = Long.fromValue(other);
+        if (this.unsigned !== other.unsigned && this.high >>> 31 === 1 && other.high >>> 31 === 1)
+          return false;
+        return this.high === other.high && this.low === other.low;
+      }
+      eq(other) {
+        return this.equals(other);
+      }
+      getHighBits() {
+        return this.high;
+      }
+      getHighBitsUnsigned() {
+        return this.high >>> 0;
+      }
+      getLowBits() {
+        return this.low;
+      }
+      getLowBitsUnsigned() {
+        return this.low >>> 0;
+      }
+      getNumBitsAbs() {
+        if (this.isNegative()) {
+          return this.eq(Long.MIN_VALUE) ? 64 : this.neg().getNumBitsAbs();
+        }
+        const val = this.high !== 0 ? this.high : this.low;
+        let bit;
+        for (bit = 31; bit > 0; bit--)
+          if ((val & 1 << bit) !== 0)
+            break;
+        return this.high !== 0 ? bit + 33 : bit + 1;
+      }
+      greaterThan(other) {
+        return this.comp(other) > 0;
+      }
+      gt(other) {
+        return this.greaterThan(other);
+      }
+      greaterThanOrEqual(other) {
+        return this.comp(other) >= 0;
+      }
+      gte(other) {
+        return this.greaterThanOrEqual(other);
+      }
+      ge(other) {
+        return this.greaterThanOrEqual(other);
+      }
+      isEven() {
+        return (this.low & 1) === 0;
+      }
+      isNegative() {
+        return !this.unsigned && this.high < 0;
+      }
+      isOdd() {
+        return (this.low & 1) === 1;
+      }
+      isPositive() {
+        return this.unsigned || this.high >= 0;
+      }
+      isZero() {
+        return this.high === 0 && this.low === 0;
+      }
+      lessThan(other) {
+        return this.comp(other) < 0;
+      }
+      lt(other) {
+        return this.lessThan(other);
+      }
+      lessThanOrEqual(other) {
+        return this.comp(other) <= 0;
+      }
+      lte(other) {
+        return this.lessThanOrEqual(other);
+      }
+      modulo(divisor) {
+        if (!Long.isLong(divisor))
+          divisor = Long.fromValue(divisor);
+        if (wasm) {
+          const low = (this.unsigned ? wasm.rem_u : wasm.rem_s)(this.low, this.high, divisor.low, divisor.high);
+          return Long.fromBits(low, wasm.get_high(), this.unsigned);
+        }
+        return this.sub(this.div(divisor).mul(divisor));
+      }
+      mod(divisor) {
+        return this.modulo(divisor);
+      }
+      rem(divisor) {
+        return this.modulo(divisor);
+      }
+      multiply(multiplier) {
+        if (this.isZero())
+          return Long.ZERO;
+        if (!Long.isLong(multiplier))
+          multiplier = Long.fromValue(multiplier);
+        if (wasm) {
+          const low = wasm.mul(this.low, this.high, multiplier.low, multiplier.high);
+          return Long.fromBits(low, wasm.get_high(), this.unsigned);
+        }
+        if (multiplier.isZero())
+          return Long.ZERO;
+        if (this.eq(Long.MIN_VALUE))
+          return multiplier.isOdd() ? Long.MIN_VALUE : Long.ZERO;
+        if (multiplier.eq(Long.MIN_VALUE))
+          return this.isOdd() ? Long.MIN_VALUE : Long.ZERO;
+        if (this.isNegative()) {
+          if (multiplier.isNegative())
+            return this.neg().mul(multiplier.neg());
+          else
+            return this.neg().mul(multiplier).neg();
+        } else if (multiplier.isNegative())
+          return this.mul(multiplier.neg()).neg();
+        if (this.lt(Long.TWO_PWR_24) && multiplier.lt(Long.TWO_PWR_24))
+          return Long.fromNumber(this.toNumber() * multiplier.toNumber(), this.unsigned);
+        const a48 = this.high >>> 16;
+        const a32 = this.high & 65535;
+        const a16 = this.low >>> 16;
+        const a00 = this.low & 65535;
+        const b48 = multiplier.high >>> 16;
+        const b32 = multiplier.high & 65535;
+        const b16 = multiplier.low >>> 16;
+        const b00 = multiplier.low & 65535;
+        let c48 = 0, c32 = 0, c16 = 0, c00 = 0;
+        c00 += a00 * b00;
+        c16 += c00 >>> 16;
+        c00 &= 65535;
+        c16 += a16 * b00;
+        c32 += c16 >>> 16;
+        c16 &= 65535;
+        c16 += a00 * b16;
+        c32 += c16 >>> 16;
+        c16 &= 65535;
+        c32 += a32 * b00;
+        c48 += c32 >>> 16;
+        c32 &= 65535;
+        c32 += a16 * b16;
+        c48 += c32 >>> 16;
+        c32 &= 65535;
+        c32 += a00 * b32;
+        c48 += c32 >>> 16;
+        c32 &= 65535;
+        c48 += a48 * b00 + a32 * b16 + a16 * b32 + a00 * b48;
+        c48 &= 65535;
+        return Long.fromBits(c16 << 16 | c00, c48 << 16 | c32, this.unsigned);
+      }
+      mul(multiplier) {
+        return this.multiply(multiplier);
+      }
+      negate() {
+        if (!this.unsigned && this.eq(Long.MIN_VALUE))
+          return Long.MIN_VALUE;
+        return this.not().add(Long.ONE);
+      }
+      neg() {
+        return this.negate();
+      }
+      not() {
+        return Long.fromBits(~this.low, ~this.high, this.unsigned);
+      }
+      notEquals(other) {
+        return !this.equals(other);
+      }
+      neq(other) {
+        return this.notEquals(other);
+      }
+      ne(other) {
+        return this.notEquals(other);
+      }
+      or(other) {
+        if (!Long.isLong(other))
+          other = Long.fromValue(other);
+        return Long.fromBits(this.low | other.low, this.high | other.high, this.unsigned);
+      }
+      shiftLeft(numBits) {
+        if (Long.isLong(numBits))
+          numBits = numBits.toInt();
+        if ((numBits &= 63) === 0)
+          return this;
+        else if (numBits < 32)
+          return Long.fromBits(this.low << numBits, this.high << numBits | this.low >>> 32 - numBits, this.unsigned);
+        else
+          return Long.fromBits(0, this.low << numBits - 32, this.unsigned);
+      }
+      shl(numBits) {
+        return this.shiftLeft(numBits);
+      }
+      shiftRight(numBits) {
+        if (Long.isLong(numBits))
+          numBits = numBits.toInt();
+        if ((numBits &= 63) === 0)
+          return this;
+        else if (numBits < 32)
+          return Long.fromBits(this.low >>> numBits | this.high << 32 - numBits, this.high >> numBits, this.unsigned);
+        else
+          return Long.fromBits(this.high >> numBits - 32, this.high >= 0 ? 0 : -1, this.unsigned);
+      }
+      shr(numBits) {
+        return this.shiftRight(numBits);
+      }
+      shiftRightUnsigned(numBits) {
+        if (Long.isLong(numBits))
+          numBits = numBits.toInt();
+        numBits &= 63;
+        if (numBits === 0)
+          return this;
+        else {
+          const high = this.high;
+          if (numBits < 32) {
+            const low = this.low;
+            return Long.fromBits(low >>> numBits | high << 32 - numBits, high >>> numBits, this.unsigned);
+          } else if (numBits === 32)
+            return Long.fromBits(high, 0, this.unsigned);
+          else
+            return Long.fromBits(high >>> numBits - 32, 0, this.unsigned);
+        }
+      }
+      shr_u(numBits) {
+        return this.shiftRightUnsigned(numBits);
+      }
+      shru(numBits) {
+        return this.shiftRightUnsigned(numBits);
+      }
+      subtract(subtrahend) {
+        if (!Long.isLong(subtrahend))
+          subtrahend = Long.fromValue(subtrahend);
+        return this.add(subtrahend.neg());
+      }
+      sub(subtrahend) {
+        return this.subtract(subtrahend);
+      }
+      toInt() {
+        return this.unsigned ? this.low >>> 0 : this.low;
+      }
+      toNumber() {
+        if (this.unsigned)
+          return (this.high >>> 0) * TWO_PWR_32_DBL + (this.low >>> 0);
+        return this.high * TWO_PWR_32_DBL + (this.low >>> 0);
+      }
+      toBigInt() {
+        return BigInt(this.toString());
+      }
+      toBytes(le) {
+        return le ? this.toBytesLE() : this.toBytesBE();
+      }
+      toBytesLE() {
+        const hi = this.high, lo = this.low;
+        return [
+          lo & 255,
+          lo >>> 8 & 255,
+          lo >>> 16 & 255,
+          lo >>> 24,
+          hi & 255,
+          hi >>> 8 & 255,
+          hi >>> 16 & 255,
+          hi >>> 24
+        ];
+      }
+      toBytesBE() {
+        const hi = this.high, lo = this.low;
+        return [
+          hi >>> 24,
+          hi >>> 16 & 255,
+          hi >>> 8 & 255,
+          hi & 255,
+          lo >>> 24,
+          lo >>> 16 & 255,
+          lo >>> 8 & 255,
+          lo & 255
+        ];
+      }
+      toSigned() {
+        if (!this.unsigned)
+          return this;
+        return Long.fromBits(this.low, this.high, false);
+      }
+      toString(radix) {
+        radix = radix || 10;
+        if (radix < 2 || 36 < radix)
+          throw new BSONError("radix");
+        if (this.isZero())
+          return "0";
+        if (this.isNegative()) {
+          if (this.eq(Long.MIN_VALUE)) {
+            const radixLong = Long.fromNumber(radix), div = this.div(radixLong), rem1 = div.mul(radixLong).sub(this);
+            return div.toString(radix) + rem1.toInt().toString(radix);
+          } else
+            return "-" + this.neg().toString(radix);
+        }
+        const radixToPower = Long.fromNumber(Math.pow(radix, 6), this.unsigned);
+        let rem = this;
+        let result = "";
+        while (true) {
+          const remDiv = rem.div(radixToPower);
+          const intval = rem.sub(remDiv.mul(radixToPower)).toInt() >>> 0;
+          let digits = intval.toString(radix);
+          rem = remDiv;
+          if (rem.isZero()) {
+            return digits + result;
+          } else {
+            while (digits.length < 6)
+              digits = "0" + digits;
+            result = "" + digits + result;
+          }
+        }
+      }
+      toUnsigned() {
+        if (this.unsigned)
+          return this;
+        return Long.fromBits(this.low, this.high, true);
+      }
+      xor(other) {
+        if (!Long.isLong(other))
+          other = Long.fromValue(other);
+        return Long.fromBits(this.low ^ other.low, this.high ^ other.high, this.unsigned);
+      }
+      eqz() {
+        return this.isZero();
+      }
+      le(other) {
+        return this.lessThanOrEqual(other);
+      }
+      toExtendedJSON(options) {
+        if (options && options.relaxed)
+          return this.toNumber();
+        return { $numberLong: this.toString() };
+      }
+      static fromExtendedJSON(doc, options) {
+        const { useBigInt64 = false, relaxed = true } = { ...options };
+        if (doc.$numberLong.length > MAX_INT64_STRING_LENGTH) {
+          throw new BSONError("$numberLong string is too long");
+        }
+        if (!DECIMAL_REG_EX.test(doc.$numberLong)) {
+          throw new BSONError(`$numberLong string "${doc.$numberLong}" is in an invalid format`);
+        }
+        if (useBigInt64) {
+          const bigIntResult = BigInt(doc.$numberLong);
+          return BigInt.asIntN(64, bigIntResult);
+        }
+        const longResult = Long.fromString(doc.$numberLong);
+        if (relaxed) {
+          return longResult.toNumber();
+        }
+        return longResult;
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return `new Long("${this.toString()}"${this.unsigned ? ", true" : ""})`;
+      }
+    };
+    Long.TWO_PWR_24 = Long.fromInt(TWO_PWR_24_DBL);
+    Long.MAX_UNSIGNED_VALUE = Long.fromBits(4294967295 | 0, 4294967295 | 0, true);
+    Long.ZERO = Long.fromInt(0);
+    Long.UZERO = Long.fromInt(0, true);
+    Long.ONE = Long.fromInt(1);
+    Long.UONE = Long.fromInt(1, true);
+    Long.NEG_ONE = Long.fromInt(-1);
+    Long.MAX_VALUE = Long.fromBits(4294967295 | 0, 2147483647 | 0, false);
+    Long.MIN_VALUE = Long.fromBits(0, 2147483648 | 0, false);
+    var PARSE_STRING_REGEXP = /^(\+|-)?(\d+|(\d*\.\d*))?(E|e)?([-+])?(\d+)?$/;
+    var PARSE_INF_REGEXP = /^(\+|-)?(Infinity|inf)$/i;
+    var PARSE_NAN_REGEXP = /^(\+|-)?NaN$/i;
+    var EXPONENT_MAX = 6111;
+    var EXPONENT_MIN = -6176;
+    var EXPONENT_BIAS = 6176;
+    var MAX_DIGITS = 34;
+    var NAN_BUFFER = ByteUtils.fromNumberArray([
+      124,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ].reverse());
+    var INF_NEGATIVE_BUFFER = ByteUtils.fromNumberArray([
+      248,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ].reverse());
+    var INF_POSITIVE_BUFFER = ByteUtils.fromNumberArray([
+      120,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ].reverse());
+    var EXPONENT_REGEX = /^([-+])?(\d+)?$/;
+    var COMBINATION_MASK = 31;
+    var EXPONENT_MASK = 16383;
+    var COMBINATION_INFINITY = 30;
+    var COMBINATION_NAN = 31;
+    function isDigit(value) {
+      return !isNaN(parseInt(value, 10));
+    }
+    function divideu128(value) {
+      const DIVISOR = Long.fromNumber(1e3 * 1e3 * 1e3);
+      let _rem = Long.fromNumber(0);
+      if (!value.parts[0] && !value.parts[1] && !value.parts[2] && !value.parts[3]) {
+        return { quotient: value, rem: _rem };
+      }
+      for (let i = 0; i <= 3; i++) {
+        _rem = _rem.shiftLeft(32);
+        _rem = _rem.add(new Long(value.parts[i], 0));
+        value.parts[i] = _rem.div(DIVISOR).low;
+        _rem = _rem.modulo(DIVISOR);
+      }
+      return { quotient: value, rem: _rem };
+    }
+    function multiply64x2(left, right) {
+      if (!left && !right) {
+        return { high: Long.fromNumber(0), low: Long.fromNumber(0) };
+      }
+      const leftHigh = left.shiftRightUnsigned(32);
+      const leftLow = new Long(left.getLowBits(), 0);
+      const rightHigh = right.shiftRightUnsigned(32);
+      const rightLow = new Long(right.getLowBits(), 0);
+      let productHigh = leftHigh.multiply(rightHigh);
+      let productMid = leftHigh.multiply(rightLow);
+      const productMid2 = leftLow.multiply(rightHigh);
+      let productLow = leftLow.multiply(rightLow);
+      productHigh = productHigh.add(productMid.shiftRightUnsigned(32));
+      productMid = new Long(productMid.getLowBits(), 0).add(productMid2).add(productLow.shiftRightUnsigned(32));
+      productHigh = productHigh.add(productMid.shiftRightUnsigned(32));
+      productLow = productMid.shiftLeft(32).add(new Long(productLow.getLowBits(), 0));
+      return { high: productHigh, low: productLow };
+    }
+    function lessThan(left, right) {
+      const uhleft = left.high >>> 0;
+      const uhright = right.high >>> 0;
+      if (uhleft < uhright) {
+        return true;
+      } else if (uhleft === uhright) {
+        const ulleft = left.low >>> 0;
+        const ulright = right.low >>> 0;
+        if (ulleft < ulright)
+          return true;
+      }
+      return false;
+    }
+    function invalidErr(string, message) {
+      throw new BSONError(`"${string}" is not a valid Decimal128 string - ${message}`);
+    }
+    var Decimal128 = class extends BSONValue {
+      get _bsontype() {
+        return "Decimal128";
+      }
+      constructor(bytes) {
+        super();
+        if (typeof bytes === "string") {
+          this.bytes = Decimal128.fromString(bytes).bytes;
+        } else if (isUint8Array(bytes)) {
+          if (bytes.byteLength !== 16) {
+            throw new BSONError("Decimal128 must take a Buffer of 16 bytes");
+          }
+          this.bytes = bytes;
+        } else {
+          throw new BSONError("Decimal128 must take a Buffer or string");
+        }
+      }
+      static fromString(representation) {
+        let isNegative = false;
+        let sawRadix = false;
+        let foundNonZero = false;
+        let significantDigits = 0;
+        let nDigitsRead = 0;
+        let nDigits = 0;
+        let radixPosition = 0;
+        let firstNonZero = 0;
+        const digits = [0];
+        let nDigitsStored = 0;
+        let digitsInsert = 0;
+        let firstDigit = 0;
+        let lastDigit = 0;
+        let exponent = 0;
+        let i = 0;
+        let significandHigh = new Long(0, 0);
+        let significandLow = new Long(0, 0);
+        let biasedExponent = 0;
+        let index = 0;
+        if (representation.length >= 7e3) {
+          throw new BSONError("" + representation + " not a valid Decimal128 string");
+        }
+        const stringMatch = representation.match(PARSE_STRING_REGEXP);
+        const infMatch = representation.match(PARSE_INF_REGEXP);
+        const nanMatch = representation.match(PARSE_NAN_REGEXP);
+        if (!stringMatch && !infMatch && !nanMatch || representation.length === 0) {
+          throw new BSONError("" + representation + " not a valid Decimal128 string");
+        }
+        if (stringMatch) {
+          const unsignedNumber = stringMatch[2];
+          const e = stringMatch[4];
+          const expSign = stringMatch[5];
+          const expNumber = stringMatch[6];
+          if (e && expNumber === void 0)
+            invalidErr(representation, "missing exponent power");
+          if (e && unsignedNumber === void 0)
+            invalidErr(representation, "missing exponent base");
+          if (e === void 0 && (expSign || expNumber)) {
+            invalidErr(representation, "missing e before exponent");
+          }
+        }
+        if (representation[index] === "+" || representation[index] === "-") {
+          isNegative = representation[index++] === "-";
+        }
+        if (!isDigit(representation[index]) && representation[index] !== ".") {
+          if (representation[index] === "i" || representation[index] === "I") {
+            return new Decimal128(isNegative ? INF_NEGATIVE_BUFFER : INF_POSITIVE_BUFFER);
+          } else if (representation[index] === "N") {
+            return new Decimal128(NAN_BUFFER);
+          }
+        }
+        while (isDigit(representation[index]) || representation[index] === ".") {
+          if (representation[index] === ".") {
+            if (sawRadix)
+              invalidErr(representation, "contains multiple periods");
+            sawRadix = true;
+            index = index + 1;
+            continue;
+          }
+          if (nDigitsStored < 34) {
+            if (representation[index] !== "0" || foundNonZero) {
+              if (!foundNonZero) {
+                firstNonZero = nDigitsRead;
+              }
+              foundNonZero = true;
+              digits[digitsInsert++] = parseInt(representation[index], 10);
+              nDigitsStored = nDigitsStored + 1;
+            }
+          }
+          if (foundNonZero)
+            nDigits = nDigits + 1;
+          if (sawRadix)
+            radixPosition = radixPosition + 1;
+          nDigitsRead = nDigitsRead + 1;
+          index = index + 1;
+        }
+        if (sawRadix && !nDigitsRead)
+          throw new BSONError("" + representation + " not a valid Decimal128 string");
+        if (representation[index] === "e" || representation[index] === "E") {
+          const match = representation.substr(++index).match(EXPONENT_REGEX);
+          if (!match || !match[2])
+            return new Decimal128(NAN_BUFFER);
+          exponent = parseInt(match[0], 10);
+          index = index + match[0].length;
+        }
+        if (representation[index])
+          return new Decimal128(NAN_BUFFER);
+        firstDigit = 0;
+        if (!nDigitsStored) {
+          firstDigit = 0;
+          lastDigit = 0;
+          digits[0] = 0;
+          nDigits = 1;
+          nDigitsStored = 1;
+          significantDigits = 0;
+        } else {
+          lastDigit = nDigitsStored - 1;
+          significantDigits = nDigits;
+          if (significantDigits !== 1) {
+            while (digits[firstNonZero + significantDigits - 1] === 0) {
+              significantDigits = significantDigits - 1;
+            }
+          }
+        }
+        if (exponent <= radixPosition && radixPosition - exponent > 1 << 14) {
+          exponent = EXPONENT_MIN;
+        } else {
+          exponent = exponent - radixPosition;
+        }
+        while (exponent > EXPONENT_MAX) {
+          lastDigit = lastDigit + 1;
+          if (lastDigit - firstDigit > MAX_DIGITS) {
+            const digitsString = digits.join("");
+            if (digitsString.match(/^0+$/)) {
+              exponent = EXPONENT_MAX;
+              break;
+            }
+            invalidErr(representation, "overflow");
+          }
+          exponent = exponent - 1;
+        }
+        while (exponent < EXPONENT_MIN || nDigitsStored < nDigits) {
+          if (lastDigit === 0 && significantDigits < nDigitsStored) {
+            exponent = EXPONENT_MIN;
+            significantDigits = 0;
+            break;
+          }
+          if (nDigitsStored < nDigits) {
+            nDigits = nDigits - 1;
+          } else {
+            lastDigit = lastDigit - 1;
+          }
+          if (exponent < EXPONENT_MAX) {
+            exponent = exponent + 1;
+          } else {
+            const digitsString = digits.join("");
+            if (digitsString.match(/^0+$/)) {
+              exponent = EXPONENT_MAX;
+              break;
+            }
+            invalidErr(representation, "overflow");
+          }
+        }
+        if (lastDigit - firstDigit + 1 < significantDigits) {
+          let endOfString = nDigitsRead;
+          if (sawRadix) {
+            firstNonZero = firstNonZero + 1;
+            endOfString = endOfString + 1;
+          }
+          if (isNegative) {
+            firstNonZero = firstNonZero + 1;
+            endOfString = endOfString + 1;
+          }
+          const roundDigit = parseInt(representation[firstNonZero + lastDigit + 1], 10);
+          let roundBit = 0;
+          if (roundDigit >= 5) {
+            roundBit = 1;
+            if (roundDigit === 5) {
+              roundBit = digits[lastDigit] % 2 === 1 ? 1 : 0;
+              for (i = firstNonZero + lastDigit + 2; i < endOfString; i++) {
+                if (parseInt(representation[i], 10)) {
+                  roundBit = 1;
+                  break;
+                }
+              }
+            }
+          }
+          if (roundBit) {
+            let dIdx = lastDigit;
+            for (; dIdx >= 0; dIdx--) {
+              if (++digits[dIdx] > 9) {
+                digits[dIdx] = 0;
+                if (dIdx === 0) {
+                  if (exponent < EXPONENT_MAX) {
+                    exponent = exponent + 1;
+                    digits[dIdx] = 1;
+                  } else {
+                    return new Decimal128(isNegative ? INF_NEGATIVE_BUFFER : INF_POSITIVE_BUFFER);
+                  }
+                }
+              }
+            }
+          }
+        }
+        significandHigh = Long.fromNumber(0);
+        significandLow = Long.fromNumber(0);
+        if (significantDigits === 0) {
+          significandHigh = Long.fromNumber(0);
+          significandLow = Long.fromNumber(0);
+        } else if (lastDigit - firstDigit < 17) {
+          let dIdx = firstDigit;
+          significandLow = Long.fromNumber(digits[dIdx++]);
+          significandHigh = new Long(0, 0);
+          for (; dIdx <= lastDigit; dIdx++) {
+            significandLow = significandLow.multiply(Long.fromNumber(10));
+            significandLow = significandLow.add(Long.fromNumber(digits[dIdx]));
+          }
+        } else {
+          let dIdx = firstDigit;
+          significandHigh = Long.fromNumber(digits[dIdx++]);
+          for (; dIdx <= lastDigit - 17; dIdx++) {
+            significandHigh = significandHigh.multiply(Long.fromNumber(10));
+            significandHigh = significandHigh.add(Long.fromNumber(digits[dIdx]));
+          }
+          significandLow = Long.fromNumber(digits[dIdx++]);
+          for (; dIdx <= lastDigit; dIdx++) {
+            significandLow = significandLow.multiply(Long.fromNumber(10));
+            significandLow = significandLow.add(Long.fromNumber(digits[dIdx]));
+          }
+        }
+        const significand = multiply64x2(significandHigh, Long.fromString("100000000000000000"));
+        significand.low = significand.low.add(significandLow);
+        if (lessThan(significand.low, significandLow)) {
+          significand.high = significand.high.add(Long.fromNumber(1));
+        }
+        biasedExponent = exponent + EXPONENT_BIAS;
+        const dec = { low: Long.fromNumber(0), high: Long.fromNumber(0) };
+        if (significand.high.shiftRightUnsigned(49).and(Long.fromNumber(1)).equals(Long.fromNumber(1))) {
+          dec.high = dec.high.or(Long.fromNumber(3).shiftLeft(61));
+          dec.high = dec.high.or(Long.fromNumber(biasedExponent).and(Long.fromNumber(16383).shiftLeft(47)));
+          dec.high = dec.high.or(significand.high.and(Long.fromNumber(140737488355327)));
+        } else {
+          dec.high = dec.high.or(Long.fromNumber(biasedExponent & 16383).shiftLeft(49));
+          dec.high = dec.high.or(significand.high.and(Long.fromNumber(562949953421311)));
+        }
+        dec.low = significand.low;
+        if (isNegative) {
+          dec.high = dec.high.or(Long.fromString("9223372036854775808"));
+        }
+        const buffer2 = ByteUtils.allocate(16);
+        index = 0;
+        buffer2[index++] = dec.low.low & 255;
+        buffer2[index++] = dec.low.low >> 8 & 255;
+        buffer2[index++] = dec.low.low >> 16 & 255;
+        buffer2[index++] = dec.low.low >> 24 & 255;
+        buffer2[index++] = dec.low.high & 255;
+        buffer2[index++] = dec.low.high >> 8 & 255;
+        buffer2[index++] = dec.low.high >> 16 & 255;
+        buffer2[index++] = dec.low.high >> 24 & 255;
+        buffer2[index++] = dec.high.low & 255;
+        buffer2[index++] = dec.high.low >> 8 & 255;
+        buffer2[index++] = dec.high.low >> 16 & 255;
+        buffer2[index++] = dec.high.low >> 24 & 255;
+        buffer2[index++] = dec.high.high & 255;
+        buffer2[index++] = dec.high.high >> 8 & 255;
+        buffer2[index++] = dec.high.high >> 16 & 255;
+        buffer2[index++] = dec.high.high >> 24 & 255;
+        return new Decimal128(buffer2);
+      }
+      toString() {
+        let biased_exponent;
+        let significand_digits = 0;
+        const significand = new Array(36);
+        for (let i = 0; i < significand.length; i++)
+          significand[i] = 0;
+        let index = 0;
+        let is_zero = false;
+        let significand_msb;
+        let significand128 = { parts: [0, 0, 0, 0] };
+        let j, k;
+        const string = [];
+        index = 0;
+        const buffer2 = this.bytes;
+        const low = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+        const midl = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+        const midh = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+        const high = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+        index = 0;
+        const dec = {
+          low: new Long(low, midl),
+          high: new Long(midh, high)
+        };
+        if (dec.high.lessThan(Long.ZERO)) {
+          string.push("-");
+        }
+        const combination = high >> 26 & COMBINATION_MASK;
+        if (combination >> 3 === 3) {
+          if (combination === COMBINATION_INFINITY) {
+            return string.join("") + "Infinity";
+          } else if (combination === COMBINATION_NAN) {
+            return "NaN";
+          } else {
+            biased_exponent = high >> 15 & EXPONENT_MASK;
+            significand_msb = 8 + (high >> 14 & 1);
+          }
+        } else {
+          significand_msb = high >> 14 & 7;
+          biased_exponent = high >> 17 & EXPONENT_MASK;
+        }
+        const exponent = biased_exponent - EXPONENT_BIAS;
+        significand128.parts[0] = (high & 16383) + ((significand_msb & 15) << 14);
+        significand128.parts[1] = midh;
+        significand128.parts[2] = midl;
+        significand128.parts[3] = low;
+        if (significand128.parts[0] === 0 && significand128.parts[1] === 0 && significand128.parts[2] === 0 && significand128.parts[3] === 0) {
+          is_zero = true;
+        } else {
+          for (k = 3; k >= 0; k--) {
+            let least_digits = 0;
+            const result = divideu128(significand128);
+            significand128 = result.quotient;
+            least_digits = result.rem.low;
+            if (!least_digits)
+              continue;
+            for (j = 8; j >= 0; j--) {
+              significand[k * 9 + j] = least_digits % 10;
+              least_digits = Math.floor(least_digits / 10);
+            }
+          }
+        }
+        if (is_zero) {
+          significand_digits = 1;
+          significand[index] = 0;
+        } else {
+          significand_digits = 36;
+          while (!significand[index]) {
+            significand_digits = significand_digits - 1;
+            index = index + 1;
+          }
+        }
+        const scientific_exponent = significand_digits - 1 + exponent;
+        if (scientific_exponent >= 34 || scientific_exponent <= -7 || exponent > 0) {
+          if (significand_digits > 34) {
+            string.push(`${0}`);
+            if (exponent > 0)
+              string.push(`E+${exponent}`);
+            else if (exponent < 0)
+              string.push(`E${exponent}`);
+            return string.join("");
+          }
+          string.push(`${significand[index++]}`);
+          significand_digits = significand_digits - 1;
+          if (significand_digits) {
+            string.push(".");
+          }
+          for (let i = 0; i < significand_digits; i++) {
+            string.push(`${significand[index++]}`);
+          }
+          string.push("E");
+          if (scientific_exponent > 0) {
+            string.push(`+${scientific_exponent}`);
+          } else {
+            string.push(`${scientific_exponent}`);
+          }
+        } else {
+          if (exponent >= 0) {
+            for (let i = 0; i < significand_digits; i++) {
+              string.push(`${significand[index++]}`);
+            }
+          } else {
+            let radix_position = significand_digits + exponent;
+            if (radix_position > 0) {
+              for (let i = 0; i < radix_position; i++) {
+                string.push(`${significand[index++]}`);
+              }
+            } else {
+              string.push("0");
+            }
+            string.push(".");
+            while (radix_position++ < 0) {
+              string.push("0");
+            }
+            for (let i = 0; i < significand_digits - Math.max(radix_position - 1, 0); i++) {
+              string.push(`${significand[index++]}`);
+            }
+          }
+        }
+        return string.join("");
+      }
+      toJSON() {
+        return { $numberDecimal: this.toString() };
+      }
+      toExtendedJSON() {
+        return { $numberDecimal: this.toString() };
+      }
+      static fromExtendedJSON(doc) {
+        return Decimal128.fromString(doc.$numberDecimal);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return `new Decimal128("${this.toString()}")`;
+      }
+    };
+    var Double = class extends BSONValue {
+      get _bsontype() {
+        return "Double";
+      }
+      constructor(value) {
+        super();
+        if (value instanceof Number) {
+          value = value.valueOf();
+        }
+        this.value = +value;
+      }
+      valueOf() {
+        return this.value;
+      }
+      toJSON() {
+        return this.value;
+      }
+      toString(radix) {
+        return this.value.toString(radix);
+      }
+      toExtendedJSON(options) {
+        if (options && (options.legacy || options.relaxed && isFinite(this.value))) {
+          return this.value;
+        }
+        if (Object.is(Math.sign(this.value), -0)) {
+          return { $numberDouble: "-0.0" };
+        }
+        return {
+          $numberDouble: Number.isInteger(this.value) ? this.value.toFixed(1) : this.value.toString()
+        };
+      }
+      static fromExtendedJSON(doc, options) {
+        const doubleValue = parseFloat(doc.$numberDouble);
+        return options && options.relaxed ? doubleValue : new Double(doubleValue);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        const eJSON = this.toExtendedJSON();
+        return `new Double(${eJSON.$numberDouble})`;
+      }
+    };
+    var Int32 = class extends BSONValue {
+      get _bsontype() {
+        return "Int32";
+      }
+      constructor(value) {
+        super();
+        if (value instanceof Number) {
+          value = value.valueOf();
+        }
+        this.value = +value | 0;
+      }
+      valueOf() {
+        return this.value;
+      }
+      toString(radix) {
+        return this.value.toString(radix);
+      }
+      toJSON() {
+        return this.value;
+      }
+      toExtendedJSON(options) {
+        if (options && (options.relaxed || options.legacy))
+          return this.value;
+        return { $numberInt: this.value.toString() };
+      }
+      static fromExtendedJSON(doc, options) {
+        return options && options.relaxed ? parseInt(doc.$numberInt, 10) : new Int32(doc.$numberInt);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return `new Int32(${this.valueOf()})`;
+      }
+    };
+    var MaxKey = class extends BSONValue {
+      get _bsontype() {
+        return "MaxKey";
+      }
+      toExtendedJSON() {
+        return { $maxKey: 1 };
+      }
+      static fromExtendedJSON() {
+        return new MaxKey();
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return "new MaxKey()";
+      }
+    };
+    var MinKey = class extends BSONValue {
+      get _bsontype() {
+        return "MinKey";
+      }
+      toExtendedJSON() {
+        return { $minKey: 1 };
+      }
+      static fromExtendedJSON() {
+        return new MinKey();
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return "new MinKey()";
+      }
+    };
+    var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+    var PROCESS_UNIQUE = null;
+    var kId = Symbol("id");
+    var ObjectId3 = class extends BSONValue {
+      get _bsontype() {
+        return "ObjectId";
+      }
+      constructor(inputId) {
+        super();
+        let workingId;
+        if (typeof inputId === "object" && inputId && "id" in inputId) {
+          if (typeof inputId.id !== "string" && !ArrayBuffer.isView(inputId.id)) {
+            throw new BSONError("Argument passed in must have an id that is of type string or Buffer");
+          }
+          if ("toHexString" in inputId && typeof inputId.toHexString === "function") {
+            workingId = ByteUtils.fromHex(inputId.toHexString());
+          } else {
+            workingId = inputId.id;
+          }
+        } else {
+          workingId = inputId;
+        }
+        if (workingId == null || typeof workingId === "number") {
+          this[kId] = ObjectId3.generate(typeof workingId === "number" ? workingId : void 0);
+        } else if (ArrayBuffer.isView(workingId) && workingId.byteLength === 12) {
+          this[kId] = ByteUtils.toLocalBufferType(workingId);
+        } else if (typeof workingId === "string") {
+          if (workingId.length === 12) {
+            const bytes = ByteUtils.fromUTF8(workingId);
+            if (bytes.byteLength === 12) {
+              this[kId] = bytes;
+            } else {
+              throw new BSONError("Argument passed in must be a string of 12 bytes");
+            }
+          } else if (workingId.length === 24 && checkForHexRegExp.test(workingId)) {
+            this[kId] = ByteUtils.fromHex(workingId);
+          } else {
+            throw new BSONError("Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer");
+          }
+        } else {
+          throw new BSONError("Argument passed in does not match the accepted types");
+        }
+        if (ObjectId3.cacheHexString) {
+          this.__id = ByteUtils.toHex(this.id);
+        }
+      }
+      get id() {
+        return this[kId];
+      }
+      set id(value) {
+        this[kId] = value;
+        if (ObjectId3.cacheHexString) {
+          this.__id = ByteUtils.toHex(value);
+        }
+      }
+      toHexString() {
+        if (ObjectId3.cacheHexString && this.__id) {
+          return this.__id;
+        }
+        const hexString = ByteUtils.toHex(this.id);
+        if (ObjectId3.cacheHexString && !this.__id) {
+          this.__id = hexString;
+        }
+        return hexString;
+      }
+      static getInc() {
+        return ObjectId3.index = (ObjectId3.index + 1) % 16777215;
+      }
+      static generate(time) {
+        if ("number" !== typeof time) {
+          time = Math.floor(Date.now() / 1e3);
+        }
+        const inc = ObjectId3.getInc();
+        const buffer2 = ByteUtils.allocate(12);
+        BSONDataView.fromUint8Array(buffer2).setUint32(0, time, false);
+        if (PROCESS_UNIQUE === null) {
+          PROCESS_UNIQUE = ByteUtils.randomBytes(5);
+        }
+        buffer2[4] = PROCESS_UNIQUE[0];
+        buffer2[5] = PROCESS_UNIQUE[1];
+        buffer2[6] = PROCESS_UNIQUE[2];
+        buffer2[7] = PROCESS_UNIQUE[3];
+        buffer2[8] = PROCESS_UNIQUE[4];
+        buffer2[11] = inc & 255;
+        buffer2[10] = inc >> 8 & 255;
+        buffer2[9] = inc >> 16 & 255;
+        return buffer2;
+      }
+      toString(encoding) {
+        if (encoding === "base64")
+          return ByteUtils.toBase64(this.id);
+        if (encoding === "hex")
+          return this.toHexString();
+        return this.toHexString();
+      }
+      toJSON() {
+        return this.toHexString();
+      }
+      equals(otherId) {
+        if (otherId === void 0 || otherId === null) {
+          return false;
+        }
+        if (otherId instanceof ObjectId3) {
+          return this[kId][11] === otherId[kId][11] && ByteUtils.equals(this[kId], otherId[kId]);
+        }
+        if (typeof otherId === "string" && ObjectId3.isValid(otherId) && otherId.length === 12 && isUint8Array(this.id)) {
+          return ByteUtils.equals(this.id, ByteUtils.fromISO88591(otherId));
+        }
+        if (typeof otherId === "string" && ObjectId3.isValid(otherId) && otherId.length === 24) {
+          return otherId.toLowerCase() === this.toHexString();
+        }
+        if (typeof otherId === "string" && ObjectId3.isValid(otherId) && otherId.length === 12) {
+          return ByteUtils.equals(ByteUtils.fromUTF8(otherId), this.id);
+        }
+        if (typeof otherId === "object" && "toHexString" in otherId && typeof otherId.toHexString === "function") {
+          const otherIdString = otherId.toHexString();
+          const thisIdString = this.toHexString().toLowerCase();
+          return typeof otherIdString === "string" && otherIdString.toLowerCase() === thisIdString;
+        }
+        return false;
+      }
+      getTimestamp() {
+        const timestamp = /* @__PURE__ */ new Date();
+        const time = BSONDataView.fromUint8Array(this.id).getUint32(0, false);
+        timestamp.setTime(Math.floor(time) * 1e3);
+        return timestamp;
+      }
+      static createPk() {
+        return new ObjectId3();
+      }
+      static createFromTime(time) {
+        const buffer2 = ByteUtils.fromNumberArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        BSONDataView.fromUint8Array(buffer2).setUint32(0, time, false);
+        return new ObjectId3(buffer2);
+      }
+      static createFromHexString(hexString) {
+        if (typeof hexString === "undefined" || hexString != null && hexString.length !== 24) {
+          throw new BSONError("Argument passed in must be a single String of 12 bytes or a string of 24 hex characters");
+        }
+        return new ObjectId3(ByteUtils.fromHex(hexString));
+      }
+      static isValid(id) {
+        if (id == null)
+          return false;
+        try {
+          new ObjectId3(id);
+          return true;
+        } catch {
+          return false;
+        }
+      }
+      toExtendedJSON() {
+        if (this.toHexString)
+          return { $oid: this.toHexString() };
+        return { $oid: this.toString("hex") };
+      }
+      static fromExtendedJSON(doc) {
+        return new ObjectId3(doc.$oid);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return `new ObjectId("${this.toHexString()}")`;
+      }
+    };
+    ObjectId3.index = Math.floor(Math.random() * 16777215);
+    function internalCalculateObjectSize(object, serializeFunctions, ignoreUndefined) {
+      let totalLength = 4 + 1;
+      if (Array.isArray(object)) {
+        for (let i = 0; i < object.length; i++) {
+          totalLength += calculateElement(i.toString(), object[i], serializeFunctions, true, ignoreUndefined);
+        }
+      } else {
+        if (typeof object?.toBSON === "function") {
+          object = object.toBSON();
+        }
+        for (const key of Object.keys(object)) {
+          totalLength += calculateElement(key, object[key], serializeFunctions, false, ignoreUndefined);
+        }
+      }
+      return totalLength;
+    }
+    function calculateElement(name2, value, serializeFunctions = false, isArray = false, ignoreUndefined = false) {
+      if (typeof value?.toBSON === "function") {
+        value = value.toBSON();
+      }
+      switch (typeof value) {
+        case "string":
+          return 1 + ByteUtils.utf8ByteLength(name2) + 1 + 4 + ByteUtils.utf8ByteLength(value) + 1;
+        case "number":
+          if (Math.floor(value) === value && value >= JS_INT_MIN && value <= JS_INT_MAX) {
+            if (value >= BSON_INT32_MIN && value <= BSON_INT32_MAX) {
+              return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (4 + 1);
+            } else {
+              return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (8 + 1);
+            }
+          } else {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (8 + 1);
+          }
+        case "undefined":
+          if (isArray || !ignoreUndefined)
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + 1;
+          return 0;
+        case "boolean":
+          return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (1 + 1);
+        case "object":
+          if (value != null && typeof value._bsontype === "string" && value[Symbol.for("@@mdb.bson.version")] !== BSON_MAJOR_VERSION) {
+            throw new BSONVersionError();
+          } else if (value == null || value._bsontype === "MinKey" || value._bsontype === "MaxKey") {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + 1;
+          } else if (value._bsontype === "ObjectId") {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (12 + 1);
+          } else if (value instanceof Date || isDate(value)) {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (8 + 1);
+          } else if (ArrayBuffer.isView(value) || value instanceof ArrayBuffer || isAnyArrayBuffer(value)) {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (1 + 4 + 1) + value.byteLength;
+          } else if (value._bsontype === "Long" || value._bsontype === "Double" || value._bsontype === "Timestamp") {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (8 + 1);
+          } else if (value._bsontype === "Decimal128") {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (16 + 1);
+          } else if (value._bsontype === "Code") {
+            if (value.scope != null && Object.keys(value.scope).length > 0) {
+              return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + 1 + 4 + 4 + ByteUtils.utf8ByteLength(value.code.toString()) + 1 + internalCalculateObjectSize(value.scope, serializeFunctions, ignoreUndefined);
+            } else {
+              return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + 1 + 4 + ByteUtils.utf8ByteLength(value.code.toString()) + 1;
+            }
+          } else if (value._bsontype === "Binary") {
+            const binary = value;
+            if (binary.sub_type === Binary.SUBTYPE_BYTE_ARRAY) {
+              return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (binary.position + 1 + 4 + 1 + 4);
+            } else {
+              return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + (binary.position + 1 + 4 + 1);
+            }
+          } else if (value._bsontype === "Symbol") {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + ByteUtils.utf8ByteLength(value.value) + 4 + 1 + 1;
+          } else if (value._bsontype === "DBRef") {
+            const ordered_values = Object.assign({
+              $ref: value.collection,
+              $id: value.oid
+            }, value.fields);
+            if (value.db != null) {
+              ordered_values["$db"] = value.db;
+            }
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + 1 + internalCalculateObjectSize(ordered_values, serializeFunctions, ignoreUndefined);
+          } else if (value instanceof RegExp || isRegExp(value)) {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + 1 + ByteUtils.utf8ByteLength(value.source) + 1 + (value.global ? 1 : 0) + (value.ignoreCase ? 1 : 0) + (value.multiline ? 1 : 0) + 1;
+          } else if (value._bsontype === "BSONRegExp") {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + 1 + ByteUtils.utf8ByteLength(value.pattern) + 1 + ByteUtils.utf8ByteLength(value.options) + 1;
+          } else {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + internalCalculateObjectSize(value, serializeFunctions, ignoreUndefined) + 1;
+          }
+        case "function":
+          if (serializeFunctions) {
+            return (name2 != null ? ByteUtils.utf8ByteLength(name2) + 1 : 0) + 1 + 4 + ByteUtils.utf8ByteLength(value.toString()) + 1;
+          }
+      }
+      return 0;
+    }
+    function alphabetize(str) {
+      return str.split("").sort().join("");
+    }
+    var BSONRegExp = class extends BSONValue {
+      get _bsontype() {
+        return "BSONRegExp";
+      }
+      constructor(pattern, options) {
+        super();
+        this.pattern = pattern;
+        this.options = alphabetize(options ?? "");
+        if (this.pattern.indexOf("\0") !== -1) {
+          throw new BSONError(`BSON Regex patterns cannot contain null bytes, found: ${JSON.stringify(this.pattern)}`);
+        }
+        if (this.options.indexOf("\0") !== -1) {
+          throw new BSONError(`BSON Regex options cannot contain null bytes, found: ${JSON.stringify(this.options)}`);
+        }
+        for (let i = 0; i < this.options.length; i++) {
+          if (!(this.options[i] === "i" || this.options[i] === "m" || this.options[i] === "x" || this.options[i] === "l" || this.options[i] === "s" || this.options[i] === "u")) {
+            throw new BSONError(`The regular expression option [${this.options[i]}] is not supported`);
+          }
+        }
+      }
+      static parseOptions(options) {
+        return options ? options.split("").sort().join("") : "";
+      }
+      toExtendedJSON(options) {
+        options = options || {};
+        if (options.legacy) {
+          return { $regex: this.pattern, $options: this.options };
+        }
+        return { $regularExpression: { pattern: this.pattern, options: this.options } };
+      }
+      static fromExtendedJSON(doc) {
+        if ("$regex" in doc) {
+          if (typeof doc.$regex !== "string") {
+            if (doc.$regex._bsontype === "BSONRegExp") {
+              return doc;
+            }
+          } else {
+            return new BSONRegExp(doc.$regex, BSONRegExp.parseOptions(doc.$options));
+          }
+        }
+        if ("$regularExpression" in doc) {
+          return new BSONRegExp(doc.$regularExpression.pattern, BSONRegExp.parseOptions(doc.$regularExpression.options));
+        }
+        throw new BSONError(`Unexpected BSONRegExp EJSON object form: ${JSON.stringify(doc)}`);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return `new BSONRegExp(${JSON.stringify(this.pattern)}, ${JSON.stringify(this.options)})`;
+      }
+    };
+    var BSONSymbol = class extends BSONValue {
+      get _bsontype() {
+        return "BSONSymbol";
+      }
+      constructor(value) {
+        super();
+        this.value = value;
+      }
+      valueOf() {
+        return this.value;
+      }
+      toString() {
+        return this.value;
+      }
+      inspect() {
+        return `new BSONSymbol("${this.value}")`;
+      }
+      toJSON() {
+        return this.value;
+      }
+      toExtendedJSON() {
+        return { $symbol: this.value };
+      }
+      static fromExtendedJSON(doc) {
+        return new BSONSymbol(doc.$symbol);
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+    };
+    var LongWithoutOverridesClass = Long;
+    var Timestamp = class extends LongWithoutOverridesClass {
+      get _bsontype() {
+        return "Timestamp";
+      }
+      constructor(low) {
+        if (low == null) {
+          super(0, 0, true);
+        } else if (typeof low === "bigint") {
+          super(low, true);
+        } else if (Long.isLong(low)) {
+          super(low.low, low.high, true);
+        } else if (typeof low === "object" && "t" in low && "i" in low) {
+          if (typeof low.t !== "number" && (typeof low.t !== "object" || low.t._bsontype !== "Int32")) {
+            throw new BSONError("Timestamp constructed from { t, i } must provide t as a number");
+          }
+          if (typeof low.i !== "number" && (typeof low.i !== "object" || low.i._bsontype !== "Int32")) {
+            throw new BSONError("Timestamp constructed from { t, i } must provide i as a number");
+          }
+          if (low.t < 0) {
+            throw new BSONError("Timestamp constructed from { t, i } must provide a positive t");
+          }
+          if (low.i < 0) {
+            throw new BSONError("Timestamp constructed from { t, i } must provide a positive i");
+          }
+          if (low.t > 4294967295) {
+            throw new BSONError("Timestamp constructed from { t, i } must provide t equal or less than uint32 max");
+          }
+          if (low.i > 4294967295) {
+            throw new BSONError("Timestamp constructed from { t, i } must provide i equal or less than uint32 max");
+          }
+          super(low.i.valueOf(), low.t.valueOf(), true);
+        } else {
+          throw new BSONError("A Timestamp can only be constructed with: bigint, Long, or { t: number; i: number }");
+        }
+      }
+      toJSON() {
+        return {
+          $timestamp: this.toString()
+        };
+      }
+      static fromInt(value) {
+        return new Timestamp(Long.fromInt(value, true));
+      }
+      static fromNumber(value) {
+        return new Timestamp(Long.fromNumber(value, true));
+      }
+      static fromBits(lowBits, highBits) {
+        return new Timestamp({ i: lowBits, t: highBits });
+      }
+      static fromString(str, optRadix) {
+        return new Timestamp(Long.fromString(str, true, optRadix));
+      }
+      toExtendedJSON() {
+        return { $timestamp: { t: this.high >>> 0, i: this.low >>> 0 } };
+      }
+      static fromExtendedJSON(doc) {
+        const i = Long.isLong(doc.$timestamp.i) ? doc.$timestamp.i.getLowBitsUnsigned() : doc.$timestamp.i;
+        const t = Long.isLong(doc.$timestamp.t) ? doc.$timestamp.t.getLowBitsUnsigned() : doc.$timestamp.t;
+        return new Timestamp({ t, i });
+      }
+      [Symbol.for("nodejs.util.inspect.custom")]() {
+        return this.inspect();
+      }
+      inspect() {
+        return `new Timestamp({ t: ${this.getHighBits()}, i: ${this.getLowBits()} })`;
+      }
+    };
+    Timestamp.MAX_VALUE = Long.MAX_UNSIGNED_VALUE;
+    var FIRST_BIT = 128;
+    var FIRST_TWO_BITS = 192;
+    var FIRST_THREE_BITS = 224;
+    var FIRST_FOUR_BITS = 240;
+    var FIRST_FIVE_BITS = 248;
+    var TWO_BIT_CHAR = 192;
+    var THREE_BIT_CHAR = 224;
+    var FOUR_BIT_CHAR = 240;
+    var CONTINUING_CHAR = 128;
+    function validateUtf8(bytes, start, end) {
+      let continuation = 0;
+      for (let i = start; i < end; i += 1) {
+        const byte = bytes[i];
+        if (continuation) {
+          if ((byte & FIRST_TWO_BITS) !== CONTINUING_CHAR) {
+            return false;
+          }
+          continuation -= 1;
+        } else if (byte & FIRST_BIT) {
+          if ((byte & FIRST_THREE_BITS) === TWO_BIT_CHAR) {
+            continuation = 1;
+          } else if ((byte & FIRST_FOUR_BITS) === THREE_BIT_CHAR) {
+            continuation = 2;
+          } else if ((byte & FIRST_FIVE_BITS) === FOUR_BIT_CHAR) {
+            continuation = 3;
+          } else {
+            return false;
+          }
+        }
+      }
+      return !continuation;
+    }
+    var JS_INT_MAX_LONG = Long.fromNumber(JS_INT_MAX);
+    var JS_INT_MIN_LONG = Long.fromNumber(JS_INT_MIN);
+    function internalDeserialize(buffer2, options, isArray) {
+      options = options == null ? {} : options;
+      const index = options && options.index ? options.index : 0;
+      const size = buffer2[index] | buffer2[index + 1] << 8 | buffer2[index + 2] << 16 | buffer2[index + 3] << 24;
+      if (size < 5) {
+        throw new BSONError(`bson size must be >= 5, is ${size}`);
+      }
+      if (options.allowObjectSmallerThanBufferSize && buffer2.length < size) {
+        throw new BSONError(`buffer length ${buffer2.length} must be >= bson size ${size}`);
+      }
+      if (!options.allowObjectSmallerThanBufferSize && buffer2.length !== size) {
+        throw new BSONError(`buffer length ${buffer2.length} must === bson size ${size}`);
+      }
+      if (size + index > buffer2.byteLength) {
+        throw new BSONError(`(bson size ${size} + options.index ${index} must be <= buffer length ${buffer2.byteLength})`);
+      }
+      if (buffer2[index + size - 1] !== 0) {
+        throw new BSONError("One object, sized correctly, with a spot for an EOO, but the EOO isn't 0x00");
+      }
+      return deserializeObject(buffer2, index, options, isArray);
+    }
+    var allowedDBRefKeys = /^\$ref$|^\$id$|^\$db$/;
+    function deserializeObject(buffer2, index, options, isArray = false) {
+      const fieldsAsRaw = options["fieldsAsRaw"] == null ? null : options["fieldsAsRaw"];
+      const raw = options["raw"] == null ? false : options["raw"];
+      const bsonRegExp = typeof options["bsonRegExp"] === "boolean" ? options["bsonRegExp"] : false;
+      const promoteBuffers = options.promoteBuffers ?? false;
+      const promoteLongs = options.promoteLongs ?? true;
+      const promoteValues = options.promoteValues ?? true;
+      const useBigInt64 = options.useBigInt64 ?? false;
+      if (useBigInt64 && !promoteValues) {
+        throw new BSONError("Must either request bigint or Long for int64 deserialization");
+      }
+      if (useBigInt64 && !promoteLongs) {
+        throw new BSONError("Must either request bigint or Long for int64 deserialization");
+      }
+      const validation = options.validation == null ? { utf8: true } : options.validation;
+      let globalUTFValidation = true;
+      let validationSetting;
+      const utf8KeysSet = /* @__PURE__ */ new Set();
+      const utf8ValidatedKeys = validation.utf8;
+      if (typeof utf8ValidatedKeys === "boolean") {
+        validationSetting = utf8ValidatedKeys;
+      } else {
+        globalUTFValidation = false;
+        const utf8ValidationValues = Object.keys(utf8ValidatedKeys).map(function(key) {
+          return utf8ValidatedKeys[key];
+        });
+        if (utf8ValidationValues.length === 0) {
+          throw new BSONError("UTF-8 validation setting cannot be empty");
+        }
+        if (typeof utf8ValidationValues[0] !== "boolean") {
+          throw new BSONError("Invalid UTF-8 validation option, must specify boolean values");
+        }
+        validationSetting = utf8ValidationValues[0];
+        if (!utf8ValidationValues.every((item) => item === validationSetting)) {
+          throw new BSONError("Invalid UTF-8 validation option - keys must be all true or all false");
+        }
+      }
+      if (!globalUTFValidation) {
+        for (const key of Object.keys(utf8ValidatedKeys)) {
+          utf8KeysSet.add(key);
+        }
+      }
+      const startIndex = index;
+      if (buffer2.length < 5)
+        throw new BSONError("corrupt bson message < 5 bytes long");
+      const size = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+      if (size < 5 || size > buffer2.length)
+        throw new BSONError("corrupt bson message");
+      const object = isArray ? [] : {};
+      let arrayIndex = 0;
+      const done = false;
+      let isPossibleDBRef = isArray ? false : null;
+      const dataview = new DataView(buffer2.buffer, buffer2.byteOffset, buffer2.byteLength);
+      while (!done) {
+        const elementType = buffer2[index++];
+        if (elementType === 0)
+          break;
+        let i = index;
+        while (buffer2[i] !== 0 && i < buffer2.length) {
+          i++;
+        }
+        if (i >= buffer2.byteLength)
+          throw new BSONError("Bad BSON Document: illegal CString");
+        const name2 = isArray ? arrayIndex++ : ByteUtils.toUTF8(buffer2.subarray(index, i));
+        let shouldValidateKey = true;
+        if (globalUTFValidation || utf8KeysSet.has(name2)) {
+          shouldValidateKey = validationSetting;
+        } else {
+          shouldValidateKey = !validationSetting;
+        }
+        if (isPossibleDBRef !== false && name2[0] === "$") {
+          isPossibleDBRef = allowedDBRefKeys.test(name2);
+        }
+        let value;
+        index = i + 1;
+        if (elementType === BSON_DATA_STRING) {
+          const stringSize = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          if (stringSize <= 0 || stringSize > buffer2.length - index || buffer2[index + stringSize - 1] !== 0) {
+            throw new BSONError("bad string length in bson");
+          }
+          value = getValidatedString(buffer2, index, index + stringSize - 1, shouldValidateKey);
+          index = index + stringSize;
+        } else if (elementType === BSON_DATA_OID) {
+          const oid = ByteUtils.allocate(12);
+          oid.set(buffer2.subarray(index, index + 12));
+          value = new ObjectId3(oid);
+          index = index + 12;
+        } else if (elementType === BSON_DATA_INT && promoteValues === false) {
+          value = new Int32(buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24);
+        } else if (elementType === BSON_DATA_INT) {
+          value = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+        } else if (elementType === BSON_DATA_NUMBER && promoteValues === false) {
+          value = new Double(dataview.getFloat64(index, true));
+          index = index + 8;
+        } else if (elementType === BSON_DATA_NUMBER) {
+          value = dataview.getFloat64(index, true);
+          index = index + 8;
+        } else if (elementType === BSON_DATA_DATE) {
+          const lowBits = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          const highBits = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          value = new Date(new Long(lowBits, highBits).toNumber());
+        } else if (elementType === BSON_DATA_BOOLEAN) {
+          if (buffer2[index] !== 0 && buffer2[index] !== 1)
+            throw new BSONError("illegal boolean type value");
+          value = buffer2[index++] === 1;
+        } else if (elementType === BSON_DATA_OBJECT) {
+          const _index = index;
+          const objectSize = buffer2[index] | buffer2[index + 1] << 8 | buffer2[index + 2] << 16 | buffer2[index + 3] << 24;
+          if (objectSize <= 0 || objectSize > buffer2.length - index)
+            throw new BSONError("bad embedded document length in bson");
+          if (raw) {
+            value = buffer2.slice(index, index + objectSize);
+          } else {
+            let objectOptions = options;
+            if (!globalUTFValidation) {
+              objectOptions = { ...options, validation: { utf8: shouldValidateKey } };
+            }
+            value = deserializeObject(buffer2, _index, objectOptions, false);
+          }
+          index = index + objectSize;
+        } else if (elementType === BSON_DATA_ARRAY) {
+          const _index = index;
+          const objectSize = buffer2[index] | buffer2[index + 1] << 8 | buffer2[index + 2] << 16 | buffer2[index + 3] << 24;
+          let arrayOptions = options;
+          const stopIndex = index + objectSize;
+          if (fieldsAsRaw && fieldsAsRaw[name2]) {
+            arrayOptions = { ...options, raw: true };
+          }
+          if (!globalUTFValidation) {
+            arrayOptions = { ...arrayOptions, validation: { utf8: shouldValidateKey } };
+          }
+          value = deserializeObject(buffer2, _index, arrayOptions, true);
+          index = index + objectSize;
+          if (buffer2[index - 1] !== 0)
+            throw new BSONError("invalid array terminator byte");
+          if (index !== stopIndex)
+            throw new BSONError("corrupted array bson");
+        } else if (elementType === BSON_DATA_UNDEFINED) {
+          value = void 0;
+        } else if (elementType === BSON_DATA_NULL) {
+          value = null;
+        } else if (elementType === BSON_DATA_LONG) {
+          const dataview2 = BSONDataView.fromUint8Array(buffer2.subarray(index, index + 8));
+          const lowBits = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          const highBits = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          const long = new Long(lowBits, highBits);
+          if (useBigInt64) {
+            value = dataview2.getBigInt64(0, true);
+          } else if (promoteLongs && promoteValues === true) {
+            value = long.lessThanOrEqual(JS_INT_MAX_LONG) && long.greaterThanOrEqual(JS_INT_MIN_LONG) ? long.toNumber() : long;
+          } else {
+            value = long;
+          }
+        } else if (elementType === BSON_DATA_DECIMAL128) {
+          const bytes = ByteUtils.allocate(16);
+          bytes.set(buffer2.subarray(index, index + 16), 0);
+          index = index + 16;
+          value = new Decimal128(bytes);
+        } else if (elementType === BSON_DATA_BINARY) {
+          let binarySize = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          const totalBinarySize = binarySize;
+          const subType = buffer2[index++];
+          if (binarySize < 0)
+            throw new BSONError("Negative binary type element size found");
+          if (binarySize > buffer2.byteLength)
+            throw new BSONError("Binary type size larger than document size");
+          if (buffer2["slice"] != null) {
+            if (subType === Binary.SUBTYPE_BYTE_ARRAY) {
+              binarySize = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+              if (binarySize < 0)
+                throw new BSONError("Negative binary type element size found for subtype 0x02");
+              if (binarySize > totalBinarySize - 4)
+                throw new BSONError("Binary type with subtype 0x02 contains too long binary size");
+              if (binarySize < totalBinarySize - 4)
+                throw new BSONError("Binary type with subtype 0x02 contains too short binary size");
+            }
+            if (promoteBuffers && promoteValues) {
+              value = ByteUtils.toLocalBufferType(buffer2.slice(index, index + binarySize));
+            } else {
+              value = new Binary(buffer2.slice(index, index + binarySize), subType);
+              if (subType === BSON_BINARY_SUBTYPE_UUID_NEW) {
+                value = value.toUUID();
+              }
+            }
+          } else {
+            const _buffer = ByteUtils.allocate(binarySize);
+            if (subType === Binary.SUBTYPE_BYTE_ARRAY) {
+              binarySize = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+              if (binarySize < 0)
+                throw new BSONError("Negative binary type element size found for subtype 0x02");
+              if (binarySize > totalBinarySize - 4)
+                throw new BSONError("Binary type with subtype 0x02 contains too long binary size");
+              if (binarySize < totalBinarySize - 4)
+                throw new BSONError("Binary type with subtype 0x02 contains too short binary size");
+            }
+            for (i = 0; i < binarySize; i++) {
+              _buffer[i] = buffer2[index + i];
+            }
+            if (promoteBuffers && promoteValues) {
+              value = _buffer;
+            } else if (subType === BSON_BINARY_SUBTYPE_UUID_NEW) {
+              value = new Binary(buffer2.slice(index, index + binarySize), subType).toUUID();
+            } else {
+              value = new Binary(buffer2.slice(index, index + binarySize), subType);
+            }
+          }
+          index = index + binarySize;
+        } else if (elementType === BSON_DATA_REGEXP && bsonRegExp === false) {
+          i = index;
+          while (buffer2[i] !== 0 && i < buffer2.length) {
+            i++;
+          }
+          if (i >= buffer2.length)
+            throw new BSONError("Bad BSON Document: illegal CString");
+          const source = ByteUtils.toUTF8(buffer2.subarray(index, i));
+          index = i + 1;
+          i = index;
+          while (buffer2[i] !== 0 && i < buffer2.length) {
+            i++;
+          }
+          if (i >= buffer2.length)
+            throw new BSONError("Bad BSON Document: illegal CString");
+          const regExpOptions = ByteUtils.toUTF8(buffer2.subarray(index, i));
+          index = i + 1;
+          const optionsArray = new Array(regExpOptions.length);
+          for (i = 0; i < regExpOptions.length; i++) {
+            switch (regExpOptions[i]) {
+              case "m":
+                optionsArray[i] = "m";
+                break;
+              case "s":
+                optionsArray[i] = "g";
+                break;
+              case "i":
+                optionsArray[i] = "i";
+                break;
+            }
+          }
+          value = new RegExp(source, optionsArray.join(""));
+        } else if (elementType === BSON_DATA_REGEXP && bsonRegExp === true) {
+          i = index;
+          while (buffer2[i] !== 0 && i < buffer2.length) {
+            i++;
+          }
+          if (i >= buffer2.length)
+            throw new BSONError("Bad BSON Document: illegal CString");
+          const source = ByteUtils.toUTF8(buffer2.subarray(index, i));
+          index = i + 1;
+          i = index;
+          while (buffer2[i] !== 0 && i < buffer2.length) {
+            i++;
+          }
+          if (i >= buffer2.length)
+            throw new BSONError("Bad BSON Document: illegal CString");
+          const regExpOptions = ByteUtils.toUTF8(buffer2.subarray(index, i));
+          index = i + 1;
+          value = new BSONRegExp(source, regExpOptions);
+        } else if (elementType === BSON_DATA_SYMBOL) {
+          const stringSize = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          if (stringSize <= 0 || stringSize > buffer2.length - index || buffer2[index + stringSize - 1] !== 0) {
+            throw new BSONError("bad string length in bson");
+          }
+          const symbol = getValidatedString(buffer2, index, index + stringSize - 1, shouldValidateKey);
+          value = promoteValues ? symbol : new BSONSymbol(symbol);
+          index = index + stringSize;
+        } else if (elementType === BSON_DATA_TIMESTAMP) {
+          const i2 = buffer2[index++] + buffer2[index++] * (1 << 8) + buffer2[index++] * (1 << 16) + buffer2[index++] * (1 << 24);
+          const t = buffer2[index++] + buffer2[index++] * (1 << 8) + buffer2[index++] * (1 << 16) + buffer2[index++] * (1 << 24);
+          value = new Timestamp({ i: i2, t });
+        } else if (elementType === BSON_DATA_MIN_KEY) {
+          value = new MinKey();
+        } else if (elementType === BSON_DATA_MAX_KEY) {
+          value = new MaxKey();
+        } else if (elementType === BSON_DATA_CODE) {
+          const stringSize = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          if (stringSize <= 0 || stringSize > buffer2.length - index || buffer2[index + stringSize - 1] !== 0) {
+            throw new BSONError("bad string length in bson");
+          }
+          const functionString = getValidatedString(buffer2, index, index + stringSize - 1, shouldValidateKey);
+          value = new Code(functionString);
+          index = index + stringSize;
+        } else if (elementType === BSON_DATA_CODE_W_SCOPE) {
+          const totalSize = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          if (totalSize < 4 + 4 + 4 + 1) {
+            throw new BSONError("code_w_scope total size shorter minimum expected length");
+          }
+          const stringSize = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          if (stringSize <= 0 || stringSize > buffer2.length - index || buffer2[index + stringSize - 1] !== 0) {
+            throw new BSONError("bad string length in bson");
+          }
+          const functionString = getValidatedString(buffer2, index, index + stringSize - 1, shouldValidateKey);
+          index = index + stringSize;
+          const _index = index;
+          const objectSize = buffer2[index] | buffer2[index + 1] << 8 | buffer2[index + 2] << 16 | buffer2[index + 3] << 24;
+          const scopeObject = deserializeObject(buffer2, _index, options, false);
+          index = index + objectSize;
+          if (totalSize < 4 + 4 + objectSize + stringSize) {
+            throw new BSONError("code_w_scope total size is too short, truncating scope");
+          }
+          if (totalSize > 4 + 4 + objectSize + stringSize) {
+            throw new BSONError("code_w_scope total size is too long, clips outer document");
+          }
+          value = new Code(functionString, scopeObject);
+        } else if (elementType === BSON_DATA_DBPOINTER) {
+          const stringSize = buffer2[index++] | buffer2[index++] << 8 | buffer2[index++] << 16 | buffer2[index++] << 24;
+          if (stringSize <= 0 || stringSize > buffer2.length - index || buffer2[index + stringSize - 1] !== 0)
+            throw new BSONError("bad string length in bson");
+          if (validation != null && validation.utf8) {
+            if (!validateUtf8(buffer2, index, index + stringSize - 1)) {
+              throw new BSONError("Invalid UTF-8 string in BSON document");
+            }
+          }
+          const namespace = ByteUtils.toUTF8(buffer2.subarray(index, index + stringSize - 1));
+          index = index + stringSize;
+          const oidBuffer = ByteUtils.allocate(12);
+          oidBuffer.set(buffer2.subarray(index, index + 12), 0);
+          const oid = new ObjectId3(oidBuffer);
+          index = index + 12;
+          value = new DBRef(namespace, oid);
+        } else {
+          throw new BSONError(`Detected unknown BSON type ${elementType.toString(16)} for fieldname "${name2}"`);
+        }
+        if (name2 === "__proto__") {
+          Object.defineProperty(object, name2, {
+            value,
+            writable: true,
+            enumerable: true,
+            configurable: true
+          });
+        } else {
+          object[name2] = value;
+        }
+      }
+      if (size !== index - startIndex) {
+        if (isArray)
+          throw new BSONError("corrupt array bson");
+        throw new BSONError("corrupt object bson");
+      }
+      if (!isPossibleDBRef)
+        return object;
+      if (isDBRefLike(object)) {
+        const copy = Object.assign({}, object);
+        delete copy.$ref;
+        delete copy.$id;
+        delete copy.$db;
+        return new DBRef(object.$ref, object.$id, object.$db, copy);
+      }
+      return object;
+    }
+    function getValidatedString(buffer2, start, end, shouldValidateUtf8) {
+      const value = ByteUtils.toUTF8(buffer2.subarray(start, end));
+      if (shouldValidateUtf8) {
+        for (let i = 0; i < value.length; i++) {
+          if (value.charCodeAt(i) === 65533) {
+            if (!validateUtf8(buffer2, start, end)) {
+              throw new BSONError("Invalid UTF-8 string in BSON document");
+            }
+            break;
+          }
+        }
+      }
+      return value;
+    }
+    var regexp = /\x00/;
+    var ignoreKeys = /* @__PURE__ */ new Set(["$db", "$ref", "$id", "$clusterTime"]);
+    function serializeString(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_STRING;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes + 1;
+      buffer2[index - 1] = 0;
+      const size = ByteUtils.encodeUTF8Into(buffer2, value, index + 4);
+      buffer2[index + 3] = size + 1 >> 24 & 255;
+      buffer2[index + 2] = size + 1 >> 16 & 255;
+      buffer2[index + 1] = size + 1 >> 8 & 255;
+      buffer2[index] = size + 1 & 255;
+      index = index + 4 + size;
+      buffer2[index++] = 0;
+      return index;
+    }
+    var NUMBER_SPACE = new DataView(new ArrayBuffer(8), 0, 8);
+    var FOUR_BYTE_VIEW_ON_NUMBER = new Uint8Array(NUMBER_SPACE.buffer, 0, 4);
+    var EIGHT_BYTE_VIEW_ON_NUMBER = new Uint8Array(NUMBER_SPACE.buffer, 0, 8);
+    function serializeNumber(buffer2, key, value, index) {
+      const isNegativeZero = Object.is(value, -0);
+      const type = !isNegativeZero && Number.isSafeInteger(value) && value <= BSON_INT32_MAX && value >= BSON_INT32_MIN ? BSON_DATA_INT : BSON_DATA_NUMBER;
+      if (type === BSON_DATA_INT) {
+        NUMBER_SPACE.setInt32(0, value, true);
+      } else {
+        NUMBER_SPACE.setFloat64(0, value, true);
+      }
+      const bytes = type === BSON_DATA_INT ? FOUR_BYTE_VIEW_ON_NUMBER : EIGHT_BYTE_VIEW_ON_NUMBER;
+      buffer2[index++] = type;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      buffer2.set(bytes, index);
+      index += bytes.byteLength;
+      return index;
+    }
+    function serializeBigInt(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_LONG;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index += numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      NUMBER_SPACE.setBigInt64(0, value, true);
+      buffer2.set(EIGHT_BYTE_VIEW_ON_NUMBER, index);
+      index += EIGHT_BYTE_VIEW_ON_NUMBER.byteLength;
+      return index;
+    }
+    function serializeNull(buffer2, key, _, index) {
+      buffer2[index++] = BSON_DATA_NULL;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      return index;
+    }
+    function serializeBoolean(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_BOOLEAN;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      buffer2[index++] = value ? 1 : 0;
+      return index;
+    }
+    function serializeDate(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_DATE;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      const dateInMilis = Long.fromNumber(value.getTime());
+      const lowBits = dateInMilis.getLowBits();
+      const highBits = dateInMilis.getHighBits();
+      buffer2[index++] = lowBits & 255;
+      buffer2[index++] = lowBits >> 8 & 255;
+      buffer2[index++] = lowBits >> 16 & 255;
+      buffer2[index++] = lowBits >> 24 & 255;
+      buffer2[index++] = highBits & 255;
+      buffer2[index++] = highBits >> 8 & 255;
+      buffer2[index++] = highBits >> 16 & 255;
+      buffer2[index++] = highBits >> 24 & 255;
+      return index;
+    }
+    function serializeRegExp(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_REGEXP;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      if (value.source && value.source.match(regexp) != null) {
+        throw new BSONError("value " + value.source + " must not contain null bytes");
+      }
+      index = index + ByteUtils.encodeUTF8Into(buffer2, value.source, index);
+      buffer2[index++] = 0;
+      if (value.ignoreCase)
+        buffer2[index++] = 105;
+      if (value.global)
+        buffer2[index++] = 115;
+      if (value.multiline)
+        buffer2[index++] = 109;
+      buffer2[index++] = 0;
+      return index;
+    }
+    function serializeBSONRegExp(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_REGEXP;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      if (value.pattern.match(regexp) != null) {
+        throw new BSONError("pattern " + value.pattern + " must not contain null bytes");
+      }
+      index = index + ByteUtils.encodeUTF8Into(buffer2, value.pattern, index);
+      buffer2[index++] = 0;
+      const sortedOptions = value.options.split("").sort().join("");
+      index = index + ByteUtils.encodeUTF8Into(buffer2, sortedOptions, index);
+      buffer2[index++] = 0;
+      return index;
+    }
+    function serializeMinMax(buffer2, key, value, index) {
+      if (value === null) {
+        buffer2[index++] = BSON_DATA_NULL;
+      } else if (value._bsontype === "MinKey") {
+        buffer2[index++] = BSON_DATA_MIN_KEY;
+      } else {
+        buffer2[index++] = BSON_DATA_MAX_KEY;
+      }
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      return index;
+    }
+    function serializeObjectId(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_OID;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      if (isUint8Array(value.id)) {
+        buffer2.set(value.id.subarray(0, 12), index);
+      } else {
+        throw new BSONError("object [" + JSON.stringify(value) + "] is not a valid ObjectId");
+      }
+      return index + 12;
+    }
+    function serializeBuffer(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_BINARY;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      const size = value.length;
+      buffer2[index++] = size & 255;
+      buffer2[index++] = size >> 8 & 255;
+      buffer2[index++] = size >> 16 & 255;
+      buffer2[index++] = size >> 24 & 255;
+      buffer2[index++] = BSON_BINARY_SUBTYPE_DEFAULT;
+      buffer2.set(value, index);
+      index = index + size;
+      return index;
+    }
+    function serializeObject(buffer2, key, value, index, checkKeys, depth, serializeFunctions, ignoreUndefined, path) {
+      if (path.has(value)) {
+        throw new BSONError("Cannot convert circular structure to BSON");
+      }
+      path.add(value);
+      buffer2[index++] = Array.isArray(value) ? BSON_DATA_ARRAY : BSON_DATA_OBJECT;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      const endIndex = serializeInto(buffer2, value, checkKeys, index, depth + 1, serializeFunctions, ignoreUndefined, path);
+      path.delete(value);
+      return endIndex;
+    }
+    function serializeDecimal128(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_DECIMAL128;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      buffer2.set(value.bytes.subarray(0, 16), index);
+      return index + 16;
+    }
+    function serializeLong(buffer2, key, value, index) {
+      buffer2[index++] = value._bsontype === "Long" ? BSON_DATA_LONG : BSON_DATA_TIMESTAMP;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      const lowBits = value.getLowBits();
+      const highBits = value.getHighBits();
+      buffer2[index++] = lowBits & 255;
+      buffer2[index++] = lowBits >> 8 & 255;
+      buffer2[index++] = lowBits >> 16 & 255;
+      buffer2[index++] = lowBits >> 24 & 255;
+      buffer2[index++] = highBits & 255;
+      buffer2[index++] = highBits >> 8 & 255;
+      buffer2[index++] = highBits >> 16 & 255;
+      buffer2[index++] = highBits >> 24 & 255;
+      return index;
+    }
+    function serializeInt32(buffer2, key, value, index) {
+      value = value.valueOf();
+      buffer2[index++] = BSON_DATA_INT;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      buffer2[index++] = value & 255;
+      buffer2[index++] = value >> 8 & 255;
+      buffer2[index++] = value >> 16 & 255;
+      buffer2[index++] = value >> 24 & 255;
+      return index;
+    }
+    function serializeDouble(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_NUMBER;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      NUMBER_SPACE.setFloat64(0, value.value, true);
+      buffer2.set(EIGHT_BYTE_VIEW_ON_NUMBER, index);
+      index = index + 8;
+      return index;
+    }
+    function serializeFunction(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_CODE;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      const functionString = value.toString();
+      const size = ByteUtils.encodeUTF8Into(buffer2, functionString, index + 4) + 1;
+      buffer2[index] = size & 255;
+      buffer2[index + 1] = size >> 8 & 255;
+      buffer2[index + 2] = size >> 16 & 255;
+      buffer2[index + 3] = size >> 24 & 255;
+      index = index + 4 + size - 1;
+      buffer2[index++] = 0;
+      return index;
+    }
+    function serializeCode(buffer2, key, value, index, checkKeys = false, depth = 0, serializeFunctions = false, ignoreUndefined = true, path) {
+      if (value.scope && typeof value.scope === "object") {
+        buffer2[index++] = BSON_DATA_CODE_W_SCOPE;
+        const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+        index = index + numberOfWrittenBytes;
+        buffer2[index++] = 0;
+        let startIndex = index;
+        const functionString = value.code;
+        index = index + 4;
+        const codeSize = ByteUtils.encodeUTF8Into(buffer2, functionString, index + 4) + 1;
+        buffer2[index] = codeSize & 255;
+        buffer2[index + 1] = codeSize >> 8 & 255;
+        buffer2[index + 2] = codeSize >> 16 & 255;
+        buffer2[index + 3] = codeSize >> 24 & 255;
+        buffer2[index + 4 + codeSize - 1] = 0;
+        index = index + codeSize + 4;
+        const endIndex = serializeInto(buffer2, value.scope, checkKeys, index, depth + 1, serializeFunctions, ignoreUndefined, path);
+        index = endIndex - 1;
+        const totalSize = endIndex - startIndex;
+        buffer2[startIndex++] = totalSize & 255;
+        buffer2[startIndex++] = totalSize >> 8 & 255;
+        buffer2[startIndex++] = totalSize >> 16 & 255;
+        buffer2[startIndex++] = totalSize >> 24 & 255;
+        buffer2[index++] = 0;
+      } else {
+        buffer2[index++] = BSON_DATA_CODE;
+        const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+        index = index + numberOfWrittenBytes;
+        buffer2[index++] = 0;
+        const functionString = value.code.toString();
+        const size = ByteUtils.encodeUTF8Into(buffer2, functionString, index + 4) + 1;
+        buffer2[index] = size & 255;
+        buffer2[index + 1] = size >> 8 & 255;
+        buffer2[index + 2] = size >> 16 & 255;
+        buffer2[index + 3] = size >> 24 & 255;
+        index = index + 4 + size - 1;
+        buffer2[index++] = 0;
+      }
+      return index;
+    }
+    function serializeBinary(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_BINARY;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      const data = value.buffer;
+      let size = value.position;
+      if (value.sub_type === Binary.SUBTYPE_BYTE_ARRAY)
+        size = size + 4;
+      buffer2[index++] = size & 255;
+      buffer2[index++] = size >> 8 & 255;
+      buffer2[index++] = size >> 16 & 255;
+      buffer2[index++] = size >> 24 & 255;
+      buffer2[index++] = value.sub_type;
+      if (value.sub_type === Binary.SUBTYPE_BYTE_ARRAY) {
+        size = size - 4;
+        buffer2[index++] = size & 255;
+        buffer2[index++] = size >> 8 & 255;
+        buffer2[index++] = size >> 16 & 255;
+        buffer2[index++] = size >> 24 & 255;
+      }
+      buffer2.set(data, index);
+      index = index + value.position;
+      return index;
+    }
+    function serializeSymbol(buffer2, key, value, index) {
+      buffer2[index++] = BSON_DATA_SYMBOL;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      const size = ByteUtils.encodeUTF8Into(buffer2, value.value, index + 4) + 1;
+      buffer2[index] = size & 255;
+      buffer2[index + 1] = size >> 8 & 255;
+      buffer2[index + 2] = size >> 16 & 255;
+      buffer2[index + 3] = size >> 24 & 255;
+      index = index + 4 + size - 1;
+      buffer2[index++] = 0;
+      return index;
+    }
+    function serializeDBRef(buffer2, key, value, index, depth, serializeFunctions, path) {
+      buffer2[index++] = BSON_DATA_OBJECT;
+      const numberOfWrittenBytes = ByteUtils.encodeUTF8Into(buffer2, key, index);
+      index = index + numberOfWrittenBytes;
+      buffer2[index++] = 0;
+      let startIndex = index;
+      let output = {
+        $ref: value.collection || value.namespace,
+        $id: value.oid
+      };
+      if (value.db != null) {
+        output.$db = value.db;
+      }
+      output = Object.assign(output, value.fields);
+      const endIndex = serializeInto(buffer2, output, false, index, depth + 1, serializeFunctions, true, path);
+      const size = endIndex - startIndex;
+      buffer2[startIndex++] = size & 255;
+      buffer2[startIndex++] = size >> 8 & 255;
+      buffer2[startIndex++] = size >> 16 & 255;
+      buffer2[startIndex++] = size >> 24 & 255;
+      return endIndex;
+    }
+    function serializeInto(buffer2, object, checkKeys, startingIndex, depth, serializeFunctions, ignoreUndefined, path) {
+      if (path == null) {
+        if (object == null) {
+          buffer2[0] = 5;
+          buffer2[1] = 0;
+          buffer2[2] = 0;
+          buffer2[3] = 0;
+          buffer2[4] = 0;
+          return 5;
+        }
+        if (Array.isArray(object)) {
+          throw new BSONError("serialize does not support an array as the root input");
+        }
+        if (typeof object !== "object") {
+          throw new BSONError("serialize does not support non-object as the root input");
+        } else if ("_bsontype" in object && typeof object._bsontype === "string") {
+          throw new BSONError(`BSON types cannot be serialized as a document`);
+        } else if (isDate(object) || isRegExp(object) || isUint8Array(object) || isAnyArrayBuffer(object)) {
+          throw new BSONError(`date, regexp, typedarray, and arraybuffer cannot be BSON documents`);
+        }
+        path = /* @__PURE__ */ new Set();
+      }
+      path.add(object);
+      let index = startingIndex + 4;
+      if (Array.isArray(object)) {
+        for (let i = 0; i < object.length; i++) {
+          const key = `${i}`;
+          let value = object[i];
+          if (typeof value?.toBSON === "function") {
+            value = value.toBSON();
+          }
+          if (typeof value === "string") {
+            index = serializeString(buffer2, key, value, index);
+          } else if (typeof value === "number") {
+            index = serializeNumber(buffer2, key, value, index);
+          } else if (typeof value === "bigint") {
+            index = serializeBigInt(buffer2, key, value, index);
+          } else if (typeof value === "boolean") {
+            index = serializeBoolean(buffer2, key, value, index);
+          } else if (value instanceof Date || isDate(value)) {
+            index = serializeDate(buffer2, key, value, index);
+          } else if (value === void 0) {
+            index = serializeNull(buffer2, key, value, index);
+          } else if (value === null) {
+            index = serializeNull(buffer2, key, value, index);
+          } else if (isUint8Array(value)) {
+            index = serializeBuffer(buffer2, key, value, index);
+          } else if (value instanceof RegExp || isRegExp(value)) {
+            index = serializeRegExp(buffer2, key, value, index);
+          } else if (typeof value === "object" && value._bsontype == null) {
+            index = serializeObject(buffer2, key, value, index, checkKeys, depth, serializeFunctions, ignoreUndefined, path);
+          } else if (typeof value === "object" && value[Symbol.for("@@mdb.bson.version")] !== BSON_MAJOR_VERSION) {
+            throw new BSONVersionError();
+          } else if (value._bsontype === "ObjectId") {
+            index = serializeObjectId(buffer2, key, value, index);
+          } else if (value._bsontype === "Decimal128") {
+            index = serializeDecimal128(buffer2, key, value, index);
+          } else if (value._bsontype === "Long" || value._bsontype === "Timestamp") {
+            index = serializeLong(buffer2, key, value, index);
+          } else if (value._bsontype === "Double") {
+            index = serializeDouble(buffer2, key, value, index);
+          } else if (typeof value === "function" && serializeFunctions) {
+            index = serializeFunction(buffer2, key, value, index);
+          } else if (value._bsontype === "Code") {
+            index = serializeCode(buffer2, key, value, index, checkKeys, depth, serializeFunctions, ignoreUndefined, path);
+          } else if (value._bsontype === "Binary") {
+            index = serializeBinary(buffer2, key, value, index);
+          } else if (value._bsontype === "BSONSymbol") {
+            index = serializeSymbol(buffer2, key, value, index);
+          } else if (value._bsontype === "DBRef") {
+            index = serializeDBRef(buffer2, key, value, index, depth, serializeFunctions, path);
+          } else if (value._bsontype === "BSONRegExp") {
+            index = serializeBSONRegExp(buffer2, key, value, index);
+          } else if (value._bsontype === "Int32") {
+            index = serializeInt32(buffer2, key, value, index);
+          } else if (value._bsontype === "MinKey" || value._bsontype === "MaxKey") {
+            index = serializeMinMax(buffer2, key, value, index);
+          } else if (typeof value._bsontype !== "undefined") {
+            throw new BSONError(`Unrecognized or invalid _bsontype: ${String(value._bsontype)}`);
+          }
+        }
+      } else if (object instanceof Map || isMap(object)) {
+        const iterator = object.entries();
+        let done = false;
+        while (!done) {
+          const entry = iterator.next();
+          done = !!entry.done;
+          if (done)
+            continue;
+          const key = entry.value[0];
+          let value = entry.value[1];
+          if (typeof value?.toBSON === "function") {
+            value = value.toBSON();
+          }
+          const type = typeof value;
+          if (typeof key === "string" && !ignoreKeys.has(key)) {
+            if (key.match(regexp) != null) {
+              throw new BSONError("key " + key + " must not contain null bytes");
+            }
+            if (checkKeys) {
+              if ("$" === key[0]) {
+                throw new BSONError("key " + key + " must not start with '$'");
+              } else if (~key.indexOf(".")) {
+                throw new BSONError("key " + key + " must not contain '.'");
+              }
+            }
+          }
+          if (type === "string") {
+            index = serializeString(buffer2, key, value, index);
+          } else if (type === "number") {
+            index = serializeNumber(buffer2, key, value, index);
+          } else if (type === "bigint") {
+            index = serializeBigInt(buffer2, key, value, index);
+          } else if (type === "boolean") {
+            index = serializeBoolean(buffer2, key, value, index);
+          } else if (value instanceof Date || isDate(value)) {
+            index = serializeDate(buffer2, key, value, index);
+          } else if (value === null || value === void 0 && ignoreUndefined === false) {
+            index = serializeNull(buffer2, key, value, index);
+          } else if (isUint8Array(value)) {
+            index = serializeBuffer(buffer2, key, value, index);
+          } else if (value instanceof RegExp || isRegExp(value)) {
+            index = serializeRegExp(buffer2, key, value, index);
+          } else if (type === "object" && value._bsontype == null) {
+            index = serializeObject(buffer2, key, value, index, checkKeys, depth, serializeFunctions, ignoreUndefined, path);
+          } else if (typeof value === "object" && value[Symbol.for("@@mdb.bson.version")] !== BSON_MAJOR_VERSION) {
+            throw new BSONVersionError();
+          } else if (value._bsontype === "ObjectId") {
+            index = serializeObjectId(buffer2, key, value, index);
+          } else if (type === "object" && value._bsontype === "Decimal128") {
+            index = serializeDecimal128(buffer2, key, value, index);
+          } else if (value._bsontype === "Long" || value._bsontype === "Timestamp") {
+            index = serializeLong(buffer2, key, value, index);
+          } else if (value._bsontype === "Double") {
+            index = serializeDouble(buffer2, key, value, index);
+          } else if (value._bsontype === "Code") {
+            index = serializeCode(buffer2, key, value, index, checkKeys, depth, serializeFunctions, ignoreUndefined, path);
+          } else if (typeof value === "function" && serializeFunctions) {
+            index = serializeFunction(buffer2, key, value, index);
+          } else if (value._bsontype === "Binary") {
+            index = serializeBinary(buffer2, key, value, index);
+          } else if (value._bsontype === "BSONSymbol") {
+            index = serializeSymbol(buffer2, key, value, index);
+          } else if (value._bsontype === "DBRef") {
+            index = serializeDBRef(buffer2, key, value, index, depth, serializeFunctions, path);
+          } else if (value._bsontype === "BSONRegExp") {
+            index = serializeBSONRegExp(buffer2, key, value, index);
+          } else if (value._bsontype === "Int32") {
+            index = serializeInt32(buffer2, key, value, index);
+          } else if (value._bsontype === "MinKey" || value._bsontype === "MaxKey") {
+            index = serializeMinMax(buffer2, key, value, index);
+          } else if (typeof value._bsontype !== "undefined") {
+            throw new BSONError(`Unrecognized or invalid _bsontype: ${String(value._bsontype)}`);
+          }
+        }
+      } else {
+        if (typeof object?.toBSON === "function") {
+          object = object.toBSON();
+          if (object != null && typeof object !== "object") {
+            throw new BSONError("toBSON function did not return an object");
+          }
+        }
+        for (const key of Object.keys(object)) {
+          let value = object[key];
+          if (typeof value?.toBSON === "function") {
+            value = value.toBSON();
+          }
+          const type = typeof value;
+          if (typeof key === "string" && !ignoreKeys.has(key)) {
+            if (key.match(regexp) != null) {
+              throw new BSONError("key " + key + " must not contain null bytes");
+            }
+            if (checkKeys) {
+              if ("$" === key[0]) {
+                throw new BSONError("key " + key + " must not start with '$'");
+              } else if (~key.indexOf(".")) {
+                throw new BSONError("key " + key + " must not contain '.'");
+              }
+            }
+          }
+          if (type === "string") {
+            index = serializeString(buffer2, key, value, index);
+          } else if (type === "number") {
+            index = serializeNumber(buffer2, key, value, index);
+          } else if (type === "bigint") {
+            index = serializeBigInt(buffer2, key, value, index);
+          } else if (type === "boolean") {
+            index = serializeBoolean(buffer2, key, value, index);
+          } else if (value instanceof Date || isDate(value)) {
+            index = serializeDate(buffer2, key, value, index);
+          } else if (value === void 0) {
+            if (ignoreUndefined === false)
+              index = serializeNull(buffer2, key, value, index);
+          } else if (value === null) {
+            index = serializeNull(buffer2, key, value, index);
+          } else if (isUint8Array(value)) {
+            index = serializeBuffer(buffer2, key, value, index);
+          } else if (value instanceof RegExp || isRegExp(value)) {
+            index = serializeRegExp(buffer2, key, value, index);
+          } else if (type === "object" && value._bsontype == null) {
+            index = serializeObject(buffer2, key, value, index, checkKeys, depth, serializeFunctions, ignoreUndefined, path);
+          } else if (typeof value === "object" && value[Symbol.for("@@mdb.bson.version")] !== BSON_MAJOR_VERSION) {
+            throw new BSONVersionError();
+          } else if (value._bsontype === "ObjectId") {
+            index = serializeObjectId(buffer2, key, value, index);
+          } else if (type === "object" && value._bsontype === "Decimal128") {
+            index = serializeDecimal128(buffer2, key, value, index);
+          } else if (value._bsontype === "Long" || value._bsontype === "Timestamp") {
+            index = serializeLong(buffer2, key, value, index);
+          } else if (value._bsontype === "Double") {
+            index = serializeDouble(buffer2, key, value, index);
+          } else if (value._bsontype === "Code") {
+            index = serializeCode(buffer2, key, value, index, checkKeys, depth, serializeFunctions, ignoreUndefined, path);
+          } else if (typeof value === "function" && serializeFunctions) {
+            index = serializeFunction(buffer2, key, value, index);
+          } else if (value._bsontype === "Binary") {
+            index = serializeBinary(buffer2, key, value, index);
+          } else if (value._bsontype === "BSONSymbol") {
+            index = serializeSymbol(buffer2, key, value, index);
+          } else if (value._bsontype === "DBRef") {
+            index = serializeDBRef(buffer2, key, value, index, depth, serializeFunctions, path);
+          } else if (value._bsontype === "BSONRegExp") {
+            index = serializeBSONRegExp(buffer2, key, value, index);
+          } else if (value._bsontype === "Int32") {
+            index = serializeInt32(buffer2, key, value, index);
+          } else if (value._bsontype === "MinKey" || value._bsontype === "MaxKey") {
+            index = serializeMinMax(buffer2, key, value, index);
+          } else if (typeof value._bsontype !== "undefined") {
+            throw new BSONError(`Unrecognized or invalid _bsontype: ${String(value._bsontype)}`);
+          }
+        }
+      }
+      path.delete(object);
+      buffer2[index++] = 0;
+      const size = index - startingIndex;
+      buffer2[startingIndex++] = size & 255;
+      buffer2[startingIndex++] = size >> 8 & 255;
+      buffer2[startingIndex++] = size >> 16 & 255;
+      buffer2[startingIndex++] = size >> 24 & 255;
+      return index;
+    }
+    function isBSONType(value) {
+      return value != null && typeof value === "object" && "_bsontype" in value && typeof value._bsontype === "string";
+    }
+    var keysToCodecs = {
+      $oid: ObjectId3,
       $binary: Binary,
       $uuid: Binary,
       $symbol: BSONSymbol,
@@ -22090,7 +17172,7 @@ var require_bson = __commonJS({
       Long: (o) => Long.fromBits(o.low != null ? o.low : o.low_, o.low != null ? o.high : o.high_, o.low != null ? o.unsigned : o.unsigned_),
       MaxKey: () => new MaxKey(),
       MinKey: () => new MinKey(),
-      ObjectId: (o) => new ObjectId2(o),
+      ObjectId: (o) => new ObjectId3(o),
       BSONRegExp: (o) => new BSONRegExp(o.pattern, o.options),
       BSONSymbol: (o) => new BSONSymbol(o.value),
       Timestamp: (o) => Timestamp.fromBits(o.low, o.high)
@@ -22240,7 +17322,7 @@ var require_bson = __commonJS({
       BSONSymbol,
       DBRef,
       Binary,
-      ObjectId: ObjectId2,
+      ObjectId: ObjectId3,
       UUID,
       Long,
       Timestamp,
@@ -22281,7 +17363,7 @@ var require_bson = __commonJS({
     exports.Long = Long;
     exports.MaxKey = MaxKey;
     exports.MinKey = MinKey;
-    exports.ObjectId = ObjectId2;
+    exports.ObjectId = ObjectId3;
     exports.Timestamp = Timestamp;
     exports.UUID = UUID;
     exports.calculateObjectSize = calculateObjectSize;
@@ -22294,12 +17376,12 @@ var require_bson = __commonJS({
 });
 
 // node_modules/mongodb/lib/bson.js
-var require_bson2 = __commonJS({
+var require_bson3 = __commonJS({
   "node_modules/mongodb/lib/bson.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.resolveBSONOptions = exports.pluckBSONSerializeOptions = exports.Timestamp = exports.serialize = exports.ObjectId = exports.MinKey = exports.MaxKey = exports.Long = exports.Int32 = exports.Double = exports.deserialize = exports.Decimal128 = exports.DBRef = exports.Code = exports.calculateObjectSize = exports.BSONType = exports.BSONSymbol = exports.BSONRegExp = exports.BSON = exports.Binary = void 0;
-    var bson_1 = require_bson();
+    var bson_1 = require_bson2();
     Object.defineProperty(exports, "Binary", { enumerable: true, get: function() {
       return bson_1.Binary;
     } });
@@ -23052,7 +18134,7 @@ var require_utils = __commonJS({
     var crypto = require("crypto");
     var os = require("os");
     var url_1 = require("url");
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var constants_1 = require_constants();
     var constants_2 = require_constants2();
     var error_1 = require_error();
@@ -23129,8 +18211,8 @@ var require_utils = __commonJS({
       return filterOptions2;
     }
     exports.filterOptions = filterOptions;
-    function applyRetryableWrites(target, db) {
-      if (db && db.s.options?.retryWrites) {
+    function applyRetryableWrites(target, db2) {
+      if (db2 && db2.s.options?.retryWrites) {
         target.retryWrites = true;
       }
       return target;
@@ -23138,7 +18220,7 @@ var require_utils = __commonJS({
     exports.applyRetryableWrites = applyRetryableWrites;
     function applyWriteConcern(target, sources, options) {
       options = options ?? {};
-      const db = sources.db;
+      const db2 = sources.db;
       const coll = sources.collection;
       if (options.session && options.session.inTransaction()) {
         if (target.writeConcern) {
@@ -23153,8 +18235,8 @@ var require_utils = __commonJS({
       if (coll && coll.writeConcern) {
         return Object.assign(target, { writeConcern: Object.assign({}, coll.writeConcern) });
       }
-      if (db && db.writeConcern) {
-        return Object.assign(target, { writeConcern: Object.assign({}, db.writeConcern) });
+      if (db2 && db2.writeConcern) {
+        return Object.assign(target, { writeConcern: Object.assign({}, db2.writeConcern) });
       }
       return target;
     }
@@ -23216,8 +18298,8 @@ var require_utils = __commonJS({
        * @param db - database name
        * @param collection - collection name
        */
-      constructor(db, collection) {
-        this.db = db;
+      constructor(db2, collection) {
+        this.db = db2;
         this.collection = collection === "" ? void 0 : collection;
       }
       toString() {
@@ -23230,9 +18312,9 @@ var require_utils = __commonJS({
         if (typeof namespace !== "string" || namespace === "") {
           throw new error_1.MongoRuntimeError(`Cannot parse namespace from "${namespace}"`);
         }
-        const [db, ...collectionParts] = namespace.split(".");
+        const [db2, ...collectionParts] = namespace.split(".");
         const collection = collectionParts.join(".");
-        return new MongoDBNamespace(db, collection === "" ? void 0 : collection);
+        return new MongoDBNamespace(db2, collection === "" ? void 0 : collection);
       }
     };
     exports.MongoDBNamespace = MongoDBNamespace;
@@ -24076,7 +19158,7 @@ var require_operation = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.defineAspects = exports.AbstractOperation = exports.Aspect = void 0;
     var util_1 = require("util");
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var read_preference_1 = require_read_preference();
     exports.Aspect = {
       READ_OPERATION: Symbol("READ_OPERATION"),
@@ -24220,15 +19302,15 @@ var require_add_user = __commonJS({
     var command_1 = require_command();
     var operation_1 = require_operation();
     var AddUserOperation = class extends command_1.CommandOperation {
-      constructor(db, username, password, options) {
-        super(db, options);
-        this.db = db;
+      constructor(db2, username, password, options) {
+        super(db2, options);
+        this.db = db2;
         this.username = username;
         this.password = password;
         this.options = options ?? {};
       }
       execute(server2, session, callback2) {
-        const db = this.db;
+        const db2 = this.db;
         const username = this.username;
         const password = this.password;
         const options = this.options;
@@ -24238,7 +19320,7 @@ var require_add_user = __commonJS({
         let roles;
         if (!options.roles || Array.isArray(options.roles) && options.roles.length === 0) {
           (0, utils_1.emitWarningOnce)('Creating a user without roles is deprecated. Defaults to "root" if db is "admin" or "dbOwner" otherwise');
-          if (db.databaseName.toLowerCase() === "admin") {
+          if (db2.databaseName.toLowerCase() === "admin") {
             roles = ["root"];
           } else {
             roles = ["dbOwner"];
@@ -24248,7 +19330,7 @@ var require_add_user = __commonJS({
         }
         let topology;
         try {
-          topology = (0, utils_1.getTopology)(db);
+          topology = (0, utils_1.getTopology)(db2);
         } catch (error) {
           return callback2(error);
         }
@@ -24435,8 +19517,8 @@ var require_list_databases = __commonJS({
     var command_1 = require_command();
     var operation_1 = require_operation();
     var ListDatabasesOperation = class extends command_1.CommandOperation {
-      constructor(db, options) {
-        super(db, options);
+      constructor(db2, options) {
+        super(db2, options);
         this.options = options ?? {};
         this.ns = new utils_1.MongoDBNamespace("admin", "$cmd");
       }
@@ -24471,8 +19553,8 @@ var require_remove_user = __commonJS({
     var command_1 = require_command();
     var operation_1 = require_operation();
     var RemoveUserOperation = class extends command_1.CommandOperation {
-      constructor(db, username, options) {
-        super(db, options);
+      constructor(db2, username, options) {
+        super(db2, options);
         this.options = options;
         this.username = username;
       }
@@ -24577,8 +19659,8 @@ var require_admin = __commonJS({
        * Create a new Admin instance
        * @internal
        */
-      constructor(db) {
-        this.s = { db };
+      constructor(db2) {
+        this.s = { db: db2 };
       }
       /**
        * Execute a command
@@ -24834,7 +19916,7 @@ var require_common_functions = __commonJS({
     exports.prepareDocs = exports.indexInformation = void 0;
     var error_1 = require_error();
     var utils_1 = require_utils();
-    function indexInformation(db, name2, _optionsOrCallback, _callback) {
+    function indexInformation(db2, name2, _optionsOrCallback, _callback) {
       let options = _optionsOrCallback;
       let callback2 = _callback;
       if ("function" === typeof _optionsOrCallback) {
@@ -24844,7 +19926,7 @@ var require_common_functions = __commonJS({
       const full = options.full == null ? false : options.full;
       let topology;
       try {
-        topology = (0, utils_1.getTopology)(db);
+        topology = (0, utils_1.getTopology)(db2);
       } catch (error) {
         return callback2(error);
       }
@@ -24861,7 +19943,7 @@ var require_common_functions = __commonJS({
         }
         return info;
       }
-      db.collection(name2).listIndexes(options).toArray().then((indexes) => {
+      db2.collection(name2).listIndexes(options).toArray().then((indexes) => {
         if (!Array.isArray(indexes))
           return callback2(void 0, []);
         if (full)
@@ -25168,7 +20250,7 @@ var require_common2 = __commonJS({
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BulkOperationBase = exports.FindOperators = exports.MongoBulkWriteError = exports.mergeBatchResults = exports.WriteError = exports.WriteConcernError = exports.BulkWriteResult = exports.Batch = exports.BatchType = void 0;
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var error_1 = require_error();
     var delete_1 = require_delete();
     var execute_operation_1 = require_execute_operation();
@@ -25948,7 +21030,7 @@ var require_ordered = __commonJS({
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.OrderedBulkOperation = void 0;
-    var BSON = require_bson2();
+    var BSON = require_bson3();
     var error_1 = require_error();
     var common_1 = require_common2();
     var OrderedBulkOperation = class extends common_1.BulkOperationBase {
@@ -26008,7 +21090,7 @@ var require_unordered = __commonJS({
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.UnorderedBulkOperation = void 0;
-    var BSON = require_bson2();
+    var BSON = require_bson3();
     var error_1 = require_error();
     var common_1 = require_common2();
     var UnorderedBulkOperation = class extends common_1.BulkOperationBase {
@@ -26341,7 +21423,7 @@ var require_server_description = __commonJS({
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.compareTopologyVersion = exports.parseServerType = exports.ServerDescription = void 0;
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var error_1 = require_error();
     var utils_1 = require_utils();
     var common_1 = require_common();
@@ -26548,8 +21630,8 @@ var require_topology_description = __commonJS({
        * Returns a new TopologyDescription based on the SrvPollingEvent
        * @internal
        */
-      updateFromSrvPollingEvent(ev2, srvMaxHosts = 0) {
-        const incomingHostnames = ev2.hostnames();
+      updateFromSrvPollingEvent(ev, srvMaxHosts = 0) {
+        const incomingHostnames = ev.hostnames();
         const currentHostnames = new Set(this.servers.keys());
         const hostnamesToAdd = new Set(incomingHostnames);
         const hostnamesToRemove = /* @__PURE__ */ new Set();
@@ -26983,7 +22065,7 @@ var require_sessions = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.updateSessionFromResponse = exports.applySession = exports.ServerSessionPool = exports.ServerSession = exports.maybeClearPinnedConnection = exports.ClientSession = void 0;
     var util_1 = require("util");
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var metrics_1 = require_metrics();
     var shared_1 = require_shared();
     var constants_1 = require_constants2();
@@ -27616,7 +22698,7 @@ var require_abstract_cursor = __commonJS({
     exports.assertUninitialized = exports.next = exports.AbstractCursor = exports.CURSOR_FLAGS = void 0;
     var stream_1 = require("stream");
     var util_1 = require("util");
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var error_1 = require_error();
     var mongo_types_1 = require_mongo_types();
     var execute_operation_1 = require_execute_operation();
@@ -28023,10 +23105,10 @@ var require_abstract_cursor = __commonJS({
        * a significant refactor.
        */
       [kInit](callback2) {
-        this._initialize(this[kSession], (error, state) => {
-          if (state) {
-            const response = state.response;
-            this[kServer] = state.server;
+        this._initialize(this[kSession], (error, state2) => {
+          if (state2) {
+            const response = state2.response;
+            this[kServer] = state2.server;
             if (response.cursor) {
               this[kId] = typeof response.cursor.id === "number" ? bson_1.Long.fromNumber(response.cursor.id) : typeof response.cursor.id === "bigint" ? bson_1.Long.fromBigInt(response.cursor.id) : response.cursor.id;
               if (response.cursor.ns) {
@@ -28036,7 +23118,7 @@ var require_abstract_cursor = __commonJS({
             }
             if (this[kId] == null) {
               this[kId] = bson_1.Long.ZERO;
-              this[kDocuments].push(state.response);
+              this[kDocuments].push(state2.response);
             }
           }
           this[kInitialized] = true;
@@ -29066,8 +24148,8 @@ var require_indexes = __commonJS({
       // wildcard indexes
       "wildcardProjection"
     ]);
-    function isIndexDirection(x2) {
-      return typeof x2 === "number" || x2 === "2d" || x2 === "2dsphere" || x2 === "text" || x2 === "geoHaystack";
+    function isIndexDirection(x) {
+      return typeof x === "number" || x === "2d" || x === "2dsphere" || x === "text" || x === "geoHaystack";
     }
     function isSingleIndexTuple(t) {
       return Array.isArray(t) && t.length === 2 && isIndexDirection(t[1]);
@@ -29159,10 +24241,10 @@ var require_indexes = __commonJS({
     };
     exports.CreateIndexOperation = CreateIndexOperation;
     var EnsureIndexOperation = class extends CreateIndexOperation {
-      constructor(db, collectionName, indexSpec, options) {
-        super(db, collectionName, indexSpec, options);
+      constructor(db2, collectionName, indexSpec, options) {
+        super(db2, collectionName, indexSpec, options);
         this.readPreference = read_preference_1.ReadPreference.primary;
-        this.db = db;
+        this.db = db2;
         this.collectionName = collectionName;
       }
       execute(server2, session, callback2) {
@@ -29254,16 +24336,16 @@ var require_indexes = __commonJS({
     };
     exports.IndexExistsOperation = IndexExistsOperation;
     var IndexInformationOperation = class extends operation_1.AbstractOperation {
-      constructor(db, name2, options) {
+      constructor(db2, name2, options) {
         super(options);
         this.options = options ?? {};
-        this.db = db;
+        this.db = db2;
         this.name = name2;
       }
       execute(server2, session, callback2) {
-        const db = this.db;
+        const db2 = this.db;
         const name2 = this.name;
-        (0, common_functions_1.indexInformation)(db, name2, { ...this.options, readPreference: this.readPreference, session }, callback2);
+        (0, common_functions_1.indexInformation)(db2, name2, { ...this.options, readPreference: this.readPreference, session }, callback2);
       }
     };
     exports.IndexInformationOperation = IndexInformationOperation;
@@ -29430,21 +24512,21 @@ var require_drop = __commonJS({
     var command_1 = require_command();
     var operation_1 = require_operation();
     var DropCollectionOperation = class extends command_1.CommandOperation {
-      constructor(db, name2, options = {}) {
-        super(db, options);
-        this.db = db;
+      constructor(db2, name2, options = {}) {
+        super(db2, options);
+        this.db = db2;
         this.options = options;
         this.name = name2;
       }
       execute(server2, session, callback2) {
         (async () => {
-          const db = this.db;
+          const db2 = this.db;
           const options = this.options;
           const name2 = this.name;
-          const encryptedFieldsMap = db.s.client.options.autoEncryption?.encryptedFieldsMap;
-          let encryptedFields = options.encryptedFields ?? encryptedFieldsMap?.[`${db.databaseName}.${name2}`];
+          const encryptedFieldsMap = db2.s.client.options.autoEncryption?.encryptedFieldsMap;
+          let encryptedFields = options.encryptedFields ?? encryptedFieldsMap?.[`${db2.databaseName}.${name2}`];
           if (!encryptedFields && encryptedFieldsMap) {
-            const listCollectionsResult = await db.listCollections({ name: name2 }, { nameOnly: false }).toArray();
+            const listCollectionsResult = await db2.listCollections({ name: name2 }, { nameOnly: false }).toArray();
             encryptedFields = listCollectionsResult?.[0]?.options?.encryptedFields;
           }
           if (encryptedFields) {
@@ -29452,7 +24534,7 @@ var require_drop = __commonJS({
             const eccCollection = encryptedFields.eccCollection || `enxcol_.${name2}.ecc`;
             const ecocCollection = encryptedFields.ecocCollection || `enxcol_.${name2}.ecoc`;
             for (const collectionName of [escCollection, eccCollection, ecocCollection]) {
-              const dropOp = new DropCollectionOperation(db, collectionName);
+              const dropOp = new DropCollectionOperation(db2, collectionName);
               try {
                 await dropOp.executeWithoutEncryptedFieldsCheck(server2, session);
               } catch (err) {
@@ -29477,8 +24559,8 @@ var require_drop = __commonJS({
     };
     exports.DropCollectionOperation = DropCollectionOperation;
     var DropDatabaseOperation = class extends command_1.CommandOperation {
-      constructor(db, options) {
-        super(db, options);
+      constructor(db2, options) {
+        super(db2, options);
         this.options = options;
       }
       execute(server2, session, callback2) {
@@ -29809,8 +24891,8 @@ var require_stats = __commonJS({
     };
     exports.CollStatsOperation = CollStatsOperation;
     var DbStatsOperation = class extends command_1.CommandOperation {
-      constructor(db, options) {
-        super(db, options);
+      constructor(db2, options) {
+        super(db2, options);
         this.options = options;
       }
       execute(server2, session, callback2) {
@@ -29833,7 +24915,7 @@ var require_collection2 = __commonJS({
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Collection = void 0;
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var ordered_1 = require_ordered();
     var unordered_1 = require_unordered();
     var change_stream_1 = require_change_stream();
@@ -29866,15 +24948,15 @@ var require_collection2 = __commonJS({
        * Create a new Collection instance
        * @internal
        */
-      constructor(db, name2, options) {
+      constructor(db2, name2, options) {
         (0, utils_1.checkCollectionName)(name2);
         this.s = {
-          db,
+          db: db2,
           options,
-          namespace: new utils_1.MongoDBNamespace(db.databaseName, name2),
-          pkFactory: db.options?.pkFactory ?? utils_1.DEFAULT_PK_FACTORY,
+          namespace: new utils_1.MongoDBNamespace(db2.databaseName, name2),
+          pkFactory: db2.options?.pkFactory ?? utils_1.DEFAULT_PK_FACTORY,
           readPreference: read_preference_1.ReadPreference.fromOptions(options),
-          bsonOptions: (0, bson_1.resolveBSONOptions)(options, db),
+          bsonOptions: (0, bson_1.resolveBSONOptions)(options, db2),
           readConcern: read_concern_1.ReadConcern.fromOptions(options),
           writeConcern: write_concern_1.WriteConcern.fromOptions(options)
         };
@@ -30499,11 +25581,11 @@ var require_list_collections = __commonJS({
     var command_1 = require_command();
     var operation_1 = require_operation();
     var ListCollectionsOperation = class extends command_1.CommandOperation {
-      constructor(db, filter, options) {
-        super(db, options);
+      constructor(db2, filter, options) {
+        super(db2, options);
         this.options = { ...options };
         delete this.options.writeConcern;
-        this.db = db;
+        this.db = db2;
         this.filter = filter;
         this.nameOnly = !!this.options.nameOnly;
         this.authorizedCollections = !!this.options.authorizedCollections;
@@ -30548,9 +25630,9 @@ var require_list_collections_cursor = __commonJS({
     var list_collections_1 = require_list_collections();
     var abstract_cursor_1 = require_abstract_cursor();
     var ListCollectionsCursor = class extends abstract_cursor_1.AbstractCursor {
-      constructor(db, filter, options) {
-        super(db.s.client, db.s.namespace, options);
-        this.parent = db;
+      constructor(db2, filter, options) {
+        super(db2.s.client, db2.s.namespace, options);
+        this.parent = db2;
         this.filter = filter;
         this.options = options;
       }
@@ -30587,10 +25669,10 @@ var require_collections = __commonJS({
     var collection_1 = require_collection2();
     var operation_1 = require_operation();
     var CollectionsOperation = class extends operation_1.AbstractOperation {
-      constructor(db, options) {
+      constructor(db2, options) {
         super(options);
         this.options = options;
-        this.db = db;
+        this.db = db2;
       }
       execute(server2, session, callback2) {
         this.db.listCollections({}, { ...this.options, nameOnly: true, readPreference: this.readPreference, session }).toArray().then((documents) => {
@@ -30642,24 +25724,24 @@ var require_create_collection = __commonJS({
       "enableUtf8Validation"
     ]);
     var CreateCollectionOperation = class extends command_1.CommandOperation {
-      constructor(db, name2, options = {}) {
-        super(db, options);
+      constructor(db2, name2, options = {}) {
+        super(db2, options);
         this.options = options;
-        this.db = db;
+        this.db = db2;
         this.name = name2;
       }
       execute(server2, session, callback2) {
         (async () => {
-          const db = this.db;
+          const db2 = this.db;
           const name2 = this.name;
           const options = this.options;
-          const encryptedFields = options.encryptedFields ?? db.s.client.options.autoEncryption?.encryptedFieldsMap?.[`${db.databaseName}.${name2}`];
+          const encryptedFields = options.encryptedFields ?? db2.s.client.options.autoEncryption?.encryptedFieldsMap?.[`${db2.databaseName}.${name2}`];
           if (encryptedFields) {
             const escCollection = encryptedFields.escCollection ?? `enxcol_.${name2}.esc`;
             const eccCollection = encryptedFields.eccCollection ?? `enxcol_.${name2}.ecc`;
             const ecocCollection = encryptedFields.ecocCollection ?? `enxcol_.${name2}.ecoc`;
             for (const collectionName of [escCollection, eccCollection, ecocCollection]) {
-              const createOp = new CreateCollectionOperation(db, collectionName, {
+              const createOp = new CreateCollectionOperation(db2, collectionName, {
                 clusteredIndex: {
                   key: { _id: 1 },
                   unique: true
@@ -30673,7 +25755,7 @@ var require_create_collection = __commonJS({
           }
           const coll = await this.executeWithoutEncryptedFieldsCheck(server2, session);
           if (encryptedFields) {
-            const createIndexOp = new indexes_1.CreateIndexOperation(db, name2, { __safeContent__: 1 }, {});
+            const createIndexOp = new indexes_1.CreateIndexOperation(db2, name2, { __safeContent__: 1 }, {});
             await new Promise((resolve, reject) => {
               createIndexOp.execute(server2, session, (err) => err ? reject(err) : resolve());
             });
@@ -30683,14 +25765,14 @@ var require_create_collection = __commonJS({
       }
       executeWithoutEncryptedFieldsCheck(server2, session) {
         return new Promise((resolve, reject) => {
-          const db = this.db;
+          const db2 = this.db;
           const name2 = this.name;
           const options = this.options;
           const done = (err) => {
             if (err) {
               return reject(err);
             }
-            resolve(new collection_1.Collection(db, name2, options));
+            resolve(new collection_1.Collection(db2, name2, options));
           };
           const cmd = { create: name2 };
           for (const n in options) {
@@ -30716,8 +25798,8 @@ var require_profiling_level = __commonJS({
     var error_1 = require_error();
     var command_1 = require_command();
     var ProfilingLevelOperation = class extends command_1.CommandOperation {
-      constructor(db, options) {
-        super(db, options);
+      constructor(db2, options) {
+        super(db2, options);
         this.options = options;
       }
       execute(server2, session, callback2) {
@@ -30757,8 +25839,8 @@ var require_set_profiling_level = __commonJS({
       all: "all"
     });
     var SetProfilingLevelOperation = class extends command_1.CommandOperation {
-      constructor(db, level, options) {
-        super(db, options);
+      constructor(db2, level, options) {
+        super(db2, options);
         this.options = options;
         switch (level) {
           case exports.ProfilingLevel.off:
@@ -30799,7 +25881,7 @@ var require_db = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Db = void 0;
     var admin_1 = require_admin();
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var change_stream_1 = require_change_stream();
     var collection_1 = require_collection2();
     var CONSTANTS = require_constants2();
@@ -31129,27 +26211,27 @@ var require_lib = __commonJS({
       }
       return options.globals.Number(value);
     }
-    function evenRound(x2) {
-      if (x2 > 0 && x2 % 1 === 0.5 && (x2 & 1) === 0 || x2 < 0 && x2 % 1 === -0.5 && (x2 & 1) === 1) {
-        return censorNegativeZero(Math.floor(x2));
+    function evenRound(x) {
+      if (x > 0 && x % 1 === 0.5 && (x & 1) === 0 || x < 0 && x % 1 === -0.5 && (x & 1) === 1) {
+        return censorNegativeZero(Math.floor(x));
       }
-      return censorNegativeZero(Math.round(x2));
+      return censorNegativeZero(Math.round(x));
     }
     function integerPart(n) {
       return censorNegativeZero(Math.trunc(n));
     }
-    function sign(x2) {
-      return x2 < 0 ? -1 : 1;
+    function sign(x) {
+      return x < 0 ? -1 : 1;
     }
-    function modulo(x2, y) {
-      const signMightNotMatch = x2 % y;
+    function modulo(x, y) {
+      const signMightNotMatch = x % y;
       if (sign(y) !== sign(signMightNotMatch)) {
         return signMightNotMatch + y;
       }
       return signMightNotMatch;
     }
-    function censorNegativeZero(x2) {
-      return x2 === 0 ? 0 : x2;
+    function censorNegativeZero(x) {
+      return x === 0 ? 0 : x;
     }
     function createIntegerConversion(bitLength, { unsigned }) {
       let lowerBound, upperBound;
@@ -31163,39 +26245,39 @@ var require_lib = __commonJS({
       const twoToTheBitLength = 2 ** bitLength;
       const twoToOneLessThanTheBitLength = 2 ** (bitLength - 1);
       return (value, options = {}) => {
-        let x2 = toNumber(value, options);
-        x2 = censorNegativeZero(x2);
+        let x = toNumber(value, options);
+        x = censorNegativeZero(x);
         if (options.enforceRange) {
-          if (!Number.isFinite(x2)) {
+          if (!Number.isFinite(x)) {
             throw makeException(TypeError, "is not a finite number", options);
           }
-          x2 = integerPart(x2);
-          if (x2 < lowerBound || x2 > upperBound) {
+          x = integerPart(x);
+          if (x < lowerBound || x > upperBound) {
             throw makeException(
               TypeError,
               `is outside the accepted range of ${lowerBound} to ${upperBound}, inclusive`,
               options
             );
           }
-          return x2;
+          return x;
         }
-        if (!Number.isNaN(x2) && options.clamp) {
-          x2 = Math.min(Math.max(x2, lowerBound), upperBound);
-          x2 = evenRound(x2);
-          return x2;
+        if (!Number.isNaN(x) && options.clamp) {
+          x = Math.min(Math.max(x, lowerBound), upperBound);
+          x = evenRound(x);
+          return x;
         }
-        if (!Number.isFinite(x2) || x2 === 0) {
+        if (!Number.isFinite(x) || x === 0) {
           return 0;
         }
-        x2 = integerPart(x2);
-        if (x2 >= lowerBound && x2 <= upperBound) {
-          return x2;
+        x = integerPart(x);
+        if (x >= lowerBound && x <= upperBound) {
+          return x;
         }
-        x2 = modulo(x2, twoToTheBitLength);
-        if (!unsigned && x2 >= twoToOneLessThanTheBitLength) {
-          return x2 - twoToTheBitLength;
+        x = modulo(x, twoToTheBitLength);
+        if (!unsigned && x >= twoToOneLessThanTheBitLength) {
+          return x - twoToTheBitLength;
         }
-        return x2;
+        return x;
       };
     }
     function createLongLongConversion(bitLength, { unsigned }) {
@@ -31203,31 +26285,31 @@ var require_lib = __commonJS({
       const lowerBound = unsigned ? 0 : Number.MIN_SAFE_INTEGER;
       const asBigIntN = unsigned ? BigInt.asUintN : BigInt.asIntN;
       return (value, options = {}) => {
-        let x2 = toNumber(value, options);
-        x2 = censorNegativeZero(x2);
+        let x = toNumber(value, options);
+        x = censorNegativeZero(x);
         if (options.enforceRange) {
-          if (!Number.isFinite(x2)) {
+          if (!Number.isFinite(x)) {
             throw makeException(TypeError, "is not a finite number", options);
           }
-          x2 = integerPart(x2);
-          if (x2 < lowerBound || x2 > upperBound) {
+          x = integerPart(x);
+          if (x < lowerBound || x > upperBound) {
             throw makeException(
               TypeError,
               `is outside the accepted range of ${lowerBound} to ${upperBound}, inclusive`,
               options
             );
           }
-          return x2;
+          return x;
         }
-        if (!Number.isNaN(x2) && options.clamp) {
-          x2 = Math.min(Math.max(x2, lowerBound), upperBound);
-          x2 = evenRound(x2);
-          return x2;
+        if (!Number.isNaN(x) && options.clamp) {
+          x = Math.min(Math.max(x, lowerBound), upperBound);
+          x = evenRound(x);
+          return x;
         }
-        if (!Number.isFinite(x2) || x2 === 0) {
+        if (!Number.isFinite(x) || x === 0) {
           return 0;
         }
-        let xBigInt = BigInt(integerPart(x2));
+        let xBigInt = BigInt(integerPart(x));
         xBigInt = asBigIntN(bitLength, xBigInt);
         return Number(xBigInt);
       };
@@ -31250,39 +26332,39 @@ var require_lib = __commonJS({
     exports["long long"] = createLongLongConversion(64, { unsigned: false });
     exports["unsigned long long"] = createLongLongConversion(64, { unsigned: true });
     exports.double = (value, options = {}) => {
-      const x2 = toNumber(value, options);
-      if (!Number.isFinite(x2)) {
+      const x = toNumber(value, options);
+      if (!Number.isFinite(x)) {
         throw makeException(TypeError, "is not a finite floating-point value", options);
       }
-      return x2;
+      return x;
     };
     exports["unrestricted double"] = (value, options = {}) => {
-      const x2 = toNumber(value, options);
-      return x2;
+      const x = toNumber(value, options);
+      return x;
     };
     exports.float = (value, options = {}) => {
-      const x2 = toNumber(value, options);
-      if (!Number.isFinite(x2)) {
+      const x = toNumber(value, options);
+      if (!Number.isFinite(x)) {
         throw makeException(TypeError, "is not a finite floating-point value", options);
       }
-      if (Object.is(x2, -0)) {
-        return x2;
+      if (Object.is(x, -0)) {
+        return x;
       }
-      const y = Math.fround(x2);
+      const y = Math.fround(x);
       if (!Number.isFinite(y)) {
         throw makeException(TypeError, "is outside the range of a single-precision floating-point value", options);
       }
       return y;
     };
     exports["unrestricted float"] = (value, options = {}) => {
-      const x2 = toNumber(value, options);
-      if (isNaN(x2)) {
-        return x2;
+      const x = toNumber(value, options);
+      if (isNaN(x)) {
+        return x;
       }
-      if (Object.is(x2, -0)) {
-        return x2;
+      if (Object.is(x, -0)) {
+        return x;
       }
-      return Math.fround(x2);
+      return Math.fround(x);
     };
     exports.DOMString = (value, options = {}) => {
       if (options.treatNullAsEmptyString && value === null) {
@@ -31295,14 +26377,14 @@ var require_lib = __commonJS({
       return StringCtor(value);
     };
     exports.ByteString = (value, options = {}) => {
-      const x2 = exports.DOMString(value, options);
+      const x = exports.DOMString(value, options);
       let c;
-      for (let i = 0; (c = x2.codePointAt(i)) !== void 0; ++i) {
+      for (let i = 0; (c = x.codePointAt(i)) !== void 0; ++i) {
         if (c > 255) {
           throw makeException(TypeError, "is not a valid ByteString", options);
         }
       }
-      return x2;
+      return x;
     };
     exports.USVString = (value, options = {}) => {
       const S = exports.DOMString(value, options);
@@ -34876,8 +29958,8 @@ var require_sparse_bitfield = __commonJS({
       b.fill(0);
       return b;
     }
-    function powerOfTwo(x2) {
-      return !(x2 & x2 - 1);
+    function powerOfTwo(x) {
+      return !(x & x - 1);
     }
   }
 });
@@ -34931,8 +30013,8 @@ var require_saslprep = __commonJS({
     var mapping2space = non_ASCII_space_characters;
     var mapping2nothing = commonly_mapped_to_nothing;
     var getCodePoint = (character) => character.codePointAt(0);
-    var first = (x2) => x2[0];
-    var last = (x2) => x2[x2.length - 1];
+    var first = (x) => x[0];
+    var last = (x) => x[x.length - 1];
     function toCodePoints(input) {
       const codepoints = [];
       const size = input.length;
@@ -36829,7 +31911,7 @@ var require_commands = __commonJS({
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BinMsg = exports.Msg = exports.Response = exports.Query = void 0;
-    var BSON = require_bson2();
+    var BSON = require_bson3();
     var error_1 = require_error();
     var read_preference_1 = require_read_preference();
     var utils_1 = require_utils();
@@ -40603,7 +35685,7 @@ var require_mongodb_aws = __commonJS({
     var crypto = require("crypto");
     var http = require("http");
     var url = require("url");
-    var BSON = require_bson2();
+    var BSON = require_bson3();
     var deps_1 = require_deps();
     var error_1 = require_error();
     var utils_1 = require_utils();
@@ -40648,7 +35730,7 @@ var require_mongodb_aws = __commonJS({
         const secretAccessKey = credentials.password;
         const sessionToken = credentials.mechanismProperties.AWS_SESSION_TOKEN;
         const awsCredentials = accessKeyId && secretAccessKey && sessionToken ? { accessKeyId, secretAccessKey, sessionToken } : accessKeyId && secretAccessKey ? { accessKeyId, secretAccessKey } : void 0;
-        const db = credentials.source;
+        const db2 = credentials.source;
         crypto.randomBytes(32, (err, nonce) => {
           if (err) {
             callback2(err);
@@ -40659,7 +35741,7 @@ var require_mongodb_aws = __commonJS({
             mechanism: "MONGODB-AWS",
             payload: BSON.serialize({ r: nonce, p: ASCII_N }, bsonOptions)
           };
-          connection.command((0, utils_1.ns)(`${db}.$cmd`), saslStart, void 0, (err2, res) => {
+          connection.command((0, utils_1.ns)(`${db2}.$cmd`), saslStart, void 0, (err2, res) => {
             if (err2)
               return callback2(err2);
             const serverResponse = BSON.deserialize(res.payload.buffer, bsonOptions);
@@ -40707,7 +35789,7 @@ var require_mongodb_aws = __commonJS({
               conversationId: 1,
               payload: BSON.serialize(payload, bsonOptions)
             };
-            connection.command((0, utils_1.ns)(`${db}.$cmd`), saslContinue, void 0, callback2);
+            connection.command((0, utils_1.ns)(`${db2}.$cmd`), saslContinue, void 0, callback2);
           });
         });
       }
@@ -40812,7 +35894,7 @@ var require_plain = __commonJS({
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Plain = void 0;
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var error_1 = require_error();
     var utils_1 = require_utils();
     var auth_provider_1 = require_auth_provider();
@@ -40845,7 +35927,7 @@ var require_scram = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ScramSHA256 = exports.ScramSHA1 = void 0;
     var crypto = require("crypto");
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var deps_1 = require_deps();
     var error_1 = require_error();
     var utils_1 = require_utils();
@@ -40918,9 +36000,9 @@ var require_scram = __commonJS({
         return callback2(new error_1.MongoInvalidArgumentError("AuthContext must contain a valid nonce property"));
       }
       const nonce = authContext.nonce;
-      const db = credentials.source;
+      const db2 = credentials.source;
       const saslStartCmd = makeFirstMessage(cryptoMethod, credentials, nonce);
-      connection.command((0, utils_1.ns)(`${db}.$cmd`), saslStartCmd, void 0, (_err, result) => {
+      connection.command((0, utils_1.ns)(`${db2}.$cmd`), saslStartCmd, void 0, (_err, result) => {
         const err = resolveError(_err, result);
         if (err) {
           return callback2(err);
@@ -40938,7 +36020,7 @@ var require_scram = __commonJS({
         return callback2(new error_1.MongoInvalidArgumentError("Unable to continue SCRAM without valid nonce"));
       }
       const nonce = authContext.nonce;
-      const db = credentials.source;
+      const db2 = credentials.source;
       const username = cleanUsername(credentials.username);
       const password = credentials.password;
       let processedPassword;
@@ -40983,7 +36065,7 @@ var require_scram = __commonJS({
         conversationId: response.conversationId,
         payload: new bson_1.Binary(Buffer.from(clientFinal))
       };
-      connection.command((0, utils_1.ns)(`${db}.$cmd`), saslContinueCmd, void 0, (_err, r) => {
+      connection.command((0, utils_1.ns)(`${db2}.$cmd`), saslContinueCmd, void 0, (_err, r) => {
         const err = resolveError(_err, r);
         if (err) {
           return callback2(err);
@@ -41001,7 +36083,7 @@ var require_scram = __commonJS({
           conversationId: r.conversationId,
           payload: Buffer.alloc(0)
         };
-        connection.command((0, utils_1.ns)(`${db}.$cmd`), retrySaslContinueCmd, void 0, callback2);
+        connection.command((0, utils_1.ns)(`${db2}.$cmd`), retrySaslContinueCmd, void 0, callback2);
       });
     }
     function parsePayload(payload) {
@@ -41168,7 +36250,7 @@ var require_connect = __commonJS({
     var net = require("net");
     var socks_1 = require_build();
     var tls = require("tls");
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var constants_1 = require_constants2();
     var error_1 = require_error();
     var utils_1 = require_utils();
@@ -42190,7 +37272,7 @@ var require_monitor = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.MonitorInterval = exports.RTTPinger = exports.Monitor = void 0;
     var timers_1 = require("timers");
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var connect_1 = require_connect();
     var connection_1 = require_connection();
     var constants_1 = require_constants2();
@@ -43083,8 +38165,8 @@ var require_topology = __commonJS({
           clusterTime: void 0,
           // timer management
           connectionTimers: /* @__PURE__ */ new Set(),
-          detectShardedTopology: (ev2) => this.detectShardedTopology(ev2),
-          detectSrvRecords: (ev2) => this.detectSrvRecords(ev2)
+          detectShardedTopology: (ev) => this.detectShardedTopology(ev),
+          detectSrvRecords: (ev) => this.detectSrvRecords(ev)
         };
         if (options.srvHost && !options.loadBalanced) {
           this.s.srvPoller = options.srvPoller ?? new srv_polling_1.SrvPoller({
@@ -43107,9 +38189,9 @@ var require_topology = __commonJS({
           this.s.srvPoller?.start();
         }
       }
-      detectSrvRecords(ev2) {
+      detectSrvRecords(ev) {
         const previousTopologyDescription = this.s.description;
-        this.s.description = this.s.description.updateFromSrvPollingEvent(ev2, this.s.options.srvMaxHosts);
+        this.s.description = this.s.description.updateFromSrvPollingEvent(ev, this.s.options.srvMaxHosts);
         if (this.s.description === previousTopologyDescription) {
           return;
         }
@@ -43563,7 +38645,7 @@ var require_mongo_client = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.MongoClient = exports.ServerApiVersion = void 0;
     var util_1 = require("util");
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var change_stream_1 = require_change_stream();
     var connection_string_1 = require_connection_string();
     var constants_1 = require_constants2();
@@ -43740,8 +38822,8 @@ var require_mongo_client = __commonJS({
           dbName = this.options.dbName;
         }
         const finalOptions = Object.assign({}, this[kOptions], options);
-        const db = new db_1.Db(this, dbName, finalOptions);
-        return db;
+        const db2 = new db_1.Db(this, dbName, finalOptions);
+        return db2;
       }
       /**
        * Connect to MongoDB using a url
@@ -44414,7 +39496,7 @@ var require_upload = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.GridFSBucketWriteStream = void 0;
     var stream_1 = require("stream");
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     var error_1 = require_error();
     var write_concern_1 = require_write_concern();
     var GridFSBucketWriteStream = class extends stream_1.Writable {
@@ -44728,7 +39810,7 @@ var require_gridfs = __commonJS({
       chunkSizeBytes: 255 * 1024
     };
     var GridFSBucket = class extends mongo_types_1.TypedEventEmitter {
-      constructor(db, options) {
+      constructor(db2, options) {
         super();
         this.setMaxListeners(0);
         const privateOptions = {
@@ -44737,10 +39819,10 @@ var require_gridfs = __commonJS({
           writeConcern: write_concern_1.WriteConcern.fromOptions(options)
         };
         this.s = {
-          db,
+          db: db2,
           options: privateOptions,
-          _chunksCollection: db.collection(privateOptions.bucketName + ".chunks"),
-          _filesCollection: db.collection(privateOptions.bucketName + ".files"),
+          _chunksCollection: db2.collection(privateOptions.bucketName + ".chunks"),
+          _filesCollection: db2.collection(privateOptions.bucketName + ".files"),
           checkedIndexes: false,
           calledOpenUploadStream: false
         };
@@ -44905,11 +39987,11 @@ var require_lib3 = __commonJS({
     Object.defineProperty(exports, "ClientSession", { enumerable: true, get: function() {
       return sessions_1.ClientSession;
     } });
-    var bson_1 = require_bson2();
+    var bson_1 = require_bson3();
     Object.defineProperty(exports, "BSON", { enumerable: true, get: function() {
       return bson_1.BSON;
     } });
-    var bson_2 = require_bson2();
+    var bson_2 = require_bson3();
     Object.defineProperty(exports, "Binary", { enumerable: true, get: function() {
       return bson_2.Binary;
     } });
@@ -45236,22 +40318,22 @@ var require_symbols = __commonJS({
 var require_objectid = __commonJS({
   "node_modules/mongoose/lib/types/objectid.js"(exports, module2) {
     "use strict";
-    var ObjectId2 = require_bson().ObjectId;
+    var ObjectId3 = require_bson2().ObjectId;
     var objectIdSymbol = require_symbols().objectIdSymbol;
-    Object.defineProperty(ObjectId2.prototype, "_id", {
+    Object.defineProperty(ObjectId3.prototype, "_id", {
       enumerable: false,
       configurable: true,
       get: function() {
         return this;
       }
     });
-    if (!ObjectId2.prototype.hasOwnProperty("valueOf")) {
-      ObjectId2.prototype.valueOf = function objectIdValueOf() {
+    if (!ObjectId3.prototype.hasOwnProperty("valueOf")) {
+      ObjectId3.prototype.valueOf = function objectIdValueOf() {
         return this.toString();
       };
     }
-    ObjectId2.prototype[objectIdSymbol] = true;
-    module2.exports = ObjectId2;
+    ObjectId3.prototype[objectIdSymbol] = true;
+    module2.exports = ObjectId3;
   }
 });
 
@@ -45275,7 +40357,7 @@ var require_getConstructorName = __commonJS({
 var require_decimal128 = __commonJS({
   "node_modules/mongoose/lib/types/decimal128.js"(exports, module2) {
     "use strict";
-    module2.exports = require_bson().Decimal128;
+    module2.exports = require_bson2().Decimal128;
   }
 });
 
@@ -45378,7 +40460,7 @@ var require_clone = __commonJS({
   "node_modules/mongoose/lib/helpers/clone.js"(exports, module2) {
     "use strict";
     var Decimal = require_decimal128();
-    var ObjectId2 = require_objectid();
+    var ObjectId3 = require_objectid();
     var specialProperties = require_specialProperties();
     var isMongooseObject = require_isMongooseObject();
     var getFunctionName = require_getFunctionName();
@@ -45428,7 +40510,7 @@ var require_clone = __commonJS({
         }
       }
       if (isBsonType(obj, "ObjectId")) {
-        return new ObjectId2(obj.id);
+        return new ObjectId3(obj.id);
       }
       if (isBsonType(obj, "Decimal128")) {
         if (options && options.flattenDecimals) {
@@ -45509,7 +40591,7 @@ var require_collection3 = __commonJS({
     var MongooseCollection = require_collection();
     var MongooseError = require_mongooseError();
     var Collection = require_lib3().Collection;
-    var ObjectId2 = require_objectid();
+    var ObjectId3 = require_objectid();
     var getConstructorName = require_getConstructorName();
     var stream = require("stream");
     var util = require("util");
@@ -45550,7 +40632,7 @@ var require_collection3 = __commonJS({
         const connectionDebug = _this && _this.conn && _this.conn.options && _this.conn.options.debug;
         const debug = connectionDebug == null ? globalDebug : connectionDebug;
         const lastArg = arguments[arguments.length - 1];
-        const opId = new ObjectId2();
+        const opId = new ObjectId3();
         if (this.conn.$wasForceClosed) {
           const error = new MongooseError("Connection was force closed");
           if (args.length > 0 && typeof args[args.length - 1] === "function") {
@@ -45745,14 +40827,14 @@ var require_collection3 = __commonJS({
     function map(o) {
       return format(o, true);
     }
-    function formatObjectId(x2, key) {
-      x2[key] = inspectable('ObjectId("' + x2[key].toHexString() + '")');
+    function formatObjectId(x, key) {
+      x[key] = inspectable('ObjectId("' + x[key].toHexString() + '")');
     }
-    function formatDate(x2, key, shell) {
+    function formatDate(x, key, shell) {
       if (shell) {
-        x2[key] = inspectable('ISODate("' + x2[key].toUTCString() + '")');
+        x[key] = inspectable('ISODate("' + x[key].toUTCString() + '")');
       } else {
-        x2[key] = inspectable('new Date("' + x2[key].toUTCString() + '")');
+        x[key] = inspectable('new Date("' + x[key].toUTCString() + '")');
       }
     }
     function format(obj, sub, color, shell) {
@@ -45763,42 +40845,42 @@ var require_collection3 = __commonJS({
         return obj;
       }
       const clone = require_clone();
-      let x2 = clone(obj, { transform: false });
-      const constructorName = getConstructorName(x2);
+      let x = clone(obj, { transform: false });
+      const constructorName = getConstructorName(x);
       if (constructorName === "Binary") {
-        x2 = "BinData(" + x2.sub_type + ', "' + x2.toString("base64") + '")';
+        x = "BinData(" + x.sub_type + ', "' + x.toString("base64") + '")';
       } else if (constructorName === "ObjectId") {
-        x2 = inspectable('ObjectId("' + x2.toHexString() + '")');
+        x = inspectable('ObjectId("' + x.toHexString() + '")');
       } else if (constructorName === "Date") {
-        x2 = inspectable('new Date("' + x2.toUTCString() + '")');
+        x = inspectable('new Date("' + x.toUTCString() + '")');
       } else if (constructorName === "Object") {
-        const keys = Object.keys(x2);
+        const keys = Object.keys(x);
         const numKeys = keys.length;
         let key;
         for (let i = 0; i < numKeys; ++i) {
           key = keys[i];
-          if (x2[key]) {
+          if (x[key]) {
             let error;
-            if (typeof x2[key].toBSON === "function") {
+            if (typeof x[key].toBSON === "function") {
               try {
-                x2[key] = x2[key].toBSON();
+                x[key] = x[key].toBSON();
               } catch (_error) {
                 error = _error;
               }
             }
-            const _constructorName = getConstructorName(x2[key]);
+            const _constructorName = getConstructorName(x[key]);
             if (_constructorName === "Binary") {
-              x2[key] = "BinData(" + x2[key].sub_type + ', "' + x2[key].buffer.toString("base64") + '")';
+              x[key] = "BinData(" + x[key].sub_type + ', "' + x[key].buffer.toString("base64") + '")';
             } else if (_constructorName === "Object") {
-              x2[key] = format(x2[key], true);
+              x[key] = format(x[key], true);
             } else if (_constructorName === "ObjectId") {
-              formatObjectId(x2, key);
+              formatObjectId(x, key);
             } else if (_constructorName === "Date") {
-              formatDate(x2, key, shell);
+              formatDate(x, key, shell);
             } else if (_constructorName === "ClientSession") {
-              x2[key] = inspectable('ClientSession("' + (x2[key] && x2[key].id && x2[key].id.id && x2[key].id.id.buffer || "").toString("hex") + '")');
-            } else if (Array.isArray(x2[key])) {
-              x2[key] = x2[key].map(map);
+              x[key] = inspectable('ClientSession("' + (x[key] && x[key].id && x[key].id.id && x[key].id.id.buffer || "").toString("hex") + '")');
+            } else if (Array.isArray(x[key])) {
+              x[key] = x[key].map(map);
             } else if (error != null) {
               throw error;
             }
@@ -45806,9 +40888,9 @@ var require_collection3 = __commonJS({
         }
       }
       if (sub) {
-        return x2;
+        return x;
       }
-      return util.inspect(x2, false, 10, color).replace(/\n/g, "").replace(/\s{2,}/g, " ");
+      return util.inspect(x, false, 10, color).replace(/\n/g, "").replace(/\s{2,}/g, " ");
     }
     NativeCollection.prototype.getIndexes = NativeCollection.prototype.indexInformation;
     module2.exports = NativeCollection;
@@ -45852,15 +40934,15 @@ var require_ChangeStream = __commonJS({
             this.driverChangeStream.on("close", () => {
               this.closed = true;
             });
-            ["close", "change", "end", "error"].forEach((ev2) => {
-              this.driverChangeStream.on(ev2, (data) => {
-                if (ev2 === "error" && this.closed) {
+            ["close", "change", "end", "error"].forEach((ev) => {
+              this.driverChangeStream.on(ev, (data) => {
+                if (ev === "error" && this.closed) {
                   return;
                 }
                 if (data != null && data.fullDocument != null && this.options && this.options.hydrate) {
                   data.fullDocument = this.options.model.hydrate(data.fullDocument);
                 }
-                this.emit(ev2, data);
+                this.emit(ev, data);
               });
             });
           });
@@ -45869,12 +40951,12 @@ var require_ChangeStream = __commonJS({
         this.driverChangeStream.on("close", () => {
           this.closed = true;
         });
-        ["close", "change", "end", "error"].forEach((ev2) => {
-          this.driverChangeStream.on(ev2, (data) => {
-            if (ev2 === "error" && this.closed) {
+        ["close", "change", "end", "error"].forEach((ev) => {
+          this.driverChangeStream.on(ev, (data) => {
+            if (ev === "error" && this.closed) {
               return;
             }
-            this.emit(ev2, data);
+            this.emit(ev, data);
           });
         });
       }
@@ -47360,39 +42442,39 @@ var require_stringToParts = __commonJS({
     module2.exports = function stringToParts(str) {
       const result = [];
       let curPropertyName = "";
-      let state = "DEFAULT";
+      let state2 = "DEFAULT";
       for (let i = 0; i < str.length; ++i) {
-        if (state === "IN_SQUARE_BRACKETS" && !/\d/.test(str[i]) && str[i] !== "]") {
-          state = "DEFAULT";
+        if (state2 === "IN_SQUARE_BRACKETS" && !/\d/.test(str[i]) && str[i] !== "]") {
+          state2 = "DEFAULT";
           curPropertyName = result[result.length - 1] + "[" + curPropertyName;
           result.splice(result.length - 1, 1);
         }
         if (str[i] === "[") {
-          if (state !== "IMMEDIATELY_AFTER_SQUARE_BRACKETS") {
+          if (state2 !== "IMMEDIATELY_AFTER_SQUARE_BRACKETS") {
             result.push(curPropertyName);
             curPropertyName = "";
           }
-          state = "IN_SQUARE_BRACKETS";
+          state2 = "IN_SQUARE_BRACKETS";
         } else if (str[i] === "]") {
-          if (state === "IN_SQUARE_BRACKETS") {
-            state = "IMMEDIATELY_AFTER_SQUARE_BRACKETS";
+          if (state2 === "IN_SQUARE_BRACKETS") {
+            state2 = "IMMEDIATELY_AFTER_SQUARE_BRACKETS";
             result.push(curPropertyName);
             curPropertyName = "";
           } else {
-            state = "DEFAULT";
+            state2 = "DEFAULT";
             curPropertyName += str[i];
           }
         } else if (str[i] === ".") {
-          if (state !== "IMMEDIATELY_AFTER_SQUARE_BRACKETS") {
+          if (state2 !== "IMMEDIATELY_AFTER_SQUARE_BRACKETS") {
             result.push(curPropertyName);
             curPropertyName = "";
           }
-          state = "DEFAULT";
+          state2 = "DEFAULT";
         } else {
           curPropertyName += str[i];
         }
       }
-      if (state !== "IMMEDIATELY_AFTER_SQUARE_BRACKETS") {
+      if (state2 !== "IMMEDIATELY_AFTER_SQUARE_BRACKETS") {
         result.push(curPropertyName);
       }
       return result;
@@ -47748,9 +42830,9 @@ var require_statemachine = __commonJS({
       };
       ctor.prototype = new StateMachine();
       ctor.prototype.stateNames = states;
-      states.forEach(function(state) {
-        ctor.prototype[state] = function(path) {
-          this._changeState(path, state);
+      states.forEach(function(state2) {
+        ctor.prototype[state2] = function(path) {
+          this._changeState(path, state2);
         };
       });
       return ctor;
@@ -47763,41 +42845,41 @@ var require_statemachine = __commonJS({
       this.states[nextState] = this.states[nextState] || {};
       this.states[nextState][path] = true;
     };
-    StateMachine.prototype.clear = function clear(state) {
-      if (this.states[state] == null) {
+    StateMachine.prototype.clear = function clear(state2) {
+      if (this.states[state2] == null) {
         return;
       }
-      const keys = Object.keys(this.states[state]);
+      const keys = Object.keys(this.states[state2]);
       let i = keys.length;
       let path;
       while (i--) {
         path = keys[i];
-        delete this.states[state][path];
+        delete this.states[state2][path];
         delete this.paths[path];
       }
     };
     StateMachine.prototype.clearPath = function clearPath(path) {
-      const state = this.paths[path];
-      if (!state) {
+      const state2 = this.paths[path];
+      if (!state2) {
         return;
       }
       delete this.paths[path];
-      delete this.states[state][path];
+      delete this.states[state2][path];
     };
-    StateMachine.prototype.getStatePaths = function getStatePaths(state) {
-      if (this.states[state] != null) {
-        return this.states[state];
+    StateMachine.prototype.getStatePaths = function getStatePaths(state2) {
+      if (this.states[state2] != null) {
+        return this.states[state2];
       }
       return {};
     };
     StateMachine.prototype.some = function some() {
       const _this = this;
       const what = arguments.length ? arguments : this.stateNames;
-      return Array.prototype.some.call(what, function(state) {
-        if (_this.states[state] == null) {
+      return Array.prototype.some.call(what, function(state2) {
+        if (_this.states[state2] == null) {
           return false;
         }
-        return Object.keys(_this.states[state]).length;
+        return Object.keys(_this.states[state2]).length;
       });
     };
     StateMachine.prototype._iter = function _iter(iterMethod) {
@@ -47807,11 +42889,11 @@ var require_statemachine = __commonJS({
         if (!states.length)
           states = this.stateNames;
         const _this = this;
-        const paths = states.reduce(function(paths2, state) {
-          if (_this.states[state] == null) {
+        const paths = states.reduce(function(paths2, state2) {
+          if (_this.states[state2] == null) {
             return paths2;
           }
-          return paths2.concat(Object.keys(_this.states[state]));
+          return paths2.concat(Object.keys(_this.states[state2]));
         }, []);
         return paths[iterMethod](function(path, i, paths2) {
           return callback2(path, i, paths2);
@@ -48441,7 +43523,7 @@ var require_compile = __commonJS({
 var require_common3 = __commonJS({
   "node_modules/mongoose/lib/helpers/common.js"(exports) {
     "use strict";
-    var Binary = require_bson().Binary;
+    var Binary = require_bson2().Binary;
     var isBsonType = require_isBsonType();
     var isMongooseObject = require_isMongooseObject();
     var MongooseError = require_error2();
@@ -50482,7 +45564,7 @@ var require_objectid2 = __commonJS({
   "node_modules/mongoose/lib/cast/objectid.js"(exports, module2) {
     "use strict";
     var isBsonType = require_isBsonType();
-    var ObjectId2 = require_objectid();
+    var ObjectId3 = require_objectid();
     module2.exports = function castObjectId(value) {
       if (value == null) {
         return value;
@@ -50495,13 +45577,13 @@ var require_objectid2 = __commonJS({
           return value._id;
         }
         if (value._id.toString instanceof Function) {
-          return new ObjectId2(value._id.toString());
+          return new ObjectId3(value._id.toString());
         }
       }
       if (value.toString instanceof Function) {
-        return new ObjectId2(value.toString());
+        return new ObjectId3(value.toString());
       }
-      return new ObjectId2(value);
+      return new ObjectId3(value);
     };
   }
 });
@@ -53396,7 +48478,7 @@ var require_utils4 = __commonJS({
     "use strict";
     var ms = require_ms();
     var mpath = require_mpath();
-    var ObjectId2 = require_objectid();
+    var ObjectId3 = require_objectid();
     var PopulateOptions = require_PopulateOptions();
     var clone = require_clone();
     var immediate = require_immediate();
@@ -53583,7 +48665,7 @@ var require_utils4 = __commonJS({
               }
               continue;
             } else if (isBsonType(from[key], "ObjectId")) {
-              to[key] = new ObjectId2(from[key]);
+              to[key] = new ObjectId3(from[key]);
               continue;
             }
           }
@@ -55466,7 +50548,7 @@ var require_applyHooks = __commonJS({
 var require_buffer = __commonJS({
   "node_modules/mongoose/lib/types/buffer.js"(exports, module2) {
     "use strict";
-    var Binary = require_bson().Binary;
+    var Binary = require_bson2().Binary;
     var utils = require_utils4();
     function MongooseBuffer(value, encode, offset) {
       let val = value;
@@ -57969,11 +53051,11 @@ var require_trackTransaction = __commonJS({
           initialState.atomics = _getAtomics(this);
           session[sessionNewDocuments].set(this, initialState);
         } else {
-          const state = session[sessionNewDocuments].get(this);
+          const state2 = session[sessionNewDocuments].get(this);
           for (const path of Object.keys(this.$__.activePaths.getStatePaths("modify"))) {
-            state.modifiedPaths.add(path);
+            state2.modifiedPaths.add(path);
           }
-          state.atomics = _getAtomics(this, state.atomics);
+          state2.atomics = _getAtomics(this, state2.atomics);
         }
       });
     };
@@ -58093,7 +53175,7 @@ var require_mergeDiscriminatorSchema = __commonJS({
     var schemaMerge = require_merge();
     var specialProperties = require_specialProperties();
     var isBsonType = require_isBsonType();
-    var ObjectId2 = require_objectid();
+    var ObjectId3 = require_objectid();
     var isObject = require_isObject();
     module2.exports = function mergeDiscriminatorSchema(to, from, path, seen) {
       const keys = Object.keys(from);
@@ -58136,7 +53218,7 @@ var require_mergeDiscriminatorSchema = __commonJS({
               }
               continue;
             } else if (isBsonType(from[key], "ObjectId")) {
-              to[key] = new ObjectId2(from[key]);
+              to[key] = new ObjectId3(from[key]);
               continue;
             }
           }
@@ -59305,7 +54387,7 @@ var require_objectid3 = __commonJS({
     var utils = require_utils4();
     var CastError = SchemaType.CastError;
     var Document;
-    function ObjectId2(key, options) {
+    function ObjectId3(key, options) {
       const isKeyHexStr = typeof key === "string" && key.length === 24 && /^[a-f0-9]+$/i.test(key);
       const suppressWarning = options && options.suppressWarning;
       if ((isKeyHexStr || typeof key === "undefined") && !suppressWarning) {
@@ -59313,23 +54395,23 @@ var require_objectid3 = __commonJS({
       }
       SchemaType.call(this, key, options, "ObjectId");
     }
-    ObjectId2.schemaName = "ObjectId";
-    ObjectId2.defaultOptions = {};
-    ObjectId2.prototype = Object.create(SchemaType.prototype);
-    ObjectId2.prototype.constructor = ObjectId2;
-    ObjectId2.prototype.OptionsConstructor = SchemaObjectIdOptions;
-    ObjectId2.get = SchemaType.get;
-    ObjectId2.set = SchemaType.set;
-    ObjectId2.prototype.auto = function(turnOn) {
+    ObjectId3.schemaName = "ObjectId";
+    ObjectId3.defaultOptions = {};
+    ObjectId3.prototype = Object.create(SchemaType.prototype);
+    ObjectId3.prototype.constructor = ObjectId3;
+    ObjectId3.prototype.OptionsConstructor = SchemaObjectIdOptions;
+    ObjectId3.get = SchemaType.get;
+    ObjectId3.set = SchemaType.set;
+    ObjectId3.prototype.auto = function(turnOn) {
       if (turnOn) {
         this.default(defaultId);
         this.set(resetId);
       }
       return this;
     };
-    ObjectId2._checkRequired = (v) => isBsonType(v, "ObjectId");
-    ObjectId2._cast = castObjectId;
-    ObjectId2.cast = function cast(caster) {
+    ObjectId3._checkRequired = (v) => isBsonType(v, "ObjectId");
+    ObjectId3._cast = castObjectId;
+    ObjectId3.cast = function cast(caster) {
       if (arguments.length === 0) {
         return this._cast;
       }
@@ -59339,21 +54421,21 @@ var require_objectid3 = __commonJS({
       this._cast = caster;
       return this._cast;
     };
-    ObjectId2._defaultCaster = (v) => {
+    ObjectId3._defaultCaster = (v) => {
       if (!isBsonType(v, "ObjectId")) {
         throw new Error(v + " is not an instance of ObjectId");
       }
       return v;
     };
-    ObjectId2.checkRequired = SchemaType.checkRequired;
-    ObjectId2.prototype.checkRequired = function checkRequired(value, doc) {
+    ObjectId3.checkRequired = SchemaType.checkRequired;
+    ObjectId3.prototype.checkRequired = function checkRequired(value, doc) {
       if (SchemaType._isRef(this, value, doc, true)) {
         return !!value;
       }
-      const _checkRequired = typeof this.constructor.checkRequired === "function" ? this.constructor.checkRequired() : ObjectId2.checkRequired();
+      const _checkRequired = typeof this.constructor.checkRequired === "function" ? this.constructor.checkRequired() : ObjectId3.checkRequired();
       return _checkRequired(value);
     };
-    ObjectId2.prototype.cast = function(value, doc, init) {
+    ObjectId3.prototype.cast = function(value, doc, init) {
       if (!isBsonType(value, "ObjectId") && SchemaType._isRef(this, value, doc, init)) {
         if ((getConstructorName(value) || "").toLowerCase() === "objectid") {
           return new oid(value.toHexString());
@@ -59368,7 +54450,7 @@ var require_objectid3 = __commonJS({
       } else if (typeof this.constructor.cast === "function") {
         castObjectId2 = this.constructor.cast();
       } else {
-        castObjectId2 = ObjectId2.cast();
+        castObjectId2 = ObjectId3.cast();
       }
       try {
         return castObjectId2(value);
@@ -59379,7 +54461,7 @@ var require_objectid3 = __commonJS({
     function handleSingle(val) {
       return this.cast(val);
     }
-    ObjectId2.prototype.$conditionalHandlers = utils.options(SchemaType.prototype.$conditionalHandlers, {
+    ObjectId3.prototype.$conditionalHandlers = utils.options(SchemaType.prototype.$conditionalHandlers, {
       $gt: handleSingle,
       $gte: handleSingle,
       $lt: handleSingle,
@@ -59399,7 +54481,7 @@ var require_objectid3 = __commonJS({
       }
       return v;
     }
-    module2.exports = ObjectId2;
+    module2.exports = ObjectId3;
   }
 });
 
@@ -61411,8 +56493,8 @@ var require_connection2 = __commonJS({
         }
         if (this._readyState !== val) {
           this._readyState = val;
-          for (const db of this.otherDbs) {
-            db.readyState = val;
+          for (const db2 of this.otherDbs) {
+            db2.readyState = val;
           }
           if (STATES.connected === val) {
             this._hasOpened = true;
@@ -61499,26 +56581,26 @@ var require_connection2 = __commonJS({
           return res;
         }).catch((err) => {
           for (const doc of session[sessionNewDocuments].keys()) {
-            const state = session[sessionNewDocuments].get(doc);
-            if (state.hasOwnProperty("isNew")) {
-              doc.$isNew = state.$isNew;
+            const state2 = session[sessionNewDocuments].get(doc);
+            if (state2.hasOwnProperty("isNew")) {
+              doc.$isNew = state2.$isNew;
             }
-            if (state.hasOwnProperty("versionKey")) {
-              doc.set(doc.schema.options.versionKey, state.versionKey);
+            if (state2.hasOwnProperty("versionKey")) {
+              doc.set(doc.schema.options.versionKey, state2.versionKey);
             }
-            if (state.modifiedPaths.length > 0 && doc.$__.activePaths.states.modify == null) {
+            if (state2.modifiedPaths.length > 0 && doc.$__.activePaths.states.modify == null) {
               doc.$__.activePaths.states.modify = {};
             }
-            for (const path of state.modifiedPaths) {
+            for (const path of state2.modifiedPaths) {
               doc.$__.activePaths.paths[path] = "modify";
               doc.$__.activePaths.states.modify[path] = true;
             }
-            for (const path of state.atomics.keys()) {
+            for (const path of state2.atomics.keys()) {
               const val = doc.$__getValue(path);
               if (val == null) {
                 continue;
               }
-              val[arrayAtomicsSymbol] = state.atomics.get(path);
+              val[arrayAtomicsSymbol] = state2.atomics.get(path);
             }
           }
           delete session[sessionNewDocuments];
@@ -61715,14 +56797,14 @@ var require_connection2 = __commonJS({
       client.setMaxListeners(0);
       await client.connect();
       _setClient(conn, client, options, dbName);
-      for (const db of conn.otherDbs) {
-        _setClient(db, client, {}, db.name);
+      for (const db2 of conn.otherDbs) {
+        _setClient(db2, client, {}, db2.name);
       }
       return conn;
     }
     function _setClient(conn, client, options, dbName) {
-      const db = dbName != null ? client.db(dbName) : client.db();
-      conn.db = db;
+      const db2 = dbName != null ? client.db(dbName) : client.db();
+      conn.db = db2;
       conn.client = client;
       conn.host = client && client.s && client.s.options && client.s.options.hosts && client.s.options.hosts[0] && client.s.options.hosts[0].host || void 0;
       conn.port = client && client.s && client.s.options && client.s.options.hosts && client.s.options.hosts[0] && client.s.options.hosts[0].port || void 0;
@@ -61738,8 +56820,8 @@ var require_connection2 = __commonJS({
       };
       const type = client && client.topology && client.topology.description && client.topology.description.type || "";
       if (type === "Single") {
-        client.on("serverDescriptionChanged", (ev2) => {
-          const newDescription = ev2.newDescription;
+        client.on("serverDescriptionChanged", (ev) => {
+          const newDescription = ev.newDescription;
           if (newDescription.type === "Unknown") {
             conn.readyState = STATES.disconnected;
           } else {
@@ -61747,8 +56829,8 @@ var require_connection2 = __commonJS({
           }
         });
       } else if (type.startsWith("ReplicaSet")) {
-        client.on("topologyDescriptionChanged", (ev2) => {
-          const description = ev2.newDescription;
+        client.on("topologyDescriptionChanged", (ev) => {
+          const description = ev.newDescription;
           if (conn.readyState === STATES.connected && description.type !== "ReplicaSetWithPrimary") {
             conn.readyState = STATES.disconnected;
           } else if (conn.readyState === STATES.disconnected && description.type === "ReplicaSetWithPrimary") {
@@ -61850,8 +56932,8 @@ var require_connection2 = __commonJS({
         }
       }
       this.emit("close", force);
-      for (const db of this.otherDbs) {
-        this._destroyCalled ? db.destroy({ force, skipCloseClient: true }) : db.close({ force, skipCloseClient: true });
+      for (const db2 of this.otherDbs) {
+        this._destroyCalled ? db2.destroy({ force, skipCloseClient: true }) : db2.close({ force, skipCloseClient: true });
       }
     };
     Connection.prototype.collection = function(name2, options) {
@@ -69314,7 +64396,7 @@ var require_lib5 = __commonJS({
       };
       var isArray = typeChecker("Array");
       var isObject = typeChecker("Object");
-      var isFunction = typeChecker("Function");
+      var isFunction2 = typeChecker("Function");
       var isVanillaObject = function(value) {
         return value && (value.constructor === Object || value.constructor === Array || value.constructor.toString() === "function Object() { [native code] }" || value.constructor.toString() === "function Array() { [native code] }") && !value.toJSON;
       };
@@ -70021,7 +65103,7 @@ var require_lib5 = __commonJS({
       };
       var $where = function(params, ownerQuery, options) {
         var test;
-        if (isFunction(params)) {
+        if (isFunction2(params)) {
           test = params;
         } else if (!process.env.CSP_ENABLED) {
           test = new Function("obj", "return " + params);
@@ -74175,7 +69257,7 @@ var require_browserDocument = __commonJS({
     var EventEmitter = require("events").EventEmitter;
     var MongooseError = require_error2();
     var Schema = require_schema2();
-    var ObjectId2 = require_objectid();
+    var ObjectId3 = require_objectid();
     var ValidationError = MongooseError.ValidationError;
     var applyHooks = require_applyHooks();
     var isObject = require_isObject();
@@ -74190,7 +69272,7 @@ var require_browserDocument = __commonJS({
       if (!this.schema && schema.options._id) {
         obj = obj || {};
         if (obj._id === void 0) {
-          obj._id = new ObjectId2();
+          obj._id = new ObjectId3();
         }
       }
       if (!schema) {
@@ -74668,8 +69750,3398 @@ var require_mongoose = __commonJS({
 });
 
 // server.ts
+var server_exports = {};
+__export(server_exports, {
+  db: () => db
+});
+module.exports = __toCommonJS(server_exports);
 var import_graphscript_node = __toESM(require_index_node());
-var import_graphscript_services_node = __toESM(require_index_services_node());
+
+// ../../graphscript/src/extras/struct/Struct.backend.ts
+var import_bson = __toESM(require_bson());
+
+// ../../graphscript/src/core/EventHandler.ts
+var EventHandler = class {
+  //sub counter, always ensures unique values
+  constructor(data) {
+    this.pushToState = {};
+    this.data = {};
+    this.triggers = {};
+    this.ctr = 0;
+    this.setState = (updateObj) => {
+      Object.assign(this.data, updateObj);
+      let props = Object.getOwnPropertyNames(updateObj);
+      for (const prop of props) {
+        this.triggerEvent(prop, this.data[prop]);
+      }
+      if (this.triggers[statesubKey]) {
+        let run = (fn) => {
+          fn(updateObj);
+        };
+        this.triggers[statesubKey].forEach((v) => {
+          run(v.onchange);
+        });
+      }
+      return this.data;
+    };
+    this.setValue = (key, value) => {
+      this.data[key] = value;
+      this.triggerEvent(key, value);
+    };
+    this.triggerEvent = (key, value) => {
+      if (this.triggers[key]) {
+        let fn = (obj) => obj.onchange(value, this.triggers[key]);
+        this.triggers[key].forEach(fn);
+      }
+    };
+    this.subscribeState = (onchange) => {
+      return this.subscribeEvent(statesubKey, onchange);
+    };
+    this.unsubscribeState = (sub) => {
+      return this.unsubscribeEvent(statesubKey, sub);
+    };
+    this.subscribeEvent = (key, onchange, refObject, refKey) => {
+      if (key) {
+        if (refObject && refKey && !this.triggers[key]) {
+          Object.defineProperty(this.data, key, {
+            get: () => {
+              return refObject[refKey];
+            },
+            set: (value) => {
+              refObject[refKey] = value;
+            },
+            enumerable: true,
+            configurable: true
+          });
+        }
+        if (!this.triggers[key]) {
+          this.triggers[key] = [];
+        }
+        let l = this.ctr;
+        this.ctr++;
+        this.triggers[key].push({ sub: l, onchange });
+        return l;
+      } else
+        return void 0;
+    };
+    this.unsubscribeEvent = (key, sub) => {
+      let triggers = this.triggers[key];
+      if (triggers) {
+        if (sub === void 0) {
+          delete this.triggers[key];
+          delete this.data[key];
+        } else {
+          let idx = void 0;
+          let obj = triggers.find((o, i) => {
+            if (o.sub === sub) {
+              idx = i;
+              return true;
+            }
+          });
+          if (obj)
+            triggers.splice(idx, 1);
+          if (Object.keys(triggers).length === 0) {
+            delete this.triggers[key];
+            delete this.data[key];
+          }
+          if (this.onRemoved)
+            this.onRemoved(obj);
+          return true;
+        }
+      }
+    };
+    this.subscribeEventOnce = (key, onchange) => {
+      let sub;
+      let changed = (value) => {
+        onchange(value);
+        this.unsubscribeEvent(key, sub);
+      };
+      sub = this.subscribeEvent(key, changed);
+    };
+    this.getEvent = (key, sub) => {
+      for (const s in this.triggers[key]) {
+        if (this.triggers[key][s].sub === sub)
+          return this.triggers[key][s];
+      }
+    };
+    this.getSnapshot = () => {
+      const snapshot = {};
+      for (const key in this.data) {
+        snapshot[key] = this.data[key];
+      }
+    };
+    if (typeof data === "object")
+      this.data = data;
+  }
+};
+var statesubKey = "*s";
+
+// ../../graphscript/src/core/Graph.ts
+var state = new EventHandler();
+var GraphNode = class {
+  //pass GraphNodeProperties, functions, or tags of other nodes
+  constructor(properties, parent, graph) {
+    this.__node = {
+      //GraphNode-specific properties 
+      tag: `node${Math.floor(Math.random() * 1e15)}`,
+      unique: `${Math.floor(Math.random() * 1e15)}`,
+      state
+      // graph: undefined as any,
+      // localState: undefined as any,
+      // source:undefined as any// source graph if a graph is passed as properties
+    };
+    this.__setProperties = (properties, parent, graph) => {
+      let enforceProperties = () => {
+        let orig = properties;
+        if (!("__node" in properties))
+          properties.__node = {};
+        if (typeof properties === "function") {
+          if (isNativeClass(properties)) {
+            properties = new properties();
+          } else
+            properties = {
+              __operator: properties,
+              __node: {
+                forward: true,
+                //propagate operator results to children
+                tag: properties.name
+              }
+            };
+        } else if (typeof properties === "string") {
+          if (graph?.get(properties)) {
+            properties = graph.get(properties);
+          }
+        }
+        if (!properties.__node.initial)
+          properties.__node.initial = orig;
+      };
+      enforceProperties();
+      if (typeof properties === "object") {
+        let assignState = () => {
+          if (properties.__node?.state)
+            this.__node.state = properties.__node.state;
+        };
+        let setProps = () => {
+          if (properties.__props) {
+            if (typeof properties.__props === "function")
+              properties.__props = new properties.__props();
+            if (typeof properties.__props === "object") {
+              this.__proxyObject(properties.__props);
+            }
+          }
+        };
+        let setTag = () => {
+          if (!properties.__node.tag) {
+            if (properties.__operator?.name)
+              properties.__node.tag = properties.__operator.name;
+            else
+              properties.__node.tag = `node${Math.floor(Math.random() * 1e15)}`;
+          }
+        };
+        let setNode = () => {
+          if (typeof properties.__node === "string") {
+            if (graph?.get(properties.__node.tag)) {
+              properties = graph.get(properties.__node.tag);
+            } else
+              properties.__node = {};
+          } else if (!properties.__node)
+            properties.__node = {};
+          if (graph) {
+            properties.__node.graph = graph;
+          }
+          if (properties instanceof Graph)
+            properties.__node.source = properties;
+        };
+        let setParent = () => {
+          if (!properties.__parent && parent)
+            properties.__parent = parent;
+          if (parent?.__node && !(parent instanceof Graph || properties instanceof Graph))
+            properties.__node.tag = parent.__node.tag + "." + properties.__node.tag;
+          if (parent instanceof Graph && properties instanceof Graph) {
+            if (properties.__node.loaders)
+              Object.assign(parent.__node.loaders ? parent.__node.loaders : {}, properties.__node.loaders);
+            if (parent.__node.mapGraphs) {
+              properties.__node.nodes.forEach((n) => {
+                parent.set(properties.__node.tag + "." + n.__node.tag, n);
+              });
+              let ondelete = () => {
+                properties.__node.nodes.forEach((n) => {
+                  parent.__node.nodes.delete(properties.__node.tag + "." + n.__node.tag);
+                });
+              };
+              this.__addOndisconnected(ondelete);
+            }
+          }
+        };
+        let setOp = () => {
+          if (typeof properties.default === "function" && !properties.__operator) {
+            properties.__operator = properties.default;
+          }
+          if (properties.__operator) {
+            if (typeof properties.__operator === "string") {
+              if (graph) {
+                let n = graph.get(properties.__operator);
+                if (n)
+                  properties.__operator = n.__operator;
+                if (!properties.__node.tag && properties.__operator.name)
+                  properties.__node.tag = properties.__operator.name;
+              }
+            }
+            if (typeof properties.__operator === "function")
+              properties.__operator = this.__setOperator(properties.__operator);
+            if (properties.default)
+              properties.default = properties.__operator;
+          }
+        };
+        let assignProps = () => {
+          properties.__node = Object.assign(this.__node, properties.__node);
+          let keys = Object.getOwnPropertyNames(properties);
+          for (const key of keys) {
+            this[key] = properties[key];
+          }
+        };
+        let bindCallbacks = () => {
+          if (this.__onconnected) {
+            if (typeof this.__onconnected === "function") {
+              this.__onconnected = this.__onconnected.bind(this);
+            } else if (Array.isArray(this.__onconnected)) {
+              this.__onconnected = this.__onconnected.map((f) => {
+                return f.bind(this);
+              });
+            }
+            if (typeof this.__ondisconnected === "function") {
+              this.__ondisconnected = this.__ondisconnected.bind(this);
+            } else if (Array.isArray(this.__ondisconnected)) {
+              this.__ondisconnected = this.__ondisconnected.map((f) => {
+                return f.bind(this);
+              });
+            }
+          }
+        };
+        assignState();
+        setTag();
+        setProps();
+        setNode();
+        setParent();
+        assignProps();
+        bindCallbacks();
+        setOp();
+      }
+    };
+    //subscribe an output or input with an arbitrary callback
+    this.__subscribe = (callback2, key, subInput, bound, target) => {
+      const subscribeToFunction = (k, setTarget = (callback3, target2) => callback3, triggerCallback = callback2) => {
+        let sub = this.__node.state.subscribeEvent(k, triggerCallback, this, key);
+        let trigger = this.__node.state.getEvent(k, sub);
+        if (!trigger)
+          return sub;
+        trigger.source = this.__node.tag;
+        if (key)
+          trigger.key = key;
+        trigger.target = setTarget(callback2);
+        if (bound)
+          trigger.bound = bound;
+        return sub;
+      };
+      const subscribeToGraph = (callback3) => {
+        let fn = this.__node.graph.get(callback3);
+        if (!fn && callback3.includes(".")) {
+          let n = this.__node.graph.get(callback3.substring(0, callback3.lastIndexOf(".")));
+          let key2 = callback3.substring(callback3.lastIndexOf(".") + 1);
+          if (n && typeof n[key2] === "function")
+            callback3 = (...args) => {
+              return n[key2](...args);
+            };
+        }
+      };
+      if (key) {
+        if (!this.__node.localState || !this.__node.localState[key]) {
+          this.__addLocalState(this, key);
+        }
+        if (typeof callback2 === "string") {
+          if (target) {
+            if (this.__node.graph?.get(target)) {
+              let n = this.__node.graph?.get(target);
+              if (typeof n[callback2] === "function") {
+                let fn = n[callback2];
+                callback2 = (...inp) => {
+                  fn(...inp);
+                };
+              } else {
+                let k2 = callback2;
+                let setter = (inp) => {
+                  n[k2] = inp;
+                };
+                callback2 = setter;
+              }
+            }
+          } else if (typeof this[callback2] === "function") {
+            let fn = this[callback2];
+            callback2 = (...inp) => {
+              fn(...inp);
+            };
+          } else if (this.__node.graph?.get(callback2))
+            subscribeToGraph(callback2);
+          if (typeof callback2 !== "function")
+            return void 0;
+        }
+        let sub;
+        let k = subInput ? this.__node.unique + "." + key + "input" : this.__node.unique + "." + key;
+        if (typeof callback2 === "function")
+          sub = subscribeToFunction(k);
+        else if (callback2?.__node)
+          sub = subscribeToFunction(
+            k,
+            (callback3, target2) => target2 ? target2 : callback3.__node.unique,
+            (...inp) => {
+              if (callback2.__operator)
+                callback2.__operator(...inp);
+            }
+          );
+        return sub;
+      } else {
+        if (typeof callback2 === "string") {
+          if (this.__node.graph.get(callback2))
+            callback2 = this.__node.graph.get(callback2);
+          if (typeof callback2 !== "object")
+            return void 0;
+        }
+        let sub;
+        let k = subInput ? this.__node.unique + "input" : this.__node.unique;
+        if (typeof callback2 === "function")
+          sub = subscribeToFunction(k);
+        else if (callback2?.__node)
+          sub = subscribeToFunction(
+            k,
+            (callback3, target2) => target2 ? target2 : callback3.__node.unique,
+            (...inp) => {
+              if (callback2.__operator)
+                callback2.__operator(...inp);
+            }
+          );
+        return sub;
+      }
+    };
+    //unsub the callback
+    this.__unsubscribe = (sub, key, unsubInput) => {
+      if (key) {
+        return this.__node.state.unsubscribeEvent(
+          unsubInput ? this.__node.unique + "." + key + "input" : this.__node.unique + "." + key,
+          sub
+        );
+      } else
+        return this.__node.state.unsubscribeEvent(
+          unsubInput ? this.__node.unique + "input" : this.__node.unique,
+          sub
+        );
+    };
+    this.__setOperator = (fn) => {
+      fn = fn.bind(this);
+      if (this.__args && this.__node.graph) {
+        fn = wrapArgs(fn, this.__args, this.__node.graph);
+      }
+      let inpstr = `${this.__node.unique}input`;
+      this.__operator = (...args) => {
+        if (this.__node.state.triggers[inpstr])
+          this.__node.state.setValue(inpstr, args);
+        let result = fn(...args);
+        if (this.__node.state.triggers[this.__node.unique]) {
+          if (typeof result?.then === "function") {
+            result.then((res) => {
+              if (res !== void 0)
+                this.__node.state.setValue(this.__node.unique, res);
+            }).catch(console.error);
+          } else if (result !== void 0)
+            this.__node.state.setValue(this.__node.unique, result);
+        }
+        return result;
+      };
+      if (this.__parent instanceof GraphNode && !this.__subscribedToParent) {
+        if (this.__parent.__operator) {
+          let sub = this.__parent.__subscribe(this);
+          let ondelete = () => {
+            this.__parent?.__unsubscribe(sub);
+            delete this.__subscribedToParent;
+          };
+          this.__addOndisconnected(ondelete);
+          this.__subscribedToParent = true;
+        }
+      }
+      return this.__operator;
+    };
+    this.__addLocalState = (props, key) => {
+      if (!props)
+        return;
+      if (!this.__node.localState) {
+        this.__node.localState = {};
+      }
+      const localState = this.__node.localState;
+      const initState = (props2, k) => {
+        let str = this.__node.unique + "." + k;
+        let inpstr = `${str}input`;
+        if (typeof props2[k] === "function" && k !== "__operator") {
+          let fn = props2[k].bind(this);
+          props2[k] = (...args) => {
+            if (this.__node.state.triggers[inpstr])
+              this.__node.state.setValue(inpstr, args);
+            let result = fn(...args);
+            if (this.__node.state.triggers[str]) {
+              if (typeof result?.then === "function") {
+                result.then((res) => {
+                  this.__node.state.triggerEvent(str, res);
+                }).catch(console.error);
+              } else
+                this.__node.state.triggerEvent(str, result);
+            }
+            return result;
+          };
+        } else {
+          let get, set;
+          if (this.__props?.[k]) {
+            get = () => {
+              return this.__props[k];
+            };
+            set = (v) => {
+              this.__props[k] = v;
+              if (this.__node.state.triggers[str])
+                this.__node.state.triggerEvent(str, v);
+            };
+          } else {
+            localState[k] = props2[k];
+            get = () => {
+              return localState[k];
+            };
+            set = (v) => {
+              localState[k] = v;
+              if (this.__node.state.triggers[str])
+                this.__node.state.triggerEvent(str, v);
+            };
+          }
+          const descriptor = {
+            get,
+            set,
+            enumerable: true,
+            configurable: true
+          };
+          Object.defineProperty(props2, k, descriptor);
+          if (typeof this.__node.initial === "object") {
+            let dec = Object.getOwnPropertyDescriptor(this.__node.initial, k);
+            if (dec === void 0 || dec?.configurable) {
+              Object.defineProperty(this.__node.initial, k, descriptor);
+            }
+          }
+        }
+      };
+      if (key)
+        initState(props, key);
+      else {
+        for (let k in props) {
+          initState(props, k);
+        }
+      }
+    };
+    //we can proxy an original object and function outputs on the node
+    this.__proxyObject = (obj) => {
+      const allProps = getAllProperties(obj);
+      for (const k of allProps) {
+        if (typeof obj[k] === "function") {
+          this[k] = (...args) => {
+            return obj[k](...args);
+          };
+        } else {
+          const descriptor = {
+            get: () => {
+              return obj[k];
+            },
+            set: (value) => {
+              obj[k] = value;
+            },
+            enumerable: true,
+            configurable: true
+          };
+          Object.defineProperty(this, k, descriptor);
+          if (typeof this.__node.initial === "object") {
+            let dec = Object.getOwnPropertyDescriptor(this.__node.initial, k);
+            if (dec === void 0 || dec?.configurable) {
+              Object.defineProperty(this.__node.initial, k, descriptor);
+            }
+          }
+        }
+      }
+    };
+    this.__setProperties(properties, parent, graph);
+  }
+  __addOnconnected(callback2) {
+    callback2 = callback2.bind(this);
+    if (Array.isArray(this.__onconnected)) {
+      this.__onconnected.push(callback2);
+    } else if (typeof this.__onconnected === "function") {
+      this.__onconnected = [callback2, this.__onconnected];
+    } else
+      this.__onconnected = callback2;
+  }
+  __addOndisconnected(callback2) {
+    callback2 = callback2.bind(this);
+    if (Array.isArray(this.__ondisconnected)) {
+      this.__ondisconnected.push(callback2);
+    } else if (typeof this.__ondisconnected === "function") {
+      this.__ondisconnected = [callback2, this.__ondisconnected];
+    } else
+      this.__ondisconnected = callback2;
+  }
+  __callConnected(node = this) {
+    if (typeof this.__onconnected === "function") {
+      this.__onconnected(this);
+    } else if (Array.isArray(this.__onconnected)) {
+      let fn = (o) => {
+        o(this);
+      };
+      this.__onconnected.forEach(fn);
+    }
+  }
+  __callDisconnected(node = this) {
+    if (typeof this.__ondisconnected === "function")
+      this.__ondisconnected(this);
+    else if (Array.isArray(this.__ondisconnected)) {
+      let fn = (o) => {
+        o(this);
+      };
+      this.__ondisconnected.forEach(fn);
+    }
+  }
+};
+var Graph = class {
+  constructor(options) {
+    this.__node = {
+      tag: `graph${Math.floor(Math.random() * 1e15)}`,
+      unique: `${Math.random()}`,
+      nodes: /* @__PURE__ */ new Map(),
+      state,
+      roots: {}
+      // mapGraphs:false //if adding a Graph as a node, do we want to map all the graph's nodes with the parent graph tag denoting it (for uniqueness)?
+      // roots:undefined as any,
+      // loaders:undefined as any,
+    };
+    this.init = (options) => {
+      if (options) {
+        let cpy = Object.assign({}, options);
+        delete cpy.roots;
+        recursivelyAssign(this.__node, cpy);
+        if (options.roots)
+          this.load(options.roots);
+      }
+    };
+    this.load = (roots) => {
+      function recursivelyAssignChildren(target, obj, inChildren = true, top = true) {
+        if (top) {
+          if (target)
+            Object.assign(target, obj);
+          else
+            target = Object.assign({}, obj);
+          recursivelyAssignChildren(target, obj, true, false);
+        }
+        if (obj.__children && !inChildren) {
+          if (obj.__children?.constructor.name === "Object") {
+            if (target.__children?.constructor.name === "Object")
+              recursivelyAssignChildren(target.__children, obj.__children, true, false);
+            else
+              target.__children = recursivelyAssignChildren({}, obj.__children, true, false);
+          } else {
+            target.__children = obj.__children;
+          }
+        } else if (inChildren) {
+          for (const key in obj) {
+            target[key] = Object.assign({}, obj[key]);
+            if (obj[key].__children) {
+              recursivelyAssignChildren({}, obj[key].__children, false, false);
+            }
+          }
+        }
+        return target;
+      }
+      this.__node.roots = recursivelyAssignChildren(this.__node.roots ? this.__node.roots : {}, roots);
+      let cpy = Object.assign({}, roots);
+      if (cpy.__node)
+        delete cpy.__node;
+      let listeners = this.recursiveSet(cpy, this, void 0, roots);
+      if (roots.__node) {
+        if (!roots.__node.tag)
+          roots.__node._tag = `roots${Math.floor(Math.random() * 1e15)}`;
+        else if (!this.get(roots.__node.tag)) {
+          let node = new GraphNode(roots, this, this);
+          this.set(node.__node.tag, node);
+          this.runLoaders(node, this, roots, roots.__node.tag);
+          if (node.__listeners) {
+            listeners[node.__node.tag] = node.__listeners;
+          }
+        }
+      } else if (roots.__listeners) {
+        this.setListeners(roots.__listeners);
+      }
+      this.setListeners(listeners);
+      return cpy;
+    };
+    this.setLoaders = (loaders2, replace) => {
+      if (replace)
+        this.__node.loaders = loaders2;
+      else
+        Object.assign(this.__node.loaders, loaders2);
+      return this.__node.loaders;
+    };
+    this.runLoaders = (node, parent, properties, key) => {
+      for (const l in this.__node.loaders) {
+        if (typeof this.__node.loaders[l] === "object") {
+          if (this.__node.loaders[l].init)
+            this.__node.loaders[l](node, parent, this, this.__node.roots, properties, key);
+          if (this.__node.loaders[l].connected)
+            node.__addOnconnected(this.__node.loaders[l].connect);
+          if (this.__node.loaders[l].disconnected)
+            node.__addOndisconnected(this.__node.loaders[l].disconnect);
+        } else if (typeof this.__node.loaders[l] === "function")
+          this.__node.loaders[l](node, parent, this, this.__node.roots, properties, key);
+      }
+    };
+    this.add = (properties, parent) => {
+      let listeners = {};
+      if (typeof parent === "string")
+        parent = this.get(parent);
+      let instanced;
+      if (typeof properties === "function") {
+        if (isNativeClass(properties)) {
+          if (properties.prototype instanceof GraphNode) {
+            properties = properties.prototype.constructor(properties, parent, this);
+            instanced = true;
+          } else
+            properties = new properties();
+        } else
+          properties = { __operator: properties };
+      } else if (typeof properties === "string") {
+        properties = this.__node.roots[properties];
+      }
+      if (!properties)
+        return;
+      if (!instanced) {
+        let keys = Object.getOwnPropertyNames(properties);
+        let cpy = {};
+        for (const key of keys) {
+          cpy[key] = properties[key];
+        }
+        properties = cpy;
+      }
+      if (!properties.__node)
+        properties.__node = {};
+      properties.__node.initial = properties;
+      if (typeof properties === "object" && (!properties?.__node?.tag || !this.get(properties.__node.tag))) {
+        let node;
+        if (instanced)
+          node = properties;
+        else
+          node = new GraphNode(properties, parent, this);
+        this.set(node.__node.tag, node);
+        this.runLoaders(node, parent, properties, node.__node.tag);
+        this.__node.roots[node.__node.tag] = properties;
+        if (node.__children) {
+          node.__children = Object.assign({}, node.__children);
+          this.recursiveSet(node.__children, node, listeners, node.__children);
+        }
+        if (node.__listeners) {
+          listeners[node.__node.tag] = Object.assign({}, node.__listeners);
+          for (const key in node.__listeners) {
+            let listener = node.__listeners[key];
+            if (node[key]) {
+              delete listeners[node.__node.tag][key];
+              listeners[node.__node.tag][node.__node.tag + "." + key] = listener;
+            }
+            if (typeof listener === "string") {
+              if (node.__children?.[listener]) {
+                listeners[node.__node.tag][key] = node.__node.tag + "." + listener;
+              } else if (parent instanceof GraphNode && (parent.__node.tag === listener || parent.__node.tag.includes(".") && parent.__node.tag.split(".").pop() === listener)) {
+                listeners[node.__node.tag][key] = parent.__node.tag;
+              }
+            }
+          }
+        }
+        this.setListeners(listeners);
+        node.__callConnected();
+        return node;
+      }
+      return;
+    };
+    this.recursiveSet = (t, parent, listeners = {}, origin) => {
+      let keys = Object.getOwnPropertyNames(origin);
+      for (const key of keys) {
+        if (key.includes("__"))
+          continue;
+        let p = origin[key];
+        if (Array.isArray(p))
+          continue;
+        let instanced;
+        if (typeof p === "function") {
+          if (isNativeClass(p)) {
+            p = new p();
+            if (p instanceof GraphNode) {
+              p = p.prototype.constructor(p, parent, this);
+              instanced = true;
+            }
+          } else
+            p = { __operator: p };
+        } else if (typeof p === "string") {
+          if (this.__node.nodes.get(p))
+            p = this.__node.nodes.get(p);
+          else
+            p = this.__node.roots[p];
+        } else if (typeof p === "boolean") {
+          if (this.__node.nodes.get(key))
+            p = this.__node.nodes.get(key);
+          else
+            p = this.__node.roots[key];
+        }
+        if (typeof p === "object") {
+          if (!instanced && !(p instanceof GraphNode)) {
+            let keys2 = Object.getOwnPropertyNames(p);
+            let cpy = {};
+            for (const key2 of keys2) {
+              cpy[key2] = p[key2];
+            }
+            p = cpy;
+          }
+          if (!p.__node)
+            p.__node = {};
+          if (!p.__node.tag)
+            p.__node.tag = key;
+          if (!p.__node.initial)
+            p.__node.initial = t[key];
+          if (this.get(p.__node.tag) && !(!(parent instanceof Graph) && parent?.__node) || parent?.__node && this.get(parent.__node.tag + "." + p.__node.tag))
+            continue;
+          let node;
+          let newnode = false;
+          if (instanced || p instanceof GraphNode) {
+            node = p;
+          } else {
+            node = new GraphNode(p, parent, this);
+            newnode = true;
+          }
+          if (!newnode && p instanceof GraphNode && !instanced && parent instanceof GraphNode) {
+            let sub = this.subscribe(parent.__node.tag, node.__node.tag);
+            let ondelete = (node2) => {
+              this.unsubscribe(parent.__node.tag, sub);
+            };
+            node.__addOndisconnected(ondelete);
+          } else {
+            this.set(node.__node.tag, node);
+            this.runLoaders(node, parent, t[key], key);
+            t[key] = node;
+            this.__node.roots[node.__node.tag] = p;
+            if (node.__children) {
+              node.__children = Object.assign({}, node.__children);
+              this.recursiveSet(node.__children, node, listeners, node.__children);
+            }
+            if (node.__listeners) {
+              listeners[node.__node.tag] = Object.assign({}, node.__listeners);
+              for (const key2 in node.__listeners) {
+                let listener = node.__listeners[key2];
+                let k = key2;
+                if (node[key2]) {
+                  delete listeners[node.__node.tag][key2];
+                  k = node.__node.tag + "." + key2;
+                  listeners[node.__node.tag][k] = listener;
+                }
+                if (typeof listener === "string") {
+                  if (node.__children?.[listener]) {
+                    listeners[node.__node.tag][k] = node.__node.tag + "." + listener;
+                  } else if (parent instanceof GraphNode && (parent.__node.tag === listener || parent.__node.tag.includes(".") && parent.__node.tag.split(".").pop() === listener)) {
+                    listeners[node.__node.tag][k] = parent.__node.tag;
+                  }
+                }
+              }
+            }
+            node.__callConnected();
+          }
+        }
+      }
+      return listeners;
+    };
+    this.remove = (node, clearListeners = true) => {
+      this.unsubscribe(node);
+      if (typeof node === "string")
+        node = this.get(node);
+      if (node instanceof GraphNode) {
+        this.delete(node.__node.tag);
+        delete this.__node.roots[node.__node.tag];
+        if (clearListeners) {
+          this.clearListeners(node);
+        }
+        node.__callDisconnected();
+        const recursiveRemove = (t) => {
+          for (const key in t) {
+            this.unsubscribe(t[key]);
+            this.delete(t[key].__node.tag);
+            delete this.__node.roots[t[key].__node.tag];
+            this.delete(key);
+            delete this.__node.roots[key];
+            t[key].__node.tag = t[key].__node.tag.substring(t[key].__node.tag.lastIndexOf(".") + 1);
+            if (clearListeners) {
+              this.clearListeners(t[key]);
+            }
+            t[key].__callDisconnected();
+            if (t[key].__children) {
+              recursiveRemove(t[key].__children);
+            }
+          }
+        };
+        if (node.__children) {
+          recursiveRemove(node.__children);
+        }
+      }
+      if (node?.__node.tag && node?.__parent) {
+        delete node?.__parent;
+        node.__node.tag = node.__node.tag.substring(node.__node.tag.indexOf(".") + 1);
+      }
+      if (node?.__node.graph)
+        node.__node.graph = void 0;
+      return node;
+    };
+    this.run = (node, ...args) => {
+      if (typeof node === "string") {
+        let nd = this.get(node);
+        if (!nd && node.includes(".")) {
+          nd = this.get(node.substring(0, node.lastIndexOf(".")));
+          if (typeof nd?.[node.substring(node.lastIndexOf(".") + 1)] === "function")
+            return nd[node.substring(node.lastIndexOf(".") + 1)](...args);
+        } else if (nd?.__operator)
+          return nd.__operator(...args);
+      }
+      if (node?.__operator) {
+        return node?.__operator(...args);
+      }
+    };
+    this.setListeners = (listeners) => {
+      for (const key in listeners) {
+        let node = this.get(key);
+        if (!node)
+          continue;
+        if (typeof listeners[key] === "object") {
+          for (const k in listeners[key]) {
+            let n = this.get(k);
+            let sub;
+            if (typeof listeners[key][k] !== "object")
+              listeners[key][k] = { __callback: listeners[key][k] };
+            else if (!listeners[key][k].__callback) {
+              for (const kk in listeners[key][k]) {
+                if (typeof listeners[key][k][kk] !== "object") {
+                  listeners[key][k][kk] = { __callback: listeners[key][k][kk] };
+                  if (node.__operator && (listeners[key][k][kk].__callback === true || typeof listeners[key][k][kk].__callback === "undefined"))
+                    listeners[key][k][kk].__callback = node.__operator;
+                }
+                let nn = this.get(kk);
+                if (!nn) {
+                  let tag = k.substring(0, k.lastIndexOf("."));
+                  nn = this.get(tag);
+                  if (nn) {
+                    let prop = k.substring(k.lastIndexOf(".") + 1);
+                    if (typeof node.__listeners[k][kk] !== "object")
+                      node.__listeners[k][kk] = { __callback: listeners[key][k][kk].__callback, inputState: listeners[key][k][kk]?.inputState, target: key, bound: k };
+                    sub = this.subscribe(
+                      nn,
+                      listeners[key][k][kk].__callback,
+                      listeners[key][k][kk].__args,
+                      prop,
+                      listeners[key][k][kk].inputState,
+                      key,
+                      k
+                    );
+                    node.__listeners[k][kk].sub = sub;
+                  }
+                } else {
+                  if (typeof node.__listeners[k][kk] !== "object")
+                    node.__listeners[k][kk] = { __callback: listeners[key][k][kk].__callback, inputState: listeners[key][k][kk]?.inputState, target: key, bound: k };
+                  sub = this.subscribe(
+                    nn,
+                    listeners[key][k][kk].__callback,
+                    listeners[key][k].__args,
+                    void 0,
+                    listeners[key][k].inputState,
+                    key,
+                    k
+                  );
+                  node.__listeners[k][kk].sub = sub;
+                }
+              }
+            }
+            if ("__callback" in listeners[key][k]) {
+              if (listeners[key][k].__callback === true || typeof listeners[key][k].__callback === "undefined")
+                listeners[key][k].__callback = node.__operator;
+              if (typeof listeners[key][k].__callback === "function")
+                listeners[key][k].__callback = listeners[key][k].__callback.bind(node);
+              if (typeof node.__listeners !== "object")
+                node.__listeners = {};
+              if (!n) {
+                let tag = k.substring(0, k.lastIndexOf("."));
+                n = this.get(tag);
+                if (n) {
+                  if (typeof node.__listeners[k] !== "object")
+                    node.__listeners[k] = { __callback: listeners[key][k].__callback, inputState: listeners[key][k]?.inputState, target: key, bound: k };
+                  sub = this.subscribe(
+                    n,
+                    listeners[key][k].__callback,
+                    listeners[key][k].__args,
+                    k.substring(k.lastIndexOf(".") + 1),
+                    listeners[key][k].inputState,
+                    key,
+                    k
+                  );
+                  node.__listeners[k].sub = sub;
+                }
+              } else {
+                if (typeof node.__listeners[k] !== "object")
+                  node.__listeners[k] = { __callback: listeners[key][k].__callback, inputState: listeners[key][k]?.inputState, target: key, bound: k };
+                sub = this.subscribe(
+                  n,
+                  listeners[key][k].__callback,
+                  listeners[key][k].__args,
+                  void 0,
+                  listeners[key][k].inputState,
+                  key,
+                  k
+                );
+                node.__listeners[k].sub = sub;
+              }
+            }
+          }
+        }
+      }
+    };
+    this.clearListeners = (node, listener) => {
+      if (typeof node === "string")
+        node = this.get(node);
+      if (node?.__listeners) {
+        for (const key in node.__listeners) {
+          if (listener && key !== listener)
+            continue;
+          if (typeof node.__listeners[key]?.sub !== "number")
+            continue;
+          let n = this.get(key);
+          if (!n) {
+            n = this.get(key.substring(0, key.lastIndexOf(".")));
+            if (n) {
+              if (typeof node.__listeners[key] === "object" && !node.__listeners[key]?.__callback) {
+                for (const k in node.__listeners[key]) {
+                  if (typeof node.__listeners[key][k]?.sub === "number") {
+                    this.unsubscribe(n, node.__listeners[key][k].sub, key.substring(key.lastIndexOf(".") + 1), node.__listeners[key][k].inputState);
+                    node.__listeners[key][k].sub = void 0;
+                  }
+                }
+              } else if (typeof node.__listeners[key]?.sub === "number") {
+                this.unsubscribe(n, node.__listeners[key].sub, key.substring(key.lastIndexOf(".") + 1), node.__listeners[key].inputState);
+                node.__listeners[key].sub = void 0;
+              }
+            }
+          } else {
+            if (typeof !node.__listeners[key]?.__callback === "number") {
+              for (const k in node.__listeners[key]) {
+                if (node.__listeners[key][k]?.sub) {
+                  this.unsubscribe(n, node.__listeners[key][k].sub, void 0, node.__listeners[key][k].inputState);
+                  node.__listeners[key][k].sub = void 0;
+                }
+              }
+            } else if (typeof node.__listeners[key]?.sub === "number") {
+              this.unsubscribe(n, node.__listeners[key].sub, void 0, node.__listeners[key].inputState);
+              node.__listeners[key].sub = void 0;
+            }
+          }
+        }
+      }
+    };
+    this.get = (tag) => {
+      return this.__node.nodes.get(tag);
+    };
+    this.set = (tag, node) => {
+      return this.__node.nodes.set(tag, node);
+    };
+    this.delete = (tag) => {
+      return this.__node.nodes.delete(tag);
+    };
+    this.getProps = (node, getInitial) => {
+      if (typeof node === "string")
+        node = this.get(node);
+      if (node instanceof GraphNode) {
+        let cpy;
+        if (getInitial)
+          cpy = Object.assign({}, this.__node.roots[node.__node.tag]);
+        else {
+          cpy = Object.assign({}, node);
+          for (const key in cpy) {
+            if (key.includes("__"))
+              delete cpy[key];
+          }
+        }
+      }
+    };
+    this.subscribe = (nodeEvent, onEvent, args, key, subInput, target, bound) => {
+      let nd = nodeEvent;
+      if (typeof nodeEvent === "string") {
+        nd = this.get(nodeEvent);
+        if (!nd && nodeEvent.includes(".")) {
+          nd = this.get(nodeEvent.substring(0, nodeEvent.lastIndexOf(".")));
+          key = nodeEvent.substring(nodeEvent.lastIndexOf(".") + 1);
+        }
+      }
+      if (target instanceof GraphNode)
+        target = target.__node.tag;
+      if (typeof onEvent === "string") {
+        let key2 = onEvent;
+        let setOnEventFromString = (onEvent2) => {
+          if (this.get(onEvent2)?.__operator) {
+            let node = this.get(onEvent2);
+            onEvent2 = function(...inp) {
+              return node.__operator(...inp);
+            };
+          } else if (onEvent2.includes(".")) {
+            let n = this.get(onEvent2.substring(0, onEvent2.lastIndexOf(".")));
+            let key3 = onEvent2.substring(onEvent2.lastIndexOf(".") + 1);
+            if (typeof n[key3] === "function") {
+              if (n[key3] instanceof GraphNode)
+                onEvent2 = n[key3];
+              else
+                onEvent2 = function(...inp) {
+                  return n[key3](...inp);
+                };
+            } else {
+              onEvent2 = function(inp) {
+                n[key3] = inp;
+                return n[key3];
+              };
+            }
+          }
+          return onEvent2;
+        };
+        if (target) {
+          let node = this.get(target);
+          if (typeof node?.[onEvent] === "function") {
+            onEvent = function(...inp) {
+              return node[key2](...inp);
+            };
+          } else if (node[key2]) {
+            if (node[key2] instanceof GraphNode)
+              onEvent = node[key2];
+            else
+              onEvent = function(inp) {
+                node[key2] = inp;
+                return node[key2];
+              };
+          } else {
+            onEvent = setOnEventFromString(onEvent);
+          }
+        } else {
+          onEvent = setOnEventFromString(onEvent);
+        }
+      }
+      if ((typeof onEvent === "function" || onEvent instanceof GraphNode) && args) {
+        if (onEvent instanceof GraphNode && onEvent.__operator)
+          onEvent = function(inp) {
+            return onEvent.__operator(inp);
+          };
+        onEvent = wrapArgs(onEvent, args, this);
+      }
+      let sub;
+      if (nd instanceof GraphNode) {
+        const doSub = () => {
+          sub = nd.__subscribe(onEvent, key, subInput, target, bound);
+          if (target && this.get(target) && this.get(target).__listeners[bound]) {
+            if (typeof this.get(target).__listeners[bound] !== "object") {
+              this.get(target).__listeners[bound] = this.get(target).__node.state.getEvent(bound);
+            }
+          }
+          this.get(target).__listeners[bound].sub = sub;
+          let ondelete = () => {
+            if (sub !== void 0)
+              nd.__unsubscribe(sub, key, subInput);
+            sub = void 0;
+          };
+          nd.__addOndisconnected(() => {
+            ondelete();
+            nd.__addOnconnected(() => {
+              if (sub === void 0 && nd.__node.graph.__node.tag === this.__node.tag)
+                doSub();
+            });
+          });
+          if (typeof onEvent === "string" && this.get(onEvent))
+            onEvent = this.get(onEvent);
+          if (onEvent instanceof GraphNode) {
+            onEvent.__addOndisconnected(() => {
+              ondelete();
+            });
+          }
+        };
+        doSub();
+      } else if (typeof nodeEvent === "string") {
+        let node = this.get(nodeEvent);
+        if (node) {
+          if (onEvent instanceof GraphNode && onEvent.__operator) {
+            const doSub = () => {
+              sub = node.__subscribe(onEvent.__operator, key, subInput, target, bound);
+              if (target && this.get(target) && this.get(target).__listeners[bound]) {
+                if (typeof this.get(target).__listeners[bound] !== "object") {
+                  this.get(target).__listeners[bound] = this.get(target).__node.state.getEvent(bound);
+                }
+                this.get(target).__listeners[bound].sub = sub;
+              }
+              let ondelete = () => {
+                if (sub !== void 0)
+                  node.__unsubscribe(sub, key, subInput);
+              };
+              node.__addOndisconnected(() => {
+                ondelete();
+                node.__addOnconnected(() => {
+                  if (sub === void 0 && node.__node.graph.__node.tag === this.__node.tag)
+                    doSub();
+                });
+              });
+              onEvent.__addOndisconnected(ondelete);
+            };
+            doSub();
+          } else if (typeof onEvent === "function" || typeof onEvent === "string") {
+            const doSub = () => {
+              sub = node.__subscribe(onEvent, key, subInput, target, bound);
+              if (target && this.get(target) && this.get(target).__listeners[bound]) {
+                if (typeof this.get(target).__listeners[bound] !== "object") {
+                  this.get(target).__listeners[bound] = this.get(target).__node.state.getEvent(bound);
+                }
+                this.get(target).__listeners[bound].sub = sub;
+              }
+              let ondelete = () => {
+                if (sub !== void 0)
+                  node.__unsubscribe(sub, key, subInput);
+                sub = void 0;
+              };
+              node.__addOndisconnected(() => {
+                ondelete();
+                node.__addOnconnected(() => {
+                  if (sub === void 0 && node.__node.graph.__node.tag === this.__node.tag)
+                    doSub();
+                });
+              });
+              if (typeof onEvent === "string" && this.get(onEvent))
+                this.get(onEvent).__addOndisconnected(ondelete);
+              this.__node.state.getEvent(node.__node.unique, sub).source = nodeEvent;
+            };
+            doSub();
+          }
+        } else {
+          if (typeof onEvent === "string")
+            onEvent = this.__node.nodes.get(onEvent).__operator;
+          if (typeof onEvent === "function")
+            sub = this.__node.state.subscribeEvent(nodeEvent, onEvent);
+        }
+      }
+      return sub;
+    };
+    this.unsubscribe = (node, sub, key, subInput) => {
+      if (node instanceof GraphNode) {
+        return node.__unsubscribe(sub, key, subInput);
+      } else
+        return this.get(node)?.__unsubscribe(sub, key, subInput);
+    };
+    this.setState = (update) => {
+      this.__node.state.setState(update);
+    };
+    this.init(options);
+  }
+};
+function recursivelyAssign(target, obj) {
+  for (const key in obj) {
+    if (obj[key]?.constructor.name === "Object") {
+      if (target[key]?.constructor.name === "Object")
+        recursivelyAssign(target[key], obj[key]);
+      else
+        target[key] = recursivelyAssign({}, obj[key]);
+    } else {
+      target[key] = obj[key];
+    }
+  }
+  return target;
+}
+function getAllProperties(obj) {
+  var allProps = [], curr = obj;
+  do {
+    var props = Object.getOwnPropertyNames(curr);
+    let fn = function(prop) {
+      if (allProps.indexOf(prop) === -1)
+        allProps.push(prop);
+    };
+    props.forEach(fn);
+  } while (curr = Object.getPrototypeOf(curr));
+  return allProps;
+}
+function isNativeClass(thing) {
+  return isFunction(thing) === "class";
+}
+function isFunction(x) {
+  const res = typeof x === "function" ? x.prototype ? Object.getOwnPropertyDescriptor(x, "prototype")?.writable ? "function" : "class" : x.constructor.name === "AsyncFunction" ? "async" : "arrow" : "";
+  return res;
+}
+var wrapArgs = (callback2, argOrder, graph) => {
+  let args = [];
+  let getCallbackFromString = (a) => {
+    if (graph.get(a)?.__operator) {
+      let node = graph.get(a);
+      return (...inp) => {
+        node.__operator(...inp);
+      };
+    } else if (a.includes(".")) {
+      let split = a.split(".");
+      let popped = split.pop();
+      let joined = split.join(".");
+      let node = graph.get(joined);
+      if (typeof graph.get(joined)?.[popped] === "function") {
+        return (...inp) => {
+          return node[popped](...inp);
+        };
+      } else
+        return () => {
+          return node[popped];
+        };
+    } else if (graph.get(a)) {
+      let node = graph.get(a);
+      return () => {
+        return node;
+      };
+    } else {
+      let arg = a;
+      return () => {
+        return arg;
+      };
+    }
+  };
+  let forArg = (a, i) => {
+    if (a === "__output" || a === "__input") {
+      args[i] = (inp) => {
+        return inp;
+      };
+    } else if (typeof a === "string") {
+      args[i] = getCallbackFromString(a);
+    } else if (typeof a === "function") {
+      let fn2 = a;
+      args[i] = (...inp) => {
+        return fn2(...inp);
+      };
+    } else if (typeof a === "object" && a.__input) {
+      let recursivelyCreateCallback = function(c) {
+        let input = c.__input;
+        if (typeof c.__input === "string") {
+          input = getCallbackFromString(c.__input);
+        }
+        if (c.__args) {
+          input = wrapArgs(input, c.__args, graph);
+        }
+        if (c.__output) {
+          let output = c.__output;
+          if (typeof c.__output === "string") {
+            output = getCallbackFromString(output);
+          } else if (typeof a.__output === "object") {
+            output = recursivelyCreateCallback(output);
+          }
+          if (typeof output === "function") {
+            let fn2 = input;
+            input = (...inp) => {
+              return output(fn2(...inp));
+            };
+          }
+        }
+        return input;
+      };
+      args[i] = recursivelyCreateCallback(a);
+    } else {
+      let arg = a;
+      args[i] = () => {
+        return arg;
+      };
+    }
+  };
+  argOrder.forEach(forArg);
+  if (typeof callback2 === "string")
+    callback2 = getCallbackFromString(callback2);
+  let fn = callback2;
+  callback2 = function(...inp) {
+    let mapArg = (arg) => {
+      return arg(...inp);
+    };
+    return fn(...args.map(mapArg));
+  };
+  return callback2;
+};
+
+// ../../graphscript/src/loaders/index.ts
+var backprop = (node, parent, graph) => {
+  if (node.__node.backward && parent instanceof GraphNode) {
+    graph.setListeners({
+      [parent.__node.tag]: {
+        [node.__node.tag]: parent
+      }
+    });
+  }
+};
+var loop = (node, parent, graph) => {
+  if (node.__operator && !node.__node.looperSet) {
+    if (typeof node.__node.delay === "number") {
+      let fn = node.__operator;
+      node.__setOperator((...args) => {
+        return new Promise((res, rej) => {
+          setTimeout(async () => {
+            res(await fn(...args));
+          }, node.__node.delay);
+        });
+      });
+    } else if (node.__node.frame === true) {
+      let fn = node.__operator;
+      node.__setOperator((...args) => {
+        return new Promise((res, rej) => {
+          requestAnimationFrame(async () => {
+            res(await fn(...args));
+          });
+        });
+      });
+    }
+    if (typeof node.__node.repeat === "number" || typeof node.__node.recursive === "number") {
+      let fn = node.__operator;
+      node.__setOperator(async (...args) => {
+        let i = node.__node.repeat ? node.__node.repeat : node.__node.recursive;
+        let result;
+        let repeater = async (tick, ...inp) => {
+          while (tick > 0) {
+            if (node.__node.delay || node.__node.frame) {
+              fn(...inp).then(async (res) => {
+                if (node.__node.recursive) {
+                  await repeater(tick, res);
+                } else
+                  await repeater(tick, ...inp);
+              });
+              break;
+            } else
+              result = await fn(...args);
+            tick--;
+          }
+        };
+        await repeater(i, ...args);
+        return result;
+      });
+    }
+    if (node.__node.loop && typeof node.__node.loop === "number") {
+      node.__node.looperSet = true;
+      let fn = node.__operator;
+      let time = node.__node.loop;
+      node.__setOperator((...args) => {
+        if (!("looping" in node.__node))
+          node.__node.looping = true;
+        if (node.__node.looping) {
+          let last = performance.now();
+          fn(...args);
+          setTimeout(
+            () => {
+              let now = performance.now();
+              let overshoot = now - last - node.__node.loop;
+              if (overshoot > 0)
+                time = node.__node.loop - overshoot;
+              else
+                time = node.__node.loop;
+              if (time <= 0)
+                time = node.__node.loop;
+              node.__operator(...args);
+            },
+            time
+          );
+        }
+      });
+      if (node.__node.looping)
+        node.__operator();
+      let ondelete = (node2) => {
+        if (node2.__node.looping)
+          node2.__node.looping = false;
+      };
+      node.__addOndisconnected(ondelete);
+    }
+  }
+};
+var animate = (node, parent, graph) => {
+  if (node.__node.animate === true || node.__animation) {
+    let fn = node.__operator;
+    node.__setOperator((...args) => {
+      if (!("animating" in node.__node))
+        node.__node.animating = true;
+      if (node.__node.animating) {
+        if (typeof node.__animation === "function")
+          node.__animation(...args);
+        else
+          fn(...args);
+        requestAnimationFrame(() => {
+          node.__operator(...args);
+        });
+      }
+    });
+    if (node.__node.animating || (!("animating" in node.__node) || node.__node.animating) && node.__animation)
+      setTimeout(() => {
+        requestAnimationFrame(node.__operator);
+      }, 10);
+    let ondelete = (node2) => {
+      if (node2.__node.animating)
+        node2.__node.animating = false;
+    };
+    node.__addOndisconnected(ondelete);
+  }
+};
+var branching = (node, parent, graph) => {
+  if (typeof node.__branch === "object" && node.__operator && !node.__branchApplied) {
+    let fn = node.__operator;
+    node.__branchApplied = true;
+    node.__operator = (...args) => {
+      let result = fn(...args);
+      for (const key in node.__branch) {
+        let triggered = () => {
+          if (typeof node.__branch[key].then === "function") {
+            node.__branch[key].then(result);
+          } else if (node.__branch[key].then instanceof GraphNode && node.__branch[key].then.__operator) {
+            node.__branch[key].then.__operator(result);
+          } else
+            result = node.__branch[key].then;
+        };
+        if (typeof node.__branch[key].if === "function") {
+          if (node.__branch[key].if(result) == true) {
+            triggered();
+          }
+        } else if (node.__branch[key].if === result) {
+          triggered();
+        }
+      }
+      return result;
+    };
+  }
+  if (node.__listeners) {
+    for (const key in node.__listeners) {
+      if (typeof node.__listeners[key] === "object") {
+        if (node.__listeners[key].branch && !node.__listeners[key].branchApplied) {
+          let fn = node.__listeners[key].callback;
+          node.__listeners[key].branchApplied = true;
+          node.__listeners.callback = (ret) => {
+            let triggered = () => {
+              if (typeof node.__listeners[key].branch.then === "function") {
+                ret = node.__listeners[key].branch.then(ret);
+              } else if (node.__listeners[key].branch.then instanceof GraphNode && node.__listeners[key].branch.then.__operator) {
+                ret = node.__listeners[key].branch.then.__operator(ret);
+              } else
+                ret = node.__listeners[key].branch.then;
+            };
+            if (typeof node.__listeners[key].branch.if === "function") {
+              if (node.__listeners[key].branch.if(ret)) {
+                triggered();
+              }
+            } else if (node.__listeners[key].branch.if === ret) {
+              triggered();
+            }
+            return fn(ret);
+          };
+        }
+      }
+    }
+  }
+};
+var triggerListenerOncreate = (node, parent, graph) => {
+  if (node.__listeners) {
+    for (const key in node.__listeners) {
+      if (typeof node.__listeners[key] === "object") {
+        if (node.__listeners[key].oncreate) {
+          node.__listeners[key].callback(node.__listeners[key].oncreate);
+        }
+      }
+    }
+  }
+};
+var bindListener = (node, parent, graph) => {
+  if (node.__listeners) {
+    for (const key in node.__listeners) {
+      if (typeof node.__listeners[key] === "object") {
+        if (typeof node.__listeners[key].binding === "object") {
+          node.__listeners.callback = node.__listeners.callback.bind(node.__listeners[key].binding);
+        }
+      }
+    }
+  }
+};
+var transformListenerResult = (node, parent, graph) => {
+  if (node.__listeners) {
+    for (const key in node.__listeners) {
+      if (typeof node.__listeners[key] === "object") {
+        if (typeof node.__listeners[key].transform === "function" && !node.__listeners[key].transformApplied) {
+          let fn = node.__listeners[key].callback;
+          node.__listeners[key].transformApplied = true;
+          node.__listeners.callback = (ret) => {
+            ret = node.__listeners[key].transform(ret);
+            return fn(ret);
+          };
+        }
+      }
+    }
+  }
+};
+var substitute__operator = (node, parent, graph) => {
+  if (node.post && !node.__operator) {
+    node.__setOperator(node.post);
+  } else if (!node.__operator && typeof node.get == "function") {
+    node.__setOperator(node.get);
+  }
+  if (!node.get && node.__operator) {
+    node.get = node.__operator;
+  }
+  if (node.aliases) {
+    node.aliases.forEach((a) => {
+      graph.set(a, node);
+      let ondelete = (node2) => {
+        graph.__node.nodes.delete(a);
+      };
+      node.__addOndisconnected(ondelete);
+    });
+  }
+  if (typeof graph.__node.roots?.[node.__node.tag] === "object" && node.get)
+    graph.__node.roots[node.__node.tag].get = node.get;
+};
+var loaders = {
+  backprop,
+  loop,
+  animate,
+  branching,
+  triggerListenerOncreate,
+  bindListener,
+  transformListenerResult,
+  substitute__operator
+};
+
+// ../../graphscript/src/services/Service.ts
+var Service = class extends Graph {
+  constructor(options) {
+    super({
+      //assign properties to the graph
+      ...options,
+      loaders: options?.loaders ? Object.assign({ ...loaders }, options.loaders) : { ...loaders }
+      //roots:
+    });
+    this.name = `service${Math.floor(Math.random() * 1e15)}`;
+    this.addServices = (services) => {
+      for (const s in services) {
+        if (typeof services[s] === "function")
+          services[s] = new services[s]();
+        if (services[s]?.__node?.loaders)
+          Object.assign(this.__node.loaders, services[s].__node.loaders);
+        if (services[s]?.__node?.nodes) {
+          services[s].__node.nodes.forEach((n, tag) => {
+            if (!this.get(tag)) {
+              this.set(tag, n);
+            } else
+              this.set(s + "." + tag, n);
+          });
+          this.__node.nodes.forEach((n, k) => {
+            if (!services[s].__node.nodes.get(k))
+              services[s].__node.nodes.set(k, n);
+          });
+          let set = this.set;
+          this.set = (tag, node) => {
+            services[s].set(tag, node);
+            return set(tag, node);
+          };
+          let del = this.delete;
+          this.delete = (tag) => {
+            services[s].delete(tag);
+            return del(tag);
+          };
+        } else if (typeof services[s] === "object") {
+          this.load(services[s]);
+        }
+      }
+    };
+    this.handleMethod = (route, method, args) => {
+      let m = method.toLowerCase();
+      let src = this.__node.nodes.get(route);
+      if (!src) {
+        src = this.__node.roots[route];
+      }
+      if (src?.[m]) {
+        if (typeof src[m] !== "function") {
+          if (args) {
+            if (Array.isArray(args) && args.length === 1)
+              src[m] = args[0];
+            else
+              src[m] = args;
+            return;
+          }
+          return src[m];
+        } else {
+          if (Array.isArray(args))
+            return src[m](...args);
+          else
+            return src[m](args);
+        }
+      } else
+        return this.handleServiceMessage({ route, args, method });
+    };
+    //transmit http requests, socket messages, webrtc, osc, etc. with this customizable callback
+    this.transmit = (...args) => {
+      if (typeof args[0] === "object") {
+        if (args[0].method) {
+          return this.handleMethod(args[0].route, args[0].method, args[0].args);
+        } else if (args[0].route) {
+          return this.handleServiceMessage(args[0]);
+        } else if (args[0].node) {
+          return this.handleGraphNodeCall(args[0].node, args[0].args);
+        } else if (this.__node.keepState) {
+          if (args[0].route)
+            this.setState({ [args[0].route]: args[0].args });
+          if (args[0].node)
+            this.setState({ [args[0].node]: args[0].args });
+        }
+        return args;
+      } else
+        return args;
+    };
+    //process http requests, socket messages, webrtc, osc, etc. with this customizable callback. This default still works in some scenarios
+    this.receive = (...args) => {
+      if (args[0]) {
+        if (typeof args[0] === "string") {
+          let substr = args[0].substring(0, 8);
+          if (substr.includes("{") || substr.includes("[")) {
+            if (substr.includes("\\"))
+              args[0] = args[0].replace(/\\/g, "");
+            if (args[0][0] === '"') {
+              args[0] = args[0].substring(1, args[0].length - 1);
+            }
+            ;
+            args[0] = JSON.parse(args[0]);
+          }
+        }
+      }
+      if (typeof args[0] === "object") {
+        if (args[0].method) {
+          return this.handleMethod(args[0].route, args[0].method, args[0].args);
+        } else if (args[0].route) {
+          return this.handleServiceMessage(args[0]);
+        } else if (args[0].node) {
+          return this.handleGraphNodeCall(args[0].node, args[0].args);
+        } else if (this.__node.keepState) {
+          if (args[0].route)
+            this.setState({ [args[0].route]: args[0].args });
+          if (args[0].node)
+            this.setState({ [args[0].node]: args[0].args });
+        }
+        return args;
+      } else
+        return args;
+    };
+    //these are fairly identical on the base template plus json parsing on the receive end
+    //we may want to auto pipe outputs from a node through our frontend<-->backend service protocol
+    this.pipe = (source, destination, endpoint, method, callback2) => {
+      if (source instanceof GraphNode) {
+        if (callback2)
+          return this.subscribe(source, (res) => {
+            let mod = callback2(res);
+            if (mod !== void 0)
+              this.transmit({ route: destination, args: mod, method });
+            else
+              this.transmit({ route: destination, args: res, method }, endpoint);
+          });
+        else
+          return this.subscribe(source, (res) => {
+            this.transmit({ route: destination, args: res, method }, endpoint);
+          });
+      } else if (typeof source === "string")
+        return this.subscribe(source, (res) => {
+          this.transmit({ route: destination, args: res, method }, endpoint);
+        });
+    };
+    //one-shot callback pipe e.g. to return results back through an endpoint
+    this.pipeOnce = (source, destination, endpoint, method, callback2) => {
+      if (source instanceof GraphNode) {
+        if (callback2)
+          return source.__node.state.subscribeEventOnce(source.__node.unique, (res) => {
+            let mod = callback2(res);
+            if (mod !== void 0)
+              this.transmit({ route: destination, args: mod, method });
+            else
+              this.transmit({ route: destination, args: res, method }, endpoint);
+          });
+        else
+          return this.__node.state.subscribeEventOnce(source.__node.unique, (res) => {
+            this.transmit({ route: destination, args: res, method }, endpoint);
+          });
+      } else if (typeof source === "string")
+        return this.__node.state.subscribeEventOnce(this.__node.nodes.get(source).__node.unique, (res) => {
+          this.transmit({ route: destination, args: res, method }, endpoint);
+        });
+    };
+    this.terminate = (...args) => {
+    };
+    this.isTypedArray = isTypedArray;
+    this.recursivelyAssign = recursivelyAssign2;
+    this.spliceTypedArray = spliceTypedArray;
+    this.ping = () => {
+      console.log("pinged!");
+      return "pong";
+    };
+    this.echo = (...args) => {
+      this.transmit(...args);
+      return args;
+    };
+    this.log = (...args) => {
+      console.log(...args);
+      return true;
+    };
+    this.error = (...args) => {
+      console.error(...args);
+      return true;
+    };
+    if (options?.services)
+      this.addServices(options.services);
+    this.load(this);
+  }
+  handleServiceMessage(message) {
+    let call;
+    if (typeof message === "object") {
+      if (message.route)
+        call = message.route;
+      else if (message.node)
+        call = message.node;
+    }
+    if (call) {
+      if (Array.isArray(message.args))
+        return this.run(call, ...message.args);
+      else
+        return this.run(call, message.args);
+    } else
+      return message;
+  }
+  handleGraphNodeCall(route, args) {
+    if (!route)
+      return args;
+    if (args?.args) {
+      this.handleServiceMessage(args);
+    } else if (Array.isArray(args))
+      return this.run(route, ...args);
+    else
+      return this.run(route, args);
+  }
+};
+function isTypedArray(x) {
+  return ArrayBuffer.isView(x) && Object.prototype.toString.call(x) !== "[object DataView]";
+}
+var recursivelyAssign2 = (target, obj) => {
+  for (const key in obj) {
+    if (obj[key]?.constructor.name === "Object" && !Array.isArray(obj[key])) {
+      if (target[key]?.constructor.name === "Object" && !Array.isArray(target[key]))
+        recursivelyAssign2(target[key], obj[key]);
+      else
+        target[key] = recursivelyAssign2({}, obj[key]);
+    } else
+      target[key] = obj[key];
+  }
+  return target;
+};
+function spliceTypedArray(arr, start, end) {
+  let s = arr.subarray(0, start);
+  let e;
+  if (end) {
+    e = arr.subarray(end + 1);
+  }
+  let ta;
+  if (s.length > 0 || e?.length > 0)
+    ta = new arr.constructor(s.length + e.length);
+  if (ta) {
+    if (s.length > 0)
+      ta.set(s);
+    if (e && e.length > 0)
+      ta.set(e, s.length);
+  }
+  return ta;
+}
+
+// ../../graphscript/src/extras/struct/Struct.backend.ts
+var randomId = (prefix) => (prefix ? `${prefix}_` : "") + Math.floor(1e15 * Math.random());
+var toObjectId = (str) => {
+  return typeof str === "string" && str.length === 24 ? new import_bson.ObjectId(str) : str;
+};
+var getStringId = (mongoid) => {
+  if (typeof mongoid === "object")
+    return mongoid.toString();
+  else
+    return mongoid;
+};
+var defaultCollections = [
+  "profile",
+  "group",
+  "authorization",
+  "discussion",
+  "chatroom",
+  "comment",
+  "dataInstance",
+  "event",
+  "notification",
+  "schedule",
+  "date"
+];
+var StructBackend = class extends Service {
+  //check if the user querying has the correct permissions 
+  constructor(options, dboptions) {
+    super(options);
+    this.name = "structs";
+    this.debug = false;
+    // mongodb instance (mongoose)
+    this.users = {};
+    this.collections = {};
+    this.useAuths = true;
+    //------------------------------------
+    //routes to be loaded
+    this.query = async (requestingUserId, collection, queryObj, findOne, skip) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      if (this.mode.indexOf("mongo") > -1) {
+        return await this.queryMongo(user, collection, queryObj, findOne, skip);
+      } else {
+        let res = this.getLocalData(user, collection);
+        if (res && !Array.isArray(res)) {
+          let passed = !this.useAuths;
+          if (!res?.ownerId)
+            passed = true;
+          else if (this.useAuths)
+            passed = await this.checkAuthorization(user, res);
+        }
+        if (typeof skip === "number" && Array.isArray(res)) {
+          if (res.length > skip)
+            res.splice(0, skip);
+        }
+        let data = [];
+        if (res)
+          await Promise.all(res.map(async (s) => {
+            let struct = this.getLocalData(getStringId(s._id));
+            let passed = !this.useAuths;
+            if (!struct?.ownerId)
+              passed = true;
+            else if (this.useAuths)
+              passed = await this.checkAuthorization(user, struct);
+            if (passed)
+              data.push(struct);
+          }));
+        return data;
+      }
+    };
+    this.getUser = async (requestingUserId, lookupId) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.indexOf("mongo") > -1) {
+        data = await this.getMongoUser(user, lookupId);
+      } else {
+        let struct = this.getLocalData("profile", { _id: lookupId });
+        if (!struct)
+          data = { user: void 0 };
+        else {
+          let passed = !this.useAuths;
+          if (!struct?.ownerId)
+            passed = true;
+          else if (this.useAuths)
+            passed = await this.checkAuthorization(user, struct);
+          if (passed) {
+            let groups = this.getLocalData("group", { ownerId: lookupId });
+            let auths = this.getLocalData("authorization", { ownerId: lookupId });
+            data = { user: struct, groups, authorizations: auths };
+          } else
+            data = { user: {} };
+        }
+      }
+      if (this.debug)
+        console.log("getUser: user:", user, "input:", lookupId, "output", data);
+      return data;
+    };
+    this.setUser = async (requestingUserId, struct) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.indexOf("mongo") > -1) {
+        data = await this.setMongoUser(user, struct);
+      } else {
+        let passed = !this.useAuths;
+        if (!struct?.ownerId)
+          passed = true;
+        else if (this.useAuths)
+          passed = await this.checkAuthorization(user, struct, "WRITE");
+        if (passed)
+          this.setLocalData(struct);
+        return true;
+      }
+      if (this.debug)
+        console.log("setUser user:", user, "input:", struct, "output", data);
+      return data;
+    };
+    this.getUsersByIds = async (requestingUserId, userIds) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.getMongoUsersByIds(user, userIds);
+      } else {
+        data = [];
+        if (Array.isArray(userIds)) {
+          let struct = this.getLocalData("profile", { _id: userIds });
+          if (struct)
+            data.push(struct);
+        }
+      }
+      if (this.debug)
+        console.log("getUserByIds: user:", user, "input:", userIds, "output", data);
+      return data;
+    };
+    this.getUsersByRole = async (requestingUserId, role) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.getMongoUsersByRole(user, role);
+      } else {
+        let profiles = this.getLocalData("profile");
+        data = [];
+        profiles.forEach((struct) => {
+          if (struct.userRoles[role]) {
+            data.push(struct);
+          }
+        });
+      }
+      if (this.debug)
+        console.log("getUserByRoles: user:", user, "input:", role, "output", data);
+      return data;
+    };
+    this.deleteUser = async (requestingUserId, userId) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.deleteMongoUser(user, userId);
+      } else {
+        data = false;
+        let struct = this.getLocalData(userId);
+        if (struct) {
+          let passed = !this.useAuths;
+          if (!struct?.ownerId)
+            passed = true;
+          else if (this.useAuths)
+            passed = await this.checkAuthorization(user, struct, "WRITE");
+          if (passed)
+            data = this.deleteLocalData(struct);
+        }
+      }
+      if (this.debug)
+        console.log("deleteUser: user:", user, "input:", userId, "output", data);
+      return data;
+    };
+    this.setData = async (requestingUserId, structs, notify) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.setMongoData(user, structs, notify);
+      } else {
+        let non_notes = [];
+        data = [];
+        await Promise.all(structs.map(async (structId) => {
+          let struct = this.getLocalData(structId);
+          let passed = !this.useAuths;
+          if (!struct?.ownerId)
+            passed = true;
+          else if (this.useAuths)
+            passed = await this.checkAuthorization(user, struct, "WRITE");
+          if (passed) {
+            if (!this.collections[struct.structType]) {
+              this.collections[struct.structType] = this.db ? { instance: this.db.collection(struct.structType) } : {};
+              this.collections[struct.structType].reference = {};
+            }
+            this.setLocalData(struct);
+            data.push(struct);
+            if (struct.structType !== "notification")
+              non_notes.push(struct);
+          }
+        }));
+        if (non_notes.length > 0 && (notify === true || typeof notify === "undefined"))
+          this.checkToNotify(user, non_notes, this.mode);
+        if (this.debug)
+          console.log("setData:", user, structs, data);
+        return true;
+      }
+      if (this.debug)
+        console.log("setData: user:", user, "input:", structs, notify, "output", data);
+      return data;
+    };
+    this.getData = async (requestingUserId, collection, ownerId, dict, limit, skip) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.getMongoData(user, collection, ownerId, dict, limit, skip);
+      } else {
+        data = [];
+        let structs;
+        if (collection)
+          structs = this.getLocalData(collection);
+        if (structs && ownerId)
+          structs = structs.filter((o) => {
+            if (o.ownerId === ownerId)
+              return true;
+          });
+        if (structs)
+          await Promise.all(structs.map(async (s) => {
+            let struct = this.getLocalData(getStringId(s._id));
+            let passed = !this.useAuths;
+            if (!struct?.ownerId)
+              passed = true;
+            else if (this.useAuths)
+              passed = await this.checkAuthorization(user, struct);
+            if (passed)
+              data.push(struct);
+          }));
+      }
+      if (this.debug)
+        console.log("getData: user:", user, "input:", collection, ownerId, dict, limit, skip, "output", data);
+      return data;
+    };
+    this.getDataByIds = async (requestingUserId, structIds, ownerId, collection) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.getMongoDataByIds(user, structIds, ownerId, collection);
+      } else {
+        data = [];
+        let structs;
+        if (collection)
+          structs = this.getLocalData(collection);
+        if (structs && ownerId)
+          structs = structs.filter((o) => {
+            if (o.ownerId === ownerId)
+              return true;
+          });
+        if (structs)
+          await Promise.all(structs.map(async (s) => {
+            let struct = this.getLocalData(getStringId(s._id));
+            let passed = !this.useAuths;
+            if (!struct?.ownerId)
+              passed = true;
+            else if (this.useAuths)
+              passed = await this.checkAuthorization(user, struct);
+            if (passed)
+              data.push(struct);
+          }));
+      }
+      if (this.debug)
+        console.log("getDataByIds: user:", user, "input:", structIds, ownerId, collection, "output", data);
+      return data;
+    };
+    this.getAllData = async (requestingUserId, ownerId, excludedCollections) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.getAllUserMongoData(user, ownerId, excludedCollections);
+      } else {
+        let result = this.getLocalData(void 0, { ownerId });
+        data = [];
+        await Promise.all(result.map(async (struct) => {
+          if (excludedCollections) {
+            if (excludedCollections.indexOf(struct.structType) < 0) {
+              let passed = !this.useAuths;
+              if (!struct?.ownerId)
+                passed = true;
+              else if (this.useAuths)
+                passed = await this.checkAuthorization(user, struct);
+              if (passed)
+                data.push(struct);
+            }
+          } else {
+            let passed = !this.useAuths;
+            if (!struct?.ownerId)
+              passed = true;
+            else if (this.useAuths)
+              passed = await this.checkAuthorization(user, struct);
+            if (passed)
+              data.push(struct);
+          }
+        }));
+      }
+      if (this.debug)
+        console.log("getAllData: user:", user, "input:", ownerId, excludedCollections, "output", data);
+      return data;
+    };
+    this.deleteData = async (requestingUserId, structIds) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.deleteMongoData(user, structIds);
+      } else {
+        data = false;
+        await Promise.all(structIds.map(async (structId) => {
+          let struct = this.getLocalData(structId);
+          let passed = !this.useAuths;
+          if (!struct?.ownerId)
+            passed = true;
+          else if (this.useAuths)
+            passed = await this.checkAuthorization(user, struct, "WRITE");
+          if (passed)
+            this.deleteLocalData(struct);
+          data = true;
+        }));
+      }
+      if (this.debug)
+        console.log("deleteData: user:", user, "input:", structIds, "output", data);
+      return data;
+    };
+    this.getUserGroups = async (requestingUserId, userId, groupId) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.getMongoGroups(user, userId, groupId);
+      } else {
+        if (typeof groupId === "string") {
+          data = this.getLocalData("group", { _id: groupId });
+        } else {
+          data = [];
+          let result = this.getLocalData("group");
+          if (userId) {
+            result.forEach((struct) => {
+              if (Object.keys(struct.users).includes(userId))
+                data.push(struct);
+            });
+          } else {
+            result.forEach((struct) => {
+              if (Object.keys(struct.users).includes(getStringId(user._id)))
+                data.push(struct);
+            });
+          }
+        }
+      }
+      if (this.debug)
+        console.log("getGroups: user:", user, "input:", userId, groupId, "output", data);
+      return data;
+    };
+    this.deleteGroup = async (requestingUserId, groupId) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.deleteMongoGroup(user, groupId);
+      } else {
+        let struct = this.getLocalData("group", groupId);
+        let passed = !this.useAuths;
+        if (struct) {
+          if (!struct?.ownerId)
+            passed = true;
+          else if (this.useAuths)
+            passed = await this.checkAuthorization(user, struct, "WRITE");
+        }
+        if (passed) {
+          data = true;
+        }
+      }
+      if (this.debug)
+        console.log("deleteGroup: user:", user, "input:", groupId, "output", data);
+      return data;
+    };
+    this.getAuthorizations = async (requestingUserId, ownerId, authId) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.getMongoAuthorizations(user, ownerId, authId);
+      } else {
+        if (authId) {
+          let result = this.getLocalData("authorization", { _id: authId });
+          if (result)
+            data = [result];
+        } else {
+          data = this.getLocalData("authorization", { ownerId });
+        }
+      }
+      if (this.debug)
+        console.log("getAuthorizations: user:", user, "input:", ownerId, authId, "output", data);
+      return data;
+    };
+    this.deleteAuthorization = async (requestingUserId, authId) => {
+      let user = this.users[requestingUserId];
+      if (!user)
+        return false;
+      let data;
+      if (this.mode.includes("mongo")) {
+        data = await this.deleteMongoAuthorization(user, authId);
+      } else {
+        data = true;
+        let struct = this.getLocalData("authorization", { _id: authId });
+        if (struct) {
+          let passed = !this.useAuths;
+          if (!struct?.ownerId)
+            passed = true;
+          else if (this.useAuths)
+            passed = await this.checkAuthorization(user, struct, "WRITE");
+          if (passed)
+            data = this.deleteLocalData(struct);
+        }
+      }
+      if (this.debug)
+        console.log("deleteAuthorization: user:", user, "input:", authId, "output", data);
+      return data;
+    };
+    // permissionSets = [ //return undefined to pass to next or return a boolean to break the checks
+    //     (user, struct, auth1, auth2, request) => {
+    //         if (auth1.excluded[struct.structType] && struct.ownerId === getStringId(user._id as string) && request === 'WRITE') return false;
+    //     },
+    //     (user, struct, auth1, auth2, request) => {
+    //         if(struct.structType === 'group') {
+    //             if (auth1.authorizations[struct.name+'_admin'] && auth2.authorizations[struct.name+'_admin']) return true;
+    //             else return false;
+    //         }
+    //     },
+    //     (user, struct, auth1, auth2, request) => {
+    //         if(auth1.authorizations['peer'] && auth2.authorizations['peer']) return true;
+    //     },
+    //     (user, struct, auth1, auth2, request) => {
+    //         if(auth1.authorizations['admincontrol'] && auth2.authorizations['admincontrol']) return true;
+    //     },
+    //     (user, struct, auth1, auth2, request) => {
+    //         if (auth1.structIds[getStringId(struct._id)] && auth2.structIds[getStringId(struct._id)]) return true;
+    //     }
+    // ]
+    // //return undefined if nothing passes
+    // checkPermissionSets(user, struct, auth1, auth2, request): boolean|undefined {
+    //     let checked:any = undefined;
+    //     for(let i = 0; i < this.permissionSets.length; i++) {
+    //         checked = this.permissionSets[i](user,struct,auth1,auth2,request);
+    //         if(checked !== undefined) break;
+    //     }
+    //     return checked;
+    // }
+    // addPermissionSet(callback=(struct, auth1, auth2)=>{return true;}) {
+    //     if(typeof callback === 'function') {
+    //         this.permissionSets.push(callback);
+    //         return true;
+    //     }
+    //     return false;
+    // }
+    this.wipeDB = async () => {
+      await Promise.all(Object.values(this.collections).map((c) => {
+        try {
+          c.instance.remove({});
+        } catch (err) {
+        }
+      }));
+      return true;
+    };
+    this.load(this);
+    if (dboptions) {
+      this.initDB(dboptions);
+    }
+  }
+  initDB(dboptions) {
+    if (dboptions?.users)
+      this.users = dboptions.users;
+    this.db = dboptions.db;
+    if (!this.mode && dboptions?.db)
+      this.mode = this.db ? dboptions.mode ? dboptions.mode : "local" : "local";
+    if (dboptions?.collections)
+      this.collections = dboptions.collections;
+    if ("useAuths" in dboptions)
+      this.useAuths = dboptions.useAuths;
+    defaultCollections.forEach((k) => {
+      if (!this.collections[k]) {
+        this.collections[k] = this.db ? { instance: this.db.collection(k) } : {};
+        this.collections[k].reference = {};
+      }
+    });
+  }
+  //------------------------------------
+  //internalish stuff
+  notificationStruct(parentStruct = {}) {
+    let structType = "notification";
+    let struct = {
+      structType,
+      timestamp: Date.now(),
+      _id: randomId(structType),
+      note: "",
+      alert: false,
+      //can throw an alert if there is an alert flag on the struct
+      ownerId: "",
+      parentUserId: "",
+      parent: { structType: parentStruct?.structType, _id: getStringId(parentStruct?._id) }
+      //where it belongs
+    };
+    return struct;
+  }
+  //when passing structs to be set, check them for if notifications need to be created
+  //TODO: need to make this more flexible in the cases you DON'T want an update
+  async checkToNotify(user, structs = [], mode = this.mode) {
+    if (structs.length === 0)
+      return false;
+    if (typeof user === "string") {
+      for (let key in this.users) {
+        const obj = this.users[key];
+        if (getStringId(obj._id) === user)
+          user = obj;
+      }
+    }
+    if (typeof user === "string" || user == null)
+      return false;
+    let usersToNotify = {};
+    let newNotifications = [];
+    structs.forEach(async (struct) => {
+      if (struct?._id) {
+        if (user?._id !== struct.ownerId) {
+          let newNotification = this.notificationStruct(struct);
+          newNotification._id = "notification_" + getStringId(struct._id);
+          newNotification.ownerId = struct.ownerId;
+          newNotification.note = struct.structType;
+          newNotification.parentUserId = struct.ownerId;
+          if (struct.alert)
+            newNotification.alert = struct.alert;
+          newNotifications.push(newNotification);
+          usersToNotify[struct.ownerId] = struct.ownerId;
+        }
+        if (struct.users) {
+          Object.keys(struct.users).forEach((usr) => {
+            if (usr !== user._id) {
+              let newNotification = this.notificationStruct(struct);
+              newNotification._id = "notification_" + getStringId(struct._id);
+              newNotification.ownerId = usr;
+              newNotification.note = struct.structType;
+              if (struct.alert)
+                newNotification.alert = struct.alert;
+              newNotification.parentUserId = struct.ownerId;
+              newNotifications.push(newNotification);
+              usersToNotify[usr] = usr;
+            }
+          });
+        } else {
+          let auths = [];
+          if (mode.includes("mongo")) {
+            let s = this.collections.authorization.instance.find({ $or: [{ authorizedId: user._id }, { authorizerId: user._id }] });
+            let arr = s.toArray();
+            if (arr.length > 0) {
+              arr.forEach((d) => auths.push(d));
+            }
+          } else {
+            auths = this.getLocalData("authorization", { authorizedId: user._id });
+            auths.push(...this.getLocalData("authorization", { authorizerId: user._id }));
+          }
+          if (auths.length > 0) {
+            auths.forEach((auth) => {
+              if (struct.authorizerId === struct.ownerId && !usersToNotify[struct.authorizedId]) {
+                if (auth.status === "OKAY" && auth.authorizations["peer"]) {
+                  let newNotification = this.notificationStruct(struct);
+                  newNotification.ownerId = auth.authorizedId;
+                  newNotification._id = "notification_" + getStringId(struct._id);
+                  newNotification.note = struct.structType;
+                  newNotification.parentUserId = struct.ownerId;
+                  if (struct.alert)
+                    newNotification.alert = struct.alert;
+                  newNotifications.push(newNotification);
+                  usersToNotify[newNotification.ownerId] = newNotification.ownerId;
+                }
+              }
+            });
+          }
+        }
+      }
+    });
+    if (newNotifications.length > 0) {
+      if (mode.includes("mongo")) {
+        await this.setMongoData(user, newNotifications);
+      } else {
+        this.setLocalData(newNotifications);
+      }
+      for (const uid in usersToNotify) {
+        this.users[uid].sendAll({ route: "structNotification", args: true });
+      }
+      return true;
+    } else
+      return false;
+  }
+  //general mongodb query
+  async queryMongo(user, collection, queryObj = {}, findOne = false, skip = 0) {
+    if (!collection && !queryObj)
+      return void 0;
+    else if (findOne) {
+      let res = this.db.collection(collection).findOne(queryObj);
+      if (!res)
+        return void 0;
+      let passed = !this.useAuths;
+      if (!res?.ownerId) {
+        passed = true;
+      } else if (getStringId(user._id) !== res.ownerId || getStringId(user._id) === res.ownerId && user.userRoles?.admincontrol) {
+        if (this.useAuths)
+          passed = await this.checkAuthorization(user, res);
+      }
+      if (passed)
+        return res;
+      else
+        return void 0;
+    } else {
+      let res = await this.db.collection(collection).find(queryObj).sort({ $natural: -1 }).skip(skip);
+      let structs = [];
+      let arr = res.toArray();
+      if (arr.length > 0) {
+        let passed = !this.useAuths;
+        let checkedAuth = "";
+        for (const s of arr) {
+          if (!s?.ownerId) {
+            passed = true;
+          } else if ((getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) && checkedAuth !== s.ownerId) {
+            if (this.useAuths)
+              passed = await this.checkAuthorization(user, s);
+            checkedAuth = s.ownerId;
+          }
+          if (passed)
+            structs.push(s);
+        }
+      }
+      return structs;
+    }
+  }
+  //structs can be Struct objects or they can be an array with a secondary option e.g. [Struct,{$push:{x:[1,2,3]}}]
+  async setMongoData(user, structs = [], notify = true) {
+    let firstwrite = false;
+    if (structs.length > 0) {
+      let passed = !this.useAuths;
+      let checkedAuth = "";
+      await Promise.all(structs.map(async (struct) => {
+        let secondary = {};
+        if (Array.isArray(struct)) {
+          secondary = struct[1];
+          struct = struct[0];
+        }
+        if (!struct?.ownerId)
+          passed = true;
+        else if ((getStringId(user._id) !== struct.ownerId || getStringId(user._id) === struct.ownerId && user.userRoles?.admincontrol) && checkedAuth !== struct.ownerId) {
+          if (this.useAuths)
+            passed = await this.checkAuthorization(user, struct, "WRITE");
+          checkedAuth = struct.ownerId;
+        }
+        if (passed) {
+          if (struct.structType) {
+            if (!this.collections[struct.structType]) {
+              this.collections[struct.structType] = this.db ? { instance: this.db.collection(struct.structType) } : {};
+              this.collections[struct.structType].reference = {};
+            }
+            let copy = JSON.parse(JSON.stringify(struct));
+            if (copy._id)
+              delete copy._id;
+            if (struct._id) {
+              if (getStringId(struct._id).includes("defaultId")) {
+                await this.db.collection(struct.structType).insertOne(copy);
+                firstwrite = true;
+              } else if (struct.structType === "notification")
+                await this.db.collection(struct.structType).updateOne({ parent: struct.parent, _id: struct._id }, { $set: copy, ...secondary }, { upsert: true, unique: false });
+              else
+                await this.db.collection(struct.structType).updateOne({ _id: toObjectId(struct._id) }, { $set: copy, ...secondary }, { upsert: true });
+            } else if (struct.structType) {
+              this.db.collection(struct.structType).insertOne(copy);
+            }
+          }
+        }
+      }));
+      if (firstwrite === true) {
+        let toReturn = [];
+        await Promise.all(structs.map(async (struct, j) => {
+          let copy = JSON.parse(JSON.stringify(struct));
+          if (copy._id && copy.structType !== "profile")
+            delete copy._id;
+          if (struct.structType !== "comment") {
+            let pulled;
+            if (struct.structType !== "notification")
+              pulled = await this.db.collection(copy.structType).findOne(copy);
+            if (pulled) {
+              pulled._id = getStringId(pulled._id);
+              toReturn.push(pulled);
+            }
+          } else if (struct.structType === "comment") {
+            let comment = struct;
+            let copy2 = JSON.parse(JSON.stringify(comment));
+            if (copy2._id)
+              delete copy2._id;
+            let pulledComment = await this.db.collection("comment").findOne(copy2);
+            let replyToId = pulledComment?.replyTo;
+            let replyTo = structs.find((s) => {
+              if (getStringId(s._id) === replyToId)
+                return true;
+            });
+            if (replyTo) {
+              let copy3 = JSON.parse(JSON.stringify(replyTo));
+              if (copy3._id)
+                delete copy3._id;
+              let pulledReply;
+              await Promise.all(["discussion", "chatroom", "comment"].map(async (name2) => {
+                let found = await this.db.collection(name2).findOne({ _id: toObjectId(replyToId) });
+                if (found)
+                  pulledReply = found;
+              }));
+              if (pulledReply) {
+                let roomId = getStringId(pulledComment.parent._id);
+                let room, pulledRoom;
+                if (roomId !== replyToId) {
+                  room = structs.find((s) => {
+                    if (getStringId(s._id) === roomId)
+                      return true;
+                  });
+                  if (room) {
+                    delete room._id;
+                    await Promise.all(["discussion", "chatroom"].map(async (name2) => {
+                      let found = await this.db.collection(name2).findOne(room);
+                      if (found)
+                        pulledRoom = found;
+                    }));
+                  }
+                } else
+                  pulledRoom = pulledReply;
+                let toUpdate = [pulledComment];
+                if (pulledReply) {
+                  let i = pulledReply.replies.indexOf(getStringId(pulledComment._id));
+                  if (i < 0) {
+                    pulledReply.replies.push(getStringId(pulledComment._id));
+                    pulledComment.replyTo = getStringId(pulledReply._id);
+                  }
+                  toUpdate.push(pulledReply);
+                }
+                if (pulledRoom) {
+                  let i = pulledRoom.comments.indexOf(pulledComment._id);
+                  if (i < 0) {
+                    pulledRoom.comments.push(getStringId(pulledComment._id));
+                    pulledComment.parent._id = getStringId(pulledRoom._id);
+                  }
+                }
+                await Promise.all(toUpdate.map(async (s) => {
+                  let copy4 = JSON.parse(JSON.stringify(s));
+                  delete copy4._id;
+                  await this.db.collection(s.structType).updateOne({ _id: toObjectId(s._id) }, { $set: copy4 }, { upsert: false });
+                }));
+                [...toReturn].reverse().forEach((s, j2) => {
+                  if (toUpdate.find((o) => {
+                    if (getStringId(s._id) === getStringId(o._id))
+                      return true;
+                  })) {
+                    toReturn.splice(toReturn.length - j2 - 1, 1);
+                  }
+                });
+                toReturn.push(...toUpdate);
+              }
+            } else if (pulledComment) {
+              toReturn.push(pulledComment);
+            }
+          }
+        }));
+        if (notify)
+          this.checkToNotify(user, toReturn);
+        return toReturn;
+      } else {
+        let non_notes = [];
+        structs.forEach((s) => {
+          if (s.structType !== "notification")
+            non_notes.push(s);
+        });
+        if (notify)
+          this.checkToNotify(user, non_notes);
+        return true;
+      }
+    } else
+      return false;
+  }
+  async setMongoUser(user, struct) {
+    if (struct._id) {
+      const _id = toObjectId(struct._id);
+      let usersearch = { _id };
+      let userexists = await this.collections.profile.instance.findOne(usersearch);
+      if (userexists) {
+        if (getStringId(user._id) !== struct.ownerId || getStringId(user._id) === struct.ownerId && user.userRoles?.admincontrol) {
+          let passed = !this.useAuths;
+          if (!struct?.ownerId)
+            passed = true;
+          else if (this.useAuths)
+            passed = await this.checkAuthorization(user, struct, "WRITE");
+          if (!passed)
+            return false;
+        }
+      }
+      let copy = JSON.parse(JSON.stringify(struct));
+      copy._id = _id;
+      if (this.debug)
+        console.log("RETURNS PROFILE", struct);
+      await this.collections.profile.instance.updateOne(
+        usersearch,
+        { $set: copy },
+        { upsert: true }
+      );
+      user = await this.collections.profile.instance.findOne(usersearch);
+      this.checkToNotify(user, [struct]);
+      return user;
+    } else
+      return false;
+  }
+  async setGroup(user, struct, mode = this.mode) {
+    if (struct?._id) {
+      let exists = void 0;
+      if (mode.includes("mongo")) {
+        exists = await this.collections.group.instance.findOne({ name: struct.name });
+      } else {
+        exists = this.getLocalData("group", { _id: getStringId(struct._id) });
+      }
+      if (exists && (exists.ownerId !== struct.ownerId || struct.admins.indexOf(getStringId(user._id)) < 0))
+        return false;
+      if (getStringId(user._id) !== struct.ownerId) {
+        let passed = !this.useAuths;
+        if (!struct?.ownerId)
+          passed = true;
+        else if (this.useAuths)
+          passed = await this.checkAuthorization(user, struct, "WRITE");
+        if (!passed)
+          return false;
+      }
+      let allusers = [];
+      Object.keys(struct.users).forEach((u) => {
+        allusers.push({ email: u }, { id: u }, { username: u });
+      });
+      let users = {};
+      let ids = {};
+      if (mode.includes("mongo")) {
+        let cursor = this.collections.profile.instance.find({ $or: allusers });
+        let arr = cursor.toArray();
+        if (arr.length > 0) {
+          await cursor.forEach((user2) => {
+            users[getStringId(user2._id)] = user2;
+            ids[getStringId(user2._id)] = true;
+          });
+        }
+      } else {
+        allusers.forEach((search) => {
+          let result = this.getLocalData("profile", search);
+          if (result.length > 0) {
+            users[getStringId(result[0]._id)] = result[0];
+            ids[getStringId(result[0]._id)] = true;
+          }
+        });
+      }
+      struct.users = ids;
+      let admins = {};
+      let peers = {};
+      let clients = {};
+      Object.keys(users).forEach((id) => {
+        let u = users[id];
+        if (struct.admins[getStringId(u._id)] || struct.admins[u.email] || struct.admins[u.username] || struct.admins[struct.ownerId]) {
+          if (!admins[getStringId(u._id)])
+            admins[getStringId(u._id)] = true;
+        }
+        if (struct.peers[getStringId(u._id)] || struct.peers[u.email] || struct.peers[u.username] || struct.peers[struct.ownerId]) {
+          if (!peers[getStringId(u._id)])
+            peers[getStringId(u._id)] = true;
+        }
+        if (struct.clients[getStringId(u._id)] || struct.clients[u.email] || struct.clients[u.username] || struct.clients[struct.ownerId]) {
+          if (!clients[getStringId(u._id)])
+            clients[getStringId(u._id)] = true;
+        }
+      });
+      struct.admins = admins;
+      struct.peers = peers;
+      struct.clients = clients;
+      let copy = JSON.parse(JSON.stringify(struct));
+      if (copy._id)
+        delete copy._id;
+      if (mode.includes("mongo")) {
+        if (getStringId(struct._id).includes("defaultId")) {
+          await this.db.collection(struct.structType).insertOne(copy);
+          delete struct._id;
+          struct = await this.db.collection(struct.structType).findOne(struct);
+          struct._id = getStringId(struct._id);
+        } else
+          await this.collections.group.instance.updateOne({ _id: toObjectId(struct._id) }, { $set: copy }, { upsert: true });
+      } else {
+        this.setLocalData(struct);
+      }
+      this.checkToNotify(user, [struct], this.mode);
+      if (this.debug)
+        console.log("setGroup: user:", user, "output", struct);
+      return struct;
+    } else
+      return false;
+  }
+  //
+  async getMongoUser(user, info = "", bypassAuth = false) {
+    return new Promise(async (resolve) => {
+      const query = [{ email: info }, { id: info }, { username: info }];
+      console.log("creating query with", info);
+      try {
+        query.push({ _id: toObjectId(info) });
+      } catch (e) {
+        console.log("error creating ObjectId with ", info);
+      }
+      let u = await this.collections.profile.instance.findOne({ $or: query });
+      if (!u || u == null)
+        resolve(void 0);
+      else {
+        u._id = getStringId(u._id);
+        if (!u.ownerId)
+          u.ownerId = u._id;
+        if (u && bypassAuth === false) {
+          if (getStringId(user._id) !== u._id || getStringId(user._id) === u._id && user.userRoles?.admincontrol) {
+            let passed = !this.useAuths;
+            if (this.useAuths)
+              passed = await this.checkAuthorization(user, u);
+            if (!passed)
+              resolve(void 0);
+          }
+          let authorizations = [];
+          let auths = this.collections.authorization.instance.find({ ownerId: u._id });
+          if (auths.toArray().length > 0) {
+            await auths.forEach((d) => authorizations.push(d));
+          }
+          let gs = this.collections.group.instance.find({ users: { $all: [u._id] } });
+          let groups = [];
+          if (gs.toArray().length > 0) {
+            await gs.forEach((d) => groups.push(d));
+          }
+          resolve({ user: u, authorizations, groups });
+        } else
+          resolve({ user: u });
+      }
+    });
+  }
+  //safely returns the profile id, username, and email and other basic info based on the user role set applied
+  async getMongoUsersByIds(user, userIds = []) {
+    let usrs = [];
+    userIds.forEach((u) => {
+      try {
+        usrs.push({ _id: toObjectId(u) });
+      } catch {
+      }
+    });
+    let found = [];
+    if (usrs.length > 0) {
+      let users = this.collections.profile.instance.find({ $or: usrs });
+      if (users.toArray().length > 0) {
+        await users.forEach((u) => {
+          found.push(u);
+        });
+      }
+    }
+    return found;
+  }
+  //safely returns the profile id, username, and email and other basic info based on the user role set applied
+  async getMongoUsersByRole(user, role) {
+    let users = this.collections.profile.instance.find({
+      userRoles: { $all: { [role]: true } }
+    });
+    let found = [];
+    if (users.toArray().length > 0) {
+      await users.forEach((u) => {
+        found.push(u);
+      });
+    }
+    return found;
+  }
+  async getMongoDataByIds(user, structIds, ownerId, collection) {
+    if (structIds.length > 0) {
+      let query = [];
+      structIds.forEach(
+        (_id) => {
+          let q = { _id: toObjectId(_id) };
+          if (ownerId)
+            q.ownerId = ownerId;
+          query.push(q);
+        }
+      );
+      let found = [];
+      if (!collection) {
+        await Promise.all(Object.keys(this.collections).map(async (name2) => {
+          let cursor = await this.db.collection(name2).find({ $or: query });
+          if (cursor.toArray().length > 0) {
+            let passed = true;
+            let checkedAuth = "";
+            await cursor.forEach(async (s) => {
+              if (!s?.ownerId)
+                passed = true;
+              else if ((getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) && checkedAuth !== s.ownerId) {
+                if (this.useAuths)
+                  passed = await this.checkAuthorization(user, s);
+                checkedAuth = s.ownerId;
+              }
+              if (passed)
+                found.push(s);
+            });
+          }
+        }));
+      } else {
+        let cursor = await this.db.collection(collection).find({ $or: query });
+        if (cursor.toArray().length > 0) {
+          let passed = true;
+          let checkedAuth = "";
+          await cursor.forEach(async (s) => {
+            if (!s?.ownerId)
+              passed = true;
+            else if ((getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) && checkedAuth !== s.ownerId) {
+              if (this.useAuths)
+                passed = await this.checkAuthorization(user, s);
+              checkedAuth = s.ownerId;
+            }
+            if (passed)
+              found.push(s);
+          });
+        }
+      }
+      return found;
+    }
+  }
+  //get all data for an associated user, can add a search string
+  async getMongoData(user, collection, ownerId, dict = {}, limit = 0, skip = 0) {
+    if (!ownerId)
+      ownerId = dict?.ownerId;
+    if (!dict)
+      dict = {};
+    if (dict._id)
+      dict._id = toObjectId(dict._id);
+    let structs = [];
+    let passed = true;
+    let checkedAuth = "";
+    if (!collection && !ownerId && !dict)
+      return [];
+    else if (!collection && ownerId && Object.keys(dict).length === 0)
+      return await this.getAllUserMongoData(user, ownerId);
+    else if ((!dict || Object.keys(dict).length === 0) && ownerId && collection) {
+      let cursor = this.db.collection(collection).find({ ownerId }).sort({ $natural: -1 }).skip(skip);
+      if (limit > 0)
+        cursor.limit(limit);
+      if (cursor.toArray().length > 0) {
+        await cursor.forEach(async (s) => {
+          if (!s?.ownerId)
+            passed = true;
+          else if ((getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) && checkedAuth !== s.ownerId) {
+            if (this.useAuths)
+              passed = await this.checkAuthorization(user, s);
+            checkedAuth = s.ownerId;
+          }
+          if (passed === true)
+            structs.push(s);
+        });
+      }
+    } else if (Object.keys(dict).length > 0 && ownerId) {
+      let found = await this.db.collection(collection).findOne({ ownerId, ...dict });
+      if (found)
+        structs.push(found);
+    } else if (Object.keys(dict).length > 0 && !ownerId) {
+      await Promise.all(Object.keys(this.collections).map(async (name2) => {
+        let found = await this.db.collection(name2).findOne(dict);
+        if (found) {
+          if (!found?.ownerId)
+            passed = true;
+          else if ((getStringId(user._id) !== found.ownerId || getStringId(user._id) === found.ownerId && user.userRoles?.admincontrol) && checkedAuth !== found.ownerId) {
+            if (this.useAuths)
+              passed = await this.checkAuthorization(user, found);
+            checkedAuth = found.ownerId;
+          }
+          structs.push(found);
+          return;
+        }
+      }));
+    }
+    if (!passed)
+      return [];
+    return structs;
+  }
+  async getAllUserMongoData(user, ownerId, excluded = []) {
+    let structs = [];
+    let passed = true;
+    let checkedId = "";
+    await Promise.all(Object.keys(this.collections).map(async (name2, j) => {
+      if (passed && excluded.indexOf(name2) < 0) {
+        let cursor = this.db.collection(name2).find({ ownerId });
+        let count = cursor.toArray().length;
+        for (let k = 0; k < count; k++) {
+          let struct = await cursor.next();
+          if (!ownerId)
+            passed = true;
+          else if ((getStringId(user._id) !== ownerId || getStringId(user._id) === ownerId && user.userRoles?.admincontrol) && checkedId !== ownerId) {
+            if (this.useAuths)
+              passed = await this.checkAuthorization(user, struct);
+            checkedId = ownerId;
+          }
+          if (passed)
+            structs.push(struct);
+        }
+      }
+    }));
+    if (!passed)
+      return [];
+    return structs;
+  }
+  //passing in structrefs to define the collection (structType) and id
+  async getMongoDataByRefs(user, structRefs = []) {
+    let structs = [];
+    if (structs.length > 0) {
+      let checkedAuth = "";
+      structRefs.forEach(async (ref) => {
+        if (ref.structType && getStringId(ref._id)) {
+          let struct = await this.db.collection(ref.structType).findOne({ _id: toObjectId(ref._id) });
+          if (struct) {
+            let passed = true;
+            if (!struct?.ownerId)
+              passed = true;
+            else if ((getStringId(user._id) !== struct.ownerId || getStringId(user._id) === struct.ownerId && user.userRoles?.admincontrol) && checkedAuth !== struct.ownerId) {
+              if (this.useAuths)
+                passed = await this.checkAuthorization(user, struct);
+              checkedAuth = struct.ownerId;
+            }
+            if (passed === true) {
+              structs.push(struct);
+            }
+          }
+        }
+      });
+    }
+    return structs;
+  }
+  async getMongoAuthorizations(user, ownerId = getStringId(user._id), authId = "") {
+    let auths = [];
+    if (authId.length === 0) {
+      let cursor = this.collections.authorization.instance.find({ ownerId });
+      if (await cursor.count > 0) {
+        await cursor.forEach((a) => {
+          auths.push(a);
+        });
+      }
+    } else
+      auths.push(await this.collections.authorization.instance.findOne({ _id: toObjectId(authId), ownerId }));
+    if (!auths[0]?.ownerId)
+      true;
+    else if (getStringId(user._id) !== auths[0]?.ownerId) {
+      let passed = !this.useAuths;
+      if (this.useAuths)
+        passed = await this.checkAuthorization(user, auths[0]);
+      if (!passed)
+        return void 0;
+    }
+    return auths;
+  }
+  async getMongoGroups(user, userId = getStringId(user._id), groupId = "") {
+    let groups = [];
+    if (groupId.length === 0) {
+      let cursor = this.collections.group.instance.find({ users: { $all: [userId] } });
+      if (await cursor.count > 0) {
+        await cursor.forEach((a) => {
+          groups.push(a);
+        });
+      }
+    } else {
+      try {
+        groups.push(await this.collections.group.instance.findOne({ _id: toObjectId(groupId), users: { $all: [userId] } }));
+      } catch {
+      }
+    }
+    return groups;
+  }
+  //general delete function
+  async deleteMongoData(user, structRefs = []) {
+    let structs = [];
+    await Promise.all(structRefs.map(async (ref) => {
+      try {
+        let _id = toObjectId(ref._id);
+        let struct = await this.db.collection(ref.structType).findOne({ _id });
+        if (struct) {
+          structs.push(struct);
+          let notifications = await this.collections.notifications.instance.find({ parent: { structType: ref.structType, _id: getStringId(ref._id) } });
+          let count = notifications.toArray().length;
+          for (let i = 0; i < count; i++) {
+            let note = await notifications.next();
+            if (note)
+              structs.push(note);
+          }
+        }
+      } catch {
+      }
+    }));
+    let checkedOwner = "";
+    await Promise.all(structs.map(async (struct, i) => {
+      let passed = true;
+      if (!struct?.ownerId)
+        passed = true;
+      else if ((struct.ownerId !== getStringId(user._id) || getStringId(user._id) === struct.ownerId && user.userRoles?.admincontrol) && struct.ownerId !== checkedOwner) {
+        checkedOwner = struct.ownerId;
+        if (this.useAuths)
+          passed = await this.checkAuthorization(user, struct, "WRITE");
+      }
+      if (passed) {
+        await this.db.collection(struct.structType).deleteOne({ _id: toObjectId(struct._id) });
+        if (struct.users) {
+          Object.keys(struct.users).forEach((uid) => {
+            if (uid !== getStringId(user._id) && uid !== struct.ownerId && this.users[uid])
+              this.users[uid].sendAll({ route: "structDeleted", args: getStringId(struct._id) });
+          });
+        }
+        if (struct.ownerId !== user._id && this.users[struct.ownerId]) {
+          this.users[struct.ownerId].sendAll({ route: "structDeleted", args: getStringId(struct._id) });
+        }
+      }
+    }));
+    return true;
+  }
+  //specific delete functions (the above works for everything)
+  async deleteMongoUser(user, userId) {
+    if (getStringId(user._id) !== userId || getStringId(user._id) === userId && user.userRoles?.admincontrol) {
+      let u = await this.collections.profile.instance.findOne({ id: userId });
+      let passed = !this.useAuths;
+      if (!u?.ownerId)
+        passed = true;
+      else if (this.useAuths)
+        passed = await this.checkAuthorization(user, u, "WRITE");
+      if (!passed)
+        return false;
+    }
+    await this.collections.profile.instance.deleteOne({ id: userId });
+    if (getStringId(user._id) !== userId && this.users[userId])
+      this.users[userId].sendAll({ route: "structDeleted", args: userId });
+    return true;
+  }
+  async deleteMongoGroup(user, groupId) {
+    let s = await this.collections.group.instance.findOne({ _id: toObjectId(groupId) });
+    if (s) {
+      if (!s?.ownerId)
+        true;
+      else if (getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) {
+        let passed = !this.useAuths;
+        if (this.useAuths)
+          passed = await this.checkAuthorization(user, s, "WRITE");
+        if (!passed)
+          return false;
+      }
+      if (s.users) {
+        Object.keys(s.users).forEach((u) => {
+          this.users[s.authorizerId].sendAll({ route: "structDeleted", args: getStringId(s._id) });
+        });
+      }
+      await this.collections.group.instance.deleteOne({ _id: toObjectId(groupId) });
+      return true;
+    } else
+      return false;
+  }
+  async deleteMongoAuthorization(user, authId) {
+    let s = await this.collections.authorization.instance.findOne({ _id: toObjectId(authId) });
+    if (s) {
+      if (getStringId(user._id) !== s.ownerId || getStringId(user._id) === s.ownerId && user.userRoles?.admincontrol) {
+        let passed = !this.useAuths;
+        if (!s?.ownerId)
+          passed = true;
+        else if (this.useAuths)
+          passed = await this.checkAuthorization(user, s, "WRITE");
+        if (!passed)
+          return false;
+      }
+      if (s.associatedAuthId) {
+        if (this.debug)
+          console.log(s);
+        await this.collections.authorization.instance.deleteOne({ _id: toObjectId(s.associatedAuthId) });
+        if (s.authorizerId && s.authorizerId !== getStringId(user._id))
+          this.users[s.authorizerId].sendAll({ route: "structDeleted", args: getStringId(s._id) });
+        else if (s.authorizedId && s.authorizedId !== getStringId(user._id))
+          this.users[s.authorizerId].sendAll({ route: "structDeleted", args: getStringId(s._id) });
+      }
+      await this.collections.authorization.instance.deleteOne({ _id: toObjectId(authId) });
+      return true;
+    } else
+      return false;
+  }
+  async setAuthorization(user, authStruct, mode = this.mode) {
+    let u1, u2;
+    if (mode.includes("mongo")) {
+      u1 = (await this.getMongoUser(user, authStruct.authorizedId, true)).user;
+      u2 = (await this.getMongoUser(user, authStruct.authorizerId, true)).user;
+    } else {
+      u1 = this.getLocalData("profile", { "_id": authStruct.authorizedId })[0];
+      u2 = this.getLocalData("profile", { "_id": authStruct.authorizerId })[0];
+    }
+    if (!u1 || !u2)
+      return false;
+    if (authStruct.authorizedId !== getStringId(u1._id))
+      authStruct.authorizedId = getStringId(u1._id);
+    if (authStruct.authorizerId !== getStringId(u2._id))
+      authStruct.authorizerId = getStringId(u2._id);
+    if (!authStruct.authorizedName) {
+      if (u1.username)
+        authStruct.authorizedName = u1.username;
+      else if (u1.email)
+        authStruct.authorizedName = u1.email;
+    }
+    if (!authStruct.authorizerName) {
+      if (u2.username)
+        authStruct.authorizerName = u2.username;
+      else if (u2.email)
+        authStruct.authorizerName = u2.email;
+    }
+    if (!authStruct?.ownerId)
+      true;
+    else if ((getStringId(user._id) !== authStruct.ownerId || getStringId(user._id) === authStruct.ownerId && user.userRoles?.admincontrol) && (getStringId(user._id) !== authStruct.authorizedId && getStringId(user._id) !== authStruct.authorizerId)) {
+      let passed = !this.useAuths;
+      if (this.useAuths)
+        passed = await this.checkAuthorization(user, authStruct, "WRITE");
+      if (!passed)
+        return false;
+    }
+    let auths = [];
+    if (mode.includes("mongo")) {
+      let s = this.collections.authorization.instance.find(
+        { $and: [{ authorizedId: authStruct.authorizedId }, { authorizerId: authStruct.authorizerId }] }
+      );
+      if (s.toArray().length > 0) {
+        await s.forEach((d) => auths.push(d));
+      }
+    } else {
+      let s = this.getLocalData("authorization", { authorizedId: authStruct.authorizedId });
+      if (Array.isArray(s)) {
+        s.forEach((d) => {
+          if (d.authorizerId === authStruct.authorizerId)
+            auths.push(d);
+        });
+      }
+    }
+    let otherAuthset;
+    if (Array.isArray(auths)) {
+      auths.forEach(async (auth) => {
+        if (auth.ownerId === getStringId(user._id)) {
+        } else {
+          if (authStruct.authorizerId === getStringId(user._id)) {
+            auth.authorizations = authStruct.authorizations;
+            auth.structs = authStruct.structs;
+            auth.excluded = authStruct.excluded;
+            auth.expires = authStruct.expires;
+            auth.status = "OKAY";
+            authStruct.status = "OKAY";
+          } else {
+            authStruct.authorizations = auth.authorizations;
+            authStruct.structs = auth.structs;
+            authStruct.excluded = auth.excluded;
+            authStruct.expires = auth.expires;
+            auth.status = "OKAY";
+            authStruct.status = "OKAY";
+          }
+          authStruct.associatedAuthId = getStringId(auth._id);
+          auth.associatedAuthId = getStringId(authStruct._id);
+          otherAuthset = auth;
+          let copy2 = JSON.parse(JSON.stringify(auth));
+          if (mode.includes("mongo")) {
+            delete copy2._id;
+            await this.collections.authorization.instance.updateOne({ $and: [{ authorizedId: authStruct.authorizedId }, { authorizerId: authStruct.authorizerId }, { ownerId: auth.ownerId }] }, { $set: copy2 }, { upsert: true });
+          } else {
+            this.setLocalData(copy2);
+          }
+        }
+      });
+    }
+    let copy = JSON.parse(JSON.stringify(authStruct));
+    if (mode.includes("mongo")) {
+      delete copy._id;
+      await this.collections.authorization.instance.updateOne({ $and: [{ authorizedId: authStruct.authorizedId }, { authorizerId: authStruct.authorizerId }, { ownerId: authStruct.ownerId }] }, { $set: copy }, { upsert: true });
+    } else {
+      this.setLocalData(copy);
+    }
+    if (getStringId(authStruct._id).includes("defaultId") && mode.includes("mongo")) {
+      let replacedAuth = await this.collections.authorization.instance.findOne(copy);
+      if (replacedAuth) {
+        authStruct._id = getStringId(replacedAuth._id);
+        if (otherAuthset) {
+          let otherAuth = await this.collections.authorization.instance.findOne({ $and: [{ authorizedId: otherAuthset.authorizedId }, { authorizerId: otherAuthset.authorizerId }, { ownerId: otherAuthset.ownerId }] });
+          if (otherAuth) {
+            otherAuth.associatedAuthId = getStringId(authStruct._id);
+            let copy2 = JSON.parse(JSON.stringify(otherAuth));
+            delete copy2._id;
+            await this.collections.authorization.instance.updateOne({ $and: [{ authorizedId: otherAuth.authorizedId }, { authorizerId: otherAuth.authorizerId }, { ownerId: otherAuth.ownerId }] }, { $set: copy2 }, { upsert: true });
+            this.checkToNotify(user, [otherAuth]);
+          }
+        }
+      }
+    }
+    return authStruct;
+  }
+  async checkAuthorization(user, struct, request = "READ", mode = this.mode) {
+    if (!user || !struct)
+      return false;
+    if (!struct.ownerId)
+      return true;
+    if (typeof user === "object") {
+      if (struct.ownerId === getStringId(user._id)) {
+        if (user.userRoles?.["admincontrol"]) {
+        } else
+          return true;
+      }
+    } else if (typeof user === "string") {
+      if (struct.ownerId === user) {
+        return true;
+      } else
+        user = { _id: user };
+    }
+    let auth1, auth2;
+    if (mode.includes("mongo")) {
+      auth1 = await this.collections.authorization.instance.findOne({ $or: [{ authorizedId: getStringId(user._id), authorizerId: struct.ownerId, ownerId: getStringId(user._id) }, { authorizedId: struct.ownerId, authorizerId: getStringId(user._id), ownerId: getStringId(user._id) }] });
+      auth2 = await this.collections.authorization.instance.findOne({ $or: [{ authorizedId: getStringId(user._id), authorizerId: struct.ownerId, ownerId: struct.ownerId }, { authorizedId: struct.ownerId, authorizerId: getStringId(user._id), ownerId: struct.ownerId }] });
+    } else {
+      auth1 = this.getLocalData("authorization", { ownerId: getStringId(user._id) }).find((o) => {
+        if (o.authorizedId === getStringId(user._id) && o.authorizerId === struct.ownerId)
+          return true;
+      });
+      auth2 = this.getLocalData("authorization", { ownerId: struct.ownerId }).find((o) => {
+        if (o.authorizedId === getStringId(user._id) && o.authorizerId === struct.ownerId)
+          return true;
+      });
+    }
+    if (!auth1 || !auth2) {
+      return false;
+    }
+    let passed = false;
+    if (auth1.status === "OKAY" && auth2.status === "OKAY") {
+      if (struct.structType === "group") {
+        if (auth1.authorizations[struct.name + "_admin"] && auth2.authorizations[struct.name + "_admin"])
+          passed = true;
+        else
+          passed = false;
+      } else if (auth1.authorizations["peer"] && auth2.authorizations["peer"])
+        passed = true;
+      else if (auth1.authorizations["admincontrol"] && auth2.authorizations["admincontrol"])
+        passed = true;
+      else if (auth1.structIds[getStringId(struct._id)] && auth2.structIds[getStringId(struct._id)])
+        passed = true;
+      else if (auth1.excluded[struct.structType] && struct.ownerId === getStringId(user._id) && request === "WRITE")
+        passed = false;
+    }
+    return passed;
+  }
+  //Local Data stuff (for non-mongodb usage of this server)
+  //just assigns replacement object to old object if it exists, keeps things from losing parent context in UI
+  overwriteLocalData(structs) {
+    if (Array.isArray(structs)) {
+      structs.forEach((struct) => {
+        let localdat = this.getLocalData(struct.structType, { "ownerId": struct.ownerId, "_id": getStringId(struct._id) });
+        if (!localdat || localdat?.length === 0) {
+          this.setLocalData(struct);
+        } else
+          Object.assign(localdat, struct);
+      });
+    } else {
+      let localdat = this.getLocalData(structs.structType, { "ownerId": structs.ownerId, "_id": getStringId(structs._id) });
+      if (!localdat || localdat?.length === 0) {
+        this.setLocalData(structs);
+      } else
+        Object.assign(localdat, structs);
+    }
+  }
+  setLocalData(structs) {
+    let setInCollection = (s) => {
+      let type = s.structType;
+      let collection = this.collections[type]?.reference;
+      if (!collection) {
+        collection = {};
+        if (!this.collections[type])
+          this.collections[type] = {};
+        this.collections[type].reference = collection;
+      }
+      collection[getStringId(s._id)] = s;
+    };
+    if (Array.isArray(structs)) {
+      structs.forEach((s) => {
+        setInCollection(s);
+      });
+    } else
+      setInCollection(structs);
+  }
+  //pull a struct by collection, owner, and key/value pair from the local platform, leave collection blank to pull all ownerId associated data
+  getLocalData(collection, query) {
+    let ownerId, key, value;
+    if (typeof query === "object") {
+      ownerId = query.ownerId;
+      const keys = Object.keys(query).filter((k) => k != "ownerId");
+      key = keys[0];
+      value = query[key];
+    } else
+      value = query;
+    if (!collection && !ownerId && !key && !value)
+      return [];
+    let result = [];
+    if (!collection && (ownerId || key)) {
+      Object.values(this.collections).forEach((c) => {
+        c = c.reference;
+        if ((key === "_id" || key === "id") && value) {
+          let found = c[value];
+          if (found)
+            result.push(found);
+        } else {
+          Object.values(c).forEach((struct) => {
+            if (key && value) {
+              if (struct[key] === value && struct.ownerId === ownerId) {
+                result.push(struct);
+              }
+            } else if (struct.ownerId === ownerId) {
+              result.push(struct);
+            }
+          });
+        }
+      });
+      return result;
+    } else {
+      let c = this.collections[collection]?.reference;
+      if (!c)
+        return result;
+      if (!key && !ownerId) {
+        Object.values(c).forEach((struct) => {
+          result.push(struct);
+        });
+        return result;
+      }
+      if ((key === "_id" || key === "id") && value)
+        return getStringId(c[value]);
+      else {
+        Object.keys(c).forEach((k) => {
+          const struct = c[k];
+          if (key && value && !ownerId) {
+            if (struct[key] === value)
+              result.push(struct);
+          } else if (ownerId && !key) {
+            if (struct.ownerId === ownerId)
+              result.push(struct);
+          } else if (ownerId && key && value) {
+            if (struct.ownerId === ownerId && struct[key]) {
+              if (struct[key] === value)
+                result.push(struct);
+            }
+          }
+        });
+      }
+    }
+    return result;
+  }
+  deleteLocalData(struct) {
+    if (!struct)
+      throw new Error("Struct not supplied");
+    if (!struct.structType || !struct._id)
+      return false;
+    if (this.collections[struct.structType])
+      delete this.collections[struct.structType].reference[struct._id];
+    return true;
+  }
+};
 
 // node_modules/graphscript-node/src/services/http/boilerplate/index.ts
 function scriptBoilerPlate(scripts) {
@@ -74866,6 +73338,7 @@ var import_dotenv = __toESM(require_main());
 var import_fs = __toESM(require("fs"));
 if (import_fs.default.existsSync(".env"))
   (0, import_dotenv.config)();
+var db;
 var ContentServer = new import_graphscript_node.Router({
   graph: {
     "wss": import_graphscript_node.WSSbackend,
@@ -74952,7 +73425,7 @@ var initDB = (router) => {
   mongoose.connection.on("open", () => console.log(`connected to mongodb ${serverconfig_default.mongodbmode} server`));
   console.log("Connecting to MongoDB URI:", MONGODB_URI);
   mongoose.connect(MONGODB_URI).then(() => {
-    const db = new import_graphscript_services_node.StructBackend({}, {
+    db = new StructBackend({}, {
       mode: "mongo",
       //'local'
       db: mongoose.connections[0].db,
@@ -74966,7 +73439,7 @@ var initDB = (router) => {
     });
     console.log("MongoDB Connected!");
   }).catch((e) => {
-    const db = new import_graphscript_services_node.StructBackend({}, {
+    db = new StructBackend({}, {
       mode: "local",
       //'local'
       users: router.users,
@@ -75037,6 +73510,10 @@ var DataServer = new import_graphscript_node.Router({
       }
     }
   }
+});
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  db
 });
 /*! Bundled license information:
 

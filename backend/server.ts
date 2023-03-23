@@ -10,7 +10,7 @@ import {
 } from 'graphscript-node'//'../../graphscript/index.node'////
 import { 
     StructBackend 
-} from 'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'//'graphscript-services'
+} from 'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'////'../../graphscript/src/extras/struct/Struct.backend'//'graphscript-services'
 import { scriptBoilerPlate } from 'graphscript-node/src/services/http/boilerplate'
 import { fitbitRoutes } from './fitbit';
 import settings from './serverconfig'

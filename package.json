@@ -27,7 +27,7 @@
     "device-decoder": "^0.4.21",
     "graphscript": "^0.2.88",
     "graphscript-node": "~0.2.88",
-    "graphscript-services": "~0.2.88",
+    "graphscript-services": "~0.2.90",
     "graphscript-services.storage": "~0.2.85",
     "hamburger-react": "^2.5.0",
     "my-alyce-component-lib": "^0.1.30",
