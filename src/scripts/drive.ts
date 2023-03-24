@@ -64,6 +64,8 @@ export class GDrive {
         const script = document.createElement('script');
         script.type = "text/javascript";
         script.src = "https://apis.google.com/js/api.js";
+        script.async = true;
+        script.defer = true;
         script.onload = handleClientLoad; //gapi installed to window
         document.head.appendChild(script);
 
