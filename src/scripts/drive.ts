@@ -44,8 +44,8 @@ export class GDrive {
             ];
         
             window.gapi.client.init({
-                apiKey: apiKey,             //'AIzaSyDkUs-ofe1TPDftg4_T5wcA8y7qp03f6nU',
-                clientId: googleClientID,   //"354011508571-521lgm8ulo8nl6bevis1n94nlekf44ge.apps.googleusercontent.com",
+                apiKey: apiKey,             
+                clientId: googleClientID,   
                 discoveryDocs: DISCOVERY_DOCS,
                 scope: "https://www.googleapis.com/auth/drive"
             }).then(function () {
