@@ -13,7 +13,7 @@ export class GDrive {
     directory = "MyAlyce_Data"
     fs = fs;
 
-    //this is deprecated now: https://developers.google.com/identity/gsi/web/guides/overview
+    //this is deprecated now?: https://developers.google.com/identity/gsi/web/guides/overview
     initGapi(
         apiKey:string, 
         googleClientID:string
