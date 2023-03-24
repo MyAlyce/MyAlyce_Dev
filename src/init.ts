@@ -4,6 +4,7 @@ import { authorizeCode, refreshToken, setupFitbitApi } from "./scripts/fitbit";
 import { login } from "./scripts/login";
 
 import './scripts/gapi' //setup gapi
+
 import { connectionHasId } from "graphscript";
 
 export function getDictFromUrlParams(url = window.location) {

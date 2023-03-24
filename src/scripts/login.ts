@@ -47,7 +47,7 @@ export type RealmUser = { //The token we receive from Realm
 
 //set the current realm user, specify google for the login to use that, requires a valid google client id and permissions
 export const login = async (
-    login?:string | 'google',
+    login?:string | 'google' | 'apple' | 'facebook',
     password?:string
 ) => {
 
@@ -75,6 +75,12 @@ export const login = async (
                         res(Credentials.google({ redirectUrl: window.location.origin })); 
                         //realm function
                     },1)
+                }
+                else if (login === 'apple') {
+                    res(Credentials.apple(window.location.origin));
+                }
+                else if (login === 'facebook') {
+                    res(Credentials.facebook(window.location.origin));
                 }
                 else {
                     if(login)

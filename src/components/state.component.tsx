@@ -34,7 +34,7 @@ export class sComponent extends Component<{[key:string]:any}> {
             this.UPDATED = Object.keys(s);
             react_setState(s);
             if(typeof s === 'object') {            
-               state.setState(s); //now relay through statemanager
+               state.setState(s); //now relay through event handler
             }
         }
 
