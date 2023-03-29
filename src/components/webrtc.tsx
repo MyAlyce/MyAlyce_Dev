@@ -13,7 +13,7 @@ export class WebRTCComponent extends sComponent {
         availableUsers:undefined as undefined|any[],
         webrtcStream:undefined,
         availableStreams:{}, //we can handle multiple connections too
-        unansweredCalls:{}, //webrtc.unanswered reference
+        unansweredCalls:webrtc.unanswered, //webrtc.unanswered reference
         unansweredCallDivs:undefined as undefined|any[],
         chartDataDiv:undefined,
         videoTrackDiv:undefined

@@ -4,8 +4,8 @@ import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//'../../../graphscr
 
 const webrtcData = {
     webrtcStream:undefined, //current active stream
-    availableStreams:{} as {[key:string]:WebRTCInfo}, //list of accepted calls
-    unansweredCalls:{} as {[key:string]:WebRTCProps & {caller:string, firstName?:string, lastName?: string}}
+    availableStreams:webrtc.rtc as {[key:string]:WebRTCInfo}, //list of accepted calls
+    unansweredCalls:webrtc.unanswered as {[key:string]:WebRTCProps & {caller:string, firstName?:string, lastName?: string}}
 }
 
 state.setState(webrtcData);
@@ -85,12 +85,7 @@ export let answerCall = async (call:WebRTCProps & {caller:string}) => {
     );
 
     state.setState({
-        availableStreams:Object.assign(
-            state.data.availableStreams,
-            {
-                [rtc._id]:rtc
-            }
-        )
+        availableStreams:webrtc.rtc
     });
 }
 
