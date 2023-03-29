@@ -4,7 +4,7 @@ import {
     workerCanvasRoutes, 
     nodeTemplates
     //GPUService, 
-} from 'graphscript'//'../../graphscript/index'//'graphscript'//
+} from 'graphscript'//'../../../graphscript/index'//
 
 import { webglPlotRoutes } from 'graphscript-services'; //"../../graphscript/extras/index.services"//
 

@@ -63,7 +63,7 @@ export class WebRTCComponent extends sComponent {
                 }
 
                 divs.push( //turn into a dropdown or something
-                    <div>
+                    <div key={user._id}>
                         <div>User: {user.firstName} {user.lastName}</div>
                         <button id={`voicecall${user._id}`} onClick={voicecall}>📞</button>
                         <button id={`videocall${user._id}`} onClick={videocall}>📽️</button>
@@ -141,7 +141,7 @@ export class WebRTCComponent extends sComponent {
                     chartDataDiv:(
                         <div>
                             <Device
-                              remote={false}
+                              remote={true}
                               deviceId={call._id}
                             />
                         </div>
@@ -157,7 +157,7 @@ export class WebRTCComponent extends sComponent {
                 this.setState({
                     videoTrackDiv:(
                         <div>
-                            
+                            <video></video>
                         </div>
                     )
                 });
@@ -166,7 +166,7 @@ export class WebRTCComponent extends sComponent {
             let divId = `call${call._id}`;
 
             return (
-                <div id={divId}>
+                <div id={divId} key={divId}>
                     <div>User: {caller.firstName} {caller.lastName}</div>
                     <button onClick={() => {answerCall(call as any);}}>Join Call</button>
                 </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {state} from 'graphscript'
+import {state} from 'graphscript'//'../../graphscript/index'//'graphscript'
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
 import { client, onLogin, onLogout } from './scripts/client';

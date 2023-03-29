@@ -46,7 +46,7 @@ export class Recordings extends sComponent {
             }
 
             recordings.push (
-                <div>
+                <div key={file}>
                     <span>{file}</span>
                     <button onClick={download}>Download</button>
                     <button onClick={deleteFile}>Delete</button>

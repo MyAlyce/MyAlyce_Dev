@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { EventHandler, state } from 'graphscript';
+import { EventHandler, state } from 'graphscript'//'../../../graphscript/index'//'graphscript'
 
 //These components share their state with the global state provided by graphscript's EventHandler, 
 //  and changes propagate both directions with setState on the component state or global state

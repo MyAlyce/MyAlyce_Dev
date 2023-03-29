@@ -5,7 +5,7 @@ import { login } from "./scripts/login";
 
 import './scripts/gapi' //setup gapi
 
-import { connectionHasId } from "graphscript";
+import { connectionHasId } from "../../graphscript/index"//"graphscript";
 
 export function getDictFromUrlParams(url = window.location) {
     const paramDict: any = {};
@@ -47,7 +47,8 @@ const TESTUSER = false;
 
 
 const init = async () => {
-  await connectionHasId(usersocket);
+  await connectionHasId(usersocket,3000);
+  console.log(usersocket);
   
   let promise;
   //spaghetti tests

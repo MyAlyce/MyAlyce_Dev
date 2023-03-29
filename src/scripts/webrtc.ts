@@ -1,5 +1,5 @@
 import { client, usersocket, webrtc } from "./client"
-import { state, WebRTCInfo, WebRTCProps } from 'graphscript'
+import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//'../../../graphscript/index'//'graphscript'
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
 const webrtcData = {

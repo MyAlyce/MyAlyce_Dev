@@ -7,10 +7,11 @@ import {
     SessionsService, 
     User, 
     SocketServerInfo 
-} from 'graphscript-node'//'../../graphscript/index.node'////
+} from '../../graphscript/index.node'//'graphscript-node'//'../../graphscript/index.node'////
 import { 
     StructBackend 
-} from 'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'////'../../graphscript/src/extras/struct/Struct.backend'//'graphscript-services'
+} from '../../graphscript/src/extras/struct/Struct.backend'//'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'////'../../graphscript/src/extras/struct/Struct.backend'//'graphscript-services'
+
 import { scriptBoilerPlate } from 'graphscript-node/src/services/http/boilerplate'
 import { fitbitRoutes } from './fitbit';
 import settings from './serverconfig'

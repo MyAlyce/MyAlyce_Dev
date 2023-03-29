@@ -9,12 +9,13 @@ import {
     WebSocketInfo, 
     WebRTCfrontend,
     SessionsService,
-    GraphNode
-} from 'graphscript'//'../../../graphscript/index'//'graphscript'//
+    GraphNode,
+    state
+} from 'graphscript'//'../../../graphscript/index'//'../../../graphscript/index'//'graphscript'//
 
 import { BFSRoutes } from 'graphscript-services.storage'
 
-import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//'graphscript-services' //'../../../graphscript/src/extras/index.services'//
+import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//'graphscript-services'//'../../../graphscript/src/extras/index.services'//'graphscript-services' //'../../../graphscript/src/extras/index.services'//
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
 
 import { RealmUser } from './login'
@@ -27,6 +28,8 @@ export let sockets = new WSSfrontend();
 export let webrtc = new WebRTCfrontend();
 
 export let usersocket:WebSocketInfo;
+
+export {state}; //
 
 let makeSocket = () => {
     usersocket = sockets.open({

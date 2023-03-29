@@ -13,6 +13,11 @@ export class GDrive {
     directory = "MyAlyce_Data"
     fs = fs;
 
+    constructor(apiKey, googleClientId) {
+        if(apiKey && googleClientId)
+            this.initGapi(apiKey, googleClientId);
+    }
+
     //this is deprecated now?: https://developers.google.com/identity/gsi/web/guides/overview
     initGapi(
         apiKey:string, 
