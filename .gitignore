@@ -4,6 +4,8 @@ node_modules
 .env
 .key
 
+*.lock
+
 # Built application files
 #*.apk
 *.aar

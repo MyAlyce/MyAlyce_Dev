@@ -8,10 +8,14 @@ import { SettingsView } from './components/SettingsView';
 
 //@ts-ignore
 import {slide as Menu} from 'react-burger-menu'
-import { WebRTCComponent } from './components/WebRTC';
+import { WebRTCComponent } from './components/webrtc';
 import { Dashboard } from './components/Dashboard';
 import { Recordings } from './components/Recordings';
-import { Device } from './components/Device';
+import { Device } from './components/device';
+
+import googleLogo from './assets/google.png'
+import myalyceLogo from './assets/myalyce.png'
+import personIcon from './assets/person.jpg'
 
 state.subscribeEvent('route', (route:string) => {
     window.history.pushState(undefined, route, location.origin + route); //uhh
@@ -21,7 +25,7 @@ state.subscribeEvent('route', (route:string) => {
 const TESTVIEWS = false //true; //skip login page (debug)
 
 const brand = () => {
-    return <img src="dist/assets/myalyce.png" width='100px' alt='MyAlyce'/>
+    return <img src={myalyceLogo} width='100px' alt='MyAlyce'/>
 };
   
 //note we're using sComponent which has some extended functionality for a global state
@@ -67,7 +71,7 @@ export class App extends sComponent {
                         thirdPartyLogins={[
                             {
                                 name:'google',
-                                logo:(<img src="dist/assets/google.png" width="50px"></img>),
+                                logo:(<img src={googleLogo} width="50px"></img>),
                                 onClick:this.onGoogleLoginClick
                             }
                         ]}   
@@ -99,7 +103,7 @@ export class App extends sComponent {
                             {
                                 children:<Avatar
                                   dataState='done'
-                                  imgSrc={client.currentUser.pictureUrl ? client.currentUser.pictureUrl : './dist/assets/person.jpg'}
+                                  imgSrc={client.currentUser.pictureUrl ? client.currentUser.pictureUrl : {personIcon}}
                                   size='xs'
                                   status='online'
                                   name={
