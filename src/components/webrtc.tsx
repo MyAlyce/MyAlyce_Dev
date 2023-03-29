@@ -3,8 +3,8 @@ import {ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 import React from 'react'
 import { sComponent } from './state.component';
 import { state, WebRTCInfo, WebRTCProps } from "graphscript";
-import { Device } from "./Device";
 import { answerCall } from "../scripts/webrtc";
+import { Chart } from "./Chart";
 
 export class WebRTCComponent extends sComponent {
 
@@ -14,11 +14,12 @@ export class WebRTCComponent extends sComponent {
         webrtcStream:undefined,
         availableStreams:webrtc.rtc, //we can handle multiple connections too
         unansweredCalls:webrtc.unanswered, //webrtc.unanswered reference
-        unansweredCallDivs:undefined as undefined|any[],
+        unansweredCallDivs:[] as any[],
         chartDataDiv:undefined,
         videoTrackDiv:undefined
     }
 
+    listed = {};
     subscriptions = {} as any;
     deviceId?:string
 
@@ -30,6 +31,7 @@ export class WebRTCComponent extends sComponent {
     componentDidMount() {
         this.getUsers();
         this.getUnanweredCallInfo();
+        state.subscribeEvent('receiveCallInformation',this.getUnanweredCallInfo);
     }
 
     async getUsers() {
@@ -43,23 +45,30 @@ export class WebRTCComponent extends sComponent {
                 let voicecall = async() => {
                     if(this.state.availableStreams[user._id as string]) {
                         //add track
+
                     } else {
                         //send handshake
+
                     }
                 }
                 let videocall = async() => {
                     if(this.state.availableStreams[user._id as string]) {
                         //add track
+
                     } else {
                         //send handshake
+
                     }
                 }
                 let view = async () => {
 
                     if(this.state.availableStreams[user._id as string]) {
                         //add track
+
                     } else {
+
                     }
+
                 }
 
                 divs.push( //turn into a dropdown or something
@@ -78,7 +87,15 @@ export class WebRTCComponent extends sComponent {
     }
 
     async getUnanweredCallInfo() {
-        let divs = Object.keys(this.state.unansweredCalls).map(async (key) => {
+        let keys = Object.keys(this.state.unansweredCalls);
+
+        let divs = [] as any;
+
+        for(const key of keys) {
+
+            if(!this.listed[key])
+                this.listed[key] = true;
+            else continue;
                         
             let call = this.state.unansweredCalls[key] as WebRTCProps;
             let caller = (await client.getUsers([(call as any).caller]))[0];
@@ -90,7 +107,7 @@ export class WebRTCComponent extends sComponent {
                         'runConnection', //run this function on the backend router
                         [
                             (call as any).caller, //run this connection 
-                            'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                            'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
                             'receiveCallInformation', //run this function on the user's end
                             [ //and pass these arguments
                                 {
@@ -140,7 +157,7 @@ export class WebRTCComponent extends sComponent {
                 this.setState({
                     chartDataDiv:(
                         <div>
-                            <Device
+                            <Chart
                               remote={true}
                               deviceId={call._id}
                             />
@@ -165,15 +182,18 @@ export class WebRTCComponent extends sComponent {
 
             let divId = `call${call._id}`;
 
-            return (
+            divs.push(
                 <div id={divId} key={divId}>
                     <div>User: {caller.firstName} {caller.lastName}</div>
                     <button onClick={() => {answerCall(call as any);}}>Join Call</button>
                 </div>
             );
-        });
+        };
 
-        this.setState({unansweredCallDivs:divs});
+        let unanswered = this.state.unansweredCallDivs;
+        unanswered?.push(...divs);
+
+        this.setState({unansweredCallDivs:unanswered});
     }
 
     enableVideo(audio?:boolean) {
@@ -223,18 +243,18 @@ export class WebRTCComponent extends sComponent {
             <div>
                 <div id='receivedCalls'>
                     Received Calls
-                    { this.state.unansweredCallDivs && this.state.unansweredCallDivs.map((div) => div ) }
+                    { this.state.unansweredCallDivs && this.state.unansweredCallDivs.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
                 <div id='availableUsers'>
                     Available Users
-                    { this.state.availableUsers && this.state.availableUsers.map((div) => div ) }
+                    { this.state.availableUsers && this.state.availableUsers.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
                     Stream:
                 <div id='webrtcstream'>
-                    {  this.state.videoTrackDiv  }
-                    {  this.state.chartDataDiv  }
+                    {  this.state.videoTrackDiv ? this.state.videoTrackDiv : ""  }
+                    {  this.state.chartDataDiv ? this.state.chartDataDiv : ""    }
                 </div>
             </div>
         )
