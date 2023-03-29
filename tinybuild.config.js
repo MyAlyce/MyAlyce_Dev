@@ -24,6 +24,12 @@ const config = {
             }),
             installerPlugin
           ], //{importmap:{imports:{[key:string]: string}}, directory: string}
+
+          loader: {
+            '.png': 'dataurl',
+            '.jpg': 'dataurl',
+            '.jpeg': 'dataurl',
+          }
         //globalThis:null //'mymodule'
         //globals:{'index.js':['Graph']}
         //init:{'index.js':function(bundle) { console.log('prepackaged bundle script!', bundle); }.toString(); } //pass stringified functions in to init bundle scripts in a custom way (e.g. for quick rebundling)     
