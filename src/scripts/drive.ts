@@ -13,7 +13,7 @@ export class GDrive {
     directory = "MyAlyce_Data"
     fs = fs;
 
-    constructor(apiKey, googleClientId) {
+    constructor(apiKey?, googleClientId?) {
         if(apiKey && googleClientId)
             this.initGapi(apiKey, googleClientId);
     }
