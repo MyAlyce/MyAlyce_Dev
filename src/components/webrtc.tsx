@@ -12,7 +12,7 @@ export class WebRTCComponent extends sComponent {
         loggedInId:undefined,
         availableUsers:undefined as undefined|any[],
         webrtcStream:undefined,
-        availableStreams:{}, //we can handle multiple connections too
+        availableStreams:webrtc.rtc, //we can handle multiple connections too
         unansweredCalls:webrtc.unanswered, //webrtc.unanswered reference
         unansweredCallDivs:undefined as undefined|any[],
         chartDataDiv:undefined,
