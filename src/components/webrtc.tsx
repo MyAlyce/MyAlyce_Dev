@@ -3,7 +3,7 @@ import {ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 import React from 'react'
 import { sComponent } from './state.component';
 import { state, WebRTCInfo, WebRTCProps } from "graphscript";
-import { answerCall } from "../scripts/webrtc";
+import { answerCall, startCall  } from "../scripts/webrtc";
 import { Chart } from "./Chart";
 
 export class WebRTCComponent extends sComponent {
@@ -42,41 +42,12 @@ export class WebRTCComponent extends sComponent {
             let divs = [] as any[];
             userInfo.forEach((user:Partial<ProfileStruct>) => {
 
-                let voicecall = async() => {
-                    if(this.state.availableStreams[user._id as string]) {
-                        //add track
-
-                    } else {
-                        //send handshake
-
-                    }
-                }
-                let videocall = async() => {
-                    if(this.state.availableStreams[user._id as string]) {
-                        //add track
-
-                    } else {
-                        //send handshake
-
-                    }
-                }
-                let view = async () => {
-
-                    if(this.state.availableStreams[user._id as string]) {
-                        //add track
-
-                    } else {
-
-                    }
-
-                }
+                
 
                 divs.push( //turn into a dropdown or something
                     <div key={user._id}>
                         <div>User: {user.firstName} {user.lastName}</div>
-                        <button id={`voicecall${user._id}`} onClick={voicecall}>📞</button>
-                        <button id={`videocall${user._id}`} onClick={videocall}>📽️</button>
-                        <button id={`view${user._id}`} onClick={view}>💓</button> 
+                        <button id={`startcall${user._id}`} onClick={()=>{startCall(user._id)}}>Start Call</button>
                     </div>
                 )
             })
