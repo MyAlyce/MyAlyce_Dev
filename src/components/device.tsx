@@ -46,7 +46,6 @@ export class Device extends sComponent {
     render() {
         return (
             <div>
-                <div>Device Connect</div>
                 { !this.remote && 
                     <DeviceConnect/>
                 }

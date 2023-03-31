@@ -15,8 +15,6 @@ export class Dashboard extends sComponent {
 
         return (
             <div>
-                Dashboard:
-                <hr/>
                 <div>
                 {/*Device/Stream select */}
                     <StreamSelect/>

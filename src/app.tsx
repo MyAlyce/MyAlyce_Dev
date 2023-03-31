@@ -3,7 +3,7 @@ import {state} from 'graphscript'//'../../graphscript/index'//'graphscript'
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
 import { client, onLogin, onLogout } from './scripts/client';
-import { Login, Avatar, TopBar } from 'my-alyce-component-lib';
+import { Login, Avatar, TopBar, NavDrawer } from 'my-alyce-component-lib';
 import { SettingsView } from './components/SettingsView';
 
 //@ts-ignore
@@ -70,7 +70,7 @@ export class App extends sComponent {
                         onLoginClick={this.onLoginClick}
                         thirdPartyLogins={[
                             {
-                                name:'google',
+                                name:'Google',
                                 logo:(<img src={googleLogo} width="50px"></img>),
                                 onClick:this.onGoogleLoginClick
                             }
@@ -85,7 +85,7 @@ export class App extends sComponent {
                             <button onClick={() => this.setState({'route':'/history',  navOpen:false})} className="menu-item" >History</button>
                             <button onClick={() => this.setState({'route':'/device',  navOpen:false})} className="menu-item--small">Device</button>
                         </Menu>
-                        {/* <NavDrawer fixed="left" zIndex={102} isOpen={this.state.navOpen} 
+                        <NavDrawer fixed="left" zIndex={102} isOpen={this.state.navOpen} 
                             brand={brand()} 
                             onBackdropClick={() => this.setState({navOpen:false})} menuItems={[
                                 { type: 'action', icon: 'D' as any, onClick: () => this.setState({'route':'/dashboard', navOpen:false}), title: 'Dashboard' },
@@ -93,12 +93,18 @@ export class App extends sComponent {
                                 { type: 'action', icon: 'S' as any, onClick: () => this.setState({'route':'/settings',  navOpen:false}), title: 'Profile Settings' },
                                 { type: 'action', icon: 'D' as any, onClick: () => this.setState({'route':'/dev',  navOpen:false}),      title: 'DEV MODE' }
                             ]}
-                        />  */}
+                        /> 
                     <div id="view">
                       <TopBar zIndex={0} onMenuExpand={() => {
                             let open = !this.state.navOpen;
                             this.setState({'navOpen':open})
                           }} 
+
+                          style={{
+                            position:'sticky',
+                            top:0,
+                            left:0,
+                          }}
                           rightNavItems={[
                             {
                                 children:<Avatar
@@ -117,7 +123,12 @@ export class App extends sComponent {
                                 onClick:()=>{}                                
                             },
                             {
-                                children:(<p style={{fontSize:'16px'}}>logout</p>),
+                                children:(<p style={{
+                                    fontSize:'16px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    height: '100%',
+                                }}>Logout</p>),
                                 onClick:()=>{this.logout()}
                             }
                             ]}  

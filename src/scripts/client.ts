@@ -87,7 +87,7 @@ export const onLogin = async (
     let resultHasUser = false;
 
     let profile = {
-        ...result.data.profile.data,
+        ...result.data.profile?.data ?? {},
         _id:result.data.id
     }
 
