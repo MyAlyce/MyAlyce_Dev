@@ -1,6 +1,10 @@
 # MyAlyce_Dev
  Development Env Repo for MyAlyce
 
+ First demo targeting a barebones RPM feature set.
+ Second demo implementing goal system and social(ish) tracking features.
+ Third will add back office support to start to build out an EHR companion system, eventually a full thing.
+
 ### Dev
 
 With the latest NodeJS LTS installed:
