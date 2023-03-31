@@ -7,10 +7,10 @@ import {
     SessionsService, 
     User, 
     SocketServerInfo 
-} from 'graphscript-node'//'../../graphscript/index.node'//'../../graphscript/index.node'////
+} from 'graphscript-node'////'../../graphscript/index.node'//
 import { 
     StructBackend 
-} from 'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'//'../../graphscript/src/extras/struct/Struct.backend'////'../../graphscript/src/extras/struct/Struct.backend'//'graphscript-services'
+} from 'graphscript-services-node'//
 
 import { scriptBoilerPlate } from 'graphscript-node/src/services/http/boilerplate'
 import { fitbitRoutes } from './fitbit';
@@ -27,6 +27,8 @@ if(fs.existsSync('.env'))
 
 export let db;
 
+//process.setMaxListeners(0);
+
 const ContentServer = new Router({
     graph:{
         'wss':WSSbackend,
@@ -39,7 +41,7 @@ const ContentServer = new Router({
                     port:settings.port,
                     pages:{
                         '/':{
-                            template:scriptBoilerPlate('./dist/index.js'),
+                            template:scriptBoilerPlate('./index.js'),
                             onrequest:function(self,node, request, response) {
                                 // //e.g. CORS
                                 // response.setHeader('Access-Control-Allow-Origin','*');
@@ -60,12 +62,6 @@ const ContentServer = new Router({
                         },
                         'history':{ //redirect subdomains to main page which sort of fakes the subdomains from state
                             redirect:'/'
-                        },
-                        'config':{
-                            template:'tinybuild.config.js',
-                            onrequest:function (self, node, request, response) {
-                                
-                            }
                         },
                         'home':{
                             redirect:'/'

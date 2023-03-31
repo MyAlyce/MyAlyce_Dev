@@ -1,7 +1,7 @@
 import React from 'react'
 import {sComponent} from './state.component'
 
-import { EventHandler, WorkerInfo, WorkerRoute, state } from 'graphscript'//'../../../graphscript/index'//'graphscript'
+import { EventHandler, WorkerInfo, WorkerRoute, state } from 'graphscript'//'../../../graphscript/index'//
 import { connectDevice, disconnectDevice } from '../scripts/device';
 import { WGLPlotter } from '../scripts/webglplot/plotter';
 

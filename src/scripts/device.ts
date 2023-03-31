@@ -3,7 +3,7 @@ import { initDevice, Devices, FilterSettings, workers } from 'device-decoder'
 
 import gsworker from './device.worker'
 
-import { state } from 'graphscript'//'../../../graphscript/index'//'graphscript'
+import { state } from 'graphscript'//'../../../graphscript/index'//
 import { ByteParser } from 'device-decoder/src/util/ByteParser';
 
 let device;

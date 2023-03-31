@@ -11,9 +11,8 @@ import {
     SessionsService,
     GraphNode,
     state
-} from 'graphscript'//'../../../graphscript/index'//'../../../graphscript/index'//'graphscript'//
+} from 'graphscript'//'../../../graphscript/index'//
 
-import { BFSRoutes } from 'graphscript-services.storage'
 
 import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//'graphscript-services'//'../../../graphscript/src/extras/index.services'//'graphscript-services' //'../../../graphscript/src/extras/index.services'//
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
@@ -86,10 +85,12 @@ export const onLogin = async (
   ): Promise<Partial<ProfileStruct|undefined>> => {
     let resultHasUser = false;
 
-    let profile = {
-        ...result.data.profile?.data ?? {},
-        _id:result.data.id
-    }
+    let profile;
+    if(result?.data?.profile) 
+        profile = {
+            ...result.data.profile.data,
+            _id:result.data.id
+        }
 
     let p;
     if(result && result?.type !== 'FAIL') {

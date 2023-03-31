@@ -15,7 +15,7 @@ import './src/styles/burger.css'
 
 if(useStyles) {
   document.head.insertAdjacentHTML('beforeend',
-  `<link rel="stylesheet" href="dist/index.css" type="text/css" />`
+  `<link rel="stylesheet" href="./index.css" type="text/css" />`
   );
 }
 

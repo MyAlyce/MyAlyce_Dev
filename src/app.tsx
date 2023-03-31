@@ -1,5 +1,5 @@
 import React from 'react'
-import {state} from 'graphscript'//'../../graphscript/index'//'graphscript'
+import {state} from 'graphscript'//'../../graphscript/index'//
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
 import { client, onLogin, onLogout } from './scripts/client';
@@ -8,14 +8,14 @@ import { SettingsView } from './components/SettingsView';
 
 //@ts-ignore
 import {slide as Menu} from 'react-burger-menu'
-import { WebRTCComponent } from './components/webrtc';
+import { WebRTCComponent } from './components/WebRTC';
 import { Dashboard } from './components/Dashboard';
 import { Recordings } from './components/Recordings';
-import { Device } from './components/device';
+import { Device } from './components/Device';
 
-import googleLogo from './assets/google.png'
-import myalyceLogo from './assets/myalyce.png'
-import personIcon from './assets/person.jpg'
+let googleLogo = './assets/google.png'
+let myalyceLogo = './assets/myalyce.png'
+let personIcon = './assets/person.jpg'
 
 state.subscribeEvent('route', (route:string) => {
     window.history.pushState(undefined, route, location.origin + route); //uhh

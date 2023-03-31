@@ -1,5 +1,5 @@
 import { client, usersocket, webrtc } from "./client"
-import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//'../../../graphscript/index'//'graphscript'
+import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//'../../../graphscript/index'//
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
 const webrtcData = {
@@ -10,7 +10,7 @@ const webrtcData = {
 
 state.setState(webrtcData);
 
-                
+
 export async function startCall(userId) {
     //send handshake
     let rtcId = `room${Math.floor(Math.random()*1000000000000000)}`;
@@ -25,8 +25,8 @@ export async function startCall(userId) {
                     [
                         userId, //run this connection 
                         'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                        'receiveCallInformation', //run this function on the user's end
                         [ //and pass these arguments
+                            'receiveCallInformation', //run this function on the user's end
                             {
                                 _id:rtcId, 
                                 hostcandidates:{[cid]:ev.candidate}
@@ -51,12 +51,13 @@ export async function startCall(userId) {
         [
             userId, //run this connection 
             'postAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
-            'receiveCallInformation', //run this function on the user's end
             [ //and pass these arguments
+                'receiveCallInformation', //run this function on the user's end
                 {
                     _id:rtcId, 
                     hostdescription:rtc.hostdescription, //the peer needs to accept this
-                    caller:client.currentUser._id
+                    caller:client.currentUser._id,
+                    socketId:usersocket._id
                 }
             ]
         ]
@@ -64,24 +65,28 @@ export async function startCall(userId) {
 }
 
 //todo: need to grab the specific endpoint to respond to
-export let answerCall = async (call:WebRTCProps & {caller:string}) => {
-    let rtc = await webrtc.answerCall(call);
+export let answerCall = async (call:WebRTCProps & {caller:string, socketId:string}) => {
+    let rtc = await webrtc.answerCall(call as any);
     
     usersocket.run(
         'runConnection', //run this function on the backend router
         [
             call.caller, //run this connection 
             'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
-            'answerPeer', //run this function on the user's end
             [ //and pass these arguments
-                {
-                    _id:rtc._id, 
-                    peerdescription:rtc.peerdescription, //the host needs this
-                    caller:client.currentUser._id,
-                    firstName:client.currentUser.firstName,
-                    lastName:client.currentUser.lastName
-                }
-            ]
+                'answerPeer', //run this function on the user's end
+                [
+                    rtc._id,
+                    {
+                        peerdescription:rtc.peerdescription, //the host needs this
+                        caller:client.currentUser._id,
+                        socketId:usersocket._id,
+                        firstName:client.currentUser.firstName,
+                        lastName:client.currentUser.lastName
+                    }
+                ]
+            ],
+            call.socketId
         ]
     );
 
@@ -92,9 +97,10 @@ export let answerCall = async (call:WebRTCProps & {caller:string}) => {
 
 webrtc.subscribe('receiveCallInformation', (id) => {
     
-    let callinfo = webrtc.unanswered[id];
     console.log('received call information:', id);
 
-    state.setState({unansweredCalls:webrtc.unanswered}); //update this event for the app
+    state.setState({
+        unansweredCalls:webrtc.unanswered
+    }); //update this event for the app
 
 });

@@ -5,7 +5,7 @@ import { login } from "./scripts/login";
 
 import './scripts/gapi' //setup gapi
 
-import { connectionHasId } from "../../graphscript/index"//"graphscript";
+import { connectionHasId } from "graphscript";//"../../graphscript/index"//
 
 export function getDictFromUrlParams(url = window.location) {
     const paramDict: any = {};

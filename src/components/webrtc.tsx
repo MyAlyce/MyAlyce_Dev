@@ -1,8 +1,11 @@
 import { client, webrtc, graph, usersocket } from "../scripts/client";
+import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//"../../../graphscript/index";//
+
 import {ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 import React from 'react'
 import { sComponent } from './state.component';
-import { state, WebRTCInfo, WebRTCProps } from "graphscript";
+
+
 import { answerCall, startCall  } from "../scripts/webrtc";
 import { Chart } from "./Chart";
 
@@ -22,16 +25,23 @@ export class WebRTCComponent extends sComponent {
     listed = {};
     subscriptions = {} as any;
     deviceId?:string
+    evSub;
 
     constructor(props:{deviceId?:string}) {
         super(props);
         if(props.deviceId) this.deviceId = props.deviceId;
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.getUsers();
         this.getUnanweredCallInfo();
-        state.subscribeEvent('receiveCallInformation',this.getUnanweredCallInfo);
+        this.evSub = state.subscribeEvent('receiveCallInformation',()=>{
+            this.getUnanweredCallInfo();
+        });
+    }
+
+    componentWillUnmount = () => {
+        state.unsubscribeEvent('receiveCallInformation', this.evSub);
     }
 
     async getUsers() {
@@ -41,9 +51,7 @@ export class WebRTCComponent extends sComponent {
         if(userInfo) {
             let divs = [] as any[];
             userInfo.forEach((user:Partial<ProfileStruct>) => {
-
-                
-
+                //console.log(user);
                 divs.push( //turn into a dropdown or something
                     <div key={user._id}>
                         <div>User: {user.firstName} {user.lastName}</div>
@@ -62,6 +70,8 @@ export class WebRTCComponent extends sComponent {
 
         let divs = [] as any;
 
+        console.log('getUnanweredCallInfo')
+
         for(const key of keys) {
 
             if(!this.listed[key])
@@ -79,13 +89,14 @@ export class WebRTCComponent extends sComponent {
                         [
                             (call as any).caller, //run this connection 
                             'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                            'receiveCallInformation', //run this function on the user's end
                             [ //and pass these arguments
+                                'receiveCallInformation', //run this function on the user's end
                                 {
                                     _id:call._id, 
                                     peercandidates:{[cid]:ev.candidate}
                                 }
-                            ]
+                            ],
+                            (call as any).socketId
                         ]
                     ).then((id) => {
                         console.log('call information echoed from peer:', id);
@@ -95,6 +106,7 @@ export class WebRTCComponent extends sComponent {
 
             //overwrites the default message
             call.ondatachannel = (ev) => {
+                console.log('call started')
                 //the call is now live, add tracks
                 //data channel streams the device data
                 ev.channel.onmessage = (ev) => { 
@@ -165,6 +177,8 @@ export class WebRTCComponent extends sComponent {
         unanswered?.push(...divs);
 
         this.setState({unansweredCallDivs:unanswered});
+        this.render();
+        
     }
 
     enableVideo(audio?:boolean) {
