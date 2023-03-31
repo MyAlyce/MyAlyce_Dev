@@ -7,7 +7,7 @@
 
 ### Scripting/Events/State
 
-- finish file saving subscriptions with local/stream recording
+- finish file saving subscriptions with local/stream recording. Get google drive working somehow
 - readd basic alert workflow
 - readd saved browser state
 - webrtc management, test video and audio
@@ -16,7 +16,7 @@
 ### Backend
 
 - Security
-
+- plain email/password storage? i.e. not just google reliance
 
 ### Fix
 
