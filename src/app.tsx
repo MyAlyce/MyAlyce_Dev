@@ -8,10 +8,10 @@ import { SettingsView } from './components/SettingsView';
 
 //@ts-ignore
 import {slide as Menu} from 'react-burger-menu'
-import { WebRTCComponent } from './components/WebRTC';
+import { WebRTCComponent } from './components/webrtc';
 import { Dashboard } from './components/Dashboard';
 import { Recordings } from './components/Recordings';
-import { Device } from './components/Device';
+import { Device } from './components/device';
 
 let googleLogo = './assets/google.png'
 let myalyceLogo = './assets/myalyce.png'

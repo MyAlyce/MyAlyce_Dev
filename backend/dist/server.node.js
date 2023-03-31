@@ -3463,13 +3463,8 @@ var require_index_node = __commonJS({
                 if (typeof this.get(target).__listeners[bound] !== "object") {
                   this.get(target).__listeners[bound] = this.get(target).__node.state.getEvent(bound);
                 }
-<<<<<<< Updated upstream:backend/server.node.js
-              }
-              this.get(target).__listeners[bound].sub = sub;
-=======
                 this.get(target).__listeners[bound].sub = sub;
               }
->>>>>>> Stashed changes:backend/dist/server.node.js
               let ondelete = () => {
                 if (sub !== void 0)
                   nd.__unsubscribe(sub, key, subInput);
@@ -6953,11 +6948,8 @@ var require_index_node = __commonJS({
               console.log(`wss closed: ${address}`);
           });
           let send = (message, socketId) => {
-<<<<<<< Updated upstream:backend/server.node.js
-=======
             if (typeof message === "object")
               message = JSON.stringify(message);
->>>>>>> Stashed changes:backend/dist/server.node.js
             if (!socketId) {
               for (const key in this.servers[address].clients) {
                 this.sockets[key].send(message);
@@ -7200,10 +7192,7 @@ var require_index_node = __commonJS({
           return true;
         };
         this.terminate = (ws) => {
-<<<<<<< Updated upstream:backend/server.node.js
-=======
           let str;
->>>>>>> Stashed changes:backend/dist/server.node.js
           if (!ws) {
             let served = Object.keys(this.servers);
             for (const key in served) {
@@ -7214,14 +7203,9 @@ var require_index_node = __commonJS({
               this.terminate(key);
             }
           } else if (typeof ws === "string") {
-<<<<<<< Updated upstream:backend/server.node.js
-            for (const k in this.servers) {
-              if (k.includes(ws)) {
-=======
             str = ws;
             for (const k in this.servers) {
               if (k.includes(ws) || this.servers[k]._id === ws) {
->>>>>>> Stashed changes:backend/dist/server.node.js
                 ws = this.servers[k].wss;
                 for (const key in this.servers[k].clients) {
                   this.closeWS(this.servers[k].clients[key]);
@@ -7232,11 +7216,7 @@ var require_index_node = __commonJS({
             }
             if (!ws) {
               for (const k in this.sockets) {
-<<<<<<< Updated upstream:backend/server.node.js
-                if (k.includes(ws)) {
-=======
                 if (k.includes(ws) || this.sockets[k]._id === ws) {
->>>>>>> Stashed changes:backend/dist/server.node.js
                   ws = this.sockets[k].socket;
                   delete this.sockets[k];
                   break;
@@ -7252,13 +7232,8 @@ var require_index_node = __commonJS({
           } else if (ws instanceof wrapper_default) {
             if (ws.readyState === ws.OPEN)
               ws.close();
-<<<<<<< Updated upstream:backend/server.node.js
-            if (this.get(ws.url))
-              this.remove(ws.url);
-=======
             if (this.get(str ? str : ws.url))
               this.remove(str ? str : ws.url);
->>>>>>> Stashed changes:backend/dist/server.node.js
           }
           return true;
         };
@@ -8382,11 +8357,7 @@ var require_index_node = __commonJS({
               for (const key in connections2)
                 if (connections2[key]?.request)
                   results.push(connections2[key].request(message, method, ...a));
-<<<<<<< Updated upstream:backend/server.node.js
-              return results;
-=======
               return Promise.all(results);
->>>>>>> Stashed changes:backend/dist/server.node.js
             };
             let post = (route, args, method, ...a) => {
               let connection = this.getConnection(user._id, "post");
@@ -8398,10 +8369,6 @@ var require_index_node = __commonJS({
               for (const key in connections2)
                 if (connections2[key]?.post)
                   connections2[key].post(route, args, method, ...a);
-<<<<<<< Updated upstream:backend/server.node.js
-              return;
-=======
->>>>>>> Stashed changes:backend/dist/server.node.js
             };
             let run = (route, args, method, ...a) => {
               let connection = this.getConnection(user._id, "run");
@@ -8412,15 +8379,9 @@ var require_index_node = __commonJS({
               let connections2 = this.getConnections(user._id, "run");
               let results = [];
               for (const key in connections2)
-<<<<<<< Updated upstream:backend/server.node.js
-                if (connections2[key]?.post)
-                  results.push(connections2[key].run(route, args, method, ...a));
-              return results;
-=======
                 if (connections2[key]?.run)
                   results.push(connections2[key].run(route, args, method, ...a));
               return Promise.all(results);
->>>>>>> Stashed changes:backend/dist/server.node.js
             };
             let subscribe = (route, callback2, ...a) => {
               let connection = this.getConnection(user._id, "subscribe");
@@ -8433,11 +8394,7 @@ var require_index_node = __commonJS({
               for (const key in connections2)
                 if (connections2[key]?.post)
                   results.push(connections2[key].subscribe(route, callback2, ...a));
-<<<<<<< Updated upstream:backend/server.node.js
-              return results;
-=======
               return Promise.all(results);
->>>>>>> Stashed changes:backend/dist/server.node.js
             };
             let unsubscribe = (route, sub, ...a) => {
               let connection = this.getConnection(user._id, "unsubscribe");
@@ -8450,11 +8407,7 @@ var require_index_node = __commonJS({
               for (const key in connections2)
                 if (connections2[key]?.post && subs[key])
                   results.push(connections2[key].unsubscribe(route, subs[key], ...a));
-<<<<<<< Updated upstream:backend/server.node.js
-              return results;
-=======
               return Promise.all(results);
->>>>>>> Stashed changes:backend/dist/server.node.js
             };
             let terminate = () => {
               return this.removeUser(user);
@@ -8490,11 +8443,6 @@ var require_index_node = __commonJS({
           }
           return user;
         };
-<<<<<<< Updated upstream:backend/server.node.js
-        this.getConnection = (sourceId, hasMethod) => {
-          if (this.sources[sourceId]) {
-            if (this.order) {
-=======
         this.getConnection = (sourceId, hasMethod, connectionId) => {
           if (this.connections[sourceId]) {
             return this.connections[sourceId];
@@ -8510,7 +8458,6 @@ var require_index_node = __commonJS({
               else
                 return void 0;
             } else if (this.order) {
->>>>>>> Stashed changes:backend/dist/server.node.js
               for (let i = 0; i < this.order.length; i++) {
                 let k = this.order[i];
                 for (const key in this.sources[sourceId]) {
@@ -8523,15 +8470,11 @@ var require_index_node = __commonJS({
                             continue;
                           }
                         }
-<<<<<<< Updated upstream:backend/server.node.js
-                        return this.sources[sourceId][key];
-=======
                         if (hasMethod) {
                           if (this.sources[sourceId][key][hasMethod])
                             return this.sources[sourceId][key];
                         } else
                           return this.sources[sourceId][key];
->>>>>>> Stashed changes:backend/dist/server.node.js
                       }
                     } else if (this.sources[sourceId][key].service === k) {
                       if (this.sources[sourceId][key].connectionType && this.sources[sourceId][key].service?.name) {
@@ -8539,15 +8482,11 @@ var require_index_node = __commonJS({
                           this.removeConnection(this.sources[sourceId][key]);
                         continue;
                       }
-<<<<<<< Updated upstream:backend/server.node.js
-                      return this.sources[sourceId][key];
-=======
                       if (hasMethod) {
                         if (this.sources[sourceId][key][hasMethod])
                           return this.sources[sourceId][key];
                       } else
                         return this.sources[sourceId][key];
->>>>>>> Stashed changes:backend/dist/server.node.js
                     }
                   }
                 }
@@ -8560,24 +8499,15 @@ var require_index_node = __commonJS({
                     continue;
                   }
                 }
-<<<<<<< Updated upstream:backend/server.node.js
-                if (hasMethod && this.sources[sourceId][k][hasMethod]) {
-                  return this.sources[sourceId][k];
-=======
                 if (hasMethod) {
                   if (this.sources[sourceId][k][hasMethod])
                     return this.sources[sourceId][k];
->>>>>>> Stashed changes:backend/dist/server.node.js
                 } else {
                   return this.sources[sourceId][k];
                 }
               }
             }
-<<<<<<< Updated upstream:backend/server.node.js
-          } else if (this.order) {
-=======
           } else if (this.order && !this.connections[sourceId]) {
->>>>>>> Stashed changes:backend/dist/server.node.js
             for (let i = 0; i < this.order.length; i++) {
               let k = this.order[i];
               if (this.sources[k]?.[sourceId]) {
@@ -8587,26 +8517,15 @@ var require_index_node = __commonJS({
                     continue;
                   }
                 }
-<<<<<<< Updated upstream:backend/server.node.js
-                if (hasMethod && this.sources[k][sourceId]?.[hasMethod]) {
-                  return this.sources[k][sourceId];
-=======
                 if (hasMethod) {
                   if (this.sources[k][sourceId][hasMethod])
                     return this.sources[k][sourceId];
->>>>>>> Stashed changes:backend/dist/server.node.js
                 } else {
                   return this.sources[k][sourceId];
                 }
               }
             }
           }
-<<<<<<< Updated upstream:backend/server.node.js
-          if (typeof sourceId === "string" && this.connections[sourceId] && this.connections[sourceId].send) {
-            return this.connections[sourceId];
-          }
-=======
->>>>>>> Stashed changes:backend/dist/server.node.js
         };
         this.getConnections = (sourceId, hasMethod, props) => {
           if (this.sources[sourceId]) {
@@ -8621,21 +8540,6 @@ var require_index_node = __commonJS({
                       let pass = true;
                       if (hasMethod && !this.sources[sourceId][key][k][hasMethod])
                         pass = false;
-<<<<<<< Updated upstream:backend/server.node.js
-                      for (const p in props) {
-                        if (typeof this.sources[sourceId][key][k][p] === "object" && typeof props[p] === "object") {
-                          for (const pp in props[p]) {
-                            if (props[p][pp] !== this.sources[sourceId][key][k][p][pp]) {
-                              pass = false;
-                              break;
-                            }
-                          }
-                        } else if (this.sources[sourceId][key][k][p] !== props[p]) {
-                          pass = false;
-                        } else {
-                          pass = false;
-                          break;
-=======
                       if (props) {
                         for (const p in props) {
                           if (typeof this.sources[sourceId][key][k][p] === "object" && typeof props[p] === "object") {
@@ -8651,7 +8555,6 @@ var require_index_node = __commonJS({
                             pass = false;
                             break;
                           }
->>>>>>> Stashed changes:backend/dist/server.node.js
                         }
                       }
                       if (pass) {
@@ -8663,26 +8566,6 @@ var require_index_node = __commonJS({
                   let pass = true;
                   if (hasMethod && !this.sources[sourceId][key][hasMethod])
                     pass = false;
-<<<<<<< Updated upstream:backend/server.node.js
-                  for (const p in props) {
-                    if (typeof this.sources[sourceId][key][p] === "object" && typeof props[p] === "object") {
-                      for (const pp in props[p]) {
-                        if (props[p][pp] !== this.sources[sourceId][key][p][pp]) {
-                          pass = false;
-                          break;
-                        }
-                      }
-                    } else if (this.sources[sourceId][key][p] !== props[p]) {
-                      pass = false;
-                    } else {
-                      pass = false;
-                      break;
-                    }
-                  }
-                  if (pass) {
-                    if (this.getConnection(this.sources[sourceId][key], hasMethod))
-                      found[this.sources[sourceId][key]._id] = this.sources[sourceId][key];
-=======
                   if (props) {
                     for (const p in props) {
                       if (typeof this.sources[sourceId][key][p] === "object" && typeof props[p] === "object") {
@@ -8702,15 +8585,10 @@ var require_index_node = __commonJS({
                   }
                   if (pass) {
                     found[this.sources[sourceId][key]._id] = this.sources[sourceId][key];
->>>>>>> Stashed changes:backend/dist/server.node.js
                   }
                 }
               }
             }
-<<<<<<< Updated upstream:backend/server.node.js
-          }
-        };
-=======
             return found;
           }
         };
@@ -8748,7 +8626,6 @@ var require_index_node = __commonJS({
               }).catch(rej);
             });
         };
->>>>>>> Stashed changes:backend/dist/server.node.js
         this.addConnection = (options2, source) => {
           let settings = {};
           if (typeof options2 === "string") {
@@ -9105,40 +8982,6 @@ var require_index_node = __commonJS({
             connection = this.connections[connection];
           return connection.terminate();
         };
-<<<<<<< Updated upstream:backend/server.node.js
-        this.runConnection = (endpoint, method, args) => {
-          let sendTo;
-          if (method.indexOf("All") > -1) {
-            sendTo = this.users[endpoint];
-          } else {
-            sendTo = this.getConnection(endpoint, method);
-          }
-          if (sendTo)
-            return sendTo[method](...args);
-        };
-        this.subscribeThroughConnection = (route, relay, endpoint, callback2, ...args) => {
-          if (typeof relay === "string") {
-            relay = this.getConnection(relay, "run");
-          }
-          if (typeof relay === "object")
-            return new Promise((res, rej) => {
-              relay.run("routeConnections", [route, endpoint, relay._id, ...args]).then((sub) => {
-                this.__node.state.subscribeEvent(endpoint, (res2) => {
-                  if (res2?.callbackId === route) {
-                    if (!callback2)
-                      this.setState({ [endpoint]: res2.args });
-                    else if (typeof callback2 === "string") {
-                      this.setState({ [callback2]: res2.args });
-                    } else
-                      callback2(res2.args);
-                  }
-                });
-                res(sub);
-              }).catch(rej);
-            });
-        };
-=======
->>>>>>> Stashed changes:backend/dist/server.node.js
         this.routeConnections = (route, transmitter, receiver, ...args) => {
           let rxsrc;
           if (typeof receiver === "string") {
@@ -14333,13 +14176,8 @@ var require_index_services_node = __commonJS({
                 if (typeof this.get(target).__listeners[bound] !== "object") {
                   this.get(target).__listeners[bound] = this.get(target).__node.state.getEvent(bound);
                 }
-<<<<<<< Updated upstream:backend/server.node.js
-              }
-              this.get(target).__listeners[bound].sub = sub;
-=======
                 this.get(target).__listeners[bound].sub = sub;
               }
->>>>>>> Stashed changes:backend/dist/server.node.js
               let ondelete = () => {
                 if (sub !== void 0)
                   nd.__unsubscribe(sub, key, subInput);
@@ -15877,10 +15715,7 @@ var require_index_services_node = __commonJS({
         this.debug = false;
         this.users = {};
         this.collections = {};
-<<<<<<< Updated upstream:backend/server.node.js
-=======
         this.mode = "local";
->>>>>>> Stashed changes:backend/dist/server.node.js
         this.useAuths = true;
         this.query = async (requestingUserId, collection, queryObj, findOne, skip) => {
           let user = this.users[requestingUserId];
@@ -16307,15 +16142,6 @@ var require_index_services_node = __commonJS({
         }
       }
       initDB(dboptions) {
-<<<<<<< Updated upstream:backend/server.node.js
-        if (dboptions?.users)
-          this.users = dboptions.users;
-        this.db = dboptions.db;
-        if (!this.mode && dboptions?.db)
-          this.mode = this.db ? dboptions.mode ? dboptions.mode : "local" : "local";
-        if (dboptions?.collections)
-          this.collections = dboptions.collections;
-=======
         this.db = dboptions.db;
         if (dboptions?.users)
           this.users = dboptions.users;
@@ -16327,7 +16153,6 @@ var require_index_services_node = __commonJS({
           this.collections = dboptions.collections;
         if (dboptions.debug)
           this.debug = dboptions.debug;
->>>>>>> Stashed changes:backend/dist/server.node.js
         if ("useAuths" in dboptions)
           this.useAuths = dboptions.useAuths;
         defaultCollections.forEach((k) => {
@@ -16422,7 +16247,7 @@ var require_index_services_node = __commonJS({
             this.setLocalData(newNotifications);
           }
           for (const uid in usersToNotify) {
-            this.users[uid].sendAll({ route: "structNotification", args: true });
+            this.users[uid]?.sendAll({ route: "structNotification", args: true });
           }
           return true;
         } else
@@ -16500,7 +16325,7 @@ var require_index_services_node = __commonJS({
                     await this.db.collection(struct.structType).insertOne(copy);
                     firstwrite = true;
                   } else if (struct.structType === "notification")
-                    await this.db.collection(struct.structType).updateOne({ parent: struct.parent, _id: struct._id }, { $set: copy, ...secondary }, { upsert: true, unique: false });
+                    await this.db.collection(struct.structType).updateOne({ _id: struct._id }, { $set: copy, ...secondary }, { upsert: true, unique: false });
                   else
                     await this.db.collection(struct.structType).updateOne({ _id: toObjectId(struct._id) }, { $set: copy, ...secondary }, { upsert: true });
                 } else if (struct.structType) {
@@ -17036,7 +16861,7 @@ var require_index_services_node = __commonJS({
             if (struct.users) {
               Object.keys(struct.users).forEach((uid) => {
                 if (uid !== getStringId(user._id) && uid !== struct.ownerId && this.users[uid])
-                  this.users[uid].sendAll({ route: "structDeleted", args: getStringId(struct._id) });
+                  this.users[uid]?.sendAll({ route: "structDeleted", args: getStringId(struct._id) });
               });
             }
             if (struct.ownerId !== user._id && this.users[struct.ownerId]) {

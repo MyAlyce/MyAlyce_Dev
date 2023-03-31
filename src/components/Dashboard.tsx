@@ -1,6 +1,6 @@
 import React from 'react'
 import { sComponent } from './state.component'
-import { Device } from './Device'
+import { Device } from './device'
 import { StreamSelect } from './StreamSelect'
 
 export class Dashboard extends sComponent {
