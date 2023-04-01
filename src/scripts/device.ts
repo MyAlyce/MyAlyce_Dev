@@ -72,6 +72,7 @@ export async function connectDevice() {
                 '0002cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
                     [key: string]: number[]
                 }) => {
+                    if(!state.data.detectedEMG) state.data.detectedEMG = true;
                     state.setValue('emg', data); //these values are now subscribable 
                 }, //ads131m08 (main)
                 '0003cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
@@ -80,6 +81,7 @@ export async function connectDevice() {
                     max_dietemp: number,
                     timestamp: number
                 }) => {
+                    if(!state.data.detectedPPG) state.data.detectedPPG = true;
                     state.setValue('ppg', data);
                     
                     let d = Object.assign({}, data);
@@ -98,12 +100,13 @@ export async function connectDevice() {
                     mpu_dietemp: number,
                     timestamp: number
                 }) => {
+                    if(!state.data.detectedIMU) state.data.detectedIMU = true;
                     state.setValue('imu', data);
                 }, //mpu6050
                 '0005cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
                     [key: string]: number[]
                 }) => {
-                    //state.emg2 = data;
+                    if(!state.data.detectedEMG2) state.data.detectedEMG2 = true;
                     state.setValue('emg2', data);
                 }, //extra ads131 (if plugged in)
                 '0006cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
@@ -112,6 +115,7 @@ export async function connectDevice() {
                     humidity: number[], //if using BME, not available on BMP
                     altitude: number[]
                 }) => {
+                    if(!state.data.detectedENV) state.data.detectedENV = true;
                     state.setValue('env', data);
                 } //bme280
             },

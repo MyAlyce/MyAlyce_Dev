@@ -59,15 +59,19 @@ export const graph = new Router({
     roots:{}
 });
 
-let appState = {
+graph.setState({
     route: '/',            //current pathname
     isLoggedIn: false,     //logged in?
     appInitialized: false, //initialized app?
     loggedInId: undefined, //id of the current user
-    viewingId: undefined   //id of the user currently being viewed
-}
-
-graph.setState(appState);
+    viewingId: undefined,  //id of the user currently being viewed
+    
+    detectedEMG:false,
+    detectedENV:false,
+    detectedPPG:false,
+    detectedIMU:false,
+    detectedEMG2:false
+});
 
 export const onLogin = async (
     result:

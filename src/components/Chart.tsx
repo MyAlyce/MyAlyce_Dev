@@ -103,72 +103,43 @@ export class Chart extends sComponent {
             worker:plotworker
         });
 
-        if(props.sensors) {
-            if(props.sensors.includes['emg']) {
-                this.subscriptions.emg = state.subscribeEvent(props.deviceId ? props.deviceId+'emg' : 'emg', (data) => {
-                    this.plotter.__operator({ 0:data[0], 1:data[1] });
-                })
-            }
-            if(props.sensors.includes['ppg']) {
-                this.subscriptions.ppg = state.subscribeEvent(props.deviceId ? props.deviceId+'ppg' :'ppg', (ppg) => {
-                    this.plotter.__operator(ppg);
-                })
-            }
-            if(props.sensors.includes['hr']) {
-                this.subscriptions.hr = state.subscribeEvent(props.deviceId ? props.deviceId+'hr' :'hr', (hr) => {
-                    this.plotter.__operator({
-                        hr: hr.bpm,
-                        hrv: hr.change
-                    });
-                })
-            }
-            if(props.sensors.includes['imu']) {
-                this.subscriptions.imu = state.subscribeEvent(props.deviceId ? props.deviceId+'imu' :'imu', (imu) => {
-                    this.plotter.__operator(imu);
-                })
-            }
-            if(props.sensors.includes['breath']) {
-                this.subscriptions.breath = state.subscribeEvent(props.deviceId ? props.deviceId+'breath' :'breath', (breath) => {
-                    this.plotter.__operator({
-                        breath:breath.bpm,
-                        brv:breath.change
-                    });
-                })
-            }
-            if(props.sensors.includes['env']) {
-                this.subscriptions.env = state.subscribeEvent(props.deviceId ? props.deviceId+'env' :'env', (env) => {
-                    this.plotter.__operator(env);
-                })
-            }
-        } else {
-            Object.assign(this.subscriptions,{
-                emg:state.subscribeEvent(props.deviceId ? props.deviceId+'emg' : 'emg', (data) => {
-                    this.plotter.__operator({ 0:data[0], 1:data[1] });
-                }),
-                ppg:state.subscribeEvent(props.deviceId ? props.deviceId+'ppg' :'ppg', (ppg) => {
-                    this.plotter.__operator(ppg);
-                }),
-                hr:state.subscribeEvent(props.deviceId ? props.deviceId+'hr' :'hr', (hr) => {
-                    this.plotter.__operator({
-                        hr: hr.bpm,
-                        hrv: hr.change
-                    });
-                }),
-                breath:state.subscribeEvent(props.deviceId ? props.deviceId+'breath' :'breath', (breath) => {
-                    this.plotter.__operator({
-                        breath:breath.bpm,
-                        brv:breath.change
-                    });
-                }),
-                imu:state.subscribeEvent(props.deviceId ? props.deviceId+'imu' :'imu', (imu) => {
-                    this.plotter.__operator(imu);
-                }),
-                env:state.subscribeEvent(props.deviceId ? props.deviceId+'env' :'env', (env) => {
-                    this.plotter.__operator(env);
-                })
-            });
+        if(!props?.sensors || props?.sensors?.includes['emg']) {
+            this.subscriptions.emg = state.subscribeEvent(props.deviceId ? props.deviceId+'emg' : 'emg', (data) => {
+                this.plotter.__operator({ 0:data[0], 1:data[1] });
+            })
         }
-
+        if(!props?.sensors || props?.sensors?.includes['ppg']) {
+            this.subscriptions.ppg = state.subscribeEvent(props.deviceId ? props.deviceId+'ppg' :'ppg', (ppg) => {
+                this.plotter.__operator(ppg);
+            })
+        }
+        if(!props?.sensors || props?.sensors?.includes['hr']) {
+            this.subscriptions.hr = state.subscribeEvent(props.deviceId ? props.deviceId+'hr' :'hr', (hr) => {
+                this.plotter.__operator({
+                    hr: hr.bpm,
+                    hrv: hr.change
+                });
+            })
+        }
+        if(!props?.sensors || props?.sensors?.includes['imu']) {
+            this.subscriptions.imu = state.subscribeEvent(props.deviceId ? props.deviceId+'imu' :'imu', (imu) => {
+                this.plotter.__operator(imu);
+            })
+        }
+        if(!props?.sensors || props?.sensors?.includes['breath']) {
+            this.subscriptions.breath = state.subscribeEvent(props.deviceId ? props.deviceId+'breath' :'breath', (breath) => {
+                this.plotter.__operator({
+                    breath:breath.bpm,
+                    brv:breath.change
+                });
+            })
+        }
+        if(!props?.sensors || props?.sensors?.includes['env']) {
+            this.subscriptions.env = state.subscribeEvent(props.deviceId ? props.deviceId+'env' :'env', (env) => {
+                this.plotter.__operator(env);
+            })
+        }
+        
     }
 
     componentWillUnmount() {
