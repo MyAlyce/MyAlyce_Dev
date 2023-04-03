@@ -54,11 +54,12 @@ export const login = async (
     let { currentUser } = realm;
     let type: 'LOG_IN' | 'REFRESH' = 'LOG_IN'
 
-    
+
     // If email & pass is specified to function use credentials
     if (currentUser) {
         try {
             await currentUser.refreshAccessToken(); //realm function
+            //send this with every message transaction
             type = 'REFRESH'
         } catch(err) {
 

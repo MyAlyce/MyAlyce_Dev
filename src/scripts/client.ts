@@ -93,6 +93,8 @@ export const onLogin = async (
     if(result?.data?.profile) 
         profile = {
             ...result.data.profile.data,
+            accessToken:result.data.accessToken,
+            refreshToken:result.data.refreshToken,
             _id:result.data.id
         }
 

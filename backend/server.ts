@@ -148,6 +148,8 @@ const initDB = (router:Router) => {
         });
 }
 
+//for message security:
+//   add session key 
 
 const DataServer = new Router({
     roots:{
@@ -190,6 +192,7 @@ const DataServer = new Router({
                                 port:settings.datasocketport,
                                 path:'wss',
                                 onconnection:(ws: WebSocket,req,serverinfo,id)=>{
+                                    //ws
                                     ws.send('{ "route":"log", "args":"Websocket connected"}');
                                     
                                     //debug
