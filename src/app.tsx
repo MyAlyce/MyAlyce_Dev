@@ -83,7 +83,7 @@ export class App extends sComponent {
                             onBackdropClick={() => this.setState({navOpen:false})} menuItems={[
                                 { type: 'action', icon: 'D' as any, onClick: () => this.setState({'route':'/dashboard', navOpen:false}), title: 'Dashboard' },
                                 { type: 'action', icon: 'P' as any, onClick: () => this.setState({'route':'/peers',     navOpen:false}), title: 'Peers & Groups' },
-                                { type: 'action', icon: 'S' as any, onClick: () => this.setState({'route':'/settings',  navOpen:false}), title: 'Settings' },
+                                { type: 'action', icon: 'R' as any, onClick: () => this.setState({'route':'/recordings',  navOpen:false}), title: 'Recordings' },
                                 { type: 'action', icon: 'Dev' as any, onClick: () => this.setState({'route':'/device',  navOpen:false}),      title: 'Device' },
                             ]}
                         /> 
@@ -113,7 +113,9 @@ export class App extends sComponent {
                                   }
                                   backgroundColor='lightblue'
                                 />,
-                                onClick:()=>{}                                
+                                onClick: ()=> this.setState({
+                                    route: '/settings',
+                                })                                
                             },
                             {
                                 children:(<p style={{
@@ -131,15 +133,10 @@ export class App extends sComponent {
                                 { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
                                     <Dashboard/>
                                 }
-                                { this.state.route.includes('peers') &&
-                                    <WebRTCComponent/>
-                                }
-                                { this.state.route.includes('settings') &&
-                                    <Recordings/>
-                                }
-                                { this.state.route.includes('device') &&
-                                    <Device/>
-                                }
+                                { this.state.route.includes('peers') &&  <WebRTCComponent/>}
+                                { this.state.route.includes('recordings') && <Recordings/>}
+                                { this.state.route.includes('settings') && <SettingsView/> }
+                                { this.state.route.includes('device') && <Device/>}
                             </div>
                         </div>
                   </div> 
