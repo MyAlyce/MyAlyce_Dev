@@ -6,7 +6,7 @@ import { StreamSelect } from './StreamSelect'
 export class Dashboard extends sComponent {
 
     state = { //synced with global state
-        streamSelected:undefined, //stream selected?
+        activeStream:undefined, //stream selected?
         availableStreams:{}, //we can handle multiple connections too
     }
 
@@ -22,8 +22,8 @@ export class Dashboard extends sComponent {
                 {/*Chart*/}
                 <div>
                     <Device 
-                        remote={!!this.state.streamSelected}
-                        deviceId={this.state.streamSelected}
+                        remote={!!this.state.activeStream}
+                        streamId={this.state.activeStream}
                     />
                 </div>
             </div>

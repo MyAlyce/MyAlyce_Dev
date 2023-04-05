@@ -7,6 +7,8 @@ import { EventHandler, state } from 'graphscript'//'../../../graphscript/index'/
 // It assumes all state keys are to be shared with global state, 
 //    so if you want unique properties on this component, enforce a random Id, qhich we provided with this.unique, e.g. state = { [this.unique+'.textColor']:'blue' }
 
+//Use "this" scope for things you don't want on the global state.
+
 export class sComponent extends Component<{[key:string]:any}> {
 
     statemgr = state;

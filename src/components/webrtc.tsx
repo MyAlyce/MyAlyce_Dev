@@ -141,7 +141,6 @@ export class WebRTCComponent extends sComponent {
 
                 //now add a device chart component
                 this.setState({
-                    activeStream:call._id,
                     chartDataDiv:(
                         <div>
                             <Chart

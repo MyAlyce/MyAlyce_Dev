@@ -93,6 +93,7 @@ export let answerCall = async (call:WebRTCProps & {caller:string, socketId:strin
     );
 
     state.setState({
+        activeStream:call._id,
         availableStreams:webrtc.rtc
     });
 }
