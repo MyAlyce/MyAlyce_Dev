@@ -3,7 +3,7 @@ import { HeartRateAlert } from "./alertTemplates/heartrate";
 import { graph } from "./client";
 import { BreathAlert } from "./alertTemplates/breath";
 import { FallAlert } from "./alertTemplates/falldetection";
-import { Howl } from "./alertTemplates/howler";
+import { Howl } from "howler";
 
 export let getCurrentLocation = (options:PositionOptions={enableHighAccuracy:true}) => {
     return new Promise((res,rej) => {
