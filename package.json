@@ -26,7 +26,7 @@
     "@giveback007/fitbit-api": "^0.1.0",
     "device-decoder": "^0.4.21",
     "graphscript": "^0.2.93",
-    "graphscript-services": "~0.2.98",
+    "graphscript-services": "~0.2.99",
     "graphscript-services.storage": "~0.2.90",
     "hamburger-react": "^2.5.0",
     "my-alyce-component-lib": "^0.1.30",
