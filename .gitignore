@@ -4,7 +4,12 @@ node_modules
 .env
 .key
 
-dist
+backend/dist/index.js
+backend/dist/index.html
+backend/dist/index.css
+backend/dist/server.node.js
+dist/canvas.worker.js
+dist/device.worker.js
 
 *.lock
 
