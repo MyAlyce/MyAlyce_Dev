@@ -2,7 +2,6 @@ import React from 'react'
 import { sComponent } from './state.component'
 import { workers } from "device-decoder";
 
-import { state } from "graphscript";
 import gsworker from '../scripts/device.worker'
 import { client } from '../scripts/client';
 
@@ -12,18 +11,11 @@ export class NoteTaking extends sComponent {
     csvworker = workers.addWorker({url:gsworker});
     filename;
 
-    constructor(streamId, filename?) {
-        super();
-        if(filename) this.filename = filename;
-        else this.filename = `data/Notes_${new Date().toISOString()}${streamId ? '_'+streamId : ''}.csv`
+    constructor(props:{streamId?:string, filename?:string}) {
+        super(props);
+        if(props.filename) this.filename = props.filename;
+        else this.filename = `data/Notes_${new Date().toISOString()}${props.streamId ? '_'+props.streamId : ''}.csv`
 
-        this.csvworker.run('createCSV', [
-            this.filename,
-            [
-                'timestamp',
-                'note'
-            ]
-        ]);
     }
 
     submit = () => {
@@ -38,8 +30,8 @@ export class NoteTaking extends sComponent {
         client.addEvent(
             client.currentUser, 
             client.currentUser._id, 
-            note.title, 
             note.note, 
+            undefined,
             note.timestamp, 
             undefined, 
             note.grade 
@@ -47,14 +39,30 @@ export class NoteTaking extends sComponent {
     }
 
     render() {
+
+        var now = new Date();
+        var utcString = now.toISOString().substring(0,19);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        //var second = now.getSeconds();
+        var localDatetime = year + "-" +
+                      (month < 10 ? "0" + month.toString() : month) + "-" +
+                      (day < 10 ? "0" + day.toString() : day) + "T" +
+                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+                      (minute < 10 ? "0" + minute.toString() : minute) +
+                      utcString.substring(16,19);
+
         return (
-        <div>
-            Note: <input id={this.id+'note'} type='text'/><br/>
-            Time: <input id={this.id+'time'} type='datetime-local' value={Date.now()}/><br/>
-            Grade?: <input id={this.id+'number'} type='number' min='0' max='10'></input>
-            Title?: <input id={this.id+'title'} type='text'/><br/>
-            <button onClick={this.submit}>Submit</button>
-        </div>)
+            <div>
+                Event: <input id={this.id+'note'} type='text'/><br/>
+                Time: <input id={this.id+'time'} type='datetime-local' value={localDatetime} onChange={()=>{}}/><br/>
+                Grade?: <input id={this.id+'number'} type='number' min='0' max='10'></input>
+                <button onClick={this.submit}>Submit</button>
+            </div>
+        );
     }
 
 }

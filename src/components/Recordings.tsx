@@ -7,6 +7,7 @@ import { driveInstance } from '../scripts/gapi';
 import { recordCSV, stopRecording } from '../scripts/datacsv';
 import { StreamSelect } from './StreamSelect';
 import { Button } from './lib/src';
+import { NoteTaking } from './NoteTaking';
 
 //add google drive backup/sync since we're using google accounts
 
@@ -80,6 +81,7 @@ export class Recordings extends sComponent {
                 <StreamSelect/>
                 { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream);}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream);}}>Record</Button> }
                 <br/>
+                <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'}/>
                 Recordings:
                 <div>
                     { this.state.recordings ? this.state.recordings : "" }
