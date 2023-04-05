@@ -16,6 +16,7 @@ import {
 
 import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
+import { workers } from 'device-decoder'
 
 import { RealmUser } from './login'
 
@@ -29,6 +30,35 @@ export let webrtc = new WebRTCfrontend();
 export let usersocket:WebSocketInfo;
 
 export {state}; //
+
+export const graph = new Router({
+    services:{
+        client,
+        sockets,
+        webrtc,
+        workers,
+        SessionsService
+    },
+    roots:{}
+});
+
+graph.subscribe('checkForNotifications',(result:any[])=>{
+    if(result?.length > 0) client.resolveNotifications(result); //pull latest data. That's it!
+})
+
+graph.setState({
+    route: '/',            //current pathname
+    isLoggedIn: false,     //logged in?
+    appInitialized: false, //initialized app?
+    loggedInId: undefined, //id of the current user
+    viewingId: undefined,  //id of the user currently being viewed
+    
+    detectedEMG:false,
+    detectedENV:false,
+    detectedPPG:false,
+    detectedIMU:false,
+    detectedEMG2:false
+});
 
 let makeSocket = () => {
     usersocket = sockets.open({
@@ -47,31 +77,6 @@ let makeSocket = () => {
 }
 
 makeSocket();
-
-export const graph = new Router({
-    services:{
-        client,
-        sockets,
-        webrtc,
-        SessionsService,
-        WorkerService
-    },
-    roots:{}
-});
-
-graph.setState({
-    route: '/',            //current pathname
-    isLoggedIn: false,     //logged in?
-    appInitialized: false, //initialized app?
-    loggedInId: undefined, //id of the current user
-    viewingId: undefined,  //id of the user currently being viewed
-    
-    detectedEMG:false,
-    detectedENV:false,
-    detectedPPG:false,
-    detectedIMU:false,
-    detectedEMG2:false
-});
 
 export const onLogin = async (
     result:

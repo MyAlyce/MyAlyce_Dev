@@ -2,21 +2,24 @@
 import { initDevice, Devices, FilterSettings, workers } from 'device-decoder'
 
 import gsworker from './device.worker'
+export {gsworker};
 
 import { state } from 'graphscript'//'../../../graphscript/index'//
 import { ByteParser } from 'device-decoder/src/util/ByteParser';
+import { setupAlerts } from './alerts';
+import { graph } from './client';
 
 let device;
-
-export function disconnectDevice() {
-    device?.disconnect();
-    state.setState({device:undefined});
-}
 
 function genTimestamps(ct, sps, from?) {
     let now = from ? from : Date.now();
     let toInterp = [now - ct * 1000 / sps, now];
     return ByteParser.upsample(toInterp, ct);
+}
+
+export function disconnectDevice() {
+    device?.disconnect();
+    state.setState({device:undefined});
 }
 
 export async function connectDevice() {
@@ -33,7 +36,7 @@ export async function connectDevice() {
 
     hrworker.subscribe('hr', (data: {
         bpm: number,
-        change: number, //lower is better
+        change: number, //higher is better
         height0: number,
         height1: number,
         timestamp: number
@@ -64,18 +67,20 @@ export async function connectDevice() {
 
     });
 
+    //Setup Alerts
+    let nodes = setupAlerts();
 
     device = await initDevice(
         Devices['BLE']['nrf5x'],
         {
             ondecoded: { //after data comes back from codec
-                '0002cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
+                '0002cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //ads131m08 (main)
                     [key: string]: number[]
                 }) => {
                     if(!state.data.detectedEMG) state.data.detectedEMG = true;
                     state.setValue('emg', data); //these values are now subscribable 
-                }, //ads131m08 (main)
-                '0003cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
+                }, 
+                '0003cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //max30102
                     red: number[],
                     ir: number[],
                     max_dietemp: number,
@@ -89,8 +94,8 @@ export async function connectDevice() {
                     hrworker.post('hr', d);
                     brworker.post('breath', d);
 
-                }, //max30102
-                '0004cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
+                },
+                '0004cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //mpu6050
                     ax: number[],
                     ay: number[],
                     az: number[],
@@ -102,14 +107,14 @@ export async function connectDevice() {
                 }) => {
                     if(!state.data.detectedIMU) state.data.detectedIMU = true;
                     state.setValue('imu', data);
-                }, //mpu6050
-                '0005cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
+                },
+                '0005cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //extra ads131 (if plugged in)
                     [key: string]: number[]
                 }) => {
                     if(!state.data.detectedEMG2) state.data.detectedEMG2 = true;
                     state.setValue('emg2', data);
-                }, //extra ads131 (if plugged in)
-                '0006cafe-b0ba-8bad-f00d-deadbeef0000': (data: {
+                },
+                '0006cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //bme280
                     temp: number[],
                     pressure: number[],
                     humidity: number[], //if using BME, not available on BMP
@@ -117,13 +122,16 @@ export async function connectDevice() {
                 }) => {
                     if(!state.data.detectedENV) state.data.detectedENV = true;
                     state.setValue('env', data);
-                } //bme280
+                }
             },
             onconnect: () => {
                 this.setState({deviceConnected:true});
             },
             ondisconnect: () => {
                 this.setState({deviceConnected:false});
+                for(const key in nodes) {
+                    graph.remove(key,true);
+                }
             }
         }
     );
@@ -161,5 +169,6 @@ export async function connectDevice() {
 
     device.workers.streamworker.run('setFilters', ads131m08FilterSettings); //filter the EMG results
 
+    
     state.setState({device});
 }

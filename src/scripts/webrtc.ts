@@ -1,4 +1,5 @@
-import { client, usersocket, webrtc } from "./client"
+import { setupAlerts } from "./alerts";
+import { client, graph, usersocket, webrtc } from "./client"
 import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//'../../../graphscript/index'//
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
@@ -15,6 +16,8 @@ export async function startCall(userId) {
     //send handshake
     let rtcId = `room${Math.floor(Math.random()*1000000000000000)}`;
     
+    let nodes = setupAlerts(rtcId);
+
     let rtc = await webrtc.openRTC({ 
         _id:rtcId,
         onicecandidate:async (ev) => {
@@ -38,6 +41,11 @@ export async function startCall(userId) {
                 });
             }
         },
+        onclose:() => {
+            for(const key in nodes) {
+                graph.remove(key,true);
+            }
+        }
         // ondatachannel:(ev) => {
         //     //the call is now live, set ev.channel.onmessage function and add media tracks etc.
         // },
@@ -45,6 +53,8 @@ export async function startCall(userId) {
         //     //received a media track, e.g. audio or video
         // }
     });
+
+
 
     usersocket.post(
         'runConnection', //run this function on the backend router
@@ -68,6 +78,16 @@ export async function startCall(userId) {
 
 //todo: need to grab the specific endpoint to respond to
 export let answerCall = async (call:WebRTCProps & {caller:string, socketId:string}) => {
+    
+    let nodes = setupAlerts(call._id);
+    
+    call.onclose = () => {
+        for(const key in nodes) {
+            graph.remove(key,true);
+        }
+    }
+    
+    
     let rtc = await webrtc.answerCall(call as any);
     
     usersocket.run(
