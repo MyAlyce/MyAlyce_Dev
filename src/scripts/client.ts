@@ -43,6 +43,7 @@ export const graph = new Router({
 });
 
 graph.subscribe('checkForNotifications',(result:any[])=>{
+    console.log('checked notifications:', result);
     if(result?.length > 0) client.resolveNotifications(result); //pull latest data. That's it!
 })
 

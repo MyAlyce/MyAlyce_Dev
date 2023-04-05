@@ -56,7 +56,7 @@ export class WebRTCComponent extends sComponent {
                 divs.push( //turn into a dropdown or something
                     <div key={user._id}>
                         <div>User: {user.firstName} {user.lastName}</div>
-                        <Button id={`startcall${user._id}`} onClick={()=>{startCall(user._id)}}>Start Call</Button>
+                        <Button onClick={()=>{startCall(user._id)}}>Start Call</Button>
                     </div>
                 )
             })
@@ -71,7 +71,7 @@ export class WebRTCComponent extends sComponent {
 
         let divs = [] as any;
 
-        console.log('getUnanweredCallInfo')
+        console.log('getUnanweredCallInfo') //this should throw on the subscription event for receiveCallInformation
 
         for(const key of keys) {
 

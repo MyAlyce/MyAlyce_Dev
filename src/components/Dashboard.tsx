@@ -2,6 +2,7 @@ import React from 'react'
 import { sComponent } from './state.component'
 import { Device } from './device'
 import { StreamSelect } from './StreamSelect'
+import { NoteTaking } from './NoteTaking'
 
 export class Dashboard extends sComponent {
 
@@ -25,6 +26,7 @@ export class Dashboard extends sComponent {
                         remote={!!this.state.activeStream}
                         streamId={this.state.activeStream}
                     />
+                    <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'}/>
                 </div>
             </div>
         )
