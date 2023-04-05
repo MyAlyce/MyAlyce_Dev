@@ -70,38 +70,40 @@ export class Chart extends sComponent {
         };
 
         if(this.sensors) {
-            if(this.sensors.includes['emg']) {
-                lines[0] = ads131m08ChartSettings.lines?.['0'] as WebglLineProps,
-                lines[1] = ads131m08ChartSettings.lines?.['1'] as WebglLineProps
+            if(this.sensors.includes('emg')) {
+                lines['0'] = ads131m08ChartSettings.lines?.['0'] as WebglLineProps,
+                lines['1'] = ads131m08ChartSettings.lines?.['1'] as WebglLineProps
             }
-            if(this.sensors.includes['ppg']) {
+            if(this.sensors.includes('ppg')) {
                 Object.assign(lines,{
                     ...max3010xChartSettings.lines
                 })
             }
-            if(this.sensors.includes['hr']) {
+            if(this.sensors.includes('hr')) {
                 Object.assign(lines,{
                     hr: { sps: 1, nSec: 100, units: 'bpm' },
                     hrv: { sps: 1, nSec: 100, units: 'bpm' }
                 })
             }
-            if(this.sensors.includes['imu']) {
+            if(this.sensors.includes('imu')) {
                 Object.assign(lines,{
                     ...mpu6050ChartSettings.lines
                 })
             }
-            if(this.sensors.includes['breath']) {
+            if(this.sensors.includes('breath')) {
                 Object.assign(lines,{
                     breath: { sps: 1, nSec: 100, units: 'bpm' },
                     brv: { sps: 1, nSec: 100, units: 'bpm' }
                 })
             }
-            if(this.sensors.includes['env']) {
+            if(this.sensors.includes('env')) {
                 Object.assign(lines,{
                     ...bme280ChartSettings.lines
                 })
             }
         }
+
+        console.log('making chart with lines', lines);
 
         //we are appending the canvas and overlay this way so they only need to be transferred once to the plotter thread 
         this.plotter = new WGLPlotter({
@@ -113,17 +115,17 @@ export class Chart extends sComponent {
             worker:plotworker
         });
 
-        if(!this?.sensors || this?.sensors?.includes['emg']) {
+        if(!this.sensors || this.sensors?.includes['emg']) {
             this.subscriptions.emg = state.subscribeEvent(this.streamId ? this.streamId+'emg' : 'emg', (data) => {
                 this.plotter.__operator({ 0:data[0], 1:data[1] });
             })
         }
-        if(!this?.sensors || this?.sensors?.includes['ppg']) {
+        if(!this.sensors || this.sensors?.includes['ppg']) {
             this.subscriptions.ppg = state.subscribeEvent(this.streamId ? this.streamId+'ppg' :'ppg', (ppg) => {
                 this.plotter.__operator(ppg);
             })
         }
-        if(!this?.sensors || this?.sensors?.includes['hr']) {
+        if(!this.sensors || this.sensors?.includes['hr']) {
             this.subscriptions.hr = state.subscribeEvent(this.streamId ? this.streamId+'hr' :'hr', (hr) => {
                 this.plotter.__operator({
                     hr: hr.bpm,
@@ -131,12 +133,12 @@ export class Chart extends sComponent {
                 });
             })
         }
-        if(!this?.sensors || this?.sensors?.includes['imu']) {
+        if(!this.sensors || this.sensors?.includes['imu']) {
             this.subscriptions.imu = state.subscribeEvent(this.streamId ? this.streamId+'imu' :'imu', (imu) => {
                 this.plotter.__operator(imu);
             })
         }
-        if(!this?.sensors || this?.sensors?.includes['breath']) {
+        if(!this.sensors || this.sensors?.includes['breath']) {
             this.subscriptions.breath = state.subscribeEvent(this.streamId ? this.streamId+'breath' :'breath', (breath) => {
                 this.plotter.__operator({
                     breath:breath.bpm,
@@ -144,7 +146,7 @@ export class Chart extends sComponent {
                 });
             })
         }
-        if(!this?.sensors || this?.sensors?.includes['env']) {
+        if(!this.sensors || this.sensors?.includes['env']) {
             this.subscriptions.env = state.subscribeEvent(this.streamId ? this.streamId+'env' :'env', (env) => {
                 this.plotter.__operator(env);
             })
