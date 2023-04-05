@@ -1,8 +1,11 @@
 import React from 'react'
 import { sComponent } from './state.component'
+import {state} from 'graphscript'
 
 import { BFSRoutes, csvRoutes } from 'graphscript-services.storage';
 import { driveInstance } from '../scripts/gapi';
+import { recordCSV, stopRecording } from '../scripts/datacsv';
+import { StreamSelect } from './StreamSelect';
 
 //add google drive backup/sync since we're using google accounts
 
@@ -10,7 +13,8 @@ export class Recordings extends sComponent {
 
     state = {
         isRecording:false,
-        recordings:undefined
+        recordings:undefined,
+        activeStream:undefined
     }
 
     constructor() {
@@ -60,19 +64,20 @@ export class Recordings extends sComponent {
         return recordings;
     }
 
-    record() {
-        let filePath = 'data/' + new Date().toISOString() 
+    record(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[]) {
+        recordCSV(streamId, sensors);
     }
 
-    stopRecording() {
-
+    stopRecording(streamId?:string) {
+        stopRecording(streamId);
     }
 
     render() {
 
         return (
             <div>
-                { this.state.isRecording ? <button>Stop Recording</button> : <button>Record</button> }
+                <StreamSelect/>
+                { this.state.isRecording ? <button onClick={()=>{this.stopRecording(this.state.activeStream);}}>Stop Recording</button> : <button onClick={()=>{this.record(this.state.activeStream);}}>Record</button> }
                 <br/>
                 Recordings:
                 <div>

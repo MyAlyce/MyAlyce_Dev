@@ -14,6 +14,10 @@ export class SettingsView extends sComponent  {
         authorizeRedirect();
     }
 
+    addUser() {
+
+    }
+
     render() {
 
         let viewing = client.getLocalData('profile',{_id:this.state.viewingId}) as ProfileStruct;
@@ -30,6 +34,7 @@ export class SettingsView extends sComponent  {
             </div>
             <div>
                 More fine grained permissions and opt-in stuff<br/>
+                <span>Add Team Member</span><input type='text'></input><button onClick={this.addUser}>Add User</button>
                 <span>Register Fitbit: <button style={{border:'1px solid black', borderRadius:'5px'}} onClick={this.setupFitbit}>Authorize Fitbit</button></span>
                 <div>Fitbit Registered: {fbreg}</div>
             </div>

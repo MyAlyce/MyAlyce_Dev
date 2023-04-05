@@ -57,7 +57,9 @@ export async function startCall(userId) {
                     _id:rtcId, 
                     hostdescription:rtc.hostdescription, //the peer needs to accept this
                     caller:client.currentUser._id,
-                    socketId:usersocket._id
+                    socketId:usersocket._id,
+                    firstName:client.currentUser.firstName,
+                    lastName:client.currentUser.lastName
                 }
             ]
         ]

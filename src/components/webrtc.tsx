@@ -8,6 +8,7 @@ import { sComponent } from './state.component';
 
 import { answerCall, startCall  } from "../scripts/webrtc";
 import { Chart } from "./Chart";
+import { StreamSelect } from "./StreamSelect";
 
 export class WebRTCComponent extends sComponent {
 
@@ -19,17 +20,16 @@ export class WebRTCComponent extends sComponent {
         unansweredCalls:webrtc.unanswered, //webrtc.unanswered reference
         unansweredCallDivs:[] as any[],
         chartDataDiv:undefined,
-        videoTrackDiv:undefined
+        videoTrackDiv:undefined,
+        activeStream:undefined //stream/user in focus
     }
 
     listed = {};
     subscriptions = {} as any;
-    deviceId?:string
     evSub;
 
-    constructor(props:{deviceId?:string}) {
+    constructor(props:{streamId?:string}) {
         super(props);
-        if(props.deviceId) this.deviceId = props.deviceId;
     }
 
     componentDidMount = () => {
@@ -78,16 +78,15 @@ export class WebRTCComponent extends sComponent {
                 this.listed[key] = true;
             else continue;
                         
-            let call = this.state.unansweredCalls[key] as WebRTCProps;
-            let caller = (await client.getUsers([(call as any).caller]))[0];
-            
+            let call = this.state.unansweredCalls[key] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
+             
             call.onicecandidate = (ev) => {
                 if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
                     let cid = `peercandidate${Math.floor(Math.random()*1000000000000000)}`;
                     usersocket.run(
                         'runConnection', //run this function on the backend router
                         [
-                            (call as any).caller, //run this connection 
+                            call.caller, //run this connection 
                             'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
                             [ //and pass these arguments
                                 'receiveCallInformation', //run this function on the user's end
@@ -96,7 +95,7 @@ export class WebRTCComponent extends sComponent {
                                     peercandidates:{[cid]:ev.candidate}
                                 }
                             ],
-                            (call as any).socketId
+                            call.socketId
                         ]
                     ).then((id) => {
                         console.log('call information echoed from peer:', id);
@@ -106,38 +105,43 @@ export class WebRTCComponent extends sComponent {
 
             //overwrites the default message
             call.ondatachannel = (ev) => {
-                console.log('call started')
+                console.log('call started with', call.firstName, call.lastName);
                 //the call is now live, add tracks
                 //data channel streams the device data
                 ev.channel.onmessage = (ev) => { 
                     if(ev.data.emg) {
-                        state.setValue(this.deviceId ? this.deviceId+'emg' : 'emg', ev.data.emg);
+                        if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
+                        state.setValue(call._id+'emg', ev.data.emg);
                     } 
                     if (ev.data.ppg) {
-                        state.setValue(this.deviceId ? this.deviceId+'ppg' : 'ppg', ev.data.ppg);
+                        if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
+                        state.setValue(call._id+'ppg', ev.data.ppg);
                     } 
                     if (ev.data.hr) {
-                        state.setValue(this.deviceId ? this.deviceId+'hr' : 'hr', ev.data.hr);
+                        state.setValue(call._id+'hr', ev.data.hr);
                     } 
                     if (ev.data.hrv) {
-                        state.setValue(this.deviceId ? this.deviceId+'hrv' : 'hrv', ev.data.hrv);
+                        state.setValue(call._id+'hrv', ev.data.hrv);
                     } 
                     if (ev.data.breath) {
-                        state.setValue(this.deviceId ? this.deviceId+'breath' : 'breath', ev.data.breath);
+                        state.setValue(call._id+'breath', ev.data.breath);
                     } 
                     if (ev.data.brv) {
-                        state.setValue(this.deviceId ? this.deviceId+'brv' : 'brv', ev.data.brv);
+                        state.setValue(call._id+'brv', ev.data.brv);
                     } 
                     if (ev.data.imu) {
-                        state.setValue(this.deviceId ? this.deviceId+'imu' : 'imu', ev.data.imu);
+                        if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
+                        state.setValue(call._id+'imu', ev.data.imu);
                     } 
                     if (ev.data.env) {
-                        state.setValue(this.deviceId ? this.deviceId+'env' : 'env', ev.data.env);
+                        if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
+                        state.setValue(call._id+'env', ev.data.env);
                     } //else if (ev.data.emg2) {}
                 }
 
                 //now add a device chart component
                 this.setState({
+                    activeStream:call._id,
                     chartDataDiv:(
                         <div>
                             <Chart
@@ -167,7 +171,7 @@ export class WebRTCComponent extends sComponent {
 
             divs.push(
                 <div id={divId} key={divId}>
-                    <div>User: {caller.firstName} {caller.lastName}</div>
+                    <div>User: {call.firstName} {call.lastName}</div>
                     <button onClick={() => {answerCall(call as any);}}>Join Call</button>
                 </div>
             );
@@ -190,28 +194,28 @@ export class WebRTCComponent extends sComponent {
             let stream = (this.state.availableStreams)[streamId as string] as WebRTCInfo;
             this.subscriptions[streamId] = {
                 emg:state.subscribeEvent('emg', (data) => {
-                    stream.send({ [streamId+'emg']:data });
+                    stream.send({ 'emg':data });
                 }),
                 ppg:state.subscribeEvent('ppg', (ppg) => {
-                    stream.send({ [streamId+'ppg']:ppg });
+                    stream.send({ 'ppg':ppg });
                 }),
                 hr:state.subscribeEvent('hr', (hr) => {
                     stream.send({
-                        [streamId+'hr']: hr.bpm,
-                        [streamId+'hrv']: hr.change
+                        'hr': hr.bpm,
+                        'hrv': hr.change
                     });
                 }),
                 breath:state.subscribeEvent('breath', (breath) => {
                     stream.send({
-                        [streamId+'breath']:breath.bpm,
-                        [streamId+'brv']:breath.change
+                        'breath':breath.bpm,
+                        'brv':breath.change
                     });
                 }),
                 imu:state.subscribeEvent('imu', (imu) => {
-                    stream.send({[streamId+'imu']:imu});
+                    stream.send({'imu':imu});
                 }),
                 env:state.subscribeEvent('env', (env) => {
-                    stream.send({[streamId+'env']:env});
+                    stream.send({'env':env});
                 })
             };
 
@@ -236,6 +240,7 @@ export class WebRTCComponent extends sComponent {
                     { this.state.availableUsers && this.state.availableUsers.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
+                    <StreamSelect/>
                     Stream:
                 <div id='webrtcstream'>
                     {  this.state.videoTrackDiv ? this.state.videoTrackDiv : ""  }

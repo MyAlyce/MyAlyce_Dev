@@ -30,7 +30,7 @@ export class Chart extends sComponent {
     constructor(props:{
         lines?:{[key:string]:WebglLineProps},
         sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[],
-        deviceId?:string
+        streamId?:string
     }) {
         super(props as any);
 
@@ -104,17 +104,17 @@ export class Chart extends sComponent {
         });
 
         if(!props?.sensors || props?.sensors?.includes['emg']) {
-            this.subscriptions.emg = state.subscribeEvent(props.deviceId ? props.deviceId+'emg' : 'emg', (data) => {
+            this.subscriptions.emg = state.subscribeEvent(props.streamId ? props.streamId+'emg' : 'emg', (data) => {
                 this.plotter.__operator({ 0:data[0], 1:data[1] });
             })
         }
         if(!props?.sensors || props?.sensors?.includes['ppg']) {
-            this.subscriptions.ppg = state.subscribeEvent(props.deviceId ? props.deviceId+'ppg' :'ppg', (ppg) => {
+            this.subscriptions.ppg = state.subscribeEvent(props.streamId ? props.streamId+'ppg' :'ppg', (ppg) => {
                 this.plotter.__operator(ppg);
             })
         }
         if(!props?.sensors || props?.sensors?.includes['hr']) {
-            this.subscriptions.hr = state.subscribeEvent(props.deviceId ? props.deviceId+'hr' :'hr', (hr) => {
+            this.subscriptions.hr = state.subscribeEvent(props.streamId ? props.streamId+'hr' :'hr', (hr) => {
                 this.plotter.__operator({
                     hr: hr.bpm,
                     hrv: hr.change
@@ -122,12 +122,12 @@ export class Chart extends sComponent {
             })
         }
         if(!props?.sensors || props?.sensors?.includes['imu']) {
-            this.subscriptions.imu = state.subscribeEvent(props.deviceId ? props.deviceId+'imu' :'imu', (imu) => {
+            this.subscriptions.imu = state.subscribeEvent(props.streamId ? props.streamId+'imu' :'imu', (imu) => {
                 this.plotter.__operator(imu);
             })
         }
         if(!props?.sensors || props?.sensors?.includes['breath']) {
-            this.subscriptions.breath = state.subscribeEvent(props.deviceId ? props.deviceId+'breath' :'breath', (breath) => {
+            this.subscriptions.breath = state.subscribeEvent(props.streamId ? props.streamId+'breath' :'breath', (breath) => {
                 this.plotter.__operator({
                     breath:breath.bpm,
                     brv:breath.change
@@ -135,7 +135,7 @@ export class Chart extends sComponent {
             })
         }
         if(!props?.sensors || props?.sensors?.includes['env']) {
-            this.subscriptions.env = state.subscribeEvent(props.deviceId ? props.deviceId+'env' :'env', (env) => {
+            this.subscriptions.env = state.subscribeEvent(props.streamId ? props.streamId+'env' :'env', (env) => {
                 this.plotter.__operator(env);
             })
         }
