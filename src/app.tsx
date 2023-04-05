@@ -7,7 +7,6 @@ import { Login, Avatar, TopBar, NavDrawer } from './components/lib/src/index';
 import { SettingsView } from './components/SettingsView';
 
 //@ts-ignore
-import {slide as Menu} from 'react-burger-menu'
 import { WebRTCComponent } from './components/webrtc';
 import { Dashboard } from './components/Dashboard';
 import { Recordings } from './components/Recordings';
@@ -79,19 +78,13 @@ export class App extends sComponent {
                 }
                 { (this.state.isLoggedIn || TESTVIEWS) && 
                     <div>
-                        <Menu>
-                            <button onClick={() => {this.setState({'route':'/dashboard', navOpen:false})}} id="home" className="menu-item">Dash</button>
-                            <button onClick={() => this.setState({'route':'/peers',     navOpen:false})} className="menu-item">Peers</button>
-                            <button onClick={() => this.setState({'route':'/history',  navOpen:false})} className="menu-item" >History</button>
-                            <button onClick={() => this.setState({'route':'/device',  navOpen:false})} className="menu-item--small">Device</button>
-                        </Menu>
                         <NavDrawer fixed="left" zIndex={102} isOpen={this.state.navOpen} 
                             brand={brand()} 
                             onBackdropClick={() => this.setState({navOpen:false})} menuItems={[
                                 { type: 'action', icon: 'D' as any, onClick: () => this.setState({'route':'/dashboard', navOpen:false}), title: 'Dashboard' },
                                 { type: 'action', icon: 'P' as any, onClick: () => this.setState({'route':'/peers',     navOpen:false}), title: 'Peers & Groups' },
-                                { type: 'action', icon: 'S' as any, onClick: () => this.setState({'route':'/settings',  navOpen:false}), title: 'Profile Settings' },
-                                { type: 'action', icon: 'D' as any, onClick: () => this.setState({'route':'/dev',  navOpen:false}),      title: 'DEV MODE' }
+                                { type: 'action', icon: 'S' as any, onClick: () => this.setState({'route':'/history',  navOpen:false}), title: 'History' },
+                                { type: 'action', icon: 'D' as any, onClick: () => this.setState({'route':'/device',  navOpen:false}),      title: 'Device' }
                             ]}
                         /> 
                     <div id="view">
