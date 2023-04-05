@@ -2,6 +2,7 @@ import { ProfileStruct } from 'graphscript-services/struct/datastructures/types'
 import React from 'react';
 import { client } from '../scripts/client';
 import { authorizeRedirect } from '../scripts/fitbit';
+import { Button } from './lib/src';
 import { sComponent } from './state.component';
 
 export class SettingsView extends sComponent  {
@@ -34,8 +35,8 @@ export class SettingsView extends sComponent  {
             </div>
             <div>
                 More fine grained permissions and opt-in stuff<br/>
-                <span>Add Team Member</span><input type='text'></input><button onClick={this.addUser}>Add User</button>
-                <span>Register Fitbit: <button style={{border:'1px solid black', borderRadius:'5px'}} onClick={this.setupFitbit}>Authorize Fitbit</button></span>
+                <span>Add Team Member</span><input type='text'></input><Button onClick={this.addUser}>Add User</Button>
+                <span>Register Fitbit: <Button style={{border:'1px solid black', borderRadius:'5px'}} onClick={this.setupFitbit}>Authorize Fitbit</Button></span>
                 <div>Fitbit Registered: {fbreg}</div>
             </div>
         </div>

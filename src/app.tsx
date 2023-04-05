@@ -83,8 +83,8 @@ export class App extends sComponent {
                             onBackdropClick={() => this.setState({navOpen:false})} menuItems={[
                                 { type: 'action', icon: 'D' as any, onClick: () => this.setState({'route':'/dashboard', navOpen:false}), title: 'Dashboard' },
                                 { type: 'action', icon: 'P' as any, onClick: () => this.setState({'route':'/peers',     navOpen:false}), title: 'Peers & Groups' },
-                                { type: 'action', icon: 'S' as any, onClick: () => this.setState({'route':'/history',  navOpen:false}), title: 'History' },
-                                { type: 'action', icon: 'D' as any, onClick: () => this.setState({'route':'/device',  navOpen:false}),      title: 'Device' }
+                                { type: 'action', icon: 'S' as any, onClick: () => this.setState({'route':'/settings',  navOpen:false}), title: 'Settings' },
+                                { type: 'action', icon: 'Dev' as any, onClick: () => this.setState({'route':'/device',  navOpen:false}),      title: 'Device' },
                             ]}
                         /> 
                     <div id="view">

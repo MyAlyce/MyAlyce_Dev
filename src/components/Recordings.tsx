@@ -6,6 +6,7 @@ import { BFSRoutes, csvRoutes } from 'graphscript-services.storage';
 import { driveInstance } from '../scripts/gapi';
 import { recordCSV, stopRecording } from '../scripts/datacsv';
 import { StreamSelect } from './StreamSelect';
+import { Button } from './lib/src';
 
 //add google drive backup/sync since we're using google accounts
 
@@ -52,9 +53,9 @@ export class Recordings extends sComponent {
             recordings.push (
                 <div key={file}>
                     <span>{file}</span>
-                    <button onClick={download}>Download</button>
-                    <button onClick={deleteFile}>Delete</button>
-                    <button onClick={backup}>To Drive</button>
+                    <Button onClick={download}>Download</Button>
+                    <Button onClick={deleteFile}>Delete</Button>
+                    <Button onClick={backup}>To Drive</Button>
                 </div>
             )
         });
@@ -77,7 +78,7 @@ export class Recordings extends sComponent {
         return (
             <div>
                 <StreamSelect/>
-                { this.state.isRecording ? <button onClick={()=>{this.stopRecording(this.state.activeStream);}}>Stop Recording</button> : <button onClick={()=>{this.record(this.state.activeStream);}}>Record</button> }
+                { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream);}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream);}}>Record</Button> }
                 <br/>
                 Recordings:
                 <div>

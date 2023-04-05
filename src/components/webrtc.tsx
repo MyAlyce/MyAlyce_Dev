@@ -9,6 +9,7 @@ import { sComponent } from './state.component';
 import { answerCall, startCall  } from "../scripts/webrtc";
 import { Chart } from "./Chart";
 import { StreamSelect } from "./StreamSelect";
+import { Button } from "./lib/src";
 
 export class WebRTCComponent extends sComponent {
 
@@ -55,7 +56,7 @@ export class WebRTCComponent extends sComponent {
                 divs.push( //turn into a dropdown or something
                     <div key={user._id}>
                         <div>User: {user.firstName} {user.lastName}</div>
-                        <button id={`startcall${user._id}`} onClick={()=>{startCall(user._id)}}>Start Call</button>
+                        <Button id={`startcall${user._id}`} onClick={()=>{startCall(user._id)}}>Start Call</Button>
                     </div>
                 )
             })
@@ -171,7 +172,7 @@ export class WebRTCComponent extends sComponent {
             divs.push(
                 <div id={divId} key={divId}>
                     <div>User: {call.firstName} {call.lastName}</div>
-                    <button onClick={() => {answerCall(call as any);}}>Join Call</button>
+                    <Button onClick={() => {answerCall(call as any);}}>Join Call</Button>
                 </div>
             );
         };

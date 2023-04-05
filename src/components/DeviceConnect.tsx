@@ -1,5 +1,6 @@
 import React from "react";
 import { connectDevice, disconnectDevice } from "../scripts/device";
+import { Button } from "./lib/src";
 import { sComponent } from "./state.component";
 
 
@@ -13,8 +14,8 @@ export class DeviceConnect extends sComponent {
         return (                    
             <div>
             { !this.state.deviceConnected ? 
-                <button onClick={connectDevice}>Connect</button> :
-                <button onClick={disconnectDevice}>Disconnect</button>
+                <Button onClick={connectDevice}>Connect</Button> :
+                <Button onClick={disconnectDevice}>Disconnect</Button>
             } 
             </div>
         );
