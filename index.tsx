@@ -8,7 +8,7 @@ import './src/init' //run init sequence
 const useStyles = true;
 
 //esbuild compiles these
-import 'my-alyce-component-lib/dist/index.css'
+import './src/components/lib/src/index.css'
 import './src/styles/styles.css'
 import './src/styles/index.scss'
 import './src/styles/burger.css'

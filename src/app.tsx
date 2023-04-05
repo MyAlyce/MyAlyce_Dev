@@ -3,7 +3,7 @@ import {state} from 'graphscript'//'../../graphscript/index'//
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
 import { client, onLogin, onLogout } from './scripts/client';
-import { Login, Avatar, TopBar, NavDrawer } from 'my-alyce-component-lib';
+import { Login, Avatar, TopBar, NavDrawer } from './components/lib/src/index';
 import { SettingsView } from './components/SettingsView';
 
 //@ts-ignore
