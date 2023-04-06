@@ -7,7 +7,7 @@ import {
     SessionsService, 
     User, 
     SocketServerInfo 
-} from '../../graphscript/index.node'//'graphscript-node'////
+} from 'graphscript-node'////'../../graphscript/index.node'//
 import { 
     StructBackend 
 } from 'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'//
@@ -41,8 +41,8 @@ const ContentServer = new Router({
                     port:settings.port,
                     pages:{
                         '/':{
-                            template:scriptBoilerPlate('./index.js'),
-                            onrequest:function(self,node, request, response) {
+                            template:scriptBoilerPlate('./index.js'), 
+                            onrequest:function(self, node, request, response) {
                                 // //e.g. CORS
                                 // response.setHeader('Access-Control-Allow-Origin','*');
                                 
@@ -51,20 +51,11 @@ const ContentServer = new Router({
                                 // response.setHeader('Cross-Origin-Embedder-Policy','require-corp');
                             }
                         }, //serve the built dist
-                        'dashboard':{ //redirect subdomains to main page which sort of fakes the subdomains from state
-                            redirect:'/'
-                        }, 
-                        'device':{ //redirect subdomains to main page which sort of fakes the subdomains from state
+                        '/*':{
                             redirect:'/'
                         },
-                        'peers':{ //redirect subdomains to main page which sort of fakes the subdomains from state
-                            redirect:'/'
-                        },
-                        'history':{ //redirect subdomains to main page which sort of fakes the subdomains from state
-                            redirect:'/'
-                        },
-                        'home':{
-                            redirect:'/'
+                        '/home/*':{
+
                         },
                         'redir':{
                             redirect:'https://google.com'
