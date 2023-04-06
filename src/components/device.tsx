@@ -35,13 +35,12 @@ export class Device extends sComponent {
             <div>
                 <div>
                     { !this.remote ? 
-                    <DeviceConnect/> : ""
+                        <DeviceConnect/> : ""
                     }
                 </div>
                 <div>{    
                     this.state.deviceConnected ? (<ChartGroup streamId={this.state.activeStream}/>) : (<Chart sensors={['emg']}/>)
-                }
-                </div>
+                }</div>
             </div>
         )
     }

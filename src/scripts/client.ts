@@ -15,8 +15,12 @@ import {
 
 
 import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//
+import {BFSRoutes} from 'graphscript-services.storage'
+
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
 import { workers } from 'device-decoder'
+
+
 
 import { RealmUser } from './login'
 
@@ -129,6 +133,8 @@ export const onLogin = async (
             });
             console.log("Logged in: ", user, client);
 
+            restoreSession(user);
+
             return user;
         }
     }
@@ -156,6 +162,86 @@ export const onLogout = (
         viewingId: undefined
     });
 }
+
+
+
+
+//subscribe to the state so any and all changes are saved, can store multiple states (e.g. particular for pages or components)
+export function backupState(
+    filename='state.json', 
+    backup=['isLoggedIn','viewingId','loggedInId','route']
+){
+    //read initial data, now setup subscription to save the state every time it updates
+
+    let lastState = {};
+    let hasUpdate = false;
+
+    backup.forEach((v) => {
+        lastState[v] = state.data[v];
+        state.subscribeEvent(v,(newValue) => {
+            lastState[v] = newValue;
+            hasUpdate = true;    
+        });
+    });
+
+    function backupLoop() {
+
+        if(hasUpdate) {
+            BFSRoutes.writeFile(
+                '/data/'+filename,
+                JSON.stringify(lastState),
+            );
+            hasUpdate = false;
+        }
+           
+        setTimeout(()=> {backupLoop()}, 500 );
+    }
+
+    backupLoop();
+}
+
+            backupState();
+
+//should subscribe to the state then restore session to setup the app
+export async function restoreSession(
+    u:Partial<ProfileStruct>|undefined,
+    filename='state.json', //state file
+) {
+    //make sure the indexeddb directory is initialized
+
+    let exists = await BFSRoutes.exists('/data/'+filename);
+
+    let read;
+    if(exists) {
+        read = await BFSRoutes.readFileAsText(
+            '/data/'+filename,
+        )
+        try {
+            let restored = JSON.parse(read);
+            if(typeof restored === 'object') {
+                if(restored.loggedInId && restored.loggedInId === u?._id || !restored.loggedInId) 
+                    state.setState(restored);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+      
+    backupState(filename);
+
+    return read;
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 //dummy profile
@@ -193,7 +279,7 @@ export async function setupTestUser():Promise<Partial<ProfileStruct> | undefined
             console.log("Ping Result: ", ping);
 
             res(testuser);
-            
+
         //}, 1000);
     });
 }
