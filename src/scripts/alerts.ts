@@ -60,8 +60,8 @@ export function setupAlerts(
             (event) => {
                 console.log("Heart Rate Alert:", event);
                 let sound = new Howl({src:'./alerts/sounds/alarm.wav'}); // Only play the sound if a value has been provided
-                sound.play();
-                showNotification("Heart Rate Alert:",`bpm:${event.bpm}`)
+                sound.play(undefined,false);
+                showNotification("Heart Rate Alert:", `bpm:${event.bpm}` );
             },
             streamId ? streamId+'hr' : 'hr',    
             streamId ? streamId+'hrAlert' : 'hrAlert'
@@ -73,7 +73,7 @@ export function setupAlerts(
             (event) => {
                 console.log("Heart Rate Alert:", event);
                 let sound = new Howl({src:'./alerts/sounds/alarm.wav'}); // Only play the sound if a value has been provided
-                sound.play();
+                sound.play(undefined,false);
             },
             streamId ? streamId+'breath' : 'breath',
             streamId ? streamId+'breathAlert' : 'breathAlert'
@@ -85,7 +85,7 @@ export function setupAlerts(
             (event) => {
                 console.log("Heart Rate Alert:", event);
                 let sound = new Howl({src:'./alerts/sounds/alarm.wav'}); // Only play the sound if a value has been provided
-                sound.play();
+                sound.play(undefined,false);
             },
             streamId ? streamId+'imu' : 'imu',
             streamId ? streamId+'imuAlert' : 'imuAlert'

@@ -16,12 +16,12 @@ import { scriptBoilerPlate } from 'graphscript-node/src/services/http/boilerplat
 import { fitbitRoutes } from './fitbit';
 import settings from './serverconfig'
 
+
 import {config} from 'dotenv'
 import fs from 'fs'
 
 if(fs.existsSync('.env'))
     config(); //load the .env file
-
 
 //NodeJS script
 

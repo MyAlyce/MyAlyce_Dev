@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "start": "tinybuild && cd backend && tinybuild && cd dist && node server.node.js",
+    "hotreload": "nodemon --exec \"npm start\" -e ejs,js,ts,jsx,tsx,css,html,jpg,png,scss,txt,csv",
     "build": "tinybuild build",
     "serve": "tinybuild serve",
     "init": "node tinybuild/init.js",
@@ -47,10 +48,10 @@
     "@capacitor/ios": "~4.6.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "nodemon": "^2.0.22",
     "concurrently": "^8.0.1",
     "esbuild-sass-plugin": "^2.5.0",
-    "nodemon": "^2.0.22",
-    "tinybuild": "^0.3.205",
+    "tinybuild": "^0.3.214",
     "typescript": "~4.9.5"
   },
   "nodemonConfig": {
@@ -59,7 +60,9 @@
     },
     "ignore": [
       "dist/",
+      "backend/dist/",
       ".temp/"
-    ]
+    ],
+    "delay": 1500
   }
 }
