@@ -213,6 +213,13 @@ export class WebRTCComponent extends sComponent {
         }
     }
 
+    setActiveStream(call) {
+        this.setState({
+            chartDataDiv:createStreamChart(call),
+            videoTrackDiv:createVideoDiv(call)
+        });
+    }
+
     //enable our own vaudio/video 
     enableVideo(audio?:boolean) {
         //todo
