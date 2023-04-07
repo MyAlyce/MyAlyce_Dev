@@ -12,6 +12,7 @@ import { Recordings } from './components/pages/Recordings';
 import { WebRTCComponent } from './components/pages/webrtc';
 
 import { Device } from './components/device';
+import { Dev } from './components/pages/Dev';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -81,10 +82,10 @@ export class App extends sComponent {
                         <NavDrawer fixed="left" zIndex={102} isOpen={this.state.navOpen} 
                             brand={brand()} 
                             onBackdropClick={() => this.setState({navOpen:false})} menuItems={[
-                                { type: 'action', icon: 'D' as any, onClick: () => this.setState({'route':'/dashboard', navOpen:false}), title: 'Dashboard' },
-                                { type: 'action', icon: 'P' as any, onClick: () => this.setState({'route':'/peers',     navOpen:false}), title: 'Peers & Groups' },
-                                { type: 'action', icon: 'R' as any, onClick: () => this.setState({'route':'/recordings',  navOpen:false}), title: 'Recordings' },
-                                { type: 'action', icon: 'Dev' as any, onClick: () => this.setState({'route':'/device',  navOpen:false}),      title: 'Device' },
+                                { type: 'action', icon: 'D' as any, onClick: () => this.setState({   'route':'/dashboard',   navOpen:false}), title: 'Dashboard' },
+                                { type: 'action', icon: 'P' as any, onClick: () => this.setState({   'route':'/peers',       navOpen:false}), title: 'WebRTC' },
+                                { type: 'action', icon: 'R' as any, onClick: () => this.setState({   'route':'/recordings',  navOpen:false}), title: 'Recordings' },
+                                { type: 'action', icon: 'Dev' as any, onClick: () => this.setState({ 'route':'/dev',         navOpen:false}),      title: 'Device' },
                             ]}
                         /> 
                     <div id="view">
@@ -136,7 +137,7 @@ export class App extends sComponent {
                                 { this.state.route.includes('peers') &&  <WebRTCComponent/>}
                                 { this.state.route.includes('recordings') && <Recordings/>}
                                 { this.state.route.includes('settings') && <SettingsView/> }
-                                { this.state.route.includes('device') && <Device/>}
+                                { this.state.route.includes('dev') && <Dev/>}
                             </div>
                         </div>
                   </div> 

@@ -30,6 +30,7 @@ export async function connectDevice() {
     hrworker.post('loadFromTemplate',['beat_detect','hr',{
         sps:100
     }]);
+    
     brworker.post('loadFromTemplate',['beat_detect','breath',{
         sps:100
     }]);
