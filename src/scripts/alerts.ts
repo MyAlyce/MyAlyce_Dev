@@ -18,6 +18,32 @@ export let getCurrentLocation = (options:PositionOptions={enableHighAccuracy:tru
     });
 }
 
+export const showNotification = (title,message) => {
+    // Check if browser supports notifications
+    if ('Notification' in window && Notification.permission === 'granted') {
+      // Create a notification
+      new Notification(title, {
+        body:message,
+        icon: 'favicon.ico',
+      });
+    } else if ('Notification' in window && Notification.permission !== 'denied') {
+      // Request permission to show notifications
+      Notification.requestPermission()
+        .then(permission => {
+          if (permission === 'granted') {
+            // Create a notification
+            new Notification(title, {
+                body:message,
+                icon: 'favicon.ico',
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Failed to request notification permission:', error);
+        });
+    }
+  };
+
 getCurrentLocation().then((position) => {
     console.log('current position:', position);
 }); //run on init to get permission
@@ -35,8 +61,9 @@ export function setupAlerts(
                 console.log("Heart Rate Alert:", event);
                 let sound = new Howl({src:'./alerts/sounds/alarm.wav'}); // Only play the sound if a value has been provided
                 sound.play();
+                showNotification("Heart Rate Alert:",`bpm:${event.bpm}`)
             },
-            streamId ? streamId+'hr' : 'hr',
+            streamId ? streamId+'hr' : 'hr',    
             streamId ? streamId+'hrAlert' : 'hrAlert'
         ));
         nodes['hr'] = node;
