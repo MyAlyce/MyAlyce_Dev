@@ -6,7 +6,7 @@ import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/
 
 let personIcon = './assets/person.jpg';
 
-export class UAuth extends sComponent {
+export class UserAuths extends sComponent {
 
     state = {
         viewingId:undefined

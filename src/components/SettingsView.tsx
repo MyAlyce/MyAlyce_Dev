@@ -4,6 +4,7 @@ import { client } from '../scripts/client';
 import { authorizeRedirect } from '../scripts/fitbit';
 import { Button } from './lib/src';
 import { sComponent } from './state.component';
+import { UserAuths } from './UserAuths';
 
 export class SettingsView extends sComponent  {
 
@@ -33,6 +34,7 @@ export class SettingsView extends sComponent  {
             <div>
                 Profile Deets + Editing
             </div>
+            <UserAuths/>
             <div>
                 More fine grained permissions and opt-in stuff<br/>
                 <span>Add Team Member</span><input type='text'></input><Button onClick={this.addUser}>Add User</Button>
