@@ -1,7 +1,7 @@
 import { client, webrtc, graph, usersocket } from "../../scripts/client";
 import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//"../../../graphscript/index";//
 
-import {ProfileStruct} from 'graphscript-services/struct/datastructures/types'
+import {AuthorizationStruct, ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 import React from 'react'
 import { sComponent } from '../state.component';
 
@@ -47,8 +47,19 @@ export class WebRTCComponent extends sComponent {
 
     async getUsers() {
         //todo: use user list supplied by authorizations rather than global server visibility (but this is just a test)
-        let userIds = await usersocket.run('getAllOnlineUsers');
-        let userInfo = await client.getUsers(userIds);
+        let auths = client.getLocalData('authorization', {authorizedId:client.currentUser._id});
+        
+        let pushed = [] as any;
+        let checkIds = auths.map((a:AuthorizationStruct) => {
+            if(!pushed.includes(a.authorizerId)) {
+                pushed.push(a.authorizerId);
+                return true;
+            }
+        });
+
+        let userIds = await usersocket.run('getAllOnlineUsers', [checkIds]);
+
+        let userInfo = await client.getUsers(userIds, true);
         if(userInfo) {
             let divs = [] as any[];
             userInfo.forEach((user:Partial<ProfileStruct>) => {
