@@ -15,6 +15,23 @@ export function getDictFromUrlParams(url = window.location) {
     return paramDict;
 }
 
+if ('Notification' in window && Notification.permission !== 'denied') {
+  // Request permission to show notifications
+  Notification.requestPermission()
+    .then(permission => {
+      if (permission === 'granted') {
+        // Create a notification
+        // new Notification('Hello, World!', {
+        //   body: 'This is a notification example.',
+        //   icon: 'favicon.ico',
+        //});
+      }
+    })
+    .catch(error => {
+      console.error('Failed to request notification permission:', error);
+    });
+}
+
 let params = getDictFromUrlParams();
 
 //get fitbit api ready for querying
