@@ -34,7 +34,7 @@ export class UserAuths extends sComponent {
                     <option value={user._id}>
                         <Avatar
                             dataState='done'
-                            imgSrc={user.pictureUrl ? user.pictureUrl : {personIcon}}
+                            imgSrc={user.pictureUrl ? user.pictureUrl : personIcon}
                             size='xs'
                             name={
                                 {

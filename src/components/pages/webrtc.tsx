@@ -9,7 +9,9 @@ import { sComponent } from '../state.component';
 import { answerCall, startCall  } from "../../scripts/webrtc";
 import { Chart } from "../Chart";
 import { StreamSelect } from "../StreamSelect";
-import { Button } from "../lib/src";
+import { Avatar, Button } from "../lib/src";
+
+let personIcon = './assets/person.jpg';
 
 export class WebRTCComponent extends sComponent {
 
@@ -60,7 +62,7 @@ export class WebRTCComponent extends sComponent {
         let userIds = await usersocket.run('getAllOnlineUsers', [checkIds]);
 
         userIds.push(client.currentUser._id);
-        
+
         let userInfo = await client.getUsers(userIds, true);
         if(userInfo) {
             let divs = [] as any[];
@@ -68,7 +70,19 @@ export class WebRTCComponent extends sComponent {
                 //console.log(user);
                 divs.push( //turn into a dropdown or something
                     <div key={user._id}>
-                        <div>User: {user.firstName} {user.lastName}</div>
+                        <div>User: <Avatar
+                            dataState='done'
+                            imgSrc={user.pictureUrl ? user.pictureUrl : personIcon}
+                            size='xs'
+                            name={
+                                {
+                                    first:user.firstName as string,
+                                    last:user.lastName as string,
+                                }
+                            }
+                            status='online'
+                            backgroundColor='lightblue'
+                        /> {user.firstName} {user.lastName}</div>
                         <Button onClick={()=>{startCall(user._id)}}>Start Call</Button>
                     </div>
                 )
