@@ -6,7 +6,11 @@ export class FallAlert extends Alert {
     upperBound=50000;
 
     constructor(
-        onEvent:(event: any) => void,
+        onEvent:(event: {
+            message:string
+            magnitude:number,
+            timestamp:number
+        }) => void,
         subscribeTo:string, //the state key we want
         name='fallAlert', 
         upperBound=50000

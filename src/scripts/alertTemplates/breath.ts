@@ -4,7 +4,7 @@ import { Alert } from "./Alert";
 export class BreathAlert extends Alert {
 
     constructor(
-        onEvent:(event: any) => void,
+        onEvent:(event: event: {message:string,bpm:number, timestamp:number}) => void,
         subscribeTo:string, //the state key we want
         name='breathAlert', 
         sampleRate?:number

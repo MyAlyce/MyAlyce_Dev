@@ -85,6 +85,7 @@ export class App extends sComponent {
                                 { type: 'action', icon: 'D' as any, onClick: () => this.setState({   'route':'/dashboard',   navOpen:false}), title: 'Dashboard' },
                                 { type: 'action', icon: 'P' as any, onClick: () => this.setState({   'route':'/peers',       navOpen:false}), title: 'WebRTC' },
                                 { type: 'action', icon: 'R' as any, onClick: () => this.setState({   'route':'/recordings',  navOpen:false}), title: 'Recordings' },
+                                { type: 'action', icon: 'S' as any, onClick: () => this.setState({   'route':'/settings',       navOpen:false}), title: 'Settings' },
                                 { type: 'action', icon: 'Dev' as any, onClick: () => this.setState({ 'route':'/dev',         navOpen:false}),      title: 'Device' },
                             ]}
                         /> 
