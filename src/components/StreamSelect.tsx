@@ -23,7 +23,14 @@ export class StreamSelect extends sComponent {
                     <option selected={this.state.activeStream == undefined} value={undefined}>My Device</option>
                     { Object.keys(this.state.availableStreams).length > 0 &&
                         Object.keys(this.state.availableStreams).map((key) => {
-                            return (<option selected={this.state.activeStream === key}  key={key} value={key}>{this.state.availableStreams[key].firstName ? this.state.availableStreams[key].firstName : this.state.availableStreams[key]._id} {this.state.availableStreams[key].lastName ? this.state.availableStreams[key].lastName : ""}</option>)  
+                            return (
+                                <option 
+                                    selected={this.state.activeStream === key} 
+                                    key={key} 
+                                    value={key}
+                                >{this.state.availableStreams[key].firstName ? this.state.availableStreams[key].firstName : this.state.availableStreams[key]._id} {this.state.availableStreams[key].lastName ? this.state.availableStreams[key].lastName : ""}
+                                </option>
+                            );  
                         })
                     }
                 </select>

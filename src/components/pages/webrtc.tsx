@@ -53,7 +53,7 @@ export class WebRTCComponent extends sComponent {
 
     listed = {};
     subscriptions = {} as any;
-    evSub;
+    evSub; streamSelectSub;
 
     constructor(props:{streamId?:string}) {
         super(props);
@@ -64,6 +64,11 @@ export class WebRTCComponent extends sComponent {
         this.getUnanweredCallInfo();
         this.evSub = state.subscribeEvent('receiveCallInformation',()=>{
             this.getUnanweredCallInfo();
+        });
+        this.streamSelectSub = state.subscribeEvent('activeStream',(id?)=>{
+            if(id) {
+                this.setActiveStream(this.state.availableStreams[id]);
+            }
         });
     }
 
