@@ -6,12 +6,35 @@ import React from 'react'
 import { sComponent } from '../state.component';
 
 
-import { answerCall, startCall  } from "../../scripts/webrtc";
+import { answerCall, enableDeviceStream, startCall  } from "../../scripts/webrtc";
 import { Chart } from "../Chart";
 import { StreamSelect } from "../StreamSelect";
 import { Avatar, Button } from "../lib/src";
 
 let personIcon = './assets/person.jpg';
+
+
+
+
+export const createStreamChart = (call) => {
+    return (
+        <div>
+            <Chart
+                remote={true}
+                deviceId={call._id}
+            />
+        </div>
+    )
+}
+
+export const createVideoDiv = (call) => {
+    return (
+        <div>
+           <video></video>
+        </div>
+    )
+}
+
 
 export class WebRTCComponent extends sComponent {
 
@@ -85,69 +108,7 @@ export class WebRTCComponent extends sComponent {
                         /> {user.firstName} {user.lastName}</div>
                         <Button onClick={()=>{startCall(user._id).then(call => {
                             //overwrites the default message
-                            call.ondatachannel = (ev) => {
-                                console.log('call started with', user.firstName, user.lastName);
-                                //the call is now live, add tracks
-                                //data channel streams the device data
-                                ev.channel.onmessage = (ev) => { 
-                                    if(ev.data.emg) {
-                                        if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
-                                        state.setValue(call._id+'emg', ev.data.emg);
-                                    } 
-                                    if (ev.data.ppg) {
-                                        if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
-                                        state.setValue(call._id+'ppg', ev.data.ppg);
-                                    } 
-                                    if (ev.data.hr) {
-                                        state.setValue(call._id+'hr', ev.data.hr);
-                                    } 
-                                    if (ev.data.hrv) {
-                                        state.setValue(call._id+'hrv', ev.data.hrv);
-                                    } 
-                                    if (ev.data.breath) {
-                                        state.setValue(call._id+'breath', ev.data.breath);
-                                    } 
-                                    if (ev.data.brv) {
-                                        state.setValue(call._id+'brv', ev.data.brv);
-                                    } 
-                                    if (ev.data.imu) {
-                                        if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
-                                        state.setValue(call._id+'imu', ev.data.imu);
-                                    } 
-                                    if (ev.data.env) {
-                                        if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
-                                        state.setValue(call._id+'env', ev.data.env);
-                                    } //else if (ev.data.emg2) {}
-                                }
-
-                                //now add a device chart component
-                                this.setState({
-                                    chartDataDiv:(
-                                        <div>
-                                            <Chart
-                                            remote={true}
-                                            deviceId={call._id}
-                                            />
-                                        </div>
-                                    )
-                                });
-                            } 
-
-                            call.ontrack = (ev) => {
-                                //received a media track, e.g. audio or video
-                                //video/audio channel, if video add a video tag, if audio make the audio context
-                                
-                                //if video, else if audio, else if video & audio
-                                this.setState({
-                                    videoTrackDiv:(
-                                        <div>
-                                            <video></video>
-                                        </div>
-                                    )
-                                });
-                            }
-
-
+                            this.setupCallUI(call);
                         })}}>Start Call</Button>
                     </div>
                 )
@@ -172,92 +133,8 @@ export class WebRTCComponent extends sComponent {
             else continue;
                         
             let call = this.state.unansweredCalls[key] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
-             
-            call.onicecandidate = (ev) => {
-                if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
-                    let cid = `peercandidate${Math.floor(Math.random()*1000000000000000)}`;
-                    usersocket.run(
-                        'runConnection', //run this function on the backend router
-                        [
-                            call.caller, //run this connection 
-                            'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                            [ //and pass these arguments
-                                'receiveCallInformation', //run this function on the user's end
-                                {
-                                    _id:call._id, 
-                                    peercandidates:{[cid]:ev.candidate}
-                                }
-                            ],
-                            call.socketId
-                        ]
-                    ).then((id) => {
-                        console.log('call information echoed from peer:', id);
-                    });
-                }
-            }
-
-            //overwrites the default message
-            call.ondatachannel = (ev) => {
-                console.log('call started with', call.firstName, call.lastName);
-                //the call is now live, add tracks
-                //data channel streams the device data
-                ev.channel.onmessage = (ev) => { 
-                    if(ev.data.emg) {
-                        if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
-                        state.setValue(call._id+'emg', ev.data.emg);
-                    } 
-                    if (ev.data.ppg) {
-                        if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
-                        state.setValue(call._id+'ppg', ev.data.ppg);
-                    } 
-                    if (ev.data.hr) {
-                        state.setValue(call._id+'hr', ev.data.hr);
-                    } 
-                    if (ev.data.hrv) {
-                        state.setValue(call._id+'hrv', ev.data.hrv);
-                    } 
-                    if (ev.data.breath) {
-                        state.setValue(call._id+'breath', ev.data.breath);
-                    } 
-                    if (ev.data.brv) {
-                        state.setValue(call._id+'brv', ev.data.brv);
-                    } 
-                    if (ev.data.imu) {
-                        if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
-                        state.setValue(call._id+'imu', ev.data.imu);
-                    } 
-                    if (ev.data.env) {
-                        if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
-                        state.setValue(call._id+'env', ev.data.env);
-                    } //else if (ev.data.emg2) {}
-                }
-
-                //now add a device chart component
-                this.setState({
-                    chartDataDiv:(
-                        <div>
-                            <Chart
-                              remote={true}
-                              deviceId={call._id}
-                            />
-                        </div>
-                    )
-                });
-            } 
-
-            call.ontrack = (ev) => {
-                //received a media track, e.g. audio or video
-                //video/audio channel, if video add a video tag, if audio make the audio context
-                
-                //if video, else if audio, else if video & audio
-                this.setState({
-                    videoTrackDiv:(
-                        <div>
-                            <video></video>
-                        </div>
-                    )
-                });
-            }
+     
+            this.setupCallUI(call);
 
             let divId = `call${call._id}`;
 
@@ -277,46 +154,65 @@ export class WebRTCComponent extends sComponent {
         
     }
 
-    enableVideo(audio?:boolean) {
-        //todo
+    setupCallUI(call) {
+         //overwrites the default message
+         call.ondatachannel = (ev) => {
+            console.log('call started with', call.firstName, call.lastName);
+            //the call is now live, add tracks
+            //data channel streams the device data
+            enableDeviceStream(call._id); //enable my device to stream data to this endpoint
+            
+            ev.channel.onmessage = (ev) => { 
+                if(ev.data.emg) {
+                    if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
+                    state.setValue(call._id+'emg', ev.data.emg);
+                } 
+                if (ev.data.ppg) {
+                    if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
+                    state.setValue(call._id+'ppg', ev.data.ppg);
+                } 
+                if (ev.data.hr) {
+                    state.setValue(call._id+'hr', ev.data.hr);
+                } 
+                if (ev.data.hrv) {
+                    state.setValue(call._id+'hrv', ev.data.hrv);
+                } 
+                if (ev.data.breath) {
+                    state.setValue(call._id+'breath', ev.data.breath);
+                } 
+                if (ev.data.brv) {
+                    state.setValue(call._id+'brv', ev.data.brv);
+                } 
+                if (ev.data.imu) {
+                    if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
+                    state.setValue(call._id+'imu', ev.data.imu);
+                } 
+                if (ev.data.env) {
+                    if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
+                    state.setValue(call._id+'env', ev.data.env);
+                } //else if (ev.data.emg2) {}
+            }
+
+            //now add a device chart component
+            if(this.state.activeStream === call._id) this.setState({
+                chartDataDiv:createStreamChart(call)
+            });
+        } 
+
+        call.ontrack = (ev) => {
+            //received a media track, e.g. audio or video
+            //video/audio channel, if video add a video tag, if audio make the audio context
+            
+            //if video, else if audio, else if video & audio
+            if(this.state.activeStream === call._id) this.setState({
+                videoTrackDiv:createVideoDiv(call)
+            });
+        }
     }
 
-    enableDeviceStream(streamId) { //enable sending data to a given RTC channel
-        if(state.data.device) {
-            let stream = (this.state.availableStreams)[streamId as string] as WebRTCInfo;
-            this.subscriptions[streamId] = {
-                emg:state.subscribeEvent('emg', (data) => {
-                    stream.send({ 'emg':data });
-                }),
-                ppg:state.subscribeEvent('ppg', (ppg) => {
-                    stream.send({ 'ppg':ppg });
-                }),
-                hr:state.subscribeEvent('hr', (hr) => {
-                    stream.send({
-                        'hr': hr.bpm,
-                        'hrv': hr.change
-                    });
-                }),
-                breath:state.subscribeEvent('breath', (breath) => {
-                    stream.send({
-                        'breath':breath.bpm,
-                        'brv':breath.change
-                    });
-                }),
-                imu:state.subscribeEvent('imu', (imu) => {
-                    stream.send({'imu':imu});
-                }),
-                env:state.subscribeEvent('env', (env) => {
-                    stream.send({'env':env});
-                })
-            };
-
-            stream.onclose = () => {
-                for(const key in this.subscriptions[streamId]) {
-                    state.unsubscribeEvent(key, this.subscriptions[streamId][key]);
-                }
-            }
-        }
+    //enable our own vaudio/video 
+    enableVideo(audio?:boolean) {
+        //todo
     }
 
     render() {

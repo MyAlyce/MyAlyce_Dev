@@ -25,29 +25,31 @@ export class UserAuths extends sComponent {
 
     }
 
-    queryUsers(ev) {
-        let query = ev.target.value;
+    queryUsers = () => {
+        let query = (document.getElementById(this.unique + 'query') as HTMLInputElement).value;
         this.queryResults = [];
-        client.queryUsers(query, 0, 0).then((res) => {
-            res?.forEach((user) => {
-                this.queryResults.push(
-                    <option value={user._id}>
-                        <Avatar
-                            dataState='done'
-                            imgSrc={user.pictureUrl ? user.pictureUrl : personIcon}
-                            size='xs'
-                            name={
-                                {
-                                    first:user.firstName as string,
-                                    last:user.lastName as string,
+        if(query) {
+            client.queryUsers(query, 0, 0).then((res) => {
+                res?.forEach((user) => {
+                    this.queryResults.push(
+                        <option value={user._id}>
+                            <Avatar
+                                dataState='done'
+                                imgSrc={user.pictureUrl ? user.pictureUrl : personIcon}
+                                size='xs'
+                                name={
+                                    {
+                                        first:user.firstName as string,
+                                        last:user.lastName as string,
+                                    }
                                 }
-                            }
-                            backgroundColor='lightblue'
-                        /> {user.firstName} {user.lastName}
-                    </option>
-                );
-            })
-        });
+                                backgroundColor='lightblue'
+                            /> {user.firstName} {user.lastName}
+                        </option>
+                    );
+                })
+            });
+        }
 
         this.render();
     }
@@ -198,7 +200,8 @@ export class UserAuths extends sComponent {
             <div id={this.unique}>
                 <div>
                     Search Users<br/>
-                    Name or Email:<input  id={this.unique+'query'} onChange={this.queryUsers} />
+                    Name or Email:<input  id={this.unique+'query'} />
+                    <button onClick={this.queryUsers} >Search</button>
                 </div>
                 <div>
                     Results:

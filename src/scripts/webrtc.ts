@@ -3,6 +3,7 @@ import { client, graph, usersocket, webrtc } from "./client"
 import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//'../../../graphscript/index'//
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
+
 const webrtcData = {
     webrtcStream:undefined, //current active stream
     availableStreams:webrtc.rtc as {[key:string]:WebRTCInfo}, //list of accepted calls
@@ -124,8 +125,75 @@ webrtc.subscribe('receiveCallInformation', (id) => {
     
     console.log('received call information:', id);
 
+    let call = webrtc.unanswered[id] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
+             
+    call.onicecandidate = (ev) => {
+        if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
+            let cid = `peercandidate${Math.floor(Math.random()*1000000000000000)}`;
+            usersocket.run(
+                'runConnection', //run this function on the backend router
+                [
+                    call.caller, //run this connection 
+                    'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                    [ //and pass these arguments
+                        'receiveCallInformation', //run this function on the user's end
+                        {
+                            _id:call._id, 
+                            peercandidates:{[cid]:ev.candidate}
+                        }
+                    ],
+                    call.socketId
+                ]
+            ).then((id) => {
+                console.log('call information echoed from peer:', id);
+            });
+        }
+    }
+
     state.setState({
         unansweredCalls:webrtc.unanswered
     }); //update this event for the app
 
 });
+
+
+export function enableDeviceStream(streamId) { //enable sending data to a given RTC channel
+    
+    let stream = webrtc.rtc[streamId as string] as WebRTCInfo;
+    if(stream) {
+        let subscriptions = {};
+        subscriptions[streamId] = {
+            emg:state.subscribeEvent('emg', (data) => {
+                stream.send({ 'emg':data });
+            }),
+            ppg:state.subscribeEvent('ppg', (ppg) => {
+                stream.send({ 'ppg':ppg });
+            }),
+            hr:state.subscribeEvent('hr', (hr) => {
+                stream.send({
+                    'hr': hr.bpm,
+                    'hrv': hr.change
+                });
+            }),
+            breath:state.subscribeEvent('breath', (breath) => {
+                stream.send({
+                    'breath':breath.bpm,
+                    'brv':breath.change
+                });
+            }),
+            imu:state.subscribeEvent('imu', (imu) => {
+                stream.send({'imu':imu});
+            }),
+            env:state.subscribeEvent('env', (env) => {
+                stream.send({'env':env});
+            })
+        };
+
+        stream.onclose = () => {
+            for(const key in this.subscriptions[streamId]) {
+                state.unsubscribeEvent(key, subscriptions[streamId][key]);
+            }
+        }     
+    }
+    
+}
