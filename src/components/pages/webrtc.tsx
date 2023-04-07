@@ -27,7 +27,8 @@ export const createStreamChart = (call) => {
     )
 }
 
-export const createVideoDiv = (call) => {
+export const createVideoDiv = (call:WebRTCInfo) => {
+
     return (
         <div>
            <video></video>
@@ -108,6 +109,8 @@ export class WebRTCComponent extends sComponent {
                         /> {user.firstName} {user.lastName}</div>
                         <Button onClick={()=>{startCall(user._id).then(call => {
                             //overwrites the default message
+                            call.rtc.addTransceiver('audio');
+                            call.rtc.addTransceiver('video');
                             this.setupCallUI(call);
                         })}}>Start Call</Button>
                     </div>
