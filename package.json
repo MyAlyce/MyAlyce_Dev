@@ -30,7 +30,7 @@
     "classnames": "^2.3.2",
     "device-decoder": "^0.4.21",
     "graphscript": "^0.2.94",
-    "graphscript-services": "~0.2.104",
+    "graphscript-services": "~0.2.105",
     "graphscript-services.storage": "~0.2.90",
     "hamburger-react": "^2.5.0",
     "howler": "^2.2.3",

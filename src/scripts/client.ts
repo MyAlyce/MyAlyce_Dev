@@ -48,7 +48,15 @@ export const graph = new Router({
 
 graph.subscribe('checkForNotifications',(result:any[])=>{
     console.log('checked notifications:', result);
-    if(result?.length > 0) client.resolveNotifications(result); //pull latest data. That's it!
+    if(result?.length > 0) client.resolveNotifications(result,true).then((latest) => {
+        if(latest?.length > 0) {
+            latest.forEach((struct) => {
+                if(struct?.structType === 'authRequest') {
+                    console.log('Received peer request from', struct.firstName, struct.lastName); //todo:turn this into a popup thing
+                }
+            })
+        }
+    }); //pull latest data. That's it!
 })
 
 graph.setState({

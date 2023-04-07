@@ -4,12 +4,13 @@ import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
 import { client, onLogin, onLogout } from './scripts/client';
 import { Login, Avatar, TopBar, NavDrawer } from './components/lib/src/index';
-import { SettingsView } from './components/SettingsView';
 
-//@ts-ignore
-import { WebRTCComponent } from './components/webrtc';
-import { Dashboard } from './components/Dashboard';
-import { Recordings } from './components/Recordings';
+
+import { SettingsView } from './components/pages/SettingsView';
+import { Dashboard } from './components/pages/Dashboard';
+import { Recordings } from './components/pages/Recordings';
+import { WebRTCComponent } from './components/pages/webrtc';
+
 import { Device } from './components/device';
 
 let googleLogo = './assets/google.png';
@@ -20,11 +21,10 @@ state.subscribeEvent('route', (route:string) => {
     window.history.pushState(undefined, route, location.origin + route); //uhh
 });
   
-
 const TESTVIEWS = false //true; //skip login page (debug)
 
 const brand = () => {
-    return <img src={myalyceLogo} width='100px' alt='MyAlyce'/>
+    return <img src={ myalyceLogo } width='100px' alt='MyAlyce'/>
 };
   
 //note we're using sComponent which has some extended functionality for a global state

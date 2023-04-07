@@ -1,13 +1,13 @@
 import React from 'react'
-import { sComponent } from './state.component'
+import { sComponent } from '../state.component'
 import {state} from 'graphscript'
 
 import { BFSRoutes, csvRoutes } from 'graphscript-services.storage';
-import { driveInstance } from '../scripts/gapi';
-import { recordCSV, stopRecording } from '../scripts/datacsv';
-import { StreamSelect } from './StreamSelect';
-import { Button } from './lib/src';
-import { NoteTaking } from './NoteTaking';
+import { driveInstance } from '../../scripts/gapi';
+import { recordCSV, stopRecording } from '../../scripts/datacsv';
+import { StreamSelect } from '../StreamSelect';
+import { Button } from '../lib/src';
+import { NoteTaking } from '../NoteTaking';
 
 //add google drive backup/sync since we're using google accounts
 

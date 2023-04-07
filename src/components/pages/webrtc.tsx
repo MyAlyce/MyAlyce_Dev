@@ -1,15 +1,15 @@
-import { client, webrtc, graph, usersocket } from "../scripts/client";
+import { client, webrtc, graph, usersocket } from "../../scripts/client";
 import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//"../../../graphscript/index";//
 
 import {ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 import React from 'react'
-import { sComponent } from './state.component';
+import { sComponent } from '../state.component';
 
 
-import { answerCall, startCall  } from "../scripts/webrtc";
-import { Chart } from "./Chart";
-import { StreamSelect } from "./StreamSelect";
-import { Button } from "./lib/src";
+import { answerCall, startCall  } from "../../scripts/webrtc";
+import { Chart } from "../Chart";
+import { StreamSelect } from "../StreamSelect";
+import { Button } from "../lib/src";
 
 export class WebRTCComponent extends sComponent {
 

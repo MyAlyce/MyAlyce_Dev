@@ -1,8 +1,8 @@
 import React from 'react'
-import { sComponent } from './state.component'
-import { Device } from './device'
-import { StreamSelect } from './StreamSelect'
-import { NoteTaking } from './NoteTaking'
+import { sComponent } from '../state.component'
+import { Device } from '../device'
+import { StreamSelect } from '../StreamSelect'
+import { NoteTaking } from '../NoteTaking'
 
 export class Dashboard extends sComponent {
 
