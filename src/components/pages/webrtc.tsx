@@ -83,7 +83,72 @@ export class WebRTCComponent extends sComponent {
                             status='online'
                             backgroundColor='lightblue'
                         /> {user.firstName} {user.lastName}</div>
-                        <Button onClick={()=>{startCall(user._id)}}>Start Call</Button>
+                        <Button onClick={()=>{startCall(user._id).then(call => {
+                            //overwrites the default message
+                            call.ondatachannel = (ev) => {
+                                console.log('call started with', user.firstName, user.lastName);
+                                //the call is now live, add tracks
+                                //data channel streams the device data
+                                ev.channel.onmessage = (ev) => { 
+                                    if(ev.data.emg) {
+                                        if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
+                                        state.setValue(call._id+'emg', ev.data.emg);
+                                    } 
+                                    if (ev.data.ppg) {
+                                        if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
+                                        state.setValue(call._id+'ppg', ev.data.ppg);
+                                    } 
+                                    if (ev.data.hr) {
+                                        state.setValue(call._id+'hr', ev.data.hr);
+                                    } 
+                                    if (ev.data.hrv) {
+                                        state.setValue(call._id+'hrv', ev.data.hrv);
+                                    } 
+                                    if (ev.data.breath) {
+                                        state.setValue(call._id+'breath', ev.data.breath);
+                                    } 
+                                    if (ev.data.brv) {
+                                        state.setValue(call._id+'brv', ev.data.brv);
+                                    } 
+                                    if (ev.data.imu) {
+                                        if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
+                                        state.setValue(call._id+'imu', ev.data.imu);
+                                    } 
+                                    if (ev.data.env) {
+                                        if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
+                                        state.setValue(call._id+'env', ev.data.env);
+                                    } //else if (ev.data.emg2) {}
+                                }
+
+                                //now add a device chart component
+                                this.setState({
+                                    chartDataDiv:(
+                                        <div>
+                                            <Chart
+                                            remote={true}
+                                            deviceId={call._id}
+                                            />
+                                        </div>
+                                    )
+                                });
+                            } 
+
+                            call.ontrack = (ev) => {
+                                //received a media track, e.g. audio or video
+                                //video/audio channel, if video add a video tag, if audio make the audio context
+                                
+                                //if video, else if audio, else if video & audio
+                                this.setState({
+                                    videoTrackDiv:(
+                                        <div>
+                                            <video></video>
+                                        </div>
+                                    )
+                                });
+                            }
+
+
+                        })}}>Start Call</Button>
                     </div>
                 )
             })

@@ -74,6 +74,8 @@ export async function startCall(userId) {
             ]
         ]
     );
+
+    return rtc;
 }
 
 //todo: need to grab the specific endpoint to respond to
