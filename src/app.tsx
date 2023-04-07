@@ -12,9 +12,9 @@ import { Dashboard } from './components/Dashboard';
 import { Recordings } from './components/Recordings';
 import { Device } from './components/device';
 
-let googleLogo = './assets/google.png'
-let myalyceLogo = './assets/myalyce.png'
-let personIcon = './assets/person.jpg'
+let googleLogo = './assets/google.png';
+let myalyceLogo = './assets/myalyce.png';
+let personIcon = './assets/person.jpg';
 
 state.subscribeEvent('route', (route:string) => {
     window.history.pushState(undefined, route, location.origin + route); //uhh

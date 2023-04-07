@@ -10,7 +10,7 @@ const sizeMap = {
 
 import { Spinner } from '../Spinner/Spinner';
 
-export type AvatarStatus = 'online' | 'offline' | 'away' | 'busy';
+export type AvatarStatus = 'online' | 'offline' | 'away' | 'busy' | 'none';
 
 export type AvatarProps = {
     dataState: DataState;
@@ -91,7 +91,7 @@ export const AvatarInner = (p: AvatarInnerProps) => {
         }
 
         {/* Status */}
-        {status && <Status size={size} status={status} />}
+        {status && status !== 'none' && <Status size={size} status={status} />}
     </>;
 };
 
