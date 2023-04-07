@@ -59,6 +59,8 @@ export class WebRTCComponent extends sComponent {
 
         let userIds = await usersocket.run('getAllOnlineUsers', [checkIds]);
 
+        userIds.push(client.currentUser._id);
+        
         let userInfo = await client.getUsers(userIds, true);
         if(userInfo) {
             let divs = [] as any[];
