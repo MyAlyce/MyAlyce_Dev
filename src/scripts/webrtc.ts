@@ -13,6 +13,10 @@ const webrtcData = {
 state.setState(webrtcData);
 
 
+export type RTCCallProps = WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string, videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
+export type RTCCallInfo = WebRTCInfo & {caller:string, firstName:string, lastName:string, socketId:string, videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
+
+
 export async function startCall(userId) {
     //send handshake
     let rtcId = `room${Math.floor(Math.random()*1000000000000000)}`;
@@ -80,7 +84,7 @@ export async function startCall(userId) {
 }
 
 //todo: need to grab the specific endpoint to respond to
-export let answerCall = async (call:WebRTCProps & {caller:string, socketId:string}) => {
+export let answerCall = async (call:RTCCallProps) => {
     
     let nodes = setupAlerts(call._id);
     
@@ -196,4 +200,60 @@ export function enableDeviceStream(streamId) { //enable sending data to a given 
         }     
     }
     
+}
+
+
+export function enableAudio(call:RTCCallInfo) {
+
+    if(call.audioSender) this.disableVideo(call);
+    
+    let senders = webrtc.addUserMedia(
+        call.rtc, 
+        {
+            audio:false
+        }, 
+        call 
+    );
+
+    call.audioSender = senders[0];
+}
+
+export function enableVideo(call:RTCCallInfo, minWidth?:320|640|1024|1280|1920|2560|3840) { //the maximum available resolution will be selected if not specified
+    
+    if(call.videoSender) this.disableVideo(call);
+
+    let senders = webrtc.addUserMedia(
+        call.rtc, 
+        {
+            audio:false, 
+            video:{
+                optional: minWidth ? [{
+                    minWidth: minWidth
+                }] : [
+                    {minWidth: 320},
+                    {minWidth: 640},
+                    {minWidth: 1024},
+                    {minWidth: 1280},
+                    {minWidth: 1920},
+                    {minWidth: 2560},
+                    {minWidth: 3840},
+                ]
+            } as MediaTrackConstraints
+        }, 
+        call 
+    );
+
+    call.videoSender = senders[0];
+}
+
+export function disableAudio(call:RTCCallInfo) {
+    if(call.audioSender) {
+        call.rtc.removeTrack(call.audioSender);
+    }
+}
+
+export function disableVideo(call:RTCCallInfo) {
+    if(call.videoSender) {
+        call.rtc.removeTrack(call.videoSender);
+    }
 }

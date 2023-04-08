@@ -6,10 +6,11 @@ import React from 'react'
 import { sComponent } from '../state.component';
 
 
-import { answerCall, enableDeviceStream, startCall  } from "../../scripts/webrtc";
+import { RTCCallProps, RTCCallInfo, answerCall, enableDeviceStream, startCall  } from "../../scripts/webrtc";
 import { Chart } from "../Chart";
 import { StreamSelect } from "../StreamSelect";
 import { Avatar, Button } from "../lib/src";
+import { Howler } from "howler";
 
 let personIcon = './assets/person.jpg';
 
@@ -27,27 +28,61 @@ export const createStreamChart = (call) => {
     )
 }
 
-export const createVideoDiv = (call:WebRTCInfo) => {
+export const createAudioDiv = (call:WebRTCInfo) => {
 
-    return (
-        <div>
-           <video></video>
-        </div>
-    )
+    if((call as any).gainNode) {
+        (call as any).gainNode.disconnect();
+    }
+
+    call.streams?.forEach((s) => {
+        if(s.getAudioTracks().length > 0) {
+            //@ts-ignore
+            let src = Howler.ctx.createMediaStreamSource(s);
+            let gainNode = src.context.createGain();
+            src.connect(gainNode);
+            //@ts-ignore
+            gainNode.connect((Howler as any).masterGain);
+
+            (call as any).gainNode = gainNode;
+            
+
+            return (
+                <div>
+                   <input type='range' min='0' max='1' step='0.01' onInput={(ev)=>{
+                        gainNode.gain.value = (ev.target as any).value }}></input>
+                </div>
+            )
+        }
+    })
 }
 
+export const createVideoDiv = (call:WebRTCInfo) => {
+    
+    call.streams?.forEach((s) => {
+        if(s.getVideoTracks().length > 0) {
+            let video = document.createElement('video');
+            video.srcObject = s;
+
+            return (
+                <div  ref={ (ref) => {
+                    ref?.appendChild(video);
+                } }></div>
+            )
+        }
+    });
+}
 
 export class WebRTCComponent extends sComponent {
 
     state = {
         loggedInId:undefined,
         availableUsers:undefined as undefined|any[],
-        webrtcStream:undefined,
         availableStreams:webrtc.rtc, //we can handle multiple connections too
         unansweredCalls:webrtc.unanswered, //webrtc.unanswered reference
         unansweredCallDivs:[] as any[],
         chartDataDiv:undefined,
         videoTrackDiv:undefined,
+        audioTrackDiv:undefined,
         activeStream:undefined //stream/user in focus
     }
 
@@ -67,7 +102,7 @@ export class WebRTCComponent extends sComponent {
         });
         this.streamSelectSub = state.subscribeEvent('activeStream',(id?)=>{
             if(id) {
-                this.setActiveStream(this.state.availableStreams[id]);
+                this.setActiveStream(this.state.availableStreams[id] as RTCCallInfo);
             }
         });
     }
@@ -140,7 +175,7 @@ export class WebRTCComponent extends sComponent {
                 this.listed[key] = true;
             else continue;
                         
-            let call = this.state.unansweredCalls[key] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
+            let call = this.state.unansweredCalls[key] as RTCCallProps;
      
             this.setupCallUI(call);
 
@@ -218,16 +253,12 @@ export class WebRTCComponent extends sComponent {
         }
     }
 
-    setActiveStream(call) {
+    setActiveStream(call:RTCCallInfo) {
         this.setState({
             chartDataDiv:createStreamChart(call),
-            videoTrackDiv:createVideoDiv(call)
+            videoTrackDiv:createVideoDiv(call),
+            audioTrackDiv:createAudioDiv(call)
         });
-    }
-
-    //enable our own vaudio/video 
-    enableVideo(audio?:boolean) {
-        //todo
     }
 
     render() {
@@ -243,11 +274,18 @@ export class WebRTCComponent extends sComponent {
                     { this.state.availableUsers && this.state.availableUsers.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
-                    <StreamSelect/>
+                    <StreamSelect onChange={()=>{ if(this.state.activeStream) this.setActiveStream(this.state.availableStreams[this.state.activeStream] as any) }} />
                     Stream:
-                <div id='webrtcstream'>
-                    {  this.state.videoTrackDiv ? this.state.videoTrackDiv : ""  }
-                    {  this.state.chartDataDiv ? this.state.chartDataDiv : ""    }
+                <div id={this.unique + 'webrtcstream'}>
+                    <div id={this.unique + 'datastream'}>
+                        {  this.state.chartDataDiv ? this.state.chartDataDiv : ""    }
+                    </div>
+                    <div id={this.unique + 'videostream'}>
+                        {  this.state.videoTrackDiv ? this.state.videoTrackDiv : ""  }
+                    </div>
+                    <div id={this.unique + 'audiostream'}>
+                        {  this.state.audioTrackDiv ? this.state.audioTrackDiv : ""  }
+                    </div>
                 </div>
             </div>
         )

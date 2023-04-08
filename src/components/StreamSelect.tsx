@@ -8,12 +8,21 @@ export class StreamSelect extends sComponent {
         availableStreams:{},
         activeStream:undefined
     }
+
+    onchange=()=>{}
+
+    constructor(props:{onChange:()=>void}) {
+        super(props);
+        if(props?.onChange) 
+            this.onchange = props.onChange;
+    }
     
     render() {
         
         let onchange = (ev) => {
             let value = ev.target.value;
             this.setState({activeStream:value});
+            this.onchange();
         }
 
         return (
