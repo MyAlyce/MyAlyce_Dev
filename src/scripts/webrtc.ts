@@ -116,6 +116,7 @@ export let answerCall = async (call:RTCCallProps) => {
     let rtc = await webrtc.answerCall(call as any);
     
     rtc.onnegotiationneeded = async () => { //you need to implement this
+        console.log('negotiating');
         const offer = await (rtc as any).rtc.createOffer();
         if ((rtc as any).rtc.signalingState != "stable") return;
         await (rtc as any).rtc.setLocalDescription(offer);
@@ -168,34 +169,36 @@ webrtc.subscribe('receiveCallInformation', (id) => {
     console.log('received call information:', id);
 
     let call = webrtc.unanswered[id] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
-             
-    if(!call.onicecandidate) call.onicecandidate = (ev) => {
-        if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
-            let cid = `peercandidate${Math.floor(Math.random()*1000000000000000)}`;
-            usersocket.run(
-                'runConnection', //run this function on the backend router
-                [
-                    call.caller, //run this connection 
-                    'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                    [ //and pass these arguments
-                        'receiveCallInformation', //run this function on the user's end
-                        {
-                            _id:call._id, 
-                            peercandidates:{[cid]:ev.candidate}
-                        }
-                    ],
-                    call.socketId
-                ]
-            ).then((id) => {
-                console.log('call information echoed from peer:', id);
-            });
+         
+    if(call) {
+        if(!call.onicecandidate) call.onicecandidate = (ev) => {
+            if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
+                let cid = `peercandidate${Math.floor(Math.random()*1000000000000000)}`;
+                usersocket.run(
+                    'runConnection', //run this function on the backend router
+                    [
+                        call.caller, //run this connection 
+                        'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                        [ //and pass these arguments
+                            'receiveCallInformation', //run this function on the user's end
+                            {
+                                _id:call._id, 
+                                peercandidates:{[cid]:ev.candidate}
+                            }
+                        ],
+                        call.socketId
+                    ]
+                ).then((id) => {
+                    console.log('call information echoed from peer:', id);
+                });
+            }
         }
+    
+        state.setState({
+            unansweredCalls:webrtc.unanswered
+        }); //update this event for the app
+    
     }
-
-    state.setState({
-        unansweredCalls:webrtc.unanswered
-    }); //update this event for the app
-
 });
 
 
