@@ -6,7 +6,7 @@ import React from 'react'
 import { sComponent } from '../state.component';
 
 
-import { RTCCallProps, RTCCallInfo, answerCall, enableDeviceStream, startCall  } from "../../scripts/webrtc";
+import { RTCCallProps, RTCCallInfo, answerCall, enableDeviceStream, startCall, disableVideo, enableVideo, disableAudio, enableAudio  } from "../../scripts/webrtc";
 import { Chart } from "../Chart";
 import { StreamSelect } from "../StreamSelect";
 import { Avatar, Button } from "../lib/src";
@@ -35,7 +35,7 @@ export const createAudioDiv = (call:WebRTCInfo) => {
     }
 
     call.streams?.forEach((s) => {
-        if(s.getAudioTracks().length > 0) {
+        if(s?.getAudioTracks().length > 0 && s.active) {
             //@ts-ignore
             let src = Howler.ctx.createMediaStreamSource(s);
             let gainNode = src.context.createGain();
@@ -59,7 +59,7 @@ export const createAudioDiv = (call:WebRTCInfo) => {
 export const createVideoDiv = (call:WebRTCInfo) => {
     
     call.streams?.forEach((s) => {
-        if(s.getVideoTracks().length > 0) {
+        if(s?.getVideoTracks().length > 0 && s.active) {
             let video = document.createElement('video');
             video.srcObject = s;
 
@@ -195,7 +195,7 @@ export class WebRTCComponent extends sComponent {
         
     }
 
-    setupCallUI(call) {
+    setupCallUI(call:RTCCallProps) {
          //overwrites the default message
          call.ondatachannel = (ev) => {
             console.log('call started with', call.firstName, call.lastName);
@@ -246,8 +246,19 @@ export class WebRTCComponent extends sComponent {
             
             //if video, else if audio, else if video & audio
             if(this.state.activeStream === call._id) this.setState({
-                videoTrackDiv:createVideoDiv(call)
+                videoTrackDiv:createVideoDiv(call as any)
             });
+        }
+
+        call.removetrack = (ev) => {
+            if(this.state.activeStream === call._id) {
+                if(ev.track.kind == 'audio') {
+                    this.removeStreamAudio();
+                } 
+                if(ev.track.kind == 'video') {
+                    this.removeStreamVideo();
+                }
+            }
         }
     }
 
@@ -259,7 +270,37 @@ export class WebRTCComponent extends sComponent {
         });
     }
 
-    render() {
+    removeStreamVideo() {
+        this.setState({
+            videoTrackDiv:undefined
+        });
+    }
+
+    removeStreamAudio() {
+        this.setState({
+            audioTrackDiv:undefined
+        });
+    }
+
+    render = () => {
+
+        let hasAudio;
+        let hasVideo;
+
+        if(this.state.activeStream) {
+            let stream = this.state.availableStreams[this.state.activeStream];
+
+            stream.senders?.forEach((s) => {
+                if(s?.track?.kind === 'audio') {
+                    hasAudio = true;
+                }
+                if(s?.track?.kind === 'video') {
+                    hasVideo = true;
+                }
+            })
+        }
+
+
         return (
             <div>
                 <div id='receivedCalls'>
@@ -274,16 +315,32 @@ export class WebRTCComponent extends sComponent {
                 <hr/>
                     <StreamSelect onChange={()=>{ if(this.state.activeStream) this.setActiveStream(this.state.availableStreams[this.state.activeStream] as any) }} />
                     Stream:
-                <div id={this.unique + 'webrtcstream'}>
-                    <div id={this.unique + 'datastream'}>
-                        {  this.state.chartDataDiv ? this.state.chartDataDiv : ""    }
+                <div id={this.unique + 'webrtcstream'}>{
+                    this.state.activeStream ? (
+                    <div>
+                        {hasVideo ? <button onClick={() => {
+                            disableVideo(this.state.availableStreams[this.state.activeStream as any] as any);
+                        }}>Disable My Video</button> : <button onClick={() => {
+                            enableVideo(this.state.availableStreams[this.state.activeStream as any] as any);
+                        }}>Enable My Video</button>}
+                        {hasAudio ? <button onClick={() => {
+                            disableAudio(this.state.availableStreams[this.state.activeStream as any] as any);
+                        }}>Disable My Audio</button> : <button onClick={() => {
+                            enableAudio(this.state.availableStreams[this.state.activeStream as any] as any);
+                        }}>Enable My Audio</button>}
+                        <div id={this.unique + 'datastream'}>
+                            {  this.state.chartDataDiv ? this.state.chartDataDiv : ""    }
+                        </div>
+                        <div id={this.unique + 'videostream'}>
+                            {  this.state.videoTrackDiv ? this.state.videoTrackDiv : ""  }
+                        </div>
+                        <div id={this.unique + 'audiostream'}>
+                            {  this.state.audioTrackDiv ? this.state.audioTrackDiv : ""  }
+                        </div>
                     </div>
-                    <div id={this.unique + 'videostream'}>
-                        {  this.state.videoTrackDiv ? this.state.videoTrackDiv : ""  }
-                    </div>
-                    <div id={this.unique + 'audiostream'}>
-                        {  this.state.audioTrackDiv ? this.state.audioTrackDiv : ""  }
-                    </div>
+                    ) : ""
+                }
+                    
                 </div>
             </div>
         )
