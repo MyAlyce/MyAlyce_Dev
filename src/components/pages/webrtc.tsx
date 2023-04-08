@@ -35,7 +35,7 @@ export const createAudioDiv = (call:WebRTCInfo) => {
     }
 
     call.streams?.forEach((s) => {
-        if(s?.getAudioTracks().length > 0 && s.active) {
+        if((s as MediaStream)?.getAudioTracks().length > 0) {
             //@ts-ignore
             let src = Howler.ctx.createMediaStreamSource(s);
             let gainNode = src.context.createGain();
@@ -59,9 +59,9 @@ export const createAudioDiv = (call:WebRTCInfo) => {
 export const createVideoDiv = (call:WebRTCInfo) => {
     
     call.streams?.forEach((s) => {
-        if(s?.getVideoTracks().length > 0 && s.active) {
+        if((s as MediaStream)?.getVideoTracks().length > 0) {
             let video = document.createElement('video');
-            video.srcObject = s;
+            video.srcObject = s as MediaStream;
 
             return (
                 <div  ref={ (ref) => {

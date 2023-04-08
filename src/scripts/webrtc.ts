@@ -59,6 +59,25 @@ export async function startCall(userId) {
         // }
     });
 
+    rtc.onnegotiationneeded = async () => { //you need to implement this
+        const offer = await (rtc as any).rtc.createOffer();
+        if ((rtc as any).rtc.signalingState != "stable") return;
+        await (rtc as any).rtc.setLocalDescription(offer);
+        usersocket.run(
+            'runConnection', //run this function on the backend router
+            [
+                (rtc as RTCCallInfo).caller, //run this connection 
+                'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                [ //and pass these arguments
+                    'negotiateCall', //run this function on the user's end
+                    [rtc._id, (rtc as any).rtc.localDescription]
+                ],
+                (rtc as RTCCallInfo).socketId
+            ]
+        ).then((description) => {
+            webrtc.negotiateCall(rtc._id as string, description);
+        });
+    };
 
 
     usersocket.post(
@@ -94,9 +113,28 @@ export let answerCall = async (call:RTCCallProps) => {
         }
     }
     
-    
     let rtc = await webrtc.answerCall(call as any);
     
+    rtc.onnegotiationneeded = async () => { //you need to implement this
+        const offer = await (rtc as any).rtc.createOffer();
+        if ((rtc as any).rtc.signalingState != "stable") return;
+        await (rtc as any).rtc.setLocalDescription(offer);
+        usersocket.run(
+            'runConnection', //run this function on the backend router
+            [
+                call.caller, //run this connection 
+                'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                [ //and pass these arguments
+                    'negotiateCall', //run this function on the user's end
+                    [rtc._id, (rtc as any).rtc.localDescription]
+                ],
+                call.socketId
+            ]
+        ).then((description) => {
+            webrtc.negotiateCall(rtc._id as string, description);
+        });
+    };
+
     usersocket.run(
         'runConnection', //run this function on the backend router
         [
@@ -131,7 +169,7 @@ webrtc.subscribe('receiveCallInformation', (id) => {
 
     let call = webrtc.unanswered[id] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
              
-    call.onicecandidate = (ev) => {
+    if(!call.onicecandidate) call.onicecandidate = (ev) => {
         if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
             let cid = `peercandidate${Math.floor(Math.random()*1000000000000000)}`;
             usersocket.run(
