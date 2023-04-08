@@ -16,7 +16,7 @@ export type ButtonProps = PropsWithChildren<{
   /** Can add a badge to the button */
   badge?: number | boolean;
   disabled?: boolean;
-
+  id?:string,
   /** Allows to set the button html type. Default: `"button"` */
   htmlType?: 'reset' | 'submit' | 'button';
 }> & ComponentBase;
