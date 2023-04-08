@@ -288,11 +288,13 @@ export function enableVideo(call:RTCCallInfo, minWidth?:320|640|1024|1280|1920|2
 export function disableAudio(call:RTCCallInfo) {
     if(call.audioSender) {
         call.rtc.removeTrack(call.audioSender);
+        call.audioSender = undefined;
     }
 }
 
 export function disableVideo(call:RTCCallInfo) {
     if(call.videoSender) {
         call.rtc.removeTrack(call.videoSender);
+        call.videoSender = undefined;
     }
 }
