@@ -210,7 +210,8 @@ export function enableAudio(call:RTCCallInfo) {
     let senders = webrtc.addUserMedia(
         call.rtc, 
         {
-            audio:false
+            audio:true,
+            video:false
         }, 
         call 
     );
