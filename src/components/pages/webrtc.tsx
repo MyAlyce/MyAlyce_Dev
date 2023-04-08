@@ -135,7 +135,7 @@ export class WebRTCComponent extends sComponent {
                 //console.log(user);
                 divs.push( //turn into a dropdown or something
                     <div key={user._id}>
-                        <div>User: <Avatar
+                        <div><Avatar
                             dataState='done'
                             imgSrc={user.pictureUrl ? user.pictureUrl : personIcon}
                             size='xs'
@@ -332,18 +332,25 @@ export class WebRTCComponent extends sComponent {
 
         return (
             <div className="div">
+                <h1>WebRTC Communication</h1>
+
+                <h2>Received Calls</h2>
                 <div id='receivedCalls'>
-                    Received Calls
                     { this.state.unansweredCallDivs && this.state.unansweredCallDivs.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
+
+                <h2>Available Users</h2>
                 <div id='availableUsers'>
-                    Available Users
                     { this.state.availableUsers && this.state.availableUsers.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
+
+                <h2>Select Stream</h2>
+
                     <StreamSelect onChange={()=>{ if(this.state.activeStream) this.setActiveStream(this.state.availableStreams[this.state.activeStream] as any) }} />
-                    Stream:
+                
+                <label>Streams:</label>
                 <div id={this.unique + 'webrtcstream'}>{
                     this.state.activeStream ? (
                     <div>

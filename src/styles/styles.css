@@ -33,4 +33,29 @@ body {
 .div .chartContainer {
     width:100%;
     height:500px;
-} 
+
+    background: black;
+}
+
+#viewcontent {
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+}
+
+h1, h2, h3, h4 {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 80%;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

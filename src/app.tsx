@@ -86,13 +86,12 @@ export class App extends sComponent {
                                 { type: 'action', icon: 'P' as any, onClick: () => this.setState({   'route':'/peers',       navOpen:false}), title: 'WebRTC' },
                                 { type: 'action', icon: 'R' as any, onClick: () => this.setState({   'route':'/recordings',  navOpen:false}), title: 'Recordings' },
                                 { type: 'action', icon: 'S' as any, onClick: () => this.setState({   'route':'/settings',       navOpen:false}), title: 'Settings' },
-                                { type: 'action', icon: 'D' as any, onClick: () => this.setState({ 'route':'/device',         navOpen:false}),      title: 'Device' },
-                                { type: 'action', icon: 'Dev' as any, onClick: () => this.setState({ 'route':'/dev',         navOpen:false}),      title: 'Developer Tools' },
+                                { type: 'action', icon: 'D' as any, onClick: () => this.setState({ 'route':'/dev',         navOpen:false}),      title: 'Developer Tools' },
 
                             ]}
                         /> 
                     <div id="view">
-                      <TopBar zIndex={0} onMenuExpand={() => {
+                      <TopBar zIndex={100} onMenuExpand={() => {
                             let open = !this.state.navOpen;
                             this.setState({'navOpen':open})
                           }} 
