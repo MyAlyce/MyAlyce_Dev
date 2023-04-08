@@ -77,7 +77,7 @@ export class Recordings extends sComponent {
     render() {
 
         return (
-            <div>
+            <div className='div'>
                 <StreamSelect/>
                 { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream);}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream);}}>Record</Button> }
                 <br/>

@@ -15,7 +15,7 @@ export class Dev extends sComponent {
     render() {
 
         return (
-            <div>
+            <div className='div'>
             <h1>Browser Notification Example</h1>
             <Button onClick={()=>{showNotification("Hello World","Exmaple Notification")}}>Show Notification</Button>
           </div>

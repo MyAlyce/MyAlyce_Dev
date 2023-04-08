@@ -331,7 +331,7 @@ export class WebRTCComponent extends sComponent {
 
 
         return (
-            <div>
+            <div className="div">
                 <div id='receivedCalls'>
                     Received Calls
                     { this.state.unansweredCallDivs && this.state.unansweredCallDivs.map((div) => div ? div : "" ) }
