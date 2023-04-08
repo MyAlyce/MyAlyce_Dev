@@ -89,6 +89,7 @@ export class WebRTCComponent extends sComponent {
     listed = {};
     subscriptions = {} as any;
     evSub; streamSelectSub;
+    messages = [] as any;
 
     constructor(props:{streamId?:string}) {
         super(props);
@@ -204,6 +205,18 @@ export class WebRTCComponent extends sComponent {
             enableDeviceStream(call._id); //enable my device to stream data to this endpoint
             
             ev.channel.onmessage = (ev) => { 
+                if(ev.data.message) {
+
+                    if(!call.messages) call.messages = [] as any;
+                    call.messages.push({message:ev.data.message, timestamp:Date.now(), from:call.firstName + ' ' + call.lastName});
+
+                    this.messages.push(<div>
+                        {call.firstName} {call.lastName}: {ev.data.message} | {new Date().toLocaleTimeString()}
+                    </div>);
+                    (document.getElementById(this.unique + 'messages') as HTMLElement).insertAdjacentHTML('beforeend',`<div>
+                        ${call.firstName} ${call.lastName}: ${ev.data.message} | ${new Date().toLocaleTimeString()}
+                    </div>`);
+                }
                 if(ev.data.emg) {
                     if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
                     state.setValue(call._id+'emg', ev.data.emg);
@@ -262,6 +275,21 @@ export class WebRTCComponent extends sComponent {
         }
     }
 
+    sendMessage(call:RTCCallInfo) {
+        let message = (document.getElementById(this.unique+'sendmessage') as HTMLInputElement).value;
+        call.send({message:message});
+        if(!call.messages) call.messages = [] as any;
+        call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + ' ' + client.currentUser.lastName});
+        
+        this.messages.push(<div>
+            {client.currentUser.firstName} {client.currentUser.lastName}: {message} | {new Date().toLocaleTimeString()}
+        </div>);
+        
+        (document.getElementById(this.unique + 'messages') as HTMLElement).insertAdjacentHTML('beforeend',`<div>
+            ${client.currentUser.firstName} ${client.currentUser.lastName}: ${message} | ${new Date().toLocaleTimeString()}
+        </div>`);
+    }
+
     setActiveStream(call:RTCCallInfo) {
         this.setState({
             chartDataDiv:createStreamChart(call),
@@ -286,9 +314,10 @@ export class WebRTCComponent extends sComponent {
 
         let hasAudio;
         let hasVideo;
+        let stream: RTCCallInfo|undefined = undefined;
 
         if(this.state.activeStream) {
-            let stream = this.state.availableStreams[this.state.activeStream];
+            stream = this.state.availableStreams[this.state.activeStream] as RTCCallInfo;
 
             stream.senders?.forEach((s) => {
                 if(s?.track?.kind === 'audio') {
@@ -337,6 +366,10 @@ export class WebRTCComponent extends sComponent {
                         <div id={this.unique + 'audiostream'}>
                             {  this.state.audioTrackDiv ? this.state.audioTrackDiv : ""  }
                         </div>
+                        <div id={this.unique + 'messages'}>
+                            { this.messages ? this.messages.map(v => v): ""}
+                        </div>
+                        <input id={this.unique+'sendmessage'} type='text'></input><button id={this.unique+'send'} onClick={()=>{this.sendMessage(stream as RTCCallInfo);}}>Send Message</button>
                     </div>
                     ) : ""
                 }

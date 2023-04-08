@@ -13,8 +13,8 @@ const webrtcData = {
 state.setState(webrtcData);
 
 
-export type RTCCallProps = WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string, videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
-export type RTCCallInfo = WebRTCInfo & {caller:string, firstName:string, lastName:string, socketId:string, videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
+export type RTCCallProps = WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string, messages:{message:string, from:string, timestamp:number}[], videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
+export type RTCCallInfo = WebRTCInfo & {caller:string, firstName:string, lastName:string, socketId:string,  messages:{message:string, from:string, timestamp:number}[],videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
 
 
 export async function startCall(userId) {
