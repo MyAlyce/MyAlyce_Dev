@@ -19,8 +19,8 @@ export class Recordings extends sComponent {
         activeStream:undefined
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.listRecordings();
     }
 
