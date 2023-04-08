@@ -256,10 +256,13 @@ export class WebRTCComponent extends sComponent {
         call.ontrack = (ev) => {
             //received a media track, e.g. audio or video
             //video/audio channel, if video add a video tag, if audio make the audio context
-            
+            console.log('track');
             //if video, else if audio, else if video & audio
-            if(this.state.activeStream === call._id) this.setState({
+            if(ev.track.kind === 'video' && this.state.activeStream === call._id) this.setState({
                 videoTrackDiv:createVideoDiv(call as any)
+            });
+            else if(ev.track.kind === 'audio' && this.state.activeStream === call._id) this.setState({
+                videoTrackDiv:createAudioDiv(call as any)
             });
         }
 
@@ -291,6 +294,7 @@ export class WebRTCComponent extends sComponent {
     }
 
     setActiveStream(call:RTCCallInfo) {
+        if(!call) return;
         this.setState({
             chartDataDiv:createStreamChart(call),
             videoTrackDiv:createVideoDiv(call),
@@ -318,8 +322,8 @@ export class WebRTCComponent extends sComponent {
 
         if(this.state.activeStream) {
             stream = this.state.availableStreams[this.state.activeStream] as RTCCallInfo;
-
-            stream.senders?.forEach((s) => {
+            
+            stream?.senders?.forEach((s) => {
                 if(s?.track?.kind === 'audio') {
                     hasAudio = true;
                 }

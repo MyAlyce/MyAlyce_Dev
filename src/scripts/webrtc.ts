@@ -46,6 +46,25 @@ export async function startCall(userId) {
                 });
             }
         },
+        onnegotiationneeded: async () => { //you need to implement this
+            const offer = await (rtc as any).rtc.createOffer();
+            if ((rtc as any).rtc.signalingState != "stable") return;
+            await (rtc as any).rtc.setLocalDescription(offer);
+            usersocket.run(
+                'runConnection', //run this function on the backend router
+                [
+                    (rtc as RTCCallInfo).caller, //run this connection 
+                    'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                    [ //and pass these arguments
+                        'negotiateCall', //run this function on the user's end
+                        [rtc._id, (rtc as any).rtc.localDescription]
+                    ],
+                    (rtc as RTCCallInfo).socketId
+                ]
+            ).then((description) => {
+                webrtc.negotiateCall(rtc._id as string, description);
+            });
+        },
         onclose:() => {
             for(const key in nodes) {
                 graph.remove(key,true);
@@ -59,25 +78,6 @@ export async function startCall(userId) {
         // }
     });
 
-    rtc.onnegotiationneeded = async () => { //you need to implement this
-        const offer = await (rtc as any).rtc.createOffer();
-        if ((rtc as any).rtc.signalingState != "stable") return;
-        await (rtc as any).rtc.setLocalDescription(offer);
-        usersocket.run(
-            'runConnection', //run this function on the backend router
-            [
-                (rtc as RTCCallInfo).caller, //run this connection 
-                'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                [ //and pass these arguments
-                    'negotiateCall', //run this function on the user's end
-                    [rtc._id, (rtc as any).rtc.localDescription]
-                ],
-                (rtc as RTCCallInfo).socketId
-            ]
-        ).then((description) => {
-            webrtc.negotiateCall(rtc._id as string, description);
-        });
-    };
 
 
     usersocket.post(
@@ -113,9 +113,7 @@ export let answerCall = async (call:RTCCallProps) => {
         }
     }
     
-    let rtc = await webrtc.answerCall(call as any);
-    
-    rtc.onnegotiationneeded = async () => { //you need to implement this
+    call.onnegotiationneeded = async () => { //you need to implement this
         console.log('negotiating');
         const offer = await (rtc as any).rtc.createOffer();
         if ((rtc as any).rtc.signalingState != "stable") return;
@@ -136,6 +134,8 @@ export let answerCall = async (call:RTCCallProps) => {
         });
     };
 
+    let rtc = await webrtc.answerCall(call as any);
+    
     usersocket.run(
         'runConnection', //run this function on the backend router
         [
