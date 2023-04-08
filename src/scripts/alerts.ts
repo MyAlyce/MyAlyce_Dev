@@ -22,12 +22,15 @@ export const showNotification = (title,message) => {
     // Check if browser supports notifications
     if ('Notification' in window && Notification.permission === 'granted') {
       // Create a notification
+      
       new Notification(title, {
         body:message,
         icon: 'favicon.ico',
       });
+
     } else if ('Notification' in window && Notification.permission !== 'denied') {
       // Request permission to show notifications
+      
       Notification.requestPermission()
         .then(permission => {
           if (permission === 'granted') {
@@ -41,6 +44,7 @@ export const showNotification = (title,message) => {
         .catch(error => {
           console.error('Failed to request notification permission:', error);
         });
+    
     }
   };
 
@@ -59,7 +63,7 @@ export function setupAlerts(
         let node = graph.add(new HeartRateAlert(
             (event) => {
                 console.log("Heart Rate Alert:", event);
-                let sound = new Howl({src:'./alerts/sounds/alarm.wav'}); // Only play the sound if a value has been provided
+                let sound = new Howl({src:'./sounds/alarm.wav'}); // Only play the sound if a value has been provided
                 sound.play(undefined,false);
                 showNotification("Heart Rate Alert:", `bpm:${event.bpm}` );
             },
@@ -72,7 +76,7 @@ export function setupAlerts(
         let node = graph.add(new BreathAlert(
             (event) => {
                 console.log("Heart Rate Alert:", event);
-                let sound = new Howl({src:'./alerts/sounds/alarm.wav'}); // Only play the sound if a value has been provided
+                let sound = new Howl({src:'./sounds/alarm.wav'}); // Only play the sound if a value has been provided
                 sound.play(undefined,false);
             },
             streamId ? streamId+'breath' : 'breath',
@@ -84,7 +88,7 @@ export function setupAlerts(
         let node = graph.add(new FallAlert(
             (event) => {
                 console.log("Heart Rate Alert:", event);
-                let sound = new Howl({src:'./alerts/sounds/alarm.wav'}); // Only play the sound if a value has been provided
+                let sound = new Howl({src:'./sounds/alarm.wav'}); // Only play the sound if a value has been provided
                 sound.play(undefined,false);
             },
             streamId ? streamId+'imu' : 'imu',
