@@ -1,6 +1,8 @@
 import React from 'react'
 import { sComponent } from '../state.component'
 import { showNotification } from '../../scripts/alerts'
+import { Button } from '../lib/src'
+
 export class Dev extends sComponent {
 
     state = { //synced with global state
@@ -15,7 +17,7 @@ export class Dev extends sComponent {
         return (
             <div>
             <h1>Browser Notification Example</h1>
-            <button onClick={()=>{showNotification("Hello World","Exmaple Notification")}}>Show Notification</button>
+            <Button onClick={()=>{showNotification("Hello World","Exmaple Notification")}}>Show Notification</Button>
           </div>
         )
     }

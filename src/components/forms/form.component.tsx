@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
+import { Button } from '../lib/src';
 
 export type FormInputSettings = {
     type:'text' | 'number' | 'email' | 'password' | 
         'date' | 'file' | 'datetime-local' | 'checkbox' | 
-        'color' | 'button' | 'radio' | 'range' | 'search' | 
+        'color' | 'Button' | 'radio' | 'range' | 'search' | 
         'submit' | 'url' | 'month' | 'week' | 'hidden' |
         'image' | 'reset' | 'time' | 'tel',
     name:string,
@@ -56,7 +57,7 @@ export class FormInputSetting {
     constructor(
         type:'text' | 'number' | 'email' | 'password' | 
         'date' | 'file' | 'datetime-local' | 'checkbox' | 
-        'color' | 'button' | 'radio' | 'range' | 'search' | 
+        'color' | 'Button' | 'radio' | 'range' | 'search' | 
         'submit' | 'url' | 'month' | 'week' | 'hidden' |
         'image' | 'reset' | 'time' | 'tel',
         name:string,
@@ -97,10 +98,10 @@ export class FormTemplate extends Component<FormProps> {
                 })}
                 {this.props.custom && this.props.custom}
                 {this.props.onSubmit && 
-                    <button id={this.id+'submit'} className={this.props.submitClass} onClick={()=>{(this.props.onSubmit as any)(this.id)}}>✔️</button>
+                    <Button id={this.id+'submit'} className={this.props.submitClass} onClick={()=>{(this.props.onSubmit as any)(this.id)}}>✔️</Button>
                 }
                 {this.props.onCancel &&
-                    <button id={this.id+'cancel'} className={this.props.cancelClass} onClick={()=>{(this.props.onCancel as any)(this.id)}}>❌</button>
+                    <Button id={this.id+'cancel'} className={this.props.cancelClass} onClick={()=>{(this.props.onCancel as any)(this.id)}}>❌</Button>
                 }
             </form>
         )

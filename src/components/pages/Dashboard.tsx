@@ -4,6 +4,8 @@ import { Device } from '../device'
 import { StreamSelect } from '../StreamSelect'
 import { NoteTaking } from '../NoteTaking'
 
+import { client } from '../../scripts/client';
+
 export class Dashboard extends sComponent {
 
     state = { //synced with global state
@@ -14,8 +16,10 @@ export class Dashboard extends sComponent {
 
     render() {
 
+        console.log(client.currentUser)
         return (
             <div>
+                <h1>Welcome {client.currentUser.firstName}</h1>
                 <div>
                 {/*Device/Stream select */}
                     <StreamSelect/>

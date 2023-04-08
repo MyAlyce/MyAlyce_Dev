@@ -1,7 +1,7 @@
 import React from 'react'
 import { sComponent } from './state.component'
 import { client } from '../scripts/client';
-import { Avatar } from '../components/lib/src/index';
+import { Avatar, Button } from '../components/lib/src/index';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
 
 let personIcon = './assets/person.jpg';
@@ -147,7 +147,7 @@ export class UserAuths extends sComponent {
                 this.sentRequests.push(
                     <div>
                         To: {req.receivingName}
-                        <button onClick={deleteRequest}>❌</button>
+                        <Button onClick={deleteRequest}>❌</Button>
                     </div>
                 );
             });
@@ -185,8 +185,8 @@ export class UserAuths extends sComponent {
                 this.userRequests.push(
                     <div>
                         User: {req.firstName} {req.lastName}<br/>
-                        <button onClick={accept}>✔️</button>
-                        <button onClick={reject}>❌</button>
+                        <Button onClick={accept}>✔️</Button>
+                        <Button onClick={reject}>❌</Button>
                     </div>
                 );
             });
@@ -198,36 +198,43 @@ export class UserAuths extends sComponent {
     render() {
         return (
             <div id={this.unique}>
+                <h2>User Authorizations</h2>
+
                 <div>
-                    Search Users<br/>
-                    Name or Email:<input  id={this.unique+'query'} />
-                    <button onClick={this.queryUsers} >Search</button>
-                </div>
-                <div>
-                    Results:
+                    <h3>Search Users</h3>
+                    <div>
+                        <label>Name or Email</label><input id={this.unique+'query'} type="text"></input>
+                        <Button onClick={this.queryUsers} >Search</Button>
+                    </div>
+
+                    <h4>Results</h4>
                     <div>
                         <select id={this.unique+'select'}>
                             { this.queryResults.map(v => v) }
                         </select>
-                        <button onClick={this.authFromSelect}>Add Peer</button>
+                        <Button onClick={this.authFromSelect}>Add Peer</Button>
                     </div>
                 </div>
+
                 <div>
-                    Requests:
+                    <h3>Your Authorizations</h3>
                     <div>
-                        { this.userRequests.map(v => v) }
+                        <h4>Requests</h4>
+                        <div>
+                            { this.userRequests.map(v => v) }
+                        </div>
                     </div>
-                </div>
-                <div>
-                    Outgoing:
                     <div>
-                        { this.userRequests.map(v => v) }
+                        <h4>Outgoing</h4>
+                        <div>
+                            { this.userRequests.map(v => v) }
+                        </div>
                     </div>
-                </div>
-                <div>
-                    Authorized:
                     <div>
-                        { this.existingAuths.map(v => v) }
+                        <h4>Authorized</h4>
+                        <div>
+                            { this.existingAuths.map(v => v) }
+                        </div>
                     </div>
                 </div>
             </div>

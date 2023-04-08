@@ -347,16 +347,16 @@ export class WebRTCComponent extends sComponent {
                 <div id={this.unique + 'webrtcstream'}>{
                     this.state.activeStream ? (
                     <div>
-                        {hasVideo ? <button onClick={() => {
+                        {hasVideo ? <Button onClick={() => {
                             disableVideo(this.state.availableStreams[this.state.activeStream as any] as any);
-                        }}>Disable My Video</button> : <button onClick={() => {
+                        }}>Disable My Video</Button> : <Button onClick={() => {
                             enableVideo(this.state.availableStreams[this.state.activeStream as any] as any);
-                        }}>Enable My Video</button>}
-                        {hasAudio ? <button onClick={() => {
+                        }}>Enable My Video</Button>}
+                        {hasAudio ? <Button onClick={() => {
                             disableAudio(this.state.availableStreams[this.state.activeStream as any] as any);
-                        }}>Disable My Audio</button> : <button onClick={() => {
+                        }}>Disable My Audio</Button> : <Button onClick={() => {
                             enableAudio(this.state.availableStreams[this.state.activeStream as any] as any);
-                        }}>Enable My Audio</button>}
+                        }}>Enable My Audio</Button>}
                         <div id={this.unique + 'datastream'}>
                             {  this.state.chartDataDiv ? this.state.chartDataDiv : ""    }
                         </div>
@@ -369,7 +369,7 @@ export class WebRTCComponent extends sComponent {
                         <div id={this.unique + 'messages'}>
                             { this.messages ? this.messages.map(v => v): ""}
                         </div>
-                        <input id={this.unique+'sendmessage'} type='text'></input><button id={this.unique+'send'} onClick={()=>{this.sendMessage(stream as RTCCallInfo);}}>Send Message</button>
+                        <input id={this.unique+'sendmessage'} type='text'></input><Button id={this.unique+'send'} onClick={()=>{this.sendMessage(stream as RTCCallInfo);}}>Send Message</Button>
                     </div>
                     ) : ""
                 }

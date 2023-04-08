@@ -22,24 +22,24 @@ export class SettingsView extends sComponent  {
 
     render() {
 
-        let viewing = client.getLocalData('profile',{_id:this.state.viewingId}) as ProfileStruct;
+        const data = client.currentUser
+        // let viewing = client.getLocalData('profile',{_id:this.state.viewingId}) as ProfileStruct;
 
         let fbreg = false;
-        if((viewing?.data as any)?.fitbit?.access_token) {
+        if((data)?.fitbit?.access_token) {
             fbreg = true;
         }
 
+        console.log('Is registered', fbreg, data)
+
         return (
         <div>
-            <div>
-                Profile Deets + Editing
-            </div>
+            <h1>Settings</h1>
             <UserAuths/>
+
             <div>
-                More fine grained permissions and opt-in stuff<br/>
-                <span>Add Team Member</span><input type='text'></input><Button onClick={this.addUser}>Add User</Button>
-                <span>Register Fitbit: <Button style={{border:'1px solid black', borderRadius:'5px'}} onClick={this.setupFitbit}>Authorize Fitbit</Button></span>
-                <div>Fitbit Registered: {fbreg}</div>
+                <h2>Other Settings</h2>
+                <label>Add Team Member</label><input type='text'></input><Button onClick={this.addUser}>Add User</Button>
             </div>
         </div>
         );

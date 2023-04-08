@@ -4,6 +4,7 @@ import { workers } from "device-decoder";
 
 import gsworker from '../scripts/device.worker'
 import { client } from '../scripts/client';
+import { Button } from './lib/src';
 
 export class NoteTaking extends sComponent {
 
@@ -60,7 +61,7 @@ export class NoteTaking extends sComponent {
                 Event: <input id={this.id+'note'} type='text'/><br/>
                 Time: <input id={this.id+'time'} type='datetime-local' value={localDatetime} onChange={()=>{}}/><br/>
                 Grade?: <input id={this.id+'number'} type='number' min='0' max='10'></input>
-                <button onClick={this.submit}>Submit</button>
+                <Button onClick={this.submit}>Submit</Button>
             </div>
         );
     }
