@@ -27,7 +27,6 @@ export class StreamSelect extends sComponent {
 
         return (
             <div>
-                Select Stream:
                 <select onChange={onchange}>
                     <option selected={this.state.activeStream == undefined} value={undefined}>My Device</option>
                     { Object.keys(this.state.availableStreams).length > 0 &&

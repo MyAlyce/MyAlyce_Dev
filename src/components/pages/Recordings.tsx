@@ -78,11 +78,12 @@ export class Recordings extends sComponent {
 
         return (
             <div>
+                <h1>Recording Manager</h1>
                 <StreamSelect/>
                 { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream);}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream);}}>Record</Button> }
                 <br/>
                 <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'}/>
-                Recordings:
+                <h2>Recordings</h2>
                 <div>
                     { this.state.recordings ? this.state.recordings : "" }
                 </div>
