@@ -30,17 +30,20 @@ export class Chart extends sComponent {
     lines?:{[key:string]:WebglLineProps};
     sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[];
     streamId?:string;
+    title?:string;
 
     constructor(props:{
         lines?:{[key:string]:WebglLineProps},
         sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[],
-        streamId?:string
+        streamId?:string,
+        title?:string
     }) {
         super(props as any);
 
         this.lines = props.lines;
         this.sensors = props.sensors;
         this.streamId = props.streamId;
+        this.title = props.title;
     }
 
     componentDidMount = () => {
@@ -72,7 +75,10 @@ export class Chart extends sComponent {
         if(this.sensors) {
             if(this.sensors.includes('emg')) {
                 lines['0'] = ads131m08ChartSettings.lines?.['0'] as WebglLineProps,
-                lines['1'] = ads131m08ChartSettings.lines?.['1'] as WebglLineProps
+                lines['1'] = ads131m08ChartSettings.lines?.['1'] as WebglLineProps,
+                lines['2'] = ads131m08ChartSettings.lines?.['2'] as WebglLineProps,
+                lines['3'] = ads131m08ChartSettings.lines?.['3'] as WebglLineProps,
+                lines['4'] = ads131m08ChartSettings.lines?.['4'] as WebglLineProps
             }
             if(this.sensors.includes('ppg')) {
                 Object.assign(lines,{
@@ -163,12 +169,16 @@ export class Chart extends sComponent {
     
     render() {
         return (
-            <div className='chartContainer' ref={ (ref) => {
-                ref?.appendChild(this.canvas); 
-                ref?.appendChild(this.overlay);
-                /*this is an example of weird reactjs crap*/
-            }}>
+            <div>
+                <div>{ this.title }</div>
+                <div className='chartContainer' ref={ (ref) => {
+                    ref?.appendChild(this.canvas); 
+                    ref?.appendChild(this.overlay);
+                    /*this is an example of weird reactjs crap*/
+                }}>
+                </div>
             </div>
+            
         )
     }
 }

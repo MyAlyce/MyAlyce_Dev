@@ -2,7 +2,6 @@ import React from 'react'
 import {sComponent} from './state.component'
 
 
-import { DeviceConnect } from './DeviceConnect';
 import { Chart } from './Chart';
 import { StreamSelect } from './StreamSelect';
 import { state } from 'graphscript';
@@ -41,7 +40,7 @@ export class ChartGroup extends sComponent {
 
         if(!sensors || sensors?.includes('emg')) {
             let makeChart = () => {
-                this.activeCharts['emg'] = <Chart sensors={['emg']} streamId={streamId}/>;
+                this.activeCharts['emg'] = <Chart sensors={['emg']} streamId={streamId} title={"EMG & ECG"}/>;
                 if(!this.unmounted) requestAnimationFrame(this.render); //this call fired repeatedly will only fire once on the next frame
             }
             if(state.data[streamId ? streamId+'detectedEMG' : 'detectedEMG']) {
@@ -51,7 +50,7 @@ export class ChartGroup extends sComponent {
         }
         if(!sensors || sensors?.includes('ppg')) {
             let makeChart = () => {
-                this.activeCharts['ppg'] = <Chart sensors={['ppg']} streamId={streamId}/>;
+                this.activeCharts['ppg'] = <Chart sensors={['ppg']} streamId={streamId} title={"Pulse Oximeter"}/>;
                 if(!this.unmounted) requestAnimationFrame(this.render);
             }
             if(state.data[streamId ? streamId+'detectedPPG' : 'detectedPPG']) {
@@ -60,7 +59,7 @@ export class ChartGroup extends sComponent {
         }
         if(!sensors || sensors?.includes('hr')) {
             let makeChart = () => {
-                this.activeCharts['hr'] = <Chart sensors={['hr']} streamId={streamId}/>;
+                this.activeCharts['hr'] = <Chart sensors={['hr']} streamId={streamId} title={"Heart Rate & HRV"}/>;
                 if(!this.unmounted) requestAnimationFrame(this.render);
             }
             if(state.data[streamId ? streamId+'detectedPPG' : 'detectedPPG']) {
@@ -69,7 +68,7 @@ export class ChartGroup extends sComponent {
         }
         if(!sensors || sensors?.includes('imu')) {
             let makeChart = () => {
-                this.activeCharts['imu'] = <Chart sensors={['env']} streamId={streamId}/>;
+                this.activeCharts['imu'] = <Chart sensors={['imu']} streamId={streamId} title={"Accelerometer"}/>;
                 if(!this.unmounted) requestAnimationFrame(this.render);
             }
             if(state.data[streamId ? streamId+'detectedIMU' : 'detectedIMU']) {
@@ -79,7 +78,7 @@ export class ChartGroup extends sComponent {
         }
         if(!sensors || sensors?.includes('breath')) {
             let makeChart = () => {
-                this.activeCharts['imu'] = <Chart sensors={['env']} streamId={streamId} />;
+                this.activeCharts['breath'] = <Chart sensors={['breath']} streamId={streamId} title={"Breathing"}/>;
                 if(!this.unmounted) requestAnimationFrame(this.render); 
             }
             if(state.data[streamId ? streamId+'detectedPPG' : 'detectedPPG']) {
@@ -88,7 +87,7 @@ export class ChartGroup extends sComponent {
         }
         if(!sensors || sensors?.includes('env')) {
             let makeChart = () => {
-                this.activeCharts['env'] = <Chart sensors={['env']} streamId={streamId}/>;
+                this.activeCharts['env'] = <Chart sensors={['env']} streamId={streamId} title={"Environment"}/>;
                 if(!this.unmounted) requestAnimationFrame(this.render);
             }
             if(state.data[streamId ? streamId+'detectedENV' : 'detectedENV']) {

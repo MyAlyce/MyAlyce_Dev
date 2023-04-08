@@ -11,6 +11,7 @@ import { Chart } from "../Chart";
 import { StreamSelect } from "../StreamSelect";
 import { Avatar, Button } from "../lib/src";
 import { Howler } from "howler";
+import { ChartGroup } from "../ChartGroup";
 
 let personIcon = './assets/person.jpg';
 
@@ -20,9 +21,8 @@ let personIcon = './assets/person.jpg';
 export const createStreamChart = (call) => {
     return (
         <div>
-            <Chart
-                remote={true}
-                deviceId={call._id}
+            <ChartGroup
+                streamId={call._id}
             />
         </div>
     )

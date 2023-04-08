@@ -39,7 +39,7 @@ export class Device extends sComponent {
                     }
                 </div>
                 <div>{    
-                    this.state.deviceConnected ? (<ChartGroup streamId={this.state.activeStream}/>) : (<Chart sensors={['emg']}/>)
+                    this.state.deviceConnected ? (<ChartGroup streamId={this.state.activeStream}/>) : (<Chart sensors={['emg']} title={"EMG & ECG"}/>)
                 }</div>
             </div>
         )
