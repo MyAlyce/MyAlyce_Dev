@@ -18,7 +18,7 @@ export class Dashboard extends sComponent {
 
         console.log(client.currentUser)
         return (
-            <div>
+            <div className='div'>
                 <h1>Welcome {client.currentUser.firstName}</h1>
                 <div>
                 {/*Device/Stream select */}

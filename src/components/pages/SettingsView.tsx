@@ -31,7 +31,7 @@ export class SettingsView extends sComponent  {
         }
 
         return (
-        <div>
+        <div className='div'>
             <h1>Settings</h1>
             <UserAuths/>
 

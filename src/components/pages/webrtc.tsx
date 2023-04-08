@@ -331,7 +331,7 @@ export class WebRTCComponent extends sComponent {
 
 
         return (
-            <div>
+            <div className="div">
                 <h1>WebRTC Communication</h1>
 
                 <h2>Received Calls</h2>

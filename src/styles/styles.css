@@ -1,5 +1,36 @@
+/* The styles in this file are used to format the app pages. */
 
-.chartContainer {
+:root { font-family: 'Inter', sans-serif; }
+    @supports (font-variation-settings: normal) {
+        :root { font-family: 'Inter var', sans-serif; }
+}
+
+body {
+    background: #ffffff;
+    font-family: 'Inter';
+}
+
+.div{
+    background: #ffffff; 
+}
+
+.div h1{
+    height: 29px;
+    font-family:'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+
+}
+
+.div button{
+    background: #3B82F6 !important;
+    border-radius: 8px;
+}
+
+.div .chartContainer {
     width:100%;
     height:500px;
 
