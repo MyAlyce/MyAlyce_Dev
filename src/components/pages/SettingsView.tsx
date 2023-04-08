@@ -30,8 +30,6 @@ export class SettingsView extends sComponent  {
             fbreg = true;
         }
 
-        console.log('Is registered', fbreg, data)
-
         return (
         <div>
             <h1>Settings</h1>

@@ -19,6 +19,7 @@ export let getCurrentLocation = (options:PositionOptions={enableHighAccuracy:tru
 }
 
 export const showNotification = (title,message) => {
+
     // Check if browser supports notifications
     if ('Notification' in window && Notification.permission === 'granted') {
       // Create a notification
@@ -28,7 +29,7 @@ export const showNotification = (title,message) => {
         icon: 'favicon.ico',
       });
 
-    } else if ('Notification' in window && Notification.permission !== 'denied') {
+    } else if ('Notification' in window && Notification.permission !== 'granted') {
       // Request permission to show notifications
       
       Notification.requestPermission()
@@ -39,12 +40,21 @@ export const showNotification = (title,message) => {
                 body:message,
                 icon: 'favicon.ico',
             });
-          }
+          } 
+          
+          //   Fallback to alert
+          else alert(message)
         })
         .catch(error => {
           console.error('Failed to request notification permission:', error);
+          alert(message)
         });
     
+    } 
+    
+    // Fallback to alert
+    else {
+        alert(message);
     }
   };
 
