@@ -12,7 +12,7 @@ import { RTCCallProps, RTCCallInfo, answerCall, enableDeviceStream, startCall, d
 import { Chart } from "../Chart";
 import { StreamSelect } from "../StreamSelect";
 import { Avatar, Button } from "../lib/src";
-import { Howler } from "howler";
+import { Howl, Howler } from "howler";
 import { ChartGroup } from "../ChartGroup";
 
 let personIcon = './assets/person.jpg';
@@ -30,48 +30,68 @@ export const createStreamChart = (call) => {
     )
 }
 
+let ctx:AudioContext;
+
 export const createAudioDiv = (call:WebRTCInfo) => {
 
     if((call as any).gainNode) {
         (call as any).gainNode.disconnect();
     }
 
-    call.streams?.forEach((s) => {
+    let found = call.streams?.find((s) => {
         if((s as MediaStream)?.getAudioTracks().length > 0) {
-            //@ts-ignore
-            let src = Howler.ctx.createMediaStreamSource(s);
-            let gainNode = src.context.createGain();
-            src.connect(gainNode);
-            //@ts-ignore
-            gainNode.connect((Howler as any).masterGain);
-
-            (call as any).gainNode = gainNode;
-            
-
-            return (
-                <div>
-                   <input type='range' min='0' max='1' step='0.01' onInput={(ev)=>{
-                        gainNode.gain.value = (ev.target as any).value }}></input>
-                </div>
-            )
+            return true;
         }
     })
+
+    if(found) {
+        if(!ctx) ctx = new AudioContext();
+        
+        //todo fix using howler for this
+        let src = ctx.createMediaStreamSource(found);
+        let filterNode = ctx.createBiquadFilter();
+        // See https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode-section
+        filterNode.type = 'highpass';
+        // Cutoff frequency. For highpass, audio is attenuated below this frequency.
+        filterNode.frequency.value = 10000;
+
+        let gainNode = ctx.createGain();
+        src.connect(filterNode);
+        filterNode.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        gainNode.gain.value = 1;
+
+        (call as any).gainNode = gainNode;
+        
+        return (
+            <div>
+                <input type='range' min='0' max='1' step='0.01' defaultValue='1' onInput={(ev)=>{
+                    gainNode.gain.value = (ev.target as any).value }}></input>
+            </div>
+        )
+    }
 }
 
 export const createVideoDiv = (call:WebRTCInfo) => {
     
-    call.streams?.forEach((s) => {
+    let found = call.streams?.find((s) => {
         if((s as MediaStream)?.getVideoTracks().length > 0) {
-            let video = document.createElement('video');
-            video.srcObject = s as MediaStream;
-
-            return (
-                <div  ref={ (ref) => {
-                    ref?.appendChild(video);
-                } }></div>
-            )
+            return true;
         }
     });
+    if(found){
+        let video = document.createElement('video');
+        video.autoplay = true;
+        video.srcObject = found as MediaStream;
+        video.style.width = '300px';
+        video.style.height = '300px';
+
+        return (
+            <div  ref={ (ref) => {
+                ref?.appendChild(video);
+            } }></div>
+        )
+    }
 }
 
 export class WebRTCComponent extends sComponent {
@@ -264,13 +284,13 @@ export class WebRTCComponent extends sComponent {
         call.ontrack = (ev) => {
             //received a media track, e.g. audio or video
             //video/audio channel, if video add a video tag, if audio make the audio context
-            console.log('track');
+            console.log('track', ev);
             //if video, else if audio, else if video & audio
             if(ev.track.kind === 'video' && this.state.activeStream === call._id) this.setState({
-                videoTrackDiv:createVideoDiv(call as any)
+                videoTrackDiv:createVideoDiv(webrtc.rtc[call._id as any] as any)
             });
             else if(ev.track.kind === 'audio' && this.state.activeStream === call._id) this.setState({
-                videoTrackDiv:createAudioDiv(call as any)
+                audioTrackDiv:createAudioDiv(webrtc.rtc[call._id as any] as any)
             });
         }
 

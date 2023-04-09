@@ -203,7 +203,7 @@ export class UserAuths extends sComponent {
                 <div>
                     <h3>Search Users</h3>
                     <div>
-                        <label>Name or Email</label><input id={this.unique+'query'} type="text"></input>
+                        <label>Name or Email</label><input id={this.unique+'query'} type="text" defaultValue=""></input>
                         <Button onClick={this.queryUsers} >Search</Button>
                     </div>
 

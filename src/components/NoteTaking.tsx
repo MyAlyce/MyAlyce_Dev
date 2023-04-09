@@ -58,9 +58,9 @@ export class NoteTaking extends sComponent {
 
         return (
             <div>
-                Event: <input id={this.id+'note'} type='text'/><br/>
-                Time: <input id={this.id+'time'} type='datetime-local' value={localDatetime} onChange={()=>{}}/><br/>
-                Grade?: <input id={this.id+'number'} type='number' min='0' max='10'></input>
+                Event: <input id={this.id+'note'} type='text' defaultValue=""/><br/>
+                Time: <input id={this.id+'time'} type='datetime-local' defaultValue={localDatetime} onChange={()=>{}}/><br/>
+                Grade?: <input id={this.id+'number'} type='number' min='0' max='10' defaultValue='0'></input>
                 <Button onClick={this.submit}>Submit</Button>
             </div>
         );
