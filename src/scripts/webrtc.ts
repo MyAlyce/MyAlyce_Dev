@@ -50,6 +50,8 @@ export async function startCall(userId) {
             const offer = await (rtc as any).rtc.createOffer();
             if ((rtc as any).rtc.signalingState != "stable") return;
             await (rtc as any).rtc.setLocalDescription(offer);
+
+            console.log((rtc as RTCCallInfo).socketId);
             usersocket.run(
                 'runConnection', //run this function on the backend router
                 [
@@ -57,13 +59,17 @@ export async function startCall(userId) {
                     'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
                     [ //and pass these arguments
                         'negotiateCall', //run this function on the user's end
-                        [rtc._id, (rtc as any).rtc.localDescription]
+                        [rtc._id, encodeURIComponent(JSON.stringify((rtc as any).rtc.localDescription))]
                     ],
                     (rtc as RTCCallInfo).socketId
                 ]
             ).then((description) => {
-                webrtc.negotiateCall(rtc._id as string, description);
+                console.log('description echoed back');
+                if(description) webrtc.negotiateCall(rtc._id as string, description);
             });
+        },
+        ontrack:() => {
+            console.log('track');
         },
         onclose:() => {
             for(const key in nodes) {
@@ -125,12 +131,13 @@ export let answerCall = async (call:RTCCallProps) => {
                 'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
                 [ //and pass these arguments
                     'negotiateCall', //run this function on the user's end
-                    [rtc._id, (rtc as any).rtc.localDescription]
+                    [rtc._id, encodeURIComponent(JSON.stringify((rtc as any).rtc.localDescription))]
                 ],
                 call.socketId
             ]
         ).then((description) => {
-            webrtc.negotiateCall(rtc._id as string, description);
+            console.log('description echoed back');
+           if(description) webrtc.negotiateCall(rtc._id as string, description);
         });
     };
 

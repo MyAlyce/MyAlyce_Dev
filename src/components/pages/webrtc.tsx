@@ -148,7 +148,8 @@ export class WebRTCComponent extends sComponent {
                             status='online'
                             backgroundColor='lightblue'
                         /> {user.firstName} {user.lastName}</div>
-                        <Button onClick={()=>{startCall(user._id).then(call => {
+                        <Button onClick={()=>{
+                            startCall(user._id).then(call => {
                             //overwrites the default message
                             this.setupCallUI(call as any);
                         })}}>Start Call</Button>
