@@ -361,13 +361,17 @@ export class WebRTCComponent extends sComponent {
                     <div>
                         {hasVideo ? <Button onClick={() => {
                             disableVideo(this.state.availableStreams[this.state.activeStream as any] as any);
+                            this.render();
                         }}>Disable My Video</Button> : <Button onClick={() => {
                             enableVideo(this.state.availableStreams[this.state.activeStream as any] as any);
+                            this.render();
                         }}>Enable My Video</Button>}
                         {hasAudio ? <Button onClick={() => {
                             disableAudio(this.state.availableStreams[this.state.activeStream as any] as any);
+                            this.render();
                         }}>Disable My Audio</Button> : <Button onClick={() => {
                             enableAudio(this.state.availableStreams[this.state.activeStream as any] as any);
+                            this.render();
                         }}>Enable My Audio</Button>}
                         <div id={this.unique + 'datastream'}>
                             {  this.state.chartDataDiv ? this.state.chartDataDiv : ""    }
