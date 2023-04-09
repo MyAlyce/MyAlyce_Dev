@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import { sComponent } from './state.component'
 import { workers } from "device-decoder";
 
@@ -12,11 +12,16 @@ export class NoteTaking extends sComponent {
     csvworker = workers.addWorker({url:gsworker});
     filename;
 
+    ref1;ref2;ref3;
+
     constructor(props:{streamId?:string, filename?:string}) {
         super(props);
         if(props.filename) this.filename = props.filename;
         else this.filename = `data/Notes_${new Date().toISOString()}${props.streamId ? '_'+props.streamId : ''}.csv`
 
+        this.ref1 = React.createRef();
+        this.ref2 = React.createRef();
+        this.ref3 = React.createRef();
     }
 
     submit = () => {
@@ -58,9 +63,9 @@ export class NoteTaking extends sComponent {
 
         return (
             <div>
-                Event: <input id={this.id+'note'} type='text' defaultValue=""/><br/>
-                Time: <input id={this.id+'time'} type='datetime-local' defaultValue={localDatetime} onChange={()=>{}}/><br/>
-                Grade?: <input id={this.id+'number'} type='number' min='0' max='10' defaultValue='0'></input>
+                Event: <input ref={this.ref1 as any} id={this.id+'note'} name="note" type='text' defaultValue=""/><br/>
+                Time: <input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/><br/>
+                Grade?: <input ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'></input>
                 <Button onClick={this.submit}>Submit</Button>
             </div>
         );

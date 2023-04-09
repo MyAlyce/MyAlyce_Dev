@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import { sComponent } from './state.component'
 import { client } from '../scripts/client';
 import { Avatar, Button } from '../components/lib/src/index';
@@ -18,11 +18,12 @@ export class UserAuths extends sComponent {
     sentRequests = [] as any[];
     userRequests = [] as any[];
 
+    ref;
     constructor() {
         super();
 
         this.listAuths();
-
+        this.ref = React.createRef();
     }
 
     queryUsers = () => {
@@ -195,7 +196,9 @@ export class UserAuths extends sComponent {
         this.render();
     }
 
+
     render() {
+
         return (
             <div id={this.unique}>
                 <h2>User Authorizations</h2>
@@ -203,7 +206,13 @@ export class UserAuths extends sComponent {
                 <div>
                     <h3>Search Users</h3>
                     <div>
-                        <label>Name or Email</label><input id={this.unique+'query'} type="text" defaultValue=""></input>
+                        <label>Name or Email</label>
+                        <input 
+                            id={this.unique+'query'} 
+                            type="text" 
+                            defaultValue=""
+                            ref={this.ref as any}
+                        />
                         <Button onClick={this.queryUsers} >Search</Button>
                     </div>
 
