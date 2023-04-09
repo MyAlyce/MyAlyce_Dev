@@ -40,7 +40,7 @@ export const graph = new Router({
         client,
         sockets,
         webrtc,
-        workers, //has independent state
+        workers, //has independent state just fyi
         SessionsService
     },
     roots:{}

@@ -16,7 +16,7 @@ state.setState(webrtcData);
 export type RTCCallProps = WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string, messages:{message:string, from:string, timestamp:number}[], videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
 export type RTCCallInfo = WebRTCInfo & {caller:string, firstName:string, lastName:string, socketId:string,  messages:{message:string, from:string, timestamp:number}[],videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
 
-
+//started from host end, see answerCall for peer end
 export async function startCall(userId) {
     //send handshake
     let rtcId = `room${Math.floor(Math.random()*1000000000000000)}`;
@@ -46,12 +46,13 @@ export async function startCall(userId) {
                 });
             }
         },
-        onnegotiationneeded: async () => { //you need to implement this
+        //both ends need to set this function up when adding audio and video tracks freshly
+        onnegotiationneeded: async (ev) => {
+            console.log('negotiating');
             const offer = await (rtc as any).rtc.createOffer();
             if ((rtc as any).rtc.signalingState != "stable") return;
             await (rtc as any).rtc.setLocalDescription(offer);
 
-            console.log((rtc as RTCCallInfo).socketId);
             usersocket.run(
                 'runConnection', //run this function on the backend router
                 [
@@ -64,12 +65,14 @@ export async function startCall(userId) {
                     (rtc as RTCCallInfo).socketId
                 ]
             ).then((description) => {
-                console.log('description echoed back');
+                if(description) console.log('remote description returned');
+                else console.log('caller renegotiated');
+                
                 if(description) webrtc.negotiateCall(rtc._id as string, description);
             });
         },
-        ontrack:() => {
-            console.log('track');
+        ontrack:(ev) => {
+            console.log('\n\n\nreceived track\n\n\n',ev);
         },
         onclose:() => {
             for(const key in nodes) {
@@ -108,7 +111,6 @@ export async function startCall(userId) {
     return rtc;
 }
 
-//todo: need to grab the specific endpoint to respond to
 export let answerCall = async (call:RTCCallProps) => {
     
     let nodes = setupAlerts(call._id);
@@ -119,7 +121,8 @@ export let answerCall = async (call:RTCCallProps) => {
         }
     }
     
-    call.onnegotiationneeded = async () => { //you need to implement this
+    //both ends need to set this function up when adding audio and video tracks freshly
+    call.onnegotiationneeded = async () => { 
         console.log('negotiating');
         const offer = await (rtc as any).rtc.createOffer();
         if ((rtc as any).rtc.signalingState != "stable") return;
@@ -136,8 +139,10 @@ export let answerCall = async (call:RTCCallProps) => {
                 call.socketId
             ]
         ).then((description) => {
-            console.log('description echoed back');
-           if(description) webrtc.negotiateCall(rtc._id as string, description);
+            if(description) console.log('remote description returned');
+            else console.log('caller renegotiated');
+            
+            if(description) webrtc.negotiateCall(rtc._id as string, description);
         });
     };
 
