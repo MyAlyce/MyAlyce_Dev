@@ -27,9 +27,9 @@ import { RealmUser } from './login'
 import config from '../../backend/serverconfig.js'
 import { DS } from 'graphscript-services/struct/datastructures/index'
 
-export let client = new StructFrontend();
-export let sockets = new WSSfrontend();
-export let webrtc = new WebRTCfrontend();
+export let client = new StructFrontend({state:state});
+export let sockets = new WSSfrontend({state:state});
+export let webrtc = new WebRTCfrontend({state:state});
 
 export let usersocket:WebSocketInfo;
 
@@ -40,7 +40,7 @@ export const graph = new Router({
         client,
         sockets,
         webrtc,
-        workers,
+        workers, //has independent state
         SessionsService
     },
     roots:{}
