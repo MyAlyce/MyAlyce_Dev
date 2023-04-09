@@ -197,10 +197,15 @@ export class WebRTCComponent extends sComponent {
         
     }
 
-    setupCallUI(call:RTCCallProps) {
+    setupCallUI(call:RTCCallInfo|RTCCallProps) {
          //overwrites the default message
          call.ondatachannel = (ev) => {
-            console.log('call started with', call.firstName, call.lastName);
+            console.log('Call started with', call.firstName, call.lastName);
+
+            webrtc.rtc[call._id as string].run('ping').then((res) => {
+                console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
+            });
+
             //the call is now live, add tracks
             //data channel streams the device data
             enableDeviceStream(call._id); //enable my device to stream data to this endpoint

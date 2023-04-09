@@ -46,31 +46,7 @@ export async function startCall(userId) {
                 });
             }
         },
-        //both ends need to set this function up when adding audio and video tracks freshly
-        onnegotiationneeded: async (ev) => {
-            console.log('negotiating');
-            const offer = await (rtc as any).rtc.createOffer();
-            if ((rtc as any).rtc.signalingState != "stable") return;
-            await (rtc as any).rtc.setLocalDescription(offer);
-
-            usersocket.run(
-                'runConnection', //run this function on the backend router
-                [
-                    (rtc as RTCCallInfo).caller, //run this connection 
-                    'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                    [ //and pass these arguments
-                        'negotiateCall', //run this function on the user's end
-                        [rtc._id, encodeURIComponent(JSON.stringify((rtc as any).rtc.localDescription))]
-                    ],
-                    (rtc as RTCCallInfo).socketId
-                ]
-            ).then((description) => {
-                if(description) console.log('remote description returned');
-                else console.log('caller renegotiated');
-                
-                if(description) webrtc.negotiateCall(rtc._id as string, description);
-            });
-        },
+        
         ontrack:(ev) => {
             console.log('\n\n\nreceived track\n\n\n',ev);
         },
@@ -87,7 +63,31 @@ export async function startCall(userId) {
         // }
     });
 
+    rtc.onnegotiationneeded = async (ev) => {//both ends need to set this function up when adding audio and video tracks freshly
+    
+        console.log('negotiating');
+        const offer = await webrtc.rtc[rtc._id as string].rtc.createOffer();
+        if (webrtc.rtc[rtc._id as string].rtc.signalingState != "stable") return;
+        await  webrtc.rtc[rtc._id as string].rtc.setLocalDescription(offer);
 
+        usersocket.run(
+            'runConnection', //run this function on the backend router
+            [
+                (webrtc.rtc[rtc._id as string] as RTCCallInfo).caller, //run this connection 
+                'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                [ //and pass these arguments
+                    'negotiateCall', //run this function on the user's end
+                    [rtc._id, encodeURIComponent(JSON.stringify(webrtc.rtc[rtc._id as string].rtc.localDescription))]
+                ],
+                (webrtc.rtc[rtc._id as string] as RTCCallInfo).socketId
+            ]
+        ).then((description) => {
+            if(description) console.log('remote description returned');
+            else console.log('caller renegotiated');
+            
+            if(description) webrtc.negotiateCall(rtc._id as string, description);
+        });
+    };
 
     usersocket.post(
         'runConnection', //run this function on the backend router
@@ -124,9 +124,9 @@ export let answerCall = async (call:RTCCallProps) => {
     //both ends need to set this function up when adding audio and video tracks freshly
     call.onnegotiationneeded = async () => { 
         console.log('negotiating');
-        const offer = await (rtc as any).rtc.createOffer();
-        if ((rtc as any).rtc.signalingState != "stable") return;
-        await (rtc as any).rtc.setLocalDescription(offer);
+        const offer = await webrtc.rtc[call._id as string].rtc.createOffer();
+        if (webrtc.rtc[call._id as string].rtc.signalingState != "stable") return;
+        await webrtc.rtc[call._id as string].rtc.setLocalDescription(offer);
         usersocket.run(
             'runConnection', //run this function on the backend router
             [
@@ -134,7 +134,7 @@ export let answerCall = async (call:RTCCallProps) => {
                 'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
                 [ //and pass these arguments
                     'negotiateCall', //run this function on the user's end
-                    [rtc._id, encodeURIComponent(JSON.stringify((rtc as any).rtc.localDescription))]
+                    [rtc._id, encodeURIComponent(JSON.stringify(webrtc.rtc[call._id as string].rtc.localDescription))]
                 ],
                 call.socketId
             ]
