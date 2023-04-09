@@ -27,6 +27,31 @@ const TESTVIEWS = false //true; //skip login page (debug)
 const brand = () => {
     return <img src={ myalyceLogo } width='100px' alt='MyAlyce'/>
 };
+
+
+//this allows this part of the app to re-render independently
+class NavDrawerContainer extends sComponent {
+
+    state = {
+        navOpen: false,
+    }
+
+    render() {
+        return (
+            <NavDrawer fixed="left" zIndex={102} isOpen={this.state.navOpen} 
+            brand={brand()} 
+            onBackdropClick={() => this.setState({navOpen:false})} menuItems={[
+                { type: 'action', icon: 'H' as any, onClick: () => this.setState({   'route':'/',   navOpen:false}), title: 'Home' },
+                { type: 'action', icon: 'P' as any, onClick: () => this.setState({   'route':'/peers',       navOpen:false}), title: 'WebRTC' },
+                { type: 'action', icon: 'R' as any, onClick: () => this.setState({   'route':'/recordings',  navOpen:false}), title: 'Recordings' },
+                { type: 'action', icon: 'S' as any, onClick: () => this.setState({   'route':'/settings',       navOpen:false}), title: 'Settings' },
+                { type: 'action', icon: 'D' as any, onClick: () => this.setState({ 'route':'/dev',         navOpen:false}),      title: 'Developer Tools' },
+
+            ]}
+        /> 
+        )
+    }
+}
   
 //note we're using sComponent which has some extended functionality for a global state
 export class App extends sComponent {
@@ -34,7 +59,6 @@ export class App extends sComponent {
     state = {
         isLoggedIn: false,
         loggingIn:false, //show load screen
-        navOpen: false,
         route: '/'
     }
 
@@ -85,21 +109,12 @@ export class App extends sComponent {
                 }
                 { (this.state.isLoggedIn || TESTVIEWS) && 
                     <div>
-                        <NavDrawer fixed="left" zIndex={102} isOpen={this.state.navOpen} 
-                            brand={brand()} 
-                            onBackdropClick={() => this.setState({navOpen:false})} menuItems={[
-                                { type: 'action', icon: 'H' as any, onClick: () => this.setState({   'route':'/',   navOpen:false}), title: 'Home' },
-                                { type: 'action', icon: 'P' as any, onClick: () => this.setState({   'route':'/peers',       navOpen:false}), title: 'WebRTC' },
-                                { type: 'action', icon: 'R' as any, onClick: () => this.setState({   'route':'/recordings',  navOpen:false}), title: 'Recordings' },
-                                { type: 'action', icon: 'S' as any, onClick: () => this.setState({   'route':'/settings',       navOpen:false}), title: 'Settings' },
-                                { type: 'action', icon: 'D' as any, onClick: () => this.setState({ 'route':'/dev',         navOpen:false}),      title: 'Developer Tools' },
-
-                            ]}
-                        /> 
+                        {/** TODO: Fix NavDrawer to not require an app=level  */ }
+                        <NavDrawerContainer/>
                     <div id="view">
                       <TopBar zIndex={100} onMenuExpand={() => {
                             let open = !this.state.navOpen;
-                            this.setState({'navOpen':open})
+                            state.setState({'navOpen':open}); //dont trigger a rerender on this component, only trigger in sub-components
                           }} 
 
                           style={{
