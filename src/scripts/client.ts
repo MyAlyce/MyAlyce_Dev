@@ -65,6 +65,7 @@ graph.subscribe('checkForNotifications',(result:any[])=>{
 graph.setState({
     route: '/',            //current pathname
     isLoggedIn: false,     //logged in?
+    loggingIn: false,       //loading login?
     appInitialized: false, //initialized app?
     loggedInId: undefined, //id of the current user
     viewingId: undefined,  //id of the user currently being viewed
@@ -123,6 +124,8 @@ export const onLogin = async (
     if(result && result?.type !== 'FAIL') {
         if(profile._id) {
 
+            graph.setState({ loggingIn:true });
+
             client.currentUser = {
                 ...usersocket,
                 _id:profile._id
@@ -139,6 +142,7 @@ export const onLogin = async (
             resultHasUser = true;
             graph.setState({
                 isLoggedIn: true,
+                loggingIn: false,
                 loggedInId: user._id,
                 viewingId: user._id
             });
@@ -153,7 +157,8 @@ export const onLogin = async (
     if(!resultHasUser) {
         console.log('User not created with info:', result?.data);
         if(graph.__node.state.data['isLoggedIn']) graph.setState({
-            isLoggedIn: false
+            isLoggedIn: false,
+            loggingIn: false
         });
     }          
 
@@ -169,6 +174,7 @@ export const onLogout = (
 
     graph.setState({
         isLoggedIn: false,
+        loggingIn: false,
         loggedInId: undefined,
         viewingId: undefined
     });

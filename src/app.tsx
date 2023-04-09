@@ -33,6 +33,7 @@ export class App extends sComponent {
 
     state = {
         isLoggedIn: false,
+        loggingIn:false, //show load screen
         navOpen: false,
         route: '/'
     }
@@ -64,6 +65,11 @@ export class App extends sComponent {
     render() {
         return (
             <div>
+                {this.state.loggingIn && 
+                    <div style={{zIndex:100, position:'absolute', width:'100%', height:'100%', backgroundColor:'royalblue', color:'white'}}>
+                        LOADING
+                    </div>
+                }
                 {(!this.state.isLoggedIn && !TESTVIEWS) && 
                     <Login
                         useRegularLogin={false}

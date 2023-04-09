@@ -1,6 +1,8 @@
 import { setupAlerts } from "./alerts";
 import { client, graph, usersocket, webrtc } from "./client"
-import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//'../../../graphscript/index'//
+import { state } from 'graphscript'//'../../../graphscript/index'//
+
+import {WebRTCInfo, WebRTCProps} from 'graphscript'//'../../../graphscript/index'//
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
 
@@ -27,7 +29,7 @@ export async function startCall(userId) {
         _id:rtcId,
         onicecandidate:async (ev) => {
             if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
-                let cid = `hostcandidate${Math.floor(Math.random()*1000000000000000)}`;
+                let cid = `candidate${Math.floor(Math.random()*1000000000000000)}`;
                 usersocket.run(
                     'runConnection', //run this function on the backend router
                     [
@@ -37,7 +39,7 @@ export async function startCall(userId) {
                             'receiveCallInformation', //run this function on the user's end
                             {
                                 _id:rtcId, 
-                                hostcandidates:{[cid]:ev.candidate}
+                                candidates:{[cid]:ev.candidate}
                             }
                         ]
                     ]
@@ -63,12 +65,9 @@ export async function startCall(userId) {
         // }
     });
 
-    rtc.onnegotiationneeded = async (ev) => {//both ends need to set this function up when adding audio and video tracks freshly
+    rtc.onnegotiationneeded = async (ev, description) => {//both ends need to set this function up when adding audio and video tracks freshly
     
         console.log('negotiating');
-        const offer = await webrtc.rtc[rtc._id as string].rtc.createOffer();
-        if (webrtc.rtc[rtc._id as string].rtc.signalingState != "stable") return;
-        await  webrtc.rtc[rtc._id as string].rtc.setLocalDescription(offer);
 
         usersocket.run(
             'runConnection', //run this function on the backend router
@@ -77,7 +76,7 @@ export async function startCall(userId) {
                 'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
                 [ //and pass these arguments
                     'negotiateCall', //run this function on the user's end
-                    [rtc._id, encodeURIComponent(JSON.stringify(webrtc.rtc[rtc._id as string].rtc.localDescription))]
+                    [rtc._id, encodeURIComponent(JSON.stringify(description))]
                 ],
                 (webrtc.rtc[rtc._id as string] as RTCCallInfo).socketId
             ]
@@ -98,7 +97,7 @@ export async function startCall(userId) {
                 'receiveCallInformation', //run this function on the user's end
                 {
                     _id:rtcId, 
-                    hostdescription:rtc.hostdescription, //the peer needs to accept this
+                    description:encodeURIComponent(JSON.stringify(rtc.rtc.localDescription)), //the peer needs to accept this
                     caller:client.currentUser._id,
                     socketId:usersocket._id,
                     firstName:client.currentUser.firstName,
@@ -122,11 +121,8 @@ export let answerCall = async (call:RTCCallProps) => {
     }
     
     //both ends need to set this function up when adding audio and video tracks freshly
-    call.onnegotiationneeded = async () => { 
+    call.onnegotiationneeded = async (ev, description) => { 
         console.log('negotiating');
-        const offer = await webrtc.rtc[call._id as string].rtc.createOffer();
-        if (webrtc.rtc[call._id as string].rtc.signalingState != "stable") return;
-        await webrtc.rtc[call._id as string].rtc.setLocalDescription(offer);
         usersocket.run(
             'runConnection', //run this function on the backend router
             [
@@ -134,7 +130,7 @@ export let answerCall = async (call:RTCCallProps) => {
                 'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
                 [ //and pass these arguments
                     'negotiateCall', //run this function on the user's end
-                    [rtc._id, encodeURIComponent(JSON.stringify(webrtc.rtc[call._id as string].rtc.localDescription))]
+                    [rtc._id, encodeURIComponent(JSON.stringify(description))]
                 ],
                 call.socketId
             ]
@@ -158,7 +154,7 @@ export let answerCall = async (call:RTCCallProps) => {
                 [
                     rtc._id,
                     {
-                        peerdescription:rtc.peerdescription, //the host needs this
+                        description:encodeURIComponent(JSON.stringify(rtc.rtc.localDescription)), //the host needs this
                         caller:client.currentUser._id,
                         socketId:usersocket._id,
                         firstName:client.currentUser.firstName,
@@ -185,7 +181,7 @@ webrtc.subscribe('receiveCallInformation', (id) => {
     if(call) {
         if(!call.onicecandidate) call.onicecandidate = (ev) => {
             if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
-                let cid = `peercandidate${Math.floor(Math.random()*1000000000000000)}`;
+                let cid = `candidate${Math.floor(Math.random()*1000000000000000)}`;
                 usersocket.run(
                     'runConnection', //run this function on the backend router
                     [
@@ -195,7 +191,7 @@ webrtc.subscribe('receiveCallInformation', (id) => {
                             'receiveCallInformation', //run this function on the user's end
                             {
                                 _id:call._id, 
-                                peercandidates:{[cid]:ev.candidate}
+                                candidates:{[cid]:ev.candidate}
                             }
                         ],
                         call.socketId

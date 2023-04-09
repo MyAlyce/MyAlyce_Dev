@@ -1,5 +1,7 @@
 import { client, webrtc, graph, usersocket } from "../../scripts/client";
-import { state, WebRTCInfo, WebRTCProps } from 'graphscript'//"../../../graphscript/index";//
+import { state, } from 'graphscript'//"../../../../graphscript/index";//
+
+import {WebRTCInfo, WebRTCProps } from'graphscript'// "../../../../graphscript/index";//
 
 import {AuthorizationStruct, ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 import React from 'react'
