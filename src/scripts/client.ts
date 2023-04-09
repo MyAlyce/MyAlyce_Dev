@@ -7,12 +7,15 @@ import {
     ConnectionProps, 
     WebSocketProps, 
     WebSocketInfo, 
-    WebRTCfrontend,
     SessionsService,
     GraphNode,
     state
 } from 'graphscript'//'../../../graphscript/index'//
 
+//isolated import for dev with src
+import {
+    WebRTCfrontend
+} from 'graphscript'//'../../../graphscript/index'//
 
 import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//
 import {BFSRoutes} from 'graphscript-services.storage'
