@@ -113,7 +113,7 @@ export class App extends sComponent {
                         <NavDrawerContainer/>
                     <div id="view">
                       <TopBar zIndex={100} onMenuExpand={() => {
-                            let open = !this.state.navOpen;
+                            let open = !state.data.navOpen;
                             state.setState({'navOpen':open}); //dont trigger a rerender on this component, only trigger in sub-components
                           }} 
 
