@@ -19,8 +19,8 @@ export class UserAuths extends sComponent {
     userRequests = [] as any[];
 
     ref;
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.listAuths();
         this.ref = React.createRef();
