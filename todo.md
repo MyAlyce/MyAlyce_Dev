@@ -6,9 +6,6 @@
 ### Scripting/Events/State
 
 - finish file saving subscriptions with local/stream recording. Get google drive working somehow
-- readd basic alert workflow
-- readd saved browser state
-- webrtc management, test video and audio
 - readd notifications, friends lists, etc.
 
 ### Backend

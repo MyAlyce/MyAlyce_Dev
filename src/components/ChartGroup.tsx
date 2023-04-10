@@ -100,9 +100,6 @@ export class ChartGroup extends sComponent {
     render() {
         return (
             <div>
-                <div>
-                    <StreamSelect/>
-                </div>
                 <div>{
                     Object.keys(this.activeCharts).map((v) => {
                         return this.activeCharts[v];
