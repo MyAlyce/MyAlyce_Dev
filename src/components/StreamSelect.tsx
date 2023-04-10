@@ -33,7 +33,6 @@ export class StreamSelect extends sComponent {
                         Object.keys(this.state.availableStreams).map((key) => {
                             return (
                                 <option 
-                                     
                                     key={key} 
                                     value={key}
                                 >{this.state.availableStreams[key].firstName ? this.state.availableStreams[key].firstName : this.state.availableStreams[key]._id} {this.state.availableStreams[key].lastName ? this.state.availableStreams[key].lastName : ""}

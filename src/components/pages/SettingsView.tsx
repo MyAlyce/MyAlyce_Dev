@@ -34,11 +34,6 @@ export class SettingsView extends sComponent  {
         <div className='div'>
             <h1>Settings</h1>
             <UserAuths/>
-
-            <div>
-                <h2>Other Settings</h2>
-                <label>Add Team Member</label><input type='text'></input><Button onClick={this.addUser}>Add User</Button>
-            </div>
         </div>
         );
     }

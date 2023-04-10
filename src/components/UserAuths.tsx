@@ -33,7 +33,7 @@ export class UserAuths extends sComponent {
             client.queryUsers(query, 0, 0).then((res) => {
                 res?.forEach((user) => {
                     this.queryResults.push(
-                        <option value={user._id}>
+                        <option key={user._id} value={user._id}>
                             <Avatar
                                 dataState='done'
                                 imgSrc={user.pictureUrl ? user.pictureUrl : personIcon}
@@ -48,11 +48,10 @@ export class UserAuths extends sComponent {
                             /> {user.firstName} {user.lastName}
                         </option>
                     );
-                })
+                });
+                this.render();
             });
         }
-
-        this.render();
     }
 
     authFromSelect = () => {
@@ -218,8 +217,11 @@ export class UserAuths extends sComponent {
 
                     <h4>Results</h4>
                     <div>
-                        <select id={this.unique+'select'}>
-                            { this.queryResults.map(v => v) }
+                        <select id={this.unique+'select'} onChange={()=>{}}>
+                            { this.queryResults.map(v => {
+                                console.log(v);
+                                return v;
+                            }) }
                         </select>
                         <Button onClick={this.authFromSelect}>Add Peer</Button>
                     </div>
@@ -230,19 +232,19 @@ export class UserAuths extends sComponent {
                     <div>
                         <h4>Requests</h4>
                         <div>
-                            { this.userRequests.map(v => v) }
+                            {  this.userRequests }
                         </div>
                     </div>
                     <div>
                         <h4>Outgoing</h4>
                         <div>
-                            { this.userRequests.map(v => v) }
+                            {  this.sentRequests }
                         </div>
                     </div>
                     <div>
                         <h4>Authorized</h4>
                         <div>
-                            { this.existingAuths.map(v => v) }
+                            {  this.existingAuths }
                         </div>
                     </div>
                 </div>
