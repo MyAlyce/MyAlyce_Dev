@@ -3,7 +3,6 @@ import {sComponent} from './state.component'
 
 
 import { Chart } from './Chart';
-import { StreamSelect } from './StreamSelect';
 import { state } from 'graphscript';
 
 

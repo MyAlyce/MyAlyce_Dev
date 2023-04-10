@@ -172,7 +172,7 @@ export let answerCall = async (call:RTCCallProps) => {
     });
 }
 
-webrtc.subscribe('receiveCallInformation', (id) => {
+graph.subscribe('receiveCallInformation', (id) => {
     
     console.log('received call information:', id);
 

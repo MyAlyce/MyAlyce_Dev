@@ -22,8 +22,8 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "graphscript-node": "^0.2.98",
-    "graphscript-services-node": "^0.2.109",
+    "graphscript-node": "^0.2.108",
+    "graphscript-services-node": "^0.2.110",
     "mongoose": "~7.0.0"
   },
   "nodemonConfig": {

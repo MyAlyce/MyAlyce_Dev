@@ -1,5 +1,5 @@
 import { client, webrtc, graph, usersocket } from "../../scripts/client";
-import { state, } from 'graphscript'//"../../../../graphscript/index";//
+import { state } from '../../scripts/client'//"../../../../graphscript/index";//
 
 import {WebRTCInfo, WebRTCProps } from'graphscript'// "../../../../graphscript/index";//
 
@@ -16,8 +16,6 @@ import { Howl, Howler } from "howler";
 import { ChartGroup } from "../ChartGroup";
 
 let personIcon = './assets/person.jpg';
-
-
 
 
 export const createStreamChart = (call) => {
@@ -120,7 +118,7 @@ export class WebRTCComponent extends sComponent {
     componentDidMount = () => {
         this.getUsers();
         this.getUnanweredCallInfo();
-        this.evSub = state.subscribeEvent('receiveCallInformation',()=>{
+        this.evSub = graph.subscribe('receiveCallInformation',()=>{
             this.getUnanweredCallInfo();
         });
         this.streamSelectSub = state.subscribeEvent('activeStream',(id?)=>{
@@ -131,7 +129,7 @@ export class WebRTCComponent extends sComponent {
     }
 
     componentWillUnmount = () => {
-        state.unsubscribeEvent('receiveCallInformation', this.evSub);
+        graph.subscribe('receiveCallInformation', this.evSub);
     }
 
     async getUsers() {
@@ -215,7 +213,8 @@ export class WebRTCComponent extends sComponent {
         unanswered?.push(...divs);
 
         this.setState({unansweredCallDivs:unanswered});
-        this.render();
+
+        //this.render();
         
     }
 

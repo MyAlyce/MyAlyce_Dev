@@ -1,7 +1,7 @@
 import React from 'react'
 import {sComponent} from './state.component'
 
-import { state } from 'graphscript'//'../../../graphscript/index'//
+import { state } from '../scripts/client'//'../../../graphscript/index'//
 import { WGLPlotter } from '../scripts/webglplot/plotter';
 
 import plotworker from '../scripts/webglplot/canvas.worker'
