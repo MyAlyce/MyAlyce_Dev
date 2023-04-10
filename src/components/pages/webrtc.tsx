@@ -1,7 +1,6 @@
-import { client, webrtc, graph, usersocket } from "../../scripts/client";
-import { state } from '../../scripts/client'//"../../../../graphscript/index";//
+import { client, webrtc, graph, usersocket, state } from "../../scripts/client";
 
-import {WebRTCInfo, WebRTCProps } from'graphscript'// "../../../../graphscript/index";//
+import {WebRTCInfo, WebRTCProps } from 'graphscript'// "../../../../graphscript/index";//
 
 import {AuthorizationStruct, ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 import React from 'react'
@@ -129,7 +128,7 @@ export class WebRTCComponent extends sComponent {
     }
 
     componentWillUnmount = () => {
-        graph.subscribe('receiveCallInformation', this.evSub);
+        graph.unsubscribe('receiveCallInformation', this.evSub);
     }
 
     async getUsers() {

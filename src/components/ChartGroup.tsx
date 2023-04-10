@@ -3,7 +3,7 @@ import {sComponent} from './state.component'
 
 
 import { Chart } from './Chart';
-import { state } from 'graphscript';
+import { state } from '../scripts/client';
 
 
 

@@ -4,7 +4,7 @@ import { initDevice, Devices, FilterSettings, workers } from 'device-decoder'
 import gsworker from './device.worker'
 export {gsworker};
 
-import { state } from 'graphscript'//'../../../graphscript/index'//
+import { state } from './client'//'../../../graphscript/index'//
 import { ByteParser } from 'device-decoder/src/util/ByteParser';
 import { setupAlerts } from './alerts';
 import { graph } from './client';

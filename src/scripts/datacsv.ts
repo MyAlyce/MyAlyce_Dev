@@ -1,5 +1,5 @@
 import { workers } from "device-decoder";
-import { state } from "graphscript";
+import { state } from "./client";
 import gsworker from './device.worker'
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import {state} from 'graphscript'
+import {state} from '../../scripts/client'
 
 import { BFSRoutes, csvRoutes } from 'graphscript-services.storage';
 import { driveInstance } from '../../scripts/gapi';

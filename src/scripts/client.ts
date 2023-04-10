@@ -46,6 +46,7 @@ export const graph = new Router({
         workers, //has independent state just fyi
         SessionsService
     },
+    state:state,
     roots:{}
 });
 
@@ -124,7 +125,7 @@ export const onLogin = async (
     if(result && result?.type !== 'FAIL') {
         if(profile._id) {
 
-            graph.setState({ loggingIn:true });
+            state.setState({ loggingIn:true });
 
             client.currentUser = {
                 ...usersocket,
@@ -140,7 +141,7 @@ export const onLogin = async (
         let user = await p;
         if(user) {
             resultHasUser = true;
-            graph.setState({
+            state.setState({
                 isLoggedIn: true,
                 loggingIn: false,
                 loggedInId: user._id,
@@ -156,7 +157,7 @@ export const onLogin = async (
 
     if(!resultHasUser) {
         console.log('User not created with info:', result?.data);
-        if(graph.__node.state.data['isLoggedIn']) graph.setState({
+        if(state.data['isLoggedIn']) state.setState({
             isLoggedIn: false,
             loggingIn: false
         });
@@ -172,7 +173,7 @@ export const onLogout = (
     usersocket.terminate();
     makeSocket(); //this just lets the backend know this connection is no longer associated with the previous user
 
-    graph.setState({
+    state.setState({
         isLoggedIn: false,
         loggingIn: false,
         loggedInId: undefined,
@@ -195,7 +196,7 @@ export function backupState(
 
     backup.forEach((v) => {
         lastState[v] = state.data[v];
-        state.subscribeEvent(v,(newValue) => {
+        state.subscribeEvent(v, (newValue) => {
             lastState[v] = newValue;
             hasUpdate = true;    
         });
@@ -217,7 +218,7 @@ export function backupState(
     backupLoop();
 }
 
-            backupState();
+backupState();
 
 //should subscribe to the state then restore session to setup the app
 export async function restoreSession(

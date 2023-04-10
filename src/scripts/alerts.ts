@@ -1,6 +1,5 @@
-import { state } from "graphscript";
 import { HeartRateAlert } from "./alertTemplates/heartrate";
-import { graph } from "./client";
+import { graph, state } from "./client";
 import { BreathAlert } from "./alertTemplates/breath";
 import { FallAlert } from "./alertTemplates/falldetection";
 import { Howl } from "howler";

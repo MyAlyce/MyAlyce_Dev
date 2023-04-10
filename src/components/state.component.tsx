@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { EventHandler, state } from 'graphscript'//'../../../graphscript/index'//
-
+import { EventHandler } from 'graphscript'//'../../../graphscript/index'//
+import { state } from '../scripts/client'
 //These components share their state with the global state provided by graphscript's EventHandler, 
 //  and changes propagate both directions with setState on the component state or global state
 
@@ -11,7 +11,7 @@ import { EventHandler, state } from 'graphscript'//'../../../graphscript/index'/
 
 export class sComponent extends Component<{[key:string]:any}> {
 
-    statemgr = state;
+    statemgr = state as EventHandler;
     UPDATED = [] as any;
     unique = `component${Math.floor(Math.random()*1000000000000000)}`;
 
@@ -20,13 +20,13 @@ export class sComponent extends Component<{[key:string]:any}> {
             [key:string]:any,
             state?:EventHandler
         }={
-            state:state //can apply a new state other than the global state so you can have states for certain pages for example
+            state:state as EventHandler //can apply a new state other than the global state so you can have states for certain pages for example
         }
     ) {
         super(props);
 
         if(props.state) //synced with global state
-            this.statemgr = props.state;
+            this.statemgr = props.state as EventHandler;
 
         //lets overload setState
         let react_setState = this.setState.bind(this);

@@ -1,6 +1,5 @@
 import { setupAlerts } from "./alerts";
-import { client, graph, usersocket, webrtc } from "./client"
-import { state } from 'graphscript'//'../../../graphscript/index'//
+import { client, graph, usersocket, webrtc, state } from "./client"
 
 import {WebRTCInfo, WebRTCProps} from 'graphscript'//'../../../graphscript/index'//
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
@@ -176,6 +175,8 @@ graph.subscribe('receiveCallInformation', (id) => {
     
     console.log('received call information:', id);
 
+    console.log(graph.__node.state, state, graph.__node.state.data.receiveCallInformation, state.data.receiveCallInformation);
+        
     let call = webrtc.unanswered[id] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
          
     if(call) {
