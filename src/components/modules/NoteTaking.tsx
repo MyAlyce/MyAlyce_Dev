@@ -1,12 +1,11 @@
-import React, {useRef} from 'react'
-import { sComponent } from '../state.component'
+import React, {useRef, Component} from 'react'
 import { workers } from "device-decoder";
 
 import gsworker from '../../scripts/device.worker'
 import { client } from '../../scripts/client';
 import { Button } from '../lib/src';
 
-export class NoteTaking extends sComponent {
+export class NoteTaking extends Component<{[key:string]:any}> {
 
     id=`form${Math.floor(Math.random()*1000000000000000)}`;
     csvworker = workers.addWorker({url:gsworker});
