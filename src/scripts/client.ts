@@ -47,7 +47,14 @@ export const graph = new Router({
         SessionsService
     },
     state:state,
-    roots:{}
+    roots:{
+        cleanupCallInfo:(callId)=>{ //for webrtc
+            delete webrtc.unanswered[callId];
+            state.setState({
+                unansweredCalls:webrtc.unanswered
+            }); //update this event for the app
+        }
+    }
 });
 
 graph.subscribe('checkForNotifications',(result:any[])=>{
