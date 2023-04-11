@@ -141,7 +141,7 @@ export class WebRTCComponent extends sComponent {
 
         this.setState({unansweredCallDivs:unanswered});
 
-        //this.render();
+        //this.setState({});
         
     }
 

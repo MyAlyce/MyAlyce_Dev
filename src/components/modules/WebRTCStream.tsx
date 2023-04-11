@@ -307,17 +307,17 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
                 <div>
                     {hasVideo ? <Button onClick={() => {
                         disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
-                        this.render();
+                        this.setState({});
                     }}>Disable My Video</Button> : <Button onClick={() => {
                         enableVideo(webrtc.rtc[this.state.activeStream as any] as any);
-                        this.render();
+                        this.setState({});
                     }}>Enable My Video</Button>}
                     {hasAudio ? <Button onClick={() => {
                         disableAudio(webrtc.rtc[this.state.activeStream as any] as any);
-                        this.render();
+                        this.setState({});
                     }}>Disable My Audio</Button> : <Button onClick={() => {
                         enableAudio(webrtc.rtc[this.state.activeStream as any] as any);
-                        this.render();
+                        this.setState({});
                     }}>Enable My Audio</Button>}
                     <div id={this.unique + 'datastream'}>
                         {  this.state.chartDataDiv ? this.state.chartDataDiv : ""    }

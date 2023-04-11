@@ -49,7 +49,7 @@ export class UserAuths extends sComponent {
                         </option>
                     );
                 });
-                this.render();
+                this.setState({});
             });
         }
     }
@@ -169,7 +169,7 @@ export class UserAuths extends sComponent {
                     this.createAuth(req.requesting, req.firstName + req.lastName ? ' '+req.lastName : '', true).then(() => {
                         client.deleteData([req]).then(async ()=>{
                             await this.listAuths();
-                            this.render();
+                            this.setState({});
                         });
                     });
                     
@@ -178,7 +178,7 @@ export class UserAuths extends sComponent {
                 let reject = () => {
                     client.deleteData([req]).then(async ()=>{
                         await this.listAuths();
-                        this.render();
+                        this.setState({});
                     });
                 }
 
@@ -192,7 +192,7 @@ export class UserAuths extends sComponent {
             });
         });
         
-        this.render();
+        this.setState({});
     }
 
 
