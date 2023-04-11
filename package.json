@@ -30,7 +30,7 @@
     "@giveback007/fitbit-api": "^0.1.0",
     "classnames": "^2.3.2",
     "device-decoder": "~0.4.23",
-    "graphscript": "~0.2.115",
+    "graphscript": "~0.2.116",
     "graphscript-services": "~0.2.117",
     "graphscript-services.storage": "~0.2.115",
     "hamburger-react": "^2.5.0",

@@ -1,10 +1,10 @@
 import React from 'react'
-import {sComponent} from './state.component'
+import {sComponent} from '../state.component'
 
-import { state } from '../scripts/client'//'../../../graphscript/index'//
-import { WGLPlotter } from '../scripts/webglplot/plotter';
+import { state } from '../../scripts/client'//'../../../graphscript/index'//
+import { WGLPlotter } from '../../scripts/webglplot/plotter';
 
-import plotworker from '../scripts/webglplot/canvas.worker'
+import plotworker from '../../scripts/webglplot/canvas.worker'
 import { WebglLineProps } from 'webgl-plot-utils';
 
 import { max3010xChartSettings } from 'device-decoder/src/devices/max30102';
