@@ -55,7 +55,7 @@ class RTCAudio extends Component<{[key:string]:any}> {
 
         let gainNode = this.ctx.createGain();
         src.connect(filterNode);
-        filterNode.connect(gainNode);
+        filterNode.connect(gainNode); //src.connect(gainNode); // filterNode.connect(gainNode);
         gainNode.connect(this.ctx.destination);
         gainNode.gain.value = 1;
 
@@ -185,12 +185,20 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
         //overwrites the default message
         
         let ondata = (ev) => {
+
+            const json = JSON.parse(ev.data);
+
+            if (!json.message) {
+                throw new Error(`Invalid message: ${ev.data}`);
+            }
+            
+            // NOTE: This duplicates on rerender...
             this.messages.push(<div>
-                {call.firstName} {call.lastName}: {ev.data.message} | {new Date().toLocaleTimeString()}
+                {call.firstName} {call.lastName}: {json.message} | {new Date().toLocaleTimeString()}
             </div>);
 
             (document.getElementById(this.unique + 'messages') as HTMLElement).insertAdjacentHTML('beforeend',`<div>
-                ${call.firstName} ${call.lastName}: ${ev.data.message} | ${new Date().toLocaleTimeString()}
+                ${call.firstName} ${call.lastName}: ${json.message} | ${new Date().toLocaleTimeString()}
             </div>`);
         }
 
