@@ -1,9 +1,9 @@
 import React from 'react'
-import {sComponent} from './state.component'
+import {sComponent} from '../state.component'
 
 
 import { Chart } from './Chart';
-import { state } from '../scripts/client';
+import { state } from '../../scripts/client';
 
 
 

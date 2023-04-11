@@ -17,6 +17,9 @@ state.setState(webrtcData);
 export type RTCCallProps = WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string, messages:{message:string, from:string, timestamp:number}[], videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
 export type RTCCallInfo = WebRTCInfo & {caller:string, firstName:string, lastName:string, socketId:string,  messages:{message:string, from:string, timestamp:number}[],videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
 
+
+//spaghetti
+
 //started from host end, see answerCall for peer end
 export async function startCall(userId) {
     //send handshake
@@ -47,7 +50,55 @@ export async function startCall(userId) {
                 });
             }
         },
-        
+        ondatachannel: (ev) => {
+            console.log('Call started with', (rtc as RTCCallInfo).firstName, (rtc as RTCCallInfo).lastName);
+
+            webrtc.rtc[rtc._id as string].run('ping').then((res) => {
+                console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
+            });
+
+            //the call is now live, add tracks
+            //data channel streams the device data
+            enableDeviceStream(rtc._id); //enable my device to stream data to this endpoint
+            
+            ev.channel.onmessage = (ev) => { 
+                if(ev.data.message) {
+
+                    if(!(rtc as RTCCallInfo).messages) (rtc as RTCCallInfo).messages = [] as any;
+                    (rtc as RTCCallInfo).messages.push({message:ev.data.message, timestamp:Date.now(), from:(rtc as RTCCallInfo).firstName + ' ' + (rtc as RTCCallInfo).lastName});
+
+                }
+                if(ev.data.emg) {
+                    if(!state.data[rtc._id+'detectedEMG']) state.setState({[rtc._id+'detectedEMG']:true});
+                    state.setValue(rtc._id+'emg', ev.data.emg);
+                } 
+                if (ev.data.ppg) {
+                    if(!state.data[rtc._id+'detectedPPG']) state.setState({[rtc._id+'detectedPPG']:true});
+                    state.setValue(rtc._id+'ppg', ev.data.ppg);
+                } 
+                if (ev.data.hr) {
+                    state.setValue(rtc._id+'hr', ev.data.hr);
+                } 
+                if (ev.data.hrv) {
+                    state.setValue(rtc._id+'hrv', ev.data.hrv);
+                } 
+                if (ev.data.breath) {
+                    state.setValue(rtc._id+'breath', ev.data.breath);
+                } 
+                if (ev.data.brv) {
+                    state.setValue(rtc._id+'brv', ev.data.brv);
+                } 
+                if (ev.data.imu) {
+                    if(!state.data[rtc._id+'detectedIMU']) state.setState({[rtc._id+'detectedIMU']:true});
+                    state.setValue(rtc._id+'imu', ev.data.imu);
+                } 
+                if (ev.data.env) {
+                    if(!state.data[rtc._id+'detectedENV']) state.setState({[rtc._id+'detectedENV']:true});
+                    state.setValue(rtc._id+'env', ev.data.env);
+                } //else if (ev.data.emg2) {}
+            }
+
+        },
         ontrack:(ev) => {
             console.log('\n\n\nreceived track\n\n\n',ev);
         },
@@ -139,6 +190,55 @@ export let answerCall = async (call:RTCCallProps) => {
             
             if(description) webrtc.negotiateCall(rtc._id as string, description);
         });
+    };
+
+    call.ondatachannel = (ev) => {
+        console.log('Call started with', (call as RTCCallInfo).firstName, (call as RTCCallInfo).lastName);
+
+        webrtc.rtc[call._id as string].run('ping').then((res) => {
+            console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
+        });
+
+        //the call is now live, add tracks
+        //data channel streams the device data
+        enableDeviceStream(call._id); //enable my device to stream data to this endpoint
+        
+        ev.channel.onmessage = (ev) => { 
+            if(ev.data.message) {
+
+                if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
+                (call as RTCCallInfo).messages.push({message:ev.data.message, timestamp:Date.now(), from:(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName});
+
+            }
+            if(ev.data.emg) {
+                if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
+                state.setValue(call._id+'emg', ev.data.emg);
+            } 
+            if (ev.data.ppg) {
+                if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
+                state.setValue(call._id+'ppg', ev.data.ppg);
+            } 
+            if (ev.data.hr) {
+                state.setValue(call._id+'hr', ev.data.hr);
+            } 
+            if (ev.data.hrv) {
+                state.setValue(call._id+'hrv', ev.data.hrv);
+            } 
+            if (ev.data.breath) {
+                state.setValue(call._id+'breath', ev.data.breath);
+            } 
+            if (ev.data.brv) {
+                state.setValue(call._id+'brv', ev.data.brv);
+            } 
+            if (ev.data.imu) {
+                if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
+                state.setValue(call._id+'imu', ev.data.imu);
+            } 
+            if (ev.data.env) {
+                if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
+                state.setValue(call._id+'env', ev.data.env);
+            } //else if (ev.data.emg2) {}
+        }
     };
 
     let rtc = await webrtc.answerCall(call as any);
@@ -300,6 +400,7 @@ export function enableVideo(call:RTCCallInfo, minWidth?:320|640|1024|1280|1920|2
 export function disableAudio(call:RTCCallInfo) {
     if(call.audioSender) {
         call.rtc.removeTrack(call.audioSender);
+        call.audioSender.track?.stop();
         call.audioSender = undefined;
     }
 }
@@ -307,6 +408,7 @@ export function disableAudio(call:RTCCallInfo) {
 export function disableVideo(call:RTCCallInfo) {
     if(call.videoSender) {
         call.rtc.removeTrack(call.videoSender);
+        call.videoSender.track?.stop();
         call.videoSender = undefined;
     }
 }

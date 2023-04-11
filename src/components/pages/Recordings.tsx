@@ -5,9 +5,9 @@ import {state} from '../../scripts/client'
 import { BFSRoutes, csvRoutes } from 'graphscript-services.storage';
 import { driveInstance } from '../../scripts/gapi';
 import { recordCSV, stopRecording } from '../../scripts/datacsv';
-import { StreamSelect } from '../StreamSelect';
+import { StreamSelect } from '../modules/StreamSelect';
 import { Button } from '../lib/src';
-import { NoteTaking } from '../NoteTaking';
+import { NoteTaking } from '../modules/NoteTaking';
 
 //add google drive backup/sync since we're using google accounts
 

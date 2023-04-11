@@ -1,11 +1,11 @@
-import React from 'react'
-import { sComponent } from "./state.component";
+import React, {Component} from 'react'
+import {webrtc} from '../../scripts/client'
+import { RTCCallInfo } from '../../scripts/webrtc';
 
 
-export class StreamSelect extends sComponent {
+export class StreamSelect extends Component<{[key:string]:any}> {
    
     state = { //synced with global state
-        availableStreams:{},
         activeStream:undefined
     }
 
@@ -29,13 +29,13 @@ export class StreamSelect extends sComponent {
             <div>
                 <select onChange={onchange} defaultValue = {this.state.activeStream}>
                     <option value={undefined}>My Device</option>
-                    { Object.keys(this.state.availableStreams).length > 0 &&
-                        Object.keys(this.state.availableStreams).map((key) => {
+                    { Object.keys(webrtc.rtc).length > 0 &&
+                        Object.keys(webrtc.rtc).map((key) => {
                             return (
                                 <option 
                                     key={key} 
                                     value={key}
-                                >{this.state.availableStreams[key].firstName ? this.state.availableStreams[key].firstName : this.state.availableStreams[key]._id} {this.state.availableStreams[key].lastName ? this.state.availableStreams[key].lastName : ""}
+                                >{(webrtc.rtc[key] as RTCCallInfo).firstName ? (webrtc.rtc[key] as RTCCallInfo).firstName : (webrtc.rtc[key] as RTCCallInfo)._id} {(webrtc.rtc[key] as RTCCallInfo).lastName ? (webrtc.rtc[key] as RTCCallInfo).lastName : ""}
                                 </option>
                             );  
                         })

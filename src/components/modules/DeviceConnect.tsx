@@ -1,7 +1,7 @@
 import React from "react";
-import { connectDevice, disconnectDevice } from "../scripts/device";
-import { Button } from "./lib/src";
-import { sComponent } from "./state.component";
+import { connectDevice, disconnectDevice } from "../../scripts/device";
+import { Button } from "../lib/src";
+import { sComponent } from "../state.component";
 
 
 export class DeviceConnect extends sComponent {

@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
-import { sComponent } from './state.component'
-import { client } from '../scripts/client';
-import { Avatar, Button } from '../components/lib/src/index';
+import { sComponent } from '../state.component'
+import { client } from '../../scripts/client';
+import { Avatar, Button } from '../../components/lib/src/index';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
 
 let personIcon = './assets/person.jpg';

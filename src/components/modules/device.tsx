@@ -1,5 +1,5 @@
 import React from 'react'
-import {sComponent} from './state.component'
+import {sComponent} from '../state.component'
 
 
 import { DeviceConnect } from './DeviceConnect';

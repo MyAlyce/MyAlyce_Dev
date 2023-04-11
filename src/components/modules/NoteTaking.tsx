@@ -1,10 +1,10 @@
 import React, {useRef} from 'react'
-import { sComponent } from './state.component'
+import { sComponent } from '../state.component'
 import { workers } from "device-decoder";
 
-import gsworker from '../scripts/device.worker'
-import { client } from '../scripts/client';
-import { Button } from './lib/src';
+import gsworker from '../../scripts/device.worker'
+import { client } from '../../scripts/client';
+import { Button } from '../lib/src';
 
 export class NoteTaking extends sComponent {
 

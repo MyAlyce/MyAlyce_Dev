@@ -4,7 +4,7 @@ import { client } from '../../scripts/client';
 import { authorizeRedirect } from '../../scripts/fitbit';
 import { Button } from '../lib/src';
 import { sComponent } from '../state.component';
-import { UserAuths } from '../UserAuths';
+import { UserAuths } from '../modules/UserAuths';
 
 export class SettingsView extends sComponent  {
 

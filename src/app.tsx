@@ -11,7 +11,7 @@ import { Dashboard } from './components/pages/Dashboard';
 import { Recordings } from './components/pages/Recordings';
 import { WebRTCComponent } from './components/pages/webrtc';
 
-import { Device } from './components/device';
+import { Device } from './components/modules/device';
 import { Dev } from './components/pages/Dev';
 
 let googleLogo = './assets/google.png';

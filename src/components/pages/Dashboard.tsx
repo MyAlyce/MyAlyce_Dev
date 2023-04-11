@@ -1,8 +1,8 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import { Device } from '../device'
-import { StreamSelect } from '../StreamSelect'
-import { NoteTaking } from '../NoteTaking'
+import { Device } from '../modules/device'
+import { StreamSelect } from '../modules/StreamSelect'
+import { NoteTaking } from '../modules/NoteTaking'
 
 import { client } from '../../scripts/client';
 
