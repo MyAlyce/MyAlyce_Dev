@@ -242,6 +242,18 @@ export let answerCall = async (call:RTCCallProps) => {
     };
 
     let rtc = await webrtc.answerCall(call as any);
+
+    usersocket.run(
+        'runConnection', //run this function on the backend router
+        [
+            client.currentUser._id, //run this connection 
+            'postAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
+            [ //and pass these arguments
+                'cleanupCallInfo', //run this function on the user's end
+                call._id
+            ]
+        ]
+    )
     
     usersocket.run(
         'runConnection', //run this function on the backend router
@@ -275,7 +287,7 @@ graph.subscribe('receiveCallInformation', (id) => {
     
     console.log('received call information:', id);
 
-    console.log(graph.__node.state, state, graph.__node.state.data.receiveCallInformation, state.data.receiveCallInformation);
+    //console.log(graph.__node.state, state, graph.__node.state.data.receiveCallInformation, state.data.receiveCallInformation);
         
     let call = webrtc.unanswered[id] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
          
@@ -287,7 +299,7 @@ graph.subscribe('receiveCallInformation', (id) => {
                     'runConnection', //run this function on the backend router
                     [
                         call.caller, //run this connection 
-                        'runAll',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                        'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
                         [ //and pass these arguments
                             'receiveCallInformation', //run this function on the user's end
                             {
