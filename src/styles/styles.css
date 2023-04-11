@@ -59,3 +59,19 @@ hr {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid > * {
+    width: 400px;
+    margin: 5px;
+}
+
+video {
+    border-radius: 10px;
+}

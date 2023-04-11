@@ -30,7 +30,54 @@ export const createStreamChart = (call) => {
     )
 }
 
-let ctx:AudioContext;
+
+class RTCAudio extends Component<{[key:string]:any}> {
+
+    ctx = new AudioContext();
+    call:RTCCallInfo;
+    stream:MediaStream
+
+    constructor(props:{stream:MediaStream, call:RTCCallInfo}) {
+        super(props);
+
+        this.call = props.call;
+        this.stream = props.stream;
+    }
+
+    componentDidMount() {
+        //todo fix using howler for this
+        let src = this.ctx.createMediaStreamSource(this.stream as MediaStream);
+        let filterNode = this.ctx.createBiquadFilter();
+        // See https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode-section
+        filterNode.type = 'highpass';
+        // Cutoff frequency. For highpass, audio is attenuated below this frequency.
+        filterNode.frequency.value = 10000;
+
+        let gainNode = this.ctx.createGain();
+        src.connect(filterNode);
+        filterNode.connect(gainNode);
+        gainNode.connect(this.ctx.destination);
+        gainNode.gain.value = 1;
+
+        (this.call as any).srcNode = src;
+        (this.call as any).filterNode = filterNode;
+        (this.call as any).gainNode = gainNode;
+
+    }
+
+    componentWillUnmount(): void {
+        (this.call as any).srcNode.disconnect();
+    }
+
+    render() {
+        return (
+            <div>
+                <input type='range' min='0' max='1' step='0.01' defaultValue='1' onInput={(ev)=>{
+                    (this.call as any).gainNode.gain.value = (ev.target as any).value }}></input>
+            </div>
+        )
+    }
+}
 
 export const createAudioDiv = (call:WebRTCInfo) => {
 
@@ -45,106 +92,51 @@ export const createAudioDiv = (call:WebRTCInfo) => {
     })
 
     if(found) {
-        if(!ctx) ctx = new AudioContext();
-        
-        class RTCAudio extends Component<{[key:string]:any}> {
-
-            call:RTCCallInfo;
-            stream:MediaStream
-
-            constructor(props:{stream:MediaStream, call:RTCCallInfo}) {
-                super(props);
-
-                this.call = props.call;
-                this.stream = props.stream;
-            }
-
-            componentDidMount() {
-                //todo fix using howler for this
-                let src = ctx.createMediaStreamSource(this.stream as MediaStream);
-                let filterNode = ctx.createBiquadFilter();
-                // See https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode-section
-                filterNode.type = 'highpass';
-                // Cutoff frequency. For highpass, audio is attenuated below this frequency.
-                filterNode.frequency.value = 10000;
-
-                let gainNode = ctx.createGain();
-                src.connect(filterNode);
-                filterNode.connect(gainNode);
-                gainNode.connect(ctx.destination);
-                gainNode.gain.value = 1;
-
-                (this.call as any).srcNode = src;
-                (this.call as any).filterNode = filterNode;
-                (this.call as any).gainNode = gainNode;
-
-            }
-
-            componentWillUnmount(): void {
-                (this.call as any).srcNode.disconnect();
-            }
-
-            render() {
-                return (
-                    <div>
-                        <input type='range' min='0' max='1' step='0.01' defaultValue='1' onInput={(ev)=>{
-                            (this.call as any).gainNode.gain.value = (ev.target as any).value }}></input>
-                    </div>
-                )
-            }
-        }
-        
         return (<RTCAudio call={call} stream={found}/>);
-        
+    }
+}
+
+export class RTCVideo extends Component<{[key:string]:any}> {
+
+    call:RTCCallInfo;
+    stream:MediaStream;
+    video;
+
+    constructor(props:{stream:MediaStream, call:RTCCallInfo}) {
+        super(props);
+
+        this.call = props.call;
+        this.stream = props.stream;
+
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then((stream) => {
+            this.stream = stream;
+            this.forceUpdate()
+        })
+
+        let video = document.createElement('video');
+        video.autoplay = true;
+        this.video = video;
+    }
+
+    componentWillUnmount(): void {
+        (this.video as HTMLVideoElement)?.remove();
+    }
+
+    render() {
+
+        this.video.srcObject = this.stream as MediaStream;
+
+        return (
+            <div  ref={ (ref) => {
+                ref?.appendChild(this.video);
+            } }></div>
+        )
     }
 }
 
 export const createVideoDiv = (call:WebRTCInfo) => {
-    
-    let found = call.streams?.find((s) => {
-        if((s as MediaStream)?.getVideoTracks().length > 0) {
-            return true;
-        }
-    });
-    if(found){
-
-        class RTCVideo extends Component<{[key:string]:any}> {
-
-            call:RTCCallInfo;
-            stream:MediaStream;
-            video;
-
-            constructor(props:{stream:MediaStream, call:RTCCallInfo}) {
-                super(props);
-
-                this.call = props.call;
-                this.stream = props.stream;
-            }
-
-            componentDidMount(): void {
-                let video = document.createElement('video');
-                video.autoplay = true;
-                video.srcObject = found as MediaStream;
-                video.style.width = '300px';
-                video.style.height = '300px';
-                this.video = video;
-            }
-
-            componentWillUnmount(): void {
-                (this.video as HTMLVideoElement)?.remove();
-            }
-
-            render() {
-                return (
-                    <div  ref={ (ref) => {
-                        ref?.appendChild(this.video);
-                    } }></div>
-                )
-            }
-        }
-        
-        return <RTCVideo call={call} stream={found}/>
-    }
+    let found = call.streams?.find((s) => (s as MediaStream)?.getVideoTracks().length > 0);
+    if(found) return <RTCVideo call={call} stream={found}/>
 }
 
 

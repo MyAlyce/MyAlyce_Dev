@@ -15,7 +15,7 @@ import { StreamSelect } from "../modules/StreamSelect";
 import { Avatar, Button } from "../lib/src";
 
 
-import { WebRTCStream } from '../modules/WebRTCStream';
+import { RTCVideo, WebRTCStream } from '../modules/WebRTCStream';
 
 let personIcon = './assets/person.jpg';
 
@@ -180,7 +180,6 @@ export class WebRTCComponent extends sComponent {
             })
         }
 
-
         return (
             <div className="div">
                 <h1>WebRTC Communication</h1>
@@ -196,16 +195,21 @@ export class WebRTCComponent extends sComponent {
                     { this.state.availableUsers && this.state.availableUsers.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
-
+                
+                {/* 
                 <h2>Select Stream</h2>
                     <StreamSelect onChange={(ev)=>{ this.activeStream = ev.target.value; this.setState({}); }} />
                 <label>Streams:</label>
                 <div id={this.unique + 'webrtcstream'}>{
                     this.activeStream ? ( <WebRTCStream streamId={this.activeStream}/>
                     ) : ""
-                }
-                    
+                } 
+                </div>*/}
+
+                <div className="grid">
+                    {Object.keys(this.state.availableStreams).map((streamId: string) => <WebRTCStream streamId={streamId}/>)}
                 </div>
+                    
             </div>
         )
     }
