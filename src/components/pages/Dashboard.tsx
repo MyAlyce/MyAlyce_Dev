@@ -4,7 +4,8 @@ import { Device } from '../modules/device'
 import { StreamSelect } from '../modules/StreamSelect'
 import { NoteTaking } from '../modules/NoteTaking'
 
-import { client } from '../../scripts/client';
+import { client, webrtc } from '../../scripts/client';
+import { RTCCallInfo } from '../../scripts/webrtc'
 
 export class Dashboard extends sComponent {
 
@@ -22,7 +23,7 @@ export class Dashboard extends sComponent {
                 <h1>Welcome {client.currentUser.firstName}</h1>
                 <div>
                 {/*Device/Stream select */}
-                    <StreamSelect/>
+                    <StreamSelect onChange={(ev)=>{ this.setState({activeStream:ev.target.value});}}/>
                 </div>
                 {/*Chart*/}
                 <div>
@@ -30,7 +31,7 @@ export class Dashboard extends sComponent {
                         remote={!!this.state.activeStream}
                         streamId={this.state.activeStream}
                     />
-                    <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'}/>
+                    <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName+(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName+'.csv' : 'Notes.csv'}/>
                 </div>
             </div>
         )
