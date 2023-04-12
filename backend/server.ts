@@ -151,7 +151,7 @@ const DataServer = new Router({
         getAllOnlineUsers:function(userIds?:string[]) { //dev
             if(userIds) {
                 let res = [] as string[];
-                for(const key in userIds) {
+                for(const key of userIds) {
                     if(DataServer.users[key]) res.push(key);
                 }
                 return res;

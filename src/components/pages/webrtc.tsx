@@ -166,23 +166,6 @@ export class WebRTCComponent extends sComponent {
 
     render = () => {
 
-        let hasAudio;
-        let hasVideo;
-        let stream: RTCCallInfo|undefined = undefined;
-
-        if(this.activeStream) {
-            stream = this.state.availableStreams[this.activeStream] as RTCCallInfo;
-            
-            stream?.senders?.forEach((s) => {
-                if(s?.track?.kind === 'audio') {
-                    hasAudio = true;
-                }
-                if(s?.track?.kind === 'video') {
-                    hasVideo = true;
-                }
-            })
-        }
-
         return (
             <div className="div">
                 <h1>WebRTC Communication</h1>
