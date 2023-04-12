@@ -113,83 +113,116 @@ export class UserAuths extends sComponent {
         this.userRequests = [];
         this.sentRequests = [];
 
-        await client.getAuthorizations().then((auths) => {
-            auths?.forEach((a:AuthorizationStruct) => {
-                this.existingAuths.push(
-                    <tr>
-                        <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
-                            return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
-                        })}</td>
-                        <td>Authorized: ${a.authorizedName}</td>
-                        <td>Authorizer: ${a.authorizerName}</td>
-                        <td>Status: ${a.status}</td>
-                    </tr>
-                )
-            })
+        let auths = await client.getAuthorizations();
+        auths?.forEach((a:AuthorizationStruct) => {
+            this.existingAuths.push(
+                <tr>
+                    <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
+                        return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
+                    })}</td>
+                    <td>Authorized: ${a.authorizedName}</td>
+                    <td>Authorizer: ${a.authorizerName}</td>
+                    <td>Status: ${a.status}</td>
+                </tr>
+            )
         }); //get own auths
 
         //my requests
-        await client.getData('authRequest', undefined, {requesting: client.currentUser._id}).then((authRequests) => {
-            authRequests?.forEach((req:{
-                requesting:string, //them
-                receiving:string //me
-                receivingName:string,
-                users:string, //this will cause this user to receive a notification
-                authorizations:{ 'peer':true },
-                firstName:string,
-                lastName:string
-            }) => {
+        let authRequests = await client.getData('authRequest', undefined, {requesting: client.currentUser._id});
+        authRequests?.forEach((req:{
+            requesting:string, //them
+            receiving:string //me
+            receivingName:string,
+            users:string, //this will cause this user to receive a notification
+            authorizations:{ 'peer':true },
+            firstName:string,
+            lastName:string
+        }) => {
+
+            if(auths.find((a) => {
+                
+                if(a.status === 'OKAY' && a.authorizerId === req.requesting && a.authorizedId === req.receiving) {
+                    return true;
+                }
+                
+            })) {
+                client.deleteData([req]);
+            }
+            else {
 
                 let deleteRequest = () => {
                     client.deleteData([req]);
                 }
-
+    
                 this.sentRequests.push(
                     <div>
                         To: {req.receivingName}
                         <Button onClick={deleteRequest}>❌</Button>
                     </div>
                 );
-            });
-        })
+            }
+
+        });
 
         //other people's requests
-        await client.getData('authRequest', undefined, {receiving: client.currentUser._id}).then((authRequests) => {
-            authRequests?.forEach((req:{
-                requesting:string, //them
-                receiving:string //me
-                receivingName:string,
-                users:string, //this will cause this user to receive a notification
-                authorizations:{ 'peer':true },
-                firstName:string,
-                lastName:string
-            }) => {
+        let otherAuthRequests = await client.getData('authRequest', undefined, {receiving: client.currentUser._id})
+        otherAuthRequests?.forEach((req:{
+            requesting:string, //them
+            receiving:string //me
+            receivingName:string,
+            users:string, //this will cause this user to receive a notification
+            authorizations:{ 'peer':true },
+            firstName:string,
+            lastName:string
+        }) => {
 
-                let accept = () => {
-                    this.createAuth(req.requesting, req.firstName + req.lastName ? ' '+req.lastName : '', true).then(() => {
-                        client.deleteData([req]).then(async ()=>{
-                            await this.listAuths();
-                            this.setState({});
-                        });
-                    });
-                    
+            if(auths.find((a) => {
+                if(a.status === 'OKAY' && a.authorizerId === req.receiving && a.authorizedId === req.requesting) {
+                    return true;
                 }
+                
+            })) {
+                client.deleteData([req]);
+            }
+            else {
 
-                let reject = () => {
+                let deleteRequest = () => {
+                    client.deleteData([req]);
+                }
+    
+                this.sentRequests.push(
+                    <div>
+                        To: {req.receivingName}
+                        <Button onClick={deleteRequest}>❌</Button>
+                    </div>
+                );
+            }
+
+
+            let accept = () => {
+                this.createAuth(req.requesting, req.firstName + req.lastName ? ' '+req.lastName : '', true).then(() => {
                     client.deleteData([req]).then(async ()=>{
                         await this.listAuths();
                         this.setState({});
                     });
-                }
+                });
+                
+            }
 
-                this.userRequests.push(
-                    <div>
-                        User: {req.firstName} {req.lastName}<br/>
-                        <Button onClick={accept}>✔️</Button>
-                        <Button onClick={reject}>❌</Button>
-                    </div>
-                );
-            });
+            let reject = () => {
+                client.deleteData([req]).then(async ()=>{
+                    await this.listAuths();
+                    this.setState({});
+                });
+            }
+
+            this.userRequests.push(
+                <div>
+                    User: {req.firstName} {req.lastName}<br/>
+                    <Button onClick={accept}>✔️</Button>
+                    <Button onClick={reject}>❌</Button>
+                </div>
+            );
         });
         
         this.setState({});
