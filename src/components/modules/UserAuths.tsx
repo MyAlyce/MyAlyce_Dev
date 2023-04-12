@@ -34,18 +34,7 @@ export class UserAuths extends sComponent {
                 res?.forEach((user) => {
                     this.queryResults.push(
                         <option key={user._id} value={user._id}>
-                            <Avatar
-                                dataState='done'
-                                imgSrc={user.pictureUrl ? user.pictureUrl : personIcon}
-                                size='xs'
-                                name={
-                                    {
-                                        first:user.firstName as string,
-                                        last:user.lastName as string,
-                                    }
-                                }
-                                backgroundColor='lightblue'
-                            /> {user.firstName} {user.lastName}
+                            {user.firstName} {user.lastName}
                         </option>
                     );
                 });
