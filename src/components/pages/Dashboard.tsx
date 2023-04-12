@@ -17,7 +17,7 @@ export class Dashboard extends sComponent {
 
     render() {
 
-        console.log(client.currentUser)
+        //console.log(client.currentUser)
         return (
             <div className='div'>
                 <h1>Welcome {client.currentUser.firstName}</h1>

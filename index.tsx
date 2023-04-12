@@ -7,14 +7,14 @@ import './src/init' //run init sequence
 
 const useStyles = true;
 
-//esbuild compiles these
+//esbuild compiles these into index.css
 import './src/components/lib/src/index.css'
 import './src/styles/index.scss'
 import './src/styles/burger.css'
+import './src/styles/inter.css'
 import './src/styles/styles.css'
 
 if(useStyles) {
-  document.head.insertAdjacentHTML('beforeend', '<link rel="preconnect" href="https://rsms.me/"><link rel="stylesheet" href="https://rsms.me/inter/inter.css">');
   document.head.insertAdjacentHTML('beforeend',
   `<link rel="stylesheet" href="./index.css" type="text/css" />`
   );
