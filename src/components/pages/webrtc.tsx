@@ -74,11 +74,14 @@ export class WebRTCComponent extends sComponent {
             }
         });
 
-        let userIds = await usersocket.run('getAllOnlineUsers', [checkIds]);
+        let userIds = await usersocket.run('getAllOnlineUsers', [pushed]);
+
+        console.log(pushed, userIds);
 
         userIds.push(client.currentUser._id);
 
         let userInfo = await client.getUsers(userIds, true);
+
         if(userInfo) {
             let divs = [] as any[];
             userInfo.forEach((user:Partial<ProfileStruct>) => {
