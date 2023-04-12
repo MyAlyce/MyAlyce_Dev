@@ -16,8 +16,8 @@ import './src/styles/styles.css'
 import './src/styles/bootstrap.min.css'
 
 if(useStyles) {
-  document.head.insertAdjacentHTML('beforeend',
-  `<link rel="stylesheet" href="./index.css" type="text/css" />`
+  document.head.insertAdjacentHTML('beforeend','<meta name="viewport" content="width=device-width, initial-scale=1" />');
+  document.head.insertAdjacentHTML('beforeend',`<link rel="stylesheet" href="./index.css" type="text/css" />`
   );
 }
 
