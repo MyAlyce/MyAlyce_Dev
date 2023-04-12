@@ -13,6 +13,7 @@ import './src/styles/index.scss'
 import './src/styles/burger.css'
 import './src/styles/inter.css'
 import './src/styles/styles.css'
+import './src/styles/bootstrap.min.css'
 
 if(useStyles) {
   document.head.insertAdjacentHTML('beforeend',
