@@ -126,10 +126,10 @@ export async function connectDevice() {
                 }
             },
             onconnect: () => {
-                this.setState({deviceConnected:true});
+                state.setState({deviceConnected:true});
             },
             ondisconnect: () => {
-                this.setState({deviceConnected:false});
+                state.setState({deviceConnected:false});
                 for(const key in nodes) {
                     graph.remove(key,true);
                 }

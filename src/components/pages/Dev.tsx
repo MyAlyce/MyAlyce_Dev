@@ -9,9 +9,6 @@ export class Dev extends sComponent {
        
     }
 
-
-    
-
     render() {
 
         return (

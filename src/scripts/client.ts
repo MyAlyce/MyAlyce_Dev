@@ -23,8 +23,6 @@ import {BFSRoutes} from 'graphscript-services.storage'
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
 import { workers } from 'device-decoder'
 
-
-
 import { RealmUser } from './login'
 
 import config from '../../backend/serverconfig.js'
