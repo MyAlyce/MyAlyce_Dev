@@ -17,8 +17,10 @@ import { Avatar, Button } from "../lib/src";
 import { Howl, Howler } from "howler";
 import { RTCCallInfo, RTCCallProps, disableAudio, disableVideo, enableAudio, enableDeviceStream, enableVideo } from '../../scripts/webrtc';
 
-let personIcon = './assets/person.jpg';
-
+const micOn = './assets/mic.svg';
+const micOff = './assets/mic-off.svg';
+const videoOn = './assets/webcam.svg';
+const videoOff = './assets/webcam-off.svg';
 
 export const createStreamChart = (call) => {
     return (
@@ -48,10 +50,8 @@ class RTCAudio extends Component<{[key:string]:any}> {
         //todo fix using howler for this
         let src = this.ctx.createMediaStreamSource(this.stream as MediaStream);
         let filterNode = this.ctx.createBiquadFilter();
-        // See https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode-section
-        filterNode.type = 'highpass';
-        // Cutoff frequency. For highpass, audio is attenuated below this frequency.
-        filterNode.frequency.value = 10000;
+        filterNode.type = 'highpass'; // See https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode-section
+        filterNode.frequency.value = 10000; // Cutoff frequency. For highpass, audio is attenuated below this frequency.
 
         let gainNode = this.ctx.createGain();
         src.connect(filterNode);
@@ -309,24 +309,27 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
             })
         }
 
+        console.log('hasAudio',hasAudio, 'hasVideo',hasVideo)
         return (
-            <div id={this.unique + 'webrtcstream'}>{
+            <div id={this.unique + 'webrtcstream'} className='rtcStream'>{
                 this.state.activeStream ? (
                 <div>
-                    {hasVideo ? <Button onClick={() => {
-                        disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
-                        this.setState({});
-                    }}>Disable My Video</Button> : <Button onClick={() => {
-                        enableVideo(webrtc.rtc[this.state.activeStream as any] as any);
-                        this.setState({});
-                    }}>Enable My Video</Button>}
-                    {hasAudio ? <Button onClick={() => {
-                        disableAudio(webrtc.rtc[this.state.activeStream as any] as any);
-                        this.setState({});
-                    }}>Disable My Audio</Button> : <Button onClick={() => {
-                        enableAudio(webrtc.rtc[this.state.activeStream as any] as any);
-                        this.setState({});
-                    }}>Enable My Audio</Button>}
+                    <div className="rtcButtons">
+                        {hasVideo ? <img src={videoOn} alt="Video On" onClick={() => {
+                            disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
+                            this.forceUpdate()
+                        }} /> : <img src={videoOff} alt="Video Off" onClick={() => {
+                            enableVideo(webrtc.rtc[this.state.activeStream as any] as any);
+                            this.forceUpdate()
+                        }}/>}
+                        {hasAudio ? <img src={micOn} alt="Microphone On" onClick={() => {
+                            disableAudio(webrtc.rtc[this.state.activeStream as any] as any);
+                            this.forceUpdate()
+                        }}/> : <img src={micOff} alt="Microphone Off" onClick={() => {
+                            enableAudio(webrtc.rtc[this.state.activeStream as any] as any);
+                            this.forceUpdate()
+                        }}/>}
+                    </div>
                     <div id={this.unique + 'datastream'}>
                         {  this.state.chartDataDiv ? this.state.chartDataDiv : ""    }
                     </div>

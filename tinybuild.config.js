@@ -27,6 +27,7 @@ const config = {
 
           loader: {
             '.png': 'dataurl',
+            '.svg': 'dataurl',
             '.jpg': 'dataurl',
             '.jpeg': 'dataurl',
           }

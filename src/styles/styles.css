@@ -75,3 +75,28 @@ hr {
 video {
     border-radius: 10px;
 }
+
+
+.rtcStream {
+    position: relative;
+}
+
+.rtcButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.rtcButtons > * {
+    margin: 10px;
+    cursor: pointer;
+}
+
+.rtcButtons img {
+    width: 30px;
+    height: 30px;
+}
