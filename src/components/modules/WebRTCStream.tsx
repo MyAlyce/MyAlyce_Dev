@@ -335,14 +335,18 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
                             disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
                             this.forceUpdate()
                         }} /> : <img src={videoOff} alt="Video Off" onClick={() => {
-                            enableVideo(webrtc.rtc[this.state.activeStream as any] as any, this.videoInId ? {deviceId:this.videoInId} : undefined, this.audioInId === this.videoInId); //todo: deal with case of using e.g. a webcam for both audio and video
+                            enableVideo(webrtc.rtc[this.state.activeStream as any] as any, this.videoInId ? {deviceId:this.videoInId} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
                             this.forceUpdate()
                         }}/>}
                         {hasAudio ? <img src={micOn} alt="Microphone On" onClick={() => {
                             disableAudio(webrtc.rtc[this.state.activeStream as any] as any);
                             this.forceUpdate()
                         }}/> : <img src={micOff} alt="Microphone Off" onClick={() => {
-                            enableAudio(webrtc.rtc[this.state.activeStream as any] as any, this.audioInId ? {deviceId:this.audioInId} : undefined);
+                            if(hasVideo && this.audioInId === this.videoInId) {
+                                disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
+                                enableVideo(webrtc.rtc[this.state.activeStream as any] as any, this.videoInId ? {deviceId:this.videoInId} : undefined, true);
+                            }
+                            else enableAudio(webrtc.rtc[this.state.activeStream as any] as any, this.audioInId ? {deviceId:this.audioInId} : undefined);
                             this.forceUpdate()
                         }}/>}
                     </div>
