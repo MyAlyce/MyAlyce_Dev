@@ -230,7 +230,13 @@ export class WebRTCComponent extends sComponent {
                 </div>
                 <hr/>
                 Device Select: 
-                {/* TODO: add onchange event and have all outgoing streams send the same audio/video, also add a loop to check for new devices (e.g. 1 check per 1-3 seconds for new listings from enumerateDevices) */}
+                {/* 
+                    TODO: 
+                        Add onchange event and have all outgoing streams send the same audio/video. We need to basically just need to call disableAudio/Video then enableAudio/Video with the new settings if the Ids in the stream don't match
+                        Also add a loop to check for new devices (e.g. 1 check per 1-3 seconds for new listings from enumerateDevices).
+                        Add screenshare options
+                    */
+                }
                 <select id={this.unique+'aIn'} onChange={(ev) => { this.selectedAudioIn = ev.target.value; }}>{this.state.audioInDevices}</select>
                 <select id={this.unique+'aOut'} onChange={(ev) => { this.selectedAudioOut = ev.target.value; }}>{this.state.audioOutDevices}</select> 
                 <select id={this.unique+'vIn'} onChange={(ev) => { this.selectedVideo = ev.target.value; }}>{this.state.cameraDevices}</select>
