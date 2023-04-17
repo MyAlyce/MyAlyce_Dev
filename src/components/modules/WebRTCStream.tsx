@@ -316,11 +316,25 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
             stream = webrtc.rtc[this.state.activeStream] as RTCCallInfo;
             
             stream?.senders?.forEach((s) => {
+                let videoEnabledInAudio = false;
                 if(s?.track?.kind === 'audio') {
                     hasAudio = true;
+                    if((s as any).deviceId && this.audioInId && (s as any).deviceId !== this.audioInId) {
+                        disableAudio(webrtc.rtc[this.state.activeStream as any] as any);
+                        if(hasVideo && this.audioInId === this.videoInId) {
+                            disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
+                            enableVideo(webrtc.rtc[this.state.activeStream as any] as any, this.videoInId ? {deviceId:this.videoInId} : undefined, true);
+                            videoEnabledInAudio = true;
+                        }
+                        else enableAudio(webrtc.rtc[this.state.activeStream as any] as any, this.audioInId ? {deviceId:this.audioInId} : undefined);
+                    }
                 }
                 if(s?.track?.kind === 'video') {
                     hasVideo = true;
+                    if((s as any).deviceId && this.videoInId && (s as any).deviceId !== this.videoInId && !videoEnabledInAudio) {
+                        disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
+                        enableVideo(webrtc.rtc[this.state.activeStream as any] as any, this.videoInId ? {deviceId:this.videoInId} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
+                    }
                 }
             })
         }

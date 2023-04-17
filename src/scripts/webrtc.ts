@@ -379,6 +379,9 @@ export function enableAudio(call:RTCCallInfo, audioOptions:boolean|MediaTrackCon
     );
 
     call.audioSender = senders[0];
+    if((audioOptions as MediaTrackConstraints)?.deviceId) {
+        senders[0].deviceId = (audioOptions as MediaTrackConstraints).deviceId;
+    }
 }
 
 export function enableVideo(
@@ -410,6 +413,9 @@ export function enableVideo(
     );
 
     call.videoSender = senders[0];
+    if((options as MediaTrackConstraints)?.deviceId) {
+        senders[0].deviceId = (options as MediaTrackConstraints).deviceId;
+    }
 }
 
 export function disableAudio(call:RTCCallInfo) {
