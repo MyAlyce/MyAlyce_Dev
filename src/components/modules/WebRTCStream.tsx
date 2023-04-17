@@ -52,23 +52,22 @@ class RTCAudio extends Component<{[key:string]:any}> {
         this.audioOutId = props.audioOutId;
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //todo fix using howler for this
-        let src = this.ctx.createMediaStreamSource(this.stream as MediaStream);
-        
-        // // create Oscillator node
-        // const oscillator = this.ctx.createOscillator();
-        // oscillator.type = "square";
-        // oscillator.frequency.setValueAtTime(440, this.ctx.currentTime); // value in hertz
+
+        // let stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        // let src = this.ctx.createMediaStreamSource(stream);
+        let src = this.ctx.createMediaStreamSource(this.stream);
 
         let filterNode = this.ctx.createBiquadFilter();
-        filterNode.type = 'highpass'; // See https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode-section
-        filterNode.frequency.value = 10000; // Cutoff frequency. For highpass, audio is attenuated below this frequency.
+        filterNode.type = 'lowshelf'; 
+        filterNode.frequency.value = 1000;
+        filterNode.gain.value = 1;
 
         let gainNode = this.ctx.createGain();
         src.connect(filterNode);
         filterNode.connect(gainNode); //src.connect(gainNode); // filterNode.connect(gainNode);
-        // oscillator.connect(gainNode);
+        gainNode.gain.value = 1;
 
         if (this.audioOutId) this.ctx.setSinkId(this.audioOutId)
         gainNode.connect(this.ctx.destination);
@@ -76,8 +75,6 @@ class RTCAudio extends Component<{[key:string]:any}> {
         (this.call as any).srcNode = src;
         (this.call as any).filterNode = filterNode;
         (this.call as any).gainNode = gainNode;
-
-        // oscillator.start()
 
     }
 
