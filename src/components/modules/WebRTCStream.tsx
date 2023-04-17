@@ -68,7 +68,7 @@ class RTCAudio extends Component<{[key:string]:any}> {
         filterNode.connect(gainNode); //src.connect(gainNode); // filterNode.connect(gainNode);
         // gainNode.gain.value = 1;
 
-        if (this.audioOutId) this.ctx.setSinkId(this.audioOutId)
+        if (this.audioOutId) (this.ctx as any).setSinkId(this.audioOutId)
         gainNode.connect(this.ctx.destination);
 
         (this.call as any).srcNode = src;
@@ -91,7 +91,7 @@ class RTCAudio extends Component<{[key:string]:any}> {
     }
 }
 
-export const createAudioDiv = (call:WebRTCInfo, audioOutId: string) => {
+export const createAudioDiv = (call:WebRTCInfo, audioOutId?: string) => {
 
     if((call as any).gainNode) {
         (call as any).gainNode.disconnect();
