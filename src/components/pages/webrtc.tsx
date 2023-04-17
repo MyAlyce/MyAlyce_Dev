@@ -34,7 +34,10 @@ export class WebRTCComponent extends sComponent {
         audioTrackDiv:undefined,
         audioInDevices:[] as any[],
         audioOutDevices:[] as any[],
-        cameraDevices:[] as any[]
+        cameraDevices:[] as any[],
+        selectedVideo: '' as string,
+        selectedAudioIn: '' as string,
+        selectedAudioOut: '' as string,
     }
 
     activeStream?:string;
@@ -42,9 +45,6 @@ export class WebRTCComponent extends sComponent {
     subscriptions = {} as any;
     evSub; streamSelectSub;
     messages = [] as any;
-    selectedVideo;
-    selectedAudioIn;
-    selectedAudioOut;
 
     constructor(props:{streamId?:string}) {
         super(props);
@@ -214,6 +214,7 @@ export class WebRTCComponent extends sComponent {
 
     render = () => {
 
+        console.log('selectedAudioOut', this.state.selectedAudioOut)
         return (
             <div className="div">
                 <h1>WebRTC Communication</h1>
@@ -237,9 +238,9 @@ export class WebRTCComponent extends sComponent {
                         Add screenshare options
                     */
                 }
-                <select id={this.unique+'aIn'} onChange={(ev) => { this.selectedAudioIn = ev.target.value; }}>{this.state.audioInDevices}</select>
-                <select id={this.unique+'aOut'} onChange={(ev) => { this.selectedAudioOut = ev.target.value; }}>{this.state.audioOutDevices}</select> 
-                <select id={this.unique+'vIn'} onChange={(ev) => { this.selectedVideo = ev.target.value; }}>{this.state.cameraDevices}</select>
+                <select id={this.unique+'aIn'} onChange={(ev) => this.setState({selectedAudioIn: ev.target.value})}>{this.state.audioInDevices}</select>
+                <select id={this.unique+'aOut'} onChange={(ev) => this.setState({selectedAudioOut: ev.target.value})}>{this.state.audioOutDevices}</select> 
+                <select id={this.unique+'vIn'} onChange={(ev) => this.setState({selectedVideo: ev.target.value})}>{this.state.cameraDevices}</select>
                 
                 {/* 
                 <h2>Select Stream</h2>
@@ -252,7 +253,7 @@ export class WebRTCComponent extends sComponent {
                 </div>*/}
 
                 <div className="grid">
-                    {Object.keys(this.state.availableStreams).map((streamId: string) => <WebRTCStream streamId={streamId} audioInId={this.selectedAudioIn} videoInId={this.selectedVideo} audioOutId={this.selectedAudioOut}/>)}
+                    {Object.keys(this.state.availableStreams).map((streamId: string) => <WebRTCStream streamId={streamId} audioInId={this.state.selectedAudioIn} videoInId={this.state.selectedVideo} audioOutId={this.state.selectedAudioOut}/>)}
                 </div>
                     
             </div>

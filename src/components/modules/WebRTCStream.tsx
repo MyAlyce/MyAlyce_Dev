@@ -38,6 +38,7 @@ class RTCAudio extends Component<{[key:string]:any}> {
     ctx = new AudioContext();
     call:RTCCallInfo;
     stream:MediaStream
+    audioOutId:string;
 
     constructor(props:{
         stream:MediaStream, 
@@ -48,11 +49,18 @@ class RTCAudio extends Component<{[key:string]:any}> {
 
         this.call = props.call;
         this.stream = props.stream;
+        this.audioOutId = props.audioOutId;
     }
 
     componentDidMount() {
         //todo fix using howler for this
         let src = this.ctx.createMediaStreamSource(this.stream as MediaStream);
+        
+        // // create Oscillator node
+        // const oscillator = this.ctx.createOscillator();
+        // oscillator.type = "square";
+        // oscillator.frequency.setValueAtTime(440, this.ctx.currentTime); // value in hertz
+
         let filterNode = this.ctx.createBiquadFilter();
         filterNode.type = 'highpass'; // See https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode-section
         filterNode.frequency.value = 10000; // Cutoff frequency. For highpass, audio is attenuated below this frequency.
@@ -60,12 +68,16 @@ class RTCAudio extends Component<{[key:string]:any}> {
         let gainNode = this.ctx.createGain();
         src.connect(filterNode);
         filterNode.connect(gainNode); //src.connect(gainNode); // filterNode.connect(gainNode);
+        // oscillator.connect(gainNode);
+
+        if (this.audioOutId) this.ctx.setSinkId(this.audioOutId)
         gainNode.connect(this.ctx.destination);
-        gainNode.gain.value = 1;
 
         (this.call as any).srcNode = src;
         (this.call as any).filterNode = filterNode;
         (this.call as any).gainNode = gainNode;
+
+        // oscillator.start()
 
     }
 
@@ -83,7 +95,7 @@ class RTCAudio extends Component<{[key:string]:any}> {
     }
 }
 
-export const createAudioDiv = (call:WebRTCInfo) => {
+export const createAudioDiv = (call:WebRTCInfo, audioOutId: string) => {
 
     if((call as any).gainNode) {
         (call as any).gainNode.disconnect();
@@ -96,7 +108,7 @@ export const createAudioDiv = (call:WebRTCInfo) => {
     })
 
     if(found) {
-        return (<RTCAudio call={call} stream={found}/>);
+        return (<RTCAudio call={call} stream={found} audioOutId={audioOutId}/>);
     }
 }
 
@@ -243,7 +255,7 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
                 videoTrackDiv:createVideoDiv(webrtc.rtc[call._id as any] as any)
             });
             else if(ev.track.kind === 'audio' && this.state.activeStream === call._id) this.setState({
-                audioTrackDiv:createAudioDiv(webrtc.rtc[call._id as any] as any)
+                audioTrackDiv:createAudioDiv(webrtc.rtc[call._id as any] as any, this.audioOutId)
             });
             
             ev.track.addEventListener('ended', () => {
@@ -289,7 +301,7 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
         this.setState({
             chartDataDiv:createStreamChart(call),
             videoTrackDiv:createVideoDiv(call),
-            audioTrackDiv:createAudioDiv(call)
+            audioTrackDiv:createAudioDiv(call, this.audioOutId)
         });
     }
 
