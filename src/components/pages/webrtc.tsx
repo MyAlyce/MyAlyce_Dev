@@ -31,7 +31,10 @@ export class WebRTCComponent extends sComponent {
         unansweredCallDivs:[] as any[],
         chartDataDiv:undefined,
         videoTrackDiv:undefined,
-        audioTrackDiv:undefined
+        audioTrackDiv:undefined,
+        audioInDevices:[] as any[],
+        audioOutDevices:[] as any[],
+        cameraDevices:[] as any[]
     }
 
     activeStream?:string;
@@ -39,9 +42,54 @@ export class WebRTCComponent extends sComponent {
     subscriptions = {} as any;
     evSub; streamSelectSub;
     messages = [] as any;
+    selectedVideo;
+    selectedAudioIn;
+    selectedAudioOut;
 
     constructor(props:{streamId?:string}) {
         super(props);
+        this.listMediaDevices();
+    }
+
+    listMediaDevices() {
+        navigator.mediaDevices.enumerateDevices()
+        .then((deviceInfos) => { //https://github.com/garrettmflynn/intensities/blob/main/app/index.js
+
+            let ain = [] as any[]; let aout = [] as any[]; let cam = [] as any[];
+            for (var i = 0; i !== deviceInfos.length; ++i) {
+                var deviceInfo = deviceInfos[i];
+                var option = (<option value={deviceInfo.deviceId}>{deviceInfo.label}</option>)//document.createElement('option');
+                //option.value = deviceInfo.deviceId;
+                if (deviceInfo.kind === 'videoinput') {
+                    cam.push(option);
+                    // option.text = deviceInfo.label || 'Camera ' +
+                    //     (videoSelect.options.length + 1);
+                    // this.camsrc.insertAdjacentElement('beforeend',option);
+                }
+                else if (deviceInfo.kind === 'audioinput') {
+                    ain.push(option);
+                    // option.text = deviceInfo.label ||
+                    //     'Microphone ' + (audioInputSelect.options.length + 1);
+                    // this.camsrc.insertAdjacentElement('beforeend',option);
+                } 
+                else if (deviceInfo.kind === 'audiooutput') {
+                    aout.push(option);
+                    // option.text = deviceInfo.label || 'Speaker ' +
+                    //     (audioOutputSelect.options.length + 1);
+                    //     this.camsrc.insertAdjacentElement('beforeend',option);
+                } 
+            }
+
+            this.setState({
+                audioInDevices:ain,
+                audioOutDevices:aout,
+                videoInDevices:cam
+            })
+        });
+    }
+
+    screenShare(call:RTCCallInfo) {
+        //call.rtc.addTrack(new MediaStreamTrack(MediaStream)) //or something like that
     }
 
     componentDidMount = () => {
@@ -181,6 +229,11 @@ export class WebRTCComponent extends sComponent {
                     { this.state.availableUsers && this.state.availableUsers.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
+                Device Select: 
+                {/* TODO: add onchange event and have all outgoing streams send the same audio/video, also add a loop to check for new devices (e.g. 1 check per 1-3 seconds for new listings from enumerateDevices) */}
+                <select id={this.unique+'aIn'} onChange={(ev) => { this.selectedAudioIn = ev.target.value; }}>{this.state.audioInDevices}</select>
+                <select id={this.unique+'aOut'} onChange={(ev) => { this.selectedAudioOut = ev.target.value; }}>{this.state.audioOutDevices}</select> 
+                <select id={this.unique+'vIn'} onChange={(ev) => { this.selectedVideo = ev.target.value; }}>{this.state.cameraDevices}</select>
                 
                 {/* 
                 <h2>Select Stream</h2>
@@ -193,7 +246,7 @@ export class WebRTCComponent extends sComponent {
                 </div>*/}
 
                 <div className="grid">
-                    {Object.keys(this.state.availableStreams).map((streamId: string) => <WebRTCStream streamId={streamId}/>)}
+                    {Object.keys(this.state.availableStreams).map((streamId: string) => <WebRTCStream streamId={streamId} audioInId={this.selectedAudioIn} videoInId={this.selectedVideo} audioOutId={this.selectedAudioOut}/>)}
                 </div>
                     
             </div>

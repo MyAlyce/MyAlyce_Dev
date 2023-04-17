@@ -365,14 +365,14 @@ export function enableDeviceStream(streamId) { //enable sending data to a given 
 }
 
 
-export function enableAudio(call:RTCCallInfo) {
+export function enableAudio(call:RTCCallInfo, audioOptions:boolean|MediaTrackConstraints=true) {
 
     if(call.audioSender) this.disableVideo(call);
     
     let senders = webrtc.addUserMedia(
         call.rtc, 
         {
-            audio:true,
+            audio:audioOptions,
             video:false
         }, 
         call 
@@ -381,27 +381,30 @@ export function enableAudio(call:RTCCallInfo) {
     call.audioSender = senders[0];
 }
 
-export function enableVideo(call:RTCCallInfo, minWidth?:320|640|1024|1280|1920|2560|3840) { //the maximum available resolution will be selected if not specified
+export function enableVideo(
+    call:RTCCallInfo, 
+    options:MediaTrackConstraints  = {
+        //deviceId: 'abc' //or below default setting:
+        optional:[
+            {minWidth: 320},
+            {minWidth: 640},
+            {minWidth: 1024},
+            {minWidth: 1280},
+            {minWidth: 1920},
+            {minWidth: 2560},
+            {minWidth: 3840},
+        ]
+    } as MediaTrackConstraints  & { optional:{minWidth: number}[] },
+    includeAudio:boolean=false
+) { //the maximum available resolution will be selected if not specified
     
     if(call.videoSender) this.disableVideo(call);
 
     let senders = webrtc.addUserMedia(
         call.rtc, 
         {
-            audio:false, 
-            video:{
-                optional: minWidth ? [{
-                    minWidth: minWidth
-                }] : [
-                    {minWidth: 320},
-                    {minWidth: 640},
-                    {minWidth: 1024},
-                    {minWidth: 1280},
-                    {minWidth: 1920},
-                    {minWidth: 2560},
-                    {minWidth: 3840},
-                ]
-            } as MediaTrackConstraints
+            audio:includeAudio, 
+            video:options
         }, 
         call 
     );
