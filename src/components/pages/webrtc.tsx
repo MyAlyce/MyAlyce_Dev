@@ -61,18 +61,24 @@ export class WebRTCComponent extends sComponent {
                 var option = (<option value={deviceInfo.deviceId}>{deviceInfo.label}</option>)//document.createElement('option');
                 //option.value = deviceInfo.deviceId;
                 if (deviceInfo.kind === 'videoinput') {
+                    if(!this.state.selectedVideo)
+                        this.state.selectedVideo = deviceInfo.deviceId;
                     cam.push(option);
                     // option.text = deviceInfo.label || 'Camera ' +
                     //     (videoSelect.options.length + 1);
                     // this.camsrc.insertAdjacentElement('beforeend',option);
                 }
                 else if (deviceInfo.kind === 'audioinput') {
+                    if(!this.state.selectedAudioIn)
+                        this.state.selectedAudioIn = deviceInfo.deviceId;
                     ain.push(option);
                     // option.text = deviceInfo.label ||
                     //     'Microphone ' + (audioInputSelect.options.length + 1);
                     // this.camsrc.insertAdjacentElement('beforeend',option);
                 } 
                 else if (deviceInfo.kind === 'audiooutput') {
+                    if(!this.state.selectedAudioOut)
+                        this.state.selectedAudioOut = deviceInfo.deviceId;
                     aout.push(option);
                     // option.text = deviceInfo.label || 'Speaker ' +
                     //     (audioOutputSelect.options.length + 1);
