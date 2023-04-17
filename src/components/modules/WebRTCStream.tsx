@@ -55,9 +55,9 @@ class RTCAudio extends Component<{[key:string]:any}> {
     async componentDidMount() {
         //todo fix using howler for this
 
-        let stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-        let src = this.ctx.createMediaStreamSource(stream);
-        // let src = this.ctx.createMediaStreamSource(this.stream);
+        // let stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        // let src = this.ctx.createMediaStreamSource(stream);
+        let src = this.ctx.createMediaStreamSource(this.stream);
 
         let filterNode = this.ctx.createBiquadFilter();
         filterNode.type = 'lowshelf'; 
