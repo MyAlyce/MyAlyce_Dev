@@ -1,11 +1,9 @@
 //simply import to run this script on init
 
-import { GDrive } from "./drive";
 
-const googleClientID = "266491467596-vuq7b4q1bt34s5tmmqpgp0ovs91r74kl.apps.googleusercontent.com";
-const apiKey = "AIzaSyDxBHuENbHVlbSj_v0ezWSqIw3JsxAsprc";
+export const googleClientID = "266491467596-vuq7b4q1bt34s5tmmqpgp0ovs91r74kl.apps.googleusercontent.com";
+export const apiKey = "AIzaSyDxBHuENbHVlbSj_v0ezWSqIw3JsxAsprc";
 
-export let driveInstance = new GDrive(apiKey, googleClientID);
 
 
 

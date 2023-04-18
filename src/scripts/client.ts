@@ -27,6 +27,8 @@ import { RealmUser } from './login'
 
 import config from '../../backend/serverconfig.js'
 import { DS } from 'graphscript-services/struct/datastructures/index'
+import { GDrive } from './drive'
+import { apiKey, googleClientID } from './gapi'
 
 export let client = new StructFrontend({state:state});
 export let sockets = new WSSfrontend({state:state});
@@ -35,6 +37,8 @@ export let webrtc = new WebRTCfrontend({state:state});
 export let usersocket:WebSocketInfo;
 
 export {state}; //
+
+export let driveInstance:GDrive;
 
 export const graph = new Router({
     services:{
@@ -152,7 +156,11 @@ export const onLogin = async (
                 loggedInId: user._id,
                 viewingId: user._id
             });
+            
             console.log("Logged in: ", user, client);
+
+            console.log('initializing gapi');
+            driveInstance = new GDrive(apiKey, googleClientID);
 
             restoreSession(user);
 

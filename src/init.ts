@@ -3,8 +3,6 @@ import { graph, onLogin, setupTestUser, usersocket } from "./scripts/client";
 import { authorizeCode, refreshToken, setupFitbitApi } from "./scripts/fitbit";
 import { login } from "./scripts/login";
 
-import './scripts/gapi' //setup gapi
-
 import { connectionHasId } from "graphscript";//"../../graphscript/index"//
 
 export function getDictFromUrlParams(url = window.location) {
