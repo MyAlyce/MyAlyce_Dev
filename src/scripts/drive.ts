@@ -9,7 +9,11 @@ export class GDrive {
     //------------------------
     
 
-    gapi = (window as any).gapi
+    gapi = (window as any).gapi;
+    gAuth = (window as any).gAuth;
+
+    isSignedIn = false;
+
     directory = "MyAlyce_Data"
     fs = fs;
 
@@ -19,19 +23,17 @@ export class GDrive {
     }
 
     //this is deprecated now?: https://developers.google.com/identity/gsi/web/guides/overview
-    initGapi(
+    initGapi = (
         apiKey:string, 
         googleClientID:string
-    ) {
+    ) => {
 
-        if (location.hostname === 'localhost') return;
-        
-        function handleClientLoad() {
+        let handleClientLoad = () => {
             window.gapi.load('client:auth2', initClient);
         }
         
         
-        function updateSigninStatus(isSignedIn) {
+        let updateSigninStatus = (isSignedIn) => {
             if (isSignedIn) {
                 console.log("Signed in with Google.")
             } else {
@@ -40,26 +42,30 @@ export class GDrive {
         }
         
         
-        function initClient() {
-            window.gapi.auth2.initialized = false;
+        let initClient = () => {
+            this.gapi = window.gapi;
+            this.gapi.auth2.initialized = false;
             // Array of API discovery doc URLs for APIs used by the quickstart
             var DISCOVERY_DOCS = [
                 //"https://sheets.googleapis.com/$discovery/rest?version=v4",
                 "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"
             ];
         
-            window.gapi.client.init({
+            console.log('GAPI LOADED', this);
+            
+            this.gapi.client.init({
                 apiKey: apiKey,             
                 clientId: googleClientID,   
                 discoveryDocs: DISCOVERY_DOCS,
                 scope: "https://www.googleapis.com/auth/drive"
-            }).then(function () {
+            }).then(() => {
                 // Listen for sign-in state changes.
-                window.gAuth = window.gapi.auth2.getAuthInstance()
-                window.gAuth.isSignedIn.listen(updateSigninStatus);
-                window.gapi.auth2.initialized = true;
+                this.gAuth = window.gapi.auth2.getAuthInstance();
+                this.gAuth.isSignedIn.listen(updateSigninStatus);
+                this.gapi.auth2.initialized = true;
+                console.log('GAPI INIT', this);
                 // Handle the initial sign-in state.
-                window.updateSigninStatus(this.auth.isSignedIn.get());
+                updateSigninStatus(this.gAuth.isSignedIn.get());
                 
             }, function(error) {
                 console.log(error);//appendPre(JSON.stringify(error, null, 2));
@@ -68,7 +74,7 @@ export class GDrive {
         
         const script = document.createElement('script');
         script.type = "text/javascript";
-        script.src = "https://apis.google.com/js/api.js";
+        script.src = "https://apis.google.com/js/platform.js";
         script.async = true;
         script.defer = true;
         script.onload = handleClientLoad; //gapi installed to window
@@ -76,10 +82,10 @@ export class GDrive {
 
     }
 
-    checkFolder(
+    checkFolder = (
         name=this.directory,
         onResponse=(result)=>{}
-    ) {
+    ) => {
         return new Promise((res,rej) => {
 
             this.gapi.client.drive.files.list({
@@ -96,9 +102,9 @@ export class GDrive {
         })
     }
 
-    createDriveFolder(
+    createDriveFolder = (
         name=this.directory
-    ) {
+    ) => {
         return new Promise((res,rej) => {
             let data = new Object() as any;
             data.name = name;
@@ -116,7 +122,7 @@ export class GDrive {
     ) => {
         return new Promise(async (res,rej) => {
             if(!fsInited) await initFS(['data']);
-            if(this.gapi.auth2.getAuthInstance().isSignedIn.get()){
+            if(this.gAuth.isSignedIn.get()){
                 fs.readFile(bfsPath, (e,output)=>{
                     if(e) throw e; if(!output) return;
                     let file = new Blob([output.toString()],{type:'text/csv'});

@@ -13,11 +13,10 @@ state.setState({
 
 let recordingSubs = {} as any;
 
-const csvworkers = {}
+const csvworkers = {};
 
 export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[]) { 
 
-    
     csvworkers[streamId ? streamId+'emg' : 'emg'] =  workers.default.addWorker({ url: gsworker }),
     csvworkers[streamId ? streamId+'ppg' : 'ppg'] =  workers.default.addWorker({ url: gsworker }),
     csvworkers[streamId ? streamId+'imu' : 'imu'] =  workers.default.addWorker({ url: gsworker }),

@@ -208,6 +208,8 @@ export let answerCall = async (call:RTCCallProps) => {
 
                 if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
                 (call as RTCCallInfo).messages.push({message:ev.data.message, timestamp:Date.now(), from:(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName});
+                
+                
 
             }
             if(ev.data.emg) {
