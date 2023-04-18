@@ -66,6 +66,10 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 Time: <input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/><br/>
                 Grade?: <input ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'></input>
                 <Button onClick={this.submit}>Submit</Button>
+                History:
+                <table>
+                    
+                </table>
             </div>
         );
     }

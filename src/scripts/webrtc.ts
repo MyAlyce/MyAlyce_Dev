@@ -2,6 +2,8 @@ import { setupAlerts } from "./alerts";
 import { client, graph, usersocket, webrtc, state } from "./client"
 
 import {WebRTCInfo, WebRTCProps} from 'graphscript'//'../../../graphscript/index'//
+import { csvworkers, gsworker } from "./datacsv";
+import { workers } from "device-decoder";
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
 
@@ -202,15 +204,30 @@ export let answerCall = async (call:RTCCallProps) => {
         //the call is now live, add tracks
         //data channel streams the device data
         enableDeviceStream(call._id); //enable my device to stream data to this endpoint
-        
+
+        const from = (call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName;
+
         ev.channel.onmessage = (ev) => { 
             if(ev.data.message) {
 
                 if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
-                (call as RTCCallInfo).messages.push({message:ev.data.message, timestamp:Date.now(), from:(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName});
+                const message = {message:ev.data.message, timestamp:Date.now(), from:from};
+                (call as RTCCallInfo).messages.push(message);
                 
+                if(state.data.isRecording) {
+                    if(!csvworkers[call._id+'chat']) {
+                        csvworkers[call._id+'chat'] =  workers.addWorker({ url: gsworker });
+                        csvworkers[call._id+'chat'].run('createCSV', [
+                            `data/Chat_${new Date().toISOString()}${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
+                            [
+                                'timestamp',
+                                'from','message'
+                            ]
+                        ]);
+                    }
+                    csvworkers[call._id+'chat'].run('appendCSV',message)
+                }
                 
-
             }
             if(ev.data.emg) {
                 if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});

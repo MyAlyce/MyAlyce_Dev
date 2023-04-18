@@ -1,7 +1,9 @@
 import { workers } from "device-decoder";
 import { state } from "./client";
+
 import gsworker from './device.worker'
 
+export {gsworker}
 
 state.setState({
     isRecording:false,
@@ -13,22 +15,24 @@ state.setState({
 
 let recordingSubs = {} as any;
 
-const csvworkers = {};
+export const csvworkers = {};
 
-export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[]) { 
+export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[], subTitle?:string) { 
 
-    csvworkers[streamId ? streamId+'emg' : 'emg'] =  workers.default.addWorker({ url: gsworker }),
-    csvworkers[streamId ? streamId+'ppg' : 'ppg'] =  workers.default.addWorker({ url: gsworker }),
-    csvworkers[streamId ? streamId+'imu' : 'imu'] =  workers.default.addWorker({ url: gsworker }),
-    csvworkers[streamId ? streamId+'env' : 'env'] =  workers.default.addWorker({ url: gsworker }),
-    //csvworkers[streamId ? streamId+'emg2' : 'emg2'] =  workers.default.addWorker({ url: gsworker })
+    
+    csvworkers[streamId ? streamId+'emg' : 'emg'] =  workers.addWorker({ url: gsworker });
+    csvworkers[streamId ? streamId+'ppg' : 'ppg'] =  workers.addWorker({ url: gsworker });
+    csvworkers[streamId ? streamId+'imu' : 'imu'] =  workers.addWorker({ url: gsworker });
+    csvworkers[streamId ? streamId+'env' : 'env'] =  workers.addWorker({ url: gsworker });
+    //csvworkers[streamId ? streamId+'emg2' : 'emg2'] =  workers.addWorker({ url: gsworker })
 
     state.setState({isRecording:true});
+
 
     if(!sensors || sensors.includes('ppg') || sensors.includes('breath') || sensors.includes('hr')) {
         let makeCSV = () => {
             if(state.data.isRecording) csvworkers[streamId ? streamId+'emg' : 'emg']?.run('createCSV', [
-                `data/PPG_${new Date().toISOString()}${streamId ? '_'+streamId : ''}.csv`,
+                `data/PPG_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`,
                 [
                     'timestamp',
                     'red', 'ir', 'hr', 'spo2', 'breath', 'max_dietemp'
@@ -45,7 +49,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
     if(!sensors || sensors?.includes('emg')) {
         let makeCSV = () => {
             if(state.data.isRecording) csvworkers[streamId ? streamId+'emg' : 'emg']?.run('createCSV', [
-                `data/EMG_${new Date().toISOString()}${streamId ? '_'+streamId : ''}.csv`,
+                `data/EMG_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`,
                 [
                     'timestamp',
                     '0', '1' //only record the first two channels for now (so much data!!)
@@ -74,7 +78,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
     if(!sensors || sensors?.includes('imu')) {
         let makeCSV = () => {
             if(state.data.isRecording) csvworkers[streamId ? streamId+'imu' : 'imu']?.run('createCSV', [
-                `data/IMU_${new Date().toISOString()}${streamId ? '_'+streamId : ''}.csv`,
+                `data/IMU_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`,
                 [
                     'timestamp',
                     'ax', 'ay', 'az', 'gx', 'gy', 'gz', 'mpu_dietemp'
@@ -99,7 +103,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
     if(!sensors || sensors?.includes('env')) {
         let makeCSV = () => {
             if(state.data.isRecording) csvworkers[streamId ? streamId+'env' : 'env']?.run('createCSV', [
-                `data/ENV_${new Date().toISOString()}${streamId ? '_'+streamId : ''}.csv`,
+                `data/ENV_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`,
                 [
                     'timestamp',
                     'temperature', 'pressure', 'humidity', 'altitude'
@@ -112,7 +116,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
         } else state.subscribeEventOnce(streamId ? streamId+'detectedENV' : 'detectedENV', makeCSV);
         
         recordingSubs[`${streamId ? streamId : ''}env`] = state.subscribeEvent(streamId ? streamId+'env' :'env', (env) => {
-            csvworkers[streamId ? streamId+'env' : 'env'].run('appendCSV',env);
+            csvworkers[streamId ? streamId+'env' : 'env'].run('appendCSV', env);
         })
     }
 }
@@ -139,6 +143,7 @@ export function stopRecording(streamId?:string) {
         state.unsubscribeEvent(`${streamId ? streamId : ''}env`, recordingSubs[`${streamId ? streamId : ''}env`]);
     }
 
+    if(streamId && csvworkers[streamId+'chat'] ) csvworkers[streamId+'chat'].terminate();
     csvworkers[streamId ? streamId+'emg' : 'emg'].terminate();
     csvworkers[streamId ? streamId+'ppg' : 'ppg'].terminate();
     csvworkers[streamId ? streamId+'imu' : 'imu'].terminate();
