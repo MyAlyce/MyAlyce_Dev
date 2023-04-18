@@ -31,8 +31,10 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         if(props.filename) this.filename = props.filename;
         else this.filename = `data/Notes${props.streamId ? '_'+props.streamId : ''}.csv`
 
-
         this.streamId = props.streamId;
+        
+        this.listEventHistory();
+        
         this.ref1 = React.createRef();
         this.ref2 = React.createRef();
         this.ref3 = React.createRef();
