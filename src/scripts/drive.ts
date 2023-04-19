@@ -41,55 +41,54 @@ export class GDrive {
             this.gsiInited = false;
     
     
-            await Promise.all(
-                [new Promise((res) => {
-                    const initializeGapiClient = async () => {
-                        await this.gapi.client.init({
-                            apiKey: apiKey,
-                            discoveryDocs: [DISCOVERY_DOC],
-                        });
-                        this.gapiInited = true;
-                        console.log('gapi', window.gapi);
-                    }
-                
-                    const gapiLoaded = () => {
-                        this.gapi = window.gapi;
-                        this.gapi.load('client', initializeGapiClient);
-                    }
-
-                    const script1 = document.createElement('script');
-                    script1.type = "text/javascript";
-                    script1.src = "https://apis.google.com/js/api.js";
-                    script1.async = true;
-                    script1.defer = true;
-                    script1.onload = gapiLoaded;
-                    document.head.appendChild(script1);
-
-                }),
-                new Promise((res) => {
+            await new Promise((res) => {
+                const initializeGapiClient = async () => {
+                    await this.gapi.client.init({
+                        apiKey: apiKey,
+                        discoveryDocs: [DISCOVERY_DOC],
+                    });
+                    this.gapiInited = true;
+                    console.log('gapi', window.gapi);
+                }
             
-                    const gsiLoaded =() => {
-                        this.google = window.google;
-                        this.tokenClient = this.google.accounts.oauth2.initTokenClient({
-                          client_id: googleClientID,
-                          scope: SCOPES,
-                          callback: '', // defined later
-                        });
-                        this.gsiInited = true;
-                        console.log('google', window.google)
-                        res(true);
-                    }
+                const gapiLoaded = () => {
+                    this.gapi = window.gapi;
+                    this.gapi.load('client', initializeGapiClient);
+                }
+
+                const script1 = document.createElement('script');
+                script1.type = "text/javascript";
+                script1.src = "https://apis.google.com/js/api.js";
+                script1.async = true;
+                script1.defer = true;
+                script1.onload = gapiLoaded;
+                document.head.appendChild(script1);
+
+            });
+
+            await new Promise((res) => {
             
-                    const script2 = document.createElement('script');
-                    script2.type = "text/javascript";
-                    script2.src = "https://accounts.google.com/gsi/client";
-                    script2.async = true;
-                    script2.defer = true;
-                    script2.onload = gsiLoaded;
-                    document.head.appendChild(script2);
+                const gsiLoaded =() => {
+                    this.google = window.google;
+                    this.tokenClient = this.google.accounts.oauth2.initTokenClient({
+                        client_id: googleClientID,
+                        scope: SCOPES,
+                        callback: '', // defined later
+                    });
+                    this.gsiInited = true;
+                    console.log('google', window.google)
+                    res(true);
+                }
         
-                })
-            ]);
+                const script2 = document.createElement('script');
+                script2.type = "text/javascript";
+                script2.src = "https://accounts.google.com/gsi/client";
+                script2.async = true;
+                script2.defer = true;
+                script2.onload = gsiLoaded;
+                document.head.appendChild(script2);
+    
+            });
 
             resolve(true);
 
@@ -160,7 +159,7 @@ export class GDrive {
                 data.name = name;
                 data.mimeType = "application/vnd.google-apps.folder";
                 this.gapi.client.drive.files.create({'resource': data}).then((response)=>{
-                    console.log(response.result);
+                    console.log("Created Folder:",response.result);
                     res(response.result as any);
                 });
             } else {
@@ -186,6 +185,7 @@ export class GDrive {
                     if(e) throw e; if(!output) return;
                     let file = new Blob([output.toString()],{type:'text/csv'});
                     this.checkFolder(this.directory, (result)=>{
+                        console.log(result);
                         let metadata = {
                             'name':bfsPath.split('/')[1]+".csv",
                             'mimeType':'application/vnd.google-apps.spreadsheet',
