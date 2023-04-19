@@ -3,12 +3,14 @@ import { fs, fsInited, initFS } from "graphscript-services.storage";
 
 declare var window:any;
 
+
+
 export class GDrive {
     //------------------------
     //-GOOGLE DRIVE FUNCTIONS-
     //------------------------
     
-
+    google = (window as any).google
     gapi = (window as any).gapi
     directory = "MyAlyce_Data"
     fs = fs;
@@ -19,17 +21,46 @@ export class GDrive {
     }
 
     //this is deprecated now?: https://developers.google.com/identity/gsi/web/guides/overview
-    initGapi(
+    initGapi = (
         apiKey:string, 
         googleClientID:string
-    ) {
+    ) => {
+
+        const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
+        const SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
+
 
         if (location.hostname === 'localhost') return;
+
+        const gapiLoaded = () => {
+            this.gapi = window.gapi;
+            this.gapi.load('client', initializeGapiClient);
+          }
+    
+        const gisLoaded =() => {
+            this.google = window.google;
+            tokenClient = this.google.accounts.oauth2.initTokenClient({
+              client_id: googleClientID,
+              scope: SCOPES,
+              callback: '', // defined later
+            });
+            gisInited = true;
+          }
+
+          const initializeGapiClient = async () => {
+            await this.gapi.client.init({
+              apiKey: apiKey,
+              discoveryDocs: [DISCOVERY_DOC],
+            });
+            gapiInited = true;
+          }
         
         function handleClientLoad() {
-            window.gapi.load('client:auth2', initClient);
+           // window.gapi.load('client:oauth2', initClient);
         }
-        
         
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
@@ -39,42 +70,24 @@ export class GDrive {
             }
         }
         
-        
-        function initClient() {
-            window.gapi.auth2.initialized = false;
-            // Array of API discovery doc URLs for APIs used by the quickstart
-            var DISCOVERY_DOCS = [
-                //"https://sheets.googleapis.com/$discovery/rest?version=v4",
-                "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"
-            ];
-        
-            window.gapi.client.init({
-                apiKey: apiKey,             
-                clientId: googleClientID,   
-                discoveryDocs: DISCOVERY_DOCS,
-                scope: "https://www.googleapis.com/auth/drive"
-            }).then(function () {
-                // Listen for sign-in state changes.
-                window.gAuth = window.gapi.auth2.getAuthInstance()
-                window.gAuth.isSignedIn.listen(updateSigninStatus);
-                window.gapi.auth2.initialized = true;
-                // Handle the initial sign-in state.
-                window.updateSigninStatus(this.auth.isSignedIn.get());
-                
-            }, function(error) {
-                console.log(error);//appendPre(JSON.stringify(error, null, 2));
-            });
-        }
-        
-        const script = document.createElement('script');
-        script.type = "text/javascript";
-        script.src = "https://apis.google.com/js/api.js";
-        script.async = true;
-        script.defer = true;
-        script.onload = handleClientLoad; //gapi installed to window
-        document.head.appendChild(script);
+        const script1 = document.createElement('script');
+        script1.type = "text/javascript";
+        script1.src = "https://apis.google.com/js/api.js";
+        script1.async = true;
+        script1.defer = true;
+        script1.onload = gapiLoaded;
+        document.head.appendChild(script1);
+        const script2 = document.createElement('script');
+        script2.type = "text/javascript";
+        script2.src = "https://accounts.google.com/gsi/client";
+        script2.async = true;
+        script2.defer = true;
+        script2.onload = gisLoaded;
+        document.head.appendChild(script2);
 
     }
+
+
 
     checkFolder(
         name=this.directory,
