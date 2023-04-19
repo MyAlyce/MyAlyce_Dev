@@ -159,7 +159,6 @@ export const onLogin = async (
             
             console.log("Logged in: ", user, client);
 
-            console.log('initializing gapi');
             driveInstance = new GDrive(apiKey, googleClientID);
 
             restoreSession(user);

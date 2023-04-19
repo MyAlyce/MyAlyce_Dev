@@ -113,8 +113,10 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 <Button onClick={this.submit}>Submit</Button>
                 History:
                 <table>
+                    <tbody>
                     <tr><th>Time</th><th>Notes</th></tr>
                     {this.state.noteRows}
+                    </tbody>
                 </table>
             </div>
         );
