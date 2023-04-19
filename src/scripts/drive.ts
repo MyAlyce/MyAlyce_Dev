@@ -177,19 +177,20 @@ export class GDrive {
     //backup file to drive by name (requires gapi authorization)
     backupToDrive = (
         bfsPath:string,
-        dir='data'
+        bfsDir='data',
+        mimeType='application/vnd.google-apps.spreadsheet'
     ) => {
         return new Promise(async (res,rej) => {
             if(!fsInited) await initFS(['data']);
             if(this.isLoggedIn){
-                fs.readFile(dir+'/'+bfsPath, (e,output)=>{
+                fs.readFile(bfsDir+'/'+bfsPath, (e,output)=>{
                     if(e) throw e; if(!output) return;
                     let file = new Blob([output.toString()],{type:'text/csv'});
                     this.checkFolder(this.directory, (result)=>{
                         console.log(result);
                         let metadata = {
-                            'name':bfsPath.split('/')[1]+".csv",
-                            'mimeType':'application/vnd.google-apps.spreadsheet',
+                            'name':bfsPath,
+                            'mimeType':mimeType,
                             'parents':[result.files[0].id]
                         }
                         let token = this.gapi.auth.getToken().access_token;
@@ -223,12 +224,13 @@ export class GDrive {
     }
 
     listDriveFiles = (
+        driveDirectory=this.directory,
         pageSize=100,
         onload?:(files)=>{}
     ) => {
         return new Promise((res,rej) => {
             if(this.isLoggedIn) {
-                this.checkFolder(this.directory, (result)=> {
+                this.checkFolder(driveDirectory, (result)=> {
                     this.gapi.client.drive.files.list({
                         q: `'${result.files[0].id}' in parents`,
                         'pageSize': pageSize,
@@ -266,6 +268,7 @@ export class GDrive {
                 this.handleUserSignIn().then(async () => {
                     if(this.isLoggedIn) {
                         res(await this.listDriveFiles(
+                            driveDirectory,
                             pageSize,
                             onload //rerun
                         ))
@@ -279,11 +282,12 @@ export class GDrive {
     driveToBFS = (
         file:{id:string, name:string, [key:string]:any}, //you need the file id from gdrive
         bfsDir='data',
-        ondownload=(body)=>{}
+        ondownload=(body)=>{},
+        mimeType='text/csv'
     ) => {
         return new Promise((res,rej) => {
             if(this.isLoggedIn) {
-                var request = this.gapi.client.drive.files.export({'fileId': file.id, 'mimeType':'text/csv'});
+                var request = this.gapi.client.drive.files.export({'fileId': file.id, 'mimeType':mimeType});
                 request.then(async (resp) => {
                     let filename = file.name;
                     if(!fsInited) await initFS(['data']);
@@ -312,3 +316,4 @@ export class GDrive {
         });
     }
 }
+
