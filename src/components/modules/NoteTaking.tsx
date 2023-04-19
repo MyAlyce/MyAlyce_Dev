@@ -114,8 +114,8 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 History:
                 <table>
                     <tbody>
-                    <tr><th>Time</th><th>Notes</th></tr>
-                    {this.state.noteRows}
+                        <tr><th>Time</th><th>Notes</th></tr>
+                        {this.state.noteRows}
                     </tbody>
                 </table>
             </div>
