@@ -8,16 +8,18 @@ import './src/init' //run init sequence
 const useStyles = true;
 
 //esbuild compiles these into index.css
-import './src/components/lib/src/index.css'
-import './src/styles/index.scss'
-import './src/styles/burger.css'
+//import './src/components/lib/src/index.css'
+//import './src/styles/index.scss'
+//import './src/styles/burger.css'
 //import './src/styles/inter.css'
-import './src/styles/styles.css'
-//import './src/styles/bootstrap.min.css'
+//import './src/styles/styles.css'
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 if(useStyles) {
   document.head.insertAdjacentHTML('beforeend','<meta name="viewport" content="width=device-width, initial-scale=1" />');
   document.head.insertAdjacentHTML('beforeend',`<link rel="stylesheet" href="./index.css" type="text/css" />`);
+  document.head.insertAdjacentHTML('beforeend',`<link rel="stylesheet" href="./font-files/inter.css" type="text/css" />`);
 }
 
 let container = document.createElement('div');
