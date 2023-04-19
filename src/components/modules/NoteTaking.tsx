@@ -84,6 +84,8 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         this.state.noteRows.unshift(
             <tr><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td>{event.notes}</td></tr>
         )
+        
+        this.setState({});
     }
 
     render() {
