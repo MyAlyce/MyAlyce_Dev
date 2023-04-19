@@ -33,7 +33,7 @@ export class GDrive {
         
         return new Promise(async (resolve,rej) => {
         
-            console.log('initializing gapi');
+            //console.log('initializing gapi');
 
             const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
             const SCOPES = 'https://www.googleapis.com/auth/drive';
@@ -41,54 +41,55 @@ export class GDrive {
             this.gsiInited = false;
     
     
-            await new Promise((res) => {
-                const initializeGapiClient = async () => {
-                    await this.gapi.client.init({
-                        apiKey: apiKey,
-                        discoveryDocs: [DISCOVERY_DOC],
-                    });
-                    this.gapiInited = true;
-                    console.log('gapi', window.gapi);
-                }
+            await Promise.all(
+                [new Promise((res) => {
+                    const initializeGapiClient = async () => {
+                        await this.gapi.client.init({
+                            apiKey: apiKey,
+                            discoveryDocs: [DISCOVERY_DOC],
+                        });
+                        this.gapiInited = true;
+                        //console.log('gapi', window.gapi);
+                    }
+                
+                    const gapiLoaded = () => {
+                        this.gapi = window.gapi;
+                        this.gapi.load('client', initializeGapiClient);
+                    }
+
+                    const script1 = document.createElement('script');
+                    script1.type = "text/javascript";
+                    script1.src = "https://apis.google.com/js/api.js";
+                    script1.async = true;
+                    script1.defer = true;
+                    script1.onload = gapiLoaded;
+                    document.head.appendChild(script1);
+
+                }),
+                new Promise((res) => {
             
-                const gapiLoaded = () => {
-                    this.gapi = window.gapi;
-                    this.gapi.load('client', initializeGapiClient);
-                }
-
-                const script1 = document.createElement('script');
-                script1.type = "text/javascript";
-                script1.src = "https://apis.google.com/js/api.js";
-                script1.async = true;
-                script1.defer = true;
-                script1.onload = gapiLoaded;
-                document.head.appendChild(script1);
-
-            });
-
-            await new Promise((res) => {
+                    const gsiLoaded =() => {
+                        this.google = window.google;
+                        this.tokenClient = this.google.accounts.oauth2.initTokenClient({
+                          client_id: googleClientID,
+                          scope: SCOPES,
+                          callback: '', // defined later
+                        });
+                        this.gsiInited = true;
+                        //console.log('google', window.google)
+                        res(true);
+                    }
             
-                const gsiLoaded =() => {
-                    this.google = window.google;
-                    this.tokenClient = this.google.accounts.oauth2.initTokenClient({
-                        client_id: googleClientID,
-                        scope: SCOPES,
-                        callback: '', // defined later
-                    });
-                    this.gsiInited = true;
-                    console.log('google', window.google)
-                    res(true);
-                }
+                    const script2 = document.createElement('script');
+                    script2.type = "text/javascript";
+                    script2.src = "https://accounts.google.com/gsi/client";
+                    script2.async = true;
+                    script2.defer = true;
+                    script2.onload = gsiLoaded;
+                    document.head.appendChild(script2);
         
-                const script2 = document.createElement('script');
-                script2.type = "text/javascript";
-                script2.src = "https://accounts.google.com/gsi/client";
-                script2.async = true;
-                script2.defer = true;
-                script2.onload = gsiLoaded;
-                document.head.appendChild(script2);
-    
-            });
+                })
+            ]);
 
             resolve(true);
 
