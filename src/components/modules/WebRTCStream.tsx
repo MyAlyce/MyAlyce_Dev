@@ -38,26 +38,38 @@ class RTCAudio extends Component<{[key:string]:any}> {
     ctx = new AudioContext();
     call:RTCCallInfo;
     stream:MediaStream
+    audioOutId:string;
 
-    constructor(props:{stream:MediaStream, call:RTCCallInfo}) {
+    constructor(props:{
+        stream:MediaStream, 
+        call:RTCCallInfo,
+        audioOutId:string //TODO: select output device for audio stream
+}) {
         super(props);
 
         this.call = props.call;
         this.stream = props.stream;
+        this.audioOutId = props.audioOutId;
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //todo fix using howler for this
-        let src = this.ctx.createMediaStreamSource(this.stream as MediaStream);
+
+        // let stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        // let src = this.ctx.createMediaStreamSource(stream);
+        let src = this.ctx.createMediaStreamSource(this.stream);
+
         let filterNode = this.ctx.createBiquadFilter();
-        filterNode.type = 'highpass'; // See https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html#BiquadFilterNode-section
-        filterNode.frequency.value = 10000; // Cutoff frequency. For highpass, audio is attenuated below this frequency.
+        filterNode.type = 'lowshelf'; 
+        filterNode.frequency.value = 1000;
 
         let gainNode = this.ctx.createGain();
         src.connect(filterNode);
         filterNode.connect(gainNode); //src.connect(gainNode); // filterNode.connect(gainNode);
+        // gainNode.gain.value = 1;
+
+        if (this.audioOutId) (this.ctx as any).setSinkId(this.audioOutId)
         gainNode.connect(this.ctx.destination);
-        gainNode.gain.value = 1;
 
         (this.call as any).srcNode = src;
         (this.call as any).filterNode = filterNode;
@@ -79,7 +91,7 @@ class RTCAudio extends Component<{[key:string]:any}> {
     }
 }
 
-export const createAudioDiv = (call:WebRTCInfo) => {
+export const createAudioDiv = (call:WebRTCInfo, audioOutId?: string) => {
 
     if((call as any).gainNode) {
         (call as any).gainNode.disconnect();
@@ -92,7 +104,7 @@ export const createAudioDiv = (call:WebRTCInfo) => {
     })
 
     if(found) {
-        return (<RTCAudio call={call} stream={found}/>);
+        return (<RTCAudio call={call} stream={found} audioOutId={audioOutId}/>);
     }
 }
 
@@ -152,11 +164,23 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
     };
 
     messages = [] as any[];
+    audioInId?:string;
+    videoInId?:string;
+    audioOutId?:string;
 
     constructor(props:{
-        streamId:string
+        streamId:string,        
+        //from navigator.mediaDevices.enumerateDevices
+        audioInId?:string,
+        audioOutId?:string,
+        videoInId?:string
     }) {
         super(props);
+
+        this.audioInId = props.audioInId;
+        this.audioOutId = props.audioOutId;
+        this.videoInId = props.videoInId;
+
 
         this.state.activeStream = props.streamId;
         if(webrtc.rtc[props.streamId]) this.setActiveStream(webrtc.rtc[props.streamId] as RTCCallInfo);
@@ -227,7 +251,7 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
                 videoTrackDiv:createVideoDiv(webrtc.rtc[call._id as any] as any)
             });
             else if(ev.track.kind === 'audio' && this.state.activeStream === call._id) this.setState({
-                audioTrackDiv:createAudioDiv(webrtc.rtc[call._id as any] as any)
+                audioTrackDiv:createAudioDiv(webrtc.rtc[call._id as any] as any, this.audioOutId)
             });
             
             ev.track.addEventListener('ended', () => {
@@ -273,7 +297,7 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
         this.setState({
             chartDataDiv:createStreamChart(call),
             videoTrackDiv:createVideoDiv(call),
-            audioTrackDiv:createAudioDiv(call)
+            audioTrackDiv:createAudioDiv(call, this.audioOutId)
         });
     }
 
@@ -300,11 +324,25 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
             stream = webrtc.rtc[this.state.activeStream] as RTCCallInfo;
             
             stream?.senders?.forEach((s) => {
+                let videoEnabledInAudio = false;
                 if(s?.track?.kind === 'audio') {
                     hasAudio = true;
+                    if((s as any).deviceId && this.audioInId && (s as any).deviceId !== this.audioInId) {
+                        disableAudio(webrtc.rtc[this.state.activeStream as any] as any);
+                        if(hasVideo && this.audioInId === this.videoInId) {
+                            disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
+                            enableVideo(webrtc.rtc[this.state.activeStream as any] as any, this.videoInId ? {deviceId:this.videoInId} : undefined, true);
+                            videoEnabledInAudio = true;
+                        }
+                        else enableAudio(webrtc.rtc[this.state.activeStream as any] as any, this.audioInId ? {deviceId:this.audioInId} : undefined);
+                    }
                 }
                 if(s?.track?.kind === 'video') {
                     hasVideo = true;
+                    if((s as any).deviceId && this.videoInId && (s as any).deviceId !== this.videoInId && !videoEnabledInAudio) {
+                        disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
+                        enableVideo(webrtc.rtc[this.state.activeStream as any] as any, this.videoInId ? {deviceId:this.videoInId} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
+                    }
                 }
             })
         }
@@ -319,14 +357,18 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
                             disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
                             this.forceUpdate()
                         }} /> : <img src={videoOff} alt="Video Off" onClick={() => {
-                            enableVideo(webrtc.rtc[this.state.activeStream as any] as any);
+                            enableVideo(webrtc.rtc[this.state.activeStream as any] as any, this.videoInId ? {deviceId:this.videoInId} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
                             this.forceUpdate()
                         }}/>}
                         {hasAudio ? <img src={micOn} alt="Microphone On" onClick={() => {
                             disableAudio(webrtc.rtc[this.state.activeStream as any] as any);
                             this.forceUpdate()
                         }}/> : <img src={micOff} alt="Microphone Off" onClick={() => {
-                            enableAudio(webrtc.rtc[this.state.activeStream as any] as any);
+                            if(hasVideo && this.audioInId === this.videoInId) {
+                                disableVideo(webrtc.rtc[this.state.activeStream as any] as any);
+                                enableVideo(webrtc.rtc[this.state.activeStream as any] as any, this.videoInId ? {deviceId:this.videoInId} : undefined, true);
+                            }
+                            else enableAudio(webrtc.rtc[this.state.activeStream as any] as any, this.audioInId ? {deviceId:this.audioInId} : undefined);
                             this.forceUpdate()
                         }}/>}
                     </div>

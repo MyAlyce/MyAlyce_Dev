@@ -2,6 +2,8 @@ import { setupAlerts } from "./alerts";
 import { client, graph, usersocket, webrtc, state } from "./client"
 
 import {WebRTCInfo, WebRTCProps} from 'graphscript'//'../../../graphscript/index'//
+import { csvworkers, gsworker } from "./datacsv";
+import { workers } from "device-decoder";
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
 
@@ -202,13 +204,30 @@ export let answerCall = async (call:RTCCallProps) => {
         //the call is now live, add tracks
         //data channel streams the device data
         enableDeviceStream(call._id); //enable my device to stream data to this endpoint
-        
+
+        const from = (call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName;
+
         ev.channel.onmessage = (ev) => { 
             if(ev.data.message) {
 
                 if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
-                (call as RTCCallInfo).messages.push({message:ev.data.message, timestamp:Date.now(), from:(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName});
-
+                const message = {message:ev.data.message, timestamp:Date.now(), from:from};
+                (call as RTCCallInfo).messages.push(message);
+                
+                if(state.data.isRecording) {
+                    if(!csvworkers[call._id+'chat']) {
+                        csvworkers[call._id+'chat'] =  workers.addWorker({ url: gsworker });
+                        csvworkers[call._id+'chat'].run('createCSV', [
+                            `data/Chat_${new Date().toISOString()}${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
+                            [
+                                'timestamp',
+                                'from','message'
+                            ]
+                        ]);
+                    }
+                    csvworkers[call._id+'chat'].run('appendCSV',message)
+                }
+                
             }
             if(ev.data.emg) {
                 if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
@@ -365,48 +384,57 @@ export function enableDeviceStream(streamId) { //enable sending data to a given 
 }
 
 
-export function enableAudio(call:RTCCallInfo) {
+export function enableAudio(call:RTCCallInfo, audioOptions:boolean|MediaTrackConstraints=true) {
 
     if(call.audioSender) this.disableVideo(call);
     
     let senders = webrtc.addUserMedia(
         call.rtc, 
         {
-            audio:true,
+            audio:audioOptions,
             video:false
         }, 
         call 
     );
 
     call.audioSender = senders[0];
+    if((audioOptions as MediaTrackConstraints)?.deviceId) {
+        senders[0].deviceId = (audioOptions as MediaTrackConstraints).deviceId;
+    }
 }
 
-export function enableVideo(call:RTCCallInfo, minWidth?:320|640|1024|1280|1920|2560|3840) { //the maximum available resolution will be selected if not specified
+export function enableVideo(
+    call:RTCCallInfo, 
+    options:MediaTrackConstraints  = {
+        //deviceId: 'abc' //or below default setting:
+        optional:[
+            {minWidth: 320},
+            {minWidth: 640},
+            {minWidth: 1024},
+            {minWidth: 1280},
+            {minWidth: 1920},
+            {minWidth: 2560},
+            {minWidth: 3840},
+        ]
+    } as MediaTrackConstraints  & { optional:{minWidth: number}[] },
+    includeAudio:boolean=false
+) { //the maximum available resolution will be selected if not specified
     
     if(call.videoSender) this.disableVideo(call);
 
     let senders = webrtc.addUserMedia(
         call.rtc, 
         {
-            audio:false, 
-            video:{
-                optional: minWidth ? [{
-                    minWidth: minWidth
-                }] : [
-                    {minWidth: 320},
-                    {minWidth: 640},
-                    {minWidth: 1024},
-                    {minWidth: 1280},
-                    {minWidth: 1920},
-                    {minWidth: 2560},
-                    {minWidth: 3840},
-                ]
-            } as MediaTrackConstraints
+            audio:includeAudio, 
+            video:options
         }, 
         call 
     );
 
     call.videoSender = senders[0];
+    if((options as MediaTrackConstraints)?.deviceId) {
+        senders[0].deviceId = (options as MediaTrackConstraints).deviceId;
+    }
 }
 
 export function disableAudio(call:RTCCallInfo) {

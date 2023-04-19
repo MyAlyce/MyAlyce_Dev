@@ -2,37 +2,76 @@ import React, {useRef, Component} from 'react'
 import { workers } from "device-decoder";
 
 import gsworker from '../../scripts/device.worker'
-import { client } from '../../scripts/client';
+import { client, webrtc } from '../../scripts/client';
 import { Button } from '../lib/src';
+import { RTCCallInfo } from '../../scripts/webrtc';
+import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 
 export class NoteTaking extends Component<{[key:string]:any}> {
+
+    state = {
+        noteRows:[] as any[]
+    }
 
     id=`form${Math.floor(Math.random()*1000000000000000)}`;
     csvworker = workers.addWorker({url:gsworker});
     filename;
+    streamId?:string;
 
     ref1;ref2;ref3;
 
     constructor(props:{streamId?:string, filename?:string}) {
         super(props);
-        if(props.filename) this.filename = props.filename;
-        else this.filename = `data/Notes_${new Date().toISOString()}${props.streamId ? '_'+props.streamId : ''}.csv`
+        if(props.streamId && !props.filename) {
+            let call = webrtc.rtc[props.streamId] as RTCCallInfo;
+            let name = call.firstName + '_' + call.lastName;
+            props.filename = `data/Notes_${name}.csv`;
+        }
 
+        if(props.filename) this.filename = props.filename;
+        else this.filename = `data/Notes${props.streamId ? '_'+props.streamId : ''}.csv`
+
+        this.streamId = props.streamId;
+        
+        this.listEventHistory();
+        
         this.ref1 = React.createRef();
         this.ref2 = React.createRef();
         this.ref3 = React.createRef();
     }
 
-    submit = () => {
-        let note = {
-            title:(document.getElementById(this.id+'title') as HTMLInputElement).value,
-            note:(document.getElementById(this.id+'note') as HTMLInputElement).value,
-            timestamp:new Date((document.getElementById(this.id+'number') as HTMLInputElement).value).getTime(),
-            grade:parseInt((document.getElementById(this.id+'number') as HTMLInputElement).value)
+    async listEventHistory() {
+        let latest;
+        if(this.streamId) {
+            let call = (webrtc.rtc[this.streamId] as RTCCallInfo);
+            latest = await client.getData('event', call.caller, undefined, 30); //these are gotten in order of the latest data
+        } else {
+            latest = await client.getData('event', client.currentUser._id, undefined, 30);
         }
+
+        if(latest?.length > 0) {
+            let noteRows = [] as any[];
+            latest.forEach((event:EventStruct) => {
+                noteRows.push(
+                    <tr><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td>{event.notes}</td></tr>
+                )
+            });
+
+            this.setState({noteRows:noteRows});
+        }
+
+    }
+
+    submit = async () => {
+        let note = {
+            note:(document.getElementById(this.id+'note') as HTMLInputElement).value,
+            timestamp:new Date((document.getElementById(this.id+'time') as HTMLInputElement).value).getTime(),
+            grade:parseInt((document.getElementById(this.id+'number') as HTMLInputElement).value)
+        };
+        if(!note.timestamp) note.timestamp = Date.now();
         this.csvworker.run('appendCSV',[note, this.filename]);
 
-        client.addEvent(
+        let event = await client.addEvent(
             client.currentUser, 
             client.currentUser._id, 
             note.note, 
@@ -41,6 +80,12 @@ export class NoteTaking extends Component<{[key:string]:any}> {
             undefined, 
             note.grade 
         );
+
+        this.state.noteRows.unshift(
+            <tr><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td>{event.notes}</td></tr>
+        )
+        
+        this.setState({});
     }
 
     render() {
@@ -66,6 +111,11 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 Time: <input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/><br/>
                 Grade?: <input ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'></input>
                 <Button onClick={this.submit}>Submit</Button>
+                History:
+                <table>
+                    <tr><th>Time</th><th>Notes</th></tr>
+                    {this.state.noteRows}
+                </table>
             </div>
         );
     }

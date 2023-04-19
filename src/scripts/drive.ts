@@ -89,10 +89,10 @@ export class GDrive {
 
 
 
-    checkFolder(
+    checkFolder =(
         name=this.directory,
         onResponse=(result)=>{}
-    ) {
+    ) => {
         return new Promise((res,rej) => {
 
             this.gapi.client.drive.files.list({
@@ -109,9 +109,9 @@ export class GDrive {
         })
     }
 
-    createDriveFolder(
+    createDriveFolder = (
         name=this.directory
-    ) {
+    ) => {
         return new Promise((res,rej) => {
             let data = new Object() as any;
             data.name = name;
@@ -129,7 +129,7 @@ export class GDrive {
     ) => {
         return new Promise(async (res,rej) => {
             if(!fsInited) await initFS(['data']);
-            if(this.gapi.auth2.getAuthInstance().isSignedIn.get()){
+            if(this.gAuth.isSignedIn.get()){
                 fs.readFile(bfsPath, (e,output)=>{
                     if(e) throw e; if(!output) return;
                     let file = new Blob([output.toString()],{type:'text/csv'});

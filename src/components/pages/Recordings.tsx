@@ -3,7 +3,7 @@ import { sComponent } from '../state.component'
 import {state} from '../../scripts/client'
 
 import { BFSRoutes, csvRoutes } from 'graphscript-services.storage';
-import { driveInstance } from '../../scripts/gapi';
+import { driveInstance } from '../../scripts/client';
 import { recordCSV, stopRecording } from '../../scripts/datacsv';
 import { StreamSelect } from '../modules/StreamSelect';
 import { Button } from '../lib/src';

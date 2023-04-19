@@ -31,7 +31,13 @@ export class WebRTCComponent extends sComponent {
         unansweredCallDivs:[] as any[],
         chartDataDiv:undefined,
         videoTrackDiv:undefined,
-        audioTrackDiv:undefined
+        audioTrackDiv:undefined,
+        audioInDevices:[] as any[],
+        audioOutDevices:[] as any[],
+        cameraDevices:[] as any[],
+        selectedVideo: '' as string,
+        selectedAudioIn: '' as string,
+        selectedAudioOut: '' as string,
     }
 
     activeStream?:string;
@@ -42,6 +48,54 @@ export class WebRTCComponent extends sComponent {
 
     constructor(props:{streamId?:string}) {
         super(props);
+        this.listMediaDevices();
+    }
+
+    listMediaDevices() {
+        navigator.mediaDevices.enumerateDevices()
+        .then((deviceInfos) => { //https://github.com/garrettmflynn/intensities/blob/main/app/index.js
+
+            let ain = [] as any[]; let aout = [] as any[]; let cam = [] as any[];
+            for (var i = 0; i !== deviceInfos.length; ++i) {
+                var deviceInfo = deviceInfos[i];
+                var option = (<option value={deviceInfo.deviceId}>{deviceInfo.label}</option>)//document.createElement('option');
+                //option.value = deviceInfo.deviceId;
+                if (deviceInfo.kind === 'videoinput') {
+                    if(!this.state.selectedVideo)
+                        this.state.selectedVideo = deviceInfo.deviceId;
+                    cam.push(option);
+                    // option.text = deviceInfo.label || 'Camera ' +
+                    //     (videoSelect.options.length + 1);
+                    // this.camsrc.insertAdjacentElement('beforeend',option);
+                }
+                else if (deviceInfo.kind === 'audioinput') {
+                    if(!this.state.selectedAudioIn)
+                        this.state.selectedAudioIn = deviceInfo.deviceId;
+                    ain.push(option);
+                    // option.text = deviceInfo.label ||
+                    //     'Microphone ' + (audioInputSelect.options.length + 1);
+                    // this.camsrc.insertAdjacentElement('beforeend',option);
+                } 
+                else if (deviceInfo.kind === 'audiooutput') {
+                    if(!this.state.selectedAudioOut)
+                        this.state.selectedAudioOut = deviceInfo.deviceId;
+                    aout.push(option);
+                    // option.text = deviceInfo.label || 'Speaker ' +
+                    //     (audioOutputSelect.options.length + 1);
+                    //     this.camsrc.insertAdjacentElement('beforeend',option);
+                } 
+            }
+
+            this.setState({
+                audioInDevices:ain,
+                audioOutDevices:aout,
+                videoInDevices:cam
+            })
+        });
+    }
+
+    screenShare(call:RTCCallInfo) {
+        //call.rtc.addTrack(new MediaStreamTrack(MediaStream)) //or something like that
     }
 
     componentDidMount = () => {
@@ -166,6 +220,7 @@ export class WebRTCComponent extends sComponent {
 
     render = () => {
 
+        console.log('selectedAudioOut', this.state.selectedAudioOut)
         return (
             <div className="div">
                 <h1>WebRTC Communication</h1>
@@ -181,6 +236,17 @@ export class WebRTCComponent extends sComponent {
                     { this.state.availableUsers && this.state.availableUsers.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
+                Device Select: 
+                {/* 
+                    TODO: 
+                        Add onchange event and have all outgoing streams send the same audio/video. We need to basically just need to call disableAudio/Video then enableAudio/Video with the new settings if the Ids in the stream don't match
+                        Also add a loop to check for new devices (e.g. 1 check per 1-3 seconds for new listings from enumerateDevices).
+                        Add screenshare options
+                    */
+                }
+                <select id={this.unique+'aIn'} onChange={(ev) => this.setState({selectedAudioIn: ev.target.value})}>{this.state.audioInDevices}</select>
+                <select id={this.unique+'aOut'} onChange={(ev) => this.setState({selectedAudioOut: ev.target.value})}>{this.state.audioOutDevices}</select> 
+                <select id={this.unique+'vIn'} onChange={(ev) => this.setState({selectedVideo: ev.target.value})}>{this.state.cameraDevices}</select>
                 
                 {/* 
                 <h2>Select Stream</h2>
@@ -193,7 +259,7 @@ export class WebRTCComponent extends sComponent {
                 </div>*/}
 
                 <div className="grid">
-                    {Object.keys(this.state.availableStreams).map((streamId: string) => <WebRTCStream streamId={streamId}/>)}
+                    {Object.keys(this.state.availableStreams).map((streamId: string) => <WebRTCStream streamId={streamId} audioInId={this.state.selectedAudioIn} videoInId={this.state.selectedVideo} audioOutId={this.state.selectedAudioOut}/>)}
                 </div>
                     
             </div>
