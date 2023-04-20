@@ -247,10 +247,12 @@ export async function restoreSession(
             '/data/'+filename,
         )
         try {
-            let restored = JSON.parse(read);
-            if(typeof restored === 'object') {
-                if(restored.loggedInId && restored.loggedInId === u?._id || !restored.loggedInId) 
-                    state.setState(restored);
+            if(read) {
+                let restored = JSON.parse(read);
+                if(typeof restored === 'object') {
+                    if(restored.loggedInId && restored.loggedInId === u?._id || !restored.loggedInId) 
+                        state.setState(restored);
+                }
             }
         } catch (err) {
             console.error(err);
