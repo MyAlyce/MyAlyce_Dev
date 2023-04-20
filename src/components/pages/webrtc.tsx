@@ -59,7 +59,7 @@ export class WebRTCComponent extends sComponent {
                 var deviceInfo = deviceInfos[i];
                 var option = (<option key={deviceInfo.deviceId} value={deviceInfo.deviceId}>{deviceInfo.label}</option>)//document.createElement('option');
                 //option.value = deviceInfo.deviceId;
-                console.log(deviceInfo.kind, deviceInfo.deviceId);
+                //console.log(deviceInfo.kind, deviceInfo.deviceId);
                 if (deviceInfo.kind === 'videoinput') {
                     if(!this.state.selectedVideo)
                         this.state.selectedVideo = deviceInfo.deviceId;
