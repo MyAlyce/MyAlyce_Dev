@@ -7,6 +7,22 @@ import { Button } from '../lib/src';
 import { RTCCallInfo } from '../../scripts/webrtc';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 
+function getColorGradientRG(value) {
+    let r, g, b;
+
+    if (value < 5) {
+        r = Math.floor(200 * (value / 5));
+        g = 200;
+        b = 0;
+    } else {
+        r = 200;
+        g = Math.floor(200 * (1 - (value - 5) / 5));
+        b = 0;
+    }
+            
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 export class NoteTaking extends Component<{[key:string]:any}> {
 
     state = {
@@ -53,7 +69,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
             let noteRows = [] as any[];
             latest.forEach((event:EventStruct) => {
                 noteRows.push(
-                    <tr><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td>{event.notes}</td></tr>
+                    <tr><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.notes}</td></tr>
                 )
             });
 
@@ -82,14 +98,15 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         );
 
         this.state.noteRows.unshift(
-            <tr><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td>{event.notes}</td></tr>
+            <tr><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td>{event.notes}</td><td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td></tr>
         )
         
         this.setState({});
     }
 
-    render() {
+    renderInputSection() {
 
+        
         var now = new Date();
         var utcString = now.toISOString().substring(0,19);
         var year = now.getFullYear();
@@ -105,21 +122,84 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                       (minute < 10 ? "0" + minute.toString() : minute) +
                       utcString.substring(16,19);
 
+        const updateInputColor = (event: React.ChangeEvent<HTMLInputElement>) => {
+            const value = parseInt(event.target.value);
+            const color = getColorGradientRG(value);
+            event.target.style.backgroundColor = color;
+        }
+
         return (
-            <div>
-                Event: <input ref={this.ref1 as any} id={this.id+'note'} name="note" type='text' defaultValue=""/><br/>
-                Time: <input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/><br/>
-                Grade?: <input ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'></input>
+            <div className="input-section">
+                <label id={`${this.id}note`}>Event</label>
+                <div><input ref={this.ref1 as any} id={this.id+'note'} name="note" type='text' defaultValue=""/></div>
+                
+                <label id={`${this.id}time`}>Time</label>
+                <div><input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/></div>
+                
+                <label id={`${this.id}number`}>Rating?</label>
+                <div><input 
+                        onInput={updateInputColor}
+                        onChange={updateInputColor}
+                        className="number-input" ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'></input></div>
+                <br/>
                 <Button onClick={this.submit}>Submit</Button>
-                History:
-                <table>
-                    <tbody>
-                        <tr><th>Time</th><th>Notes</th></tr>
-                        {this.state.noteRows}
-                    </tbody>
-                </table>
             </div>
         );
     }
+
+    render() {
+
+        return (
+            <div className="note-taking-module">
+                {this.renderInputSection()}
+                <br></br>
+                <div className="history-section">
+                    <h3>History:</h3>
+                    <table className='table-wrapper'>
+                        <tbody>
+                            <tr><th>Time</th><th>Notes</th><th>Grade</th></tr>
+                            {this.state.noteRows}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
+
+
+
+    // render() {
+
+    //     var now = new Date();
+    //     var utcString = now.toISOString().substring(0,19);
+    //     var year = now.getFullYear();
+    //     var month = now.getMonth() + 1;
+    //     var day = now.getDate();
+    //     var hour = now.getHours();
+    //     var minute = now.getMinutes();
+    //     //var second = now.getSeconds();
+    //     var localDatetime = year + "-" +
+    //                   (month < 10 ? "0" + month.toString() : month) + "-" +
+    //                   (day < 10 ? "0" + day.toString() : day) + "T" +
+    //                   (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+    //                   (minute < 10 ? "0" + minute.toString() : minute) +
+    //                   utcString.substring(16,19);
+
+    //     return (
+    //         <div>
+    //             Event: <input ref={this.ref1 as any} id={this.id+'note'} name="note" type='text' defaultValue=""/><br/>
+    //             Time: <input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/><br/>
+    //             Grade?: <input ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'></input>
+    //             <Button onClick={this.submit}>Submit</Button>
+    //             History:
+    //             <table>
+    //                 <tbody>
+    //                     <tr><th>Time</th><th>Notes</th></tr>
+    //                     {this.state.noteRows}
+    //                 </tbody>
+    //             </table>
+    //         </div>
+    //     );
+    // }
 
 }

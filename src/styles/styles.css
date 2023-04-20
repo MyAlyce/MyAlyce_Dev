@@ -100,3 +100,113 @@ video {
     width: 30px;
     height: 30px;
 }
+
+
+
+
+
+
+.note-taking-module {
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 16px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-section {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 8px 16px;
+    align-items: center;
+}
+
+.input-section label {
+    display: inline-block;
+    text-align: right;
+}
+
+.input-section input {
+    width: 100%;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-section input[type="datetime-local"] {
+    font-family: Arial, sans-serif;
+}
+
+.history-section {
+    margin-top: 16px;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.table-wrapper {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0; /* Reset the default margin for consistency */
+}
+
+
+.table-wrapper th,
+.table-wrapper td {
+    min-width:150px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+
+.table-wrapper th {
+    text-align: left;
+}
+
+
+
+.number-input {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.number-input::-webkit-inner-spin-button,
+.number-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.number-input:focus {
+    outline: none;
+    border-color: #999;
+}
+
+.number-input::-webkit-input-placeholder {
+    color: #999;
+}
+
+.number-input::-moz-placeholder {
+    color: #999;
+}
+
+.number-input:-ms-input-placeholder {
+    color: #999;
+}
+
+.number-input::placeholder {
+    color: #999;
+}

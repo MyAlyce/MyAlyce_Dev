@@ -132,26 +132,26 @@ body { // scrollbar css props
   }
 }
 
-td, th {
-  &.min-width {
-    width: 1%;
-    text-align: center !important;
-  }
-}
+// td, th {
+//   &.min-width {
+//     width: 1%;
+//     text-align: center !important;
+//   }
+// }
 
 // not functioning yet
-td .expandable {
-    .expand {
-        // border-top: none;
-        // display: grid;
-        // grid-column: 1/-1;
-        // justify-content: flex-start;
-        // color: #AEB1B3;
-        // font-size: 13px;
-        // background-color: #fff;
-    }
+// td .expandable {
+//     .expand {
+//         // border-top: none;
+//         // display: grid;
+//         // grid-column: 1/-1;
+//         // justify-content: flex-start;
+//         // color: #AEB1B3;
+//         // font-size: 13px;
+//         // background-color: #fff;
+//     }
 
-    .collapse {
-      display: none;
-    }
-  }
+//     .collapse {
+//       display: none;
+//     }
+//   }
