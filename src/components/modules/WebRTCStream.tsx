@@ -39,12 +39,12 @@ class RTCAudio extends Component<{[key:string]:any}> {
     ctx = new AudioContext();
     call:RTCCallInfo;
     stream:MediaStream
-    audioOutId:string;
+    audioOutId?:string;
 
     constructor(props:{
         stream:MediaStream, 
         call:RTCCallInfo,
-        audioOutId:string //TODO: select output device for audio stream
+        audioOutId?:string //TODO: select output device for audio stream
 }) {
         super(props);
 
