@@ -126,6 +126,7 @@ video {
     font-family: Arial, sans-serif;
 }
 
+
 .history-section {
     margin-top: 16px;
     overflow-y: auto;
@@ -172,7 +173,6 @@ video {
 
 .number-input::-webkit-inner-spin-button,
 .number-input::-webkit-outer-spin-button {
-    -webkit-appearance: none;
     margin: 0;
 }
 
