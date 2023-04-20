@@ -6,6 +6,7 @@ import { NoteTaking } from '../modules/NoteTaking'
 
 import { client, webrtc } from '../../scripts/client';
 import { RTCCallInfo } from '../../scripts/webrtc'
+import { DeviceConnect } from '../modules/DeviceConnect'
 
 export class Dashboard extends sComponent {
 
@@ -19,19 +20,26 @@ export class Dashboard extends sComponent {
 
         //console.log(client.currentUser)
         return (
-            <div className='div'>
+            <div className="page-container">
                 <h1>Welcome {client.currentUser.firstName}</h1>
-                <div>
-                {/*Device/Stream select */}
-                    <StreamSelect onChange={(ev)=>{ this.setState({activeStream:ev.target.value});}}/>
+                <div className="stream-select">
+                    {/* Device/Stream select */}
+                        <StreamSelect onChange={(ev) => { this.setState({ activeStream: ev.target.value }); }} />
+                    {/** Device Connect */}
+                    { !this.state.activeStream ? 
+                        <DeviceConnect/> : ""
+                    }
                 </div>
-                {/*Chart*/}
-                <div>
-                    <Device 
-                        remote={!!this.state.activeStream}
-                        streamId={this.state.activeStream}
-                    />
-                    <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName+(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName+'.csv' : 'Notes.csv'}/>
+                <div className="main-content">
+                    {/* Chart */}
+                    <div className="device-section">
+                        <Device
+                            streamId={this.state.activeStream}
+                        />
+                    </div>
+                    <div className="note-taking-section">
+                        <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName + '.csv' : 'Notes.csv'} />
+                    </div>
                 </div>
             </div>
         )

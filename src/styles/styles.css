@@ -10,33 +10,6 @@ body {
     font-family: 'Inter';
 }
 
-.div{
-    background: #ffffff; 
-}
-
-.div h1{
-    height: 29px;
-    font-family:'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    color: #000000;
-
-}
-
-.div button{
-    background: #3B82F6 !important;
-    border-radius: 8px;
-}
-
-.div .chartContainer {
-    width:100%;
-    height:500px;
-
-    background: black;
-}
-
 #viewcontent {
     width: 100%;
     height: 100%;
@@ -102,6 +75,19 @@ video {
 }
 
 
+.chartMain {
+    border-radius: 5px;
+    width:100%;
+    height:100%;
+    background-color: black;   
+}
+
+.chartOverlay {
+    border-radius: 5px;
+    width:100%;
+    height:100%;
+    transform: translateY(-100%);
+}
 
 
 
@@ -210,3 +196,104 @@ video {
 .number-input::placeholder {
     color: #999;
 }
+
+/* .page-container {
+
+} */
+
+.stream-select {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem; /* Add some spacing between the elements */
+    margin-bottom: 1rem;
+}
+/* 
+.main-content {
+
+} */
+
+.device-section {
+    width:100%;
+}
+/* 
+.note-taking-section {
+    
+} */
+
+
+.page-container h1{
+    height: 29px;
+    font-family:'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+
+}
+
+.page-container button{
+    background: #3B82F6 !important;
+    border-radius: 8px;
+}
+
+.page-container .chartContainer {
+    width:100%;
+    height:500px;
+
+    background: black;
+}
+
+
+
+
+.stream-select {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem; /* Add some spacing between the elements */
+    margin-bottom: 1rem;
+  }
+  
+  .selected-item {
+    padding: 8px 12px;
+    background-color: #f1f1f1;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .stream-select-dropdown {
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    top: 100%;
+    margin-top: 4px;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    background-color: #f1f1f1;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .stream-select-dropdown li {
+    padding: 8px 12px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .stream-select-dropdown li:hover {
+    background-color: #e4e4e4;
+  }
+  
+  .stream-select-dropdown .selected {
+    background-color: #d4d4d4;
+  }
+  

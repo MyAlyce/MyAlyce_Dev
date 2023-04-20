@@ -12,34 +12,28 @@ import { ChartGroup } from './ChartGroup';
 export class Device extends sComponent {
     
     state = { //synced with global state
-        deviceConnected:false,
-        activeStream:undefined
+        deviceConnected:false
     }
 
-    remote = false;
+    streamId?:string;
     sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[];
 
     constructor(props:{
-        remote?:boolean,
         sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[],
         streamId?:string
     }) {
         super(props as any);
 
-        if(props.remote) this.remote = props.remote;
+        if(props.streamId) this.streamId = props.streamId;
         if(props.sensors) this.sensors = props.sensors;
     }
 
+    //TODO: add simple views like for the raw data e.g. heart rate, breath rate, HRV
     render() {
         return (
             <div>
-                <div>
-                    { !this.remote ? 
-                        <DeviceConnect/> : ""
-                    }
-                </div>
                 <div>{    
-                    this.state.deviceConnected ? (<ChartGroup streamId={this.state.activeStream}/>) : (<Chart sensors={['emg']} title={"EMG & ECG"}/>)
+                    this.state.deviceConnected ? (<ChartGroup streamId={this.streamId}/>) : (<Chart sensors={['emg']} title={"EMG & ECG"}/>)
                 }</div>
             </div>
         )

@@ -48,16 +48,12 @@ export class Chart extends sComponent {
 
     componentDidMount = () => {
         
-        this.canvas.style.width = '100%';
-        this.canvas.style.height = '100%';
+        this.canvas.className = 'chartMain'
         this.canvas.width = 800;
         this.canvas.height = 600;
-        this.canvas.style.zIndex = '1';
-        this.overlay.style.transform = 'translateY(-100%)'
+        this.overlay.className = 'chartOverlay'
         this.overlay.width = 800;
         this.overlay.height = 600;
-        this.overlay.style.width = '100%';
-        this.overlay.style.height = '100%';
 
         let lines = this.lines ? this.lines : this.sensors ? {} : {
             hr: { sps: 1, nSec: 100, units: 'bpm' },

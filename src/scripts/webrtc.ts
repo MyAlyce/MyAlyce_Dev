@@ -16,8 +16,8 @@ const webrtcData = {
 state.setState(webrtcData);
 
 
-export type RTCCallProps = WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string, messages:{message:string, from:string, timestamp:number}[], videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
-export type RTCCallInfo = WebRTCInfo & {caller:string, firstName:string, lastName:string, socketId:string,  messages:{message:string, from:string, timestamp:number}[],videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
+export type RTCCallProps = WebRTCProps & {caller:string, firstName:string, lastName:string, pictureUrl:string, socketId:string, messages:{message:string, from:string, timestamp:number}[], videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
+export type RTCCallInfo = WebRTCInfo & {caller:string, firstName:string, lastName:string, pictureUrl:string, socketId:string,  messages:{message:string, from:string, timestamp:number}[],videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
 
 
 //spaghetti
@@ -153,7 +153,8 @@ export async function startCall(userId) {
                     caller:client.currentUser._id,
                     socketId:usersocket._id,
                     firstName:client.currentUser.firstName,
-                    lastName:client.currentUser.lastName
+                    lastName:client.currentUser.lastName,
+                    pictureUrl:client.currentUser.pictureUrl
                 }
             ]
         ]
@@ -288,7 +289,8 @@ export let answerCall = async (call:RTCCallProps) => {
                         caller:client.currentUser._id,
                         socketId:usersocket._id,
                         firstName:client.currentUser.firstName,
-                        lastName:client.currentUser.lastName
+                        lastName:client.currentUser.lastName,
+                        pictureUrl:client.currentUser.pictureUrl
                     }
                 ]
             ],
