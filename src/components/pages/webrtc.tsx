@@ -24,7 +24,6 @@ let personIcon = './assets/person.jpg';
 export class WebRTCComponent extends sComponent {
 
     state = {
-        loggedInId:undefined,
         availableUsers:undefined as undefined|any[],
         availableStreams:webrtc.rtc, //we can handle multiple connections too
         unansweredCalls:webrtc.unanswered, //webrtc.unanswered reference
@@ -58,8 +57,9 @@ export class WebRTCComponent extends sComponent {
             let ain = [] as any[]; let aout = [] as any[]; let cam = [] as any[];
             for (var i = 0; i !== deviceInfos.length; ++i) {
                 var deviceInfo = deviceInfos[i];
-                var option = (<option value={deviceInfo.deviceId}>{deviceInfo.label}</option>)//document.createElement('option');
+                var option = (<option key={deviceInfo.deviceId} value={deviceInfo.deviceId}>{deviceInfo.label}</option>)//document.createElement('option');
                 //option.value = deviceInfo.deviceId;
+                console.log(deviceInfo.kind, deviceInfo.deviceId);
                 if (deviceInfo.kind === 'videoinput') {
                     if(!this.state.selectedVideo)
                         this.state.selectedVideo = deviceInfo.deviceId;
@@ -89,7 +89,7 @@ export class WebRTCComponent extends sComponent {
             this.setState({
                 audioInDevices:ain,
                 audioOutDevices:aout,
-                videoInDevices:cam
+                cameraDevices:cam
             })
         });
     }
@@ -220,7 +220,6 @@ export class WebRTCComponent extends sComponent {
 
     render = () => {
 
-        console.log('selectedAudioOut', this.state.selectedAudioOut)
         return (
             <div className="div">
                 <h1>WebRTC Communication</h1>
@@ -231,23 +230,28 @@ export class WebRTCComponent extends sComponent {
                 </div>
                 <hr/>
 
+                {/**
+                 * TODO: 
+                 *  Separate calling yourself from calling other users into a different menu
+                 *  Maybe integrate lookup & calling permissions closer with the UserAuths content
+                 */}
                 <h2>Available Users</h2>
                 <div id='availableUsers'>
                     { this.state.availableUsers && this.state.availableUsers.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
-                Device Select: 
                 {/* 
                     TODO: 
-                        Add onchange event and have all outgoing streams send the same audio/video. We need to basically just need to call disableAudio/Video then enableAudio/Video with the new settings if the Ids in the stream don't match
                         Also add a loop to check for new devices (e.g. 1 check per 1-3 seconds for new listings from enumerateDevices).
                         Add screenshare options
                     */
                 }
-                <select id={this.unique+'aIn'} onChange={(ev) => this.setState({selectedAudioIn: ev.target.value})}>{this.state.audioInDevices}</select>
-                <select id={this.unique+'aOut'} onChange={(ev) => this.setState({selectedAudioOut: ev.target.value})}>{this.state.audioOutDevices}</select> 
-                <select id={this.unique+'vIn'} onChange={(ev) => this.setState({selectedVideo: ev.target.value})}>{this.state.cameraDevices}</select>
-                
+                { this.state.audioInDevices?.length > 0 && (<div>Mic In:<select id={this.unique+'aIn'} onChange={(ev) => this.setState({selectedAudioIn: ev.target.value})}>{this.state.audioInDevices}</select>
+                </div>)}
+                { this.state.audioOutDevices?.length > 0 && (<div>Audio Out:<select id={this.unique+'aOut'} onChange={(ev) => this.setState({selectedAudioOut: ev.target.value})}>{this.state.audioOutDevices}</select> 
+                </div>)}
+                { this.state.cameraDevices?.length > 0 && (<div>Camera In:<select id={this.unique+'vIn'} onChange={(ev) => this.setState({selectedVideo: ev.target.value})}>{this.state.cameraDevices}</select>
+                </div>)}
                 {/* 
                 <h2>Select Stream</h2>
                     <StreamSelect onChange={(ev)=>{ this.activeStream = ev.target.value; this.setState({}); }} />
