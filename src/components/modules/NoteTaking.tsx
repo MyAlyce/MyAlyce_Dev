@@ -98,7 +98,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         );
 
         this.state.noteRows.unshift(
-            <tr><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td>{event.notes}</td><td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td></tr>
+            <tr key={event._id}><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td>{event.notes}</td><td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td></tr>
         )
         
         this.setState({});

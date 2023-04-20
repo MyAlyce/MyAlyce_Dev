@@ -6,6 +6,8 @@ import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/
 
 let personIcon = './assets/person.jpg';
 
+//TODO: revoke auths, group ingoing/outgoing existingAuths together for now since we lumped them together here
+
 export class UserAuths extends sComponent {
 
     state = {
@@ -30,10 +32,11 @@ export class UserAuths extends sComponent {
         let query = (document.getElementById(this.unique + 'query') as HTMLInputElement).value;
         this.queryResults = [];
         if(query) {
+            let int = 0;
             client.queryUsers(query, 0, 0).then((res) => {
                 res?.forEach((user) => {
                     this.queryResults.push(
-                        <option key={user._id} value={user._id}>
+                        <option key={int} value={user._id}>
                             {/* <Avatar
                                 dataState='done'
                                 imgSrc={user.pictureUrl ? user.pictureUrl : personIcon}
@@ -48,6 +51,7 @@ export class UserAuths extends sComponent {
                             /> */}{user.firstName} {user.lastName} 
                         </option>
                     );
+                    int++;
                 });
                 this.setState({});
             });
@@ -116,7 +120,7 @@ export class UserAuths extends sComponent {
         let auths = await client.getAuthorizations();
         auths?.forEach((a:AuthorizationStruct) => {
             this.existingAuths.push(
-                <tr>
+                <tr key={a._id}>
                     <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
                         return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
                     })}</td>
@@ -265,20 +269,22 @@ export class UserAuths extends sComponent {
                     <div>
                         <h4>Requests</h4>
                         <div>
-                            {  this.userRequests }
+                            {  this.userRequests  }
                         </div>
                     </div>
                     <div>
                         <h4>Outgoing</h4>
                         <div>
-                            {  this.sentRequests }
+                            {  this.sentRequests  }
                         </div>
                     </div>
                     <div>
                         <h4>Authorized</h4>
-                        <div>
-                            {  this.existingAuths }
-                        </div>
+                        <table>
+                            <tbody>
+                                {  this.existingAuths  }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
