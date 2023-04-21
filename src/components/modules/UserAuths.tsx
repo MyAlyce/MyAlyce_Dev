@@ -5,7 +5,7 @@ import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/
 
 let personIcon = './assets/person.jpg';
 
-//TODO: revoke auths, group ingoing/outgoing existingAuths together for now since we lumped them together here
+//TODO:
 // Change the queryResults select to a list like on the StreamSelect, probably make it its own components because it's so complicated Dx
 export class UserAuths extends Component<{[key:string]:any}> {
 
