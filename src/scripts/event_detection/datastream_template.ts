@@ -1,67 +1,178 @@
 export class DataStreamAlgorithm {
-    bufferLength: number;
-    buffer: number[];
+    bufferLength;
+    buffer;
+    timestampBuffer;
+    channel;
     
-    constructor(bufferLength: number) {
+    constructor(
+        bufferLength=1000, 
+        channel='0'
+    ) {
         this.bufferLength = bufferLength;
         this.buffer = [];
+        this.timestampBuffer = [];
+        this.channel=channel;
     }
 
-    step = (data: { channel: number[] }): { result: boolean, index?: number } => { //input and output any SERIALIZABLE data structures
+    step = (data) => {
         // buffer the data
-        this.buffer.push(...data.channel);
+        this.buffer.push(...data[this.channel]);
+        this.timestampBuffer.push(...data.timestamp);
         if (this.buffer.length > this.bufferLength) {
             this.buffer.splice(0, this.buffer.length - this.bufferLength);
+            this.timestampBuffer.splice(0, this.timestampBuffer.length - this.bufferLength);
         }
 
-        const index = data.channel.findIndex(val => val > 0.9); // find index of value greater than 0.9
+        //or whatever
+        const index = this.buffer.findIndex(val => val > 0.95); // find index of value greater than 0.9
         if (index !== -1) {
-            return { result: true, index };
+            return { 
+                result: true, 
+                value:this.buffer[index], 
+                timestamp:this.timestampBuffer[index] 
+            };
         } else {
             return { result: false };
         }
     }
 }
 
-// test data generator
-function genData(
-    sps = 250, 
-    tduration = 1000, 
-    fn = (v: number, i: number, time: number) => Math.random(), 
-    tstart = Date.now()
-    ): number[] {
+
+
+import {CSV, parseCSVData} from 'graphscript-services.storage'
+
+let parsed;
+
+//roll over data from the parsed csv
+function genDataFromCSV(sps=250, tduration = 1000, key='0') {
     const maxSamples = Math.floor(sps * (tduration / 1000));
-    return new Array(maxSamples).fill(0).map((v, i) => {
-        const time = tstart + 1000 * i / sps;
-        return fn(v, i, time);
+    let res = {
+        [key]:[] as any, //raw
+        timestamp:[] as any //unix time
+    };
+    new Array(maxSamples).fill(0).map((v, i) => {
+        res[key].push(parseFloat(parsed[key][ctr+i]));
+        res.timestamp.push(parseFloat(parsed.timestamp?.[ctr+i]))
     });
+    ctr += maxSamples;
+    if(ctr + maxSamples > parsed[key].length) ctr = 0; //roll over
+    return res;
 }
+
 
 const algorithm = new DataStreamAlgorithm(1000);
 
-//simulate data and run the event detector
-const simuloop = (
-    eventDetector: (data: { channel: number[] }) => { result: boolean, index?: number, [key:string]:any },
-    sps = 250,
+const simuloopCSV = (
+
+    eventDetector=algorithm.step, //step function, has its own scope for keeping buffers etc
+    key='0', //roll over a single channel for this 
+    sps = 250, //sample rate
     tcheck = 1000 / 9, // 9 checks per second
-    duration = 3000,
-    dataGen: ((v: number, i: number, time: number) => number) = (v, i, time) => Math.random()
+    duration = 5000
+
 ) => {
+
     let tstart = Date.now();
+    let start = tstart;
     const recursiveAwait = async () => {
-        const data = { 
-            channel: genData(sps, tcheck, dataGen, tstart) 
-        };
+        let output = genDataFromCSV(
+            sps,
+            tcheck,
+            key
+          );
+        const data = output;
         console.log('data', data);
         const result = eventDetector(data);
-        console.log("check result:", result.result);
+        console.log("check result:", result);
         tstart += tcheck;
-        if (tstart <= Date.now() + duration) {
+        if (tstart <= start + duration) {
             await new Promise(res => setTimeout(res, tcheck));
             recursiveAwait();
         }
     };
     recursiveAwait();
+
 };
 
-simuloop(algorithm.step);
+
+
+let ctr = 0;
+
+function openCSV() {
+    let data = CSV.openCSVRaw().then((res={data:[], filename:''}) => {
+        
+        console.log(
+            res.filename, 
+            res.data
+        );
+
+        parsed = parseCSVData(
+            res.data,
+            res.filename,
+            undefined
+        );
+
+        console.log(parsed);
+
+        simuloopCSV(
+            algorithm.step,
+            '0',
+            250,
+            1000/9,
+            3000
+        )
+    });
+}
+
+
+
+
+// // test data generator
+// function genData(
+//     sps = 250, 
+//     tduration = 1000, 
+//     fn = (v, i, time) => Math.random(), 
+//     tstart = Date.now()
+// ) {
+//     const maxSamples = Math.floor(sps * (tduration / 1000));
+//     return new Array(maxSamples).fill(0).map((v, i) => {
+//         const time = tstart + 1000 * i / sps;
+//         return fn(v, i, time);
+//     });
+// }
+
+// const simuloop = (
+
+//     eventDetector=algorithm.step, //step function, has its own scope for keeping buffers etc
+//     sps = 250, //sample rate
+//     tcheck = 1000 / 9, // 9 checks per second
+//     duration = 5000,
+//     dataGen = (v, i, time) => Math.random()
+
+// ) => {
+
+//     let tstart = Date.now();
+//     let start = tstart;
+//     const recursiveAwait = async () => {
+//         const data = { 
+//           channel: genData(
+//                 sps, 
+//                 tcheck, 
+//                 dataGen, 
+//                 tstart
+//             ) 
+//         };
+//         console.log('data', data);
+//         const result = eventDetector(data);
+//         console.log("check result:", result);
+//         tstart += tcheck;
+//         if (tstart <= start + duration) {
+//             await new Promise(res => setTimeout(res, tcheck));
+//             recursiveAwait();
+//         }
+//     };
+//     recursiveAwait();
+
+// };
+
+//simuloop(algorithm.step);
