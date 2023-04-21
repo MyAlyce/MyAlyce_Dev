@@ -1,5 +1,4 @@
-import React, {useRef} from 'react'
-import { sComponent } from '../state.component'
+import React, {Component} from 'react'
 import { client } from '../../scripts/client';
 import { Avatar, Button } from '../../components/lib/src/index';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
@@ -8,10 +7,11 @@ let personIcon = './assets/person.jpg';
 
 //TODO: revoke auths, group ingoing/outgoing existingAuths together for now since we lumped them together here
 // Change the queryResults select to a list like on the StreamSelect, probably make it its own components because it's so complicated Dx
-export class UserAuths extends sComponent {
+export class UserAuths extends Component<{[key:string]:any}> {
+
+    unique=`component${Math.floor(Math.random()*1000000000000000)}`;
 
     state = {
-        viewingId:undefined,
         authRequests:undefined
     }
 
@@ -117,16 +117,23 @@ export class UserAuths extends sComponent {
         this.userRequests = [];
         this.sentRequests = [];
 
+        //my authorizations
         let auths = await client.getAuthorizations();
         auths?.forEach((a:AuthorizationStruct) => {
             this.existingAuths.push(
-                <tr key={a._id}>
+                <tr key={a._id} id={this.unique+a._id}>
                     <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
                         return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
                     })}</td>
                     <td>Authorized: ${a.authorizedName}</td>
                     <td>Authorizer: ${a.authorizerName}</td>
                     <td>Status: ${a.status}</td>
+                    <td><button onClick={()=>{ 
+                        client.deleteAuthorization(a._id,()=>{ 
+                            document.getElementById(this.unique+a._id)?.remove(); 
+                            document.getElementById(this.unique+a.associatedAuthId)?.remove(); 
+                        }); 
+                    }}>❌</button></td>
                 </tr>
             )
         }); //get own auths
