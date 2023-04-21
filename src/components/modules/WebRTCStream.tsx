@@ -33,6 +33,7 @@ export const createStreamChart = (call) => {
 }
 
 //TODO: Can't hear the audio from the other user
+// also, add the exit call button
 
 class RTCAudio extends Component<{[key:string]:any}> {
 
