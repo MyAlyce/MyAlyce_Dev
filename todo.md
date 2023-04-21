@@ -12,3 +12,8 @@
 
 - Security
 - plain email/password storage? i.e. not just google reliance
+
+
+## Data
+
+- add a recording replay for sim
