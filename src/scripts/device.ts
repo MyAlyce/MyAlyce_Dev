@@ -78,7 +78,7 @@ export async function connectDevice() {
                 '0002cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //ads131m08 (main)
                     [key: string]: number[]
                 }) => {
-                    if(!state.data.detectedEMG) state.data.detectedEMG = true;
+                    if(!state.data.detectedEMG) state.setState({detectedEMG:true});
                     state.setValue('emg', data); //these values are now subscribable 
                 }, 
                 '0003cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //max30102
@@ -87,7 +87,7 @@ export async function connectDevice() {
                     max_dietemp: number,
                     timestamp: number
                 }) => {
-                    if(!state.data.detectedPPG) state.data.detectedPPG = true;
+                    if(!state.data.detectedPPG) state.setState({detectedPPG:true});
                     state.setValue('ppg', data);
                     
                     let d = Object.assign({}, data);
@@ -106,13 +106,13 @@ export async function connectDevice() {
                     mpu_dietemp: number,
                     timestamp: number
                 }) => {
-                    if(!state.data.detectedIMU) state.data.detectedIMU = true;
+                    if(!state.data.detectedIMU) state.setState({detectedIMU:true});
                     state.setValue('imu', data);
                 },
                 '0005cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //extra ads131 (if plugged in)
                     [key: string]: number[]
                 }) => {
-                    if(!state.data.detectedEMG2) state.data.detectedEMG2 = true;
+                    if(!state.data.detectedEMG2) state.setState({detectedEMG2:true});
                     state.setValue('emg2', data);
                 },
                 '0006cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //bme280
@@ -121,7 +121,7 @@ export async function connectDevice() {
                     humidity: number[], //if using BME, not available on BMP
                     altitude: number[]
                 }) => {
-                    if(!state.data.detectedENV) state.data.detectedENV = true;
+                    if(!state.data.detectedENV) state.setState({detectedENV:true});
                     state.setValue('env', data);
                 }
             },
