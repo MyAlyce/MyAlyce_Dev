@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Beating Heart SVG Animation</title>
+    <!-- <style>
+      .heart {
+        animation: beat 1s ease-in-out infinite;
+      }
+      /* @keyframes beat {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      } */
+    </style>-->
+  </head>
+  <body>
+    <style>
+        .heart {
+          fill: red;
+          transform-origin: center;
+        }
+        
+        .ghost-heart {
+          fill: red;
+          opacity: 0.5;
+          transform-origin: 44% 50%;
+        }
+        
+        .ghost-heart.animate {
+          animation: heartbeat 0.8s ease-in-out infinite;
+        }
+        
+        .ghost-heart2 {
+          fill: red;
+          opacity: 0.5;
+          transform-origin: 44% 50%;
+        }
+        
+        .ghost-heart2.animate {
+          animation: heartbeat2 0.8s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+          from {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+          to {
+            transform: scale(1.1);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes heartbeat2 {
+          from {
+            transform: scale(1);
+            opacity: 0.5;
+          }
+          to {
+            transform: scale(1.2);
+            opacity: 0;
+          }
+        }
+      </style>
+      
+      <svg class="svg-container" width="100" height="100" viewBox="-20,-20,120,120">
+        <g>
+            <!-- Main heart -->
+            <path class="heart" d="M50,85 C25,60 10,40 10,20 C10,-5 40,-5 50,10 C60,-5 90,-5 90,20 C90,40 75,60 50,85z" />
+          
+            <!-- Animated hearts -->
+            <g id="ghosthearts">
+                <path class="ghost-heart" d="M50,85 C25,60 10,40 10,20 C10,-5 40,-5 50,10 C60,-5 90,-5 90,20 C90,40 75,60 50,85z" />
+                <path class="ghost-heart2" d="M50,85 C25,60 10,40 10,20 C10,-5 40,-5 50,10 C60,-5 90,-5 90,20 C90,40 75,60 50,85z" />
+            </g>
+        </g>
+      </svg>
+
+    <script>
+         function animateHearts(speed=0.8) {
+            const svgContainer = document.getElementById('ghosthearts'); 
+            const svgCopy = svgContainer.cloneNode(true); // Create a copy of the SVG container
+            const ghostHearts = Array.from(svgCopy.getElementsByClassName('ghost-heart'));
+            const ghostHearts2 = Array.from(svgCopy.getElementsByClassName('ghost-heart2'));
+
+            ghostHearts.forEach((heart, index) => {
+                heart.style.setProperty('--animation-speed', `${speed || 0.8}s`); // Set animation speed
+                heart.classList.add('animate');
+            });
+
+            ghostHearts2.forEach((heart, index) => {
+                heart.style.setProperty('--animation-speed', `${speed || 0.8}s`); // Set animation speed
+                heart.classList.add('animate');
+            });
+
+            svgContainer.parentNode.insertBefore(svgCopy, svgContainer.nextSibling); // Insert the copy after the original SVG container
+            setTimeout(() => {
+                svgCopy.remove(); // Remove the copy once the animation is finished
+                
+            }, speed * 1000);
+        }
+
+    </script>
+    <button onclick="animateHearts()">Animate hearts</button>
+
+  </body>
+</html>

@@ -2,7 +2,8 @@ import { setupAlerts } from "./alerts";
 import { client, graph, usersocket, webrtc, state } from "./client"
 
 import {WebRTCInfo, WebRTCProps} from 'graphscript'//'../../../graphscript/index'//
-import { csvworkers, gsworker } from "./datacsv";
+import { csvworkers } from "./datacsv";
+import gsworker from './device.worker'
 import { workers } from "device-decoder";
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 

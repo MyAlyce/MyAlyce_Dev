@@ -46,7 +46,18 @@ if(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope
             ...BFSRoutes,
             ...csvRoutes,
             ...streamWorkerRoutes,
-            ...webglPlotRoutes
+            ...webglPlotRoutes,
+            processHRSession:function (filename) {
+                let min = Infinity;
+                let max = -Infinity;
+                csvRoutes.processCSVChunksFromDB(filename, (csvdata) => {
+                    //heart rate stats,
+
+                    //hrv stats
+
+                    //min, max, slope (gain), average
+                });
+            }
         }
     });
 

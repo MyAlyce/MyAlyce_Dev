@@ -2,7 +2,6 @@
 import { initDevice, Devices, FilterSettings, workers } from 'device-decoder'
 
 import gsworker from './device.worker'
-export {gsworker};
 
 import { state } from './client'//'../../../graphscript/index'//
 import { ByteParser } from 'device-decoder/src/util/ByteParser';
@@ -70,10 +69,12 @@ export async function connectDevice() {
 
     //Setup Alerts
     let nodes = setupAlerts();
+    Devices['BLE']['nrf5x'].namePrefix = "B"
 
     device = await initDevice(
         Devices['BLE']['nrf5x'],
         {
+            workerUrl:gsworker,
             ondecoded: { //after data comes back from codec
                 '0002cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //ads131m08 (main)
                     [key: string]: number[]

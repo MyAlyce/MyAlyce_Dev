@@ -15,6 +15,7 @@ export class ChartGroup extends Component<{[key:string]:any}> {
     activeCharts = {};
     sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[];
     unmounted?=true;
+    streamId?:string;
 
     constructor(props:{
         sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[],
@@ -22,12 +23,13 @@ export class ChartGroup extends Component<{[key:string]:any}> {
     }) {
         super(props as any);
 
-        if(props.sensors) this.sensors = props.sensors;
-        this.constructCharts(props.streamId, props.sensors);
+        this.sensors = props.sensors;
+        this.streamId = props.streamId;
     }
 
     componentDidMount(): void {
         this.unmounted = false;
+        this.constructCharts(this.streamId, this.sensors);
     }
 
     componentWillUnmount(): void {
@@ -35,7 +37,7 @@ export class ChartGroup extends Component<{[key:string]:any}> {
     }
 
     constructCharts(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[]) {
-
+        console.log('construct charts');
         if(!sensors || sensors?.includes('emg')) {
             let makeChart = () => {
                 this.activeCharts['emg'] = <Chart sensors={['emg']} streamId={streamId} title={"EMG & ECG"}/>;
