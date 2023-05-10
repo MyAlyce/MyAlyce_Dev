@@ -1,7 +1,7 @@
 import { graph } from '../client'
 import { workers } from 'device-decoder';
 
-import {gsworker as alertworker} from '../device'
+import gsworker from '../device.worker'
 
 export function throwAlertSound() {
 
@@ -23,7 +23,7 @@ export class Alert {
         if(check) this.check = check;
         if(props) Object.assign(this,props);
 
-        let worker = workers.addWorker({url:alertworker});
+        let worker = workers.addWorker({url:gsworker});
         
         graph.run('transferNode',
             this,
