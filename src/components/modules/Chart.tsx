@@ -117,7 +117,7 @@ export class Chart extends sComponent {
             worker:plotworker
         });
 
-        if(!this.sensors || this.sensors?.includes('emg']) {
+        if(!this.sensors || this.sensors?.includes('emg')) {
             this.subscriptions.emg = state.subscribeEvent(this.streamId ? this.streamId+'emg' : 'emg', (data) => {
                 this.plotter.__operator(data);
             });
