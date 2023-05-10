@@ -117,17 +117,18 @@ export class Chart extends sComponent {
             worker:plotworker
         });
 
-        if(!this.sensors || this.sensors?.includes['emg']) {
+        if(!this.sensors || this.sensors?.includes('emg']) {
             this.subscriptions.emg = state.subscribeEvent(this.streamId ? this.streamId+'emg' : 'emg', (data) => {
-                this.plotter.__operator({ 0:data[0], 1:data[1] });
-            })
+                this.plotter.__operator(data);
+            });
+            console.log('subscribed emg');
         }
-        if(!this.sensors || this.sensors?.includes['ppg']) {
+        if(!this.sensors || this.sensors?.includes('ppg')) {
             this.subscriptions.ppg = state.subscribeEvent(this.streamId ? this.streamId+'ppg' :'ppg', (ppg) => {
                 this.plotter.__operator(ppg);
             })
         }
-        if(!this.sensors || this.sensors?.includes['hr']) {
+        if(!this.sensors || this.sensors?.includes('hr')) {
             this.subscriptions.hr = state.subscribeEvent(this.streamId ? this.streamId+'hr' :'hr', (hr) => {
                 this.plotter.__operator({
                     hr: hr.bpm,
@@ -135,12 +136,12 @@ export class Chart extends sComponent {
                 });
             })
         }
-        if(!this.sensors || this.sensors?.includes['imu']) {
+        if(!this.sensors || this.sensors?.includes('imu')) {
             this.subscriptions.imu = state.subscribeEvent(this.streamId ? this.streamId+'imu' :'imu', (imu) => {
                 this.plotter.__operator(imu);
             })
         }
-        if(!this.sensors || this.sensors?.includes['breath']) {
+        if(!this.sensors || this.sensors?.includes('breath')) {
             this.subscriptions.breath = state.subscribeEvent(this.streamId ? this.streamId+'breath' :'breath', (breath) => {
                 this.plotter.__operator({
                     breath:breath.bpm,
@@ -148,7 +149,7 @@ export class Chart extends sComponent {
                 });
             })
         }
-        if(!this.sensors || this.sensors?.includes['env']) {
+        if(!this.sensors || this.sensors?.includes('env')) {
             this.subscriptions.env = state.subscribeEvent(this.streamId ? this.streamId+'env' :'env', (env) => {
                 this.plotter.__operator(env);
             })

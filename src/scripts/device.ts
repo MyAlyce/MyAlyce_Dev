@@ -69,7 +69,7 @@ export async function connectDevice() {
 
     //Setup Alerts
     let nodes = setupAlerts();
-    Devices['BLE']['nrf5x'].namePrefix = "B"
+    (Devices['BLE']['nrf5x'] as any).namePrefix = "B"
 
     device = await initDevice(
         Devices['BLE']['nrf5x'],
