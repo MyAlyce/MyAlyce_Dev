@@ -112,7 +112,7 @@ export class Chart extends sComponent {
             canvas:this.canvas,
             overlay:this.overlay,
             lines, //will render all lines unless specified
-            generateNewLines:true,
+            generateNewLines:false,
             cleanGeneration:false,
             worker:plotworker
         });
@@ -121,7 +121,6 @@ export class Chart extends sComponent {
             this.subscriptions.emg = state.subscribeEvent(this.streamId ? this.streamId+'emg' : 'emg', (data) => {
                 this.plotter.__operator(data);
             });
-            console.log('subscribed emg');
         }
         if(!this.sensors || this.sensors?.includes('ppg')) {
             this.subscriptions.ppg = state.subscribeEvent(this.streamId ? this.streamId+'ppg' :'ppg', (ppg) => {
