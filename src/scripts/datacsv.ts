@@ -19,7 +19,7 @@ let fileNames = {} as any;
 
 export const csvworkers = {} as {[key:string]:WorkerInfo};
 
-export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[], subTitle?:string) { 
+export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[], subTitle?:string, dir='data') { 
 
     
     csvworkers[streamId ? streamId+'emg' : 'emg'] =  workers.addWorker({ url: gsworker });
@@ -35,7 +35,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors.includes('ppg')) {
         let makeCSV = () => {
-            let filename = `data/PPG_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename = dir+`/PPG_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['ppg'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'ppg' : 'ppg']?.run('createCSV', [
                 filename,
@@ -54,7 +54,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || !sensors.includes('breath')) {
         let makeCSV = () => {
-            let filename = `data/BREATH_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/BREATH_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['breath'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'breath' : 'breath']?.run('createCSV', [
                 filename,
@@ -72,7 +72,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors.includes('hr')) {
         let makeCSV = () => {
-            let filename = `data/HRV_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/HRV_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['hr'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'hr' : 'hr']?.run('createCSV', [
                 filename,
@@ -94,7 +94,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
             if(state.data[streamId ? streamId+'emg' : 'emg'].leds) {
                 header.push('leds');
             }
-            let filename = `data/EMG_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/EMG_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['emg'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'emg' : 'emg']?.run('createCSV', [
                 filename,
@@ -127,7 +127,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
     }
     if(!sensors || sensors?.includes('imu')) {
         let makeCSV = () => {
-            let filename = `data/IMU_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/IMU_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['imu'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'imu' : 'imu']?.run('createCSV', [
                 filename,
@@ -149,10 +149,10 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
     }
     if(!sensors || sensors?.includes('env')) {
         let makeCSV = () => {
-            let filename = `data/ENV_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/ENV_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['env'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'env' : 'env']?.run('createCSV', [
-                `data/ENV_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`,
+                filename,
                 [
                     'timestamp',
                     'temperature', 'pressure', 'humidity', 'altitude'
@@ -170,7 +170,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
     }
 }
 
-export function stopRecording(streamId?:string) {
+export function stopRecording(streamId?:string, dir='data') {
     state.setState({isRecording:false});
     
     if(`${streamId ? streamId : ''}emg` in recordingSubs) {
@@ -194,8 +194,9 @@ export function stopRecording(streamId?:string) {
 
     //now we need to calculate session averages, these are functions triggered on the threads
 
-    let filename1 = 'HRV_Session';
-    let filename2 = 'Breathing_Session';
+    let filename1 = dir+'/HRV_Session';
+    let filename2 = dir+'/Breathing_Session';
+    
     if(streamId) {
         let ses = webrtc.rtc[streamId] as RTCCallInfo;
         if(ses) {

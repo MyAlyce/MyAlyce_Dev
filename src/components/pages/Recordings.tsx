@@ -1,6 +1,6 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import {state} from '../../scripts/client'
+import {client, state, webrtc} from '../../scripts/client'
 
 import { BFSRoutes, csvRoutes } from 'graphscript-services.storage';
 import { driveInstance } from '../../scripts/client';
@@ -8,6 +8,7 @@ import { recordCSV, stopRecording } from '../../scripts/datacsv';
 import { StreamSelect } from '../modules/StreamSelect';
 import { Button } from '../lib/src';
 import { NoteTaking } from '../modules/NoteTaking';
+import { RTCCallInfo } from '../../scripts/webrtc';
 
 //add google drive backup/sync since we're using google accounts
 
@@ -19,8 +20,12 @@ export class Recordings extends sComponent {
         activeStream:undefined
     }
 
-    constructor(props) {
+    dir?:string
+
+    constructor(props:{dir?:string}) {
         super(props);
+
+        this.dir = props.dir;
         this.listRecordings();
     }
 
@@ -30,7 +35,9 @@ export class Recordings extends sComponent {
         //get saved files in indexeddb
         //iterate and push divs with download & delete & backup
         //list backed up nonlocal files too? from gdrive
-        let filelist = await BFSRoutes.listFiles('data');
+
+        let dir = this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName;
+        let filelist = await BFSRoutes.listFiles(dir); //list for a particular user
         //getfilelist
 
         
@@ -66,8 +73,8 @@ export class Recordings extends sComponent {
         return recordings;
     }
 
-    record(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[]) {
-        recordCSV(streamId, sensors);
+    record(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[], subTitle?:string, dir?:string) {
+        recordCSV(streamId, sensors, subTitle, dir);
     }
 
     stopRecording(streamId?:string) {
@@ -80,9 +87,9 @@ export class Recordings extends sComponent {
             <div>
                 <h1>Recording Manager</h1>
                 <StreamSelect/>
-                { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream);}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream);}}>Record</Button> }
+                { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream);}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream, undefined, undefined,  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Record</Button> }
                 <br/>
-                <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'}/>
+                <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'} dir={ this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  }/>
                 <h2>Recordings</h2>
                 <div>
                     { this.state.recordings ? this.state.recordings : "" }

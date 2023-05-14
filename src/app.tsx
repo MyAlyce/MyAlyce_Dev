@@ -1,5 +1,5 @@
 import React from 'react'
-import {state} from './scripts/client'//'../../graphscript/index'//
+import {state, webrtc} from './scripts/client'//'../../graphscript/index'//
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
 import { client, onLogin, onLogout } from './scripts/client';
@@ -13,6 +13,7 @@ import { WebRTCComponent } from './components/pages/webrtc';
 
 import { Device } from './components/modules/device';
 import { Dev } from './components/pages/Dev';
+import { RTCCallInfo } from './scripts/webrtc';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -158,7 +159,7 @@ export class App extends sComponent {
                                     <Dashboard/>
                                 }
                                 { this.state.route.includes('peers') &&  <WebRTCComponent/>}
-                                { this.state.route.includes('recordings') && <Recordings/>}
+                                { this.state.route.includes('recordings') && <Recordings dir={state.data.activeStream ? (webrtc.rtc[state.data.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[state.data.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName}/>}
                                 { this.state.route.includes('settings') && <SettingsView/> }
                                 { this.state.route.includes('dev') && <Dev/>}
                             </div>

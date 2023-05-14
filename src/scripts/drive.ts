@@ -290,7 +290,7 @@ export class GDrive {
                 var request = this.gapi.client.drive.files.export({'fileId': file.id, 'mimeType':mimeType});
                 request.then(async (resp) => {
                     let filename = file.name;
-                    if(!fsInited) await initFS(['data']);
+                    if(!fsInited) await initFS([bfsDir]);
                     fs.appendFile(
                         '/'+bfsDir+'/'+filename,
                         resp.body,

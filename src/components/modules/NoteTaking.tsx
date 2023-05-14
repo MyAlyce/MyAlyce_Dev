@@ -36,16 +36,17 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
     ref1;ref2;ref3;
 
-    constructor(props:{streamId?:string, filename?:string}) {
+    constructor(props:{streamId?:string, filename?:string, dir?:string}) {
         super(props);
+        let dir = props.dir ? props.dir : 'data';
         if(props.streamId && !props.filename) {
             let call = webrtc.rtc[props.streamId] as RTCCallInfo;
             let name = call.firstName + '_' + call.lastName;
-            props.filename = `data/Notes_${name}.csv`;
+            props.filename = dir+`/Notes_${name}.csv`;
         }
 
         if(props.filename) this.filename = props.filename;
-        else this.filename = `data/Notes${props.streamId ? '_'+props.streamId : ''}.csv`
+        else this.filename = dir+`/Notes${props.streamId ? '_'+props.streamId : ''}.csv`
 
         this.streamId = props.streamId;
         

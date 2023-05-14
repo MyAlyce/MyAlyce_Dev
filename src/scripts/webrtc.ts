@@ -220,7 +220,7 @@ export let answerCall = async (call:RTCCallProps) => {
                     if(!csvworkers[call._id+'chat']) {
                         csvworkers[call._id+'chat'] =  workers.addWorker({ url: gsworker });
                         csvworkers[call._id+'chat'].run('createCSV', [
-                            `data/Chat_${new Date().toISOString()}${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
+                            `${call.firstName+call.lastName}/Chat_${new Date().toISOString()}${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
                             [
                                 'timestamp',
                                 'from','message'

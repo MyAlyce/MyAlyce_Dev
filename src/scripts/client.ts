@@ -199,7 +199,8 @@ export const onLogout = (
 //subscribe to the state so any and all changes are saved, can store multiple states (e.g. particular for pages or components)
 export function backupState(
     filename='state.json', 
-    backup=['isLoggedIn','viewingId','loggedInId','route']
+    backup=['isLoggedIn','viewingId','loggedInId','route'],
+    dir='data'
 ){
     //read initial data, now setup subscription to save the state every time it updates
 
@@ -218,7 +219,7 @@ export function backupState(
 
         if(hasUpdate) {
             BFSRoutes.writeFile(
-                '/data/'+filename,
+                '/'+dir+'/'+filename,
                 JSON.stringify(lastState),
             );
             hasUpdate = false;
@@ -236,15 +237,16 @@ backupState();
 export async function restoreSession(
     u:Partial<ProfileStruct>|undefined,
     filename='state.json', //state file
+    dir='data'
 ) {
     //make sure the indexeddb directory is initialized
 
-    let exists = await BFSRoutes.exists('/data/'+filename);
+    let exists = await BFSRoutes.exists('/'+dir+'/'+filename);
 
     let read;
     if(exists) {
         read = await BFSRoutes.readFileAsText(
-            '/data/'+filename,
+            '/'+dir+'/'+filename,
         )
         try {
             if(read) {
