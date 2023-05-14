@@ -26,13 +26,14 @@ export async function connectDevice() {
     const hrworker = workers.addWorker({url:gsworker});
     const brworker = workers.addWorker({url:gsworker});
 
-    hrworker.post('loadFromTemplate',['beat_detect','hr',{
+    let t1 = await hrworker.run('loadFromTemplate',['beat_detect','hr',{
         sps:100
     }]);
     
-    brworker.post('loadFromTemplate',['beat_detect','breath',{
+    let t2 = await brworker.run('loadFromTemplate',['beat_detect','breath',{
         sps:100
     }]);
+
 
     hrworker.subscribe('hr', (data: {
         bpm: number,
@@ -50,6 +51,7 @@ export async function connectDevice() {
         state.setValue('hr', hr);
 
     });
+    
     brworker.subscribe('breath', (data: {
         bpm: number,
         change: number, //lower is better
@@ -69,7 +71,7 @@ export async function connectDevice() {
 
     //Setup Alerts
     let nodes = setupAlerts();
-    (Devices['BLE']['nrf5x'] as any).namePrefix = "B"
+    (Devices['BLE']['nrf5x'] as any).namePrefix = "B";
 
     device = await initDevice(
         Devices['BLE']['nrf5x'],
@@ -134,6 +136,8 @@ export async function connectDevice() {
                 for(const key in nodes) {
                     graph.remove(key,true);
                 }
+                hrworker.terminate();
+                brworker.terminate();
             }
         }
     );
@@ -149,7 +153,7 @@ export async function connectDevice() {
         useDCBlock: false,
         useBandpass: false,
         useLowpass: true,
-        lowpassHz: 30,
+        lowpassHz: 45,
         // bandpassLower:3, 
         // bandpassUpper:45, 
         useScaling: true,

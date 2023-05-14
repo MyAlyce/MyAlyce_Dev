@@ -1,7 +1,9 @@
 import { workers } from "device-decoder";
-import { state } from "./client";
+import { client, state, webrtc } from "./client";
 
 import gsworker from './device.worker'
+import { RTCCallInfo } from "./webrtc";
+import { WorkerInfo } from "graphscript";
 
 state.setState({
     isRecording:false,
@@ -15,7 +17,7 @@ let recordingSubs = {} as any;
 
 let fileNames = {} as any;
 
-export const csvworkers = {};
+export const csvworkers = {} as {[key:string]:WorkerInfo};
 
 export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[], subTitle?:string) { 
 
@@ -192,17 +194,36 @@ export function stopRecording(streamId?:string) {
 
     //now we need to calculate session averages, these are functions triggered on the threads
 
+    let filename1 = 'HRV_Session';
+    let filename2 = 'Breathing_Session';
+    if(streamId) {
+        let ses = webrtc.rtc[streamId] as RTCCallInfo;
+        if(ses) {
+            filename1 += '_' + ses.firstName + '_' + ses.lastName;
+            filename2 += '_' + ses.firstName + '_' + ses.lastName;
+        }
+    } else if(client.currentUser?.firstName) {
+        filename1 += '_' + client.currentUser.firstName + '_' + client.currentUser.lastName;
+        filename2 += '_' + client.currentUser.firstName + '_' + client.currentUser.lastName;
+    }
+
     //heartrate session average
+    Promise.all([
+        csvworkers[streamId ? streamId+'hr' : 'hr']?.run('processHRSession',filename1),
+        csvworkers[streamId ? streamId+'breath' : 'breath']?.run('processBRSession',filename2)
+    ]).then(() => {
+
+        if(streamId && csvworkers[streamId+'chat'] ) csvworkers[streamId+'chat'].terminate();
+        csvworkers[streamId ? streamId+'emg' : 'emg']?.terminate();
+        csvworkers[streamId ? streamId+'ppg' : 'ppg']?.terminate();
+        csvworkers[streamId ? streamId+'hr' : 'hr']?.terminate();
+        csvworkers[streamId ? streamId+'breath' : 'breath']?.terminate();
+        csvworkers[streamId ? streamId+'imu' : 'imu']?.terminate();
+        csvworkers[streamId ? streamId+'env' : 'env']?.terminate();
+        //csvworkers[streamId ? streamId+'emg2' : 'emg2']?.terminate();
+    });
 
     //breath session average
 
-    if(streamId && csvworkers[streamId+'chat'] ) csvworkers[streamId+'chat'].terminate();
-    csvworkers[streamId ? streamId+'emg' : 'emg']?.terminate();
-    csvworkers[streamId ? streamId+'ppg' : 'ppg']?.terminate();
-    csvworkers[streamId ? streamId+'hr' : 'hr']?.terminate();
-    csvworkers[streamId ? streamId+'breath' : 'breath']?.terminate();
-    csvworkers[streamId ? streamId+'imu' : 'imu']?.terminate();
-    csvworkers[streamId ? streamId+'env' : 'env']?.terminate();
-    //csvworkers[streamId ? streamId+'emg2' : 'emg2']?.terminate();
     
 }
