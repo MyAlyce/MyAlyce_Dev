@@ -63,6 +63,17 @@ export class ChartGroup extends Component<{[key:string]:any}> {
             }
             if(state.data[streamId ? streamId+'detectedPPG' : 'detectedPPG']) {
                 makeChart();
+            } else {
+                state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeChart);
+            }
+        }
+        if(!sensors || sensors?.includes('breath')) {
+            let makeChart = () => {
+                this.activeCharts['breath'] = <Chart sensors={['breath']} streamId={streamId} title={"Breathing"} key='br'/>;
+                if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})}); 
+            }
+            if(state.data[streamId ? streamId+'detectedPPG' : 'detectedPPG']) {
+                makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeChart);
         }
         if(!sensors || sensors?.includes('imu')) {
@@ -74,15 +85,6 @@ export class ChartGroup extends Component<{[key:string]:any}> {
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedIMU' : 'detectedIMU', makeChart);
               
-        }
-        if(!sensors || sensors?.includes('breath')) {
-            let makeChart = () => {
-                this.activeCharts['breath'] = <Chart sensors={['breath']} streamId={streamId} title={"Breathing"} key='br'/>;
-                if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})}); 
-            }
-            if(state.data[streamId ? streamId+'detectedPPG' : 'detectedPPG']) {
-                makeChart();
-            } else state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeChart);
         }
         if(!sensors || sensors?.includes('env')) {
             let makeChart = () => {
