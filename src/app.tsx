@@ -159,7 +159,8 @@ export class App extends sComponent {
                                     <Dashboard/>
                                 }
                                 { this.state.route.includes('peers') &&  <WebRTCComponent/>}
-                                { this.state.route.includes('recordings') && <Recordings dir={state.data.activeStream ? (webrtc.rtc[state.data.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[state.data.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName}/>}
+                                { this.state.route.includes('recordings') && <Recordings 
+                                    dir={state.data.activeStream ? (webrtc.rtc[state.data.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[state.data.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName}/>}
                                 { this.state.route.includes('settings') && <SettingsView/> }
                                 { this.state.route.includes('dev') && <Dev/>}
                             </div>
