@@ -175,7 +175,7 @@ export const onLogin = async (
         });
     }          
 
-    return undefined;
+    return undefined as any;
 }
 
 export const onLogout = (

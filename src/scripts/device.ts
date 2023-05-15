@@ -35,37 +35,50 @@ export async function connectDevice() {
     }]);
 
 
-    hrworker.subscribe('hr', (data: {
+    hrworker.subscribe('hr', (data: (undefined|{
         bpm: number,
         change: number, //higher is better
         height0: number,
         height1: number,
         timestamp: number
-    }) => {
-        const hr = {
-            hr: data.bpm,
-            hrv: data.change,
-            timestamp: data.timestamp
-        };
+    })[]) => {
 
-        state.setValue('hr', hr);
-
+        data.map((v) => {
+            if(v) {
+                
+                const hr = {
+                    hr: v.bpm,
+                    hrv: v.change,
+                    timestamp: v.timestamp
+                };
+        
+                state.setValue('hr', hr);
+            }
+        });
+        
     });
     
-    brworker.subscribe('breath', (data: {
+    brworker.subscribe('breath', (data: (undefined|{
         bpm: number,
         change: number, //lower is better
         height0: number,
         height1: number,
         timestamp: number
-    }) => {
-        const breath = {
-            breath: data.bpm,
-            brv: data.change,
-            timestamp: data.timestamp
-        };
+    })[]) => {
 
-        state.setValue('breath', breath);
+        
+        data.map((v) => {
+            if(v) {
+
+                const breath = {
+                    breath: v.bpm,
+                    brv: v.change,
+                    timestamp: v.timestamp
+                };
+        
+                state.setValue('breath', breath);
+            }
+        });
 
     });
 
@@ -78,12 +91,12 @@ export async function connectDevice() {
         {
             workerUrl:gsworker,
             ondecoded: { //after data comes back from codec
-                '0002cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //ads131m08 (main)
-                    [key: string]: number[]
-                }) => {
-                    if(!state.data.detectedEMG) state.setState({detectedEMG:true});
-                    state.setValue('emg', data); //these values are now subscribable 
-                }, 
+                // '0002cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //ads131m08 (main)
+                //     [key: string]: number[]
+                // }) => {
+                //     if(!state.data.detectedEMG) state.setState({detectedEMG:true});
+                //     state.setValue('emg', data); //these values are now subscribable 
+                // }, 
                 '0003cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //max30102
                     red: number[],
                     ir: number[],
@@ -125,6 +138,7 @@ export async function connectDevice() {
                     altitude: number[]
                 }) => {
                     if(!state.data.detectedENV) state.setState({detectedENV:true});
+                    //console.log(data);
                     state.setValue('env', data);
                 }
             },

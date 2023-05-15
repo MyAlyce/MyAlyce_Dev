@@ -74,7 +74,8 @@ export class Chart extends sComponent {
                 lines['1'] = ads131m08ChartSettings.lines?.['1'] as WebglLineProps,
                 lines['2'] = ads131m08ChartSettings.lines?.['2'] as WebglLineProps,
                 lines['3'] = ads131m08ChartSettings.lines?.['3'] as WebglLineProps,
-                lines['4'] = ads131m08ChartSettings.lines?.['4'] as WebglLineProps
+                lines['4'] = ads131m08ChartSettings.lines?.['4'] as WebglLineProps,
+                lines['5'] = ads131m08ChartSettings.lines?.['5'] as WebglLineProps //ECG
             }
             if(this.sensors.includes('ppg')) {
                 Object.assign(lines,{
