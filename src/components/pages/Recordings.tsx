@@ -77,8 +77,9 @@ export class Recordings extends sComponent {
         recordCSV(streamId, sensors, subTitle, dir);
     }
 
-    stopRecording(streamId?:string) {
-        stopRecording(streamId);
+    async stopRecording(streamId?:string, dir?:string) {
+        await stopRecording(streamId, dir);
+        this.listRecordings();
     }
 
     render() {
@@ -87,7 +88,7 @@ export class Recordings extends sComponent {
             <div>
                 <h1>Recording Manager</h1>
                 <StreamSelect/>
-                { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream);}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream, undefined, undefined,  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Record</Button> }
+                { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream, this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream, undefined, undefined,  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Record</Button> }
                 <br/>
                 <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'} dir={ this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  }/>
                 <h2>Recordings</h2>

@@ -47,9 +47,9 @@ export class ChartGroup extends Component<{[key:string]:any}> {
             } else state.subscribeEventOnce(streamId ? streamId+'detectedEMG' : 'detectedEMG', makeChart);
             
         } 
-        if (sensors && sensors.includes('ecg')) {
+        if (!sensors || sensors?.includes('ecg')) {
             let makeChart = () => {
-                this.activeCharts['emg'] = <Chart sensors={['ecg']} streamId={streamId} title={"ECG"} key='ecg'/>;
+                this.activeCharts['ecg'] = <Chart sensors={['ecg']} streamId={streamId} title={"ECG"} key='ecg'/>;
                 if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})}); //this call fired repeatedly will only fire once on the next frame
             }
             if(state.data[streamId ? streamId+'detectedEMG' : 'detectedEMG']) {

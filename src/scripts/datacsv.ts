@@ -22,11 +22,11 @@ export const csvworkers = {} as {[key:string]:WorkerInfo};
 export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[], subTitle?:string, dir='data') { 
 
     
-    if(!sensors || sensors.includes('emg') || sensors.includes('ecg')) csvworkers[streamId ? streamId+'emg' : 'emg'] =  workers.addWorker({ url: gsworker });
-    //if(!sensors || sensors.includes('ecg')) csvworkers[streamId ? streamId+'ecg' : 'ecg'] =  workers.addWorker({ url: gsworker });
-    if(!sensors || sensors.includes('ppg') || sensors.includes('hr') || sensors.includes('breath')) csvworkers[streamId ? streamId+'ppg' : 'ppg'] =  workers.addWorker({ url: gsworker });
-    //if(!sensors || sensors.includes('hr')) csvworkers[streamId ? streamId+'hr' : 'hr'] =  workers.addWorker({ url: gsworker });
-    //if(!sensors || sensors.includes('breath')) csvworkers[streamId ? streamId+'breath' : 'breath'] =  workers.addWorker({ url: gsworker });
+    if(!sensors || sensors.includes('emg')) csvworkers[streamId ? streamId+'emg' : 'emg'] =  workers.addWorker({ url: gsworker });
+    if(!sensors || sensors.includes('ecg')) csvworkers[streamId ? streamId+'ecg' : 'ecg'] =  workers.addWorker({ url: gsworker });
+    if(!sensors || sensors.includes('ppg')) csvworkers[streamId ? streamId+'ppg' : 'ppg'] =  workers.addWorker({ url: gsworker });
+    if(!sensors || sensors.includes('hr')) csvworkers[streamId ? streamId+'hr' : 'hr'] =  workers.addWorker({ url: gsworker });
+    if(!sensors || sensors.includes('breath')) csvworkers[streamId ? streamId+'breath' : 'breath'] =  workers.addWorker({ url: gsworker });
     if(!sensors || sensors.includes('imu')) csvworkers[streamId ? streamId+'imu' : 'imu'] =  workers.addWorker({ url: gsworker });
     if(!sensors || sensors.includes('env')) csvworkers[streamId ? streamId+'env' : 'env'] =  workers.addWorker({ url: gsworker });
     //csvworkers[streamId ? streamId+'emg2' : 'emg2'] =  workers.addWorker({ url: gsworker })
@@ -60,7 +60,8 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
         let makeCSV = () => {
             let filename =  dir+`/BREATH_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['breath'] = filename;
-            if(state.data.isRecording) csvworkers[streamId ? streamId+'ppg' : 'ppg']?.run('createCSV', [
+            
+            if(state.data.isRecording) csvworkers[streamId ? streamId+'breath' : 'breath']?.run('createCSV', [
                 filename,
                 [
                     'timestamp', 'breath', 'brv'
@@ -73,7 +74,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
             makeCSV();
         } else state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeCSV);
         recordingSubs[`${streamId ? streamId : ''}breath`] = state.subscribeEvent(streamId ? streamId+'breath' :'breath', (breath) => {
-            csvworkers[streamId ? streamId+'ppg' : 'ppg'].run('appendCSV',[breath, fileNames['breath']]);
+            csvworkers[streamId ? streamId+'breath' : 'breath'].run('appendCSV',[breath, fileNames['breath']]);
         });
     }
 
@@ -81,7 +82,8 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
         let makeCSV = () => {
             let filename =  dir+`/HRV_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['hr'] = filename;
-            if(state.data.isRecording) csvworkers[streamId ? streamId+'ppg' : 'ppg']?.run('createCSV', [
+            console.log('MAKE CSV:',filename);
+            if(state.data.isRecording) csvworkers[streamId ? streamId+'hr' : 'hr']?.run('createCSV', [
                 filename,
                 [
                     'timestamp', 'hr', 'hrv'
@@ -93,13 +95,13 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
         if(state.data[streamId ? streamId+'detectedPPG' : 'detectedPPG']) {
             makeCSV();
         } else state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeCSV);
-        recordingSubs[`${streamId ? streamId : ''}hr`] = state.subscribeEvent(streamId ? streamId+'hr' :'hr', (hr) => {
-            csvworkers[streamId ? streamId+'ppg' : 'ppg'].run('appendCSV',[hr, fileNames['hr']]);
+        recordingSubs[`${streamId ? streamId : ''}hr`] = state.subscribeEvent(streamId ? streamId+'hr' : 'hr', (hr) => {
+            csvworkers[streamId ? streamId+'hr' : 'hr'].run('appendCSV',[hr, fileNames['hr']]);
         });
     }
 
 
-    if(!sensors || sensors?.includes('emg')) {
+    if(!sensors || sensors.includes('emg')) {
         let makeCSV = () => {
             let header = ['timestamp','0','1','2','3','4'];
             if(state.data[streamId ? streamId+'emg' : 'emg'].leds) {
@@ -121,7 +123,8 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
             csvworkers[streamId ? streamId+'emg' : 'emg'].run('appendCSV',[data, fileNames['emg']]);
         });
     }
-    if(!sensors || sensors?.includes('ecg')) {
+
+    if(!sensors || sensors.includes('ecg')) {
         let makeCSV = () => {
             let header = ['timestamp','5'];
             if(state.data[streamId ? streamId+'emg' : 'emg'].leds) {
@@ -140,7 +143,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
             makeCSV();
         } else state.subscribeEventOnce(streamId ? streamId+'detectedEMG' : 'detectedEMG', makeCSV);
         recordingSubs[`${streamId ? streamId : ''}ecg`] = state.subscribeEvent(streamId ? streamId+'emg' : 'emg', (data) => {
-            csvworkers[streamId ? streamId+'emg' : 'emg'].run('appendCSV',[data, fileNames['ecg']]);
+            csvworkers[streamId ? streamId+'ecg' : 'ecg'].run('appendCSV',[data, fileNames['ecg']]);
         });
     }
 
@@ -190,7 +193,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
     }
 }
 
-export function stopRecording(streamId?:string, dir='data') {
+export async function stopRecording(streamId?:string, dir='data') {
     state.setState({isRecording:false});
     
     if(`${streamId ? streamId : ''}emg` in recordingSubs) {
@@ -202,14 +205,14 @@ export function stopRecording(streamId?:string, dir='data') {
     if(`${streamId ? streamId : ''}ppg` in recordingSubs) {
         state.unsubscribeEvent(`${streamId ? streamId : ''}ppg`, recordingSubs[`${streamId ? streamId : ''}ppg`]);
     }
-    if(`${streamId ? streamId : ''}imu` in recordingSubs) {
-        state.unsubscribeEvent(`${streamId ? streamId : ''}imu`, recordingSubs[`${streamId ? streamId : ''}imu`]);
-    }
     if(`${streamId ? streamId : ''}hr` in recordingSubs) {
         state.unsubscribeEvent(`${streamId ? streamId : ''}hr`, recordingSubs[`${streamId ? streamId : ''}hr`]);
     }
     if(`${streamId ? streamId : ''}breath` in recordingSubs) {
         state.unsubscribeEvent(`${streamId ? streamId : ''}breath`, recordingSubs[`${streamId ? streamId : ''}breath`]);
+    }
+    if(`${streamId ? streamId : ''}imu` in recordingSubs) {
+        state.unsubscribeEvent(`${streamId ? streamId : ''}imu`, recordingSubs[`${streamId ? streamId : ''}imu`]);
     }
     if(`${streamId ? streamId : ''}env` in recordingSubs) {
         state.unsubscribeEvent(`${streamId ? streamId : ''}env`, recordingSubs[`${streamId ? streamId : ''}env`]);
@@ -232,12 +235,12 @@ export function stopRecording(streamId?:string, dir='data') {
     }
 
     //heartrate session average
-    Promise.all([
-        csvworkers[streamId ? streamId+'hr' : 'hr']?.run('processHRSession',filename1),
-        csvworkers[streamId ? streamId+'breath' : 'breath']?.run('processBRSession',filename2)
+    await Promise.all([
+        csvworkers[streamId ? streamId+'hr' : 'hr']?.run('processHRSession',[fileNames['hr'],filename1]),
+        csvworkers[streamId ? streamId+'breath' : 'breath']?.run('processBRSession',[fileNames['breath'],filename2])
     ]).then(() => {
 
-        if(streamId && csvworkers[streamId+'chat'] ) csvworkers[streamId+'chat'].terminate();
+        csvworkers[streamId+'chat']?.terminate();
         csvworkers[streamId ? streamId+'emg' : 'emg']?.terminate();
         csvworkers[streamId ? streamId+'ppg' : 'ppg']?.terminate();
         csvworkers[streamId ? streamId+'hr' : 'hr']?.terminate();

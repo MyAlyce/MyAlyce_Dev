@@ -21,7 +21,7 @@ export function disconnectDevice() {
     state.setState({device:undefined});
 }
 
-export async function connectDevice() {
+export async function connectDevice(mode:'emg'|'other'|'all'='other') {
 
     const hrworker = workers.addWorker({url:gsworker});
     const brworker = workers.addWorker({url:gsworker});
@@ -88,62 +88,75 @@ export async function connectDevice() {
     let nodes = setupAlerts();
     (Devices['BLE']['nrf5x'] as any).namePrefix = "B";
 
+
+    let ondecoded = {};
+    if(mode === 'emg' || mode === 'all') {
+        ondecoded['0002cafe-b0ba-8bad-f00d-deadbeef0000'] =  (data: { //ads131m08 (main)
+            [key: string]: number[]
+        }) => {
+            if(!state.data.detectedEMG) state.setState({detectedEMG:true});
+            state.setValue('emg', data); //these values are now subscribable 
+        }
+        
+        ondecoded['0005cafe-b0ba-8bad-f00d-deadbeef0000'] = (data: { //extra ads131 (if plugged in)
+            [key: string]: number[]
+        }) => {
+            if(!state.data.detectedEMG2) state.setState({detectedEMG2:true});
+            state.setValue('emg2', data);
+        }
+    }
+    if(mode === 'other' || mode === 'all') {
+        ondecoded['0002cafe-b0ba-8bad-f00d-deadbeef0000'] = (data: { //ads131m08 (main)
+            [key: string]: number[]
+        }) => {
+            if(!state.data.detectedEMG) state.setState({detectedEMG:true});
+            state.setValue('emg', data); //these values are now subscribable 
+        }
+        ondecoded['0003cafe-b0ba-8bad-f00d-deadbeef0000'] = (data: { //max30102
+            red: number[],
+            ir: number[],
+            max_dietemp: number,
+            timestamp: number
+        }) => {
+            if(!state.data.detectedPPG) state.setState({detectedPPG:true});
+            state.setValue('ppg', data);
+            
+            let d = Object.assign({}, data);
+            d.timestamp = genTimestamps(32, 100, data.timestamp) as any;
+            hrworker.post('hr', d);
+            brworker.post('breath', d);
+
+        }
+        ondecoded['0004cafe-b0ba-8bad-f00d-deadbeef0000'] = (data: { //mpu6050
+            ax: number[],
+            ay: number[],
+            az: number[],
+            gx: number[],
+            gy: number[],
+            gz: number[],
+            mpu_dietemp: number,
+            timestamp: number
+        }) => {
+            if(!state.data.detectedIMU) state.setState({detectedIMU:true});
+            state.setValue('imu', data);
+        }
+        ondecoded['0006cafe-b0ba-8bad-f00d-deadbeef0000'] = (data: { //bme280
+            temp: number[],
+            pressure: number[],
+            humidity: number[], //if using BME, not available on BMP
+            altitude: number[]
+        }) => {
+            if(!state.data.detectedENV) state.setState({detectedENV:true});
+            //console.log(data);
+            state.setValue('env', data);
+        }
+    }
+
     device = await initDevice(
         Devices['BLE']['nrf5x'],
         {
             workerUrl:gsworker,
-            ondecoded: { //after data comes back from codec
-                // '0002cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //ads131m08 (main)
-                //     [key: string]: number[]
-                // }) => {
-                //     if(!state.data.detectedEMG) state.setState({detectedEMG:true});
-                //     state.setValue('emg', data); //these values are now subscribable 
-                // }, 
-                '0003cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //max30102
-                    red: number[],
-                    ir: number[],
-                    max_dietemp: number,
-                    timestamp: number
-                }) => {
-                    if(!state.data.detectedPPG) state.setState({detectedPPG:true});
-                    state.setValue('ppg', data);
-                    
-                    let d = Object.assign({}, data);
-                    d.timestamp = genTimestamps(32, 100, data.timestamp) as any;
-                    hrworker.post('hr', d);
-                    brworker.post('breath', d);
-
-                },
-                '0004cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //mpu6050
-                    ax: number[],
-                    ay: number[],
-                    az: number[],
-                    gx: number[],
-                    gy: number[],
-                    gz: number[],
-                    mpu_dietemp: number,
-                    timestamp: number
-                }) => {
-                    if(!state.data.detectedIMU) state.setState({detectedIMU:true});
-                    state.setValue('imu', data);
-                },
-                '0005cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //extra ads131 (if plugged in)
-                    [key: string]: number[]
-                }) => {
-                    if(!state.data.detectedEMG2) state.setState({detectedEMG2:true});
-                    state.setValue('emg2', data);
-                },
-                '0006cafe-b0ba-8bad-f00d-deadbeef0000': (data: { //bme280
-                    temp: number[],
-                    pressure: number[],
-                    humidity: number[], //if using BME, not available on BMP
-                    altitude: number[]
-                }) => {
-                    if(!state.data.detectedENV) state.setState({detectedENV:true});
-                    //console.log(data);
-                    state.setValue('env', data);
-                }
-            },
+            ondecoded,
             onconnect: () => {
                 state.setState({deviceConnected:true});
             },
