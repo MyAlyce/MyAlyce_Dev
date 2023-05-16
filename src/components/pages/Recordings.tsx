@@ -73,7 +73,7 @@ export class Recordings extends sComponent {
         return recordings;
     }
 
-    record(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[], subTitle?:string, dir?:string) {
+    record(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[], subTitle?:string, dir?:string) {
         recordCSV(streamId, sensors, subTitle, dir);
     }
 

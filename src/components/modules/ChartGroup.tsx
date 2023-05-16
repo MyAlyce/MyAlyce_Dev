@@ -13,12 +13,12 @@ export class ChartGroup extends Component<{[key:string]:any}> {
     }
 
     activeCharts = {};
-    sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[];
+    sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[];
     unmounted?=true;
     streamId?:string;
 
     constructor(props:{
-        sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[],
+        sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[],
         streamId?:string
     }) {
         super(props as any);
@@ -36,16 +36,25 @@ export class ChartGroup extends Component<{[key:string]:any}> {
         this.unmounted = true;
     }
 
-    constructCharts(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env')[]) {
+    constructCharts(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[]) {
         if(!sensors || sensors?.includes('emg')) {
             let makeChart = () => {
-                this.activeCharts['emg'] = <Chart sensors={['emg']} streamId={streamId} title={"EMG & ECG"} key='emg'/>;
+                this.activeCharts['emg'] = <Chart sensors={['emg']} streamId={streamId} title={"EMG"} key='emg'/>;
                 if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})}); //this call fired repeatedly will only fire once on the next frame
             }
             if(state.data[streamId ? streamId+'detectedEMG' : 'detectedEMG']) {
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedEMG' : 'detectedEMG', makeChart);
             
+        } 
+        if (sensors && sensors.includes('ecg')) {
+            let makeChart = () => {
+                this.activeCharts['emg'] = <Chart sensors={['ecg']} streamId={streamId} title={"ECG"} key='ecg'/>;
+                if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})}); //this call fired repeatedly will only fire once on the next frame
+            }
+            if(state.data[streamId ? streamId+'detectedEMG' : 'detectedEMG']) {
+                makeChart();
+            } else state.subscribeEventOnce(streamId ? streamId+'detectedEMG' : 'detectedEMG', makeChart);
         }
         if(!sensors || sensors?.includes('ppg')) {
             let makeChart = () => {
@@ -63,9 +72,7 @@ export class ChartGroup extends Component<{[key:string]:any}> {
             }
             if(state.data[streamId ? streamId+'detectedPPG' : 'detectedPPG']) {
                 makeChart();
-            } else {
-                state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeChart);
-            }
+            } else state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeChart);
         }
         if(!sensors || sensors?.includes('breath')) {
             let makeChart = () => {
