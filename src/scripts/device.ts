@@ -164,7 +164,7 @@ export async function connectDevice() {
     const nbits = 24;
     const vref = 1.2;
 
-    let defaultsetting = {
+    let emgsetting = {
         sps,
         useDCBlock: false,
         useBandpass: false,
@@ -178,15 +178,32 @@ export async function connectDevice() {
         //outlierTolerance:0.3
     } as FilterSettings;
 
+    
+    let ppgsetting = {
+        sps:100,
+        useDCBlock: false,
+        useBandpass: false,
+        useLowpass: true,
+        lowpassHz: 16,
+        // bandpassLower:3, 
+        // bandpassUpper:45, 
+        // useScaling: true,
+        // scalar: 0.96 * 1000 * vref / (gain * (Math.pow(2, nbits) - 1)), //adjust to millivolts
+        //trimOutliers:true,
+        //outlierTolerance:0.3
+    } as FilterSettings;
+
     const ads131m08FilterSettings: { [key: string]: FilterSettings } = {
-        '0': JSON.parse(JSON.stringify(defaultsetting)),
-        '1': JSON.parse(JSON.stringify(defaultsetting)),
-        '2': JSON.parse(JSON.stringify(defaultsetting)),
-        '3': JSON.parse(JSON.stringify(defaultsetting)),
-        '4': JSON.parse(JSON.stringify(defaultsetting)),
-        '5': JSON.parse(JSON.stringify(defaultsetting)),
-        '6': JSON.parse(JSON.stringify(defaultsetting)),
-        '7': JSON.parse(JSON.stringify(defaultsetting))
+        '0': JSON.parse(JSON.stringify(emgsetting)),
+        '1': JSON.parse(JSON.stringify(emgsetting)),
+        '2': JSON.parse(JSON.stringify(emgsetting)),
+        '3': JSON.parse(JSON.stringify(emgsetting)),
+        '4': JSON.parse(JSON.stringify(emgsetting)),
+        '5': JSON.parse(JSON.stringify(emgsetting)),
+        '6': JSON.parse(JSON.stringify(emgsetting)),
+        '7': JSON.parse(JSON.stringify(emgsetting)),
+        'red': JSON.parse(JSON.stringify(ppgsetting)),
+        'ir': JSON.parse(JSON.stringify(ppgsetting))
     }
 
     device.workers.streamworker.run('setFilters', ads131m08FilterSettings); //filter the EMG results

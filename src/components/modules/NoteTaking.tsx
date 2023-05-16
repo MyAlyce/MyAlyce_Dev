@@ -69,10 +69,23 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         if(latest?.length > 0) {
             let noteRows = [] as any[];
             latest.forEach((event:EventStruct) => {
+
+                let onclick = () => {
+                    client.deleteData([event],()=>{
+                        this.listEventHistory();
+                    })
+                }
+                
                 noteRows.push(
-                    <tr><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.notes}</td></tr>
+                    <tr key={event._id}>
+                        <td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td>
+                        <td>{event.event}</td>
+                        <td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td> 
+                        <td><button onClick={onclick}>❌</button></td>
+                    </tr>
                 )
             });
+
 
             this.setState({noteRows:noteRows});
         }
@@ -98,8 +111,21 @@ export class NoteTaking extends Component<{[key:string]:any}> {
             note.grade 
         );
 
+        
+        let onclick = () => {
+            client.deleteData([event],()=>{
+                this.listEventHistory();
+            })
+        }
+
+
         this.state.noteRows.unshift(
-            <tr key={event._id}><td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td><td>{event.notes}</td><td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td></tr>
+            <tr key={event._id}>
+                <td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td>
+                <td>{event.event}</td>
+                <td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td> 
+                <td><button onClick={onclick}>❌</button></td>
+            </tr>
         )
         
         this.setState({});
@@ -131,13 +157,13 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         return (
             <div className="input-section">
-                <label id={`${this.id}note`}>Event</label>
+                <label>Event</label>
                 <div><input ref={this.ref1 as any} id={this.id+'note'} name="note" type='text' defaultValue=""/></div>
                 
-                <label id={`${this.id}time`}>Time</label>
+                <label>Time</label>
                 <div><input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/></div>
                 
-                <label id={`${this.id}number`}>Rating?</label>
+                <label>Rating?</label>
                 <div><input 
                         onInput={updateInputColor}
                         onChange={updateInputColor}
@@ -158,7 +184,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                     <h3>History:</h3>
                     <table className='table-wrapper'>
                         <tbody>
-                            <tr><th>Time</th><th>Notes</th><th>Grade</th></tr>
+                            <tr><th>Time</th><th>Event</th><th>Grade</th><th></th></tr>
                             {this.state.noteRows}
                         </tbody>
                     </table>

@@ -42,7 +42,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
                 filename,
                 [
                     'timestamp', 
-                    'red', 'ir', 'max_dietemp'
+                    'red', 'ir'
                 ],
                 0,
                 100
@@ -56,7 +56,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
         });
     }
 
-    if(!sensors || !sensors.includes('breath')) {
+    if(!sensors || sensors.includes('breath')) {
         let makeCSV = () => {
             let filename =  dir+`/BREATH_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['breath'] = filename;
@@ -65,7 +65,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
                 [
                     'timestamp', 'breath', 'brv'
                 ],
-                0,
+                3,
                 100
             ]);
         }
@@ -86,7 +86,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
                 [
                     'timestamp', 'hr', 'hrv'
                 ],
-                0,
+                3,
                 100
             ]);
         }
@@ -152,7 +152,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
                 filename,
                 [
                     'timestamp',
-                    'ax', 'ay', 'az', 'gx', 'gy', 'gz', 'mpu_dietemp'
+                    'ax', 'ay', 'az', 'gx', 'gy', 'gz'
                 ],
                 0,
                 100

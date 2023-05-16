@@ -44,18 +44,18 @@ export class Recordings extends sComponent {
         filelist.forEach((file) => {
 
             let download = async () => {
-                csvRoutes.writeToCSVFromDB(file, 10); //download files in chunks (in MB). !0MB limit recommended, it will number each chunk for huge files
+                csvRoutes.writeToCSVFromDB(dir+'/'+file, 10); //download files in chunks (in MB). !0MB limit recommended, it will number each chunk for huge files
             }
 
             let deleteFile = () => {
-                BFSRoutes.deleteFile(file).then(() => {
+                BFSRoutes.deleteFile(dir+'/'+file).then(() => {
                     this.listRecordings();
                 });
             }
 
             let backup = () => {
                 //google drive backup
-                driveInstance?.backupToDrive(file);
+                driveInstance?.backupToDrive(dir+'/'+file);
             }
 
             recordings.push (
