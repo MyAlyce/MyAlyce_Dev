@@ -27,10 +27,12 @@ export async function connectDevice() {
     const brworker = workers.addWorker({url:gsworker});
 
     let t1 = await hrworker.run('loadFromTemplate',['beat_detect','hr',{
+        maxFreq:3,
         sps:100
     }]);
     
     let t2 = await brworker.run('loadFromTemplate',['beat_detect','breath',{
+        maxFreq:0.2,
         sps:100
     }]);
 

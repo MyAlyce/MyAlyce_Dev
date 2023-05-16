@@ -135,14 +135,14 @@ export class Chart extends sComponent {
                 this.plotter.__operator(hr);
             })
         }
-        if(!this.sensors || this.sensors?.includes('imu')) {
-            this.subscriptions.imu = state.subscribeEvent(this.streamId ? this.streamId+'imu' :'imu', (imu) => {
-                this.plotter.__operator(imu);
-            })
-        }
         if(!this.sensors || this.sensors?.includes('breath')) {
             this.subscriptions.breath = state.subscribeEvent(this.streamId ? this.streamId+'breath' :'breath', (breath) => {
                 this.plotter.__operator(breath);
+            })
+        }
+        if(!this.sensors || this.sensors?.includes('imu')) {
+            this.subscriptions.imu = state.subscribeEvent(this.streamId ? this.streamId+'imu' :'imu', (imu) => {
+                this.plotter.__operator(imu);
             })
         }
         if(!this.sensors || this.sensors?.includes('env')) {
