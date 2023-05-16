@@ -132,10 +132,7 @@ export class Chart extends sComponent {
         }
         if(!this.sensors || this.sensors?.includes('hr')) {
             this.subscriptions.hr = state.subscribeEvent(this.streamId ? this.streamId+'hr' :'hr', (hr) => {
-                this.plotter.__operator({
-                    hr: hr.bpm,
-                    hrv: hr.change
-                });
+                this.plotter.__operator(hr);
             })
         }
         if(!this.sensors || this.sensors?.includes('imu')) {
@@ -145,10 +142,7 @@ export class Chart extends sComponent {
         }
         if(!this.sensors || this.sensors?.includes('breath')) {
             this.subscriptions.breath = state.subscribeEvent(this.streamId ? this.streamId+'breath' :'breath', (breath) => {
-                this.plotter.__operator({
-                    breath:breath.bpm,
-                    brv:breath.change
-                });
+                this.plotter.__operator(breath);
             })
         }
         if(!this.sensors || this.sensors?.includes('env')) {
