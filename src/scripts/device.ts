@@ -89,7 +89,7 @@ export async function connectDevice(mode:'emg'|'other'|'all'='other') {
     (Devices['BLE']['nrf5x'] as any).namePrefix = "B";
 
 
-    let ondecoded = {};
+    let ondecoded = {}  as any;
     if(mode === 'emg' || mode === 'all') {
         ondecoded['0002cafe-b0ba-8bad-f00d-deadbeef0000'] =  (data: { //ads131m08 (main)
             [key: string]: number[]
@@ -106,12 +106,6 @@ export async function connectDevice(mode:'emg'|'other'|'all'='other') {
         }
     }
     if(mode === 'other' || mode === 'all') {
-        ondecoded['0002cafe-b0ba-8bad-f00d-deadbeef0000'] = (data: { //ads131m08 (main)
-            [key: string]: number[]
-        }) => {
-            if(!state.data.detectedEMG) state.setState({detectedEMG:true});
-            state.setValue('emg', data); //these values are now subscribable 
-        }
         ondecoded['0003cafe-b0ba-8bad-f00d-deadbeef0000'] = (data: { //max30102
             red: number[],
             ir: number[],
@@ -156,7 +150,7 @@ export async function connectDevice(mode:'emg'|'other'|'all'='other') {
         Devices['BLE']['nrf5x'],
         {
             workerUrl:gsworker,
-            ondecoded,
+            ondecoded:ondecoded,
             onconnect: () => {
                 state.setState({deviceConnected:true});
             },

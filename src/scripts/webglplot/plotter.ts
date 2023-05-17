@@ -75,9 +75,10 @@ export class WGLPlotter {
                 options.overlay = offscreen;
                 options.transfer = [options.overlay];
             }
+            
         }
     
-        this.plot = workerCanvasRoutes.Renderer(options as CanvasProps) as CanvasControls;
+        this.plot = workerCanvasRoutes.Renderer(Object.assign({},options as CanvasProps)) as CanvasControls;
         return this.plot;
     }
 

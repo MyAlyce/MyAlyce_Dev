@@ -14,8 +14,8 @@ export class DeviceConnect extends sComponent {
         return (                    
             <div>
             { !this.state.deviceConnected ? 
-                <Button onClick={connectDevice}>Connect</Button> :
-                <Button onClick={disconnectDevice}>Disconnect</Button>
+                <Button onClick={()=>{connectDevice('other');}}>Connect</Button> :
+                <Button onClick={()=>{disconnectDevice();}}>Disconnect</Button>
             } 
             </div>
         );

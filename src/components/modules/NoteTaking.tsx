@@ -6,6 +6,7 @@ import { client, webrtc } from '../../scripts/client';
 import { Button } from '../lib/src';
 import { RTCCallInfo } from '../../scripts/webrtc';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
+import { WorkerInfo } from 'graphscript';
 
 function getColorGradientRG(value) {
     let r, g, b;
@@ -30,7 +31,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
     }
 
     id=`form${Math.floor(Math.random()*1000000000000000)}`;
-    csvworker = workers.addWorker({url:gsworker});
+    csvworker:WorkerInfo;
     filename;
     streamId?:string;
 
@@ -55,6 +56,14 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         this.ref1 = React.createRef();
         this.ref2 = React.createRef();
         this.ref3 = React.createRef();
+    }
+
+    componentDidMount(): void {
+        this.csvworker = workers.addWorker({url:gsworker})
+    }
+
+    componentWillUnmount(): void {
+        this.csvworker?.terminate();
     }
 
     async listEventHistory() {

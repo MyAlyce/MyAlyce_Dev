@@ -4,7 +4,6 @@ import {sComponent} from '../state.component'
 import { state } from '../../scripts/client'//'../../../graphscript/index'//
 import { WGLPlotter } from '../../scripts/webglplot/plotter';
 
-import plotworker from '../../scripts/webglplot/canvas.worker'
 import { WebglLineProps } from 'webgl-plot-utils';
 
 import { max3010xChartSettings } from 'device-decoder/src/devices/max30102';
@@ -117,7 +116,7 @@ export class Chart extends sComponent {
             lines, //will render all lines unless specified
             generateNewLines:false,
             cleanGeneration:false,
-            worker:plotworker
+            worker:true
         });
 
         if(!this.sensors || (this.sensors?.includes('emg') || this.sensors?.includes('ecg'))) {
@@ -158,6 +157,7 @@ export class Chart extends sComponent {
             state.unsubscribeEvent(key, this.subscriptions[key]);
         }
         (this.plotter.options.worker as Worker)?.terminate();
+        console.log('unmounted',this.plotter.options)
     }
     
     render() {
