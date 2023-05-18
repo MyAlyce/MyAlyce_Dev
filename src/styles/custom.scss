@@ -1,0 +1,87 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+//sass custom.scss ../public/css/output.css
+
+// Include any default variable overrides here (though functions won't be available)
+
+
+$white: #ffffff;
+/*
+$theme-colors: (
+    "light":      #f1ffcf,
+    "dark":       #1a1243,
+    "primary":    #4d25a2,
+    "secondary":  #7a48b9,
+    "info":       #b68ae7,
+    "accent1":    #9da140,
+    "accent2":    #d4d854,
+    "accent3":    #4a570d,
+    "success":    #13ad68,
+    "warning":    #e2ce12,
+    "danger":     #a72463,
+);
+91C6FC 
+5F86FC
+CA7EFC
+*/
+$theme-colors: (
+    "light":      #e4f0fb,
+    "dark":       #070b15,
+    "primary":    #5F86FC,
+    "secondary":  #91C6FC,
+    "info":       #8acefc,
+    "accent1":    #CA7EFC,
+    "accent2":    #a32df2,
+    "accent3":    #4a570d,
+    "success":    #13ad68,
+    "warning":    #e2ce12,
+    "danger":     #a72463,
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
+/*
+.form-control::placeholder {
+    color: rgb(8, 218, 226);
+    opacity: 1;
+} 
+.table-striped > tbody > tr:nth-of-type(2n+1) > * {
+    --bs-table-accent-bg: #E8FFFF;
+    color: var(--bs-table-striped-color);
+}
+.table-striped > tbody {
+  /*--bs-table-color: #faffef; #f5f4ff
+  --bs-table-bg: #DFE7FF;*/
+ /* --bs-table-bg: #faffef;
+}
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #DFE7FF !important;
+}
+.table-striped > thead {
+    background-color: #f5f4ff !important;
+}
+*/
+
+.addspace { 
+    margin-bottom: .5rem;
+}
+.addmorespace { 
+    margin-bottom: 4rem;
+}
+.player {
+    background-color: #070b15;
+    padding: .6rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: .5rem;
+}
+.grey-bar {
+    background-color: #f2f3f4 ;
+    padding: .6rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: .5rem;
+}
