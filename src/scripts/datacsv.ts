@@ -177,7 +177,7 @@ export function demo(sensors = ['emg','ppg','breath','hr','imu','env','ecg']) {
 
 export function stopdemos() {
     let detected = {} as any;
-    for(const key in this.state.demos) {
+    for(const key in demos) {
         demos[key].running = false;
         detected['detected'+key.toUpperCase()] = true;
     }
