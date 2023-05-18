@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import {state} from '../../scripts/client'
 
 export function Navigation (){
     return (
@@ -13,16 +14,16 @@ export function Navigation (){
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/">          
+              <Nav.Link onClick={()=>{state.setState({route:'/'})}}>          
               <Icon.Home className="align-text-bottom" size={20}></Icon.Home>
               &nbsp;Home</Nav.Link>
-              <Nav.Link href="peers">
+              <Nav.Link onClick={()=>{state.setState({route:'/peers'})}}>
               <Icon.Phone className="align-text-bottom" size={20}></Icon.Phone>
               &nbsp;WebRTC</Nav.Link>
-              <Nav.Link href="recordings">
+              <Nav.Link onClick={()=>{state.setState({route:'/recordings'})}}>
               <Icon.Mic className="align-text-bottom" size={20}></Icon.Mic>
               &nbsp;Recordings</Nav.Link>
-              <Nav.Link href="settings">
+              <Nav.Link  onClick={()=>{state.setState({route:'/settings'})}}>
               <Icon.Settings className="align-text-bottom" size={20}></Icon.Settings>
               &nbsp;Settings</Nav.Link>
               <Icon.Tool className="align-text-bottom" size={20}></Icon.Tool>
