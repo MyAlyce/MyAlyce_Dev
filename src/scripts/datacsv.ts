@@ -77,8 +77,8 @@ export function demoFile(sensor:'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg', sps
     if(!tcheck) {
         if(sensor === 'emg') tcheck = 1000*9/250;
         else if(sensor === 'ecg') tcheck = 1000*9/250;
-        else if(sensor === 'ppg') tcheck = 1000*32/100;
-        else if (sensor === 'imu') tcheck = 1000*32/100;
+        else if(sensor === 'ppg') tcheck = 1000*33.3333/100;
+        else if (sensor === 'imu') tcheck = 1000*33.3333/100;
         else if (sensor === 'env') tcheck = 1000;
         else if(sensor === 'hr') tcheck = 1000;
         else if(sensor === 'breath') tcheck = 1000/0.166667;
