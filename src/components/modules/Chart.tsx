@@ -157,7 +157,7 @@ export class Chart extends sComponent {
             state.unsubscribeEvent(key, this.subscriptions[key]);
         }
         (this.plotter.options.worker as Worker)?.terminate();
-        console.log('unmounted',this.plotter.options)
+        //console.log('unmounted',this.plotter.options)
     }
     
     render() {
