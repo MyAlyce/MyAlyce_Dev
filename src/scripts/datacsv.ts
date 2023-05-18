@@ -161,7 +161,6 @@ export function demoFile(sensor:'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg', sps
 }
 
 
-const startDemo = true;
 
 export function demo(sensors = ['emg','ppg','breath','hr','imu','env','ecg']) {
     if(!sensors) sensors = ['emg','ppg','breath','hr','imu','env','ecg'];
