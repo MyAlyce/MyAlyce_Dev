@@ -14,7 +14,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
 
     wrapperRef:any;
 
-    onchange=()=>{}
+    onchange=(key)=>{}
 
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
@@ -39,12 +39,16 @@ export class StreamSelect extends Component<{[key:string]:any}> {
     };
 
     onItemClick = (key: string | undefined) => {
-        this.setState({ activeStream: key, dropdownOpen: false });
-        this.onchange();
+        if(key === 'my-device' || key === 'demo')
+            this.setState({ activeStream: undefined, dropdownOpen: false });
+        else 
+            this.setState({ activeStream: key, dropdownOpen: false });
+            
+        this.onchange(key);
     };
 
       
-    constructor(props:{onChange:()=>void, selected?:string}) {
+    constructor(props:{onChange:(key)=>void, selected?:string}) {
         super(props);
         if(props.selected) this.state.activeStream = props.selected;
         if(props?.onChange) 
@@ -65,10 +69,17 @@ export class StreamSelect extends Component<{[key:string]:any}> {
                 <ul className="stream-select-dropdown">
                     <li
                         key="my-device"
-                        onClick={() => this.onItemClick(undefined)}
+                        onClick={() => this.onItemClick('my-device')}
                         className={this.state.activeStream === undefined ? 'selected' : ''}
                     >
                     My Device
+                    </li>
+                    <li
+                        key="demo"
+                        onClick={() => this.onItemClick('demo')}
+                        className={this.state.activeStream === undefined ? 'selected' : ''}
+                    >
+                    Demo
                     </li>
                     {Object.keys(webrtc.rtc).length > 0 &&
                     Object.keys(webrtc.rtc).map((key) => {

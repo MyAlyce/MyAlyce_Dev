@@ -13,7 +13,8 @@ import {Devices} from 'device-decoder'
 
 import { 
     csvRoutes,
-    BFSRoutes
+    BFSRoutes,
+    fs
  } from 'graphscript-services.storage'//'../../../graphscript/src/extras/index.storage.services'//
 
 import {
@@ -47,6 +48,48 @@ if(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope
             ...csvRoutes,
             ...streamWorkerRoutes,
             ...webglPlotRoutes,
+            checkFolderList:async function(listfilename, foldername?) {
+                if(foldername && !(await BFSRoutes.exists(listfilename))) {
+                    await csvRoutes.createCSV(listfilename, ['folder','lastmodified']);
+                    let data = {folder:foldername, lastmodified:Date.now()};
+                    await csvRoutes.appendCSV(data, listfilename);
+
+                    return data;
+                } else {
+                    let exists = false;
+                    let data = {} as any;
+                    await csvRoutes.processCSVChunksFromDB(listfilename, (csvdata, start, end, size) => {
+                        for(const key in csvdata) {
+                            if(key === 'folder') {
+                                csvdata[key].forEach((n,i) => {
+                                    if(n === foldername) {
+                                        exists = true;
+                                        csvdata['lastmodified'][i] = Date.now();
+                                    }
+                                });
+                            }
+                            if(!data[key]) data[key] = csvdata[key];
+                            else data[key].push(...csvdata[key]);
+                        }
+                    });
+                    if(!exists) {
+                        data.folder ? data.folder.push(foldername) : data.folder = [foldername];
+                        data.lastmodified ? data.lastmodified.push(Date.now()) : data.lastmodified = [Date.now()];
+                    }
+
+                    //todo add a writeCSV function to replace the contents instead of doing all this
+                    await BFSRoutes.deleteFile(listfilename);
+                    await csvRoutes.createCSV(listfilename, ['folder','lastmodified']);
+                    await csvRoutes.appendCSV(data, listfilename);
+
+                    return data;
+                }
+
+            },
+            deletefolder:async function (foldername) {
+                fs.rmdir(foldername);
+                return true;
+            },
             processHRSession:async function (filename, outpfile) {
 
                 if(!filename || !outpfile) return false;

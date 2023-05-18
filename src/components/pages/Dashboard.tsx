@@ -7,11 +7,13 @@ import { NoteTaking } from '../modules/NoteTaking'
 import { client, webrtc } from '../../scripts/client';
 import { RTCCallInfo } from '../../scripts/webrtc'
 import { DeviceConnect } from '../modules/DeviceConnect'
+import { Demo } from '../modules/DemoMode'
 
 export class Dashboard extends sComponent {
 
     state = { //synced with global state
         activeStream:undefined, //stream selected?
+        deviceMode:'my-device',
         availableStreams:{}, //we can handle multiple connections too
     }
 
@@ -24,10 +26,16 @@ export class Dashboard extends sComponent {
                 <h1>Welcome {client.currentUser.firstName}</h1>
                 <div className="stream-select">
                     {/* Device/Stream select */}
-                        <StreamSelect onChange={(ev) => { this.setState({ activeStream: ev.target.value }); }} />
+                        <StreamSelect 
+                            onChange={(key) => { 
+                                this.setState({deviceMode:key});
+                            }} 
+                        />
                     {/** Device Connect */}
-                    { !this.state.activeStream ? 
-                        <DeviceConnect/> : ""
+                    { this.state.deviceMode === 'my-device' ? 
+                            <DeviceConnect/> : 
+                        this.state.deviceMode === 'demo' ? 
+                            <Demo/> : ""
                     }
                 </div>
                 <div className="main-content">

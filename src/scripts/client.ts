@@ -29,6 +29,14 @@ import config from '../../backend/serverconfig.js'
 import { DS } from 'graphscript-services/struct/datastructures/index'
 import { GDrive } from './drive'
 import { apiKey, googleClientID } from './gapi'
+import { demoFile } from './datacsv'
+
+
+
+
+const startDemo = true;
+
+
 
 export let client = new StructFrontend({state:state});
 export let sockets = new WSSfrontend({state:state});
@@ -105,6 +113,8 @@ let makeSocket = () => {
 
 makeSocket();
 
+
+
 export const onLogin = async (
     result:
       {
@@ -163,8 +173,21 @@ export const onLogin = async (
 
             restoreSession(user);
 
-            return user;
-        }
+            if(startDemo) {
+                let sensors = ['emg','ppg','breath','hr','imu','env','ecg'];
+        
+                let detected = {} as any;
+                for(const v of sensors) {
+                    demoFile(v);
+                    detected['detected'+v.toUpperCase()] = true;
+                }
+    
+                state.setState({deviceConnected:true, demoing:true, ...detected});
+    
+                    return user;
+                }
+            }
+            
     }
 
     if(!resultHasUser) {

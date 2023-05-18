@@ -4,6 +4,7 @@ import { client, state, webrtc } from "./client";
 import gsworker from './device.worker'
 import { RTCCallInfo } from "./webrtc";
 import { WorkerInfo } from "graphscript";
+import { parseCSVData } from "graphscript-services.storage";
 
 state.setState({
     isRecording:false,
@@ -16,6 +17,149 @@ state.setState({
 let recordingSubs = {} as any;
 
 let fileNames = {} as any;
+
+
+export const recordingsList = {
+    ppg:'./recordings/JoshuaBrewster_PPG_2023-05-16T03_00_47.662Z.csv',
+    hr:'./recordings/JoshuaBrewster_HRV_2023-05-16T03_00_47.662Z.csv',
+    breath:'./recordings/JoshuaBrewster_BREATH_2023-05-16T03_00_47.662Z.csv',
+    ecg:'./recordings/JoshuaBrewster_ECG_2023-05-16T03_09_02.553Z.csv',
+    emg:'./recordings/JoshuaBrewster_EMG_2023-05-16T03_09_02.553Z.csv',
+    env:'./recordings/JoshuaBrewster_ENV_2023-05-16T03_00_47.662Z.csv',
+    imu:'./recordings/JoshuaBrewster_IMU_2023-05-16T03_00_47.662Z.csv'
+};
+
+export const sessionsList = [
+    './recordings/JoshuaBrewster_HRV_Session_Joshua_Brewster.csv'
+];
+
+export function readTextFile(file) { //https://stackoverflow.com/questions/39662388/javascript-filereader-onload-get-file-from-server
+    return new Promise((res,rej) => {
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function ()
+        {
+            if(rawFile.readyState === 4)
+            {
+                if(rawFile.status === 200 || rawFile.status == 0)
+                {
+                    res(rawFile.responseText);
+                    //alert(allText);
+                } else rej(rawFile.status);
+            }
+        }
+        rawFile.send(null);
+    });
+}
+
+
+export const demos = {} as any; //we can cancel these at any time
+
+//roll over data from the parsed csv
+
+
+
+
+export function demoFile(sensor:'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg', sps?, tcheck?, duration = Infinity) {
+    let filename = recordingsList[sensor];
+
+    //make some assumptions
+    if(!sps) {
+        if(sensor === 'emg') sps = 250;
+        else if(sensor === 'ecg') sps = 250;
+        else if(sensor === 'ppg') sps = 100;
+        else if (sensor === 'imu') sps = 100;
+        else if (sensor === 'env') sps = 3;
+        else if(sensor === 'hr') sps = 1;
+        else if(sensor === 'breath') sps = 0.166667;
+    }
+
+    if(!tcheck) {
+        if(sensor === 'emg') tcheck = 1000*9/250;
+        else if(sensor === 'ecg') tcheck = 1000*9/250;
+        else if(sensor === 'ppg') tcheck = 1000*32/100;
+        else if (sensor === 'imu') tcheck = 1000*32/100;
+        else if (sensor === 'env') tcheck = 1000;
+        else if(sensor === 'hr') tcheck = 1000;
+        else if(sensor === 'breath') tcheck = 1000/0.166667;
+    }
+
+    readTextFile(filename).then((contents) => {
+        let parsed = parseCSVData(contents, filename, undefined);
+
+        let ctrs = {};
+
+        function genDataFromCSV(sps=250, tduration = 1000, key?:'0') {
+            const maxSamples = Math.floor(sps * (tduration / 1000));
+            let res = {}
+
+            function doKey(key) {
+                res[key] = [] as any; //raw
+                if(!ctrs[key]) ctrs[key] = 0;
+                //console.log((parsed[key]));
+                new Array(maxSamples).fill(0).map((v, i) => {
+                    res[key].push(
+                        parseFloat(parsed[key][ctrs[key]+i])
+                    );
+                });
+                ctrs[key] += maxSamples;
+                if(ctrs[key] + maxSamples > parsed[key].length) ctrs[key] = 0; //roll over
+            }
+
+            if(key) {
+                doKey(key);
+                doKey('timestamp');
+            } else {
+                for(const key in parsed) {
+                    if(key !== 'header' && key !== 'filename' && key !== 'localized') doKey(key);
+                }
+            }
+            
+            return res;
+        }
+
+        let demo = { running:true }; 
+
+        const simuloopCSV = ( 
+            sps = 250, //sample rate
+            tcheck = 1000 * 9 / 250, // 250/9 checks per second
+            duration = 5000
+        ) => {
+
+            let tstart = Date.now();
+            let start = tstart;
+            const recursiveAwait = async () => {
+                if(demo.running) {
+                    let output = genDataFromCSV(
+                        sps,
+                        tcheck,
+                        //key
+                    );
+                    const data = output;
+
+                    //console.log('data', data);
+                    let s = sensor;
+                    if(s === 'ecg') s = 'emg';
+                    state.setState({ [s]:data });
+                    //const result = eventDetector(data);
+                    //console.log("check result:", result);
+                    tstart += tcheck;
+                    if (tstart <= start + duration) {
+                        await new Promise(res => setTimeout(res, tcheck));
+                        recursiveAwait();
+                    }
+                }
+            };
+            recursiveAwait();
+        };
+
+        simuloopCSV(sps,tcheck,duration);
+
+        demos[sensor] = demo;
+
+    }); 
+}
+
 
 export const csvworkers = {} as {[key:string]:WorkerInfo};
 
@@ -196,6 +340,16 @@ export async function stopRecording(streamId?:string, dir='data') {
     state.setState({isRecording:false});
 
     let promises = [] as any[];
+
+    let name;
+    if(streamId) {
+        let ses = webrtc.rtc[streamId] as RTCCallInfo;
+        if(ses) {
+            name = ses.firstName + '_' + ses.lastName;
+        }
+    } else if(client.currentUser?.firstName) {
+        name = client.currentUser.firstName + '_' + client.currentUser.lastName;
+    }
     
     if(`${streamId ? streamId : ''}emg` in recordingSubs) {
         state.unsubscribeEvent(`${streamId ? streamId : ''}emg`, recordingSubs[`${streamId ? streamId : ''}emg`]);
@@ -214,10 +368,10 @@ export async function stopRecording(streamId?:string, dir='data') {
         if(streamId) {
             let ses = webrtc.rtc[streamId] as RTCCallInfo;
             if(ses) {
-                filename1 += '_' + ses.firstName + '_' + ses.lastName;
+                filename1 += '_' + name;
             }
         } else if(client.currentUser?.firstName) {
-            filename1 += '_' + client.currentUser.firstName + '_' + client.currentUser.lastName;
+            filename1 += '_' + name;
         }
 
         csvworkers[streamId ? streamId+'hrses' : 'hrses'] =  workers.addWorker({ url: gsworker });
@@ -233,10 +387,10 @@ export async function stopRecording(streamId?:string, dir='data') {
         if(streamId) {
             let ses = webrtc.rtc[streamId] as RTCCallInfo;
             if(ses) {
-                filename2 += '_' + ses.firstName + '_' + ses.lastName;
+                filename2 += '_' + name;
             }
         } else if(client.currentUser?.firstName) {
-            filename2 += '_' + client.currentUser.firstName + '_' + client.currentUser.lastName;
+            filename2 += '_' + name;
         }
 
         csvworkers[streamId ? streamId+'brses' : 'brses'] =  workers.addWorker({ url: gsworker });
@@ -249,10 +403,11 @@ export async function stopRecording(streamId?:string, dir='data') {
         state.unsubscribeEvent(`${streamId ? streamId : ''}env`, recordingSubs[`${streamId ? streamId : ''}env`]);
     }
 
-
     //heartrate session average
     if(promises.length > 0) await Promise.all(promises);
 
+    let tempworker = workers.addWorker({ url: gsworker });
+    await tempworker.run('checkFolderList',['/'+dir+'/folderList',name]);
 
     csvworkers[streamId+'chat']?.terminate();
     csvworkers[streamId ? streamId+'emg' : 'emg']?.terminate();
@@ -269,5 +424,9 @@ export async function stopRecording(streamId?:string, dir='data') {
 
     //breath session average
 
-    
 }
+
+
+
+
+
