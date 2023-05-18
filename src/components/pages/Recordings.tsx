@@ -10,6 +10,10 @@ import { Button } from '../lib/src';
 import { NoteTaking } from '../modules/NoteTaking';
 import { RTCCallInfo } from '../../scripts/webrtc';
 
+import gsworker from '../../scripts/device.worker'
+import { WorkerInfo } from 'graphscript';
+import { workers } from 'device-decoder';
+
 //add google drive backup/sync since we're using google accounts
 
 export class Recordings extends sComponent {
@@ -20,13 +24,22 @@ export class Recordings extends sComponent {
         activeStream:undefined
     }
 
-    dir?:string
+    dir?:string    
+    csvworker:WorkerInfo;
 
     constructor(props:{dir?:string}) {
         super(props);
 
         this.dir = props.dir;
         this.listRecordings();
+    }
+
+    componentDidMount(): void {
+        this.csvworker = workers.addWorker({url:gsworker})
+    }
+
+    componentWillUnmount(): void {
+        this.csvworker?.terminate();
     }
 
     //list from db
@@ -90,7 +103,10 @@ export class Recordings extends sComponent {
                 <StreamSelect/>
                 { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream, this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream, undefined, undefined,  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Record</Button> }
                 <br/>
-                <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'} dir={ this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  }/>
+                <NoteTaking 
+                    streamId={this.state.activeStream} 
+                    filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'} 
+                    dir={ this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  }/>
                 <h2>Recordings</h2>
                 <div>
                     { this.state.recordings ? this.state.recordings : "" }
