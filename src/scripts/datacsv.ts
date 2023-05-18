@@ -67,7 +67,7 @@ export function demoFile(sensor:'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg', sps
     if(!sps) {
         if(sensor === 'emg') sps = 250;
         else if(sensor === 'ecg') sps = 250;
-        else if(sensor === 'ppg') sps = 100;
+        else if(sensor === 'ppg') sps = 96;
         else if (sensor === 'imu') sps = 100;
         else if (sensor === 'env') sps = 3;
         else if(sensor === 'hr') sps = 1;
