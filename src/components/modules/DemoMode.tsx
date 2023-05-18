@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { sComponent } from '../state.component';
-import { demoFile, demos } from '../../scripts/datacsv';
+import { demo, demoFile, demos, stopdemos } from '../../scripts/datacsv';
+import {state} from '../../scripts/client'
+import { disconnectDevice } from '../../scripts/device';
 
 export class Demo extends sComponent {
 
@@ -15,27 +17,11 @@ export class Demo extends sComponent {
     }
 
     startDemos(sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[]) {
-        if(!sensors) {
-            sensors = ['emg','ppg','breath','hr','imu','env','ecg'];
-        }
-        
-        let detected = {} as any;
-        for(const v of sensors) {
-            demoFile(v);
-            detected['detected'+v.toUpperCase()] = true;
-        }
-
-        this.setState({deviceConnected:true, demoing:true, ...detected});
+        demo(sensors);
     }
 
     stopDemos() {
-
-        let detected = {} as any;
-        for(const key in this.state.demos) {
-            this.state.demos[key].running = false;
-            detected['detected'+key.toUpperCase()] = true;
-        }
-        this.setState({deviceConnected:false, demoing:false, ...detected});
+        stopdemos();
     }
 
     render() {
@@ -45,6 +31,9 @@ export class Demo extends sComponent {
         }
 
         let stopdemoonclick = () => {
+            if(state.data.deviceConnected) {
+                disconnectDevice();
+            }
             this.stopDemos();
         }
 

@@ -161,6 +161,34 @@ export function demoFile(sensor:'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg', sps
 }
 
 
+const startDemo = true;
+
+export function demo(sensors = ['emg','ppg','breath','hr','imu','env','ecg']) {
+    if(!sensors) sensors = ['emg','ppg','breath','hr','imu','env','ecg'];
+        
+    let detected = {} as any;
+    for(const v of sensors) {
+        demoFile(v as any);
+        detected['detected'+v.toUpperCase()] = true;
+    }
+
+    state.setState({deviceConnected:true, demoing:true, ...detected});
+        
+}
+
+export function stopdemos() {
+    let detected = {} as any;
+    for(const key in this.state.demos) {
+        this.state.demos[key].running = false;
+        detected['detected'+key.toUpperCase()] = true;
+    }
+    state.setState({deviceConnected:false, demoing:false, ...detected});
+}
+
+
+
+
+
 export const csvworkers = {} as {[key:string]:WorkerInfo};
 
 export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[], subTitle?:string, dir='data') { 

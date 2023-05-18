@@ -29,13 +29,10 @@ import config from '../../backend/serverconfig.js'
 import { DS } from 'graphscript-services/struct/datastructures/index'
 import { GDrive } from './drive'
 import { apiKey, googleClientID } from './gapi'
-import { demoFile } from './datacsv'
-
-
+import { demo } from './datacsv'
 
 
 const startDemo = true;
-
 
 
 export let client = new StructFrontend({state:state});
@@ -174,20 +171,11 @@ export const onLogin = async (
             restoreSession(user);
 
             if(startDemo) {
-                let sensors = ['emg','ppg','breath','hr','imu','env','ecg'];
-        
-                let detected = {} as any;
-                for(const v of sensors) {
-                    demoFile(v);
-                    detected['detected'+v.toUpperCase()] = true;
-                }
-    
-                state.setState({deviceConnected:true, demoing:true, ...detected});
-    
-                    return user;
-                }
+                demo();
             }
             
+            return user;
+        }
     }
 
     if(!resultHasUser) {

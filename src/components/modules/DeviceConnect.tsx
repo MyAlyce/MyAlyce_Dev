@@ -2,6 +2,8 @@ import React from "react";
 import { connectDevice, disconnectDevice } from "../../scripts/device";
 import { Button } from "../lib/src";
 import { sComponent } from "../state.component";
+import {state} from '../../scripts/client'
+import { stopdemos } from "../../scripts/datacsv";
 
 
 export class DeviceConnect extends sComponent {
@@ -14,8 +16,13 @@ export class DeviceConnect extends sComponent {
         return (                    
             <div>
             { !this.state.deviceConnected ? 
-                <Button onClick={()=>{connectDevice('other');}}>Connect</Button> :
-                <Button onClick={()=>{disconnectDevice();}}>Disconnect</Button>
+                <Button onClick={()=>{
+                    if(state.data.demoing) {
+                        stopdemos();
+                    }
+                    connectDevice('other');}}>Connect</Button> :
+                <Button onClick={()=>{
+                    disconnectDevice();}}>Disconnect</Button>
             } 
             </div>
         );
