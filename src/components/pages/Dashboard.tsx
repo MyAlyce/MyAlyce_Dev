@@ -43,6 +43,7 @@ export class Dashboard extends sComponent {
                     <div className="device-section">
                         <Device
                             streamId={this.state.activeStream}
+                            sensors={['ecg','emg',]}
                         />
                     </div>
                     <div className="note-taking-section">

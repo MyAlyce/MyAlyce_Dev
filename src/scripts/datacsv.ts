@@ -33,23 +33,13 @@ export const sessionsList = [
     './recordings/JoshuaBrewster_HRV_Session_Joshua_Brewster.csv'
 ];
 
-export function readTextFile(file) { //https://stackoverflow.com/questions/39662388/javascript-filereader-onload-get-file-from-server
-    return new Promise((res,rej) => {
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", file, false);
-        rawFile.onreadystatechange = function ()
-        {
-            if(rawFile.readyState === 4)
-            {
-                if(rawFile.status === 200 || rawFile.status == 0)
-                {
-                    res(rawFile.responseText);
-                    //alert(allText);
-                } else rej(rawFile.status);
-            }
-        }
-        rawFile.send(null);
-    });
+export async function readTextFile(file) { //https://stackoverflow.com/questions/39662388/javascript-filereader-onload-get-file-from-server
+    const response = await fetch(file);
+    
+    if(response.status === 200 || response.status === 0)
+        return await response.text();
+
+    else return undefined;
 }
 
 
