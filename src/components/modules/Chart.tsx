@@ -53,6 +53,7 @@ export class Chart extends sComponent {
         this.overlay.className = 'chartOverlay'
         this.overlay.width = 800;
         this.overlay.height = 600;
+        this.overlay.style.transform = 'translateY(-100%)';
 
         let lines = this.lines ? this.lines : this.sensors ? {} : {
             hr: { sps: 1, nSec: 100, units: 'bpm' },

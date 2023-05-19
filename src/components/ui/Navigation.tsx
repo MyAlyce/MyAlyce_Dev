@@ -23,7 +23,7 @@ export function Navigation (){
               <Nav.Link onClick={()=>{state.setState({route:'/recordings'})}}>
               <Icon.Mic className="align-text-bottom" size={20}></Icon.Mic>
               &nbsp;Recordings</Nav.Link>
-              <Nav.Link  onClick={()=>{state.setState({route:'/settings'})}}>
+              <Nav.Link  onClick={()=>{state.setState({route:'/settings'})}}> 
               <Icon.Settings className="align-text-bottom" size={20}></Icon.Settings>
               &nbsp;Settings</Nav.Link>
               <Icon.Tool className="align-text-bottom" size={20}></Icon.Tool>
