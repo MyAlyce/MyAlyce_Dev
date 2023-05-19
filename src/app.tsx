@@ -14,6 +14,9 @@ import { WebRTCComponent } from './components/pages/webrtc';
 import { Device } from './components/modules/device';
 import { Dev } from './components/pages/Dev';
 import { RTCCallInfo } from './scripts/webrtc';
+import { Header } from './components/ui/Header';
+import { Navigation } from './components/ui/Navigation';
+import { UserBar } from './components/ui/UserBar';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -110,49 +113,8 @@ export class App extends sComponent {
                 }
                 { (this.state.isLoggedIn || TESTVIEWS) && 
                     <div>
-                        {/** TODO: Fix NavDrawer to not require an app=level  */ }
-                        <NavDrawerContainer/>
-                    <div id="view">
-                      <TopBar zIndex={100} onMenuExpand={() => {
-                            let open = !state.data.navOpen;
-                            state.setState({'navOpen':open}); //dont trigger a rerender on this component, only trigger in sub-components
-                          }} 
-
-                          style={{
-                            position:'sticky',
-                            top:0,
-                            left:0,
-                          }}
-                          rightNavItems={[
-                            {
-                                children:<Avatar
-                                  dataState='done'
-                                  imgSrc={client.currentUser.pictureUrl ? client.currentUser.pictureUrl : personIcon}
-                                  size='xs'
-                                  status='online'
-                                  name={
-                                      {
-                                          first:client.currentUser?.firstName as string,
-                                          last:client.currentUser?.lastName as string,
-                                      }
-                                  }
-                                  backgroundColor='lightblue'
-                                />,
-                                onClick: ()=> this.setState({
-                                    route: '/settings',
-                                })                                
-                            },
-                            {
-                                children:(<p style={{
-                                    fontSize:'16px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    height: '100%',
-                                }}>Logout</p>),
-                                onClick:()=>{this.logout()}
-                            }
-                            ]}  
-                        /> 
+                         <Header />
+                         <Navigation />
                         <div id='viewcontent'>
                             <div id='route'>
                                 { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
@@ -165,8 +127,7 @@ export class App extends sComponent {
                                 { this.state.route.includes('dev') && <Dev/>}
                             </div>
                         </div>
-                  </div> 
-                </div>
+                    </div>
                 }
             </div>
         )
