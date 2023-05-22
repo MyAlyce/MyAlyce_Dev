@@ -50,6 +50,7 @@ export class Chart extends sComponent {
         this.canvas.className = 'chartMain'
         this.canvas.width = 800;
         this.canvas.height = 600;
+        this.canvas.style.backgroundColor = 'black';
         this.overlay.className = 'chartOverlay'
         this.overlay.width = 800;
         this.overlay.height = 600;
