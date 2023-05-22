@@ -22,8 +22,8 @@ export class Dev extends sComponent {
         return (
         <>
           <Header />
-          <div class="container-fluid">
-      <div class="row">
+          <div className="container-fluid">
+      <div className="row">
       <Navigation />
       <hr></hr>
       <UserBar/>
