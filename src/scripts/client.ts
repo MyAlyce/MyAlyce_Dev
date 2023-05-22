@@ -18,7 +18,7 @@ import {
 } from 'graphscript'//'../../../graphscript/index'//
 
 import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//
-import {BFSRoutes} from 'graphscript-services.storage'
+import {BFSRoutes} from 'graphscript-services.storage'//'../../../graphscript/src/extras/index.storage.services'//
 
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
 import { workers } from 'device-decoder'
@@ -230,7 +230,7 @@ export function backupState(
 
         if(hasUpdate) {
             BFSRoutes.writeFile(
-                '/'+dir+'/'+filename,
+                dir+'/'+filename,
                 JSON.stringify(lastState),
             );
             hasUpdate = false;
@@ -242,7 +242,9 @@ export function backupState(
     backupLoop();
 }
 
-backupState();
+setTimeout(() => {
+    backupState();
+}, 100);
 
 //should subscribe to the state then restore session to setup the app
 export async function restoreSession(
@@ -252,12 +254,12 @@ export async function restoreSession(
 ) {
     //make sure the indexeddb directory is initialized
 
-    let exists = await BFSRoutes.exists('/'+dir+'/'+filename);
+    let exists = await BFSRoutes.exists(dir+'/'+filename);
 
     let read;
     if(exists) {
         read = await BFSRoutes.readFileAsText(
-            '/'+dir+'/'+filename,
+            dir+'/'+filename,
         )
         try {
             if(read) {
