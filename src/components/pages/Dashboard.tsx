@@ -8,6 +8,7 @@ import { client, webrtc } from '../../scripts/client';
 import { RTCCallInfo } from '../../scripts/webrtc'
 import { DeviceConnect } from '../modules/DeviceConnect'
 import { Demo } from '../modules/DemoMode'
+import {UserBar} from '../ui/UserBar'
 
 export class Dashboard extends sComponent {
 
@@ -40,14 +41,17 @@ export class Dashboard extends sComponent {
                 </div>
                 <div className="main-content">
                     {/* Chart */}
+                    
                     <div className="device-section">
-                        <Device
+                        <UserBar/>
+
+                       {/*<Device
                             streamId={this.state.activeStream}
                             //sensors={['ecg','emg',]}
-                        />
+                />*/} 
                     </div>
                     <div className="note-taking-section">
-                        <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName + '.csv' : 'Notes.csv'} />
+                       {/* <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName + '.csv' : 'Notes.csv'} />*/}
                     </div>
                 </div>
             </div>
