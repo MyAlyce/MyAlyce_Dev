@@ -43,7 +43,7 @@ export class Dashboard extends sComponent {
                     {/* Chart */}
                     
                     <div className="device-section">
-                        <UserBar/>
+                    <Statistics />
 
                        {/*<Device
                             streamId={this.state.activeStream}
