@@ -32,7 +32,7 @@
     "classnames": "^2.3.2",
     "device-decoder": "~0.4.24",
     "graphscript": "~0.2.122",
-    "graphscript-services": "~0.2.135",
+    "graphscript-services": "~0.2.136",
     "graphscript-services.storage": "~0.2.127",
     "hamburger-react": "^2.5.0",
     "howler": "^2.2.3",
