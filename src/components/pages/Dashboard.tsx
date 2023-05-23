@@ -23,7 +23,7 @@ export class Dashboard extends sComponent {
 
         //console.log(client.currentUser)
         return (
-            <div className="page-container">
+            <div className='container-fluid'>
                 <h1>Welcome {client.currentUser.firstName}</h1>
                 <div className="stream-select">
                     {/* Device/Stream select */}

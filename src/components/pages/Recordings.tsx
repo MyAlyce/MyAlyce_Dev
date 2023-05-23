@@ -99,7 +99,7 @@ export class Recordings extends sComponent {
     render() {
 
         return (
-            <div>
+            <div className='container-fluid'>
                 <h1>Recording Manager</h1>
                 <StreamSelect/>
                 { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream, this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream, undefined, undefined,  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Record</Button> }
