@@ -24,11 +24,18 @@ export class DropdownDrawer extends Component<{direction?:'up'|'down', isOpen?:b
     return (
       <div className="drawer-container">
         {direction === 'up' ? 
-            <div>
-                <div className={arrowClass} onClick={this.toggleDrawer}>
-                    {isOpen ? 'Select Stream ▼' : 'Select Stream ▲' }
-                </div>
-            </div>
+            <table style={{width:'100%'}}>
+                <tbody>
+                    <tr>
+                        <td width='100%'></td>
+                        <td>
+                            <button className={arrowClass} onClick={this.toggleDrawer}>
+                                {isOpen ? '▼' : '▲' }
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             : null
         }
         <Collapse in={isOpen} onExited={() => { this.setState({exited:true})}}>
@@ -37,11 +44,18 @@ export class DropdownDrawer extends Component<{direction?:'up'|'down', isOpen?:b
             </div>
         </Collapse> 
         {direction === 'down' ?
-            <div>
-                <div className={arrowClass}  onClick={this.toggleDrawer}>
-                    {isOpen ? 'Stream Select ▲' : 'Stream Select ▼' }
-                </div>
-            </div>
+            <table style={{width:'100%'}}>
+                <tbody>
+                    <tr>
+                        <td width='100%'></td>
+                        <td>
+                            <button className={arrowClass}  onClick={this.toggleDrawer}>
+                                {isOpen ? '▲' : '▼' }
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             : null
         }
       </div>

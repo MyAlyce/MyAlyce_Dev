@@ -70,7 +70,7 @@ export function demoFile(sensor:'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg', sps
         else if(sensor === 'ppg') tcheck = 333;
         else if (sensor === 'imu') tcheck = 333;
         else if (sensor === 'env') tcheck = 1000;
-        else if(sensor === 'hr') tcheck = 900;
+        else if(sensor === 'hr') tcheck = 1000;
         else if(sensor === 'breath') tcheck = 1000/0.166667;
     }
 

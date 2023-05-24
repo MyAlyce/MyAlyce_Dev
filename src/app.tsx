@@ -123,9 +123,9 @@ export class App extends sComponent {
                     <div className="flex-container">
                         <div className="flex-header">
                          <Header />
-                         <Navigation />
                         </div>
                         <div id='viewcontent' className="flex-content">
+                            <Navigation />
                             <div id='route'>
                                 { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
                                     <Dashboard/>
@@ -136,6 +136,7 @@ export class App extends sComponent {
                                 { this.state.route.includes('settings') && <SettingsView/> }
                                 { this.state.route.includes('dev') && <Dev/>}
                             </div>
+                            <br/><br/><br/><br/>
                         </div>
                         <div className="footer">
                             <DropdownDrawer 
@@ -158,9 +159,9 @@ export class App extends sComponent {
                                     </div>,
                                 ]}
                             />
-
+                            <div style={{height:'50px'}}/>
+                            <Footer />
                         </div>
-                        <Footer />
                     </div>
                 }
             </div>

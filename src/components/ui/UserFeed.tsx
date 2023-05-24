@@ -13,7 +13,7 @@ export function UserFeed(props:{streamId?:string}) {
     <CardGroup>
       <Card>
       <Card.Body>
-      <Icon.Heart className="align-text-bottom" size={40} color="red" ref={target} onMouseEnter={() => setShow(!show)} onMouseLeave={() => setShow(false)}>
+      <Icon.Heart className="align-text-bottom" size={40} color="red"  onMouseEnter={() => setShow(!show)} onMouseLeave={() => setShow(false)}>
         </Icon.Heart>&nbsp;<StreamText stateKey={props.streamId ? props.streamId+'hr' : 'hr'} objectKey={'hr'}/>
       </Card.Body>
       </Card>
@@ -29,7 +29,8 @@ export function UserFeed(props:{streamId?:string}) {
           </Icon.Wind>&nbsp;<StreamText stateKey={props.streamId ? props.streamId+'breath' : 'breath'} objectKey={'breath'}/>
       </Card.Body>
       </Card>
-      <Overlay target={target.current} show={show} placement="top">
+      {/** TODO: make these tooltips instead for the card body so it's more intuitive */}
+      <Overlay target={target.current} show={show} placement="top"> 
         {({
           placement: _placement,
           arrowProps: _arrowProps,
