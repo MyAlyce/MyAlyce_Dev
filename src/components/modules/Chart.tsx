@@ -178,12 +178,12 @@ export class Chart extends sComponent {
         return (
             <div>
                 <div>{ this.title }</div>
-                <div style={ { height:this.height, width:this.width, maxHeight:this.height, overflow:'hidden' }}>
+                <div>
                     <div ref={ (ref) => {
                         ref?.appendChild(this.canvas); 
                         ref?.appendChild(this.overlay);
                         /*this is an example of weird reactjs crap*/
-                    }}>
+                    }}  style={ { height:this.height, width:this.width, maxHeight:this.height, minHeight:this.height, overflow:'hidden' }}>
                 </div>
                 </div>
             </div>
