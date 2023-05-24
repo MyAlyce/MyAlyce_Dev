@@ -19,6 +19,7 @@ import { DropdownDrawer } from './components/ui/Dropdown/DropdownDrawer';
 import { DeviceConnect } from './components/modules/DeviceConnect';
 import { StreamSelect } from './components/modules/StreamSelect';
 import { Demo } from './components/modules/DemoMode';
+import { Footer } from './components/ui/Footer';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -159,6 +160,7 @@ export class App extends sComponent {
                             />
 
                         </div>
+                        <Footer />
                     </div>
                 }
             </div>
