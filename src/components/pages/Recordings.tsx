@@ -7,13 +7,17 @@ import { BFSRoutes, csvRoutes } from 'graphscript-services.storage'//'../../../.
 import { driveInstance } from '../../scripts/client';
 import { recordCSV, stopRecording } from '../../scripts/datacsv';
 import { StreamSelect } from '../modules/StreamSelect';
-import { Button } from '../lib/src';
+import Button from 'react-bootstrap/Button';
 import { NoteTaking } from '../modules/NoteTaking';
 import { RTCCallInfo } from '../../scripts/webrtc';
 
 import gsworker from '../../scripts/device.worker'
 import { WorkerInfo } from 'graphscript';
 import { workers } from 'device-decoder';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import * as Icon from 'react-feather'
 
 //add google drive backup/sync since we're using google accounts
 
@@ -74,10 +78,15 @@ export class Recordings extends sComponent {
 
             recordings.push (
                 <div key={file}>
-                    <span>{file}</span>
-                    <Button onClick={download}>Download</Button>
-                    <Button onClick={deleteFile}>Delete</Button>
-                    <Button onClick={backup}>To Drive</Button>
+                    <Container fluid>
+                        <Row className='recordings'>
+                            <Col xs lg="2" className='over'>{file}</Col>
+                            <Col className="d-grid gap-2"><Button variant='secondary' onClick={download}>Download</Button></Col>
+                            <Col className="d-grid gap-2"><Button variant='danger' onClick={deleteFile}>Delete</Button></Col>
+                            <Col className="d-grid gap-2"><Button variant='success' onClick={backup}>To Drive</Button></Col>
+                        </Row>
+                        <hr></hr>
+                    </Container>
                 </div>
             )
         });
@@ -102,7 +111,7 @@ export class Recordings extends sComponent {
             <div className='container-fluid'>
                 <h1>Recording Manager</h1>
                 <StreamSelect/>
-                { this.state.isRecording ? <Button onClick={()=>{this.stopRecording(this.state.activeStream, this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Stop Recording</Button> : <Button onClick={()=>{this.record(this.state.activeStream, undefined, undefined,  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}>Record</Button> }
+                { this.state.isRecording ? <Button variant="secondary" onClick={()=>{this.stopRecording(this.state.activeStream, this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}><Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>Stop Recording</Button> : <Button variant="secondary" onClick={()=>{this.record(this.state.activeStream, undefined, undefined,  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}><Icon.Circle className="align-text-bottom" size={20}></Icon.Circle>&nbsp;Record</Button> }
                 <br/>
                 <NoteTaking 
                     streamId={this.state.activeStream} 
