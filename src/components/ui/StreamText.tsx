@@ -28,7 +28,6 @@ export class StreamText extends sComponent{
     }
 
     render() {
-        console.log(this.state[this.stateKey]);
 
         let result = this.objectKey ? this.state[this.stateKey]?.[this.objectKey] : this.state[this.stateKey];
 

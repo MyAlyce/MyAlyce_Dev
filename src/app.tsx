@@ -98,7 +98,6 @@ export class App extends sComponent {
 
     render() {
 
-        console.log('DEVICE MODE', this.state.deviceMode);
         return (
             <div style={{width:'100%', height:'100%'}}>
                 {this.state.loggingIn && 

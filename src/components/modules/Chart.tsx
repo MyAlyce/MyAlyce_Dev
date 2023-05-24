@@ -130,7 +130,8 @@ export class Chart extends sComponent {
             lines, //will render all lines unless specified
             generateNewLines:false,
             cleanGeneration:false,
-            worker:true
+            worker:true,
+            mode:'sweep'
         });
 
         if(!this.sensors || (this.sensors?.includes('emg') || this.sensors?.includes('ecg'))) {
