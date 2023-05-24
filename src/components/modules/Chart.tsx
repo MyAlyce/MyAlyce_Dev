@@ -131,7 +131,8 @@ export class Chart extends sComponent {
             generateNewLines:false,
             cleanGeneration:false,
             worker:true,
-            mode:'sweep'
+            mode:'sweep',
+            sweepColor:'green'
         });
 
         if(!this.sensors || (this.sensors?.includes('emg') || this.sensors?.includes('ecg'))) {

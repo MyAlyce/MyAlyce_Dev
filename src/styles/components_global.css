@@ -4,6 +4,14 @@ html, body {
     overflow-y: hidden;
 }
 
+.footer-bar {
+    background: linear-gradient(to bottom right, #5F86FC, turquoise);
+    position:absolute; 
+    bottom:0; 
+    height:50px; 
+    width:100%;
+}
+
 .flex-container{
     display: flex;
     flex-flow: column;

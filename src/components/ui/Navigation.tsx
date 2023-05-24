@@ -21,14 +21,13 @@ export function Navigation (){
               <Icon.Phone className="align-text-bottom" size={20}></Icon.Phone>
               &nbsp;WebRTC</Nav.Link>
               <Nav.Link onClick={()=>{state.setState({route:'/recordings'})}}>
-              <Icon.Mic className="align-text-bottom" size={20}></Icon.Mic>
+              <Icon.Activity className="align-text-bottom" size={20}></Icon.Activity>
               &nbsp;Recordings</Nav.Link>
               <Nav.Link  onClick={()=>{state.setState({route:'/settings'})}}> 
               <Icon.Settings className="align-text-bottom" size={20}></Icon.Settings>
               &nbsp;Settings</Nav.Link>
-              <Icon.Tool className="align-text-bottom" size={20}></Icon.Tool>
               <Nav.Link  onClick={()=>{state.setState({route:'/dev'})}}> 
-              <Icon.Settings className="align-text-bottom" size={20}></Icon.Settings>
+              <Icon.Tool className="align-text-bottom" size={20}></Icon.Tool>
               &nbsp;Dev</Nav.Link>
             </Nav>
           </Navbar.Collapse>
