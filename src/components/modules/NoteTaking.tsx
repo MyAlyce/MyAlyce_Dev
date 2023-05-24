@@ -3,10 +3,12 @@ import { workers } from "device-decoder";
 
 import gsworker from '../../scripts/device.worker'
 import { client, webrtc } from '../../scripts/client';
-import { Button } from '../lib/src';
+import Button from 'react-bootstrap/Button';
 import { RTCCallInfo } from '../../scripts/webrtc';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 import { WorkerInfo } from 'graphscript';
+import { Table } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 function getColorGradientRG(value) {
     let r, g, b;
@@ -166,19 +168,23 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         return (
             <div className="input-section">
-                <label>Event</label>
-                <div><input ref={this.ref1 as any} id={this.id+'note'} name="note" type='text' defaultValue=""/></div>
-                
-                <label>Time</label>
-                <div><input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/></div>
-                
-                <label>Rating?</label>
-                <div><input 
-                        onInput={updateInputColor}
-                        onChange={updateInputColor}
-                        className="number-input" ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'></input></div>
-                <br/>
-                <Button onClick={this.submit}>Submit</Button>
+                <Card bg='Light'>
+                    <Card.Body>
+                    <label>Event</label>
+                    <div><input ref={this.ref1 as any} id={this.id+'note'} name="note" type='text' defaultValue=""/></div>
+                    
+                    <label>Time</label>
+                    <div><input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/></div>
+                    
+                    <label>Rating?</label>
+                    <div><input 
+                            onInput={updateInputColor}
+                            onChange={updateInputColor}
+                            className="number-input" ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'></input></div>
+                    <br/>
+                    <Button onClick={this.submit}>Submit</Button>
+                    </Card.Body>
+                </Card>
             </div>
         );
     }
@@ -191,12 +197,12 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 <br></br>
                 <div className="history-section">
                     <h3>History:</h3>
-                    <table className='table-wrapper'>
+                    <Table striped bordered hover>
                         <tbody>
                             <tr><th>Time</th><th>Event</th><th>Grade</th><th></th></tr>
                             {this.state.noteRows}
                         </tbody>
-                    </table>
+                    </Table>
                 </div>
             </div>
         );

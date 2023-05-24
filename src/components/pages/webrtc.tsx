@@ -12,7 +12,8 @@ import { RTCCallProps, RTCCallInfo, answerCall, startCall } from "../../scripts/
 
 import { StreamSelect } from "../modules/StreamSelect";
 
-import { Avatar, Button } from "../lib/src";
+import { Avatar } from "../lib/src";
+import Button from 'react-bootstrap/Button';
 
 
 import { RTCVideo, WebRTCStream } from '../modules/WebRTCStream';
@@ -221,7 +222,7 @@ export class WebRTCComponent extends sComponent {
     render = () => {
 
         return (
-            <div className="div">
+            <div className='container-fluid'>
                 <h1>WebRTC Communication</h1>
 
                 <h2>Received Calls</h2>

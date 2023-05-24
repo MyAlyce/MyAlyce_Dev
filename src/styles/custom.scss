@@ -85,3 +85,37 @@ $theme-colors: (
     margin-right: 1rem;
     border-radius: .5rem;
 }
+.recordings {
+    background-color: #f2f3f4;
+    padding: .3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: .5rem;
+}
+.over {
+    width: 40%;
+    text-overflow: ellipsis;
+}
+.link-btn-hover {
+    &:hover {
+      background: #f1f1fc!important;
+      color: #5755d9!important;
+      border-radius: .1rem!important;
+      cursor: pointer!important;
+    }
+  }
+  
+  .profile-badge {
+    display: flex;
+    align-items: center;
+    .profile-info {
+        padding: 0px 10px;
+        color: black;
+        font-size: 80%;
+        line-height: .7rem;
+    
+        p {
+            margin: 0;
+        }
+    }
+  }
