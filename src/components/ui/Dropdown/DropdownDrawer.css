@@ -1,0 +1,31 @@
+.drawer-container {
+    width:100%;
+}
+
+.arrow-button {
+    border: 2px solid black;
+    padding: 5px;
+    float:right;
+}
+
+.arrow-button-up {
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-width: 0px;
+}
+
+.arrow-button-down {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    border-top-width: 0px;
+}
+
+.drawer-content {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}

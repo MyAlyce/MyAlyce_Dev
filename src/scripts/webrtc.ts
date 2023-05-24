@@ -210,6 +210,10 @@ export let answerCall = async (call:RTCCallProps) => {
         const from = (call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName;
 
         ev.channel.onmessage = (ev) => { 
+
+            if(ev.data.alert) {
+                state.setValue(call._id+'alert',ev.data.alert);
+            }
             if(ev.data.message) {
 
                 if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;

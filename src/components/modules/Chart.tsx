@@ -31,7 +31,13 @@ export class Chart extends sComponent {
     streamId?:string;
     title?:string;
 
+    width:any = '100%';
+    height:any = '600px';
+
+
     constructor(props:{
+        height?:number|string,
+        width?:number|string
         lines?:{[key:string]:WebglLineProps},
         sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[],
         streamId?:string,
@@ -39,6 +45,8 @@ export class Chart extends sComponent {
     }) {
         super(props as any);
 
+        if(props.height) this.height = props.height;
+        if(props.width) this.width = props.width;
         this.lines = props.lines;
         this.sensors = props.sensors;
         this.streamId = props.streamId;
@@ -50,10 +58,14 @@ export class Chart extends sComponent {
         this.canvas.className = 'chartMain'
         this.canvas.width = 800;
         this.canvas.height = 600;
+        this.canvas.style.width = '100%';
+        this.canvas.style.height = '100%';
         this.canvas.style.backgroundColor = 'black';
         this.overlay.className = 'chartOverlay'
         this.overlay.width = 800;
         this.overlay.height = 600;
+        this.overlay.style.width = '100%';
+        this.overlay.style.height = '100%';
         this.overlay.style.transform = 'translateY(-100%)';
 
         let lines = this.lines ? this.lines : this.sensors ? {} : {
@@ -166,11 +178,13 @@ export class Chart extends sComponent {
         return (
             <div>
                 <div>{ this.title }</div>
-                <div className='chartContainer' ref={ (ref) => {
-                    ref?.appendChild(this.canvas); 
-                    ref?.appendChild(this.overlay);
-                    /*this is an example of weird reactjs crap*/
-                }}>
+                <div style={ { height:this.height, width:this.width, maxHeight:this.height, overflow:'hidden' }}>
+                    <div ref={ (ref) => {
+                        ref?.appendChild(this.canvas); 
+                        ref?.appendChild(this.overlay);
+                        /*this is an example of weird reactjs crap*/
+                    }}>
+                </div>
                 </div>
             </div>
             

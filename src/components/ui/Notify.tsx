@@ -1,13 +1,18 @@
 import React from 'react';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { UserAlerts } from './UserAlerts.tsx';
-import { UserMessages } from './UserMessages.tsx';
+import { UserAlerts } from './UserAlerts';
+import { UserMessages } from './UserMessages';
 
-export function Notify() {
+export function Notify(props:{streamId?:string}) {
   return (
     <CardGroup>
-        <UserAlerts/>
-        <UserMessages/>
+        <UserAlerts
+            streamId={props.streamId}
+        /> 
+        {props.streamId ?
+          <UserMessages
+            streamId={props.streamId}
+          /> : null}
     </CardGroup>
   );
 }

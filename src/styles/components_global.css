@@ -1,0 +1,28 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.flex-container{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.flex-container .flex-header{
+    flex: 0 1 auto;
+    background: #7e8aa0;
+}
+.flex-container .flex-content{
+    display: flex;
+    flex-flow: column;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.flex-container .flex-footer{
+    flex: 0 1 40px;
+    position: relative;
+    background: #7e8aa0;
+}

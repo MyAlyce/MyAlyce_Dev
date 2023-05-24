@@ -24,31 +24,14 @@ export class Dashboard extends sComponent {
         //console.log(client.currentUser)
         return (
             <div className='container-fluid'>
-                <h1>Welcome {client.currentUser.firstName}</h1>
-                <div className="stream-select">
-                    {/* Device/Stream select */}
-                        <StreamSelect 
-                            onChange={(key) => { 
-                                this.setState({deviceMode:key});
-                            }} 
-                        />
-                    {/** Device Connect */}
-                    { this.state.deviceMode === 'my-device' ? 
-                            <DeviceConnect/> : 
-                        this.state.deviceMode === 'demo' ? 
-                            <Demo/> : ""
-                    }
-                </div>
                 <div className="main-content">
-                    {/* Chart */}
-                    
+                    {/* Widgets */}
                     <div className="device-section">
-                    <Statistics />
-
-                       {/*<Device
+                        {/* Chart */}
+                       <Device
                             streamId={this.state.activeStream}
                             //sensors={['ecg','emg',]}
-                />*/} 
+                        />
                     </div>
                     <div className="note-taking-section">
                        {/* <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName + '.csv' : 'Notes.csv'} />*/}

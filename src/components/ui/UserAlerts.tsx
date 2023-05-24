@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import * as Icon from 'react-feather';
 import Badge from 'react-bootstrap/Badge';
 
-export function UserAlerts() {
+export function UserAlerts(props:{streamId?:string}) {
   return (
     <Card style={{ width: '5rem' }}>
       <Card.Body>

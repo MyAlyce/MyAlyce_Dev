@@ -17,6 +17,10 @@ import { RTCCallInfo } from './scripts/webrtc';
 import { Header } from './components/ui/Header';
 import { Navigation } from './components/ui/Navigation';
 import { UserBar } from './components/ui/UserBar';
+import { DropdownDrawer } from './components/ui/Dropdown/DropdownDrawer';
+import { DeviceConnect } from './components/modules/DeviceConnect';
+import { StreamSelect } from './components/modules/StreamSelect';
+import { Demo } from './components/modules/DemoMode';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -63,7 +67,10 @@ export class App extends sComponent {
     state = {
         isLoggedIn: false,
         loggingIn:false, //show load screen
-        route: '/'
+        route: '/',
+        activeStream:undefined, //stream selected?
+        deviceMode:'my-device',
+        availableStreams:{} //we can handle multiple connections too
     }
 
     onLoginClick(c:{email:string,password:string}) {
@@ -92,7 +99,7 @@ export class App extends sComponent {
 
     render() {
         return (
-            <div>
+            <div style={{width:'100%', height:'100%'}}>
                 {this.state.loggingIn && 
                     <div style={{zIndex:100, position:'absolute', width:'100%', height:'100%', backgroundColor:'royalblue', color:'white'}}>
                         LOADING
@@ -112,10 +119,12 @@ export class App extends sComponent {
                     ></Login>
                 }
                 { (this.state.isLoggedIn || TESTVIEWS) && 
-                    <div>
+                    <div className="flex-container">
+                        <div className="flex-header">
                          <Header />
                          <Navigation />
-                        <div id='viewcontent'>
+                        </div>
+                        <div id='viewcontent' className="flex-content">
                             <div id='route'>
                                 { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
                                     <Dashboard/>
@@ -126,6 +135,27 @@ export class App extends sComponent {
                                 { this.state.route.includes('settings') && <SettingsView/> }
                                 { this.state.route.includes('dev') && <Dev/>}
                             </div>
+                        </div>
+                        <DropdownDrawer 
+                            direction={'up'}
+                            content={[
+                                <div className="stream-select">
+                                    {/** Device Connect */}
+                                    { this.state.deviceMode === 'my-device' ? 
+                                            <DeviceConnect/> : 
+                                        this.state.deviceMode === 'demo' ? 
+                                            <Demo/> : ""
+                                    }
+                                    {/* Device/Stream select */}
+                                        <StreamSelect 
+                                            onChange={(key) => { 
+                                                this.setState({deviceMode:key});
+                                            }} 
+                                        />
+                                </div>,
+                            ]}
+                        />
+                        <div className="flex-footer">
                         </div>
                     </div>
                 }

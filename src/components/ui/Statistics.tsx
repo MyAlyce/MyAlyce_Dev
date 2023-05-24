@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bluetooth } from 'react-feather';
-import { UserBarExpanded } from './UserBarExpanded.tsx';
+import { UserBarExpanded } from './UserBar/UserBarExpanded';
 
 export function Statistics (){
     return (

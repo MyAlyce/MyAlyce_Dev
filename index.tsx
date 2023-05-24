@@ -15,6 +15,7 @@ const useStyles = true;
 //import './src/styles/styles.css'
 //import './src/styles/bootstrap.min.css'
 import './src/styles/custom.scss'
+import './src/styles/components_global.css'
 
 
 if(useStyles) {
@@ -23,6 +24,9 @@ if(useStyles) {
 }
 
 let container = document.createElement('div');
+container.style.height = '100%';
+container.style.width = '100%';
+
 document.body.appendChild(container);
 
 let root = createRoot(container);

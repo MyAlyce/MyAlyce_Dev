@@ -3,8 +3,9 @@ import Card from 'react-bootstrap/Card';
 import * as Icon from 'react-feather';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Overlay from 'react-bootstrap/Overlay';
+import { StreamText } from './StreamText';
 
-export function UserFeed() {
+export function UserFeed(props:{streamId?:string}) {
   const [show, setShow] = useState(false);
   const target = useRef(null);
 
@@ -12,17 +13,20 @@ export function UserFeed() {
     <CardGroup>
       <Card>
       <Card.Body>
-      <Icon.Heart className="align-text-bottom" size={40} color="red" ref={target} onMouseEnter={() => setShow(!show)} onMouseLeave={() => setShow(false)}></Icon.Heart>&nbsp;67/min
+      <Icon.Heart className="align-text-bottom" size={40} color="red" ref={target} onMouseEnter={() => setShow(!show)} onMouseLeave={() => setShow(false)}>
+        </Icon.Heart>&nbsp;<StreamText stateKey={props.streamId ? props.streamId+'hr' : 'hr'} objectKey={'hr'}/>
       </Card.Body>
       </Card>
       <Card>
       <Card.Body>
-        <Icon.Activity className="align-text-bottom" size={40} color="green"></Icon.Activity>&nbsp;HRV
+        <Icon.Activity className="align-text-bottom" size={40} color="green">
+          </Icon.Activity>&nbsp;HRV: <StreamText stateKey={props.streamId ? props.streamId+'hr' : 'hr'} objectKey={'hrv'} />
       </Card.Body>
       </Card>
       <Card>
       <Card.Body>
-        <Icon.Wind className="align-text-bottom" size={40}></Icon.Wind>&nbsp;8.3 min
+        <Icon.Wind className="align-text-bottom" size={40}>
+          </Icon.Wind>&nbsp;<StreamText stateKey={props.streamId ? props.streamId+'breath' : 'breath'} objectKey={'breath'}/>
       </Card.Body>
       </Card>
       <Overlay target={target.current} show={show} placement="top">
