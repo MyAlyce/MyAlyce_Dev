@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import { client } from '../../scripts/client';
-import { Avatar, Button } from '../../components/lib/src/index';
+import Button from 'react-bootstrap/Button';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
+import Form from 'react-bootstrap/Form';
 
 let personIcon = './assets/person.jpg';
 
@@ -249,25 +250,32 @@ export class UserAuths extends Component<{[key:string]:any}> {
                 <div>
                     <h3>Search Users</h3>
                     <div>
-                        <label>Name or Email</label>
-                        <input 
-                            id={this.unique+'query'} 
-                            type="text" 
-                            defaultValue=""
-                            ref={this.ref as any}
-                        />
+                    <Form>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Name or Email</Form.Label>
+                            <Form.Control 
+                                id={this.unique+'query'} 
+                                type="text" 
+                                defaultValue=""
+                                ref={this.ref as any}
+                                placeholder="Enter Name or Email" 
+                            />
+                        </Form.Group>
                         <Button onClick={this.queryUsers} >Search</Button>
+                        </Form>
                     </div>
 
                     <h4>Results</h4>
                     <div>
-                        <select id={this.unique+'select'} onChange={()=>{}}>
+                        <Form>
+                        <Form.Select id={this.unique+'select'} onChange={()=>{}}>
                             { this.queryResults.map(v => {
-                                console.log(v);
-                                return v;
-                            }) }
-                        </select>
+                                    console.log(v);
+                                    return v;
+                                }) }
+                        </Form.Select>
                         <Button onClick={this.authFromSelect}>Add Peer</Button>
+                        </Form>
                     </div>
                 </div>
 
