@@ -67,7 +67,7 @@ export class App extends sComponent {
         loggingIn:false, //show load screen
         route: '/',
         activeStream:undefined, //stream selected?
-        deviceMode:'my-device',
+        deviceMode:'My Device',
         availableStreams:{} //we can handle multiple connections too
     }
 
@@ -96,6 +96,8 @@ export class App extends sComponent {
     }
 
     render() {
+
+        console.log('DEVICE MODE', this.state.deviceMode);
         return (
             <div style={{width:'100%', height:'100%'}}>
                 {this.state.loggingIn && 
@@ -140,20 +142,22 @@ export class App extends sComponent {
                                 content={[
                                     <div className="stream-select">
                                         {/** Device Connect */}
-                                        { this.state.deviceMode === 'my-device' ? 
+                                        {   
+                                            this.state.deviceMode === 'My Device' ? 
                                                 <DeviceConnect/> : 
-                                            this.state.deviceMode === 'demo' ? 
+                                            this.state.deviceMode === 'Demo' ? 
                                                 <Demo/> : ""
                                         }
                                         {/* Device/Stream select */}
-                                            <StreamSelect 
-                                                onChange={(key) => { 
-                                                    this.setState({deviceMode:key});
-                                                }} 
-                                            />
+                                        <StreamSelect 
+                                            onChange={(key) => { 
+                                                this.setState({deviceMode:key});
+                                            }} 
+                                        />
                                     </div>,
                                 ]}
                             />
+
                         </div>
                     </div>
                 }

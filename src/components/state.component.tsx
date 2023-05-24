@@ -47,7 +47,7 @@ export class sComponent extends Component<{[key:string]:any}> {
             let found = {};
             for(const prop in this.state) { //for all props in state, subscribe to changes in the global state
                 if(props?.doNotSubscribe && props.doNotSubscribe.indexOf(prop) > -1) continue;
-                found[prop] = this.statemgr.data[prop]
+                if(prop in this.statemgr.data) found[prop] = this.statemgr.data[prop]
                 this.state_subs[prop] = this.__subscribeComponent(prop);
             }
             if(Object.keys(found).length > 0) this.react_setState(found); //override defaults
