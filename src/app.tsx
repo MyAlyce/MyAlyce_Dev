@@ -11,12 +11,10 @@ import { Dashboard } from './components/pages/Dashboard';
 import { Recordings } from './components/pages/Recordings';
 import { WebRTCComponent } from './components/pages/webrtc';
 
-import { Device } from './components/modules/device';
 import { Dev } from './components/pages/Dev';
 import { RTCCallInfo } from './scripts/webrtc';
 import { Header } from './components/ui/Header';
 import { Navigation } from './components/ui/Navigation';
-import { UserBar } from './components/ui/UserBar';
 import { DropdownDrawer } from './components/ui/Dropdown/DropdownDrawer';
 import { DeviceConnect } from './components/modules/DeviceConnect';
 import { StreamSelect } from './components/modules/StreamSelect';
@@ -136,26 +134,26 @@ export class App extends sComponent {
                                 { this.state.route.includes('dev') && <Dev/>}
                             </div>
                         </div>
-                        <DropdownDrawer 
-                            direction={'up'}
-                            content={[
-                                <div className="stream-select">
-                                    {/** Device Connect */}
-                                    { this.state.deviceMode === 'my-device' ? 
-                                            <DeviceConnect/> : 
-                                        this.state.deviceMode === 'demo' ? 
-                                            <Demo/> : ""
-                                    }
-                                    {/* Device/Stream select */}
-                                        <StreamSelect 
-                                            onChange={(key) => { 
-                                                this.setState({deviceMode:key});
-                                            }} 
-                                        />
-                                </div>,
-                            ]}
-                        />
-                        <div className="flex-footer">
+                        <div className="footer">
+                            <DropdownDrawer 
+                                direction={'up'}
+                                content={[
+                                    <div className="stream-select">
+                                        {/** Device Connect */}
+                                        { this.state.deviceMode === 'my-device' ? 
+                                                <DeviceConnect/> : 
+                                            this.state.deviceMode === 'demo' ? 
+                                                <Demo/> : ""
+                                        }
+                                        {/* Device/Stream select */}
+                                            <StreamSelect 
+                                                onChange={(key) => { 
+                                                    this.setState({deviceMode:key});
+                                                }} 
+                                            />
+                                    </div>,
+                                ]}
+                            />
                         </div>
                     </div>
                 }

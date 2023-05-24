@@ -21,8 +21,9 @@ html, body {
     height: 100%;
 }
 
-.flex-container .flex-footer{
-    flex: 0 1 40px;
-    position: relative;
-    background: #7e8aa0;
+.flex-container .footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    z-index:10;
 }
