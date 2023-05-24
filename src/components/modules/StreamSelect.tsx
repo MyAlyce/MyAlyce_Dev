@@ -18,6 +18,15 @@ export class StreamSelect extends Component<{[key:string]:any}> {
 
     onchange=(key)=>{}
 
+      
+    constructor(props:{onChange:(key)=>void, selected?:string}) {
+        super(props);
+        if(props.selected) this.state.activeStream = props.selected;
+        if(props?.onChange) 
+            this.onchange = props.onChange;
+    }
+    
+
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
     }
@@ -50,14 +59,6 @@ export class StreamSelect extends Component<{[key:string]:any}> {
         this.onchange(key);
     };
 
-      
-    constructor(props:{onChange:(key)=>void, selected?:string}) {
-        super(props);
-        if(props.selected) this.state.activeStream = props.selected;
-        if(props?.onChange) 
-            this.onchange = props.onChange;
-    }
-    
     render() {
       
         return (

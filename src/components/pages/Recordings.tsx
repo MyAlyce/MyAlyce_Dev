@@ -110,9 +110,6 @@ export class Recordings extends sComponent {
         return (
             <div className='container-fluid'>
                 <h1>Recording Manager</h1>
-                <StreamSelect/>
-                { this.state.isRecording ? <Button variant="secondary" onClick={()=>{this.stopRecording(this.state.activeStream, this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}><Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>Stop Recording</Button> : <Button variant="secondary" onClick={()=>{this.record(this.state.activeStream, undefined, undefined,  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName  );}}><Icon.Circle className="align-text-bottom" size={20}></Icon.Circle>&nbsp;Record</Button> }
-                <br/>
                 <NoteTaking 
                     streamId={this.state.activeStream} 
                     filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'} 
