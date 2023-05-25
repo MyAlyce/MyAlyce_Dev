@@ -22,7 +22,10 @@ export class DeviceConnect extends sComponent {
                     }
                     connectDevice('other');}}>Connect</Button> :
                 <Button onClick={()=>{
-                    disconnectDevice();}}>Disconnect</Button>
+                    if(state.data.demoing) {
+                        stopdemos();
+                    } else disconnectDevice();
+                }}>Disconnect</Button>
             } 
             </div>
         );

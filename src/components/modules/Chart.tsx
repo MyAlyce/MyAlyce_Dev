@@ -88,9 +88,13 @@ export class Chart extends sComponent {
                 lines['2'] = ads131m08ChartSettings.lines?.['2'] as WebglLineProps,
                 lines['3'] = ads131m08ChartSettings.lines?.['3'] as WebglLineProps,
                 lines['4'] = ads131m08ChartSettings.lines?.['4'] as WebglLineProps
+                for(const key in lines) {
+                    lines[key].nSec = 5;
+                }
             }
             if(this.sensors.includes('ecg')) {
                 lines['5'] = ads131m08ChartSettings.lines?.['5'] as WebglLineProps //ECG
+                lines['5'].nSec = 5;
             }
             if(this.sensors.includes('ppg')) {
                 Object.assign(lines,{
