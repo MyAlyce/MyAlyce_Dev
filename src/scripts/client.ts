@@ -284,10 +284,28 @@ export async function restoreSession(
 
 
 
+//list available streams
+export function getAvailableConnections() {
+    return {
+        ...webrtc.rtc
+    };
+}
 
+export function subscribeToStream(
+    stream:Sensors|'chat'|'alerts', 
+    onchange:(result:any)=>void, 
+    streamId?:string
+) {
+    return state.subscribeEvent(streamId ? streamId+stream : stream, onchange);
+}
 
-
-
+export function unsubscribeFromStream(
+    stream:Sensors|'chat'|'alerts',
+    sub:number|undefined, 
+    streamId?:string
+) {
+    return state.unsubscribeEvent(streamId ? streamId+stream : stream, sub);
+}
 
 
 

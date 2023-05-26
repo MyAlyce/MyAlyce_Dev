@@ -164,7 +164,6 @@ export async function connectDevice(mode:'emg'|'other'|'all'='other') {
             }
         }
     );
-
     
     const sps = 250;
     const gain = 32;

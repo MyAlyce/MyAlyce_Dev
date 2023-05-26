@@ -26,11 +26,11 @@
   "author": "",
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "@capacitor-community/bluetooth-le": "~2.1.0",
+    "@capacitor-community/bluetooth-le": "~3.0.0",
     "@giveback007/fitbit-api": "^0.1.0",
     "bootstrap": "^5.2.3",
     "classnames": "^2.3.2",
-    "device-decoder": "~0.4.24",
+    "device-decoder": "~0.5.0",
     "graphscript": "~0.2.122",
     "graphscript-services": "~0.2.136",
     "graphscript-services.storage": "~0.2.129",
@@ -45,10 +45,10 @@
     "webgl-plot-utils": "~0.3.20"
   },
   "devDependencies": {
-    "@capacitor/android": "~4.7.3",
-    "@capacitor/cli": "~4.7.3",
-    "@capacitor/core": "~4.7.3",
-    "@capacitor/ios": "~4.7.3",
+    "@capacitor/android": "~5.0.4",
+    "@capacitor/cli": "~5.0.4",
+    "@capacitor/core": "~5.0.4",
+    "@capacitor/ios": "~5.0.4",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "concurrently": "^8.0.1",
