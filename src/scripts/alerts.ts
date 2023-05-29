@@ -84,7 +84,7 @@ export function setupAlerts(
     if(!alerts || alerts.includes('breath')) {
         let node = graph.add(new BreathAlert(
             (event) => {
-                console.log("Heart Rate Alert:", event);
+                console.log("Breathing Alert:", event);
                 let sound = new Howl({src:'./sounds/alarm.wav'}); // Only play the sound if a value has been provided
                 sound.play(undefined,false);
             },
@@ -96,7 +96,7 @@ export function setupAlerts(
     if(!alerts || alerts.includes('fall')) {
         let node = graph.add(new FallAlert(
             (event) => {
-                console.log("Heart Rate Alert:", event);
+                console.log("Motion Alert:", event);
                 let sound = new Howl({src:'./sounds/alarm.wav'}); // Only play the sound if a value has been provided
                 sound.play(undefined,false);
             },

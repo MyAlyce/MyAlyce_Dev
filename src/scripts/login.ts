@@ -120,16 +120,20 @@ export const login = async (
 
 
 //logout the current realm user
-export const logout = async () => {
+export const logout = async (onLogout?:(result:any)=>void) => {
+    let res;
     if (!realm.currentUser) //if current user does not exist
-        return { type: 'FAIL' as const, data: { err: new Error('No User Logged In') } };
-    try {
+        res = { type: 'FAIL' as const, data: { err: new Error('No User Logged In') } };
+    else try {
         await realm.currentUser.logOut(); //realm function
-        return { type: 'LOGOUT' as const }
+        res = { type: 'LOGOUT' as const };
     } catch(err) {
         console.log(err);
-        return { type: 'FAIL' as const, data: { err: new Error('Failed to logout') } };
+        res = { type: 'FAIL' as const, data: { err: new Error('Failed to logout') } };
     }
+    
+    if(onLogout) onLogout(res);
+    return res;
 }
 
 

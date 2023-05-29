@@ -23,13 +23,14 @@ import {BFSRoutes} from 'graphscript-services.storage'//'../../../graphscript/sr
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
 import { workers } from 'device-decoder'
 
-import { RealmUser } from './login'
+import { RealmUser, logout } from './login'
 
 import config from '../../backend/serverconfig.js'
 import { DS } from 'graphscript-services/struct/datastructures/index'
 import { GDrive } from './drive'
 import { apiKey, googleClientID } from './gapi'
-import { demo } from './datacsv'
+import { demo, stopdemos } from './datacsv'
+import { disconnectDevice } from './device'
 
 
 const startDemo = true;
@@ -206,7 +207,14 @@ export const onLogout = (
     });
 }
 
-
+export const logoutSequence = () => {
+    if(state.data.demoing) {
+        stopdemos();
+    } else if (state.data.deviceConnected) {
+        disconnectDevice();
+    }
+    logout(onLogout);
+}
 
 
 //subscribe to the state so any and all changes are saved, can store multiple states (e.g. particular for pages or components)

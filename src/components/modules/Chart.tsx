@@ -10,6 +10,7 @@ import { max3010xChartSettings } from 'device-decoder/src/devices/max30102';
 import { mpu6050ChartSettings } from 'device-decoder/src/devices/mpu6050';
 import { bme280ChartSettings } from 'device-decoder/src/devices/bme280'
 import { ads131m08ChartSettings } from 'device-decoder/src/devices/ads131m08';
+import { Widget } from '../widgets/Widget';
 
 
 
@@ -181,9 +182,9 @@ export class Chart extends sComponent {
     }
     
     render() {
-        return (
+
+        let content = (
             <div>
-                <div>{ this.title }</div>
                 <div>
                     <div ref={ (ref) => {
                         ref?.appendChild(this.canvas); 
@@ -193,7 +194,13 @@ export class Chart extends sComponent {
                 </div>
                 </div>
             </div>
-            
+        );
+
+        return (
+            <Widget
+                title={this.title}
+                content={content}
+            />
         )
     }
 }

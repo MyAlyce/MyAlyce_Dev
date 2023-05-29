@@ -84,8 +84,6 @@ export async function connectDevice(mode:'emg'|'other'|'all'='other') {
 
     });
 
-    //Setup Alerts
-    let nodes = setupAlerts();
     (Devices['BLE']['nrf5x'] as any).namePrefix = "B";
 
 
@@ -144,7 +142,11 @@ export async function connectDevice(mode:'emg'|'other'|'all'='other') {
             //console.log(data);
             state.setValue('env', data);
         }
+
     }
+
+
+    let alertNodes; 
 
     device = await initDevice(
         Devices['BLE']['nrf5x'],
@@ -153,14 +155,16 @@ export async function connectDevice(mode:'emg'|'other'|'all'='other') {
             ondecoded:ondecoded,
             onconnect: () => {
                 state.setState({deviceConnected:true});
+                //Setup Alerts
+                alertNodes = setupAlerts();
             },
             ondisconnect: () => {
                 state.setState({deviceConnected:false});
-                for(const key in nodes) {
-                    graph.remove(key,true);
+                if(alertNodes) for(const key in alertNodes) {
+                    graph.remove(alertNodes[key]);
                 }
-                hrworker.terminate();
-                brworker.terminate();
+                hrworker?.terminate();
+                brworker?.terminate();
             }
         }
     );

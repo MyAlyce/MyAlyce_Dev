@@ -170,7 +170,7 @@ export function stopdemos() {
     let detected = {} as any;
     for(const key in demos) {
         demos[key].running = false;
-        detected['detected'+key.toUpperCase()] = true;
+        detected['detected'+key.toUpperCase()] = false;
     }
     state.setState({deviceConnected:false, demoing:false, ...detected});
 }
