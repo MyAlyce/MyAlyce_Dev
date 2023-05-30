@@ -141,7 +141,7 @@ export class App extends sComponent {
                             <DropdownDrawer 
                                 direction={'up'}
                                 content={[
-                                    <div className="stream-select">
+                                    <div className="stream-select" key={1}>
                                         {/** Device Connect */}
                                         {   
                                             this.state.deviceMode === 'My Device' ? 

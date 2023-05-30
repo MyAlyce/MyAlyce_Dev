@@ -102,10 +102,12 @@ let makeSocket = () => {
         path:'wss'
     });
     
-    //debug
     usersocket.socket.addEventListener('message', (ev) => {
         let data = ev.data;
-        console.log(ev.data);
+        
+        //debug
+        //console.log(ev.data);
+        
         if(data.includes('{')) data = JSON.parse(data);
         client.baseServerCallback(ev.data)
     });

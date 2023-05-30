@@ -354,7 +354,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
     }
 }
 
-export async function stopRecording(streamId?:string, dir='data') {
+export async function stopRecording(streamId?:string, dir='data', folderListDir='data') {
     state.setState({isRecording:false});
 
     let promises = [] as any[];
@@ -425,7 +425,7 @@ export async function stopRecording(streamId?:string, dir='data') {
     if(promises.length > 0) await Promise.all(promises);
 
     let tempworker = workers.addWorker({ url: gsworker });
-    await tempworker.run('checkFolderList',[dir+'/folderList',name]);
+    await tempworker.run('checkFolderList',[folderListDir+'/folderList', name]);
 
     csvworkers[streamId+'chat']?.terminate();
     csvworkers[streamId ? streamId+'emg' : 'emg']?.terminate();
