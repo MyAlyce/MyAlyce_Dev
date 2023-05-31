@@ -138,19 +138,19 @@ export class Recordings extends sComponent {
                     filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'} 
                     dir={ dir }/>
                 {this.state.isRecording ? 
-                    <button onClick={()=>{stopRecording(this.state.activeStream, dir, client.currentUser.firstName+client.currentUser.lastName)}}> </button> : 
+                    <Button onClick={()=>{stopRecording(this.state.activeStream, dir, client.currentUser.firstName+client.currentUser.lastName)}}><Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>&nbsp;Pause</Button> : 
                     <div>
-                        <button onClick={()=>{
+                        <Button onClick={()=>{
                             this.record(this.state.activeStream,this.toggled,dir,dir
                         )}}>
-                            Record
-                        </button>
-                        <ToggleButtonGroup type="checkbox">
+                            <Icon.Circle className="align-text-bottom" size={20}></Icon.Circle>&nbsp;Record
+                        </Button>{' '}
+                        <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]} className="mb-2">
                         {
                             subscribable.map((v) => {
                                 this.toggled.push(v);
                                 return <ToggleButton
-                                    key={v}
+                                    id={v}
                                     value={v}
                                     onChange={(ev:any)=>{ 
                                         let idx = this.toggled.indexOf(v);
