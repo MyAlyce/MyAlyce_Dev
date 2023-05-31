@@ -7,12 +7,12 @@ export function UserLogin({name, picture}) {
 
   return (
     <CardGroup>
-    <Card>
+    <Card style={{ width: '5.3rem' }}>
       <Card.Body>
       <img className="rounded-circle" width="50" alt={name} src={picture} />
       </Card.Body>
     </Card>
-    <Card>
+    <Card style={{ width: '12rem' }}>
       <Card.Body>
       <Card.Subtitle>{name}</Card.Subtitle>
           <Card.Text>
