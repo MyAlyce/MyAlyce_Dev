@@ -27,10 +27,10 @@ export class Dashboard extends sComponent {
                 <div className="main-content">
                     {/* Widgets */}
                     <div className="device-section">
-                        {/* Chart */}
+                        {/* Charts and stats */}
                        <Device
                             streamId={this.state.activeStream}
-                            //sensors={['ecg','emg',]}
+                            sensors={['ppg','hr']}
                         />
                     </div>
                     <div className="note-taking-section">

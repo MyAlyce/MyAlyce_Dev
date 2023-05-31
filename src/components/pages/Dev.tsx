@@ -23,20 +23,20 @@ export class Dev extends sComponent {
         <>
           <Header />
           <div className="container-fluid">
-      <div className="row">
-      <Navigation />
-      <hr></hr>
-      <UserBar/>
-      <hr></hr>
-      <Statistics />
-      <hr></hr>
-      <InfoLog />
-      <hr></hr>
-      <InfoLogPlayer/>
-      <MiniSurvey />
-      <Footer />
-      </div>
-    </div>
+          <div className="row">
+          <Navigation />
+          <hr></hr>
+          <UserBar/>
+          <hr></hr>
+          <Statistics />
+          <hr></hr>
+          <InfoLog />
+          <hr></hr>
+          <InfoLogPlayer/>
+          <MiniSurvey />
+          <Footer />
+          </div>
+        </div>
           </>
         )
     }

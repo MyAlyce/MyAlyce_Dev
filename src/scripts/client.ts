@@ -48,6 +48,11 @@ export let driveInstance:GDrive;
 
 export type Sensors = 'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg';
 
+export type Streams = ('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg'|'chat'|'events'|'alerts')[];
+
+export const SensorDefaults = ['emg','ppg','breath','hr','imu','env','ecg'] as Sensors[];
+export const StreamDefaults = ['emg','ppg','breath','hr','imu','env','ecg','chat','events','alerts'] as any as Streams[];
+
 export const graph = new Router({
     services:{
         client,

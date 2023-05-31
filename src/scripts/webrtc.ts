@@ -17,8 +17,31 @@ const webrtcData = {
 state.setState(webrtcData);
 
 
-export type RTCCallProps = WebRTCProps & {caller:string, firstName:string, lastName:string, pictureUrl:string, socketId:string, messages:{message:string, from:string, timestamp:number}[], videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
-export type RTCCallInfo = WebRTCInfo & {caller:string, firstName:string, lastName:string, pictureUrl:string, socketId:string,  messages:{message:string, from:string, timestamp:number}[],videoSender?:RTCRtpSender, audioSender?:RTCRtpSender}
+export type RTCCallProps = WebRTCProps & {
+    caller:string, 
+    firstName:string, 
+    lastName:string, 
+    pictureUrl:string, 
+    socketId:string, 
+    messages:{message:string, from:string, timestamp:number}[], 
+    events:{message:string, from:string, timestamp:number}[], 
+    alerts:{message:string, from:string, timestamp:number}[], 
+    videoSender?:RTCRtpSender, 
+    audioSender?:RTCRtpSender
+}
+
+export type RTCCallInfo = WebRTCInfo & {
+    caller:string, 
+    firstName:string, 
+    lastName:string,
+    pictureUrl:string, 
+    socketId:string,  
+    messages:{message:string, from:string, timestamp:number}[],
+    events:{message:string, from:string, timestamp:number}[], 
+    alerts:{message:string, from:string, timestamp:number}[], 
+    videoSender?:RTCRtpSender, 
+    audioSender?:RTCRtpSender
+}
 
 
 //spaghetti
@@ -213,6 +236,43 @@ export let answerCall = async (call:RTCCallProps) => {
 
             if(ev.data.alert) {
                 state.setValue(call._id+'alert',ev.data.alert);
+
+                if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
+                const message = {message:ev.data.event, timestamp:Date.now(), from:from};
+                (call as RTCCallInfo).events.push(message);
+                
+                //if(state.data.isRecording) {
+                    if(!csvworkers[call._id+'alerts']) {
+                        csvworkers[call._id+'alerts'] =  workers.addWorker({ url: gsworker });
+                        csvworkers[call._id+'alerts'].run('createCSV', [
+                            `${call.firstName+call.lastName}/Alerts_${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
+                            [
+                                'timestamp','from','message'
+                            ]
+                        ]);
+                    }
+                    csvworkers[call._id+'alerts'].run('appendCSV',message);
+                //}
+
+            }
+            if(ev.data.event) {
+
+                if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
+                const message = {message:ev.data.event, timestamp:Date.now(), from:from};
+                (call as RTCCallInfo).events.push(message);
+                
+                //if(state.data.isRecording) {
+                    if(!csvworkers[call._id+'events']) {
+                        csvworkers[call._id+'events'] =  workers.addWorker({ url: gsworker });
+                        csvworkers[call._id+'events'].run('createCSV', [
+                            `${call.firstName+call.lastName}/Events_${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
+                            [
+                                'timestamp','from','message'
+                            ]
+                        ]);
+                    }
+                    csvworkers[call._id+'events'].run('appendCSV',message);
+                //}
             }
             if(ev.data.message) {
 
@@ -226,8 +286,7 @@ export let answerCall = async (call:RTCCallProps) => {
                         csvworkers[call._id+'chat'].run('createCSV', [
                             `${call.firstName+call.lastName}/Chat_${new Date().toISOString()}${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
                             [
-                                'timestamp',
-                                'from','message'
+                                'timestamp','from','message'
                             ]
                         ]);
                     }

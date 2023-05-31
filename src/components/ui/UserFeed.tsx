@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import * as Icon from 'react-feather';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Overlay from 'react-bootstrap/Overlay';
-import { StreamText } from './StreamText';
+import { StreamText } from '../modules/StreamText';
 
 export function UserFeed(props:{streamId?:string}) {
   const [show, setShow] = useState(false);

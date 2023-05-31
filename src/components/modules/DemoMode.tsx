@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { sComponent } from '../state.component';
 import { demo, demoFile, demos, stopdemos } from '../../scripts/datacsv';
-import {state} from '../../scripts/client'
+import {Sensors, state} from '../../scripts/client'
 import { disconnectDevice } from '../../scripts/device';
 
 export class Demo extends sComponent {
@@ -16,7 +16,7 @@ export class Demo extends sComponent {
         this.state.demos = demos;
     }
 
-    startDemos(sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[]) {
+    startDemos(sensors?:Sensors[]) { //('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[]
         demo(sensors);
     }
 

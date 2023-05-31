@@ -1,6 +1,6 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import {client, state, webrtc} from '../../scripts/client'
+import {SensorDefaults, client, state, webrtc} from '../../scripts/client'
 
 import { BFSRoutes, csvRoutes } from 'graphscript-services.storage'//'../../../../graphscript/src/extras/index.storage.services'//
 
@@ -18,7 +18,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import * as Icon from 'react-feather'
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { StreamToggle } from '../modules/StreamToggle';
 
 //add google drive backup/sync since we're using google accounts
 
@@ -33,7 +33,7 @@ export class Recordings extends sComponent {
 
     dir?:string    
     csvworker:WorkerInfo;
-    toggled=[] as any[];
+    toggled=[...SensorDefaults] as any[];
 
     constructor(props:{dir?:string}) {
         super(props);
@@ -127,48 +127,34 @@ export class Recordings extends sComponent {
 
         let dir =  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName;
 
-        let subscribable = ['emg','ppg','breath','hr','imu','env','ecg'];
-        this.toggled.length = 0;
-
         return (
             <div className='container-fluid'>
                 <h1>Recording Manager</h1>
                 <NoteTaking 
-                    streamId={this.state.activeStream} 
-                    filename={this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv'} 
+                    streamId={ this.state.activeStream } 
+                    filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
                     dir={ dir }/>
                 {this.state.isRecording ? 
-                    <Button onClick={()=>{stopRecording(this.state.activeStream, dir, client.currentUser.firstName+client.currentUser.lastName)}}><Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>&nbsp;Pause</Button> : 
-                    <div>
+                    <Button onClick={()=>{ 
+                        stopRecording(this.state.activeStream, dir, client.currentUser.firstName+client.currentUser.lastName) 
+                    }}>
+                        <Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>&nbsp;Pause
+                    </Button> 
+                        : 
+                    <>
                         <Button onClick={()=>{
-                            this.record(this.state.activeStream,this.toggled,dir,dir
-                        )}}>
+                            this.record(this.state.activeStream,this.toggled,dir,dir)}}
+                        >
                             <Icon.Circle className="align-text-bottom" size={20}></Icon.Circle>&nbsp;Record
                         </Button>{' '}
-                        <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]} className="mb-2">
-                        {
-                            subscribable.map((v) => {
-                                this.toggled.push(v);
-                                return <ToggleButton
-                                    id={v}
-                                    value={v}
-                                    onChange={(ev:any)=>{ 
-                                        let idx = this.toggled.indexOf(v);
-                                        if(idx < 0) {
-                                            ev.currentTarget.checked = true;
-                                            this.toggled.push(v);
-                                        }
-                                        if(idx > -1) {
-                                            ev.currentTarget.checked = false;
-                                            this.toggled.splice(idx, 1);
-                                        }
-                                    }}
-                                >{v.toUpperCase()}</ToggleButton>
-                            })
-                        }
-                        </ToggleButtonGroup>
-
-                    </div> 
+                        <StreamToggle 
+                            toggled={this.toggled}
+                            subscribable={SensorDefaults}
+                            onChange = {(ev:any)=>{ 
+                                this.setState({});
+                            }}
+                        />
+                    </> 
                     }
                 Select Folder: 
                 <select onChange={(ev)=>{ this.dir = ev.target.value; this.listRecordings(); }}>

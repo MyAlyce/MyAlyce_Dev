@@ -2,7 +2,8 @@ import React, {Component}  from 'react'
 
 
 import { Chart } from './Chart';
-import { state } from '../../scripts/client';
+import { SensorDefaults, Sensors, state } from '../../scripts/client';
+import { StreamToggle } from './StreamToggle';
 
 
 
@@ -36,8 +37,8 @@ export class ChartGroup extends Component<{[key:string]:any}> {
         this.unmounted = true;
     }
 
-    constructCharts(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[]) {
-        if(!sensors || sensors?.includes('emg')) {
+    constructCharts(streamId?:string, sensors?:Sensors[]) { //('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[]
+        if(!this.activeCharts['emg'] && (!sensors || sensors.includes('emg'))) {
             let makeChart = () => {
                 this.activeCharts['emg'] = <Chart sensors={['emg']} streamId={streamId} title={"EMG"} key='emg'/>;
                 if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})}); //this call fired repeatedly will only fire once on the next frame
@@ -45,9 +46,8 @@ export class ChartGroup extends Component<{[key:string]:any}> {
             if(state.data[streamId ? streamId+'detectedEMG' : 'detectedEMG']) {
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedEMG' : 'detectedEMG', makeChart);
-            
         } 
-        if (!sensors || sensors?.includes('ecg')) {
+        if (!this.activeCharts['ecg'] && (!sensors || sensors.includes('ecg'))) {
             let makeChart = () => {
                 this.activeCharts['ecg'] = <Chart sensors={['ecg']} streamId={streamId} title={"ECG"} key='ecg'/>;
                 if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})}); //this call fired repeatedly will only fire once on the next frame
@@ -56,7 +56,7 @@ export class ChartGroup extends Component<{[key:string]:any}> {
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedEMG' : 'detectedEMG', makeChart);
         }
-        if(!sensors || sensors?.includes('ppg')) {
+        if(!this.activeCharts['ppg'] && (!sensors || sensors.includes('ppg'))) {
             let makeChart = () => {
                 this.activeCharts['ppg'] = <Chart sensors={['ppg']} streamId={streamId} title={"Pulse Oximeter"} key='ppg'/>;
                 if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})});
@@ -65,7 +65,7 @@ export class ChartGroup extends Component<{[key:string]:any}> {
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeChart);
         }
-        if(!sensors || sensors?.includes('hr')) {
+        if(!this.activeCharts['hr'] && (!sensors || sensors.includes('hr'))) {
             let makeChart = () => {
                 this.activeCharts['hr'] = <Chart sensors={['hr']} streamId={streamId} title={"Heart Rate & HRV"} key='hr'/>;
                 if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})});
@@ -74,7 +74,7 @@ export class ChartGroup extends Component<{[key:string]:any}> {
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeChart);
         }
-        if(!sensors || sensors?.includes('breath')) {
+        if(!this.activeCharts['breath'] && (!sensors || sensors.includes('breath'))) {
             let makeChart = () => {
                 this.activeCharts['breath'] = <Chart sensors={['breath']} streamId={streamId} title={"Breathing"} key='br'/>;
                 if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})}); 
@@ -83,7 +83,7 @@ export class ChartGroup extends Component<{[key:string]:any}> {
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedPPG' : 'detectedPPG', makeChart);
         }
-        if(!sensors || sensors?.includes('imu')) {
+        if(!this.activeCharts['imu'] && (!sensors || sensors.includes('imu'))) {
             let makeChart = () => {
                 this.activeCharts['imu'] = <Chart sensors={['imu']} streamId={streamId} title={"Accelerometer"} key='imu'/>;
                 if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})});
@@ -91,9 +91,8 @@ export class ChartGroup extends Component<{[key:string]:any}> {
             if(state.data[streamId ? streamId+'detectedIMU' : 'detectedIMU']) {
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedIMU' : 'detectedIMU', makeChart);
-              
         }
-        if(!sensors || sensors?.includes('env')) {
+        if(!this.activeCharts['env'] && (!sensors || sensors.includes('env'))) {
             let makeChart = () => {
                 this.activeCharts['env'] = <Chart sensors={['env']} streamId={streamId} title={"Environment"} key='env'/>;
                 if(!this.unmounted) requestAnimationFrame(()=>{this.setState({})});
@@ -101,17 +100,30 @@ export class ChartGroup extends Component<{[key:string]:any}> {
             if(state.data[streamId ? streamId+'detectedENV' : 'detectedENV']) {
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedENV' : 'detectedENV', makeChart);
-            
         }
     }
 
-    unsubscribeCharts() {
-
+    unsubscribeCharts(sensors?:Sensors[]) { //('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[]
+        
     }
 
     render() {
         return (
             <div>
+                <StreamToggle
+                    toggled={this.sensors}
+                    subscribable={SensorDefaults}
+                    onChange={(ev) => {
+                        if(ev.checked) {
+                            this.constructCharts(this.streamId, [ev.key as any]);
+                            this.setState({});
+                        } else {
+                            delete this.activeCharts[ev.key];
+                            this.setState({});
+                        }
+                        console.log(this.sensors);
+                    }}
+                />
                 <div>{
                     Object.keys(this.activeCharts).map((v) => {
                         return this.activeCharts[v];

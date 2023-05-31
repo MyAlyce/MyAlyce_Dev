@@ -31,6 +31,6 @@ export class StreamText extends sComponent{
 
         let result = this.objectKey ? this.state[this.stateKey]?.[this.objectKey] : this.state[this.stateKey];
 
-        return (<>{result}</>)
+        return (<>{typeof result === 'number' ? result.toFixed(3) : result}</>)
     }
 }

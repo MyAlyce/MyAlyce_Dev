@@ -144,22 +144,8 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
     renderInputSection() {
 
+        var localDatetime = JSON.stringify(new Date()).slice(1, 17);
         
-        var now = new Date();
-        var utcString = now.toISOString().substring(0,19);
-        var year = now.getFullYear();
-        var month = now.getMonth() + 1;
-        var day = now.getDate();
-        var hour = now.getHours();
-        var minute = now.getMinutes();
-        //var second = now.getSeconds();
-        var localDatetime = year + "-" +
-                      (month < 10 ? "0" + month.toString() : month) + "-" +
-                      (day < 10 ? "0" + day.toString() : day) + "T" +
-                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
-                      (minute < 10 ? "0" + minute.toString() : minute) +
-                      utcString.substring(16,19);
-
         const updateInputColor = (event: React.ChangeEvent<HTMLInputElement>) => {
             const value = parseInt(event.target.value);
             const color = getColorGradientRG(value);
