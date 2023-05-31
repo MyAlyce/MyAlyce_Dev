@@ -136,7 +136,7 @@ export class Chart extends sComponent {
             generateNewLines:false,
             cleanGeneration:false,
             worker:true,
-            mode:'sweep',
+            mode:  (this.sensors?.includes('hr') ||  this.sensors?.includes('breath')) ? undefined : 'sweep',
             sweepColor:'green'
         });
 
@@ -153,7 +153,7 @@ export class Chart extends sComponent {
         if(!this.sensors || this.sensors?.includes('hr')) {
             this.subscriptions.hr = state.subscribeEvent(this.streamId ? this.streamId+'hr' :'hr', (hr) => {
                 this.plotter.__operator(hr);
-            })
+            });
         }
         if(!this.sensors || this.sensors?.includes('breath')) {
             this.subscriptions.breath = state.subscribeEvent(this.streamId ? this.streamId+'breath' :'breath', (breath) => {
