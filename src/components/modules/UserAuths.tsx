@@ -157,6 +157,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
                 </tr>
             );
 
+            console.log(a);
         }); //get own auths
 
         let getAuthsFromRequest = (req) => {
@@ -185,12 +186,11 @@ export class UserAuths extends Component<{[key:string]:any}> {
         }) => {
 
             if(auths.find((a) => {
-                if(a.status === 'OKAY' && a.authorizerId === req.requesting && a.authorizedId === req.receiving) {
+                if(a.status === 'OKAY' && ((a.authorizerId === req.receiving && a.authorizedId === req.requesting) || (a.authorizerId === req.requesting && a.authorizedId === req.receiving))) {
                     return true;
                 }
             })) {
                 await client.deleteData([req]);
-                this.setState({});
             }
             else {
 
@@ -227,15 +227,13 @@ export class UserAuths extends Component<{[key:string]:any}> {
             _id:string
         }) => {
             
-
             if(auths.find((a) => {
-                if(a.status === 'OKAY' && a.authorizerId === req.receiving && a.authorizedId === req.requesting) {
+                if(a.status === 'OKAY' && ((a.authorizerId === req.receiving && a.authorizedId === req.requesting) || (a.authorizerId === req.requesting && a.authorizedId === req.receiving))) {
                     return true;
                 }
                 
             })) {
                 await client.deleteData([req]);
-                this.setState({});
             }
             else {
                 let accept = () => {
