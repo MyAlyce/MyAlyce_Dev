@@ -15,7 +15,7 @@ import {
 } from 'graphscript'//'../../../graphscript/index'//
 
 //isolated import for dev with src
-import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//
+import { StructFrontend } from '../../../graphscript/src/extras/index.services'//'graphscript-services'//
 import {BFSRoutes} from 'graphscript-services.storage'//'../../../graphscript/src/extras/index.storage.services'//
 
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'

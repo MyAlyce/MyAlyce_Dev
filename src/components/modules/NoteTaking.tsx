@@ -122,7 +122,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
             note.timestamp, 
             undefined, 
             note.grade 
-        );
+        ) as EventStruct;
 
         let from;
         if(this.streamId) {

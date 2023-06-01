@@ -107,7 +107,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
                         }
                     );
 
-                    this.listAuths();
+                    await this.listAuths();
                     res(true);
                 });
                 
@@ -125,10 +125,11 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
         //my authorizations
         let auths = client.getLocalData('authorization', {authorizedId:client.currentUser._id}); //await client.getAuthorizations();
+        let secondaryAuths = client.getLocalData('authorization', {authorizerId:client.currentUser._id}); //await client.getAuthorizations();
 
-        let userIds = auths.filter(a => { if(a.status === 'OKAY') return true; }).map((v) => {return v.authorizerId});
+        let userIds = auths.map((v) => {return v.authorizerId});
 
-        let info = await client.getUsers(userIds,true); //get profile pics and stuff
+        let info = await client.getUsers(userIds, true); //get profile pics and stuff
 
         let onlineUsers = await usersocket.run('usersAreOnline',[userIds]);
 
@@ -149,10 +150,13 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     {a.status === 'OKAY' ? <td>Online: {idx > -1 ? `${onlineUsers[idx]}` : 'false'}</td> : <td>Status: {a.status}</td>}
                     <td><button onClick={async ()=>{ 
                         await client.deleteAuthorization(a._id); 
-                        this.listAuths();
+                        let secondaryAuth = secondaryAuths.find((a2) => {if(a2.authorizedId === a.authorizerId) return true; });
+                        if(secondaryAuth) await client.deleteAuthorization(secondaryAuth._id);
+                        setTimeout(()=>{this.listAuths()},100); //give time for server to delete local data (hacky)
                     }}>❌</button></td>
                 </tr>
             );
+
         }); //get own auths
 
         let getAuthsFromRequest = (req) => {
@@ -168,6 +172,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
         //my requests
         let authRequests = await client.getData('authRequest', undefined, {requesting: client.currentUser._id});
+        
         if(authRequests) await Promise.all(authRequests.map(async (req:{
             requesting:string, //them
             receiving:string //me
@@ -180,15 +185,18 @@ export class UserAuths extends Component<{[key:string]:any}> {
         }) => {
 
             if(auths.find((a) => {
-                
                 if(a.status === 'OKAY' && a.authorizerId === req.requesting && a.authorizedId === req.receiving) {
                     return true;
                 }
-                
             })) {
-                await client.deleteData([req, ...getAuthsFromRequest(req)]);
+                await client.deleteData([req]);
+                this.setState({});
             }
             else {
+
+                let userInfo = info.find((v) => {
+                    if(v._id === req.receiving) return true;
+                });
 
                 let cancelRequest = async () => {
                     await client.deleteData([req, ...getAuthsFromRequest(req)]);
@@ -197,7 +205,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
     
                 this.sentRequests.push(
                     <div key={req._id}>
-                        To: {req.receivingName}
+                        To:  <div className="float-start"><img className="rounded-circle" width="50" src={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic} /></div> {req.receivingName}
                         <Button onClick={cancelRequest}>❌</Button>
                     </div>
                 );
@@ -206,7 +214,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
         }));
 
         //other people's requests
-        let otherAuthRequests = await client.getData('authRequest', undefined, {receiving: client.currentUser._id})
+        let otherAuthRequests = await client.getData('authRequest', undefined, {receiving: client.currentUser._id});
         if(otherAuthRequests) await Promise.all(otherAuthRequests.map( async (req:{
             requesting:string, //them
             requestingPictureUrl?:string,
@@ -226,54 +234,34 @@ export class UserAuths extends Component<{[key:string]:any}> {
                 }
                 
             })) {
-                await client.deleteData([req, ...getAuthsFromRequest(req)]);
-                this.setState({})
+                await client.deleteData([req]);
+                this.setState({});
             }
             else {
-
-                let userInfo = info.find((v) => {
-                    if(v._id === req.receiving) return true;
-                });
-
-
-                let cancelRequest = async () => {
-                    await client.deleteData([req, ...getAuthsFromRequest(req)]);
-                    this.listAuths();
+                let accept = () => {
+                    this.createAuth(req.requesting, req.firstName + req.lastName ? ' '+req.lastName : '', true).then(() => {
+                        client.deleteData([req]).then(()=>{
+                           this.listAuths();
+                        });
+                    });
+                    
                 }
-    
-                this.sentRequests.push(
+
+                let reject = () => {
+                    client.deleteData([req, ...getAuthsFromRequest(req)]).then(()=>{
+                        this.listAuths();
+                    });
+                }
+
+                this.userRequests.push(
                     <div key={req._id}>
-                        To: <div className="float-start"><img className="rounded-circle" width="50" src={userInfo.pictureUrl ? userInfo.pictureUrl : defaultProfilePic} /></div> {req.receivingName}
-                        <Button onClick={cancelRequest}>❌</Button>
+                        From: <div className="float-start"><img className="rounded-circle" width="50" src={req.requestingPictureUrl ? req.requestingPictureUrl : defaultProfilePic} /></div> {req.firstName} {req.lastName}<br/>
+                        <Button onClick={accept}>✔️</Button>
+                        <Button onClick={reject}>❌</Button>
                     </div>
                 );
             }
 
-
-            let accept = () => {
-                this.createAuth(req.requesting, req.firstName + req.lastName ? ' '+req.lastName : '', true).then(() => {
-                    client.deleteData([req]).then(async ()=>{
-                        await this.listAuths();
-                        this.setState({});
-                    });
-                });
-                
-            }
-
-            let reject = () => {
-                client.deleteData([req, ...getAuthsFromRequest(req)]).then(async ()=>{
-                    await this.listAuths();
-                    this.setState({});
-                });
-            }
-
-            this.userRequests.push(
-                <div key={req._id}>
-                    From: <div className="float-start"><img className="rounded-circle" width="50" src={req.requestingPictureUrl ? req.requestingPictureUrl : defaultProfilePic} /></div> {req.firstName} {req.lastName}<br/>
-                    <Button onClick={accept}>✔️</Button>
-                    <Button onClick={reject}>❌</Button>
-                </div>
-            );
         }));
         
         this.setState({});

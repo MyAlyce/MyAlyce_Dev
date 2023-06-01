@@ -80,7 +80,6 @@ export class UserSearch extends Component<{onClick:(ev)=>void}> {
                                 onChange={()=>{}} 
                             >
                                 { this.queryResults.map(v => {
-                                        console.log(v);
                                         return v;
                                     }) }
                             </Form.Select>
