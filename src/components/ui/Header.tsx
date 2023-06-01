@@ -7,7 +7,6 @@ import Badge from 'react-bootstrap/Badge';
 import * as Icon from 'react-feather';
 
 let myalyceLogo = './assets/myalyce.png';
-let profilePic = './assets/JoshBrew.jpg';
 
 export class Header extends sComponent {
 

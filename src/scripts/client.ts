@@ -46,6 +46,8 @@ export const webrtcData = {
     unansweredCalls:webrtc.unanswered as {[key:string]:WebRTCProps & {caller:string, firstName?:string, lastName?: string}}
 }
 
+export let defaultProfilePic = './assets/person.jpg';
+
 
 //list available streams
 export function getAvailableConnections() {

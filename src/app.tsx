@@ -158,7 +158,7 @@ export class App extends sComponent {
                                             }} 
                                         />
                                     </div>,
-                                    (<><br/><br/><br/></>) //pads it at the bottom to stay above the footer
+                                    (<span key={2}><br/><br/><br/></span>) //pads it at the bottom to stay above the footer
                                 ]}
                             />
                             <div style={{height:'50px'}}/>

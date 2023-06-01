@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/esm/Container';
 
-let profilePic = './assets/Person.jpg';
+import { defaultProfilePic } from '../../../scripts/client';
 
 export function UserBarExpanded() {
   return (
@@ -27,7 +27,7 @@ export function UserBarExpanded() {
       <Card.Body>
         <Card.Title>Joshua Brewster</Card.Title>
         <Card.Text>
-        <img className="rounded-circle" width="50" alt="Josh" src={profilePic} />
+        <img className="rounded-circle" width="50" alt="Josh" src={defaultProfilePic} />
          &nbsp; Notifications feed or any important data to be seen first.
         </Card.Text>
       </Card.Body>

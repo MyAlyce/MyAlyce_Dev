@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { client, usersocket } from '../../scripts/client';
+import { client, defaultProfilePic, usersocket } from '../../scripts/client';
 import Button from 'react-bootstrap/Button';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
 import { UserSearch } from './UserSearch';
@@ -97,6 +97,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
                         'authRequest',
                         {
                             requesting:client.currentUser._id, //this will cause this user to receive a notification
+                            requestingPictureUrl:client.currentUser.pictureUrl,
                             receiving:userId,
                             receivingName:name,
                             users:[userId,client.currentUser._id],
@@ -125,20 +126,25 @@ export class UserAuths extends Component<{[key:string]:any}> {
         //my authorizations
         let auths = client.getLocalData('authorization', {authorizedId:client.currentUser._id}); //await client.getAuthorizations();
 
-        let userIds = auths.filter(a => { if(a.status === 'OKAY') return true; })
+        let userIds = auths.filter(a => { if(a.status === 'OKAY') return true; });
+
+        let info = await client.getUsers(userIds,true); //get profile pics and stuff
 
         let onlineUsers = await usersocket.run('usersAreOnline',[userIds]);
 
         auths?.forEach((a:AuthorizationStruct) => {
             
             let idx = userIds.indexOf(a.authorizerId);
+            let userInfo = info.find((v) => {
+                if(v._id === a.authorizerId) return true;
+            });
 
             this.existingAuths.push( //lumping both auths into one for a more typical "friend" connection, need to toggle permissions tho
                 <tr key={a._id} id={this.unique+a._id}>
                     {/* <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
                         return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
                     })}</td> */}
-                    <td>User: {a.authorizerName}</td>
+                    <td>User: <div className="float-start"><img className="rounded-circle" width="50" src={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic} /></div> {a.authorizerName}</td>
                     {a.status === 'OKAY' ? <td>Online: {idx > -1 ? `${onlineUsers[idx]}` : 'false'}</td> : <td>Status: {a.status}</td>}
                     <td><button onClick={()=>{ 
                         client.deleteAuthorization(a._id,()=>{ 
@@ -205,6 +211,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
         let otherAuthRequests = await client.getData('authRequest', undefined, {receiving: client.currentUser._id})
         if(otherAuthRequests) await Promise.all(otherAuthRequests.map( async (req:{
             requesting:string, //them
+            requestingPictureUrl?:string,
             receiving:string //me
             receivingName:string,
             users:string, //this will cause this user to receive a notification
@@ -258,7 +265,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
             this.userRequests.push(
                 <div key={req._id}>
-                    User: {req.firstName} {req.lastName}<br/>
+                    From: <div className="float-start"><img className="rounded-circle" width="50" src={req.requestingPictureUrl ? req.requestingPictureUrl : defaultProfilePic} /></div> {req.firstName} {req.lastName}<br/>
                     <Button onClick={accept}>✔️</Button>
                     <Button onClick={reject}>❌</Button>
                 </div>
