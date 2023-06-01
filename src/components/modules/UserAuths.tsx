@@ -126,7 +126,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
         //my authorizations
         let auths = client.getLocalData('authorization', {authorizedId:client.currentUser._id}); //await client.getAuthorizations();
 
-        let userIds = auths.filter(a => { if(a.status === 'OKAY') return true; });
+        let userIds = auths.filter(a => { if(a.status === 'OKAY') return true; }).map((v) => {return v.authorizerId});
 
         let info = await client.getUsers(userIds,true); //get profile pics and stuff
 
@@ -135,6 +135,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
         auths?.forEach((a:AuthorizationStruct) => {
             
             let idx = userIds.indexOf(a.authorizerId);
+            
             let userInfo = info.find((v) => {
                 if(v._id === a.authorizerId) return true;
             });
@@ -220,6 +221,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
             lastName:string,
             _id:string
         }) => {
+            
 
             if(auths.find((a) => {
                 if(a.status === 'OKAY' && a.authorizerId === req.receiving && a.authorizedId === req.requesting) {
@@ -232,6 +234,11 @@ export class UserAuths extends Component<{[key:string]:any}> {
             }
             else {
 
+                let userInfo = info.find((v) => {
+                    if(v._id === req.receiving) return true;
+                });
+
+
                 let cancelRequest = async () => {
                     await client.deleteData([req, ...getAuthsFromRequest(req)]);
                     this.listAuths();
@@ -239,7 +246,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
     
                 this.sentRequests.push(
                     <div key={req._id}>
-                        To: {req.receivingName}
+                        To: <div className="float-start"><img className="rounded-circle" width="50" src={userInfo.pictureUrl ? userInfo.pictureUrl : defaultProfilePic} /></div> {req.receivingName}
                         <Button onClick={cancelRequest}>❌</Button>
                     </div>
                 );
