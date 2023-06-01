@@ -2,6 +2,7 @@
 - styling, clean generic crm look like adminlte or google analytics
 - webrtc ux/ui. Make calling yourself its own separate deal from calling other users (since its just setting up a remote connection for yourself)
 - animation
+- fix chart scaling so the leading/trailing zeros don't make it useless for a few seconds
 
 ### Scripting/Events/State
 
