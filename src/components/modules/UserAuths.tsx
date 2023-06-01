@@ -88,9 +88,9 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     client.currentUser._id,
                     'Me',
                     { 'peer':true }
-                ).then(()=>{ 
+                ).then(async ()=>{ 
 
-                    if(!confirming) client.addStruct(
+                    if(!confirming) await client.addStruct(
                         'authRequest',
                         {
                             requesting:client.currentUser._id, //this will cause this user to receive a notification
