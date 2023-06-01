@@ -130,12 +130,10 @@ export async function startCall(userId) {
             
             const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
 
-            console.log(ev.channel);
-
-            ev.channel.addEventListener('message', (dev) => { 
+            call.ondata = (dev) => {
                 let data = JSON.parse(dev.data);
                 onrtcdata(call,from,data);
-            });
+            }
 
         },
         ontrack:(ev) => {
@@ -243,15 +241,14 @@ export let answerCall = async (call:RTCCallProps) => {
         //data channel streams the device data
         enableDeviceStream(call._id); //enable my device to stream data to this endpoint
 
-        const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
-
-        console.log(ev.channel);
-
-        ev.channel.addEventListener('message', (dev) => { 
-            let data = JSON.parse(dev.data);
-            onrtcdata(call,from,data);
-        });
     };
+
+    const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
+
+    call.ondata = (dev) => { 
+        let data = JSON.parse(dev.data);
+        onrtcdata(call,from,data);
+    }
 
     let rtc = await webrtc.answerCall(call as any);
 

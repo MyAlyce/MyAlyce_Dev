@@ -230,17 +230,23 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
             this.setState({
                 chartDataDiv:createStreamChart(call)
             });
-
-            ev.channel.addEventListener('message',ondata);
         };
 
-        call.rtc.addEventListener('datachannel', datachannel);
+        if(call.ondatachannel) {
+            let oldondatachannel = call.ondatachannel;
+            let fn = datachannel;
+            datachannel = (ev) => {
+                (oldondatachannel as any)(ev);
+                fn(ev);
+            }
+        } else call.ondatachannel = datachannel;
+
+        call.ondata = ondata;
 
         if(call.channels) Object.keys(call.channels).forEach((key) => {
             (call.channels as any)[key].addEventListener('message',ondata);
         }) 
         
-
         let ontrack = (ev) => {
             //received a media track, e.g. audio or video
             //video/audio channel, if video add a video tag, if audio make the audio context
