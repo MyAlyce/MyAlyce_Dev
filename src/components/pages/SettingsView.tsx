@@ -30,7 +30,7 @@ export class SettingsView extends sComponent  {
         }
 
         return (
-        <div className='container-fluid'>
+        <div className='container-fluid settings'>
                 <h1>Settings</h1>
                 <UserAuths/>
         </div>
