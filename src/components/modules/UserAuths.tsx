@@ -156,8 +156,6 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     }}>❌</button></td>
                 </tr>
             );
-
-            console.log(a);
         }); //get own auths
 
         let getAuthsFromRequest = (req) => {
