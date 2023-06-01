@@ -148,6 +148,11 @@ const DataServer = new Router({
         userIsOnline:function(userId) {
             return DataServer.users[userId] !== undefined; //check who is online
         },
+        usersAreOnline:function(userIds=[]) {
+            return userIds.map((userId) => {
+                return DataServer.users[userId] !== undefined; //check who is online
+            });
+        },
         getAllOnlineUsers:function(userIds?:string[]) { //dev
             if(userIds) {
                 let res = [] as string[];

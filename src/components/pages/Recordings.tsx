@@ -157,23 +157,23 @@ export class Recordings extends sComponent {
                                     }}
                                 />
                             </> 
-                            }
-                        <strong>Select Folder: </strong>
-                        <select onChange={(ev)=>{ this.dir = ev.target.value; this.listRecordings(); }}>
-                            { this.state.folders ? this.state.folders.map((v) => {
-                                return (<option value={v} key={v}>{v}</option>)
-                            }) : null }
-                        </select>
+                        }
                         </div>
                     </Card.Body>
                 </Card>
                 <h2>Recordings</h2>
                 <div>
-                <Card style={{ width: '40rem' }}>
-                    <Card.Header>Recordings:</Card.Header>
-                    { this.state.recordings ? this.state.recordings : "" }
-                </Card>
-                <div style={{height:'50px'}}/>
+                    <Card style={{ width: '40rem' }}>
+                        <Card.Header>
+                            <strong>Select Folder: </strong>
+                            <select onChange={(ev)=>{ this.dir = ev.target.value; this.listRecordings(); }}>
+                                { this.state.folders ? this.state.folders.map((v) => {
+                                    return (<option value={v} key={v}>{v}</option>)
+                                }) : null }
+                            </select>
+                        </Card.Header>
+                        { this.state.recordings ? this.state.recordings : "" }
+                    </Card>
                 </div>
             </div>
         )

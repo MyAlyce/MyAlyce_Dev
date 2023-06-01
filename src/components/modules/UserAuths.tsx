@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import { client } from '../../scripts/client';
+import { client, usersocket } from '../../scripts/client';
 import Button from 'react-bootstrap/Button';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
-import Form from 'react-bootstrap/Form';
+import { UserSearch } from './UserSearch';
 
 let personIcon = './assets/person.jpg';
 
@@ -13,7 +13,8 @@ export class UserAuths extends Component<{[key:string]:any}> {
     unique=`component${Math.floor(Math.random()*1000000000000000)}`;
 
     state = {
-        authRequests:undefined
+        authRequests:undefined,
+        searching:false
     }
 
     queryResults = [] as any[];
@@ -34,7 +35,11 @@ export class UserAuths extends Component<{[key:string]:any}> {
         this.queryResults = [];
         if(query) {
             let int = 0;
-            client.queryUsers(query, 0, 0).then((res) => {
+            client.queryUsers(
+                query, 
+                0, 
+                0 //eventually add pages for large results
+            ).then((res) => {
                 res?.forEach((user) => {
                     this.queryResults.push(
                         <option key={int} value={user._id}>
@@ -59,13 +64,11 @@ export class UserAuths extends Component<{[key:string]:any}> {
         }
     }
 
-    authFromSelect = () => {
-
-        let select = document.getElementById(this.unique+'select') as HTMLSelectElement;
-        let userId = select.value;
-        let name = select.options[select.selectedIndex].innerText;
-        
-        this.createAuth(userId,name);
+    authFromSelect = (ev:{userId:string,name:string}) => {
+        this.createAuth(
+            ev.userId, 
+            ev.name
+        );
     }
 
     createAuth = (userId, name, confirming=false) => {
@@ -114,28 +117,38 @@ export class UserAuths extends Component<{[key:string]:any}> {
     }
 
     listAuths = async () =>  {
+
         this.existingAuths = [];
         this.userRequests = [];
         this.sentRequests = [];
 
         //my authorizations
-        let auths = await client.getAuthorizations();
+        let auths = client.getLocalData('authorization', {authorizedId:client.currentUser._id}); //await client.getAuthorizations();
+
+        let userIds = auths.filter(a => { if(a.status === 'OKAY') return true; })
+
+        let onlineUsers = await usersocket.run('usersAreOnline',[userIds]);
+
         auths?.forEach((a:AuthorizationStruct) => {
-            this.existingAuths.push(
+            
+            let idx = userIds.indexOf(a.authorizerId);
+
+            this.existingAuths.push( //lumping both auths into one for a more typical "friend" connection, need to toggle permissions tho
                 <tr key={a._id} id={this.unique+a._id}>
-                    <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
+                    {/* <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
                         return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
-                    })}</td>
-                    <td>Authorized: ${a.authorizedName}</td>
-                    <td>Authorizer: ${a.authorizerName}</td>
-                    <td>Status: ${a.status}</td>
+                    })}</td> */}
+                    <td>User: {a.authorizerName}</td>
+                    {a.status === 'OKAY' ? <td>Online: {idx > -1 ? `${onlineUsers[idx]}` : 'false'}</td> : <td>Status: {a.status}</td>}
                     <td><button onClick={()=>{ 
                         client.deleteAuthorization(a._id,()=>{ 
-                            this.listAuths();
+                            client.deleteAuthorization(a.associatedAuthId,() => {
+                                this.listAuths();
+                            });
                         }); 
                     }}>❌</button></td>
                 </tr>
-            )
+            );
         }); //get own auths
 
         let getAuthsFromRequest = (req) => {
@@ -261,58 +274,36 @@ export class UserAuths extends Component<{[key:string]:any}> {
         return (
             <div id={this.unique}>
                 <h2>User Authorizations</h2>
-
+                <Button onClick={()=>{ this.setState({searching:!this.state.searching})}}>+</Button>
+                { this.state.searching ? 
+                    <>
+                        <UserSearch 
+                            onClick={this.authFromSelect}
+                        />
+                    </> : null
+                }
                 <div>
-                    <h3>Search Users</h3>
-                    <div>
-                    <Form>
-                        <Form.Group className="mb-3" controlId="searchInput">
-                            <Form.Label>Name or Email</Form.Label>
-                            <Form.Control 
-                                id={this.unique+'query'} 
-                                type="text" 
-                                defaultValue=""
-                                ref={this.ref as any}
-                                placeholder="Enter Name or Email" 
-                            />
-                        </Form.Group>
-                        <Button onClick={this.queryUsers} >Search</Button>
-                    </Form>
-                    </div>
-
-                    <h4>Results</h4>
-                    <div>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="searchResult">
-                                <Form.Select 
-                                    id={this.unique+'select'} 
-                                    onChange={()=>{}} 
-                                >
-                                    { this.queryResults.map(v => {
-                                            console.log(v);
-                                            return v;
-                                        }) }
-                                </Form.Select>
-                            </Form.Group>
-                            <Button onClick={this.authFromSelect}>Add Peer</Button>
-                        </Form>
-                    </div>
-                </div>
-
-                <div>
-                    <h3>Your Authorizations</h3>
-                    <div>
-                        <h4>Requests</h4>
+                    <h3>Your Connections</h3>
+                    {this.userRequests?.length > 0 ? 
+                       (
                         <div>
-                            {  this.userRequests  }
+                            <h4>Requests</h4>
+                            <div>
+                                {  this.userRequests  }
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <h4>Outgoing</h4>
-                        <div>
-                            {  this.sentRequests  }
-                        </div>
-                    </div>
+                        ) : null
+                    }
+                    { this.sentRequests?.length > 0 ? 
+                        (
+                            <div>
+                                <h4>Outgoing</h4>
+                                <div>
+                                    {  this.sentRequests  }
+                                </div>
+                            </div>
+                        ) : null
+                    }
                     <div>
                         <h4>Authorized</h4>
                         <table>
