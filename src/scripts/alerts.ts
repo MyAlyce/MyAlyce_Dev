@@ -74,9 +74,10 @@ export function onHRAlert(event,streamId?) {
     sound.play(undefined,false);
     showNotification("Heart Rate Alert:", `bpm: ${event.value}` );
 
+    recordAlert(event, streamId);
+
     //broadcast your own alerts
     if(!streamId) {
-        recordAlert(event);
         for(const key in webrtcData.availableStreams) {
             webrtcData.availableStreams[key].send({alert:event});
         }
@@ -94,9 +95,10 @@ export function onBreathAlert(event,streamId?) {
     sound.play(undefined,false);
     showNotification("Breathing Alert:", `bpm: ${event.value}` );
 
+    recordAlert(event, streamId);
+
     //broadcast your own alerts
     if(!streamId) {
-        recordAlert(event);
         for(const key in webrtcData.availableStreams) {
             webrtcData.availableStreams[key].send({alert:event});
         }
@@ -114,9 +116,10 @@ export function onFallAlert(event,streamId?) {
     sound.play(undefined,false);
     showNotification("Fall Alert:", `magnitude: ${event.value}` );
 
+    recordAlert(event, streamId);
+
     //broadcast your own alerts
     if(!streamId) {
-        recordAlert(event);
         for(const key in webrtcData.availableStreams) {
             webrtcData.availableStreams[key].send({alert:event});
         }

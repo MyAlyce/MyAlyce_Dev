@@ -44,7 +44,7 @@ export async function startCall(userId) {
     
     let nodes = setupAlerts(rtcId);
 
-    let rtc = await webrtc.openRTC({ 
+    let call = await webrtc.openRTC({ 
         _id:rtcId,
         onicecandidate:async (ev) => {
             if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
@@ -68,50 +68,72 @@ export async function startCall(userId) {
             }
         },
         ondatachannel: (ev) => {
-            console.log('Call started with', (rtc as RTCCallInfo).firstName, (rtc as RTCCallInfo).lastName);
+            console.log('Call started with', (call as RTCCallInfo).firstName, (call as RTCCallInfo).lastName);
 
-            webrtc.rtc[rtc._id as string].run('ping').then((res) => {
+            webrtc.rtc[call._id as string].run('ping').then((res) => {
                 console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
             });
 
             //the call is now live, add tracks
             //data channel streams the device data
-            enableDeviceStream(rtc._id); //enable my device to stream data to this endpoint
+            enableDeviceStream(call._id); //enable my device to stream data to this endpoint
             
+            const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
+
             ev.channel.onmessage = (ev) => { 
+                if(ev.data.alert) {
+
+                    if(!(call as RTCCallInfo).events) (call as RTCCallInfo).alerts = [] as any;
+                    (call as RTCCallInfo).alerts.push(ev.data.alert);
+    
+                    onAlert(ev.data.alert,call._id);
+    
+                    state.setValue(call._id+'alert',ev.data.alert);
+                }
+                if(ev.data.event) {
+    
+                    if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
+                    (call as RTCCallInfo).events.push(ev.data.event);
+                    
+                    recordEvent(from, ev.data.event, call._id);
+                }
                 if(ev.data.message) {
-
-                    if(!(rtc as RTCCallInfo).messages) (rtc as RTCCallInfo).messages = [] as any;
-                    (rtc as RTCCallInfo).messages.push({message:ev.data.message, timestamp:Date.now(), from:(rtc as RTCCallInfo).firstName + (rtc as RTCCallInfo).lastName});
-
+    
+                    if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
+                    ev.data.message.from = from;
+                    (call as RTCCallInfo).messages.push(ev.data.message);
+                    
+                    if(state.data.isRecording) {
+                        recordChat(from, ev.data.message, call._id);
+                    }
                 }
                 if(ev.data.emg) {
-                    if(!state.data[rtc._id+'detectedEMG']) state.setState({[rtc._id+'detectedEMG']:true});
-                    state.setValue(rtc._id+'emg', ev.data.emg);
+                    if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
+                    state.setValue(call._id+'emg', ev.data.emg);
                 } 
                 if (ev.data.ppg) {
-                    if(!state.data[rtc._id+'detectedPPG']) state.setState({[rtc._id+'detectedPPG']:true});
-                    state.setValue(rtc._id+'ppg', ev.data.ppg);
+                    if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
+                    state.setValue(call._id+'ppg', ev.data.ppg);
                 } 
                 if (ev.data.hr) {
-                    state.setValue(rtc._id+'hr', ev.data.hr);
+                    state.setValue(call._id+'hr', ev.data.hr);
                 } 
                 if (ev.data.hrv) {
-                    state.setValue(rtc._id+'hrv', ev.data.hrv);
+                    state.setValue(call._id+'hrv', ev.data.hrv);
                 } 
                 if (ev.data.breath) {
-                    state.setValue(rtc._id+'breath', ev.data.breath);
+                    state.setValue(call._id+'breath', ev.data.breath);
                 } 
                 if (ev.data.brv) {
-                    state.setValue(rtc._id+'brv', ev.data.brv);
+                    state.setValue(call._id+'brv', ev.data.brv);
                 } 
                 if (ev.data.imu) {
-                    if(!state.data[rtc._id+'detectedIMU']) state.setState({[rtc._id+'detectedIMU']:true});
-                    state.setValue(rtc._id+'imu', ev.data.imu);
+                    if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
+                    state.setValue(call._id+'imu', ev.data.imu);
                 } 
                 if (ev.data.env) {
-                    if(!state.data[rtc._id+'detectedENV']) state.setState({[rtc._id+'detectedENV']:true});
-                    state.setValue(rtc._id+'env', ev.data.env);
+                    if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
+                    state.setValue(call._id+'env', ev.data.env);
                 } //else if (ev.data.emg2) {}
             }
 
@@ -132,26 +154,26 @@ export async function startCall(userId) {
         // }
     });
 
-    rtc.onnegotiationneeded = async (ev, description) => {//both ends need to set this function up when adding audio and video tracks freshly
+    call.onnegotiationneeded = async (ev, description) => {//both ends need to set this function up when adding audio and video tracks freshly
     
         console.log('negotiating');
 
         usersocket.run(
             'runConnection', //run this function on the backend router
             [
-                (webrtc.rtc[rtc._id as string] as RTCCallInfo).caller, //run this connection 
+                (webrtc.rtc[call._id as string] as RTCCallInfo).caller, //run this connection 
                 'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
                 [ //and pass these arguments
                     'negotiateCall', //run this function on the user's end
-                    [rtc._id, encodeURIComponent(JSON.stringify(description))]
+                    [call._id, encodeURIComponent(JSON.stringify(description))]
                 ],
-                (webrtc.rtc[rtc._id as string] as RTCCallInfo).socketId
+                (webrtc.rtc[call._id as string] as RTCCallInfo).socketId
             ]
         ).then((description) => {
             if(description) console.log('remote description returned');
             else console.log('caller renegotiated');
             
-            if(description) webrtc.negotiateCall(rtc._id as string, description);
+            if(description) webrtc.negotiateCall(call._id as string, description);
         });
     };
 
@@ -164,7 +186,7 @@ export async function startCall(userId) {
                 'receiveCallInformation', //run this function on the user's end
                 {
                     _id:rtcId, 
-                    description:encodeURIComponent(JSON.stringify(rtc.rtc.localDescription)), //the peer needs to accept this
+                    description:encodeURIComponent(JSON.stringify(call.rtc.localDescription)), //the peer needs to accept this
                     caller:client.currentUser._id,
                     socketId:usersocket._id,
                     firstName:client.currentUser.firstName,
@@ -175,7 +197,7 @@ export async function startCall(userId) {
         ]
     );
 
-    return rtc;
+    return call;
 }
 
 export let answerCall = async (call:RTCCallProps) => {
