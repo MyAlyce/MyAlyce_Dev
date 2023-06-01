@@ -203,15 +203,15 @@ export class NoteTaking extends Component<{[key:string]:any}> {
             <div className="note-taking-module">
                 {this.renderInputSection()}
                 <br></br>
-                <div className="history-section">
-                    <h3>History:</h3>
+                <Card style={{ width: '40rem' }}>
+                    <Card.Header>History:</Card.Header>
                     <Table striped bordered hover>
                         <tbody>
                             <tr><th>Time</th><th>Event</th><th>Grade</th><th></th></tr>
                             {this.state.noteRows}
                         </tbody>
                     </Table>
-                </div>
+                </Card>
             </div>
         );
     }

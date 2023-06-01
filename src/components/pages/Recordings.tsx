@@ -16,6 +16,8 @@ import { workers } from 'device-decoder';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Table from 'react-bootstrap/Table'
+import Card from 'react-bootstrap/Card'
 import * as Icon from 'react-feather'
 import { StreamToggle } from '../modules/StreamToggle';
 
@@ -94,15 +96,12 @@ export class Recordings extends sComponent {
     
                 recordings.push (
                     <div key={file}>
-                        <Container fluid>
                             <Row className='recordings'>
                                 <Col xs lg="2" className='over'>{file}</Col>
                                 <Col className="d-grid gap-2"><Button variant='secondary' onClick={download}>Download</Button></Col>
                                 <Col className="d-grid gap-2"><Button variant='danger' onClick={deleteFile}>Delete</Button></Col>
                                 <Col className="d-grid gap-2"><Button variant='success' onClick={backup}>To Drive</Button></Col>
                             </Row>
-                            <hr></hr>
-                        </Container>
                     </div>
                 )
             } 
@@ -163,7 +162,11 @@ export class Recordings extends sComponent {
                 </select>
                 <h2>Recordings</h2>
                 <div>
+                <Card style={{ width: '40rem' }}>
+                    <Card.Header>Recordings:</Card.Header>
                     { this.state.recordings ? this.state.recordings : "" }
+                </Card>
+                <div style={{height:'50px'}}/>
                 </div>
             </div>
         )
