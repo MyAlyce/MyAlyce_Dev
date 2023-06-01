@@ -7,34 +7,33 @@ import { StreamToggle } from './StreamToggle';
 
 
 
-export class ChartGroup extends Component<{[key:string]:any}> {
+export class ChartGroup extends Component<{
+    sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[],
+    streamId?:string
+}> {
     
     state = { //synced with global state
         activeStream:undefined
     }
 
     activeCharts = {};
-    sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[];
     unmounted?=true;
-    streamId?:string;
 
     constructor(props:{
         sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[],
         streamId?:string
     }) {
         super(props as any);
-
-        this.sensors = props.sensors;
-        this.streamId = props.streamId;
     }
 
     componentDidMount(): void {
         this.unmounted = false;
-        this.constructCharts(this.streamId, this.sensors);
+        this.constructCharts(this.props.streamId, this.props.sensors);
     }
 
     componentWillUnmount(): void {
         this.unmounted = true;
+        this.activeCharts = {};
     }
 
     constructCharts(streamId?:string, sensors?:Sensors[]) { //('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[]
@@ -111,17 +110,17 @@ export class ChartGroup extends Component<{[key:string]:any}> {
         return (
             <div>
                 <StreamToggle
-                    toggled={this.sensors}
+                    toggled={this.props.sensors}
                     subscribable={SensorDefaults}
                     onChange={(ev) => {
                         if(ev.checked) {
-                            this.constructCharts(this.streamId, [ev.key as any]);
+                            this.constructCharts(this.props.streamId, [ev.key as any]);
                             this.setState({});
                         } else {
                             delete this.activeCharts[ev.key];
                             this.setState({});
                         }
-                        console.log(this.sensors);
+                        console.log(this.props.sensors);
                     }}
                 />
                 <div>{

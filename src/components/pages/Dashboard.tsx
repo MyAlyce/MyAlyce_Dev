@@ -13,7 +13,6 @@ export class Dashboard extends sComponent {
 
     render() {
 
-        //console.log(client.currentUser)
         return (
             <div className='container-fluid'>
                 <div className="main-content">

@@ -153,8 +153,8 @@ export class App extends sComponent {
                                         }
                                         {/* Device/Stream select */}
                                         <StreamSelect 
-                                            onChange={(key) => { 
-                                                this.setState({deviceMode:key});
+                                            onChange={(key, activeStream) => { 
+                                                this.setState({deviceMode:key, activeStream:activeStream});
                                             }} 
                                         />
                                     </div>,

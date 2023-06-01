@@ -48,6 +48,24 @@ export class WebRTCComponent extends sComponent {
         this.listMediaDevices();
     }
 
+    componentDidMount = () => {
+        this.getUsers();
+        this.getUnanweredCallInfo();
+        this.evSub = graph.subscribe('receiveCallInformation',()=>{
+            this.getUnanweredCallInfo();
+        });
+        this.streamSelectSub = state.subscribeEvent('activeStream',(id?)=>{
+            if(id) {
+                this.activeStream = id;
+                this.setState({});
+            }
+        });
+    }
+
+    componentWillUnmount = () => {
+        graph.unsubscribe('receiveCallInformation', this.evSub);
+    }
+
     listMediaDevices() {
         navigator.mediaDevices.enumerateDevices()
         .then((deviceInfos) => { //https://github.com/garrettmflynn/intensities/blob/main/app/index.js
@@ -94,24 +112,6 @@ export class WebRTCComponent extends sComponent {
 
     screenShare(call:RTCCallInfo) {
         //call.rtc.addTrack(new MediaStreamTrack(MediaStream)) //or something like that
-    }
-
-    componentDidMount = () => {
-        this.getUsers();
-        this.getUnanweredCallInfo();
-        this.evSub = graph.subscribe('receiveCallInformation',()=>{
-            this.getUnanweredCallInfo();
-        });
-        this.streamSelectSub = state.subscribeEvent('activeStream',(id?)=>{
-            if(id) {
-                this.activeStream = id;
-                this.setState({});
-            }
-        });
-    }
-
-    componentWillUnmount = () => {
-        graph.unsubscribe('receiveCallInformation', this.evSub);
     }
 
     async getUsers() {
@@ -169,7 +169,7 @@ export class WebRTCComponent extends sComponent {
 
         let divs = [] as any;
 
-        console.log('getUnanweredCallInfo') //this should throw on the subscription event for receiveCallInformation
+        //console.log('getUnanweredCallInfo') //this should throw on the subscription event for receiveCallInformation
 
         for(const key of keys) {
 
@@ -207,7 +207,7 @@ export class WebRTCComponent extends sComponent {
         
         call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + ' ' + client.currentUser.lastName});
         
-        this.messages.push(<div>
+        this.messages.push(<div key={call.messages.length}>
             {client.currentUser.firstName} {client.currentUser.lastName}: {message} | {new Date().toLocaleTimeString()}
         </div>);
         

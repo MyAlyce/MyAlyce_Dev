@@ -34,8 +34,58 @@ export type RTCCallInfo = WebRTCInfo & {
     audioSender?:RTCRtpSender
 }
 
+export const onrtcdata = (call, from, data) => { 
 
-//spaghetti
+
+    if(data.alert) {
+
+        if(!(call as RTCCallInfo).events) (call as RTCCallInfo).alerts = [] as any;
+        (call as RTCCallInfo).alerts.push(data.alert);
+
+        onAlert(data.alert,call._id);
+
+        state.setValue(call._id+'alert',data.alert);
+    }
+    if(data.event) {
+
+        if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
+        (call as RTCCallInfo).events.push(data.event);
+        
+        recordEvent(from, data.event, call._id);
+    }
+    if(data.message) {
+
+        if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
+        data.message.from = from;
+        (call as RTCCallInfo).messages.push(data.message);
+        
+        if(state.data.isRecording) {
+            recordChat(from, data.message, call._id);
+        }
+    }
+    if(data.emg) {
+        if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
+        state.setValue(call._id+'emg', data.emg);
+    } 
+    if (data.ppg) {
+        if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
+        state.setValue(call._id+'ppg', data.ppg);
+    } 
+    if (data.hr) {
+        state.setValue(call._id+'hr', data.hr);
+    }  
+    if (data.breath) {
+        state.setValue(call._id+'breath', data.breath);
+    } 
+    if (data.imu) {
+        if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
+        state.setValue(call._id+'imu', data.imu);
+    } 
+    if (data.env) {
+        if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
+        state.setValue(call._id+'env', data.env);
+    } //else if (ev.data.emg2) {}
+}
 
 //started from host end, see answerCall for peer end
 export async function startCall(userId) {
@@ -80,62 +130,12 @@ export async function startCall(userId) {
             
             const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
 
-            ev.channel.onmessage = (ev) => { 
-                if(ev.data.alert) {
+            console.log(ev.channel);
 
-                    if(!(call as RTCCallInfo).events) (call as RTCCallInfo).alerts = [] as any;
-                    (call as RTCCallInfo).alerts.push(ev.data.alert);
-    
-                    onAlert(ev.data.alert,call._id);
-    
-                    state.setValue(call._id+'alert',ev.data.alert);
-                }
-                if(ev.data.event) {
-    
-                    if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
-                    (call as RTCCallInfo).events.push(ev.data.event);
-                    
-                    recordEvent(from, ev.data.event, call._id);
-                }
-                if(ev.data.message) {
-    
-                    if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
-                    ev.data.message.from = from;
-                    (call as RTCCallInfo).messages.push(ev.data.message);
-                    
-                    if(state.data.isRecording) {
-                        recordChat(from, ev.data.message, call._id);
-                    }
-                }
-                if(ev.data.emg) {
-                    if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
-                    state.setValue(call._id+'emg', ev.data.emg);
-                } 
-                if (ev.data.ppg) {
-                    if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
-                    state.setValue(call._id+'ppg', ev.data.ppg);
-                } 
-                if (ev.data.hr) {
-                    state.setValue(call._id+'hr', ev.data.hr);
-                } 
-                if (ev.data.hrv) {
-                    state.setValue(call._id+'hrv', ev.data.hrv);
-                } 
-                if (ev.data.breath) {
-                    state.setValue(call._id+'breath', ev.data.breath);
-                } 
-                if (ev.data.brv) {
-                    state.setValue(call._id+'brv', ev.data.brv);
-                } 
-                if (ev.data.imu) {
-                    if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
-                    state.setValue(call._id+'imu', ev.data.imu);
-                } 
-                if (ev.data.env) {
-                    if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
-                    state.setValue(call._id+'env', ev.data.env);
-                } //else if (ev.data.emg2) {}
-            }
+            ev.channel.addEventListener('message', (dev) => { 
+                let data = JSON.parse(dev.data);
+                onrtcdata(call,from,data);
+            });
 
         },
         ontrack:(ev) => {
@@ -202,7 +202,7 @@ export async function startCall(userId) {
 
 export let answerCall = async (call:RTCCallProps) => {
     
-    let nodes = setupAlerts(call._id,['hr','breath','fall']);
+    let nodes = setupAlerts(call._id, ['hr','breath','fall']);
     
     call.onclose = () => {
         for(const key in nodes) {
@@ -245,63 +245,12 @@ export let answerCall = async (call:RTCCallProps) => {
 
         const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
 
-        ev.channel.onmessage = (ev) => { 
+        console.log(ev.channel);
 
-            if(ev.data.alert) {
-
-                if(!(call as RTCCallInfo).events) (call as RTCCallInfo).alerts = [] as any;
-                (call as RTCCallInfo).alerts.push(ev.data.alert);
-
-                onAlert(ev.data.alert,call._id);
-
-                state.setValue(call._id+'alert',ev.data.alert);
-            }
-            if(ev.data.event) {
-
-                if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
-                (call as RTCCallInfo).events.push(ev.data.event);
-                
-                recordEvent(from, ev.data.event, call._id);
-            }
-            if(ev.data.message) {
-
-                if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
-                ev.data.message.from = from;
-                (call as RTCCallInfo).messages.push(ev.data.message);
-                
-                if(state.data.isRecording) {
-                    recordChat(from, ev.data.message, call._id);
-                }
-            }
-            if(ev.data.emg) {
-                if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
-                state.setValue(call._id+'emg', ev.data.emg);
-            } 
-            if (ev.data.ppg) {
-                if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
-                state.setValue(call._id+'ppg', ev.data.ppg);
-            } 
-            if (ev.data.hr) {
-                state.setValue(call._id+'hr', ev.data.hr);
-            } 
-            if (ev.data.hrv) {
-                state.setValue(call._id+'hrv', ev.data.hrv);
-            } 
-            if (ev.data.breath) {
-                state.setValue(call._id+'breath', ev.data.breath);
-            } 
-            if (ev.data.brv) {
-                state.setValue(call._id+'brv', ev.data.brv);
-            } 
-            if (ev.data.imu) {
-                if(!state.data[call._id+'detectedIMU']) state.setState({[call._id+'detectedIMU']:true});
-                state.setValue(call._id+'imu', ev.data.imu);
-            } 
-            if (ev.data.env) {
-                if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
-                state.setValue(call._id+'env', ev.data.env);
-            } //else if (ev.data.emg2) {}
-        }
+        ev.channel.addEventListener('message', (dev) => { 
+            let data = JSON.parse(dev.data);
+            onrtcdata(call,from,data);
+        });
     };
 
     let rtc = await webrtc.answerCall(call as any);
@@ -394,28 +343,26 @@ export function enableDeviceStream(streamId) { //enable sending data to a given 
         let subscriptions = {};
         subscriptions[streamId] = {
             emg:state.subscribeEvent('emg', (data) => {
-                stream.send({ 'emg':data });
+                stream.send({ emg:data });
             }),
             ppg:state.subscribeEvent('ppg', (ppg) => {
-                stream.send({ 'ppg':ppg });
+                stream.send({ ppg:ppg });
             }),
             hr:state.subscribeEvent('hr', (hr) => {
                 stream.send({
-                    'hr': hr.bpm,
-                    'hrv': hr.change
+                    hr: hr
                 });
             }),
             breath:state.subscribeEvent('breath', (breath) => {
                 stream.send({
-                    'breath':breath.bpm,
-                    'brv':breath.change
+                    breath:breath
                 });
             }),
             imu:state.subscribeEvent('imu', (imu) => {
-                stream.send({'imu':imu});
+                stream.send({imu:imu});
             }),
             env:state.subscribeEvent('env', (env) => {
-                stream.send({'env':env});
+                stream.send({env:env});
             })
         };
 

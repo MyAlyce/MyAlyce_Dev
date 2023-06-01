@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import { client, webrtc } from "../../scripts/client";
+import { SensorDefaults, client, webrtc } from "../../scripts/client";
 
 
 import { WebRTCInfo } from 'graphscript'// "../../../../graphscript/index";//
@@ -10,18 +10,19 @@ import { ChartGroup } from "../modules/ChartGroup";
 import {Button } from "../lib/src";
 
 
-import { RTCCallInfo, disableAudio, disableVideo, enableAudio,  enableVideo } from '../../scripts/webrtc';
+import { RTCCallInfo, disableAudio, disableVideo, enableAudio,  enableVideo, onrtcdata } from '../../scripts/webrtc';
 
 const micOn = './assets/mic.svg';
 const micOff = './assets/mic-off.svg';
 const videoOn = './assets/webcam.svg';
 const videoOff = './assets/webcam-off.svg';
 
-export const createStreamChart = (call) => {
+export const createStreamChart = (call, sensors?) => {
     return (
         <div>
             <ChartGroup
                 streamId={call._id}
+                sensors={sensors ? sensors : ['ppg','hr']}
             />
         </div>
     )
@@ -164,6 +165,7 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
     audioInId?:string;
     videoInId?:string;
     audioOutId?:string;
+    streamId:string;
 
     constructor(props:{
         streamId:string,        
@@ -178,12 +180,11 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
         this.audioOutId = props.audioOutId;
         this.videoInId = props.videoInId;
 
-
-        this.state.activeStream = props.streamId;
-        if(webrtc.rtc[props.streamId]) this.setActiveStream(webrtc.rtc[props.streamId] as RTCCallInfo);
     }
 
     componentDidMount(): void {
+        this.state.activeStream = this.props.streamId;
+        if(webrtc.rtc[this.props.streamId]) this.setActiveStream(webrtc.rtc[this.props.streamId] as RTCCallInfo);
         let call = webrtc.rtc[this.state.activeStream as string] as RTCCallInfo;
         this.setupCallUI(call);
     }
@@ -205,22 +206,23 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
     setupCallUI(call:RTCCallInfo) {
         //overwrites the default message
         
-        let ondata = (ev) => {
+        const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
 
-            const json = JSON.parse(ev.data);
+        let ondata = (dev) => {
 
-            if (!json.message) {
-                throw new Error(`Invalid message: ${ev.data}`);
-            }
+            const json = JSON.parse(dev.data);
             
             // NOTE: This duplicates on rerender...
-            this.messages.push(<div>
-                {call.firstName} {call.lastName}: {json.message} | {new Date().toLocaleTimeString()}
-            </div>);
-
-            (document.getElementById(this.unique + 'messages') as HTMLElement).insertAdjacentHTML('beforeend',`<div>
-                ${call.firstName} ${call.lastName}: ${json.message} | ${new Date().toLocaleTimeString()}
-            </div>`);
+            if(json.message) {
+                this.messages.push(<div key={this.messages.length}>
+                    {call.firstName} {call.lastName}: {json.message} | {new Date().toLocaleTimeString()}
+                </div>);
+    
+                (document.getElementById(this.unique + 'messages') as HTMLElement).insertAdjacentHTML('beforeend',`<div  key="${this.messages.length}">
+                    ${call.firstName} ${call.lastName}: ${json.message} | ${new Date().toLocaleTimeString()}
+                </div>`);
+            }
+            onrtcdata(call, from, json);
         }
 
         let datachannel = (ev) => {
@@ -232,7 +234,7 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
             ev.channel.addEventListener('message',ondata);
         };
 
-        call.rtc.addEventListener('datachannel',datachannel);
+        call.rtc.addEventListener('datachannel', datachannel);
 
         if(call.channels) Object.keys(call.channels).forEach((key) => {
             (call.channels as any)[key].addEventListener('message',ondata);
@@ -280,7 +282,7 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
         if(!call.messages) call.messages = [] as any;
         call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + ' ' + client.currentUser.lastName});
         
-        this.messages.push(<div>
+        this.messages.push(<div key={this.messages.length}>
             {client.currentUser.firstName} {client.currentUser.lastName}: {message} | {new Date().toLocaleTimeString()}
         </div>);
         

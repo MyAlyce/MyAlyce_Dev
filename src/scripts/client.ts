@@ -16,7 +16,7 @@ import {
 
 //isolated import for dev with src
 import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//
-import {BFSRoutes} from 'graphscript-services.storage'//'../../../graphscript/src/extras/index.storage.services'//
+import { BFSRoutes } from 'graphscript-services.storage'//'../../../graphscript/src/extras/index.storage.services'//
 
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types'
 import { workers } from 'device-decoder'
@@ -249,7 +249,7 @@ export const logoutSequence = () => {
 //subscribe to the state so any and all changes are saved, can store multiple states (e.g. particular for pages or components)
 export function backupState(
     filename='state.json', 
-    backup=['isLoggedIn','viewingId','loggedInId','route'],
+    backup=['route'],
     dir='data'
 ){
     //read initial data, now setup subscription to save the state every time it updates

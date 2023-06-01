@@ -27,9 +27,8 @@ export class Header extends sComponent {
                     if(this.friendsListOpen) {
                         
                     } else {
-
+                        
                     }
-
                  }}></Icon.User>
                  <div className="navbar-nav">
                      <div className="nav-item text-nowrap">

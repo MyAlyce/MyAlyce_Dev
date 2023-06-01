@@ -15,9 +15,8 @@ export class StreamSelect extends Component<{[key:string]:any}> {
     wrapperRef:any;
     selectedKey?:string = 'Demo';
 
-    onchange=(key)=>{}
+    onchange=(key, activeStream)=>{}
 
-      
     constructor(props:{onChange:(key)=>void, selected?:string}) {
         super(props);
         if(props.selected) this.state.activeStream = props.selected;
@@ -50,12 +49,13 @@ export class StreamSelect extends Component<{[key:string]:any}> {
 
     onItemClick = (key: string | undefined) => {
         this.selectedKey = key;
+        let activeStream;
         if(key === 'My Device' || key === 'Demo')
-            this.setState({ activeStream: undefined});//, dropdownOpen: false });
+            activeStream = undefined;//, dropdownOpen: false });
         else 
-            this.setState({ activeStream: key});//, dropdownOpen: false });
+            activeStream = key;
             
-        this.onchange(key);
+        this.onchange(key,activeStream);
     };
 
     render() {
