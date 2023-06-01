@@ -1,9 +1,10 @@
 import React from 'react'
-import {state, webrtc} from './scripts/client'//'../../graphscript/index'//
+import {state} from './scripts/client'//'../../graphscript/index'//
+import {webrtc} from './scripts/client'
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
 import { client, onLogin, onLogout } from './scripts/client';
-import { Login, Avatar, TopBar, NavDrawer } from './components/lib/src/index';
+import { Login, NavDrawer } from './components/lib/src/index';
 
 
 import { SettingsView } from './components/pages/SettingsView';
@@ -23,6 +24,7 @@ import { Footer } from './components/ui/Footer';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
+
 let personIcon = './assets/person.jpg';
 
 state.subscribeEvent('route', (route:string) => {

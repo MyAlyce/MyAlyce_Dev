@@ -1,7 +1,8 @@
 import React from 'react';
-import profilePic from '../assets/JoshBrew.jpg';
 import { Card, CardGroup } from 'react-bootstrap';
 import * as Icon from 'react-feather';
+
+const profilePic = './assets/person.png';
 
 export function UserLogin({name, picture}) {
 
@@ -9,7 +10,7 @@ export function UserLogin({name, picture}) {
     <CardGroup>
     <Card style={{ width: '5.3rem' }}>
       <Card.Body>
-      <img className="rounded-circle" width="50" alt={name} src={picture} />
+      <img className="rounded-circle" width="50" alt={profilePic} src={picture} />
       </Card.Body>
     </Card>
     <Card style={{ width: '12rem' }}>

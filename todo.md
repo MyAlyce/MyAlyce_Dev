@@ -1,20 +1,23 @@
 ### UX/UI
-- styling
-- charts should start at the height of the first value not zero so the auto scaling starts out nicer
+- styling, clean generic crm look like adminlte or google analytics
 - webrtc ux/ui. Make calling yourself its own separate deal from calling other users (since its just setting up a remote connection for yourself)
-- animatin
+- animation
 
 ### Scripting/Events/State
 
 - finish file saving subscriptions with local/stream recording. Get google drive working somehow
 - readd notifications, friends lists, etc.
+- make the local recordings more secure per-user
 
 ### Backend
 
 - Security
-- plain email/password storage? i.e. not just google reliance
-
+- plain email/password storage? i.e. not just google reliance, see about microsoft accounts
 
 ## Data
 
-- add a recording replay for sim
+- more selective data representation
+
+## Widgets
+
+- widgetize all the things

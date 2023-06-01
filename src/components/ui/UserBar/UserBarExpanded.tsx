@@ -2,7 +2,8 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/esm/Container';
-let profilePic = './assets/JoshBrew.jpg';
+
+let profilePic = './assets/Person.jpg';
 
 export function UserBarExpanded() {
   return (

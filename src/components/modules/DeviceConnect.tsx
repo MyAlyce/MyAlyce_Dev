@@ -3,7 +3,7 @@ import { connectDevice, disconnectDevice } from "../../scripts/device";
 import { Button } from "../lib/src";
 import { sComponent } from "../state.component";
 import {state} from '../../scripts/client'
-import { stopdemos } from "../../scripts/datacsv";
+import { stopdemos } from "../../scripts/demo";
 
 
 export class DeviceConnect extends sComponent {
@@ -20,7 +20,8 @@ export class DeviceConnect extends sComponent {
                     if(state.data.demoing) {
                         stopdemos();
                     }
-                    connectDevice('other');}}>Connect</Button> :
+                    connectDevice('other');
+                }}>Connect</Button> :
                 <Button onClick={()=>{
                     if(state.data.demoing) {
                         stopdemos();

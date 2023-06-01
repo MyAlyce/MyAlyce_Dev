@@ -1,8 +1,10 @@
 import { HeartRateAlert } from "./alertTemplates/heartrate";
-import { graph, state } from "./client";
+import { alerts, graph } from "./client";
 import { BreathAlert } from "./alertTemplates/breath";
 import { FallAlert } from "./alertTemplates/falldetection";
 import { Howl } from "howler";
+import { recordAlert } from "./datacsv";
+import { webrtcData } from "./client";
 
 export let getCurrentLocation = (options:PositionOptions={enableHighAccuracy:true}) => {
     return new Promise((res,rej) => {
@@ -16,6 +18,11 @@ export let getCurrentLocation = (options:PositionOptions={enableHighAccuracy:tru
         )
     });
 }
+
+//test
+getCurrentLocation().then((position) => {
+    console.log('current position:', position);
+}); //run on init to get permission
 
 export const showNotification = (title,message) => {
 
@@ -57,10 +64,75 @@ export const showNotification = (title,message) => {
     }
   };
 
-getCurrentLocation().then((position) => {
-    console.log('current position:', position);
-}); //run on init to get permission
+export function onHRAlert(event,streamId?) {
 
+    console.log("Heart Rate Alert:", event);
+
+    alerts.push(event);
+    
+    let sound = new Howl({src:'./sounds/alarm.wav'});
+    sound.play(undefined,false);
+    showNotification("Heart Rate Alert:", `bpm: ${event.value}` );
+
+    //broadcast your own alerts
+    if(!streamId) {
+        recordAlert(event);
+        for(const key in webrtcData.availableStreams) {
+            webrtcData.availableStreams[key].send({alert:event});
+        }
+    }
+}
+
+export function onBreathAlert(event,streamId?) {
+
+    console.log("Breathing Alert:", event);
+
+    alerts.push(event);
+
+    recordAlert(event,streamId);
+    let sound = new Howl({src:'./sounds/alarm.wav'});
+    sound.play(undefined,false);
+    showNotification("Breathing Alert:", `bpm: ${event.value}` );
+
+    //broadcast your own alerts
+    if(!streamId) {
+        recordAlert(event);
+        for(const key in webrtcData.availableStreams) {
+            webrtcData.availableStreams[key].send({alert:event});
+        }
+    }
+}
+
+export function onFallAlert(event,streamId?) {
+
+    console.log("Motion Alert:", event);
+
+    alerts.push(event);
+
+    recordAlert(event,streamId);
+    let sound = new Howl({src:'./sounds/alarm.wav'});
+    sound.play(undefined,false);
+    showNotification("Fall Alert:", `magnitude: ${event.value}` );
+
+    //broadcast your own alerts
+    if(!streamId) {
+        recordAlert(event);
+        for(const key in webrtcData.availableStreams) {
+            webrtcData.availableStreams[key].send({alert:event});
+        }
+    }
+}
+
+//used in the webrtc stream
+export function onAlert(event,streamId?) {
+    if(event.message.includes('Heart')) {
+        onHRAlert(event,streamId);
+    } else if (event.message.includes('Breathing')) {
+        onBreathAlert(event,streamId);
+    } else if (event.message.includes('Fall')) {
+        onFallAlert(event,streamId);
+    }
+}
 
 //alert system
 export function setupAlerts(
@@ -68,44 +140,35 @@ export function setupAlerts(
     alerts?:('hr'|'breath'|'fall')[]
 ) {
     let nodes = {};
+
     if(!alerts || alerts.includes('hr')) {
         let node = graph.add(new HeartRateAlert(
-            (event) => {
-                console.log("Heart Rate Alert:", event);
-                let sound = new Howl({src:'./sounds/alarm.wav'}); // Only play the sound if a value has been provided
-                sound.play(undefined,false);
-                showNotification("Heart Rate Alert:", `bpm:${event.bpm}` );
-            },
+            onHRAlert,
             streamId ? streamId+'hr' : 'hr',    
             streamId ? streamId+'hrAlert' : 'hrAlert'
         ));
         nodes['hr'] = node;
     }
+
     if(!alerts || alerts.includes('breath')) {
         let node = graph.add(new BreathAlert(
-            (event) => {
-                console.log("Breathing Alert:", event);
-                let sound = new Howl({src:'./sounds/alarm.wav'}); // Only play the sound if a value has been provided
-                sound.play(undefined,false);
-            },
+            onBreathAlert,
             streamId ? streamId+'breath' : 'breath',
             streamId ? streamId+'breathAlert' : 'breathAlert'
         ));
         nodes['breath'] = node;
     }
+
     if(!alerts || alerts.includes('fall')) {
         let node = graph.add(new FallAlert(
-            (event) => {
-                console.log("Motion Alert:", event);
-                let sound = new Howl({src:'./sounds/alarm.wav'}); // Only play the sound if a value has been provided
-                sound.play(undefined,false);
-            },
+            onFallAlert,
             streamId ? streamId+'imu' : 'imu',
-            streamId ? streamId+'imuAlert' : 'imuAlert'
+            streamId ? streamId+'fallAlert' : 'fallAlert'
         ));
         nodes['imu'] = node;
     }
 
     return nodes;
 }
+
 

@@ -6,7 +6,8 @@ import { UserLogin } from '../UserLogin';
 import { UserFeed } from '../UserFeed';
 import { Notify } from '../Notify';
 
-import { webrtc, client } from '../../../scripts/client';
+import { client } from '../../../scripts/client';
+import {webrtc} from '../../../scripts/client'
 import { RTCCallInfo } from '../../../scripts/webrtc';
 
 export function UserBar(props:{streamId?:string}) {

@@ -1,20 +1,11 @@
-import { setupAlerts } from "./alerts";
-import { client, graph, usersocket, webrtc, state } from "./client"
 
+import { client, graph, usersocket, state, webrtc } from "./client"
+import { recordChat, recordEvent } from "./datacsv";
+
+import { onAlert, setupAlerts } from "./alerts";
 import {WebRTCInfo, WebRTCProps} from 'graphscript'//'../../../graphscript/index'//
-import { csvworkers } from "./datacsv";
-import gsworker from './device.worker'
-import { workers } from "device-decoder";
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
-
-const webrtcData = {
-    webrtcStream:undefined, //current active stream
-    availableStreams:webrtc.rtc as {[key:string]:WebRTCInfo}, //list of accepted calls
-    unansweredCalls:webrtc.unanswered as {[key:string]:WebRTCProps & {caller:string, firstName?:string, lastName?: string}}
-}
-
-state.setState(webrtcData);
 
 
 export type RTCCallProps = WebRTCProps & {
@@ -38,7 +29,7 @@ export type RTCCallInfo = WebRTCInfo & {
     socketId:string,  
     messages:{message:string, from:string, timestamp:number}[],
     events:{message:string, from:string, timestamp:number}[], 
-    alerts:{message:string, from:string, timestamp:number}[], 
+    alerts:{message:string, from:string, value:any, timestamp:number}[], 
     videoSender?:RTCRtpSender, 
     audioSender?:RTCRtpSender
 }
@@ -91,7 +82,7 @@ export async function startCall(userId) {
                 if(ev.data.message) {
 
                     if(!(rtc as RTCCallInfo).messages) (rtc as RTCCallInfo).messages = [] as any;
-                    (rtc as RTCCallInfo).messages.push({message:ev.data.message, timestamp:Date.now(), from:(rtc as RTCCallInfo).firstName + ' ' + (rtc as RTCCallInfo).lastName});
+                    (rtc as RTCCallInfo).messages.push({message:ev.data.message, timestamp:Date.now(), from:(rtc as RTCCallInfo).firstName + (rtc as RTCCallInfo).lastName});
 
                 }
                 if(ev.data.emg) {
@@ -189,7 +180,7 @@ export async function startCall(userId) {
 
 export let answerCall = async (call:RTCCallProps) => {
     
-    let nodes = setupAlerts(call._id);
+    let nodes = setupAlerts(call._id,['hr','breath','fall']);
     
     call.onclose = () => {
         for(const key in nodes) {
@@ -230,69 +221,35 @@ export let answerCall = async (call:RTCCallProps) => {
         //data channel streams the device data
         enableDeviceStream(call._id); //enable my device to stream data to this endpoint
 
-        const from = (call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName;
+        const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
 
         ev.channel.onmessage = (ev) => { 
 
             if(ev.data.alert) {
+
+                if(!(call as RTCCallInfo).events) (call as RTCCallInfo).alerts = [] as any;
+                (call as RTCCallInfo).alerts.push(ev.data.alert);
+
+                onAlert(ev.data.alert,call._id);
+
                 state.setValue(call._id+'alert',ev.data.alert);
-
-                if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
-                const message = {message:ev.data.event, timestamp:Date.now(), from:from};
-                (call as RTCCallInfo).events.push(message);
-                
-                //if(state.data.isRecording) {
-                    if(!csvworkers[call._id+'alerts']) {
-                        csvworkers[call._id+'alerts'] =  workers.addWorker({ url: gsworker });
-                        csvworkers[call._id+'alerts'].run('createCSV', [
-                            `${call.firstName+call.lastName}/Alerts_${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
-                            [
-                                'timestamp','from','message'
-                            ]
-                        ]);
-                    }
-                    csvworkers[call._id+'alerts'].run('appendCSV',message);
-                //}
-
             }
             if(ev.data.event) {
 
                 if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
-                const message = {message:ev.data.event, timestamp:Date.now(), from:from};
-                (call as RTCCallInfo).events.push(message);
+                (call as RTCCallInfo).events.push(ev.data.event);
                 
-                //if(state.data.isRecording) {
-                    if(!csvworkers[call._id+'events']) {
-                        csvworkers[call._id+'events'] =  workers.addWorker({ url: gsworker });
-                        csvworkers[call._id+'events'].run('createCSV', [
-                            `${call.firstName+call.lastName}/Events_${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
-                            [
-                                'timestamp','from','message'
-                            ]
-                        ]);
-                    }
-                    csvworkers[call._id+'events'].run('appendCSV',message);
-                //}
+                recordEvent(from, ev.data.event, call._id);
             }
             if(ev.data.message) {
 
                 if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
-                const message = {message:ev.data.message, timestamp:Date.now(), from:from};
-                (call as RTCCallInfo).messages.push(message);
+                ev.data.message.from = from;
+                (call as RTCCallInfo).messages.push(ev.data.message);
                 
                 if(state.data.isRecording) {
-                    if(!csvworkers[call._id+'chat']) {
-                        csvworkers[call._id+'chat'] =  workers.addWorker({ url: gsworker });
-                        csvworkers[call._id+'chat'].run('createCSV', [
-                            `${call.firstName+call.lastName}/Chat_${new Date().toISOString()}${(call as RTCCallInfo).firstName + ' ' + (call as RTCCallInfo).lastName}.csv`,
-                            [
-                                'timestamp','from','message'
-                            ]
-                        ]);
-                    }
-                    csvworkers[call._id+'chat'].run('appendCSV',message)
+                    recordChat(from, ev.data.message, call._id);
                 }
-                
             }
             if(ev.data.emg) {
                 if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});

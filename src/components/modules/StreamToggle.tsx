@@ -36,6 +36,7 @@ export class StreamToggle extends Component<{toggled?:Partial<Streams>|undefined
                     this.subscribable.map((v: any, i) => {
                         return <ToggleButton
                             id={v}
+                            key={v}
                             value={i}
                             onChange={(ev:any)=>{ 
                                 let idx = this.toggled.indexOf(v);

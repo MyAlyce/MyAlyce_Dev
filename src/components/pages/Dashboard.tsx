@@ -1,14 +1,6 @@
 import React from 'react'
 import { sComponent } from '../state.component'
 import { Device } from '../modules/device'
-import { StreamSelect } from '../modules/StreamSelect'
-import { NoteTaking } from '../modules/NoteTaking'
-
-import { client, webrtc } from '../../scripts/client';
-import { RTCCallInfo } from '../../scripts/webrtc'
-import { DeviceConnect } from '../modules/DeviceConnect'
-import { Demo } from '../modules/DemoMode'
-import {Statistics} from '../ui/Statistics'
 
 export class Dashboard extends sComponent {
 

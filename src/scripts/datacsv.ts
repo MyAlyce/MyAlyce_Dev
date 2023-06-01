@@ -1,5 +1,6 @@
 import { workers } from "device-decoder";
-import { client, state, webrtc } from "./client";
+import { alerts, client, state } from "./client";
+import { webrtc } from './client'
 
 import gsworker from './device.worker'
 import { RTCCallInfo } from "./webrtc";
@@ -19,167 +20,76 @@ let recordingSubs = {} as any;
 let fileNames = {} as any;
 
 
-export const recordingsList = {
-    ppg:'./recordings/JoshuaBrewster_PPG_2023-05-16T03_00_47.662Z.csv',
-    hr:'./recordings/JoshuaBrewster_HRV_2023-05-16T03_00_47.662Z.csv',
-    breath:'./recordings/JoshuaBrewster_BREATH_2023-05-16T03_00_47.662Z.csv',
-    ecg:'./recordings/JoshuaBrewster_ECG_2023-05-16T03_09_02.553Z.csv',
-    emg:'./recordings/JoshuaBrewster_EMG_2023-05-16T03_09_02.553Z.csv',
-    env:'./recordings/JoshuaBrewster_ENV_2023-05-16T03_00_47.662Z.csv',
-    imu:'./recordings/JoshuaBrewster_IMU_2023-05-16T03_00_47.662Z.csv'
-};
-
-export const sessionsList = [
-    './recordings/JoshuaBrewster_HRV_Session_Joshua_Brewster.csv'
-];
-
-export async function readTextFile(file) { //https://stackoverflow.com/questions/39662388/javascript-filereader-onload-get-file-from-server
-    const response = await fetch(file);
-    
-    if(response.status === 200 || response.status === 0)
-        return await response.text();
-
-    else return undefined;
-}
-
-
-export const demos = {} as any; //we can cancel these at any time
-
-//roll over data from the parsed csv
-
-
-
-
-export function demoFile(sensor:'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg', sps?, tcheck?, duration = Infinity) {
-    let filename = recordingsList[sensor];
-
-    //make some assumptions
-    if(!sps) {
-        if(sensor === 'emg') sps = 250;
-        else if(sensor === 'ecg') sps = 250;
-        else if(sensor === 'ppg') sps = 50;
-        else if (sensor === 'imu') sps = 100;
-        else if (sensor === 'env') sps = 3;
-        else if(sensor === 'hr') sps = 1;
-        else if(sensor === 'breath') sps = 0.166667;
-    }
-
-    if(!tcheck) {
-        if(sensor === 'emg') tcheck = 1000*9/250;
-        else if(sensor === 'ecg') tcheck = 1000*9/250;
-        else if(sensor === 'ppg') tcheck = 333;
-        else if (sensor === 'imu') tcheck = 333;
-        else if (sensor === 'env') tcheck = 1000;
-        else if(sensor === 'hr') tcheck = 1000;
-        else if(sensor === 'breath') tcheck = 1000/0.166667;
-    }
-
-    readTextFile(filename).then((contents) => {
-        let parsed = parseCSVData(contents, filename, undefined);
-
-        let ctrs = {};
-
-        function genDataFromCSV(sps=250, tduration = 1000, key?:'0') {
-            const maxSamples = Math.floor(sps * (tduration / 1000));
-            let res = {}
-
-            function doKey(key) {
-                res[key] = [] as any; //raw
-                if(!ctrs[key]) ctrs[key] = 0;
-                //console.log((parsed[key]));
-                new Array(maxSamples).fill(0).map((v, i) => {
-                    res[key].push(
-                        parseFloat(parsed[key][ctrs[key]+i])
-                    );
-                });
-                ctrs[key] += maxSamples;
-                if(ctrs[key] + maxSamples > parsed[key].length) ctrs[key] = 0; //roll over
-            }
-
-            if(key) {
-                doKey(key);
-                doKey('timestamp');
-            } else {
-                for(const key in parsed) {
-                    if(key !== 'header' && key !== 'filename' && key !== 'localized') doKey(key);
-                }
-            }
-            
-            return res;
-        }
-
-        let demo = { running:true }; 
-
-        const simuloopCSV = ( 
-            sps = 250, //sample rate
-            tcheck = 1000 * 9 / 250, // 250/9 checks per second
-            duration = 5000
-        ) => {
-
-            let tstart = Date.now();
-            let start = tstart;
-            const recursiveAwait = async () => {
-                if(demo.running) {
-                    let output = genDataFromCSV(
-                        sps,
-                        tcheck,
-                        //key
-                    );
-                    const data = output;
-
-                    //console.log('data', data);
-                    let s = sensor;
-                    if(s === 'ecg') s = 'emg';
-                    state.setState({ [s]:data });
-
-                    //const result = eventDetector(data);
-                    //console.log("check result:", result);
-                    tstart += tcheck;
-                    if (tstart <= start + duration) {
-                        await new Promise(res => setTimeout(res, tcheck));
-                        recursiveAwait();
-                    }
-                }
-            };
-            recursiveAwait();
-        };
-
-        simuloopCSV(sps,tcheck,duration);
-
-        demos[sensor] = demo;
-
-    }); 
-}
-
-
-
-export function demo(sensors = ['emg','ppg','breath','hr','imu','env','ecg']) {
-    if(!sensors) sensors = ['emg','ppg','breath','hr','imu','env','ecg'];
-        
-    let detected = {} as any;
-    for(const v of sensors) {
-        demoFile(v as any);
-        detected['detected'+v.toUpperCase()] = true;
-    }
-
-    state.setState({deviceConnected:true, demoing:true, ...detected});
-        
-}
-
-export function stopdemos() {
-    let detected = {} as any;
-    for(const key in demos) {
-        demos[key].running = false;
-        detected['detected'+key.toUpperCase()] = false;
-    }
-    state.setState({deviceConnected:false, demoing:false, ...detected});
-}
-
-
-
 
 
 export const csvworkers = {} as {[key:string]:WorkerInfo};
+
+export function recordAlert(alert:{message:string,timestamp:number, value:any, [key:string]:any}, streamId?) {
+
+    let from;
+    if(streamId) {
+        const call = webrtc.rtc[streamId];
+        from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
+    } else {
+        from = client.currentUser.firstName + client.currentUser.lastName;
+    }
+
+    alert.from = from;
+    alerts.push(alert as any);
+
+    const workername = streamId ? streamId+'alerts' : 'alerts';
+    
+    //if(state.data.isRecording) {
+        if(!csvworkers[workername]) {
+            csvworkers[workername] =  workers.addWorker({ url: gsworker });
+            csvworkers[workername].run('createCSV', [
+                `${from}/Alerts_${from}.csv`,
+                [
+                    'timestamp','message','value','from'
+                ]
+            ]);
+        }
+        csvworkers[workername].run('appendCSV',alert);
+    //}
+
+    state.setValue(streamId ? streamId+'alert' : 'alert', alert);
+
+}
+
+
+export const recordEvent = (from,event,streamId?) => {
+    const name = streamId ? streamId+'events' : 'events';
+    //if(state.data.isRecording) {
+        if(!csvworkers[name]) {
+            csvworkers[name] =  workers.addWorker({ url: gsworker });
+            csvworkers[name].run('createCSV', [
+                `${from}/Events_${from}.csv`,
+                [
+                    'timestamp','from','message'
+                ]
+            ]);
+        }
+        csvworkers[name].run('appendCSV', event);
+    //}
+}
+
+export const recordChat = (from,message,streamId?) => {
+    const name = streamId ? streamId+'chat' : 'chat';
+    if(state.data.isRecording) {
+        if(!csvworkers[name]) {
+            csvworkers[name] =  workers.addWorker({ url: gsworker });
+            csvworkers[name].run('createCSV', [
+                `${from}/Chat_${from}${new Date().toISOString()}.csv`,
+                [
+                    'timestamp','from','message'
+                ]
+            ]);
+        }
+        csvworkers[name].run('appendCSV',message)
+    }
+}
+
+
 
 export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[], subTitle?:string, dir='data') { 
 
@@ -198,7 +108,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors.includes('ppg')) {
         let makeCSV = () => {
-            let filename = dir+`/PPG_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename = dir+`/PPG_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
             fileNames['ppg'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'ppg' : 'ppg']?.run('createCSV', [
                 filename,
@@ -220,7 +130,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors.includes('breath')) {
         let makeCSV = () => {
-            let filename =  dir+`/BRE_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/BRE_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
             fileNames['breath'] = filename;
             
             if(state.data.isRecording) csvworkers[streamId ? streamId+'breath' : 'breath']?.run('createCSV', [
@@ -242,7 +152,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors.includes('hr')) {
         let makeCSV = () => {
-            let filename =  dir+`/HRV_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/HRV_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
             fileNames['hr'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'hr' : 'hr']?.run('createCSV', [
                 filename,
@@ -268,7 +178,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
             if(state.data[streamId ? streamId+'emg' : 'emg'].leds) {
                 header.push('leds');
             }
-            let filename =  dir+`/EMG_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/EMG_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
             fileNames['emg'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'emg' : 'emg']?.run('createCSV', [
                 filename,
@@ -291,7 +201,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
             if(state.data[streamId ? streamId+'emg' : 'emg'].leds) {
                 header.push('leds');
             }
-            let filename =  dir+`/ECG_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/ECG_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
             fileNames['ecg'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'ecg' : 'ecg']?.run('createCSV', [
                 filename,
@@ -310,7 +220,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors?.includes('imu')) {
         let makeCSV = () => {
-            let filename =  dir+`/IMU_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/IMU_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
             fileNames['imu'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'imu' : 'imu']?.run('createCSV', [
                 filename,

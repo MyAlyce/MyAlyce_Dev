@@ -1,12 +1,11 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import {SensorDefaults, client, state, webrtc} from '../../scripts/client'
+import {SensorDefaults, client, state} from '../../scripts/client'
 
 import { BFSRoutes, csvRoutes } from 'graphscript-services.storage'//'../../../../graphscript/src/extras/index.storage.services'//
 
-import { driveInstance } from '../../scripts/client';
+import { driveInstance, webrtc } from '../../scripts/client';
 import { recordCSV, stopRecording } from '../../scripts/datacsv';
-import { StreamSelect } from '../modules/StreamSelect';
 import Button from 'react-bootstrap/Button';
 import { NoteTaking } from '../modules/NoteTaking';
 import { RTCCallInfo } from '../../scripts/webrtc';

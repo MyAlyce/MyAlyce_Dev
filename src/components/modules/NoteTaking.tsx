@@ -2,13 +2,15 @@ import React, {useRef, Component} from 'react'
 import { workers } from "device-decoder";
 
 import gsworker from '../../scripts/device.worker'
-import { client, webrtc } from '../../scripts/client';
+import { client, events, webrtc, webrtcData } from '../../scripts/client';
+
 import Button from 'react-bootstrap/Button';
 import { RTCCallInfo } from '../../scripts/webrtc';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 import { WorkerInfo } from 'graphscript';
 import { Table } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
+import { csvworkers, recordEvent } from '../../scripts/datacsv';
 
 function getColorGradientRG(value) {
     let r, g, b;
@@ -122,13 +124,32 @@ export class NoteTaking extends Component<{[key:string]:any}> {
             note.grade 
         );
 
-        
+        let from;
+        if(this.streamId) {
+            from = webrtcData.availableStreams[this.streamId].firstName + webrtcData.availableStreams[this.streamId].lastName;
+        } else {
+            from = client.currentUser.firstName + client.currentUser.lastName
+        }
+
+        let message = {
+            message:event.note,
+            timestamp:event.timestamp as number
+        };
+
+        for(const key in webrtcData.availableStreams) {
+            webrtcData.availableStreams[key].send({event:message});
+        }
+
+        recordEvent(from, message, this.streamId);
+
+        (message as any).from = from;
+        events.push(message as any);
+
         let onclick = () => {
             client.deleteData([event],()=>{
                 this.listEventHistory();
-            })
+            });
         }
-
 
         this.state.noteRows.unshift(
             <tr key={event._id}>

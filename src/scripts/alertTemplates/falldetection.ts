@@ -8,7 +8,7 @@ export class FallAlert extends Alert {
     constructor(
         onEvent:(event: {
             message:string
-            magnitude:number,
+            value:number,
             timestamp:number
         }) => void,
         subscribeTo:string, //the state key we want
@@ -39,7 +39,7 @@ export class FallAlert extends Alert {
                 
                 if(magnitude > this.upperBound) return {
                     message:"Force Threshold Surpassed: "+this.upperBound,
-                    magnitude,
+                    value:magnitude,
                     timestamp:data.timestamp
                 }
             },

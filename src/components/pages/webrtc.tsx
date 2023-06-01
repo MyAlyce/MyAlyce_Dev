@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { sComponent } from '../state.component';
 
 
-import { client, webrtc, graph, usersocket, state } from "../../scripts/client";
+import { client, graph, usersocket, state, webrtc } from "../../scripts/client";
+
 
 import {WebRTCInfo, WebRTCProps } from 'graphscript'// "../../../../graphscript/index";//
 
@@ -131,8 +132,6 @@ export class WebRTCComponent extends sComponent {
 
         let userIds = await usersocket.run('getAllOnlineUsers', [pushed]);
 
-        console.log(pushed, userIds);
-
         userIds.push(client.currentUser._id);
 
         let userInfo = await client.getUsers(userIds, true);
@@ -205,8 +204,11 @@ export class WebRTCComponent extends sComponent {
 
     sendMessage(call:RTCCallInfo) {
         let message = (document.getElementById(this.unique+'sendmessage') as HTMLInputElement).value;
+        
         call.send({message:message});
+        
         if(!call.messages) call.messages = [] as any;
+        
         call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + ' ' + client.currentUser.lastName});
         
         this.messages.push(<div>

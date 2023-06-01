@@ -9,14 +9,12 @@ import {
     WebSocketInfo, 
     SessionsService,
     GraphNode,
-    state
+    state,
+    WebRTCfrontend,
+    WebRTCProps
 } from 'graphscript'//'../../../graphscript/index'//
 
 //isolated import for dev with src
-import {
-    WebRTCfrontend
-} from 'graphscript'//'../../../graphscript/index'//
-
 import { StructFrontend } from 'graphscript-services'//'../../../graphscript/src/extras/index.services'//
 import {BFSRoutes} from 'graphscript-services.storage'//'../../../graphscript/src/extras/index.storage.services'//
 
@@ -29,16 +27,35 @@ import config from '../../backend/serverconfig.js'
 import { DS } from 'graphscript-services/struct/datastructures/index'
 import { GDrive } from './drive'
 import { apiKey, googleClientID } from './gapi'
-import { demo, stopdemos } from './datacsv'
 import { disconnectDevice } from './device'
+
+import { demo, stopdemos } from './demo'
+import { RTCCallInfo } from './webrtc'
 
 
 const startDemo = true;
 
+export const client = new StructFrontend({state:state});
+export const sockets = new WSSfrontend({state:state});
 
-export let client = new StructFrontend({state:state});
-export let sockets = new WSSfrontend({state:state});
-export let webrtc = new WebRTCfrontend({state:state});
+export const webrtc = new WebRTCfrontend({state:state});
+
+export const webrtcData = {
+    webrtcStream:undefined, //current active stream
+    availableStreams:webrtc.rtc as {[key:string]:RTCCallInfo}, //list of accepted calls
+    unansweredCalls:webrtc.unanswered as {[key:string]:WebRTCProps & {caller:string, firstName?:string, lastName?: string}}
+}
+
+
+//list available streams
+export function getAvailableConnections() {
+    return {
+        ...webrtc.rtc
+    };
+}
+
+state.setState(webrtcData);
+
 
 export let usersocket:WebSocketInfo;
 
@@ -52,6 +69,9 @@ export type Streams = ('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg'|'chat'|'event
 
 export const SensorDefaults = ['emg','ppg','breath','hr','imu','env','ecg'] as Sensors[];
 export const StreamDefaults = ['emg','ppg','breath','hr','imu','env','ecg','chat','events','alerts'] as any as Streams[];
+
+export const alerts = [] as {message:string,value:any, from:string, timestamp:number|string}[]; //session alerts
+export const events = [] as {message:string, from:string, timestamp:number|string}[]; //session events
 
 export const graph = new Router({
     services:{
@@ -298,13 +318,6 @@ export async function restoreSession(
 }
 
 
-
-//list available streams
-export function getAvailableConnections() {
-    return {
-        ...webrtc.rtc
-    };
-}
 
 export function subscribeToStream(
     stream:Sensors|'chat'|'alerts', 
