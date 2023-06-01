@@ -131,24 +131,35 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     <td>Status: ${a.status}</td>
                     <td><button onClick={()=>{ 
                         client.deleteAuthorization(a._id,()=>{ 
-                            document.getElementById(this.unique+a._id)?.remove(); 
-                            document.getElementById(this.unique+a.associatedAuthId)?.remove(); 
+                            this.listAuths();
                         }); 
                     }}>❌</button></td>
                 </tr>
             )
         }); //get own auths
 
+        let getAuthsFromRequest = (req) => {
+            return auths ? auths.filter((a) => {
+                if(
+                    (a.authorizedId === req.requesting && a.authorizerId === req.receiving) ||
+                    (a.authorizerId === req.requesting && a.authorizedId === req.receiving)
+                ) {
+                    return true;
+                }
+            }) : []; 
+        }
+
         //my requests
         let authRequests = await client.getData('authRequest', undefined, {requesting: client.currentUser._id});
-        authRequests?.forEach((req:{
+        if(authRequests) await Promise.all(authRequests.map(async (req:{
             requesting:string, //them
             receiving:string //me
             receivingName:string,
             users:string, //this will cause this user to receive a notification
             authorizations:{ 'peer':true },
             firstName:string,
-            lastName:string
+            lastName:string,
+            _id:string
         }) => {
 
             if(auths.find((a) => {
@@ -158,34 +169,36 @@ export class UserAuths extends Component<{[key:string]:any}> {
                 }
                 
             })) {
-                client.deleteData([req]);
+                await client.deleteData([req, ...getAuthsFromRequest(req)]);
             }
             else {
 
-                let deleteRequest = () => {
-                    client.deleteData([req]);
+                let cancelRequest = async () => {
+                    await client.deleteData([req, ...getAuthsFromRequest(req)]);
+                    this.listAuths();
                 }
     
                 this.sentRequests.push(
-                    <div>
+                    <div key={req._id}>
                         To: {req.receivingName}
-                        <Button onClick={deleteRequest}>❌</Button>
+                        <Button onClick={cancelRequest}>❌</Button>
                     </div>
                 );
             }
 
-        });
+        }));
 
         //other people's requests
         let otherAuthRequests = await client.getData('authRequest', undefined, {receiving: client.currentUser._id})
-        otherAuthRequests?.forEach((req:{
+        if(otherAuthRequests) await Promise.all(otherAuthRequests.map( async (req:{
             requesting:string, //them
             receiving:string //me
             receivingName:string,
             users:string, //this will cause this user to receive a notification
             authorizations:{ 'peer':true },
             firstName:string,
-            lastName:string
+            lastName:string,
+            _id:string
         }) => {
 
             if(auths.find((a) => {
@@ -194,18 +207,20 @@ export class UserAuths extends Component<{[key:string]:any}> {
                 }
                 
             })) {
-                client.deleteData([req]);
+                await client.deleteData([req, ...getAuthsFromRequest(req)]);
+                this.setState({})
             }
             else {
 
-                let deleteRequest = () => {
-                    client.deleteData([req]);
+                let cancelRequest = async () => {
+                    await client.deleteData([req, ...getAuthsFromRequest(req)]);
+                    this.listAuths();
                 }
     
                 this.sentRequests.push(
-                    <div>
+                    <div key={req._id}>
                         To: {req.receivingName}
-                        <Button onClick={deleteRequest}>❌</Button>
+                        <Button onClick={cancelRequest}>❌</Button>
                     </div>
                 );
             }
@@ -222,20 +237,20 @@ export class UserAuths extends Component<{[key:string]:any}> {
             }
 
             let reject = () => {
-                client.deleteData([req]).then(async ()=>{
+                client.deleteData([req, ...getAuthsFromRequest(req)]).then(async ()=>{
                     await this.listAuths();
                     this.setState({});
                 });
             }
 
             this.userRequests.push(
-                <div>
+                <div key={req._id}>
                     User: {req.firstName} {req.lastName}<br/>
                     <Button onClick={accept}>✔️</Button>
                     <Button onClick={reject}>❌</Button>
                 </div>
             );
-        });
+        }));
         
         this.setState({});
     }
@@ -251,7 +266,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     <h3>Search Users</h3>
                     <div>
                     <Form>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Group className="mb-3" controlId="searchInput">
                             <Form.Label>Name or Email</Form.Label>
                             <Form.Control 
                                 id={this.unique+'query'} 
@@ -262,19 +277,24 @@ export class UserAuths extends Component<{[key:string]:any}> {
                             />
                         </Form.Group>
                         <Button onClick={this.queryUsers} >Search</Button>
-                        </Form>
+                    </Form>
                     </div>
 
                     <h4>Results</h4>
                     <div>
                         <Form>
-                        <Form.Select id={this.unique+'select'} onChange={()=>{}}>
-                            { this.queryResults.map(v => {
-                                    console.log(v);
-                                    return v;
-                                }) }
-                        </Form.Select>
-                        <Button onClick={this.authFromSelect}>Add Peer</Button>
+                            <Form.Group className="mb-3" controlId="searchResult">
+                                <Form.Select 
+                                    id={this.unique+'select'} 
+                                    onChange={()=>{}} 
+                                >
+                                    { this.queryResults.map(v => {
+                                            console.log(v);
+                                            return v;
+                                        }) }
+                                </Form.Select>
+                            </Form.Group>
+                            <Button onClick={this.authFromSelect}>Add Peer</Button>
                         </Form>
                     </div>
                 </div>
