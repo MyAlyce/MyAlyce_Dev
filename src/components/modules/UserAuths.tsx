@@ -147,12 +147,9 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     })}</td> */}
                     <td>User: <div className="float-start"><img className="rounded-circle" width="50" src={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic} /></div> {a.authorizerName}</td>
                     {a.status === 'OKAY' ? <td>Online: {idx > -1 ? `${onlineUsers[idx]}` : 'false'}</td> : <td>Status: {a.status}</td>}
-                    <td><button onClick={()=>{ 
-                        client.deleteAuthorization(a._id,()=>{ 
-                            client.deleteAuthorization(a.associatedAuthId,() => {
-                                this.listAuths();
-                            });
-                        }); 
+                    <td><button onClick={async ()=>{ 
+                        await client.deleteAuthorization(a._id); 
+                        this.listAuths();
                     }}>❌</button></td>
                 </tr>
             );
