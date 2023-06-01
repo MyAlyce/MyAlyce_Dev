@@ -3,6 +3,7 @@ import { client, defaultProfilePic, usersocket } from '../../scripts/client';
 import Button from 'react-bootstrap/Button';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
 import { UserSearch } from './UserSearch';
+import { Table } from 'react-bootstrap';
 
 let personIcon = './assets/person.jpg';
 
@@ -305,11 +306,18 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     }
                     <div>
                         <h4>Authorized</h4>
-                        <table>
+                        <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                            <th>User</th>
+                            <th>Status</th>
+                            <th>Authorize</th>
+                            </tr>
+                        </thead>
                             <tbody>
                                 {  this.existingAuths  }
                             </tbody>
-                        </table>
+                        </Table>
                     </div>
                 </div>
             </div>
