@@ -35,7 +35,7 @@ export function recordAlert(alert:{message:string,timestamp:number, value:any, [
     }
 
     alert.from = from;
-    alerts.push(alert as any);
+    if(!streamId) alerts.push(alert as any);
 
     const workername = streamId ? streamId+'alerts' : 'alerts';
     
