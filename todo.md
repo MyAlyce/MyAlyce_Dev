@@ -22,3 +22,4 @@
 ## Widgets
 
 - widgetize all the things
+- more data widgets, tables, etc, typical analytics stuff really (just needs to be PERFORMANT).
