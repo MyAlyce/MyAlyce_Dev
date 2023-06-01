@@ -1,4 +1,4 @@
-import React, {useRef, Component} from 'react'
+import React, {Component} from 'react'
 import { workers } from "device-decoder";
 
 import gsworker from '../../scripts/device.worker'
@@ -10,7 +10,7 @@ import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 import { WorkerInfo } from 'graphscript';
 import { Table } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
-import { csvworkers, recordEvent } from '../../scripts/datacsv';
+import {  recordEvent } from '../../scripts/datacsv';
 
 function getColorGradientRG(value) {
     let r, g, b;

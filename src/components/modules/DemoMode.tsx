@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { sComponent } from '../state.component';
-import { demo, demoFile, demos, stopdemos } from '../../scripts/demo';
+import { demo, demos, stopdemos } from '../../scripts/demo';
 import {Sensors, state} from '../../scripts/client'
 import { disconnectDevice } from '../../scripts/device';
 

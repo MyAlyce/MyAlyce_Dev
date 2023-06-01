@@ -1,10 +1,7 @@
 import React from 'react'
 import {sComponent} from '../state.component'
 
-
-import { DeviceConnect } from './DeviceConnect';
 import { Chart } from './Chart';
-import { StreamSelect } from './StreamSelect';
 import { ChartGroup } from './ChartGroup';
 
 

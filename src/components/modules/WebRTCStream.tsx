@@ -1,22 +1,16 @@
 import React, {Component} from 'react';
-import { sComponent } from '../state.component';
 
-import { client,  graph, usersocket, state, webrtc } from "../../scripts/client";
+import { client, webrtc } from "../../scripts/client";
 
 
-import { WebRTCInfo, WebRTCProps } from 'graphscript'// "../../../../graphscript/index";//
-
-import {AuthorizationStruct, ProfileStruct} from 'graphscript-services/struct/datastructures/types'
-
+import { WebRTCInfo } from 'graphscript'// "../../../../graphscript/index";//
 
 import { ChartGroup } from "../modules/ChartGroup";
-import { StreamSelect } from "../modules/StreamSelect";
 
-import { Avatar, Button } from "../lib/src";
+import {Button } from "../lib/src";
 
 
-import { Howl, Howler } from "howler";
-import { RTCCallInfo, RTCCallProps, disableAudio, disableVideo, enableAudio, enableDeviceStream, enableVideo } from '../../scripts/webrtc';
+import { RTCCallInfo, disableAudio, disableVideo, enableAudio,  enableVideo } from '../../scripts/webrtc';
 
 const micOn = './assets/mic.svg';
 const micOff = './assets/mic-off.svg';

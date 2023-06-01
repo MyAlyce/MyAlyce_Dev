@@ -1,6 +1,6 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import {SensorDefaults, client, state} from '../../scripts/client'
+import {SensorDefaults, client} from '../../scripts/client'
 
 import { BFSRoutes, csvRoutes } from 'graphscript-services.storage'//'../../../../graphscript/src/extras/index.storage.services'//
 

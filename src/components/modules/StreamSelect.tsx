@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {webrtc} from '../../scripts/client'
 import { RTCCallInfo } from '../../scripts/webrtc';
-import { Avatar } from '../lib/src';
 import { UserBar } from '../ui/UserBar/UserBar';
 
 const personIcon = './assets/person.jpg';

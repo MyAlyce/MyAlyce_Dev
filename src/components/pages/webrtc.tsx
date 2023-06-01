@@ -1,23 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { sComponent } from '../state.component';
 
 
 import { client, graph, usersocket, state, webrtc } from "../../scripts/client";
 
 
-import {WebRTCInfo, WebRTCProps } from 'graphscript'// "../../../../graphscript/index";//
-
 import {AuthorizationStruct, ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 
 import { RTCCallProps, RTCCallInfo, answerCall, startCall } from "../../scripts/webrtc";
-
-import { StreamSelect } from "../modules/StreamSelect";
 
 import { Avatar } from "../lib/src";
 import Button from 'react-bootstrap/Button';
 
 
-import { RTCVideo, WebRTCStream } from '../modules/WebRTCStream';
+import { WebRTCStream } from '../modules/WebRTCStream';
 
 let personIcon = './assets/person.jpg';
 

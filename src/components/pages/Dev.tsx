@@ -1,7 +1,5 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import { showNotification } from '../../scripts/alerts'
-import { Button } from '../lib/src'
 import { Header } from '../ui/Header'
 import { Navigation } from '../ui/Navigation'
 import { UserBar } from '../ui/UserBar/UserBar'
