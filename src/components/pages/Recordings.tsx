@@ -132,34 +132,41 @@ export class Recordings extends sComponent {
                     streamId={ this.state.activeStream } 
                     filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
                     dir={ dir }/>
-                {this.state.isRecording ? 
-                    <Button onClick={()=>{ 
-                        stopRecording(this.state.activeStream, dir, client.currentUser.firstName+client.currentUser.lastName) 
-                    }}>
-                        <Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>&nbsp;Pause
-                    </Button> 
-                        : 
-                    <>
-                        <Button onClick={()=>{
-                            this.record(this.state.activeStream,this.toggled,dir,dir)}}
-                        >
-                            <Icon.Circle className="align-text-bottom" size={20}></Icon.Circle>&nbsp;Record
-                        </Button>{' '}
-                        <StreamToggle 
-                            toggled={this.toggled}
-                            subscribable={SensorDefaults}
-                            onChange = {(ev:any)=>{ 
-                                this.setState({});
-                            }}
-                        />
-                    </> 
-                    }
-                Select Folder: 
-                <select onChange={(ev)=>{ this.dir = ev.target.value; this.listRecordings(); }}>
-                    { this.state.folders ? this.state.folders.map((v) => {
-                        return (<option value={v} key={v}>{v}</option>)
-                    }) : null }
-                </select>
+                <Card style={{ width: '30rem' }}>
+                    <Card.Header>Recording:</Card.Header>
+                    <Card.Body>
+                        <div className="d-grid gap-2">
+                        {this.state.isRecording ? 
+                            <Button variant='info' onClick={()=>{ 
+                                stopRecording(this.state.activeStream, dir, client.currentUser.firstName+client.currentUser.lastName) 
+                            }}>
+                                <Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>&nbsp;Pause
+                            </Button> 
+                                : 
+                            <>
+                                <Button variant='danger' onClick={()=>{
+                                    this.record(this.state.activeStream,this.toggled,dir,dir)}}
+                                >
+                                    <Icon.Circle className="align-text-bottom" size={20}></Icon.Circle>&nbsp;Record
+                                </Button>{' '}
+                                <StreamToggle 
+                                    toggled={this.toggled}
+                                    subscribable={SensorDefaults}
+                                    onChange = {(ev:any)=>{ 
+                                        this.setState({});
+                                    }}
+                                />
+                            </> 
+                            }
+                        <strong>Select Folder: </strong>
+                        <select onChange={(ev)=>{ this.dir = ev.target.value; this.listRecordings(); }}>
+                            { this.state.folders ? this.state.folders.map((v) => {
+                                return (<option value={v} key={v}>{v}</option>)
+                            }) : null }
+                        </select>
+                        </div>
+                    </Card.Body>
+                </Card>
                 <h2>Recordings</h2>
                 <div>
                 <Card style={{ width: '40rem' }}>
