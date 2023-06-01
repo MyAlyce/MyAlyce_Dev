@@ -36,14 +36,8 @@ export function UserBar(props:{streamId?:string}) {
             name={name}
             picture={profilePic}
          />
-        </Col>
-        <Col xs={6}>
-        <UserFeed
-        />
-        </Col>
-        <Col>
-         <Notify
-         />
+        <UserFeed/>
+         <Notify/>
         </Col>
       </Row>
     </Container>

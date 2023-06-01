@@ -9,7 +9,7 @@ export function UserAlerts(props:{streamId?:string}) {
   let as = props?.streamId ? webrtcData.availableStreams[props.streamId].alerts?.length : alerts.length;
 
   return (
-    <Card>
+    <Card style={{ width: '12rem' }}>
       <Card.Body>
       <Icon.Bell className="align-text-bottom" size={40}></Icon.Bell>
       <Badge bg="danger">{as ? as : 0}</Badge>

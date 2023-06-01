@@ -175,7 +175,8 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         return (
             <div className="input-section">
-                <Card bg='Light'>
+                <Card style={{ width: '20rem' }}>
+                    <Card.Header>Notes</Card.Header>
                     <Card.Body>
                     <label>Event</label>
                     <div><input ref={this.ref1 as any} id={this.id+'note'} name="note" type='text' defaultValue=""/></div>

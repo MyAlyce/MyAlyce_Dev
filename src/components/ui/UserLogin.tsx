@@ -8,15 +8,11 @@ export function UserLogin({name, picture}) {
 
   return (
     <CardGroup>
-    <Card style={{ width: '5.3rem' }}>
-      <Card.Body>
-      <img className="rounded-circle" width="50" alt={profilePic} src={picture} />
-      </Card.Body>
-    </Card>
     <Card style={{ width: '12rem' }}>
       <Card.Body>
-      <Card.Subtitle>{name}</Card.Subtitle>
-          <Card.Text>
+      <div className="float-start"><img className="rounded-circle" width="50" alt={profilePic} src={picture} /></div>
+      <Card.Subtitle>&nbsp;&nbsp;{name}</Card.Subtitle>
+          <Card.Text>&nbsp;&nbsp;
         <Icon.Eye className="align-text-bottom" size={20}></Icon.Eye>&nbsp;
         <Icon.MapPin className="align-text-bottom" size={20}></Icon.MapPin>
         </Card.Text>
