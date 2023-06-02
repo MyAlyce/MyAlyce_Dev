@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { RTCCallInfo } from '../../scripts/webrtc';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 import { WorkerInfo } from 'graphscript';
-import { Table } from 'react-bootstrap';
+import { CardGroup, Table } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
 import {  recordEvent } from '../../scripts/datacsv';
 
@@ -101,7 +101,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 noteRows.push(
                     <tr key={event._id}>
                         <td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td>
-                        <td>{event.event}</td>
+                        <td width="50%">{event.event}</td>
                         <td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td> 
                         <td><button onClick={onclick}>❌</button></td>
                     </tr>
@@ -184,23 +184,27 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         return (
             <Widget 
-                style={{ width: '25rem' }}
+                style={{ maxWidth: '20rem' }}
                 header={"Log Event"}
                 content = {<>
+                    <label><Icon.Edit3/></label>{' '}
+                    <textarea ref={this.ref1 as any} id={this.id+'note'}  name="note" defaultValue="" style={{width:'87.5%'}}/>
                     <div>
-                        <label><Icon.Edit3/></label>{' '}
-                        <input ref={this.ref1 as any} id={this.id+'note'} type="text" name="note" defaultValue=""/>
-                        {' '}<label><Icon.TrendingUp/></label>{' '}
+                        <label><Icon.TrendingUp/></label>{' '}
                         <input 
                             onInput={updateInputColor}
                             onChange={updateInputColor}
+                            style={{width:'12%'}}
                             className="number-input" ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'
                         />
+                        {' '}<label><Icon.Clock/></label>{' '}
+                        <input
+                        
+                            style={{width:'65%'}}
+                            ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/>
+                        {' '}<br/>
+                        <Button style={{float:'right'}} onClick={this.submit}>Submit</Button>
                     </div>
-                    <label><Icon.Clock/></label>{' '}
-                    <input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/>
-                    {' '}
-                    <Button onClick={this.submit}>Submit</Button>
                 </>}
             />
         );
@@ -214,7 +218,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 content={
                     <Table striped bordered hover>
                         <tbody>
-                            <tr><th>Time</th><th>Event</th><th>Grade</th><th></th></tr>
+                            <tr><th><Icon.Clock/></th><th>Event</th><th><Icon.TrendingUp/></th><th></th></tr>
                             {this.state.noteRows}
                         </tbody>
                     </Table>
@@ -227,8 +231,10 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         return (
             <div className="note-taking-module">
-                {this.showInput && this.renderInputSection()}
-                {this.showHistory && this.renderHistory()}
+                <CardGroup>
+                    {this.showInput && this.renderInputSection()}
+                    {this.showHistory && this.renderHistory()}
+                </CardGroup>
             </div>
         );
     }

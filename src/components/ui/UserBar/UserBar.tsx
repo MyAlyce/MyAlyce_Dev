@@ -29,19 +29,20 @@ export function UserBar(props:{streamId?:string}) {
   if(!name) name = props.streamId ? props.streamId : 'Me';
 
   return (
-    <Container className="my-auto">
-      <Row className="grey-bar">
-        <UserBlock
-            name={name}
-            pictureUrl={profilePic}
-        />
-        <UserFeed
-          streamId={props.streamId}
-        />
-        <Notify
-          streamId={props.streamId}
-        />
-      </Row>
-    </Container>
+    <Row className="grey-bar">
+      <UserBlock
+          name={name}
+          pictureUrl={profilePic}
+          width={"20%"}
+      />
+      <UserFeed
+        streamId={props.streamId}
+        width={"60%"}
+      />
+      <Notify
+        streamId={props.streamId}
+        width={"20%"}
+      />
+    </Row>
   );
 }

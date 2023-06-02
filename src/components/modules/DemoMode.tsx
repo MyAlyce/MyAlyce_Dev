@@ -3,6 +3,8 @@ import { sComponent } from '../state.component';
 import { demo, demos, stopdemos } from '../../scripts/demo';
 import {Sensors, state} from '../../scripts/client'
 import { disconnectDevice } from '../../scripts/device';
+import { Button } from 'react-bootstrap';
+import { Widget } from '../widgets/Widget';
 
 export class Demo extends sComponent {
 
@@ -38,12 +40,15 @@ export class Demo extends sComponent {
         }
 
         return (
-            <div>
-                { !this.state.demoing ? 
-                    <button onClick={demoonclick}>Demo Data</button>
-                :   <button onClick={stopdemoonclick}>Stop Demo</button>
+            <Widget
+                content={<> 
+                {!this.state.demoing ? 
+                        <Button onClick={demoonclick}>Demo Data</Button>
+                    :   <Button onClick={stopdemoonclick}>Stop Demo</Button>
+                    }
+                </>
                 }
-            </div>
+            />
         );
     }
 

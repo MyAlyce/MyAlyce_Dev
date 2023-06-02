@@ -4,9 +4,9 @@ import { UserAlerts } from './UserAlerts';
 import { UserMessages } from './UserMessages';
 import { Col } from 'react-bootstrap';
 
-export function Notify(props:{streamId?:string}) {
+export function Notify(props:{streamId?:string, width?:string}) {
   return (
-    <Col className="my-auto">
+    <Col className="my-auto" style={{minWidth:props.width}}>
       <UserAlerts
           streamId={props.streamId}
       /> 

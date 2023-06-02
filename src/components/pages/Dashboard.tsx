@@ -1,6 +1,8 @@
 import React from 'react'
 import { sComponent } from '../state.component'
 import { Device } from '../modules/device'
+import { UserBar } from '../ui/UserBar/UserBar'
+import { Widget } from '../widgets/Widget'
 
 export class Dashboard extends sComponent {
 
@@ -10,18 +12,26 @@ export class Dashboard extends sComponent {
         availableStreams:{}, //we can handle multiple connections too
     }
 
-
     render() {
 
         return (
             <div className='container-fluid'>
                 <div className="main-content">
                     {/* Widgets */}
+                    <Widget 
+                        header={<h4>Monitoring</h4>}
+                        content = {
+                            <UserBar streamId={this.state.activeStream}/>
+                        }
+                    />
                     <div className="device-section">
                         {/* Charts and stats */}
-                       <Device
-                            streamId={this.state.activeStream}
-                            sensors={['ppg','hr']}
+                        <Widget 
+                            content = {<Device
+                                streamId={this.state.activeStream}
+                                sensors={['ppg']}
+                                onlyOneActive={true}
+                            />}
                         />
                     </div>
                     <div className="note-taking-section">

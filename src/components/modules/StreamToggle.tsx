@@ -18,9 +18,12 @@ export class StreamToggle extends Component<{
 
     constructor(props) {
         super(props);
-        if(props.subscribable) this.state.subscribable = props.subscribable;
-        if(props.toggled) {
-            this.state.toggled = props.toggled; 
+        
+        console.log("StreamToggle Constructor!!")
+
+        if(this.props.subscribable) this.state.subscribable = this.props.subscribable;
+        if(this.props.toggled) {
+            this.state.toggled = this.props.toggled; 
             this.state.toggled.forEach((v) => {
                 let idx = this.state.subscribable.indexOf(v);
                 if(idx > -1) {
@@ -29,7 +32,10 @@ export class StreamToggle extends Component<{
             })
         }
         
-        if(props.onChange) this.state.onChange = props.onChange;
+        if(this.props.onChange) this.state.onChange = this.props.onChange;
+    }
+
+    componentDidMount(): void {
     }
 
     render() {

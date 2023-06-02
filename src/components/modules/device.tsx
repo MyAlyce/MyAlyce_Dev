@@ -15,7 +15,8 @@ export class Device extends sComponent {
 
     constructor(props:{
         sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[],
-        streamId?:string
+        streamId?:string,
+        onlyOneActive?:boolean
     }) {
         super(props as any);
     }
@@ -30,7 +31,11 @@ export class Device extends sComponent {
             <div>
                 <div>{    
                     (this.state.deviceConnected || this.props.streamId) ? (
-                            <ChartGroup streamId={this.props.streamId} sensors={this.props.sensors}/>
+                            <ChartGroup 
+                                streamId={this.props.streamId} 
+                                sensors={this.props.sensors} 
+                                onlyOneActive={this.props.onlyOneActive}
+                            />
                         ) : (
                             <Chart sensors={['emg','ecg']} title={"EMG & ECG"}/>
                         )

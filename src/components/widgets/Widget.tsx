@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import { Card } from 'react-bootstrap'
 
 export class Widget extends Component<{
-    content:any, 
+    className?:string,
+    content?:any, 
     style?:any
     title?:any,
     header?:any,
@@ -11,7 +12,7 @@ export class Widget extends Component<{
     
     render() {
         return (
-            <Card style={ this.props.style }>
+            <Card style={ this.props.style } className={ this.props.className }>
                 { this.props.header ? <Card.Header>{this.props.header}</Card.Header> : null}
                 <Card.Body>
                 { this.props.title ? <Card.Title>{this.props.title}</Card.Title> : null}

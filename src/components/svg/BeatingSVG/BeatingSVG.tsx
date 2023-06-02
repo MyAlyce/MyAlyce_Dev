@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {state} from '../../../scripts/client'
 
 import './BeatingSVG.css'
+import { Col } from 'react-bootstrap';
 
 type BeatingSVGProps = {
     style?:any, 
@@ -92,13 +93,13 @@ export class BeatingSVG extends Component<BeatingSVGProps> {
     render() {
         return (
             <span>{
-                this.customContent ? <div style={{position:'relative'}}>
-                    <div className='heart'  style={{position:"absolute", zIndex:"0"}}>
+                this.customContent ? <div style={{display:'block', position:'relative'}}>
+                    <span className='heart'  style={{position:"absolute", zIndex:"0"}}>
                         {this.customContent}
-                    </div> 
+                    </span> 
                     <span id={this.unique+"ghosthearts"} style={{position:"absolute", zIndex:"1"}}>
-                        <div className='ghost-heart' style={{position:"absolute", zIndex:"2"}}>{this.customContent}</div> 
-                        <div className='ghost-heart2' style={{position:"absolute", zIndex:"3"}}>{this.customContent}</div> 
+                        <span className='ghost-heart' style={{position:"absolute", zIndex:"2"}}>{this.customContent}</span> 
+                        <span className='ghost-heart2' style={{position:"absolute", zIndex:"3"}}>{this.customContent}</span> 
                     </span>
                 </div>
                     : 

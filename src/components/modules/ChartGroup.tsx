@@ -9,7 +9,8 @@ import { StreamToggle } from './StreamToggle';
 
 export class ChartGroup extends Component<{
     sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[],
-    streamId?:string
+    streamId?:string,
+    onlyOneActive?:boolean
 }> {
     
     state = { //synced with global state
@@ -21,7 +22,8 @@ export class ChartGroup extends Component<{
 
     constructor(props:{
         sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[],
-        streamId?:string
+        streamId?:string,
+        onlyOneActive?:boolean
     }) {
         super(props as any);
     }
@@ -109,7 +111,7 @@ export class ChartGroup extends Component<{
     render() {
         return (
             <div>
-                <StreamToggle
+                <span>Charts: </span><StreamToggle
                     toggled={this.props.sensors}
                     subscribable={[...SensorDefaults]}
                     onChange={(ev) => {
@@ -121,7 +123,7 @@ export class ChartGroup extends Component<{
                             this.setState({});
                         }
                     }}
-                    onlyOneActive={true}
+                    onlyOneActive={this.props.onlyOneActive}
                 />
                 <div>{
                     Object.keys(this.activeCharts).map((v) => {
