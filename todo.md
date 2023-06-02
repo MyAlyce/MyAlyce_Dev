@@ -27,3 +27,7 @@
 
 - widgetize all the things
 - more data widgets, tables, etc, typical analytics stuff really (just needs to be PERFORMANT).
+
+## Modularity
+
+Restructure the source better around the widget module development so it's easier to document. 

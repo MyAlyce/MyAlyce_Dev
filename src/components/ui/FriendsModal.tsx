@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import * as Icon from 'react-feather';
-import { NoteForm } from './Noteform';
-import { SettingsView } from '../pages/SettingsView';
+import { UserAuths } from '../modules/UserAuths';
 
 export function FriendsModal() {
   const [show, setShow] = useState(false);
@@ -19,7 +18,7 @@ export function FriendsModal() {
           <Modal.Title><Icon.User className="align-text-bottom" color="red" size={26}></Icon.User>&nbsp;My Connections</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <SettingsView />
+          <UserAuths/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

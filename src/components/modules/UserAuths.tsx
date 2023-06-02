@@ -6,6 +6,7 @@ import { UserSearch } from './UserSearch';
 import ListGroup from 'react-bootstrap/ListGroup';
 import * as Icon from 'react-feather';
 import { Card } from 'react-bootstrap';
+import { Avatar } from '../ui/Avatar';
 
 let personIcon = './assets/person.jpg';
 
@@ -149,7 +150,10 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     {/* <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
                         return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
                     })}</td> */}
-                    <div className="float-start"><img className="rounded-circle" width="50" src={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic} /> {a.authorizerName}</div>
+                    <div className="float-start">
+                        <Avatar
+                            pictureUrl={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic}
+                        /> {a.authorizerName} </div>
                     {/*a.status === 'OKAY' ? <div className="text-center">Online: {idx > -1 ? `${onlineUsers[idx]}` : 'false'}</div> : <div>Status: {a.status}</div>*/}
                     <div className="float-end"><Button variant="outline-success" size="sm" onClick={async ()=>{ 
                         await client.deleteAuthorization(a._id); 
@@ -206,7 +210,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
     
                 this.sentRequests.push(
                     <div key={req._id}>
-                        To:  <div className="float-start"><img className="rounded-circle" width="50" src={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic} /></div> {req.receivingName}
+                        To:  <div className="float-start"><Avatar pictureUrl={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic}/></div> {req.receivingName}
                         <Button onClick={cancelRequest}>❌</Button>
                     </div>
                 );
@@ -271,7 +275,6 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
         return (
             <div id={this.unique}>
-                <h2>User Authorizations</h2>
                 <Card>
                 <Button variant="secondary" size="sm"onClick={()=>{ this.setState({searching:!this.state.searching})}}><Icon.Search size={20} className="float-start"></Icon.Search><div className="float-start">&nbsp;Search</div></Button>
                 </Card>
@@ -283,7 +286,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     </> : null
                 }
                 <div>
-                    <h3>Your Connections</h3>
+                    <h3>Connections</h3>
                     {this.userRequests?.length > 0 ? 
                        (
                         <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardGroup } from 'react-bootstrap';
 import * as Icon from 'react-feather';
-import { defaultProfilePic } from '../../scripts/client';
+import { Avatar } from './Avatar';
 
 export function UserLogin({name, picture}) {
 
@@ -9,7 +9,9 @@ export function UserLogin({name, picture}) {
     <CardGroup>
     <Card style={{ width: '12rem' }}>
       <Card.Body>
-      <div className="float-start"><img className="rounded-circle" width="50" src={picture ? picture : defaultProfilePic} /></div>
+      <Avatar 
+        pictureUrl={picture}
+      />
       <Card.Subtitle>&nbsp;&nbsp;{name}</Card.Subtitle>
           <Card.Text>&nbsp;&nbsp;
         <Icon.Eye className="align-text-bottom" size={20}></Icon.Eye>&nbsp;
