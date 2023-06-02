@@ -80,18 +80,17 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
     
                 let backup = () => {
                     //google drive backup
-                    console.log(driveInstance);
                     driveInstance?.backupToDrive(file, dir);
                 }
     
                 recordings.push (
                     <div key={file}>
-                            <Row className='recordings'>
-                                <Col xs lg="2" className='over'>{file}</Col>
-                                <Col className="d-grid gap-2"><Button variant='secondary' onClick={download}><Icon.Download/></Button></Col>
-                                <Col className="d-grid gap-2"><Button variant='danger' onClick={deleteFile}><Icon.X/></Button></Col>
-                                <Col className="d-grid gap-2"><Button variant='caution' onClick={backup}><img src={GDriveIcon} height="50px" width="50px"></img ></Button></Col>
-                            </Row>
+                        <Row className='recordings'>
+                            <Col xs lg="2" className='over'>{file}</Col>
+                            <Col className="d-grid gap-2"><Button variant='secondary' onClick={download}><Icon.Download/></Button></Col>
+                            <Col className="d-grid gap-2"><Button variant='danger' onClick={deleteFile}><Icon.X/></Button></Col>
+                            <Col className="d-grid gap-2"><Button variant='caution' onClick={backup}><img src={GDriveIcon} height="50px" width="50px"></img ></Button></Col>
+                        </Row>
                     </div>
                 )
             } 

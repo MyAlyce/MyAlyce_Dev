@@ -5,7 +5,7 @@ import { webrtc } from './client'
 import gsworker from './device.worker'
 import { RTCCallInfo } from "./webrtc";
 import { WorkerInfo } from "graphscript";
-import { parseCSVData } from "graphscript-services.storage";
+import { parseCSVData, toISOLocal } from "graphscript-services.storage";
 
 state.setState({
     isRecording:false,
@@ -79,7 +79,7 @@ export const recordChat = (from,message,streamId?) => {
         if(!csvworkers[name]) {
             csvworkers[name] =  workers.addWorker({ url: gsworker });
             csvworkers[name].run('createCSV', [
-                `${from}/Chat_${from}${new Date().toISOString()}.csv`,
+                `${from}/Chat_${from}${toISOLocal(Date.now())}.csv`,
                 [
                     'timestamp','from','message'
                 ]
@@ -108,7 +108,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors.includes('ppg')) {
         let makeCSV = () => {
-            let filename = dir+`/PPG_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
+            let filename = dir+`/PPG_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${toISOLocal(Date.now())}.csv`;
             fileNames['ppg'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'ppg' : 'ppg']?.run('createCSV', [
                 filename,
@@ -130,7 +130,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors.includes('breath')) {
         let makeCSV = () => {
-            let filename =  dir+`/BRE_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
+            let filename =  dir+`/BRE_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${toISOLocal(Date.now())}.csv`;
             fileNames['breath'] = filename;
             
             if(state.data.isRecording) csvworkers[streamId ? streamId+'breath' : 'breath']?.run('createCSV', [
@@ -152,7 +152,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors.includes('hr')) {
         let makeCSV = () => {
-            let filename =  dir+`/HRV_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
+            let filename =  dir+`/HRV_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${toISOLocal(Date.now())}.csv`;
             fileNames['hr'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'hr' : 'hr']?.run('createCSV', [
                 filename,
@@ -178,7 +178,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
             if(state.data[streamId ? streamId+'emg' : 'emg'].leds) {
                 header.push('leds');
             }
-            let filename =  dir+`/EMG_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
+            let filename =  dir+`/EMG_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${toISOLocal(Date.now())}.csv`;
             fileNames['emg'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'emg' : 'emg']?.run('createCSV', [
                 filename,
@@ -201,7 +201,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
             if(state.data[streamId ? streamId+'emg' : 'emg'].leds) {
                 header.push('leds');
             }
-            let filename =  dir+`/ECG_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
+            let filename =  dir+`/ECG_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${toISOLocal(Date.now())}.csv`;
             fileNames['ecg'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'ecg' : 'ecg']?.run('createCSV', [
                 filename,
@@ -220,7 +220,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors?.includes('imu')) {
         let makeCSV = () => {
-            let filename =  dir+`/IMU_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${new Date().toISOString()}.csv`;
+            let filename =  dir+`/IMU_${subTitle ? subTitle : streamId ? '_'+streamId : ''}${toISOLocal(Date.now())}.csv`;
             fileNames['imu'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'imu' : 'imu']?.run('createCSV', [
                 filename,
@@ -243,7 +243,7 @@ export function recordCSV(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|
 
     if(!sensors || sensors?.includes('env')) {
         let makeCSV = () => {
-            let filename =  dir+`/ENV_${new Date().toISOString()}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
+            let filename =  dir+`/ENV_${toISOLocal(Date.now())}${subTitle ? subTitle : streamId ? '_'+streamId : ''}.csv`;
             fileNames['env'] = filename;
             if(state.data.isRecording) csvworkers[streamId ? streamId+'env' : 'env']?.run('createCSV', [
                 filename,
