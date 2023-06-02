@@ -98,9 +98,8 @@ export class Chart extends sComponent {
                 lines['5'].nSec = 5;
             }
             if(this.sensors.includes('ppg')) {
-                Object.assign(lines,{
-                    ...max3010xChartSettings.lines
-                })
+                lines['red'] = (max3010xChartSettings.lines as any).red;
+                lines['ir'] = (max3010xChartSettings.lines as any).ir;
             }
             if(this.sensors.includes('hr')) {
                 Object.assign(lines,{
