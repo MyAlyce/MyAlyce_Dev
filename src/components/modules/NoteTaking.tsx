@@ -12,6 +12,9 @@ import { Table } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
 import {  recordEvent } from '../../scripts/datacsv';
 
+import * as Icon from 'react-feather'
+import { Widget } from '../widgets/Widget';
+
 function getColorGradientRG(value) {
     let r, g, b;
 
@@ -39,9 +42,12 @@ export class NoteTaking extends Component<{[key:string]:any}> {
     filename;
     streamId?:string;
 
+    showInput = true;
+    showHistory = true;
+
     ref1;ref2;ref3;
 
-    constructor(props:{streamId?:string, filename?:string, dir?:string}) {
+    constructor(props:{streamId?:string, filename?:string, dir?:string, showInput?:boolean, showHistory?:boolean}) {
         super(props);
         let dir = props.dir ? props.dir : 'data';
         if(props.streamId && !props.filename) {
@@ -52,6 +58,9 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         if(props.filename) this.filename = props.filename;
         else this.filename = dir+`/Notes${props.streamId ? '_'+props.streamId : ''}.csv`
+
+        if(props.showInput) this.showInput = props.showInput;
+        if(props.showHistory) this.showHistory = props.showHistory;
 
         this.streamId = props.streamId;
         
@@ -174,44 +183,52 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         }
 
         return (
-            <div className="input-section">
-                <Card style={{ width: '20rem' }}>
-                    <Card.Header>Notes</Card.Header>
-                    <Card.Body>
-                    <label>Event</label>
-                    <div><input ref={this.ref1 as any} id={this.id+'note'} name="note" type='text' defaultValue=""/></div>
-                    
-                    <label>Time</label>
-                    <div><input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/></div>
-                    
-                    <label>Rating?</label>
-                    <div><input 
+            <Widget 
+                style={{ width: '25rem' }}
+                header={"Log Event"}
+                content = {<>
+                    <div>
+                        <label><Icon.Edit3/></label>{' '}
+                        <input ref={this.ref1 as any} id={this.id+'note'} type="text" name="note" defaultValue=""/>
+                        {' '}<label><Icon.TrendingUp/></label>{' '}
+                        <input 
                             onInput={updateInputColor}
                             onChange={updateInputColor}
-                            className="number-input" ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'></input></div>
-                    <br/>
+                            className="number-input" ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'
+                        />
+                    </div>
+                    <label><Icon.Clock/></label>{' '}
+                    <input ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/>
+                    {' '}
                     <Button onClick={this.submit}>Submit</Button>
-                    </Card.Body>
-                </Card>
-            </div>
+                </>}
+            />
         );
     }
 
-    render() {
-
+    renderHistory() {
         return (
-            <div className="note-taking-module">
-                {this.renderInputSection()}
-                <br></br>
-                <Card style={{ width: '40rem' }}>
-                    <Card.Header>History:</Card.Header>
+            <Widget 
+                style={{ width: '40rem' }}
+                header={"History:"}
+                content={
                     <Table striped bordered hover>
                         <tbody>
                             <tr><th>Time</th><th>Event</th><th>Grade</th><th></th></tr>
                             {this.state.noteRows}
                         </tbody>
                     </Table>
-                </Card>
+                }
+            />
+        )
+    }
+
+    render() {
+
+        return (
+            <div className="note-taking-module">
+                {this.showInput && this.renderInputSection()}
+                {this.showHistory && this.renderHistory()}
             </div>
         );
     }
