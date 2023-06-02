@@ -42,7 +42,7 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
 
     componentDidMount(): void {
         this.csvworker = workers.addWorker({url:gsworker});
-        this.csvworker.run('checkFolderList', [client.currentUser.firstName+client.currentUser.lastName+'/folderList', this.dir]).then(()=> {        
+        if(client.currentUser) this.csvworker.run('checkFolderList', [client.currentUser.firstName+client.currentUser.lastName+'/folderList', this.dir]).then(()=> {        
             this.parseFolderList();
         });
     }
@@ -80,18 +80,17 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
     
                 let backup = () => {
                     //google drive backup
-                    console.log(driveInstance);
                     driveInstance?.backupToDrive(file, dir);
                 }
     
                 recordings.push (
                     <div key={file}>
-                            <Row className='recordings'>
-                                <Col xs lg="2" className='over'>{file}</Col>
-                                <Col className="d-grid gap-2"><Button variant='secondary' onClick={download}><Icon.Download/></Button></Col>
-                                <Col className="d-grid gap-2"><Button variant='danger' onClick={deleteFile}><Icon.X/></Button></Col>
-                                <Col className="d-grid gap-2"><Button variant='caution' onClick={backup}><img src={GDriveIcon} height="50px" width="50px"></img ></Button></Col>
-                            </Row>
+                        <Row className='recordings'>
+                            <Col xs lg="2" className='over'>{file}</Col>
+                            <Col className="d-grid gap-2"><Button variant='secondary' onClick={download}><Icon.Download/></Button></Col>
+                            <Col className="d-grid gap-2"><Button variant='danger' onClick={deleteFile}><Icon.X/></Button></Col>
+                            <Col className="d-grid gap-2"><Button variant='caution' onClick={backup}><img src={GDriveIcon} height="50px" width="50px"></img ></Button></Col>
+                        </Row>
                     </div>
                 )
             } 
