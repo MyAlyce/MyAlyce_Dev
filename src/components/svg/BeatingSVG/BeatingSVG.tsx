@@ -48,7 +48,6 @@ export class BeatingSVG extends Component<BeatingSVGProps> {
         this.animating = true;
 
         let anim = () => {
-            console.log(this.bpm);
             this.animateHearts(this.bpm).then(() => {
                 if(this.animating) this.animation = requestAnimationFrame(anim);
             });
@@ -74,13 +73,11 @@ export class BeatingSVG extends Component<BeatingSVGProps> {
             const ghostHearts2 = Array.from(svgCopy.getElementsByClassName('ghost-heart2'));
     
             ghostHearts.forEach((heart:any, index) => {
-                heart.style.setProperty('--animation-speed', `${bps}s`); // Set animation speed
-                heart.classList.add('animate');
+                heart.style.animation = `heartbeat ${bps}s ease-in-out`;
             });
     
             ghostHearts2.forEach((heart:any, index) => {
-                heart.style.setProperty('--animation-speed', `${bps}s`); // Set animation speed
-                heart.classList.add('animate');
+                heart.style.animation = `heartbeat2 ${bps}s ease-in-out`;
             });
     
             svgContainer.parentNode?.insertBefore(svgCopy, svgContainer.nextSibling); // Insert the copy after the original SVG container
