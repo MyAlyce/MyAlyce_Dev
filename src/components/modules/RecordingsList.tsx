@@ -42,7 +42,7 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
 
     componentDidMount(): void {
         this.csvworker = workers.addWorker({url:gsworker});
-        this.csvworker.run('checkFolderList', [client.currentUser.firstName+client.currentUser.lastName+'/folderList', this.dir]).then(()=> {        
+        if(client.currentUser) this.csvworker.run('checkFolderList', [client.currentUser.firstName+client.currentUser.lastName+'/folderList', this.dir]).then(()=> {        
             this.parseFolderList();
         });
     }
