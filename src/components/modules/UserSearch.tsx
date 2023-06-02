@@ -66,9 +66,10 @@ export class UserSearch extends Component<{onClick:(ev)=>void}> {
                             defaultValue=""
                             ref={this.ref as any}
                             placeholder="Enter Name or Email" 
+                            size="sm"
                         />
+                    <Button variant="outline-success" size="sm" onClick={this.queryUsers} >Search</Button>
                     </Form.Group>
-                    <Button onClick={this.queryUsers} >Search</Button>
                 </Form>
                 </div>
                 <h4>Results</h4>
@@ -76,6 +77,7 @@ export class UserSearch extends Component<{onClick:(ev)=>void}> {
                     <Form>
                         <Form.Group className="mb-3" controlId="searchResult">
                             <Form.Select 
+                                size="sm"
                                 id={this.unique+'select'} 
                                 onChange={()=>{}} 
                             >
@@ -83,13 +85,13 @@ export class UserSearch extends Component<{onClick:(ev)=>void}> {
                                         return v;
                                     }) }
                             </Form.Select>
-                        </Form.Group>
-                        <Button onClick={()=>{
+                        <Button variant="secondary"size="sm" onClick={()=>{
                             let select = document.getElementById(this.unique+'select') as HTMLSelectElement;
                             let userId = select.value;
                             let name = select.options[select.selectedIndex].innerText;    
                             this.onClick({userId, name});
                         }}>Select</Button>
+                        </Form.Group>
                     </Form>
                 </div>
             </div>

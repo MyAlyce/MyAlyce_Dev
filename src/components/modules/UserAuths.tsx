@@ -3,7 +3,9 @@ import { client, defaultProfilePic, usersocket } from '../../scripts/client';
 import Button from 'react-bootstrap/Button';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
 import { UserSearch } from './UserSearch';
-import { Table } from 'react-bootstrap';
+import ListGroup from 'react-bootstrap/ListGroup';
+import * as Icon from 'react-feather';
+import { Card } from 'react-bootstrap';
 
 let personIcon = './assets/person.jpg';
 
@@ -143,19 +145,19 @@ export class UserAuths extends Component<{[key:string]:any}> {
             });
 
             this.existingAuths.push( //lumping both auths into one for a more typical "friend" connection, need to toggle permissions tho
-                <tr key={a._id} id={this.unique+a._id}>
+            <ListGroup.Item key={a._id} id={this.unique+a._id}>
                     {/* <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
                         return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
                     })}</td> */}
-                    <td>User: <div className="float-start"><img className="rounded-circle" width="50" src={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic} /></div> {a.authorizerName}</td>
-                    {a.status === 'OKAY' ? <td>Online: {idx > -1 ? `${onlineUsers[idx]}` : 'false'}</td> : <td>Status: {a.status}</td>}
-                    <td><button onClick={async ()=>{ 
+                    <div className="float-start"><img className="rounded-circle" width="50" src={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic} /> {a.authorizerName}</div>
+                    {/*a.status === 'OKAY' ? <div className="text-center">Online: {idx > -1 ? `${onlineUsers[idx]}` : 'false'}</div> : <div>Status: {a.status}</div>*/}
+                    <div className="float-end"><Button variant="outline-success" size="sm" onClick={async ()=>{ 
                         await client.deleteAuthorization(a._id); 
                         let secondaryAuth = secondaryAuths.find((a2) => {if(a2.authorizedId === a.authorizerId) return true; });
                         if(secondaryAuth) await client.deleteAuthorization(secondaryAuth._id);
                         setTimeout(()=>{this.listAuths()},100); //give time for server to delete local data (hacky)
-                    }}>❌</button></td>
-                </tr>
+                    }}>Remove</Button></div>
+            </ListGroup.Item>
             );
         }); //get own auths
 
@@ -270,7 +272,9 @@ export class UserAuths extends Component<{[key:string]:any}> {
         return (
             <div id={this.unique}>
                 <h2>User Authorizations</h2>
-                <Button onClick={()=>{ this.setState({searching:!this.state.searching})}}>+</Button>
+                <Card>
+                <Button variant="secondary" size="sm"onClick={()=>{ this.setState({searching:!this.state.searching})}}><Icon.Search size={20} className="float-start"></Icon.Search><div className="float-start">&nbsp;Search</div></Button>
+                </Card>
                 { this.state.searching ? 
                     <>
                         <UserSearch 
@@ -302,18 +306,9 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     }
                     <div>
                         <h4>Authorized</h4>
-                        <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                            <th>User</th>
-                            <th>Status</th>
-                            <th>Authorize</th>
-                            </tr>
-                        </thead>
-                            <tbody>
-                                {  this.existingAuths  }
-                            </tbody>
-                        </Table>
+                        <ListGroup>
+                        {  this.existingAuths  }
+                        </ListGroup>
                     </div>
                 </div>
             </div>

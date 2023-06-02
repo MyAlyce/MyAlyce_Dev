@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import * as Icon from 'react-feather';
-import { NoteForm } from './Noteform.tsx';
+import { NoteForm } from './Noteform';
 
 export function Modal1() {
   const [show, setShow] = useState(false);
