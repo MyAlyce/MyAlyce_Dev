@@ -120,7 +120,6 @@ export class ChartGroup extends Component<{
                             delete this.activeCharts[ev.key];
                             this.setState({});
                         }
-                        console.log(this.props.sensors);
                     }}
                     onlyOneActive={true}
                 />

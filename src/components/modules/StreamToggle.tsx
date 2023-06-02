@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { StreamDefaults, Streams } from '../../scripts/client';
-import { ButtonGroup, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 
 export class StreamToggle extends Component<{
     toggled?:Partial<Streams>|undefined,
