@@ -1,5 +1,5 @@
 import React from 'react'
-import {state} from './scripts/client'//'../../graphscript/index'//
+import {getActiveStreamDir, state} from './scripts/client'//'../../graphscript/index'//
 import {webrtc} from './scripts/client'
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
@@ -133,7 +133,7 @@ export class App extends sComponent {
                                 }
                                 { this.state.route.includes('peers') &&  <WebRTCComponent/>}
                                 { this.state.route.includes('recordings') && <Recordings 
-                                    dir={state.data.activeStream ? (webrtc.rtc[state.data.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[state.data.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName}/>}
+                                    dir={getActiveStreamDir()}/>}
                                 { this.state.route.includes('settings') && <SettingsView/> }
                                 { this.state.route.includes('dev') && <Dev/>}
                             </div>

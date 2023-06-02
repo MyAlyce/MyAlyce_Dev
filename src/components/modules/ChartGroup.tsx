@@ -111,7 +111,7 @@ export class ChartGroup extends Component<{
     render() {
         return (
             <div>
-                <span>Charts: </span><StreamToggle
+                <span style={{fontWeight:'bold'}}>Charts: </span><StreamToggle
                     toggled={this.props.sensors}
                     subscribable={[...SensorDefaults]}
                     onChange={(ev) => {

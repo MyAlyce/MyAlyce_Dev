@@ -49,6 +49,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
     constructor(props:{streamId?:string, filename?:string, dir?:string, showInput?:boolean, showHistory?:boolean}) {
         super(props);
+
         let dir = props.dir ? props.dir : 'data';
         if(props.streamId && !props.filename) {
             let call = webrtc.rtc[props.streamId] as RTCCallInfo;
@@ -59,12 +60,12 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         if(props.filename) this.filename = props.filename;
         else this.filename = dir+`/Notes${props.streamId ? '_'+props.streamId : ''}.csv`
 
-        if(props.showInput) this.showInput = props.showInput;
-        if(props.showHistory) this.showHistory = props.showHistory;
+        if('showInput' in props) this.showInput = props.showInput as boolean;
+        if('showHistory' in props) this.showHistory = props.showHistory as boolean;
 
         this.streamId = props.streamId;
         
-        this.listEventHistory();
+        if(this.showHistory) this.listEventHistory();
         
         this.ref1 = React.createRef();
         this.ref2 = React.createRef();
@@ -72,11 +73,11 @@ export class NoteTaking extends Component<{[key:string]:any}> {
     }
 
     componentDidMount(): void {
-        this.csvworker = workers.addWorker({url:gsworker})
+        if(this.showInput) this.csvworker = workers.addWorker({url:gsworker})
     }
 
     componentWillUnmount(): void {
-        this.csvworker?.terminate();
+        if(this.showInput) this.csvworker?.terminate();
     }
 
     async listEventHistory() {
@@ -232,8 +233,8 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         return (
             <div className="note-taking-module">
                 <CardGroup>
-                    {this.showInput && this.renderInputSection()}
-                    {this.showHistory && this.renderHistory()}
+                    {this.showInput ? this.renderInputSection() : null}
+                    {this.showHistory ? this.renderHistory() : null}
                 </CardGroup>
             </div>
         );

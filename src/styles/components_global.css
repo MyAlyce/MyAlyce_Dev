@@ -5,11 +5,12 @@ html, body {
 }
 
 .footer-bar {
-    background: linear-gradient(to bottom right, #5F86FC, turquoise);
+    background: linear-gradient(to bottom, #5F86FC, turquoise);
     position:absolute; 
     bottom:0; 
     height:50px; 
     width:100%;
+    box-shadow: 0px -4px rgba(0, 247, 255, 0.163)
 }
 
 .flex-container{

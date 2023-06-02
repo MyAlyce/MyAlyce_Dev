@@ -3,6 +3,10 @@ import { sComponent } from '../state.component'
 import { Device } from '../modules/device'
 import { UserBar } from '../ui/UserBar/UserBar'
 import { Widget } from '../widgets/Widget'
+import { NoteTaking } from '../modules/NoteTaking'
+import { getActiveStreamDir } from '../../scripts/client'
+import { RecordBar } from '../modules/RecordBar'
+import { CardGroup } from 'react-bootstrap'
 
 export class Dashboard extends sComponent {
 
@@ -14,13 +18,15 @@ export class Dashboard extends sComponent {
 
     render() {
 
+        let dir = getActiveStreamDir();
+
         return (
             <div className='container-fluid'>
                 <div className="main-content">
                     {/* Widgets */}
                     <Widget 
-                        header={<h4>Monitoring</h4>}
-                        content = {
+                        header={<h4>Dashboard</h4>}
+                        title = {
                             <UserBar streamId={this.state.activeStream}/>
                         }
                     />
@@ -33,9 +39,25 @@ export class Dashboard extends sComponent {
                                 onlyOneActive={true}
                             />}
                         />
-                    </div>
-                    <div className="note-taking-section">
-                       {/* <NoteTaking streamId={this.state.activeStream} filename={this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName + '.csv' : 'Notes.csv'} />*/}
+                        <CardGroup>
+                            <NoteTaking 
+                                showHistory={ false }
+                                streamId={ this.state.activeStream } 
+                                filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
+                                dir={ dir }
+                            />
+                            <RecordBar
+                                streamId={ this.state.activeStream }
+                                dir = { dir }
+                                // onChange={()=>{this.setState({});}}   
+                            />
+                        </CardGroup>
+                        <NoteTaking 
+                            showInput={ false }
+                            streamId={ this.state.activeStream } 
+                            filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
+                            dir={ dir }
+                        />
                     </div>
                 </div>
             </div>

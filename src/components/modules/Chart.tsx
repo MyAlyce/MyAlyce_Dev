@@ -33,7 +33,7 @@ export class Chart extends sComponent {
     title?:string;
 
     width:any = '100%';
-    height:any = '600px';
+    height:any = '300px';
 
 
     constructor(props:{

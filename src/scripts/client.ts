@@ -337,8 +337,10 @@ export function unsubscribeFromStream(
     return state.unsubscribeEvent(streamId ? streamId+stream : stream, sub);
 }
 
-
-
+export function getActiveStreamDir() {
+    let dir = state.data.activeStream ? (webrtc.rtc[state.data.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[state.data.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName
+    return dir;
+}
 
 
 //dummy profile
