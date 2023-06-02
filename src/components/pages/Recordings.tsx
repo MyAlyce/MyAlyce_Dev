@@ -1,25 +1,12 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import {SensorDefaults, client} from '../../scripts/client'
-
-import { BFSRoutes, csvRoutes } from 'graphscript-services.storage'//'../../../../graphscript/src/extras/index.storage.services'//
-
-import { driveInstance, webrtc } from '../../scripts/client';
-import { recordCSV, stopRecording } from '../../scripts/datacsv';
-import Button from 'react-bootstrap/Button';
+import {client} from '../../scripts/client'
+import { webrtc } from '../../scripts/client';
 import { NoteTaking } from '../modules/NoteTaking';
 import { RTCCallInfo } from '../../scripts/webrtc';
 
-import gsworker from '../../scripts/device.worker'
-import { WorkerInfo } from 'graphscript';
-import { workers } from 'device-decoder';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Table from 'react-bootstrap/Table'
-import Card from 'react-bootstrap/Card'
-import * as Icon from 'react-feather'
-import { StreamToggle } from '../modules/StreamToggle';
+import { RecordBar } from '../modules/RecordBar';
+import { RecordingsList } from '../modules/RecordingsList';
 
 //add google drive backup/sync since we're using google accounts
 
@@ -27,100 +14,18 @@ export class Recordings extends sComponent {
 
     state = {
         isRecording:false,
-        recordings:undefined,
         activeStream:undefined,
+        recordings:undefined,
         folders:undefined as any
     }
 
-    dir?:string    
-    csvworker:WorkerInfo;
-    toggled=[...SensorDefaults] as any[];
+    dir?:string;    
 
     constructor(props:{dir?:string}) {
         super(props);
 
         this.dir = props.dir;
     }
-
-    componentDidMount(): void {
-        this.csvworker = workers.addWorker({url:gsworker});
-        this.csvworker.run('checkFolderList', [client.currentUser.firstName+client.currentUser.lastName+'/folderList', this.dir]).then(()=> {        
-            this.parseFolderList();
-        });
-        this.listRecordings();
-    }
-
-    componentWillUnmount(): void {
-        this.csvworker?.terminate();
-    }
-
-    async parseFolderList() {
-
-        csvRoutes.readCSVChunkFromDB(
-            client.currentUser.firstName+client.currentUser.lastName + '/folderList'
-        ).then((data:any) => {
-            this.setState({folders:data.folder});
-        });
-    }
-
-    //list from db
-    async listRecordings() {
-        let recordings = [] as any[];
-        //get saved files in indexeddb
-        //iterate and push divs with download & delete & backup
-        //list backed up nonlocal files too? from gdrive
-
-        let dir = this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName;
-        let filelist = await BFSRoutes.listFiles(dir); //list for a particular user
-        //getfilelist
-
-        
-        filelist.forEach((file) => {
-
-            if(!file.includes('folderList')) {
-
-                let download = async () => {
-                    csvRoutes.writeToCSVFromDB(dir+'/'+file, 10); //download files in chunks (in MB). !0MB limit recommended, it will number each chunk for huge files
-                }
-    
-                let deleteFile = () => {
-                    BFSRoutes.deleteFile(dir+'/'+file).then(() => {
-                        this.listRecordings();
-                    });
-                }
-    
-                let backup = () => {
-                    //google drive backup
-                    driveInstance?.backupToDrive(dir+'/'+file);
-                }
-    
-                recordings.push (
-                    <div key={file}>
-                            <Row className='recordings'>
-                                <Col xs lg="2" className='over'>{file}</Col>
-                                <Col className="d-grid gap-2"><Button variant='secondary' onClick={download}>Download</Button></Col>
-                                <Col className="d-grid gap-2"><Button variant='danger' onClick={deleteFile}>Delete</Button></Col>
-                                <Col className="d-grid gap-2"><Button variant='success' onClick={backup}>To Drive</Button></Col>
-                            </Row>
-                    </div>
-                )
-            } 
-        });
-
-        this.setState({recordings});
-
-        return recordings;
-    }
-
-    record(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[], subTitle?:string, dir?:string) {
-        recordCSV(streamId, sensors, subTitle, dir);
-    }
-
-    async stopRecording(streamId?:string, dir?:string) {
-        await stopRecording(streamId, dir, client.currentUser.firstName+client.currentUser.lastName); //folder list will be associated with current user so they will only see indexeddb folders for users they are associated with
-        this.listRecordings();
-    }
-
     render() {
 
         let dir =  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName;
@@ -132,49 +37,15 @@ export class Recordings extends sComponent {
                     streamId={ this.state.activeStream } 
                     filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
                     dir={ dir }/>
-                <Card style={{ width: '30rem' }}>
-                    <Card.Header>Recording:</Card.Header>
-                    <Card.Body>
-                        <div className="d-grid gap-2">
-                        {this.state.isRecording ? 
-                            <Button variant='info' onClick={()=>{ 
-                                stopRecording(this.state.activeStream, dir, client.currentUser.firstName+client.currentUser.lastName) 
-                            }}>
-                                <Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>&nbsp;Pause
-                            </Button> 
-                                : 
-                            <>
-                                <Button variant='danger' onClick={()=>{
-                                    this.record(this.state.activeStream,this.toggled,dir,dir)}}
-                                >
-                                    <Icon.Circle className="align-text-bottom" size={20}></Icon.Circle>&nbsp;Record
-                                </Button>{' '}
-                                <StreamToggle 
-                                    toggled={this.toggled}
-                                    subscribable={SensorDefaults}
-                                    onChange = {(ev:any)=>{ 
-                                        this.setState({});
-                                    }}
-                                />
-                            </> 
-                        }
-                        </div>
-                    </Card.Body>
-                </Card>
-                <h2>Recordings</h2>
-                <div>
-                    <Card style={{ width: '40rem' }}>
-                        <Card.Header>
-                            <strong>Select Folder: </strong>
-                            <select onChange={(ev)=>{ this.dir = ev.target.value; this.listRecordings(); }}>
-                                { this.state.folders ? this.state.folders.map((v) => {
-                                    return (<option value={v} key={v}>{v}</option>)
-                                }) : null }
-                            </select>
-                        </Card.Header>
-                        { this.state.recordings ? this.state.recordings : "" }
-                    </Card>
-                </div>
+                <RecordBar
+                    streamId={ this.state.activeStream }
+                    dir = { dir }
+                    onChange={()=>{this.setState({});}}   
+                />
+                <RecordingsList 
+                    streamId={ this.state.activeStream }
+                    dir = { dir }
+                />
             </div>
         )
 

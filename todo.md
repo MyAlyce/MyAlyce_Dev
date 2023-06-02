@@ -10,6 +10,10 @@
 - readd notifications, friends lists, etc.
 - make the local recordings more secure per-user
 
+### RTC
+
+- fix audio, not sure why it's not audible on receiver as the channels appear to negotiate
+
 ### Backend
 
 - Security

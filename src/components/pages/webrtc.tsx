@@ -262,7 +262,14 @@ export class WebRTCComponent extends sComponent {
                 </div>*/}
 
                 <div className="grid">
-                    {Object.keys(this.state.availableStreams).map((streamId: string) => <WebRTCStream streamId={streamId} audioInId={this.state.selectedAudioIn} videoInId={this.state.selectedVideo} audioOutId={this.state.selectedAudioOut}/>)}
+                    {Object.keys(this.state.availableStreams).map((streamId: string) => 
+                        <WebRTCStream 
+                            streamId={streamId} 
+                            audioInId={this.state.selectedAudioIn} 
+                            videoInId={this.state.selectedVideo} 
+                            audioOutId={this.state.selectedAudioOut}
+                        />
+                    )}
                 </div>
                     
             </div>
