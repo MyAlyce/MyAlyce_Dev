@@ -122,6 +122,7 @@ export class ChartGroup extends Component<{
                         }
                         console.log(this.props.sensors);
                     }}
+                    onlyOneActive={true}
                 />
                 <div>{
                     Object.keys(this.activeCharts).map((v) => {

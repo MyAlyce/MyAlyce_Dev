@@ -1,8 +1,13 @@
 import React, {Component} from 'react'
 import { StreamDefaults, Streams } from '../../scripts/client';
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { ButtonGroup, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
-export class StreamToggle extends Component<{toggled?:Partial<Streams>|undefined,subscribable?:Partial<Streams>|undefined,onChange:(ev:{key:string,checked:boolean}) => void}> {
+export class StreamToggle extends Component<{
+    toggled?:Partial<Streams>|undefined,
+    subscribable?:Partial<Streams>|undefined,
+    onChange:(ev:{key:string,checked:boolean}) => void,
+    onlyOneActive?:boolean
+}> {
 
     onChange = (ev:{key:string,checked:boolean}) => {}
 
@@ -31,31 +36,46 @@ export class StreamToggle extends Component<{toggled?:Partial<Streams>|undefined
     render() {
 
         return (
-            <ToggleButtonGroup type="checkbox" defaultValue={this.defaultValue} className="mb-2">
+            <ButtonGroup className="mb-2">
                 {
                     this.subscribable.map((v: any, i) => {
                         return <ToggleButton
                             id={v}
                             key={v}
                             value={i}
+                            checked={this.toggled.indexOf(v) > -1}
+                            type={this.props.onlyOneActive ? "radio" : "checkbox"} 
                             onChange={(ev:any)=>{ 
                                 let idx = this.toggled.indexOf(v);
-                                console.log(v,idx,this.toggled);
                                 if(idx < 0) {
-                                    this.toggled.push(v);
-                                    if(this.onChange) 
-                                        this.onChange({key:v,checked:true});
+                                    if(this.props.onlyOneActive) {
+                                        this.toggled.forEach((j:any) => {
+                                            this.onChange({key:j, checked:false});
+                                        });
+                                        this.toggled.length = 0;
+                                        this.toggled.push(v);
+                                        if(this.onChange) 
+                                            this.onChange({key:v,checked:true});
+
+                                        this.setState({});
+                                    } else {
+                                        this.toggled.push(v);
+                                        if(this.onChange) 
+                                            this.onChange({key:v,checked:true});
+                                    }
                                 }
                                 else {
-                                    this.toggled.splice(idx, 1);
-                                    if(this.onChange) 
-                                        this.onChange({key:v,checked:false});
+                                    if(!this.props.onlyOneActive) {
+                                        this.toggled.splice(idx, 1);
+                                        if(this.onChange) 
+                                            this.onChange({key:v,checked:false});
+                                    }
                                 }
                             }}
                         >{(v as string).toUpperCase()}</ToggleButton>
                     })
                 }
-            </ToggleButtonGroup>
+            </ButtonGroup>
         );
 
     }

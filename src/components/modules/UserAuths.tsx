@@ -137,10 +137,18 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
         let onlineUsers = await usersocket.run('usersAreOnline',[userIds]);
 
+        auths?.sort((a, b) => {
+            if (a.status === 'OKAY' && b.status !== 'OKAY') {
+              return -1;
+            } else if (b.status === 'OKAY' && a.status !== 'OKAY') {
+              return 1;
+            } else {
+              return 0;
+            }
+        });
+
         auths?.forEach((a:AuthorizationStruct) => {
-            
-            let idx = userIds.indexOf(a.authorizerId);
-            
+
             let userIsOnline;
 
             let userInfo = info.find((v,i) => {
@@ -152,21 +160,20 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
             this.existingAuths.push( //lumping both auths into one for a more typical "friend" connection, need to toggle permissions tho
             <ListGroup.Item key={a._id} id={this.unique+a._id}>
-                    {/* <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
-                        return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
-                    })}</td> */}
-                    <div className="float-start">
-                        <Avatar
-                            pictureUrl={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic}
-                            onlineStatus={userIsOnline}
-                        /> {a.authorizerName} </div>
-                    {/*a.status === 'OKAY' ? <div className="text-center">Online: {idx > -1 ? `${onlineUsers[idx]}` : 'false'}</div> : <div>Status: {a.status}</div>*/}
-                    <div className="float-end"><Button variant="outline-success" size="sm" onClick={async ()=>{ 
-                        await client.deleteAuthorization(a._id); 
-                        let secondaryAuth = secondaryAuths.find((a2) => {if(a2.authorizedId === a.authorizerId) return true; });
-                        if(secondaryAuth) await client.deleteAuthorization(secondaryAuth._id);
-                        setTimeout(()=>{this.listAuths()},100); //give time for server to delete local data (hacky)
-                    }}>Remove</Button></div>
+                {/* <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
+                    return `${key}:${(a.authorizations as any)[key]}`; //return true authorizations
+                })}</td> */}
+                <div className="float-start">
+                    <Avatar
+                        pictureUrl={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic}
+                        onlineStatus={a.status === 'OKAY' ? userIsOnline : undefined}
+                    /> {a.authorizerName} </div>
+                <div className="float-end"><Button variant="outline-success" size="sm" onClick={async ()=>{ 
+                    await client.deleteAuthorization(a._id); 
+                    let secondaryAuth = secondaryAuths.find((a2) => {if(a2.authorizedId === a.authorizerId) return true; });
+                    if(secondaryAuth) await client.deleteAuthorization(secondaryAuth._id);
+                    setTimeout(()=>{this.listAuths()},100); //give time for server to delete local data (hacky)
+                }}>Remove</Button>{a.status === 'OKAY' ? null : <div>{a.status}</div>}</div>
             </ListGroup.Item>
             );
         }); //get own auths

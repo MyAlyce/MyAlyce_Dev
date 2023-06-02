@@ -12,7 +12,7 @@ export function Avatar(props:{pictureUrl:string, width?:number, onlineStatus?:bo
                 width={props.width ? props.width+'px' : defaultWidth + "px"} 
                 src={props.pictureUrl ? props.pictureUrl : defaultProfilePic} 
             />
-            {('onlineStatus' in props) ? 
+            {(typeof props.onlineStatus === 'boolean') ? 
                 <span style={{
                     position:'absolute', 
                     transform:`translateX(-${(props.width ? props.width*.25+'px' : defaultWidth*.25 + "px")})`,

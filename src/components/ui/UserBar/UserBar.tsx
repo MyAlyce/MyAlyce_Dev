@@ -2,9 +2,9 @@ import React from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { UserLogin } from '../UserLogin';
-import { UserFeed } from '../UserFeed';
-import { Notify } from '../Notify';
+import { UserBlock } from './UserBlock';
+import { UserFeed } from './UserFeed';
+import { Notify } from './Notify';
 
 import { client } from '../../../scripts/client';
 import {webrtc} from '../../../scripts/client'
@@ -29,16 +29,18 @@ export function UserBar(props:{streamId?:string}) {
   if(!name) name = props.streamId ? props.streamId : 'Me';
 
   return (
-    <Container>
+    <Container className="my-auto">
       <Row className="grey-bar">
-        <Col>
-         <UserLogin
+        <UserBlock
             name={name}
-            picture={profilePic}
-         />
-        <UserFeed/>
-         <Notify/>
-        </Col>
+            pictureUrl={profilePic}
+        />
+        <UserFeed
+          streamId={props.streamId}
+        />
+        <Notify
+          streamId={props.streamId}
+        />
       </Row>
     </Container>
   );

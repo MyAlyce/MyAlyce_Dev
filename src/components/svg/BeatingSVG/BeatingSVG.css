@@ -1,0 +1,46 @@
+.heart {
+    fill: rgba(255,25,25,0.7);
+    transform-origin: center;
+  }
+  
+  .ghost-heart {
+    fill: rgba(255,25,25,0.7);
+    opacity: 0.5;
+    transform-origin: 44% 50%;
+  }
+  
+  .ghost-heart.animate {
+    animation: heartbeat 0.8s ease-in-out;
+  }
+  
+  .ghost-heart2 {
+    fill: rgba(255,25,25,0.7);
+    opacity: 0.5;
+    transform-origin: 44% 50%;
+  }
+  
+  .ghost-heart2.animate {
+    animation: heartbeat2 0.8s ease-in-out;
+  }
+  
+  @keyframes heartbeat {
+    from {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale(1.1);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes heartbeat2 {
+    from {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    to {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+  }
