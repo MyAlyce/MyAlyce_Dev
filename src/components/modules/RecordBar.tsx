@@ -36,6 +36,7 @@ export class RecordBar extends sComponent {
 
     async stopRecording(streamId?:string, dir?:string) {
         await stopRecording(streamId, dir, client.currentUser.firstName+client.currentUser.lastName); //folder list will be associated with current user so they will only see indexeddb folders for users they are associated with
+        this.setState({streamRecording:undefined});
         if(this.onChange) this.onChange({isRecording:false, streamId})
     }
 
