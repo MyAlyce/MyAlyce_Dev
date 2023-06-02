@@ -141,8 +141,13 @@ export class UserAuths extends Component<{[key:string]:any}> {
             
             let idx = userIds.indexOf(a.authorizerId);
             
-            let userInfo = info.find((v) => {
-                if(v._id === a.authorizerId) return true;
+            let userIsOnline;
+
+            let userInfo = info.find((v,i) => {
+                if(v._id === a.authorizerId) {
+                    userIsOnline = onlineUsers[i];
+                    return true;
+                }
             });
 
             this.existingAuths.push( //lumping both auths into one for a more typical "friend" connection, need to toggle permissions tho
@@ -153,6 +158,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     <div className="float-start">
                         <Avatar
                             pictureUrl={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic}
+                            onlineStatus={userIsOnline}
                         /> {a.authorizerName} </div>
                     {/*a.status === 'OKAY' ? <div className="text-center">Online: {idx > -1 ? `${onlineUsers[idx]}` : 'false'}</div> : <div>Status: {a.status}</div>*/}
                     <div className="float-end"><Button variant="outline-success" size="sm" onClick={async ()=>{ 
@@ -241,6 +247,16 @@ export class UserAuths extends Component<{[key:string]:any}> {
                 await client.deleteData([req]);
             }
             else {
+
+                let userIsOnline;
+
+                let userInfo = info.find((v,i) => {
+                    if(v._id === req.requesting) {
+                        userIsOnline = onlineUsers[i];
+                        return true;
+                    }
+                });
+
                 let accept = () => {
                     this.createAuth(req.requesting, req.firstName + req.lastName ? ' '+req.lastName : '', true).then(() => {
                         client.deleteData([req]).then(()=>{
@@ -258,7 +274,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
                 this.userRequests.push(
                     <div key={req._id}>
-                        From: <div className="float-start"><img className="rounded-circle" width="50" src={req.requestingPictureUrl ? req.requestingPictureUrl : defaultProfilePic} /></div> {req.firstName} {req.lastName}<br/>
+                        From: <div className="float-start"><Avatar pictureUrl={req.requestingPictureUrl ? req.requestingPictureUrl : defaultProfilePic} onlineStatus={userIsOnline} /></div> {req.firstName} {req.lastName}<br/>
                         <Button onClick={accept}>✔️</Button>
                         <Button onClick={reject}>❌</Button>
                     </div>
