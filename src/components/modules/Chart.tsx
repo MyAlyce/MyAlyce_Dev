@@ -111,6 +111,7 @@ export class Chart extends sComponent {
                 Object.assign(lines,{
                     ...mpu6050ChartSettings.lines
                 })
+                delete (lines as any).mpu_dietemp;
             }
             if(this.sensors.includes('breath')) {
                 Object.assign(lines,{

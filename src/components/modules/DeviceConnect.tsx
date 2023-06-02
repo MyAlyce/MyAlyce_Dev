@@ -27,7 +27,7 @@ export class DeviceConnect extends sComponent {
             <Widget
                 className={"mx-auto"}
                 content={
-                    <Col>   
+                    <Col className="mx-auto">   
                         <span className="mx-auto">
                         { !this.state.deviceConnected ? 
                             <Button onClick={()=>{
