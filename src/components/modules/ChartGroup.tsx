@@ -111,7 +111,7 @@ export class ChartGroup extends Component<{
             <div>
                 <StreamToggle
                     toggled={this.props.sensors}
-                    subscribable={SensorDefaults}
+                    subscribable={[...SensorDefaults]}
                     onChange={(ev) => {
                         if(ev.checked) {
                             this.constructCharts(this.props.streamId, [ev.key as any]);

@@ -9,28 +9,27 @@ export class StreamToggle extends Component<{
     onlyOneActive?:boolean
 }> {
 
-    onChange = (ev:{key:string,checked:boolean}) => {}
-
-    subscribable = [...StreamDefaults] as any as Partial<Streams>;
-    toggled = [...StreamDefaults] as any as Partial<Streams>;
-    defaultValue = [] as number[];
+    state={
+        onChange: (ev:{key:string,checked:boolean}) => {},
+        subscribable: [...StreamDefaults] as any as Partial<Streams>,
+        toggled: [...StreamDefaults] as any as Partial<Streams>,
+        defaultValue: [] as number[]
+    }
 
     constructor(props) {
         super(props);
-        if(props.subscribable) this.subscribable = props.subscribable;
+        if(props.subscribable) this.state.subscribable = props.subscribable;
         if(props.toggled) {
-            this.toggled = props.toggled; 
-            this.toggled.forEach((v) => {
-                let idx = this.subscribable.indexOf(v);
+            this.state.toggled = props.toggled; 
+            this.state.toggled.forEach((v) => {
+                let idx = this.state.subscribable.indexOf(v);
                 if(idx > -1) {
-                    this.defaultValue.push(idx);
+                    this.state.defaultValue.push(idx);
                 }
             })
         }
         
-        if(props.onChange) this.onChange = props.onChange;
-
-        
+        if(props.onChange) this.state.onChange = props.onChange;
     }
 
     render() {
@@ -38,37 +37,37 @@ export class StreamToggle extends Component<{
         return (
             <ButtonGroup className="mb-2">
                 {
-                    this.subscribable.map((v: any, i) => {
+                    this.state.subscribable.map((v: any, i) => {
                         return <ToggleButton
                             id={v}
                             key={v}
                             value={i}
-                            checked={this.toggled.indexOf(v) > -1}
+                            checked={this.state.toggled.indexOf(v) > -1}
                             type={this.props.onlyOneActive ? "radio" : "checkbox"} 
                             onChange={(ev:any)=>{ 
-                                let idx = this.toggled.indexOf(v);
+                                let idx = this.state.toggled.indexOf(v);
                                 if(idx < 0) {
                                     if(this.props.onlyOneActive) {
-                                        this.toggled.forEach((j:any) => {
-                                            this.onChange({key:j, checked:false});
+                                        this.state.toggled.forEach((j:any) => {
+                                            this.state.onChange({key:j, checked:false});
                                         });
-                                        this.toggled.length = 0;
-                                        this.toggled.push(v);
-                                        if(this.onChange) 
-                                            this.onChange({key:v,checked:true});
+                                        this.state.toggled.length = 0;
+                                        this.state.toggled.push(v);
+                                        if(this.state.onChange) 
+                                            this.state.onChange({key:v,checked:true});
 
                                         this.setState({});
                                     } else {
-                                        this.toggled.push(v);
-                                        if(this.onChange) 
-                                            this.onChange({key:v,checked:true});
+                                        this.state.toggled.push(v);
+                                        if(this.state.onChange) 
+                                            this.state.onChange({key:v,checked:true});
                                     }
                                 }
                                 else {
                                     if(!this.props.onlyOneActive) {
-                                        this.toggled.splice(idx, 1);
-                                        if(this.onChange) 
-                                            this.onChange({key:v,checked:false});
+                                        this.state.toggled.splice(idx, 1);
+                                        if(this.state.onChange) 
+                                            this.state.onChange({key:v,checked:false});
                                     }
                                 }
                             }}

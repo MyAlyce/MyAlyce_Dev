@@ -37,7 +37,7 @@ export class DeviceConnect extends sComponent {
                 {/** Toggles for sensor subscriptions */}
                 <StreamToggle
                     toggled={this.sensors}
-                    subscribable={SensorDefaults}
+                    subscribable={[...SensorDefaults]}
                     onChange={(ev) => {
                         if(ev.checked) {
                             if(device && characteristicCallbacks[ev.key]) {
