@@ -22,7 +22,7 @@ import { DeviceConnect } from './components/modules/Device/DeviceConnect';
 import { StreamSelect } from './components/modules/Streams/StreamSelect';
 import { Demo } from './components/modules/Device/DemoMode';
 import { Footer } from './components/modules/Footer/Footer';
-import { MediaDeviceOptions, ToggleAudioVideo } from './components/modules/WebRTC/Calling';
+import { MediaDeviceOptions, ToggleAudioVideo, ViewSelfVideoStream } from './components/modules/WebRTC/Calling';
 import { Widget } from './components/widgets/Widget';
 import { Button } from 'react-bootstrap';
 import { throwAlert } from './scripts/alerts';
@@ -188,8 +188,9 @@ export class App extends sComponent {
                                             selected={this.state.activeStream}
                                         /> }
                                     </div>),
-                                    (<span key={2}><MediaDeviceOptions/></span>),
                                     (<span key={3}><Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button></span>),
+                                    (<span key={2}><MediaDeviceOptions/></span>),
+                                    (<span key={2}>{this.state.activeStream && <ViewSelfVideoStream streamId={this.state.activeStream}/>}</span>),
                                     (<span key={4}><br/><br/><br/></span>) //pads it at the bottom to stay above the footer
                                 ]}
                             />
