@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import * as Icon from 'react-feather';
 import { UserAuths } from '../modules/UserAuths';
+import { StartCall } from '../modules/WebRTC/Calling';
+import { client } from '../../scripts/client';
 
 export function FriendsModal() {
   const [show, setShow] = useState(false);

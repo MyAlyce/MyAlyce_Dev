@@ -1,9 +1,8 @@
 import React from 'react'
-import {sComponent} from '../state.component'
+import {sComponent} from '../../state.component'
 
-import { Chart } from './Chart';
-import { ChartGroup } from './ChartGroup';
-
+import { Chart } from '../DataVis/Chart';
+import { ChartGroup } from '../DataVis/ChartGroup';
 
 
 export class Device extends sComponent {
@@ -21,9 +20,6 @@ export class Device extends sComponent {
         super(props as any);
     }
 
-    componentDidMount(): void {
-        console.log('mounted device component');
-    }
     //TODO: add simple views like for the raw data e.g. heart rate, breath rate, HRV
     render() {
 

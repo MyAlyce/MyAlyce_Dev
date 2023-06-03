@@ -1,19 +1,19 @@
 import React, {Component} from 'react'
 import { workers } from "device-decoder";
 
-import gsworker from '../../scripts/device.worker'
-import { client, events, webrtc, webrtcData } from '../../scripts/client';
+import gsworker from '../../../scripts/device.worker'
+import { client, events, webrtc, webrtcData } from '../../../scripts/client';
 
 import Button from 'react-bootstrap/Button';
-import { RTCCallInfo } from '../../scripts/webrtc';
+import { RTCCallInfo } from '../../../scripts/webrtc';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 import { WorkerInfo } from 'graphscript';
 import { CardGroup, Table } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
-import {  recordEvent } from '../../scripts/datacsv';
+import {  recordEvent } from '../../../scripts/datacsv';
 
 import * as Icon from 'react-feather'
-import { Widget } from '../widgets/Widget';
+import { Widget } from '../../widgets/Widget';
 
 function getColorGradientRG(value) {
     let r, g, b;
@@ -38,8 +38,6 @@ export class NoteTaking extends Component<{[key:string]:any}> {
     }
 
     id=`form${Math.floor(Math.random()*1000000000000000)}`;
-    csvworker:WorkerInfo;
-    filename;
     streamId?:string;
 
     showInput = true;
@@ -49,16 +47,6 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
     constructor(props:{streamId?:string, filename?:string, dir?:string, showInput?:boolean, showHistory?:boolean}) {
         super(props);
-
-        let dir = props.dir ? props.dir : 'data';
-        if(props.streamId && !props.filename) {
-            let call = webrtc.rtc[props.streamId] as RTCCallInfo;
-            let name = call.firstName + '_' + call.lastName;
-            props.filename = dir+`/Notes_${name}.csv`;
-        }
-
-        if(props.filename) this.filename = props.filename;
-        else this.filename = dir+`/Notes${props.streamId ? '_'+props.streamId : ''}.csv`
 
         if('showInput' in props) this.showInput = props.showInput as boolean;
         if('showHistory' in props) this.showHistory = props.showHistory as boolean;
@@ -70,14 +58,6 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         this.ref1 = React.createRef();
         this.ref2 = React.createRef();
         this.ref3 = React.createRef();
-    }
-
-    componentDidMount(): void {
-        if(this.showInput) this.csvworker = workers.addWorker({url:gsworker})
-    }
-
-    componentWillUnmount(): void {
-        if(this.showInput) this.csvworker?.terminate();
     }
 
     async listEventHistory() {
@@ -102,7 +82,8 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 noteRows.push(
                     <tr key={event._id}>
                         <td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td>
-                        <td width="50%">{event.event}</td>
+                        <td width="15%">{event.event}</td>
+                        <td width="35%">{event.notes}</td>
                         <td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td> 
                         <td><button onClick={onclick}>❌</button></td>
                     </tr>
@@ -117,18 +98,20 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
     submit = async () => {
         let note = {
-            note:(document.getElementById(this.id+'note') as HTMLInputElement).value,
+            notes:(document.getElementById(this.id+'note') as HTMLInputElement).value,
+            event:(document.getElementById(this.id+'event') as HTMLInputElement).value,
             timestamp:new Date((document.getElementById(this.id+'time') as HTMLInputElement).value).getTime(),
             grade:parseInt((document.getElementById(this.id+'number') as HTMLInputElement).value)
         };
         if(!note.timestamp) note.timestamp = Date.now();
-        this.csvworker.run('appendCSV',[note, this.filename]);
 
-        let event = await client.addEvent(
+        let event;
+        if(client.currentUser)
+            event = await client.addEvent(
             client.currentUser, 
             client.currentUser._id, 
-            note.note, 
-            undefined,
+            note.event, 
+            note.notes,
             note.timestamp, 
             undefined, 
             note.grade 
@@ -138,12 +121,15 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         if(this.streamId) {
             from = webrtcData.availableStreams[this.streamId].firstName + webrtcData.availableStreams[this.streamId].lastName;
         } else {
-            from = client.currentUser.firstName + client.currentUser.lastName
+            from = client.currentUser.firstName + client.currentUser.lastName;
         }
 
         let message = {
-            message:event.note,
-            timestamp:event.timestamp as number
+            from:from,
+            event:note.event,
+            notes:note.notes,
+            grade:note.grade,
+            timestamp:note.timestamp as number
         };
 
         for(const key in webrtcData.availableStreams) {
@@ -152,23 +138,24 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         recordEvent(from, message, this.streamId);
 
-        (message as any).from = from;
         events.push(message as any);
 
-        let onclick = () => {
-            client.deleteData([event],()=>{
-                this.listEventHistory();
-            });
+        if(event) {
+            let onclick = () => {
+                client.deleteData([event],()=>{
+                    this.listEventHistory();
+                });
+            }
+    
+            this.state.noteRows.unshift(
+                <tr key={event._id}>
+                    <td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td>
+                    <td>{event.event}</td>
+                    <td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td> 
+                    <td><button onClick={onclick}>❌</button></td>
+                </tr>
+            );
         }
-
-        this.state.noteRows.unshift(
-            <tr key={event._id}>
-                <td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td>
-                <td>{event.event}</td>
-                <td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td> 
-                <td><button onClick={onclick}>❌</button></td>
-            </tr>
-        )
         
         this.setState({});
     }
@@ -188,8 +175,11 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 style={{ maxWidth: '20rem' }}
                 header={"Log Event"}
                 content = {<>
-                    <label><Icon.Edit3/></label>{' '}
-                    <textarea ref={this.ref1 as any} id={this.id+'note'}  name="note" defaultValue="" style={{width:'87.5%'}}/>
+                    <div>
+                        <label><Icon.BookOpen/></label>{' '}<input ref={this.ref1 as any} id={this.id+'event'} placeholder="Event"  name="event" defaultValue="" style={{width:'87.5%'}}/>
+                    </div>
+                    
+                    <label><Icon.Edit3/></label>{' '}<textarea ref={this.ref1 as any} id={this.id+'note'} placeholder="Notes..."  name="note" defaultValue="" style={{width:'87.5%'}}/>
                     <div>
                         <label><Icon.TrendingUp/></label>{' '}
                         <input 
@@ -200,7 +190,6 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                         />
                         {' '}<label><Icon.Clock/></label>{' '}
                         <input
-                        
                             style={{width:'65%'}}
                             ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/>
                         {' '}<br/>
@@ -219,7 +208,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 content={
                     <Table striped bordered hover>
                         <tbody>
-                            <tr><th><Icon.Clock/></th><th>Event</th><th><Icon.TrendingUp/></th><th></th></tr>
+                            <tr><th><Icon.Clock/></th><th>Event</th><th>Notes</th><th><Icon.TrendingUp/></th><th></th></tr>
                             {this.state.noteRows}
                         </tbody>
                     </Table>

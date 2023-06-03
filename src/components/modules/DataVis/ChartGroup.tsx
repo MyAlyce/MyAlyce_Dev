@@ -2,8 +2,8 @@ import React, {Component}  from 'react'
 
 
 import { Chart } from './Chart';
-import { SensorDefaults, Sensors, state } from '../../scripts/client';
-import { StreamToggle } from './StreamToggle';
+import { SensorDefaults, Sensors, state } from '../../../scripts/client';
+import { StreamToggle } from '../Streams/StreamToggle';
 
 
 
@@ -12,10 +12,6 @@ export class ChartGroup extends Component<{
     streamId?:string,
     onlyOneActive?:boolean
 }> {
-    
-    state = { //synced with global state
-        activeStream:undefined
-    }
 
     activeCharts = {};
     unmounted?=true;
@@ -102,10 +98,6 @@ export class ChartGroup extends Component<{
                 makeChart();
             } else state.subscribeEventOnce(streamId ? streamId+'detectedENV' : 'detectedENV', makeChart);
         }
-    }
-
-    unsubscribeCharts(sensors?:Sensors[]) { //('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[]
-        
     }
 
     render() {

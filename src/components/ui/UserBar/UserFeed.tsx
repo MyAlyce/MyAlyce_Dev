@@ -13,7 +13,7 @@ export function UserFeed(props:{streamId?:string, width?:string}) {
   const target = useRef(null);
 
   return (
-      <Col className="my-auto" style={{minWidth:props.width, backgroundColor:'rgba(255,255,255,0.9)'}}>
+      <Col className="my-auto" style={{minWidth:props.width, borderRadius:'10px', backgroundColor:'rgba(255,255,255,0.9)'}}>
         <Row>
           <Col className="my-auto" >
             <BeatingSVG subscribeTo={props.streamId ? props.streamId+'hr' : 'hr'} objectKey={'hr'}/>

@@ -14,7 +14,7 @@ export class Widget extends Component<{
         return (
             <Card style={ this.props.style } className={ this.props.className }>
                 { this.props.header ? <Card.Header>{this.props.header}</Card.Header> : null}
-                <Card.Body>
+                <Card.Body style={{padding:'5px'}}>
                 { this.props.title ? <Card.Title>{this.props.title}</Card.Title> : null}
                 { this.props.subtitle ? <Card.Subtitle >{this.props.subtitle}</Card.Subtitle > : null}
                 { this.props.content }

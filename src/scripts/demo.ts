@@ -112,7 +112,6 @@ export function demoFile(sensor:'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg', sps
 
                     //console.log('data', data);
                     let s = sensor;
-                    if(s === 'ecg') s = 'emg';
                     state.setState({ [s]:data });
 
                     //const result = eventDetector(data);

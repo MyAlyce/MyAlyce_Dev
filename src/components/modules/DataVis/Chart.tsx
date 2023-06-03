@@ -1,8 +1,8 @@
 import React from 'react'
-import {sComponent} from '../state.component'
+import {sComponent} from '../../state.component'
 
-import { state } from '../../scripts/client'//'../../../graphscript/index'//
-import { WGLPlotter } from '../../scripts/webglplot/plotter';
+import { state } from '../../../scripts/client'//'../../../graphscript/index'//
+import { WGLPlotter } from '../../../scripts/webglplot/plotter';
 
 import { WebglLineProps } from 'webgl-plot-utils';
 
@@ -10,7 +10,7 @@ import { max3010xChartSettings } from 'device-decoder/src/devices/max30102';
 import { mpu6050ChartSettings } from 'device-decoder/src/devices/mpu6050';
 import { bme280ChartSettings } from 'device-decoder/src/devices/bme280'
 import { ads131m08ChartSettings } from 'device-decoder/src/devices/ads131m08';
-import { Widget } from '../widgets/Widget';
+import { Widget } from '../../widgets/Widget';
 
 
 
@@ -52,6 +52,7 @@ export class Chart extends sComponent {
         this.sensors = props.sensors;
         this.streamId = props.streamId;
         this.title = props.title;
+        
     }
 
     componentDidMount = () => {
@@ -140,15 +141,20 @@ export class Chart extends sComponent {
             sweepColor:'green'
         });
 
-        if(!this.sensors || (this.sensors?.includes('emg') || this.sensors?.includes('ecg'))) {
+        if(!this.sensors || (this.sensors?.includes('emg'))) {
             this.subscriptions.emg = state.subscribeEvent(this.streamId ? this.streamId+'emg' : 'emg', (data) => {
+                this.plotter.__operator(data);
+            });
+        }
+        if(!this.sensors || this.sensors?.includes('ecg')) {
+            this.subscriptions.emg = state.subscribeEvent(this.streamId ? this.streamId+'ecg' : 'ecg', (data) => {
                 this.plotter.__operator(data);
             });
         }
         if(!this.sensors || this.sensors?.includes('ppg')) {
             this.subscriptions.ppg = state.subscribeEvent(this.streamId ? this.streamId+'ppg' :'ppg', (ppg) => {
                 this.plotter.__operator(ppg);
-            })
+            });
         }
         if(!this.sensors || this.sensors?.includes('hr')) {
             this.subscriptions.hr = state.subscribeEvent(this.streamId ? this.streamId+'hr' :'hr', (hr) => {
@@ -158,24 +164,24 @@ export class Chart extends sComponent {
         if(!this.sensors || this.sensors?.includes('breath')) {
             this.subscriptions.breath = state.subscribeEvent(this.streamId ? this.streamId+'breath' :'breath', (breath) => {
                 this.plotter.__operator(breath);
-            })
+            });
         }
         if(!this.sensors || this.sensors?.includes('imu')) {
             this.subscriptions.imu = state.subscribeEvent(this.streamId ? this.streamId+'imu' :'imu', (imu) => {
                 this.plotter.__operator(imu);
-            })
+            });
         }
         if(!this.sensors || this.sensors?.includes('env')) {
             this.subscriptions.env = state.subscribeEvent(this.streamId ? this.streamId+'env' :'env', (env) => {
                 this.plotter.__operator(env);
-            })
+            });
         }
         
     }
 
     componentWillUnmount = () => {
         for(const key in this.subscriptions) {
-            state.unsubscribeEvent(key, this.subscriptions[key]);
+            state.unsubscribeEvent(this.streamId ? this.streamId+key : key, this.subscriptions[key]);
         }
         (this.plotter.options.worker as Worker)?.terminate();
         //console.log('unmounted',this.plotter.options)

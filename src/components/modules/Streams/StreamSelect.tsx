@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import {webrtc} from '../../scripts/client'
-import { RTCCallInfo } from '../../scripts/webrtc';
-import { UserBar } from '../ui/UserBar/UserBar';
-import { Widget } from '../widgets/Widget';
+import {webrtc} from '../../../scripts/client'
+import { RTCCallInfo } from '../../../scripts/webrtc';
+import { UserBar } from '../../ui/UserBar/UserBar';
+import { Widget } from '../../widgets/Widget';
 import { Card } from 'react-bootstrap';
 
 const personIcon = './assets/person.jpg';
@@ -27,23 +27,23 @@ export class StreamSelect extends Component<{[key:string]:any}> {
     }
     
 
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-    }
+    // componentDidMount() {
+    //     document.addEventListener('mousedown', this.handleClickOutside);
+    // }
 
-    componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
-    }
+    // componentWillUnmount() {
+    //     document.removeEventListener('mousedown', this.handleClickOutside);
+    // }
 
     setWrapperRef = (node) => {
         this.wrapperRef = node;
     };
     
-    handleClickOutside = (event) => {
-        // if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-        //     this.setState({ dropdownOpen: false });
-        // }
-    };
+    // handleClickOutside = (event) => {
+    //     // if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+    //     //     this.setState({ dropdownOpen: false });
+    //     // }
+    // };
 
     toggleDropdown = () => {
         this.setState({ dropdownOpen: !this.state.dropdownOpen });

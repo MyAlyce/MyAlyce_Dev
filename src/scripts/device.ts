@@ -33,6 +33,7 @@ export let characteristicCallbacks = {
     }) => {
         if(!state.data.detectedEMG) state.setState({detectedEMG:true});
         state.setValue('emg', data); //these values are now subscribable 
+        state.setValue('ecg', data[5]);
     }},
     ppg:{characteristic:'0003cafe-b0ba-8bad-f00d-deadbeef0000', callback:(data: { //max30102
         red: number[],

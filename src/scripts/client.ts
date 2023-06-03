@@ -31,6 +31,7 @@ import { disconnectDevice } from './device'
 
 import { demo, stopdemos } from './demo'
 import { RTCCallInfo } from './webrtc'
+import { getCurrentLocation } from './alerts'
 
 
 const startDemo = true;
@@ -90,7 +91,8 @@ export const graph = new Router({
             state.setState({
                 unansweredCalls:webrtc.unanswered
             }); //update this event for the app
-        }
+        },
+        getCurrentLocation:getCurrentLocation
     }
 });
 
@@ -340,6 +342,10 @@ export function unsubscribeFromStream(
 export function getActiveStreamDir() {
     let dir = state.data.activeStream ? (webrtc.rtc[state.data.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[state.data.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName
     return dir;
+}
+
+export function getActiveStream() {
+    return state.data.activeStream ? webrtc.rtc[state.data.activeStream] as RTCCallInfo : undefined;
 }
 
 

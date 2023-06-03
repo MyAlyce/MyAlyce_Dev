@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { StreamDefaults, Streams } from '../../scripts/client';
+import { StreamDefaults, Streams } from '../../../scripts/client';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 
 export class StreamToggle extends Component<{
@@ -16,11 +16,11 @@ export class StreamToggle extends Component<{
         defaultValue: [] as number[]
     }
 
+    unique=`${Math.floor(Math.random()*1000000000000000)}`;
+
     constructor(props) {
         super(props);
         
-        console.log("StreamToggle Constructor!!")
-
         if(this.props.subscribable) this.state.subscribable = this.props.subscribable;
         if(this.props.toggled) {
             this.state.toggled = this.props.toggled; 
@@ -45,9 +45,10 @@ export class StreamToggle extends Component<{
                 {
                     this.state.subscribable.map((v: any, i) => {
                         return <ToggleButton
-                            id={v}
-                            key={v}
-                            value={i}
+                            id={this.unique+v}
+                            key={this.unique+v}
+                            value={this.unique+i}
+                            name={this.unique}
                             checked={this.state.toggled.indexOf(v) > -1}
                             type={this.props.onlyOneActive ? "radio" : "checkbox"} 
                             onChange={(ev:any)=>{ 
@@ -82,6 +83,5 @@ export class StreamToggle extends Component<{
                 }
             </ButtonGroup>
         );
-
     }
 }

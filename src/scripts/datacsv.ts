@@ -57,15 +57,16 @@ export function recordAlert(alert:{message:string,timestamp:number, value:any, [
 }
 
 
-export const recordEvent = (from,event,streamId?) => {
+export const recordEvent = (from, event, streamId?) => {
     const name = streamId ? streamId+'events' : 'events';
+    
     //if(state.data.isRecording) {
         if(!csvworkers[name]) {
             csvworkers[name] =  workers.addWorker({ url: gsworker });
             csvworkers[name].run('createCSV', [
                 `${from}/Events_${from}.csv`,
                 [
-                    'timestamp','from','message'
+                    'timestamp','from', 'event', 'notes', 'grade'
                 ]
             ]);
         }

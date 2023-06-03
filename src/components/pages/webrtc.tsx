@@ -7,13 +7,12 @@ import { client, graph, usersocket, state, webrtc } from "../../scripts/client";
 
 import {AuthorizationStruct, ProfileStruct} from 'graphscript-services/struct/datastructures/types'
 
-import { RTCCallProps, RTCCallInfo, answerCall, startCall } from "../../scripts/webrtc";
+import { RTCCallInfo } from "../../scripts/webrtc";
 
-import { Avatar } from "../lib/src";
-import Button from 'react-bootstrap/Button';
+import { Avatar } from "../lib_old/src";
 
-
-import { WebRTCStream } from '../modules/WebRTCStream';
+import { WebRTCStream } from '../modules/WebRTC/WebRTCStream';
+import { MediaDeviceOptions, StartCall, UnanweredCallInfo } from '../modules/WebRTC/Calling';
 
 let personIcon = './assets/person.jpg';
 
@@ -45,7 +44,6 @@ export class WebRTCComponent extends sComponent {
 
     constructor(props:{streamId?:string}) {
         super(props);
-        this.listMediaDevices();
     }
 
     componentDidMount = () => {
@@ -64,50 +62,6 @@ export class WebRTCComponent extends sComponent {
 
     componentWillUnmount = () => {
         graph.unsubscribe('receiveCallInformation', this.evSub);
-    }
-
-    listMediaDevices() {
-        navigator.mediaDevices.enumerateDevices()
-        .then((deviceInfos) => { //https://github.com/garrettmflynn/intensities/blob/main/app/index.js
-
-            let ain = [] as any[]; let aout = [] as any[]; let cam = [] as any[];
-            for (var i = 0; i !== deviceInfos.length; ++i) {
-                var deviceInfo = deviceInfos[i];
-                var option = (<option key={deviceInfo.deviceId} value={deviceInfo.deviceId}>{deviceInfo.label}</option>)//document.createElement('option');
-                //option.value = deviceInfo.deviceId;
-                //console.log(deviceInfo.kind, deviceInfo.deviceId);
-                if (deviceInfo.kind === 'videoinput') {
-                    if(!this.state.selectedVideo)
-                        this.state.selectedVideo = deviceInfo.deviceId;
-                    cam.push(option);
-                    // option.text = deviceInfo.label || 'Camera ' +
-                    //     (videoSelect.options.length + 1);
-                    // this.camsrc.insertAdjacentElement('beforeend',option);
-                }
-                else if (deviceInfo.kind === 'audioinput') {
-                    if(!this.state.selectedAudioIn)
-                        this.state.selectedAudioIn = deviceInfo.deviceId;
-                    ain.push(option);
-                    // option.text = deviceInfo.label ||
-                    //     'Microphone ' + (audioInputSelect.options.length + 1);
-                    // this.camsrc.insertAdjacentElement('beforeend',option);
-                } 
-                else if (deviceInfo.kind === 'audiooutput') {
-                    if(!this.state.selectedAudioOut)
-                        this.state.selectedAudioOut = deviceInfo.deviceId;
-                    aout.push(option);
-                    // option.text = deviceInfo.label || 'Speaker ' +
-                    //     (audioOutputSelect.options.length + 1);
-                    //     this.camsrc.insertAdjacentElement('beforeend',option);
-                } 
-            }
-
-            this.setState({
-                audioInDevices:ain,
-                audioOutDevices:aout,
-                cameraDevices:cam
-            })
-        });
     }
 
     screenShare(call:RTCCallInfo) {
@@ -151,10 +105,7 @@ export class WebRTCComponent extends sComponent {
                             status='online'
                             backgroundColor='lightblue'
                         /> {user.firstName} {user.lastName}</div>
-                        <Button onClick={()=>{
-                            startCall(user._id).then(call => {
-                            //overwrites the default message
-                        })}}>Start Call</Button>
+                        {StartCall(user)}
                     </div>
                 )
             })
@@ -165,30 +116,7 @@ export class WebRTCComponent extends sComponent {
     }
 
     async getUnanweredCallInfo() {
-        let keys = Object.keys(this.state.unansweredCalls);
-
-        let divs = [] as any;
-
-        //console.log('getUnanweredCallInfo') //this should throw on the subscription event for receiveCallInformation
-
-        for(const key of keys) {
-
-            if(!this.listed[key])
-                this.listed[key] = true;
-            else continue;
-                        
-            let call = this.state.unansweredCalls[key] as RTCCallProps;
-     
-            let divId = `call${call._id}`;
-
-            divs.push(
-                <div id={divId} key={divId}>
-                    <div>User: {call.firstName} {call.lastName}</div>
-                    <Button onClick={() => {answerCall(call as any);}}>Join Call</Button>
-                </div>
-            );
-        };
-
+        let divs = UnanweredCallInfo();
         let unanswered = this.state.unansweredCallDivs;
         unanswered?.push(...divs);
 
@@ -245,12 +173,7 @@ export class WebRTCComponent extends sComponent {
                         Add screenshare options
                     */
                 }
-                { this.state.audioInDevices?.length > 0 && (<div>Mic In:<select id={this.unique+'aIn'} onChange={(ev) => this.setState({selectedAudioIn: ev.target.value})}>{this.state.audioInDevices}</select>
-                </div>)}
-                { this.state.audioOutDevices?.length > 0 && (<div>Audio Out:<select id={this.unique+'aOut'} onChange={(ev) => this.setState({selectedAudioOut: ev.target.value})}>{this.state.audioOutDevices}</select> 
-                </div>)}
-                { this.state.cameraDevices?.length > 0 && (<div>Camera In:<select id={this.unique+'vIn'} onChange={(ev) => this.setState({selectedVideo: ev.target.value})}>{this.state.cameraDevices}</select>
-                </div>)}
+                <MediaDeviceOptions/>
                 {/* 
                 <h2>Select Stream</h2>
                     <StreamSelect onChange={(ev)=>{ this.activeStream = ev.target.value; this.setState({}); }} />

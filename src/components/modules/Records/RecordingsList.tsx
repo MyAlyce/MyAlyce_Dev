@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Widget } from "../widgets/Widget";
+import { Widget } from "../../widgets/Widget";
 import { Button, Col, Row } from "react-bootstrap";
 import { BFSRoutes, csvRoutes } from "graphscript-services.storage";
-import { client, driveInstance, webrtc } from "../../scripts/client";
-import { RTCCallInfo } from "../../scripts/webrtc";
+import { client, driveInstance, webrtc } from "../../../scripts/client";
+import { RTCCallInfo } from "../../../scripts/webrtc";
 
 import { workers } from 'device-decoder';
-import gsworker from '../../scripts/device.worker'
+import gsworker from '../../../scripts/device.worker'
 import { WorkerInfo } from 'graphscript';
 
 import * as Icon from 'react-feather'

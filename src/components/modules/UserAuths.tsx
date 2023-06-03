@@ -7,6 +7,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import * as Icon from 'react-feather';
 import { Card } from 'react-bootstrap';
 import { Avatar } from '../ui/Avatar';
+import { StartCall } from './WebRTC/Calling';
 
 let personIcon = './assets/person.jpg';
 
@@ -167,8 +168,8 @@ export class UserAuths extends Component<{[key:string]:any}> {
                     <Avatar
                         pictureUrl={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic}
                         onlineStatus={a.status === 'OKAY' ? userIsOnline : undefined}
-                    /> {a.authorizerName} </div>
-                <div className="float-end"><Button variant="outline-success" size="sm" onClick={async ()=>{ 
+                    /> {userInfo ? userInfo.firstName + ' ' + userInfo.lastName : a.authorizerName} </div>
+                <div className="float-end">{userIsOnline ? StartCall(userInfo) : null}<Button variant="outline-success" size="sm" onClick={async ()=>{ 
                     await client.deleteAuthorization(a._id); 
                     let secondaryAuth = secondaryAuths.find((a2) => {if(a2.authorizedId === a.authorizerId) return true; });
                     if(secondaryAuth) await client.deleteAuthorization(secondaryAuth._id);

@@ -5,7 +5,7 @@ import './DropdownDrawer.css'
 
 export class DropdownDrawer extends Component<{direction?:'up'|'down', isOpen?:boolean, content:any[]}> {
   state = {
-    isOpen: true,
+    isOpen: false,
     exited:false
   };
 

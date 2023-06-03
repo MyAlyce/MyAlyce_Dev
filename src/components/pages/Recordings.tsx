@@ -2,11 +2,11 @@ import React from 'react'
 import { sComponent } from '../state.component'
 import {client} from '../../scripts/client'
 import { webrtc } from '../../scripts/client';
-import { NoteTaking } from '../modules/NoteTaking';
+import { NoteTaking } from '../modules/Records/NoteTaking';
 import { RTCCallInfo } from '../../scripts/webrtc';
 
-import { RecordBar } from '../modules/RecordBar';
-import { RecordingsList } from '../modules/RecordingsList';
+import { RecordBar } from '../modules/Records/RecordBar';
+import { RecordingsList } from '../modules/Records/RecordingsList';
 
 //add google drive backup/sync since we're using google accounts
 

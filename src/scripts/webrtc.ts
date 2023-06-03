@@ -34,8 +34,11 @@ export type RTCCallInfo = WebRTCInfo & {
     audioSender?:RTCRtpSender
 }
 
-export const onrtcdata = (call, from, data) => { 
+export function getCallLocation(call:RTCCallInfo) {
+    return call.run('getCurrentLocation'); //run geolocation at endpoint
+}
 
+export const onrtcdata = (call, from, data) => { 
 
     if(data.alert) {
 
@@ -67,14 +70,20 @@ export const onrtcdata = (call, from, data) => {
         if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
         state.setValue(call._id+'emg', data.emg);
     } 
+    if(data.ecg) {
+        if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
+        state.setValue(call._id+'ecg', data.ecg);
+    } 
     if (data.ppg) {
         if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
         state.setValue(call._id+'ppg', data.ppg);
     } 
     if (data.hr) {
+        if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
         state.setValue(call._id+'hr', data.hr);
     }  
     if (data.breath) {
+        if(!state.data[call._id+'detectedPPG']) state.setState({[call._id+'detectedPPG']:true});
         state.setValue(call._id+'breath', data.breath);
     } 
     if (data.imu) {
@@ -134,7 +143,6 @@ export async function startCall(userId) {
                 let data = JSON.parse(dev.data);
                 onrtcdata(call,from,data);
             }
-
         },
         ontrack:(ev) => {
             console.log('\n\n\nreceived track\n\n\n',ev);
@@ -143,6 +151,8 @@ export async function startCall(userId) {
             for(const key in nodes) {
                 graph.remove(key,true);
             }
+            delete webrtc.rtc[(call as RTCCallInfo)._id];
+            state.setState({activeStream:undefined, availableStreams:webrtc.rtc, switchingUser:true});
         }
         // ondatachannel:(ev) => {
         //     //the call is now live, set ev.channel.onmessage function and add media tracks etc.
@@ -206,6 +216,9 @@ export let answerCall = async (call:RTCCallProps) => {
         for(const key in nodes) {
             graph.remove(key,true);
         }
+        delete webrtc.rtc[(call as RTCCallInfo)._id];
+        state.setState({activeStream:undefined, availableStreams:webrtc.rtc, switchingUser:true});
+        
     }
     
     //both ends need to set this function up when adding audio and video tracks freshly
@@ -247,7 +260,7 @@ export let answerCall = async (call:RTCCallProps) => {
 
     call.ondata = (dev) => { 
         let data = JSON.parse(dev.data);
-        onrtcdata(call,from,data);
+        onrtcdata(call, from, data);
     }
 
     let rtc = await webrtc.answerCall(call as any);
@@ -333,40 +346,79 @@ graph.subscribe('receiveCallInformation', (id) => {
 });
 
 
-export function enableDeviceStream(streamId) { //enable sending data to a given RTC channel
+export function enableDeviceStream(streamId, bufferInterval=500) { //enable sending data to a given RTC channel
     
     let stream = webrtc.rtc[streamId as string] as WebRTCInfo;
+
+    let buffers = {
+        emg:undefined,
+        ecg:undefined,
+        ppg:undefined,
+        hr:undefined,
+        breath:undefined,
+        imu:undefined,
+        env:undefined,
+    } as any;
+
+    let tStart = performance.now();
+
+    function BufferAndSend(data, buf) {
+        let now = performance.now();
+        if(now > tStart + bufferInterval) {
+            console.log(buffers);
+            stream.send(buffers);
+            tStart = now;
+            buffers = {};
+        } else {
+            if(!buffers[buf]) buffers[buf] = data;
+            else for(const key in data) {
+                if(!(key in buffers[buf])) buffers[buf][key] = data[key];
+                else {
+                    if(!Array.isArray(buffers[buf][key])) 
+                        buffers[buf][key] = [buffers[buf][key]];
+                    
+                    if(Array.isArray((data[key])))
+                        buffers[buf][key].push(...data[key]);
+                    else
+                        buffers[buf][key].push(data[key]);
+                }
+            }
+        }
+    }
+
     if(stream) {
         let subscriptions = {};
         subscriptions[streamId] = {
-            emg:state.subscribeEvent('emg', (data) => {
-                stream.send({ emg:data });
+            emg:state.subscribeEvent('emg', (emg) => {
+                BufferAndSend(emg,'emg');
+            }),
+            ecg:state.subscribeEvent('ecg', (ecg) => {
+                BufferAndSend(ecg,'ecg');
             }),
             ppg:state.subscribeEvent('ppg', (ppg) => {
-                stream.send({ ppg:ppg });
+                BufferAndSend(ppg,'ppg');
             }),
             hr:state.subscribeEvent('hr', (hr) => {
-                stream.send({
-                    hr: hr
-                });
+                BufferAndSend(hr,'hr');
             }),
             breath:state.subscribeEvent('breath', (breath) => {
-                stream.send({
-                    breath:breath
-                });
+                BufferAndSend(breath,'breath');
             }),
             imu:state.subscribeEvent('imu', (imu) => {
-                stream.send({imu:imu});
+                BufferAndSend(imu,'imu');
             }),
             env:state.subscribeEvent('env', (env) => {
-                stream.send({env:env});
+                BufferAndSend(env,'env');
             })
         };
 
+        let oldonclose;
+        if(stream.onclose) oldonclose = stream.onclose; 
         stream.onclose = () => {
-            for(const key in this.subscriptions[streamId]) {
+            for(const key in subscriptions[streamId]) {
                 state.unsubscribeEvent(key, subscriptions[streamId][key]);
             }
+            if(oldonclose) oldonclose();
         }     
     }
     

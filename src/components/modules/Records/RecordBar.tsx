@@ -1,12 +1,12 @@
 import React from 'react'
-import { sComponent } from "../state.component";
+import { sComponent } from "../../state.component";
 import { Button } from 'react-bootstrap';
-import { recordCSV, stopRecording } from '../../scripts/datacsv';
-import { SensorDefaults, client, webrtc } from '../../scripts/client';
-import { StreamToggle } from './StreamToggle';
+import { recordCSV, stopRecording } from '../../../scripts/datacsv';
+import { SensorDefaults, client, webrtc } from '../../../scripts/client';
+import { StreamToggle } from '../Streams/StreamToggle';
 import * as Icon from 'react-feather'
-import { RTCCallInfo } from '../../scripts/webrtc';
-import { Widget } from '../widgets/Widget';
+import { RTCCallInfo } from '../../../scripts/webrtc';
+import { Widget } from '../../widgets/Widget';
 
 export class RecordBar extends sComponent {
 
@@ -48,7 +48,7 @@ export class RecordBar extends sComponent {
         
         return (
             <Widget
-                style={{width: '30rem'}}
+                style={{minWidth:'26rem'}}
                 header="Recording:"
                 content={(
                     <div className="d-grid gap-2">

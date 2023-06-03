@@ -1,5 +1,5 @@
 import React from 'react';
-import { sComponent } from '../state.component';
+import { sComponent } from '../../state.component';
 
 
 //str8 text render
@@ -31,6 +31,6 @@ export class StreamText extends sComponent{
 
         let result = this.objectKey ? this.state[this.stateKey]?.[this.objectKey] : this.state[this.stateKey];
 
-        return (<>{typeof result === 'number' ? result.toFixed(3) : result}</>)
+        return (<>{typeof result === 'number' ? result.toFixed(2) : result}</>)
     }
 }

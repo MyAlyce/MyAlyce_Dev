@@ -4,7 +4,9 @@ import {webrtc} from './scripts/client'
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
 import { client, onLogin, onLogout } from './scripts/client';
-import { Login, NavDrawer } from './components/lib/src/index';
+
+
+import { Login, NavDrawer } from './components/lib_old/src/index';
 
 
 import { SettingsView } from './components/pages/SettingsView';
@@ -17,9 +19,9 @@ import { RTCCallInfo } from './scripts/webrtc';
 import { Header } from './components/ui/Header';
 import { Navigation } from './components/ui/Navigation';
 import { DropdownDrawer } from './components/ui/Dropdown/DropdownDrawer';
-import { DeviceConnect } from './components/modules/DeviceConnect';
-import { StreamSelect } from './components/modules/StreamSelect';
-import { Demo } from './components/modules/DemoMode';
+import { DeviceConnect } from './components/modules/Device/DeviceConnect';
+import { StreamSelect } from './components/modules/Streams/StreamSelect';
+import { Demo } from './components/modules/Device/DemoMode';
 import { Footer } from './components/ui/Footer';
 
 let googleLogo = './assets/google.png';
@@ -69,6 +71,7 @@ export class App extends sComponent {
         isLoggedIn: false,
         loggingIn:false, //show load screen
         route: '/',
+        switchingUser:false,
         activeStream:undefined, //stream selected?
         deviceMode:'My Device',
         availableStreams:{} //we can handle multiple connections too
@@ -100,6 +103,8 @@ export class App extends sComponent {
 
     render() {
 
+        if(this.state.switchingUser) this.setState({switchingUser:false});
+
         return (
             <div style={{width:'100%', height:'100%'}}>
                 {this.state.loggingIn && 
@@ -128,14 +133,19 @@ export class App extends sComponent {
                         <div id='viewcontent' className="flex-content">
                             <Navigation />
                             <div id='route'>
-                                { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
-                                    <Dashboard/>
+                                {this.state.switchingUser ? null : 
+                                    <>
+                                        { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
+                                            <Dashboard/>
+                                        }
+                                        { this.state.route.includes('peers') &&  <WebRTCComponent/>}
+                                        { this.state.route.includes('recordings') && <Recordings 
+                                            dir={getActiveStreamDir()}/>}
+                                        { this.state.route.includes('settings') && <SettingsView/> }
+                                        { this.state.route.includes('dev') && <Dev/>}
+                                    </>
                                 }
-                                { this.state.route.includes('peers') &&  <WebRTCComponent/>}
-                                { this.state.route.includes('recordings') && <Recordings 
-                                    dir={getActiveStreamDir()}/>}
-                                { this.state.route.includes('settings') && <SettingsView/> }
-                                { this.state.route.includes('dev') && <Dev/>}
+                                
                             </div>
                             <br/><br/><br/><br/>
                         </div>
@@ -152,11 +162,11 @@ export class App extends sComponent {
                                                 <Demo/> : ""
                                         }
                                         {/* Device/Stream select */}
-                                        <StreamSelect 
+                                        { this.state.switchingUser ? null :<StreamSelect 
                                             onChange={(key, activeStream) => { 
-                                                this.setState({deviceMode:key, activeStream:activeStream});
+                                                this.setState({switchingUser:true, deviceMode:key, activeStream:activeStream});
                                             }} 
-                                        />
+                                        /> }
                                     </div>,
                                     (<span key={2}><br/><br/><br/></span>) //pads it at the bottom to stay above the footer
                                 ]}

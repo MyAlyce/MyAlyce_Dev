@@ -1,10 +1,10 @@
 import React from 'react'
-import { sComponent } from '../state.component';
-import { demo, demos, stopdemos } from '../../scripts/demo';
-import {Sensors, state} from '../../scripts/client'
-import { disconnectDevice } from '../../scripts/device';
+import { sComponent } from '../../state.component';
+import { demo, demos, stopdemos } from '../../../scripts/demo';
+import {Sensors, state} from '../../../scripts/client'
+import { disconnectDevice } from '../../../scripts/device';
 import { Button } from 'react-bootstrap';
-import { Widget } from '../widgets/Widget';
+import { Widget } from '../../widgets/Widget';
 
 export class Demo extends sComponent {
 

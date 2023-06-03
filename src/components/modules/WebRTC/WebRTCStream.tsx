@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 
-import { SensorDefaults, client, webrtc } from "../../scripts/client";
+import { SensorDefaults, client, webrtc } from "../../../scripts/client";
 
 
 import { WebRTCInfo } from 'graphscript'// "../../../../graphscript/index";//
 
-import { ChartGroup } from "../modules/ChartGroup";
+import { ChartGroup } from "../../modules/DataVis/ChartGroup";
 
-import {Button } from "../lib/src";
+import { Button } from "react-bootstrap";
 
 
-import { RTCCallInfo, disableAudio, disableVideo, enableAudio,  enableVideo, onrtcdata } from '../../scripts/webrtc';
+import { RTCCallInfo, disableAudio, disableVideo, enableAudio,  enableVideo, onrtcdata } from '../../../scripts/webrtc';
 
 const micOn = './assets/mic.svg';
 const micOff = './assets/mic-off.svg';
@@ -31,7 +31,11 @@ export const createStreamChart = (call, sensors?) => {
 //TODO: Can't hear the audio from the other user
 // also, add the exit call button
 
-class RTCAudio extends Component<{[key:string]:any}> {
+class RTCAudio extends Component<{
+    stream:MediaStream, 
+    call:RTCCallInfo,
+    audioOutId?:string //TODO: select output device for audio stream
+}> {
 
     ctx = new AudioContext();
     call:RTCCallInfo;
@@ -89,7 +93,7 @@ class RTCAudio extends Component<{[key:string]:any}> {
     }
 }
 
-export const createAudioDiv = (call:WebRTCInfo, audioOutId?: string) => {
+export const createAudioDiv = (call:RTCCallInfo, audioOutId?: string) => {
 
     if((call as any).gainNode) {
         (call as any).gainNode.disconnect();
@@ -106,7 +110,7 @@ export const createAudioDiv = (call:WebRTCInfo, audioOutId?: string) => {
     }
 }
 
-export class RTCVideo extends Component<{[key:string]:any}> {
+export class RTCVideo extends Component<{stream:MediaStream, call:RTCCallInfo}> {
 
     call:RTCCallInfo;
     stream:MediaStream;
@@ -120,7 +124,7 @@ export class RTCVideo extends Component<{[key:string]:any}> {
 
         navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then((stream) => {
             this.stream = stream;
-            this.forceUpdate()
+            this.forceUpdate();
         })
 
         let video = document.createElement('video');
@@ -144,7 +148,7 @@ export class RTCVideo extends Component<{[key:string]:any}> {
     }
 }
 
-export const createVideoDiv = (call:WebRTCInfo) => {
+export const createVideoDiv = (call:RTCCallInfo) => {
     let found = call.streams?.find((s) => (s as MediaStream)?.getVideoTracks().length > 0);
     if(found) return <RTCVideo call={call} stream={found}/>
 }
