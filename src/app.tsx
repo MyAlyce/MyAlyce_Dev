@@ -1,6 +1,6 @@
 import React from 'react'
 import {getActiveStreamDir, state} from './scripts/client'//'../../graphscript/index'//
-import {webrtc} from './scripts/client'
+
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
 import { client, onLogin, onLogout } from './scripts/client';
@@ -15,7 +15,6 @@ import { Recordings } from './components/pages/Recordings';
 import { WebRTCComponent } from './components/pages/webrtc';
 
 import { Dev } from './components/pages/Dev';
-import { RTCCallInfo } from './scripts/webrtc';
 import { Header } from './components/ui/Header';
 import { Navigation } from './components/ui/Navigation';
 import { DropdownDrawer } from './components/ui/Dropdown/DropdownDrawer';
@@ -26,8 +25,6 @@ import { Footer } from './components/ui/Footer';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
-
-let personIcon = './assets/person.jpg';
 
 state.subscribeEvent('route', (route:string) => {
     window.history.pushState(undefined, route, location.origin + route); //uhh
@@ -101,9 +98,15 @@ export class App extends sComponent {
         this.setState({navOpen:b});
     }
 
+    flipState() {
+        if(this.state.switchingUser) setTimeout(()=>{
+            this.setState({switchingUser:false});
+        },0.1);
+    }
+
     render() {
 
-        if(this.state.switchingUser) this.setState({switchingUser:false});
+        this.flipState();
 
         return (
             <div style={{width:'100%', height:'100%'}}>

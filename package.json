@@ -31,7 +31,7 @@
     "bootstrap": "^5.2.3",
     "classnames": "^2.3.2",
     "device-decoder": "~0.5.0",
-    "graphscript": "~0.2.122",
+    "graphscript": "~0.2.125",
     "graphscript-services": "~0.2.142",
     "graphscript-services.storage": "~0.2.131",
     "hamburger-react": "^2.5.0",

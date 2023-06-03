@@ -189,8 +189,9 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
     componentDidMount(): void {
         this.state.activeStream = this.props.streamId;
         if(webrtc.rtc[this.props.streamId]) this.setActiveStream(webrtc.rtc[this.props.streamId] as RTCCallInfo);
-        let call = webrtc.rtc[this.state.activeStream as string] as RTCCallInfo;
-        this.setupCallUI(call);
+        let call;
+        if(this.state.activeStream) call = webrtc.rtc[this.state.activeStream as string] as RTCCallInfo;
+        if(call) this.setupCallUI(call);
     }
 
     componentWillUnmount(): void {

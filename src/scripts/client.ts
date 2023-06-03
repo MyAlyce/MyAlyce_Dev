@@ -10,8 +10,11 @@ import {
     SessionsService,
     GraphNode,
     state,
-    WebRTCfrontend,
     WebRTCProps
+} from 'graphscript'//'../../../graphscript/index'//
+
+import {
+    WebRTCfrontend
 } from 'graphscript'//'../../../graphscript/index'//
 
 //isolated import for dev with src
@@ -39,7 +42,7 @@ const startDemo = true;
 export const client = new StructFrontend({state:state});
 export const sockets = new WSSfrontend({state:state});
 
-export const webrtc = new WebRTCfrontend({state:state});
+export const webrtc = new WebRTCfrontend({state:state as any});
 
 export const webrtcData = {
     webrtcStream:undefined, //current active stream

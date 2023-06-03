@@ -139,13 +139,15 @@ export async function startCall(userId) {
             
             const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
 
-            call.ondata = (dev) => {
-                let data = JSON.parse(dev.data);
-                onrtcdata(call,from,data);
+            webrtc.rtc[call._id as string].ondata = (mev, channel) => {
+                let data = JSON.parse(mev.data);
+                onrtcdata(call, from, data);
+                webrtc.receive(mev.data, channel, webrtc.rtc[call._id]);
+                webrtc.setState({[call._id]:mev.data});
             }
         },
         ontrack:(ev) => {
-            console.log('\n\n\nreceived track\n\n\n',ev);
+            console.log('\n\n\nreceived track\n\n\n', ev);
         },
         onclose:() => {
             for(const key in nodes) {
@@ -258,9 +260,11 @@ export let answerCall = async (call:RTCCallProps) => {
 
     const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
 
-    call.ondata = (dev) => { 
-        let data = JSON.parse(dev.data);
+    call.ondata = (mev, channel) => { 
+        let data = JSON.parse(mev.data);
         onrtcdata(call, from, data);
+        webrtc.receive(mev.data, channel, webrtc.rtc[(call as any)._id]);
+        webrtc.setState({[(call as any)._id]:mev.data});
     }
 
     let rtc = await webrtc.answerCall(call as any);
@@ -357,7 +361,7 @@ export function enableDeviceStream(streamId, bufferInterval=500) { //enable send
         hr:undefined,
         breath:undefined,
         imu:undefined,
-        env:undefined,
+        env:undefined
     } as any;
 
     let tStart = performance.now();
@@ -365,18 +369,18 @@ export function enableDeviceStream(streamId, bufferInterval=500) { //enable send
     function BufferAndSend(data, buf) {
         let now = performance.now();
         if(now > tStart + bufferInterval) {
-            console.log(buffers);
-            stream.send(buffers);
+            stream.send({...buffers});
             tStart = now;
             buffers = {};
         } else {
-            if(!buffers[buf]) buffers[buf] = data;
-            else for(const key in data) {
-                if(!(key in buffers[buf])) buffers[buf][key] = data[key];
+            if(!buffers[buf]) buffers[buf] = {};
+            for(const key in data) {
+                if(!(key in buffers[buf])) {
+                    if(Array.isArray(data[key]))
+                        buffers[buf][key] = [...data[key]];
+                    else buffers[buf][key] = [data[key]];
+                }
                 else {
-                    if(!Array.isArray(buffers[buf][key])) 
-                        buffers[buf][key] = [buffers[buf][key]];
-                    
                     if(Array.isArray((data[key])))
                         buffers[buf][key].push(...data[key]);
                     else
@@ -387,8 +391,10 @@ export function enableDeviceStream(streamId, bufferInterval=500) { //enable send
     }
 
     if(stream) {
+
         let subscriptions = {};
-        subscriptions[streamId] = {
+
+        subscriptions = {
             emg:state.subscribeEvent('emg', (emg) => {
                 BufferAndSend(emg,'emg');
             }),
@@ -415,8 +421,8 @@ export function enableDeviceStream(streamId, bufferInterval=500) { //enable send
         let oldonclose;
         if(stream.onclose) oldonclose = stream.onclose; 
         stream.onclose = () => {
-            for(const key in subscriptions[streamId]) {
-                state.unsubscribeEvent(key, subscriptions[streamId][key]);
+            for(const key in subscriptions) {
+                state.unsubscribeEvent(key, subscriptions[key]);
             }
             if(oldonclose) oldonclose();
         }     
