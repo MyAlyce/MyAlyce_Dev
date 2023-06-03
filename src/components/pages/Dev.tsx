@@ -1,13 +1,13 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import { Header } from '../ui/Header'
-import { Navigation } from '../ui/Navigation'
-import { UserBar } from '../ui/UserBar/UserBar'
+import { Header } from '../modules/Header/Header'
+import { Navigation } from '../modules/Navigation/Navigation'
+import { UserBar } from '../modules/User/UserBar'
 import { Statistics } from '../ui/Statistics'
-import { InfoLog } from '../ui/InfoLog'
-import { InfoLogPlayer } from '../ui/InfoLogPlayer'
-import { MiniSurvey } from '../ui/MiniSurvey'
-import { Footer } from '../ui/Footer'
+import { InfoLog } from '../ui_wip/InfoLog'
+import { InfoLogPlayer } from '../ui_wip/InfoLogPlayer'
+import { MiniSurvey } from '../ui_wip/MiniSurvey'
+import { Footer } from '../modules/Footer/Footer'
 
 export class Dev extends sComponent {
 

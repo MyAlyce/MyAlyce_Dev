@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/esm/Container';
 
-import { defaultProfilePic } from '../../../scripts/client';
+import { defaultProfilePic } from '../../scripts/client';
 
 export function UserBarExpanded() {
   return (

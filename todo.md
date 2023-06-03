@@ -23,6 +23,8 @@
 ## Data
 
 - more selective data representation
+- Video/Audio capture local and remote (ez)
+- Screen capture
 
 ## Widgets
 

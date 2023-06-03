@@ -36,47 +36,56 @@ export class DeviceConnect extends sComponent {
                     <Col className="mx-auto">   
                         <span className="mx-auto">
                         { !this.state.deviceConnected ? 
-                            <Button onClick={()=>{
-                                if(state.data.demoing) {
-                                    stopdemos();
-                                }
-                                connectDevice(this.sensors);
-                            }}><Icon.Bluetooth/></Button> :
-                            <>
+                            
+                            <Col>
                                 <Button onClick={()=>{
                                     if(state.data.demoing) {
                                         stopdemos();
-                                    } else disconnectDevice();
-                                }}><Icon.XCircle/></Button>
+                                    }
+                                    connectDevice(this.sensors);
+                                }}><Icon.Bluetooth/></Button>
+                            </Col> :
+                            <>
+                                <Col>
+                                    <Button onClick={()=>{
+                                        if(state.data.demoing) {
+                                            stopdemos();
+                                        } else disconnectDevice();
+                                    }}><Icon.XCircle/></Button>
+                                </Col>
                                 {/** Toggles for sensor subscriptions */}
-                                <StreamToggle
-                                    toggled={this.sensors}
-                                    subscribable={[...SensorDefaults]}
-                                    onChange={(ev) => {
-                                        if(ev.checked) {
-                                            if(device && characteristicCallbacks[ev.key]) {
-                                                device.subscribe(serviceCharacteristic, characteristicCallbacks[ev.key].characteristic, characteristicCallbacks[ev.key].callback);
-                                            } else if (!hrworker && ev.key === 'hr') {
-                                                setupHRWorker();
-                                            } else if (!brworker && ev.key === 'breath') {
-                                                setupBRWorker();
+                                <Col>
+                                    <StreamToggle
+                                        toggled={this.sensors}
+                                        subscribable={[...SensorDefaults]}
+                                        onChange={(ev) => {
+                                            if(ev.checked) {
+                                                if(device && characteristicCallbacks[ev.key]) {
+                                                    device.subscribe(serviceCharacteristic, characteristicCallbacks[ev.key].characteristic, characteristicCallbacks[ev.key].callback);
+                                                } else if (!hrworker && ev.key === 'hr') {
+                                                    setupHRWorker();
+                                                } else if (!brworker && ev.key === 'breath') {
+                                                    setupBRWorker();
+                                                }
+                                                this.setState({});
+                                            } else {
+                                                if(device && characteristicCallbacks[ev.key]) {
+                                                    device.unsubscribe(serviceCharacteristic, characteristicCallbacks[ev.key].characteristic);
+                                                } else if (ev.key === 'hr') {
+                                                    terminateHRWorker();
+                                                } else if (ev.key === 'breath') {
+                                                    terminateBRWorker();
+                                                }
+                                                this.setState({});
                                             }
-                                            this.setState({});
-                                        } else {
-                                            if(device && characteristicCallbacks[ev.key]) {
-                                                device.unsubscribe(serviceCharacteristic, characteristicCallbacks[ev.key].characteristic);
-                                            } else if (ev.key === 'hr') {
-                                                terminateHRWorker();
-                                            } else if (ev.key === 'breath') {
-                                                terminateBRWorker();
-                                            }
-                                            this.setState({});
-                                        }
-                                    }}
-                                    // onlyOneActive={true}
-                                />  
-                                <CallSelf/>  
-                            </>    
+                                        }}
+                                        // onlyOneActive={true}
+                                    />  
+                                </Col>
+                                <Col>
+                                    <CallSelf/>  
+                                </Col>
+                            </>
                         } 
                         </span>
                     </Col>

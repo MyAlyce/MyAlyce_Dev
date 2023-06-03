@@ -10,7 +10,14 @@ import { client } from '../../../scripts/client';
 import {webrtc} from '../../../scripts/client'
 import { RTCCallInfo } from '../../../scripts/webrtc';
 
-export function UserBar(props:{streamId?:string, eyeOnClick?:(ev)=>void, pinOnClick?:(ev)=>void, xOnClick?:(ev)=>void}) {
+export function UserBar(props:{
+  streamId?:string, 
+  eyeOnClick?:(ev)=>void, 
+  pinOnClick?:(ev)=>void, 
+  xOnClick?:(ev)=>void, 
+  audioOnClick?:(ev)=>void, 
+  videoOnClick?:(ev)=>void
+}) {
 
   let name;
   let profilePic;
@@ -37,6 +44,8 @@ export function UserBar(props:{streamId?:string, eyeOnClick?:(ev)=>void, pinOnCl
           eyeOnClick={props.eyeOnClick}
           pinOnClick={props.pinOnClick}
           xOnClick={props.xOnClick}
+          videoOnClick={props.videoOnClick}
+          audioOnClick={props.audioOnClick}
       />
       <UserFeed
         streamId={props.streamId}

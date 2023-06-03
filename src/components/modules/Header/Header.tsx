@@ -1,9 +1,9 @@
 import React from 'react';
-import { sComponent } from '../state.component';
+import { sComponent } from '../../state.component';
 import Button from 'react-bootstrap/Button';
-import { showNotification } from '../../scripts/alerts'
-import { client, logoutSequence } from '../../scripts/client';
-import { FriendsModal } from './FriendsModal';
+import { showNotification } from '../../../scripts/alerts'
+import { client, logoutSequence } from '../../../scripts/client';
+import { FriendsModal } from '../User/FriendsModal';
 import * as Icon from 'react-feather';
 
 let myalyceLogo = './assets/myalyce.png';

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {webrtc} from '../../../scripts/client'
 import { RTCCallInfo } from '../../../scripts/webrtc';
-import { UserBar } from '../../ui/UserBar/UserBar';
+import { UserBar } from '../User/UserBar';
 import { Widget } from '../../widgets/Widget';
 import { Card } from 'react-bootstrap';
 import { ToggleAudioVideo } from '../WebRTC/Calling';
@@ -73,7 +73,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
                         <Card.Header>
                             Selected: {this.state.activeStream
                                 ? (
-                                    <>{(webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName} ${(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName} 
+                                    <>{(webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName} {(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName} 
                                 </>)
                                 : this.selectedKey}
                         </Card.Header>

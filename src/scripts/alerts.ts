@@ -5,6 +5,7 @@ import { FallAlert } from "./alertTemplates/falldetection";
 import { Howl } from "howler";
 import { recordAlert } from "./datacsv";
 import { webrtcData } from "./client";
+import { toISOLocal } from "graphscript-services.storage";
 
 export let getCurrentLocation = (options:PositionOptions={enableHighAccuracy:true}) => {
     return new Promise((res,rej) => {
@@ -75,23 +76,37 @@ export const showNotification = (title,message) => {
 
 export function onAlert(event, streamId?) {
 
-    console.log("Alert:", event);
+    console.warn("Alert:", event);
 
     alerts.push(event);
     
     let sound = new Howl({src:'./sounds/alarm.wav'});
     sound.play(undefined,false);
-    showNotification("Alert:", `${event.message} : ${event.value}` );
+    showNotification("Alert:", `${event.message} ${event.value ? ': '+event.value : ''} at ${toISOLocal(new Date(event.timestamp))}` );
 
     recordAlert(event, streamId);
 
-    //broadcast your own alerts
+    //broadcast your own alerts to connected streams
     if(!streamId) {
         for(const key in webrtcData.availableStreams) {
             webrtcData.availableStreams[key].send({alert:event});
         }
     }
 }
+
+export function throwAlert(
+    event:{
+        message:string,
+        value?:string,
+        timestamp:number
+    }={
+        message:"Alert: Something Happened",
+        value:"Test",
+        timestamp:Date.now()
+    }, streamId?
+) {
+    onAlert(event, streamId);
+}   
 
 //alert system
 export function setupAlerts(

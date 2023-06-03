@@ -1,5 +1,5 @@
 import React from "react"
-import { Button } from "react-bootstrap"
+import { Button, Col, Row } from "react-bootstrap"
 import { client, getStreamById, state, webrtc } from "../../../scripts/client";
 import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio } from "../../../scripts/webrtc";
 import { ProfileStruct } from "graphscript-services/struct/datastructures/types";
@@ -130,30 +130,36 @@ export class ToggleAudioVideo extends sComponent {
                 }
             }
         });
+
+        console.log(hasAudio, hasVideo);
     
         return (
             <>
-                {hasVideo ? <Icon.Video style={{cursor:'pointer'}} onClick={() => {
-                    disableVideo(stream);
-                    if(this.props.videoOnClick) this.props.videoOnClick(false);
-                    this.forceUpdate();
-                }} /> : <Icon.VideoOff style={{cursor:'pointer'}}  onClick={() => {
-                    enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
-                    if(this.props.videoOnClick) this.props.videoOnClick(true);
-                    this.forceUpdate();
-                }}/>}
-                {hasAudio ? <Icon.Mic style={{cursor:'pointer'}}  onClick={() => {
-                    disableAudio(stream);
-                    if(this.props.audioOnClick) this.props.audioOnClick(false);
-                    this.forceUpdate();
-                }}/> : <Icon.MicOff style={{cursor:'pointer'}}  onClick={() => {
-                    if(hasVideo && this.state.selectedAudioIn === this.state.selectedVideo) {
+                {hasVideo ? <Icon.Video style={{cursor:'pointer'}} 
+                    onClick={() => {
                         disableVideo(stream);
-                        enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, true);
-                    }
-                    else enableAudio(stream, this.state.selectedAudioIn ? {deviceId:this.state.selectedAudioIn} : undefined);
-                    if(this.props.audioOnClick) this.props.audioOnClick(true);
-                    this.forceUpdate();
+                        if(this.props.videoOnClick) this.props.videoOnClick(false);
+                        this.setState({});
+                }} /> : <Icon.VideoOff style={{cursor:'pointer'}}  
+                    onClick={() => {
+                        enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
+                        if(this.props.videoOnClick) this.props.videoOnClick(true);
+                        this.setState({});
+                }}/>}
+                {hasAudio ? <Icon.Mic style={{cursor:'pointer'}}  
+                    onClick={() => {
+                        disableAudio(stream);
+                        if(this.props.audioOnClick) this.props.audioOnClick(false);
+                        this.setState({});
+                }}/> : <Icon.MicOff style={{cursor:'pointer'}}  
+                    onClick={() => {
+                        if(hasVideo && this.state.selectedAudioIn === this.state.selectedVideo) {
+                            disableVideo(stream);
+                            enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, true);
+                        }
+                        else enableAudio(stream, this.state.selectedAudioIn ? {deviceId:this.state.selectedAudioIn} : undefined);
+                        if(this.props.audioOnClick) this.props.audioOnClick(true);
+                        this.setState({});
                 }}/>}
             </>
         );
@@ -275,12 +281,18 @@ export class MediaDeviceOptions extends sComponent {
                 title={"Voice and Video Options"}
                 content={
                     <>
-                        { this.audioInDevices?.length > 0 && ( <div>Mic In:    <select id={this.unique+'aIn'} onChange={(ev) => this.setState({selectedAudioIn: ev.target.value})}>{this.audioInDevices}</select>
-                        </div>)}
-                        { this.audioOutDevices?.length > 0 && (<div>Audio Out: <select id={this.unique+'aOut'} onChange={(ev) => this.setState({selectedAudioOut: ev.target.value})}>{this.audioOutDevices}</select> 
-                        </div>)}
-                        { this.cameraDevices?.length > 0 && (  <div>Camera In: <select id={this.unique+'vIn'} onChange={(ev) => this.setState({selectedVideo: ev.target.value})}>{this.cameraDevices}</select>
-                        </div>)}
+                        { this.audioInDevices?.length > 0 && ( <Row>
+                            <Col>Mic In:</Col>   
+                            <Col><select id={this.unique+'aIn'} onChange={(ev) => this.setState({selectedAudioIn: ev.target.value})}>{this.audioInDevices}</select></Col>
+                        </Row>)}
+                        { this.audioOutDevices?.length > 0 && (<Row>
+                            <Col>Audio Out:</Col>
+                            <Col><select id={this.unique+'aOut'} onChange={(ev) => this.setState({selectedAudioOut: ev.target.value})}>{this.audioOutDevices}</select></Col>
+                        </Row>)}
+                        { this.cameraDevices?.length > 0 && ( <Row>
+                            <Col>Camera In:</Col>
+                            <Col><select id={this.unique+'vIn'} onChange={(ev) => this.setState({selectedVideo: ev.target.value})}>{this.cameraDevices}</select></Col>
+                            </Row>)}
                     </>
                 }
             />

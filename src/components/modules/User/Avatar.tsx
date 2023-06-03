@@ -1,5 +1,5 @@
 import React from 'react'
-import { defaultProfilePic } from '../../scripts/client'
+import { defaultProfilePic } from '../../../scripts/client'
 
 export function Avatar(props:{pictureUrl:string, width?:number, onlineStatus?:boolean}) {
 

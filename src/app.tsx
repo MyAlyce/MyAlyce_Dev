@@ -15,14 +15,17 @@ import { Recordings } from './components/pages/Recordings';
 import { WebRTCComponent } from './components/pages/webrtc';
 
 import { Dev } from './components/pages/Dev';
-import { Header } from './components/ui/Header';
-import { Navigation } from './components/ui/Navigation';
-import { DropdownDrawer } from './components/ui/Dropdown/DropdownDrawer';
+import { Header } from './components/modules/Header/Header';
+import { Navigation } from './components/modules/Navigation/Navigation';
+import { DropdownDrawer } from './components/modules/Dropdown/DropdownDrawer';
 import { DeviceConnect } from './components/modules/Device/DeviceConnect';
 import { StreamSelect } from './components/modules/Streams/StreamSelect';
 import { Demo } from './components/modules/Device/DemoMode';
-import { Footer } from './components/ui/Footer';
-import { ToggleAudioVideo } from './components/modules/WebRTC/Calling';
+import { Footer } from './components/modules/Footer/Footer';
+import { MediaDeviceOptions, ToggleAudioVideo } from './components/modules/WebRTC/Calling';
+import { Widget } from './components/widgets/Widget';
+import { Button } from 'react-bootstrap';
+import { throwAlert } from './scripts/alerts';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -157,7 +160,7 @@ export class App extends sComponent {
                             <DropdownDrawer 
                                 direction={'up'}
                                 content={[
-                                    <div className="stream-select" key={1}>
+                                    (<div className="stream-select" key={1}>
                                         {/** Device Connect */}
                                         {   
                                             this.state.deviceMode === 'My Device' ? 
@@ -165,11 +168,17 @@ export class App extends sComponent {
                                             this.state.deviceMode === 'Demo' ? 
                                                 <Demo/> : 
                                             this.state.activeStream ? 
-                                                <>
-                                                    <ToggleAudioVideo streamId={this.state.activeStream} 
-                                                        videoOnClick={(onState:boolean)=>{ }} 
-                                                        audioOnClick={(onState:boolean)=>{ }}/>
-                                                </> : null
+                                                <Widget 
+                                                    content={
+                                                        <ToggleAudioVideo streamId={this.state.activeStream} 
+                                                            videoOnClick={(onState:boolean)=>{ 
+                                                                //toggle picture in picture
+                                                            }} 
+                                                            audioOnClick={(onState:boolean)=>{  
+                                                                //toggle local volume controls
+                                                            }}/>
+                                                    }
+                                                /> : null    
                                         }
                                         {/* Device/Stream select */}
                                         { this.state.switchingUser ? null : <StreamSelect 
@@ -178,8 +187,10 @@ export class App extends sComponent {
                                             }} 
                                             selected={this.state.activeStream}
                                         /> }
-                                    </div>,
-                                    (<span key={2}><br/><br/><br/></span>) //pads it at the bottom to stay above the footer
+                                    </div>),
+                                    (<span key={2}><MediaDeviceOptions/></span>),
+                                    (<span key={3}><Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button></span>),
+                                    (<span key={4}><br/><br/><br/></span>) //pads it at the bottom to stay above the footer
                                 ]}
                             />
                             <div style={{height:'50px'}}/>

@@ -6,7 +6,7 @@ import { UserSearch } from './UserSearch';
 import ListGroup from 'react-bootstrap/ListGroup';
 import * as Icon from 'react-feather';
 import { Card } from 'react-bootstrap';
-import { Avatar } from '../ui/Avatar';
+import { Avatar } from './User/Avatar';
 import { StartCall } from './WebRTC/Calling';
 
 let personIcon = './assets/person.jpg';

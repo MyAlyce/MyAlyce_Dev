@@ -1,16 +1,10 @@
-import React, { useState, useRef } from 'react';
-import Card from 'react-bootstrap/Card';
+import React from 'react';
 import * as Icon from 'react-feather';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Overlay from 'react-bootstrap/Overlay';
 import { StreamText } from '../../modules/Streams/StreamText';
 import { Col, Row, Table } from 'react-bootstrap';
 import { BeatingSVG } from '../../svg/BeatingSVG/BeatingSVG';
-import { ActivityPath } from '../../svg/paths';
 
 export function UserFeed(props:{streamId?:string, width?:string}) {
-  const [show, setShow] = useState(false);
-  const target = useRef(null);
 
   return (
       <Col className="my-auto" style={{minWidth:props.width, borderRadius:'10px', backgroundColor:'rgba(255,255,255,0.9)'}}>

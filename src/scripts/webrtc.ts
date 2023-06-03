@@ -1,5 +1,5 @@
 
-import { client, graph, usersocket, state, webrtc } from "./client"
+import { client, graph, usersocket, state, webrtc, getStreamById } from "./client"
 import { recordChat, recordEvent } from "./datacsv";
 
 import { onAlert, setupAlerts } from "./alerts";
@@ -7,7 +7,7 @@ import {WebRTCInfo, WebRTCProps} from 'graphscript'//'../../../graphscript/index
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
 
-
+//the way these types are redundantly written just helps with the hints in VSCode fyi, no need to go digging
 export type RTCCallProps = WebRTCProps & {
     caller:string, 
     firstName:string, 
@@ -18,7 +18,23 @@ export type RTCCallProps = WebRTCProps & {
     events:{message:string, from:string, timestamp:number}[], 
     alerts:{message:string, from:string, timestamp:number}[], 
     videoSender?:RTCRtpSender, 
-    audioSender?:RTCRtpSender
+    audioSender?:RTCRtpSender,
+
+    //set by rtc peer
+    hasVideo?:boolean,
+    hasAudio?:boolean,
+
+    //for ui controls
+    viewingVideo?:boolean,
+    viewingAudio?:boolean,
+
+    recordingVideo?:boolean,
+    recordingAudio?:boolean,
+
+    //for audio controls
+    srcNode?:any,
+    filterNode?:any
+    gainNode?:any
 }
 
 export type RTCCallInfo = WebRTCInfo & {
@@ -30,8 +46,25 @@ export type RTCCallInfo = WebRTCInfo & {
     messages:{message:string, from:string, timestamp:number}[],
     events:{message:string, from:string, timestamp:number}[], 
     alerts:{message:string, from:string, value:any, timestamp:number}[], 
+    
+    //set by rtc peer
+    hasVideo?:boolean,
+    hasAudio?:boolean,
+
     videoSender?:RTCRtpSender, 
-    audioSender?:RTCRtpSender
+    audioSender?:RTCRtpSender,
+
+    //for ui controls
+    viewingVideo?:boolean,
+    viewingAudio?:boolean,
+
+    recordingVideo?:boolean,
+    recordingAudio?:boolean,
+
+    //for audio controls
+    srcNode?:any,
+    filterNode?:any
+    gainNode?:any
 }
 
 export function getCallLocation(call:RTCCallInfo) {
@@ -96,17 +129,21 @@ export const onrtcdata = (call, from, data) => {
         if(!state.data[call._id+'detectedENV']) state.setState({[call._id+'detectedENV']:true});
         state.setValue(call._id+'env', data.env);
     } //else if (ev.data.emg2) {}
+    if (data.media) {
+        if('hasVideo' in data.media) {
+            call.hasVideo = data.media.hasVideo;
+            if(call.hasVideo === false) state.setState({[call._id+'hasVideo']:false}); //use ontrack event to set to true
+        }
+        if('hasAudio' in data.media) {
+            call.hasAudio = data.media.hasAudio;
+            if(call.hasAudio === false) state.setState({[call._id+'hasAudio']:false}); //use ontrack event to set to true
+        }
+    }
 }
 
-//started from host end, see answerCall for peer end
-export async function startCall(userId) {
-    //send handshake
-    let rtcId = `room${Math.floor(Math.random()*1000000000000000)}`;
-    
-    let nodes = setupAlerts(rtcId);
+export function genCallSettings(userId, rtcId, alertNodes?) {
 
-    let call = await webrtc.openRTC({ 
-        _id:rtcId,
+    return {
         onicecandidate:async (ev) => {
             if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
                 let cid = `candidate${Math.floor(Math.random()*1000000000000000)}`;
@@ -129,67 +166,82 @@ export async function startCall(userId) {
             }
         },
         ondatachannel: (ev) => {
-            console.log('Call started with', (call as RTCCallInfo).firstName, (call as RTCCallInfo).lastName);
+            console.log('Call started with', (webrtc.rtc[rtcId] as RTCCallInfo).firstName, (webrtc.rtc[rtcId] as RTCCallInfo).lastName);
 
-            webrtc.rtc[call._id as string].run('ping').then((res) => {
+            webrtc.rtc[rtcId as string].run('ping').then((res) => {
                 console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
             });
 
-            //the call is now live, add tracks
+            //the webrtc.rtc[rtcId] is now live, add tracks
             //data channel streams the device data
-            enableDeviceStream(call._id); //enable my device to stream data to this endpoint
-            
-            const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
+            enableDeviceStream(rtcId); //enable my device to stream data to this endpoint
 
-            webrtc.rtc[call._id as string].ondata = (mev, channel) => {
-                let data = JSON.parse(mev.data);
-                onrtcdata(call, from, data);
-                webrtc.receive(mev.data, channel, webrtc.rtc[call._id]);
-                webrtc.setState({[call._id]:mev.data});
-            }
+            state.setState({ activeStream:rtcId, switchingUser:true });
+        },
+        ondata: (mev, channel) => {
+            let data = JSON.parse(mev.data);
+            onrtcdata(webrtc.rtc[rtcId], (webrtc.rtc[rtcId] as RTCCallInfo).firstName+(webrtc.rtc[rtcId] as RTCCallInfo).lastName, data);
 
-            state.setState({ activeStream:call._id, switchingUser:true });
+            //stock functions for the webrtc service, e.g. you can webrtc.rtc[rtcId] anything on each other's endpoints
+            webrtc.receive(mev.data, channel, webrtc.rtc[rtcId]);
+            webrtc.setState({[rtcId]:mev.data});
+        },
+        onnegotiationneeded: async (ev, description) => {//both ends need to set this function up when adding audio and video tracks freshly
+    
+            //console.log('negotiating');
+
+            usersocket.run(
+                'runConnection', //run this function on the backend router
+                [
+                    (webrtc.rtc[rtcId] as RTCCallInfo).caller, //run this connection 
+                    'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
+                    [ //and pass these arguments
+                        'negotiateCall', //run this function on the user's end
+                        [rtcId, encodeURIComponent(JSON.stringify(description))]
+                    ],
+                    (webrtc.rtc[rtcId] as RTCCallInfo).socketId
+                ]
+            ).then((description) => {
+                //if(description) console.log('remote description returned');
+                //else console.log('caller renegotiated');
+                
+                if(description) webrtc.negotiateCall(rtcId as string, description);
+            });
         },
         ontrack:(ev) => {
             console.log('\n\n\nreceived track\n\n\n', ev);
+
+            if(ev.track.kind === 'audio') {
+                (webrtc.rtc[rtcId] as RTCCallInfo).hasAudio = true;
+                state.setState({ [rtcId+'hasAudio']:true });
+            }
+            if(ev.track.kind === 'video') {
+                (webrtc.rtc[rtcId] as RTCCallInfo).hasVideo = true;
+                state.setState({ [rtcId+'hasVideo']:true });
+            }
         },
         onclose:() => {
-            for(const key in nodes) {
-                graph.remove(key,true);
-            }
-            delete webrtc.rtc[(call as RTCCallInfo)._id];
+            if(alertNodes)
+                for(const key in alertNodes) {
+                    graph.remove(key,true);
+                }
+            delete webrtc.rtc[(webrtc.rtc[rtcId] as RTCCallInfo)._id];
             state.setState({activeStream:undefined, availableStreams:webrtc.rtc, switchingUser:true});
         }
-        // ondatachannel:(ev) => {
-        //     //the call is now live, set ev.channel.onmessage function and add media tracks etc.
-        // },
-        // ontrack:(ev) => {
-        //     //received a media track, e.g. audio or video
-        // }
-    });
+    }
+}
 
-    call.onnegotiationneeded = async (ev, description) => {//both ends need to set this function up when adding audio and video tracks freshly
+//started from host end, see answerCall for peer end
+export async function startCall(userId) {
+    //send handshake
+    let rtcId = `room${Math.floor(Math.random()*1000000000000000)}`;
     
-        console.log('negotiating');
+    let nodes = setupAlerts(rtcId);
 
-        usersocket.run(
-            'runConnection', //run this function on the backend router
-            [
-                (webrtc.rtc[call._id as string] as RTCCallInfo).caller, //run this connection 
-                'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                [ //and pass these arguments
-                    'negotiateCall', //run this function on the user's end
-                    [call._id, encodeURIComponent(JSON.stringify(description))]
-                ],
-                (webrtc.rtc[call._id as string] as RTCCallInfo).socketId
-            ]
-        ).then((description) => {
-            if(description) console.log('remote description returned');
-            else console.log('caller renegotiated');
-            
-            if(description) webrtc.negotiateCall(call._id as string, description);
-        });
-    };
+    let call = await webrtc.openRTC({ 
+        _id:rtcId,
+        ...genCallSettings(userId,rtcId,nodes)
+    });
 
     usersocket.post(
         'runConnection', //run this function on the backend router
@@ -217,59 +269,10 @@ export async function startCall(userId) {
 export let answerCall = async (call:RTCCallProps) => {
     
     let nodes = setupAlerts(call._id, ['hr','breath','fall']);
-    
-    call.onclose = () => {
-        for(const key in nodes) {
-            graph.remove(key,true);
-        }
-        delete webrtc.rtc[(call as RTCCallInfo)._id];
-        state.setState({activeStream:undefined, availableStreams:webrtc.rtc, switchingUser:true});
-        
-    }
-    
-    //both ends need to set this function up when adding audio and video tracks freshly
-    call.onnegotiationneeded = async (ev, description) => { 
-        console.log('negotiating');
-        usersocket.run(
-            'runConnection', //run this function on the backend router
-            [
-                call.caller, //run this connection 
-                'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                [ //and pass these arguments
-                    'negotiateCall', //run this function on the user's end
-                    [rtc._id, encodeURIComponent(JSON.stringify(description))]
-                ],
-                call.socketId
-            ]
-        ).then((description) => {
-            if(description) console.log('remote description returned');
-            else console.log('caller renegotiated');
-            
-            if(description) webrtc.negotiateCall(rtc._id as string, description);
-        });
-    };
 
-    call.ondatachannel = (ev) => {
-        console.log('Call started with', (call as RTCCallInfo).firstName, (call as RTCCallInfo).lastName);
-
-        webrtc.rtc[call._id as string].run('ping').then((res) => {
-            console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
-        });
-
-        //the call is now live, add tracks
-        //data channel streams the device data
-        enableDeviceStream(call._id); //enable my device to stream data to this endpoint
-
-    };
-
-    const from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
-
-    call.ondata = (mev, channel) => { 
-        let data = JSON.parse(mev.data);
-        onrtcdata(call, from, data);
-        webrtc.receive(mev.data, channel, webrtc.rtc[(call as any)._id]);
-        webrtc.setState({[(call as any)._id]:mev.data});
-    }
+    Object.assign(call,{
+        ...genCallSettings(call.caller, call._id, nodes)
+    });
 
     let rtc = await webrtc.answerCall(call as any);
 
@@ -316,35 +319,13 @@ export let answerCall = async (call:RTCCallProps) => {
 
 graph.subscribe('receiveCallInformation', (id) => {
     
-    console.log('received call information:', id);
+    //console.log('received call information:', id);
 
     //console.log(graph.__node.state, state, graph.__node.state.data.receiveCallInformation, state.data.receiveCallInformation);
         
     let call = webrtc.unanswered[id] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
          
     if(call) {
-        if(!call.onicecandidate) call.onicecandidate = (ev) => {
-            if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
-                let cid = `candidate${Math.floor(Math.random()*1000000000000000)}`;
-                usersocket.run(
-                    'runConnection', //run this function on the backend router
-                    [
-                        call.caller, //run this connection 
-                        'run',  //use this function (e.g. run, post, subscribe, etc. see User type)
-                        [ //and pass these arguments
-                            'receiveCallInformation', //run this function on the user's end
-                            {
-                                _id:call._id, 
-                                candidates:{[cid]:ev.candidate}
-                            }
-                        ],
-                        call.socketId
-                    ]
-                ).then((id) => {
-                    console.log('call information echoed from peer:', id);
-                });
-            }
-        }
     
         state.setState({
             unansweredCalls:webrtc.unanswered
@@ -354,7 +335,67 @@ graph.subscribe('receiveCallInformation', (id) => {
 });
 
 
-export function enableDeviceStream(streamId, bufferInterval=500) { //enable sending data to a given RTC channel
+export function callHasMyAudioVideo(streamId:string) {
+    
+    let stream = getStreamById(streamId) as RTCCallInfo;
+    let hasAudio; let hasVideo;
+    let videoTrack; let audioTrack;
+    
+    stream?.senders?.forEach((s) => {
+        let videoEnabledInAudio = false;
+        if(s?.track?.kind === 'audio') {
+            hasAudio = true;
+            if((s as any).deviceId && state.data.selectedAudioIn && (s as any).deviceId !== state.data.selectedAudioIn) {
+                disableAudio(stream);
+                if(hasVideo && state.data.selectedAudioIn === state.data.selectedVideo) {
+                    disableVideo(stream);
+                    enableVideo(stream, state.data.selectedVideo ? {deviceId:state.data.selectedVideo} : undefined, true);
+                    videoEnabledInAudio = true;
+                }
+                else enableAudio(stream, state.data.selectedAudioIn ? {deviceId:state.data.selectedAudioIn} : undefined);
+            }
+        }
+        if(s?.track?.kind === 'video') {
+            hasVideo = true;
+            if((s as any).deviceId && state.data.selectedVideo && (s as any).deviceId !== state.data.selectedVideo && !videoEnabledInAudio) {
+                disableVideo(stream);
+                enableVideo(stream, state.data.selectedVideo ? {deviceId:state.data.selectedVideo} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
+            }
+        }
+    });
+
+    return {
+        hasAudio, hasVideo,
+        audioTrack, videoTrack
+    };
+}
+
+export function getCallerAudioVideo(streamId:string) {
+    let stream = getStreamById(this.props.streamId) as RTCCallInfo;
+
+    let hasAudio; let hasVideo;
+    let audioTrack; let videoTrack;
+
+    if(stream.videoSender) {
+        hasVideo = true;
+        videoTrack = stream.videoSender.track;
+    }
+    if(stream.audioSender) {
+        hasAudio = true;
+        audioTrack = stream.audioSender.track;
+    }
+
+    return {
+        hasAudio, hasVideo,
+        audioTrack, videoTrack
+    };
+
+}
+
+
+export let streamSubscriptions = {};
+
+export function enableDeviceStream(streamId, bufferInterval=100) { //enable sending data to a given RTC channel
     
     let stream = webrtc.rtc[streamId as string] as WebRTCInfo;
 
@@ -374,7 +415,8 @@ export function enableDeviceStream(streamId, bufferInterval=500) { //enable send
         let now = performance.now();
         if(now > tStart + bufferInterval) {
             ///console.log( 'sent', buffers);
-            stream.send({...buffers});
+            if((stream.channels?.['data'] as RTCDataChannel).readyState === 'open')
+                stream.send({...buffers});
             tStart = now;
             buffers = {};
         } else {
@@ -395,11 +437,10 @@ export function enableDeviceStream(streamId, bufferInterval=500) { //enable send
         }
     }
 
+
     if(stream) {
 
-        let subscriptions = {};
-
-        subscriptions = {
+        streamSubscriptions[streamId] = {
             emg:state.subscribeEvent('emg', (emg) => {
                 BufferAndSend(emg,'emg');
             }),
@@ -426,13 +467,24 @@ export function enableDeviceStream(streamId, bufferInterval=500) { //enable send
         let oldonclose;
         if(stream.onclose) oldonclose = stream.onclose; 
         stream.onclose = () => {
-            for(const key in subscriptions) {
-                state.unsubscribeEvent(key, subscriptions[key]);
+            if(streamSubscriptions[streamId]) for(const key in streamSubscriptions[streamId]) {
+                state.unsubscribeEvent(key, streamSubscriptions[streamId]?.[key]);
             }
+            delete streamSubscriptions[streamId];
             if(oldonclose) oldonclose();
-        }     
+        }    
+        
+        return streamSubscriptions[streamId];
     }
     
+}
+
+export function disableDeviceStream(streamId) {
+
+    if(streamSubscriptions[streamId]) for(const key in streamSubscriptions[streamId]) {
+        state.unsubscribeEvent(key, streamSubscriptions[streamId]?.[key]);
+    }
+    delete streamSubscriptions[streamId];
 }
 
 

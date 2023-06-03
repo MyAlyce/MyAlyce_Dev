@@ -10,7 +10,7 @@ import { ChartGroup } from "../../modules/DataVis/ChartGroup";
 import { Button } from "react-bootstrap";
 
 
-import { RTCCallInfo, disableAudio, disableVideo, enableAudio,  enableVideo, onrtcdata } from '../../../scripts/webrtc';
+import { RTCCallInfo, disableAudio, disableVideo, enableAudio,  enableVideo, getCallerAudioVideo, onrtcdata } from '../../../scripts/webrtc';
 
 const micOn = './assets/mic.svg';
 const micOff = './assets/mic-off.svg';
@@ -31,8 +31,8 @@ export const createStreamChart = (call, sensors?) => {
 //TODO: Can't hear the audio from the other user
 // also, add the exit call button
 
-class RTCAudio extends Component<{
-    stream:MediaStream, 
+export class RTCAudio extends Component<{
+    stream?:MediaStream, 
     call?:RTCCallInfo,
     audioOutId?:string //TODO: select output device for audio stream
 }> {
@@ -43,19 +43,34 @@ class RTCAudio extends Component<{
     audioOutId?:string;
 
     constructor(props:{
-        stream:MediaStream, 
+        stream?:MediaStream, 
         call?:RTCCallInfo,
         audioOutId?:string //TODO: select output device for audio stream
     }) {
         super(props);
 
         this.call = props.call;
-        this.stream = props.stream;
+
+        if(this.call && !props.stream) {
+            this.stream = getCallerAudioVideo(this.call._id).audioTrack;
+        } else 
+            this.stream = props.stream as MediaStream;
+
+        if(!this.call && !this.stream) navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then((stream) => { //get your own video if none specified
+            this.stream = stream;
+            this.forceUpdate();
+        })
+
         this.audioOutId = props.audioOutId;
     }
 
     async componentDidMount() {
         //todo fix using howler for this
+
+
+        if((this.call as any)?.gainNode) {
+            (this.call as any)?.gainNode.disconnect();
+        }
 
         // let stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
         // let src = this.ctx.createMediaStreamSource(stream);
@@ -112,19 +127,23 @@ export const createAudioDiv = (call:RTCCallInfo, audioOutId?: string) => {
     }
 }
 
-export class RTCVideo extends Component<{stream:MediaStream, call?:RTCCallInfo, style?:any, className?:string}> {
+export class RTCVideo extends Component<{stream?:MediaStream, call?:RTCCallInfo, style?:any, className?:string}> {
 
     call?:RTCCallInfo;
     stream:MediaStream;
     video;
 
-    constructor(props:{stream:MediaStream, call?:RTCCallInfo, style?:any, className?:string}) {
+    constructor(props:{stream?:MediaStream, call?:RTCCallInfo, style?:any, className?:string}) {
         super(props);
 
         this.call = props.call;
-        this.stream = props.stream;
+        if(this.call && !props.stream) {
+            this.stream = getCallerAudioVideo(this.call._id).videoTrack;
+        } else 
+            this.stream = props.stream as MediaStream;
 
-        if(!this.stream) navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then((stream) => { //get your own video if none specified
+        //getOwnMedia
+        if(!this.call && !this.stream) navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then((stream) => { //get your own video if none specified
             this.stream = stream;
             this.forceUpdate();
         })
@@ -148,7 +167,7 @@ export class RTCVideo extends Component<{stream:MediaStream, call?:RTCCallInfo, 
 
         return (
             <span 
-                style={this.props.style}
+                style={this.props.style ? this.props.style : {width:"360px", height:"240px"}}
                 className={this.props.className}
                 ref={ (ref) => {
                     ref?.appendChild(this.video);
