@@ -36,6 +36,11 @@ export class Dashboard extends sComponent {
                                         alert("Callee Location: "+JSON.stringify(res));
                                     });
                                 } : undefined}
+                                xOnClick={call ? () => {
+                                    call?.terminate();
+                                    delete webrtc.rtc[(call as RTCCallInfo)._id];
+                                    this.setState({activeStream:false, switchingUser:true, availableStreams:webrtc.rtc});
+                                } : undefined}
                             />
                         }
                     />

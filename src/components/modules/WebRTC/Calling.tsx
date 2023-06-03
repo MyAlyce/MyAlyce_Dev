@@ -1,10 +1,14 @@
 import React from "react"
 import { Button } from "react-bootstrap"
-import { client, state, webrtc } from "../../../scripts/client";
-import { startCall, RTCCallInfo, RTCCallProps, answerCall } from "../../../scripts/webrtc";
+import { client, getStreamById, state, webrtc } from "../../../scripts/client";
+import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio } from "../../../scripts/webrtc";
 import { ProfileStruct } from "graphscript-services/struct/datastructures/types";
 import { sComponent } from "../../state.component";
 import { Widget } from "../../widgets/Widget";
+import { RTCVideo } from "./WebRTCStream";
+
+import * as Icon from 'react-feather'
+
 
 export function StartCall(user:Partial<ProfileStruct>) {
     return (
@@ -47,12 +51,150 @@ export function UnanweredCallInfo(onAnswered?:(call:RTCCallInfo)=>{}) {
 }
 
 
-export function Messaging() {
+export function Messaging(props:{streamId:string, renderMessages?:boolean, renderInput?:boolean}) {
 
-}
+    this.state = {
+        messages:undefined
+    }
+
+    let stream = getStreamById(props.streamId);
+
+    let renderMessages = props.renderMessages ? props.renderMessages : true;
+    let renderInput = props.renderInput ? props.renderInput : true;
+
+    let unique = `${Math.floor(Math.random()*1000000000000000)}`;
+    let messages = [] as any[];
+
+    function sendMessage(call:RTCCallInfo) {
+        let message = (document.getElementById(unique+'sendmessage') as HTMLInputElement).value;
+        call.send({message:message});
+        if(!call.messages) call.messages = [] as any;
+        call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + ' ' + client.currentUser.lastName});
+        if(renderMessages) {
+            messages.push(<div key={messages.length}>
+                {client.currentUser.firstName} {client.currentUser.lastName}: {message} | {new Date().toLocaleTimeString()}
+            </div>);
+            
+            this.setState({messages});
+        }
+    }
+
+    return (<>
+        { renderMessages ? <div id={unique + 'messages'}>
+            {this.state.messages ? this.state.messages.map(v => v): ""}
+        </div> : null }
+        { renderInput ? <><input id={unique+'sendmessage'} type='text'></input><Button id={unique+'send'} onClick={()=>{ sendMessage(stream as RTCCallInfo); }}>Send Message</Button></> : null }
+    </>);
+
+    }
 
 export function MessagingModal() {
         
+}
+
+export class ToggleAudioVideo extends sComponent {
+
+    state={
+        selectedVideo: '' as string,
+        selectedAudioIn: '' as string,
+        selectedAudioOut: '' as string,
+    }
+
+    constructor(props:{streamId:string, audioOnClick?:(toggled:boolean)=>void,  videoOnClick?:(toggled:boolean)=>void}) {
+        super(props);
+    }
+
+    render() {
+        let stream = getStreamById(this.props.streamId) as RTCCallInfo;
+        let hasAudio; let hasVideo;
+    
+        stream?.senders?.forEach((s) => {
+            let videoEnabledInAudio = false;
+            if(s?.track?.kind === 'audio') {
+                hasAudio = true;
+                if((s as any).deviceId && this.state.selectedAudioIn && (s as any).deviceId !== this.state.selectedAudioIn) {
+                    disableAudio(stream);
+                    if(hasVideo && this.state.selectedAudioIn === this.state.selectedVideo) {
+                        disableVideo(stream);
+                        enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, true);
+                        videoEnabledInAudio = true;
+                    }
+                    else enableAudio(stream, this.state.selectedAudioIn ? {deviceId:this.state.selectedAudioIn} : undefined);
+                }
+            }
+            if(s?.track?.kind === 'video') {
+                hasVideo = true;
+                if((s as any).deviceId && this.state.selectedVideo && (s as any).deviceId !== this.state.selectedVideo && !videoEnabledInAudio) {
+                    disableVideo(stream);
+                    enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
+                }
+            }
+        });
+    
+        return (
+            <>
+                {hasVideo ? <Icon.Video style={{cursor:'pointer'}} onClick={() => {
+                    disableVideo(stream);
+                    if(this.props.videoOnClick) this.props.videoOnClick(false);
+                    this.forceUpdate();
+                }} /> : <Icon.VideoOff style={{cursor:'pointer'}}  onClick={() => {
+                    enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
+                    if(this.props.videoOnClick) this.props.videoOnClick(true);
+                    this.forceUpdate();
+                }}/>}
+                {hasAudio ? <Icon.Mic style={{cursor:'pointer'}}  onClick={() => {
+                    disableAudio(stream);
+                    if(this.props.audioOnClick) this.props.audioOnClick(false);
+                    this.forceUpdate();
+                }}/> : <Icon.MicOff style={{cursor:'pointer'}}  onClick={() => {
+                    if(hasVideo && this.state.selectedAudioIn === this.state.selectedVideo) {
+                        disableVideo(stream);
+                        enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, true);
+                    }
+                    else enableAudio(stream, this.state.selectedAudioIn ? {deviceId:this.state.selectedAudioIn} : undefined);
+                    if(this.props.audioOnClick) this.props.audioOnClick(true);
+                    this.forceUpdate();
+                }}/>}
+            </>
+        );
+    }
+}
+
+export class ViewSelfVideoStream extends sComponent {
+
+    state={
+        selectedVideo: '' as string,
+        selectedAudioIn: '' as string,
+        selectedAudioOut: '' as string,
+    }
+
+    constructor(props:{streamId:string, style?:string, className?:string}) {
+        super(props);
+    }
+
+    render() {
+        let stream = getStreamById(this.props.streamId) as RTCCallInfo;
+
+        let videoTrack;
+    
+        stream?.senders?.forEach((s) => {
+            if(s?.track?.kind === 'audio') {
+            }
+            if(s?.track?.kind === 'video') {
+                videoTrack = s.track;
+            }
+        });
+
+        if(videoTrack) {
+            let s = new MediaStream();
+            s.addTrack(videoTrack);
+            
+            return (<RTCVideo stream={s} className={this.props.className} style={this.props.style}/>)
+        } else 
+            return null;
+
+
+    }
 }
 
 //uses global state to handle propagation

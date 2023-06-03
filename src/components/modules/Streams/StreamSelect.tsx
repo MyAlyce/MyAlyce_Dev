@@ -4,6 +4,7 @@ import { RTCCallInfo } from '../../../scripts/webrtc';
 import { UserBar } from '../../ui/UserBar/UserBar';
 import { Widget } from '../../widgets/Widget';
 import { Card } from 'react-bootstrap';
+import { ToggleAudioVideo } from '../WebRTC/Calling';
 
 const personIcon = './assets/person.jpg';
 
@@ -50,6 +51,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
     };
 
     onItemClick = (key: string | undefined) => {
+        console.log(key);
         this.selectedKey = key;
         let activeStream;
         if(key === 'My Device' || key === 'Demo')
@@ -58,6 +60,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
             activeStream = key;
             
         this.onchange(key,activeStream);
+        this.setState({activeStream:activeStream});
     };
 
     render() {
@@ -69,7 +72,9 @@ export class StreamSelect extends Component<{[key:string]:any}> {
                     <Card style={{cursor:'pointer'}} onClick={()=>{this.onItemClick(this.selectedKey)}} className="selected-item">
                         <Card.Header>
                             Selected: {this.state.activeStream
-                                ? `${(webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName} ${(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName}`
+                                ? (
+                                    <>{(webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName} ${(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName} 
+                                </>)
                                 : this.selectedKey}
                         </Card.Header>
                     </Card>

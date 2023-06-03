@@ -351,6 +351,9 @@ export function getActiveStream() {
     return state.data.activeStream ? webrtc.rtc[state.data.activeStream] as RTCCallInfo : undefined;
 }
 
+export function getStreamById(streamId:string) {
+    return webrtc.rtc[streamId];
+}
 
 //dummy profile
 export const testuser:ProfileStruct = DS.ProfileStruct(

@@ -11,7 +11,16 @@ export let getCurrentLocation = (options:PositionOptions={enableHighAccuracy:tru
         if(!navigator.geolocation) rej('Geolocation not found in window.navigator');
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                res({...position.coords, timestamp:position.timestamp});
+                res({ 
+                    accuracy:position.coords.accuracy, 
+                    latitude:position.coords.latitude, 
+                    longitude:position.coords.latitude, 
+                    altitudeAccuracy:position.coords.altitudeAccuracy, 
+                    altitude:position.coords.altitude, 
+                    speed:position.coords.speed, 
+                    heading:position.coords.heading, 
+                    timestamp:position.timestamp
+                });
             },
             rej,
             options

@@ -2,9 +2,9 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-import profilePic from '../assets/JoshBrew.jpg';
-import profilePic2 from '../assets/Alex-Shohet.jpg';
-import profilePic3 from '../assets/Eric-H.jpg';
+const profilePic = './assets/JoshBrew.jpg';
+const profilePic2 = './assets/Alex-Shohet.jpg';
+const profilePic3 = './assets/Eric-H.jpg';
 
 export function GroupTable (){
     return (

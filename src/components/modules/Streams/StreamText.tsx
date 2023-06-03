@@ -12,7 +12,9 @@ export class StreamText extends sComponent{
 
     sub:number;
 
-    constructor(props:{stateKey:string, objectKey?:string}) {
+    movingAverage = [] as any;
+
+    constructor(props:{stateKey:string, objectKey?:string, movingAverage?:number, toFixed?:number}) {
         super(props);
         this.stateKey = props.stateKey;
         this.objectKey = props.objectKey;
@@ -29,8 +31,37 @@ export class StreamText extends sComponent{
 
     render() {
 
-        let result = this.objectKey ? this.state[this.stateKey]?.[this.objectKey] : this.state[this.stateKey];
+        let res = this.objectKey ? this.state[this.stateKey]?.[this.objectKey] : this.state[this.stateKey];
 
-        return (<>{typeof result === 'number' ? result.toFixed(2) : result}</>)
+        let withResult = (result) => {
+            if(typeof result === 'string') {
+                result = parseFloat(result);
+            }
+    
+            if(typeof result === "number" && this.props.movingAverage) {
+                this.movingAverage.push(result);
+                
+                if(this.movingAverage.length > this.props.movingAverage) {
+                    this.movingAverage.shift();
+                }
+    
+                const sum = this.movingAverage.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    
+                result = sum / this.movingAverage.length;
+            }
+
+            return result;
+        } 
+
+        if(Array.isArray(res) && this.props.movingAverage) {
+            let t;
+            res.forEach((v) => {
+                t = withResult(v);
+            });
+            res = t;
+        } else res = withResult(res);
+        
+
+        return (<>{typeof res === 'number' ? res.toFixed(this.props.toFixed ? this.props.toFixed : 2) : res}</>)
     }
 }

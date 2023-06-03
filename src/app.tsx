@@ -22,6 +22,7 @@ import { DeviceConnect } from './components/modules/Device/DeviceConnect';
 import { StreamSelect } from './components/modules/Streams/StreamSelect';
 import { Demo } from './components/modules/Device/DemoMode';
 import { Footer } from './components/ui/Footer';
+import { ToggleAudioVideo } from './components/modules/WebRTC/Calling';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -162,13 +163,20 @@ export class App extends sComponent {
                                             this.state.deviceMode === 'My Device' ? 
                                                 <DeviceConnect/> : 
                                             this.state.deviceMode === 'Demo' ? 
-                                                <Demo/> : ""
+                                                <Demo/> : 
+                                            this.state.activeStream ? 
+                                                <>
+                                                    <ToggleAudioVideo streamId={this.state.activeStream} 
+                                                        videoOnClick={(onState:boolean)=>{ }} 
+                                                        audioOnClick={(onState:boolean)=>{ }}/>
+                                                </> : null
                                         }
                                         {/* Device/Stream select */}
-                                        { this.state.switchingUser ? null :<StreamSelect 
+                                        { this.state.switchingUser ? null : <StreamSelect 
                                             onChange={(key, activeStream) => { 
                                                 this.setState({switchingUser:true, deviceMode:key, activeStream:activeStream});
                                             }} 
+                                            selected={this.state.activeStream}
                                         /> }
                                     </div>,
                                     (<span key={2}><br/><br/><br/></span>) //pads it at the bottom to stay above the footer

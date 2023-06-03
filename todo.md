@@ -13,6 +13,7 @@
 ### RTC
 
 - fix audio, not sure why it's not audible on receiver as the channels appear to negotiate
+- fix data channel buffering sending wrong result somehow
 
 ### Backend
 

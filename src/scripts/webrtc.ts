@@ -145,6 +145,8 @@ export async function startCall(userId) {
                 webrtc.receive(mev.data, channel, webrtc.rtc[call._id]);
                 webrtc.setState({[call._id]:mev.data});
             }
+
+            state.setState({ activeStream:call._id, switchingUser:true });
         },
         ontrack:(ev) => {
             console.log('\n\n\nreceived track\n\n\n', ev);
@@ -366,6 +368,7 @@ export function enableDeviceStream(streamId, bufferInterval=500) { //enable send
 
     let tStart = performance.now();
 
+    //bugged
     function BufferAndSend(data, buf) {
         let now = performance.now();
         if(now > tStart + bufferInterval) {
@@ -448,6 +451,8 @@ export function enableAudio(call:RTCCallInfo, audioOptions:boolean|MediaTrackCon
     if((audioOptions as MediaTrackConstraints)?.deviceId) {
         senders[0].deviceId = (audioOptions as MediaTrackConstraints).deviceId;
     }
+
+    return senders;
 }
 
 export function enableVideo(
@@ -482,6 +487,8 @@ export function enableVideo(
     if((options as MediaTrackConstraints)?.deviceId) {
         senders[0].deviceId = (options as MediaTrackConstraints).deviceId;
     }
+
+    return senders;
 }
 
 export function disableAudio(call:RTCCallInfo) {
@@ -499,3 +506,4 @@ export function disableVideo(call:RTCCallInfo) {
         call.videoSender = undefined;
     }
 }
+

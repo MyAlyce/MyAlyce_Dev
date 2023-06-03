@@ -33,20 +33,20 @@ export const createStreamChart = (call, sensors?) => {
 
 class RTCAudio extends Component<{
     stream:MediaStream, 
-    call:RTCCallInfo,
+    call?:RTCCallInfo,
     audioOutId?:string //TODO: select output device for audio stream
 }> {
 
     ctx = new AudioContext();
-    call:RTCCallInfo;
+    call?:RTCCallInfo;
     stream:MediaStream
     audioOutId?:string;
 
     constructor(props:{
         stream:MediaStream, 
-        call:RTCCallInfo,
+        call?:RTCCallInfo,
         audioOutId?:string //TODO: select output device for audio stream
-}) {
+    }) {
         super(props);
 
         this.call = props.call;
@@ -73,9 +73,11 @@ class RTCAudio extends Component<{
         if (this.audioOutId) (this.ctx as any).setSinkId(this.audioOutId)
         gainNode.connect(this.ctx.destination);
 
-        (this.call as any).srcNode = src;
-        (this.call as any).filterNode = filterNode;
-        (this.call as any).gainNode = gainNode;
+        if(this.call) {
+            (this.call as any).srcNode = src;
+            (this.call as any).filterNode = filterNode;
+            (this.call as any).gainNode = gainNode;
+        }
 
     }
 
@@ -110,19 +112,19 @@ export const createAudioDiv = (call:RTCCallInfo, audioOutId?: string) => {
     }
 }
 
-export class RTCVideo extends Component<{stream:MediaStream, call:RTCCallInfo}> {
+export class RTCVideo extends Component<{stream:MediaStream, call?:RTCCallInfo, style?:any, className?:string}> {
 
-    call:RTCCallInfo;
+    call?:RTCCallInfo;
     stream:MediaStream;
     video;
 
-    constructor(props:{stream:MediaStream, call:RTCCallInfo}) {
+    constructor(props:{stream:MediaStream, call?:RTCCallInfo, style?:any, className?:string}) {
         super(props);
 
         this.call = props.call;
         this.stream = props.stream;
 
-        navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then((stream) => {
+        if(!this.stream) navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then((stream) => { //get your own video if none specified
             this.stream = stream;
             this.forceUpdate();
         })
@@ -140,10 +142,18 @@ export class RTCVideo extends Component<{stream:MediaStream, call:RTCCallInfo}> 
 
         this.video.srcObject = this.stream as MediaStream;
 
+        //fill span, let span decide style
+        this.video.style.height = "100%";
+        this.video.style.width = "100%";
+
         return (
-            <div  ref={ (ref) => {
-                ref?.appendChild(this.video);
-            } }></div>
+            <span 
+                style={this.props.style}
+                className={this.props.className}
+                ref={ (ref) => {
+                    ref?.appendChild(this.video);
+                } }
+            />
         )
     }
 }
@@ -154,6 +164,8 @@ export const createVideoDiv = (call:RTCCallInfo) => {
 }
 
 
+
+//old
 export class WebRTCStream extends Component<{[key:string]:any}> {
 
     unique = `component${Math.floor(Math.random()*1000000000000000)}`;
@@ -357,7 +369,8 @@ export class WebRTCStream extends Component<{[key:string]:any}> {
             })
         }
 
-        console.log('hasAudio',hasAudio, 'hasVideo',hasVideo)
+        console.log('hasAudio', hasAudio, 'hasVideo', hasVideo); //audio is bugged
+
         return (
             <div id={this.unique + 'webrtcstream'} className='rtcStream'>{
                 this.state.activeStream ? (

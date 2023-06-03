@@ -35,9 +35,6 @@ export class StreamToggle extends Component<{
         if(this.props.onChange) this.state.onChange = this.props.onChange;
     }
 
-    componentDidMount(): void {
-    }
-
     render() {
 
         return (
