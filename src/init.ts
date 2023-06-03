@@ -1,3 +1,5 @@
+import './scripts/hacktimer/HackTimer.min' //Prevent setTimeout loops from hanging in browser
+
 import { ProfileStruct } from "graphscript-services/dist/src/extras/struct/datastructures/types";
 import { graph, onLogin, setupTestUser, usersocket } from "./scripts/client";
 import { authorizeCode, refreshToken, setupFitbitApi } from "./scripts/fitbit";

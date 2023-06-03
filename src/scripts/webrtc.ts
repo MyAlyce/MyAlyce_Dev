@@ -40,7 +40,7 @@ export function getCallLocation(call:RTCCallInfo) {
 
 export const onrtcdata = (call, from, data) => { 
 
-    console.log( 'received',data);
+    //console.log( 'received',data);
 
     if(data.alert) {
 
@@ -370,11 +370,10 @@ export function enableDeviceStream(streamId, bufferInterval=500) { //enable send
 
     let tStart = performance.now();
 
-    //bugged
     function BufferAndSend(data, buf) {
         let now = performance.now();
         if(now > tStart + bufferInterval) {
-            console.log( 'sent', buffers);
+            ///console.log( 'sent', buffers);
             stream.send({...buffers});
             tStart = now;
             buffers = {};
