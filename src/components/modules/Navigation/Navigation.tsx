@@ -19,18 +19,18 @@ export function Navigation (){
               <Nav.Link onClick={()=>{state.setState({route:'/'}); setExpanded(false);}}>          
               <Icon.Home className="align-text-bottom" size={20}></Icon.Home>
               &nbsp;Dashboard</Nav.Link>
-              <Nav.Link onClick={()=>{state.setState({route:'/peers'}); setExpanded(false);}}>
+              {/* <Nav.Link onClick={()=>{state.setState({route:'/peers'}); setExpanded(false);}}>
               <Icon.Phone className="align-text-bottom" size={20}></Icon.Phone>
-              &nbsp;WebRTC</Nav.Link>
+              &nbsp;WebRTC</Nav.Link> */}
               <Nav.Link onClick={()=>{state.setState({route:'/recordings'}); setExpanded(false);}}>
               <Icon.Activity className="align-text-bottom" size={20}></Icon.Activity>
               &nbsp;Recordings</Nav.Link>
-              <Nav.Link  onClick={()=>{state.setState({route:'/settings'}); setExpanded(false);}}> 
+              {/* <Nav.Link  onClick={()=>{state.setState({route:'/settings'}); setExpanded(false);}}> 
               <Icon.Settings className="align-text-bottom" size={20}></Icon.Settings>
-              &nbsp;Settings</Nav.Link>
-              <Nav.Link  onClick={()=>{state.setState({route:'/dev'}); setExpanded(false);}}> 
+              &nbsp;Settings</Nav.Link> */}
+              {/* <Nav.Link  onClick={()=>{state.setState({route:'/dev'}); setExpanded(false);}}> 
               <Icon.Tool className="align-text-bottom" size={20}></Icon.Tool>
-              &nbsp;Dev</Nav.Link>
+              &nbsp;Dev</Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
         </Container>

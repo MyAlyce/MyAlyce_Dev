@@ -147,6 +147,8 @@ export class WebRTCComponent extends sComponent {
 
     render = () => {
 
+        return "UNDER CONSTRUCTION";
+
         return (
             <div className='container-fluid'>
                 <h1>WebRTC Communication</h1>
@@ -164,7 +166,7 @@ export class WebRTCComponent extends sComponent {
                  */}
                 <h2>Available Users</h2>
                 <div id='availableUsers'>
-                    { this.state.availableUsers && this.state.availableUsers.map((div) => div ? div : "" ) }
+                    { this.state.availableUsers && this.state.availableUsers?.map((div) => div ? div : "" ) }
                 </div>
                 <hr/>
                 {/* 

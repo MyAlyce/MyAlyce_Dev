@@ -67,7 +67,6 @@ export class RTCAudio extends Component<{
     async componentDidMount() {
         //todo fix using howler for this
 
-
         if((this.call as any)?.gainNode) {
             (this.call as any)?.gainNode.disconnect();
         }

@@ -33,7 +33,7 @@ import { apiKey, googleClientID } from './gapi'
 import { disconnectDevice } from './device'
 
 import { demo, stopdemos } from './demo'
-import { RTCCallInfo } from './webrtc'
+import { RTCCallInfo, listMediaDevices } from './webrtc'
 import { getCurrentLocation } from './alerts'
 
 
@@ -110,7 +110,24 @@ graph.subscribe('checkForNotifications',(result:any[])=>{
             })
         }
     }); //pull latest data. That's it!
-})
+});
+
+graph.subscribe('receiveCallInformation', (id) => {
+    
+    //console.log('received call information:', id);
+
+    //console.log(graph.__node.state, state, graph.__node.state.data.receiveCallInformation, state.data.receiveCallInformation);
+        
+    let call = webrtc.unanswered[id] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
+         
+    if(call) {
+    
+        state.setState({
+            unansweredCalls:webrtc.unanswered
+        }); //update this event for the app
+    
+    }
+});
 
 graph.setState({
     route: '/',            //current pathname
@@ -205,7 +222,8 @@ export const onLogin = async (
 
             driveInstance = new GDrive(apiKey, googleClientID);
 
-            restoreSession(user);
+            restoreSession(user,undefined,user.firstName+user.lastName);
+            listMediaDevices(); //run on start
 
             if(startDemo) {
                 demo();
@@ -254,7 +272,7 @@ export const logoutSequence = () => {
 //subscribe to the state so any and all changes are saved, can store multiple states (e.g. particular for pages or components)
 export function backupState(
     filename='state.json', 
-    backup=['route'],
+    backup=['route','selectedVideo','selectedAudioIn','selectedAudioOut'],
     dir='data'
 ){
     //read initial data, now setup subscription to save the state every time it updates
@@ -318,7 +336,7 @@ export async function restoreSession(
         }
     }
       
-    backupState(filename);
+    backupState(filename, undefined, dir);
 
     return read;
 

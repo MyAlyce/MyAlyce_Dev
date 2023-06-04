@@ -18,17 +18,27 @@ export class Dashboard extends sComponent {
         availableStreams:{}, //we can handle multiple connections too
     }
 
+    componentDidMount(): void {
+        if(this.state.activeStream) {
+            this.__subscribeComponent(this.state.activeStream+'hasAudio');
+            this.__subscribeComponent(this.state.activeStream+'hasVideo');
+        }
+    }
+
+    componentWillUnmount(): void {
+        if(this.state.activeStream) {
+            this.__unsubscribeComponent(this.state.activeStream+'hasAudio');
+            this.__unsubscribeComponent(this.state.activeStream+'hasVideo');
+        }
+    }
+
     render() {
 
         let dir = getActiveStreamDir();
         let call = getActiveStream();
+
+        console.log('rendered');
         
-        let callMedia;
-
-        if(call) {
-            callMedia = getCallerAudioVideo(call._id);
-        }
-
         return (
             <div className='container-fluid'>
                 <div className="main-content">
@@ -46,7 +56,7 @@ export class Dashboard extends sComponent {
                                 xOnClick={call ? () => {
                                     call?.terminate();
                                     delete webrtc.rtc[(call as RTCCallInfo)._id];
-                                    this.setState({activeStream:false, switchingUser:true, availableStreams:webrtc.rtc});
+                                    this.setState({activeStream:false, triggerPageRerender:true, availableStreams:webrtc.rtc});
                                 } : undefined}
                                 videoOnClick={call ? (onState) => {
                                     this.setState({}); 

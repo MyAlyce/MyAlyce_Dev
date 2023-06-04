@@ -72,7 +72,7 @@ export class App extends sComponent {
         isLoggedIn: false,
         loggingIn:false, //show load screen
         route: '/',
-        switchingUser:false,
+        triggerPageRerender:false,
         activeStream:undefined, //stream selected?
         deviceMode:'My Device',
         availableStreams:{} //we can handle multiple connections too
@@ -103,8 +103,8 @@ export class App extends sComponent {
     }
 
     flipState() {
-        if(this.state.switchingUser) setTimeout(()=>{
-            this.setState({switchingUser:false});
+        if(this.state.triggerPageRerender) setTimeout(()=>{
+            this.setState({triggerPageRerender:false});
         },0.1);
     }
 
@@ -140,7 +140,7 @@ export class App extends sComponent {
                         <div id='viewcontent' className="flex-content">
                             <Navigation />
                             <div id='route'>
-                                {this.state.switchingUser ? null : 
+                                {this.state.triggerPageRerender ? null : 
                                     <>
                                         { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
                                             <Dashboard/>
@@ -183,9 +183,9 @@ export class App extends sComponent {
                                                 /> : null    
                                         }
                                         {/* Device/Stream select */}
-                                        { this.state.switchingUser ? null : <StreamSelect 
+                                        { this.state.triggerPageRerender ? null : <StreamSelect 
                                             onChange={(key, activeStream) => { 
-                                                this.setState({switchingUser:true, deviceMode:key, activeStream:activeStream});
+                                                this.setState({triggerPageRerender:true, deviceMode:key, activeStream:activeStream});
                                             }} 
                                             selected={this.state.activeStream}
                                         /> }

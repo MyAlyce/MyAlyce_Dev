@@ -17,8 +17,6 @@ export type RTCCallProps = WebRTCProps & {
     messages:{message:string, from:string, timestamp:number}[], 
     events:{message:string, from:string, timestamp:number}[], 
     alerts:{message:string, from:string, timestamp:number}[], 
-    videoSender?:RTCRtpSender, 
-    audioSender?:RTCRtpSender,
 
     //set by rtc peer
     hasVideo?:boolean,
@@ -30,6 +28,9 @@ export type RTCCallProps = WebRTCProps & {
 
     recordingVideo?:boolean,
     recordingAudio?:boolean,
+
+    videoSender?:boolean, 
+    audioSender?:boolean,
 
     //for audio controls
     srcNode?:any,
@@ -51,15 +52,15 @@ export type RTCCallInfo = WebRTCInfo & {
     hasVideo?:boolean,
     hasAudio?:boolean,
 
-    videoSender?:RTCRtpSender, 
-    audioSender?:RTCRtpSender,
-
     //for ui controls
     viewingVideo?:boolean,
     viewingAudio?:boolean,
 
     recordingVideo?:boolean,
     recordingAudio?:boolean,
+
+    videoSender?:boolean, 
+    audioSender?:boolean,
 
     //for audio controls
     srcNode?:any,
@@ -132,11 +133,13 @@ export const onrtcdata = (call, from, data) => {
     if (data.media) {
         if('hasVideo' in data.media) {
             call.hasVideo = data.media.hasVideo;
-            if(call.hasVideo === false) state.setState({[call._id+'hasVideo']:false}); //use ontrack event to set to true
+            call.viewingVideo = data.media.hasVideo;
+            if(call.hasVideo === false) state.setState({[call._id+'hasVideo']:data.media.hasVideo}); //use ontrack event to set to true
         }
         if('hasAudio' in data.media) {
             call.hasAudio = data.media.hasAudio;
-            if(call.hasAudio === false) state.setState({[call._id+'hasAudio']:false}); //use ontrack event to set to true
+            call.viewingVideo = data.media.hasAudio;
+            if(call.hasAudio === false) state.setState({[call._id+'hasAudio']:data.media.hasAudio}); //use ontrack event to set to true
         }
     }
 }
@@ -176,7 +179,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
             //data channel streams the device data
             enableDeviceStream(rtcId); //enable my device to stream data to this endpoint
 
-            state.setState({ activeStream:rtcId, deviceMode:rtcId, switchingUser:true }); //switch over to new call
+            state.setState({ activeStream:rtcId, deviceMode:rtcId, triggerPageRerender:true }); //switch over to new call
         },
         ondata: (mev, channel) => {
             let data = JSON.parse(mev.data);
@@ -211,14 +214,19 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
         ontrack:(ev) => {
             console.log('\n\n\nreceived track\n\n\n', ev);
 
-            if(ev.track.kind === 'audio') {
-                (webrtc.rtc[rtcId] as RTCCallInfo).hasAudio = true;
-                state.setState({ [rtcId+'hasAudio']:true });
-            }
-            if(ev.track.kind === 'video') {
-                (webrtc.rtc[rtcId] as RTCCallInfo).hasVideo = true;
-                state.setState({ [rtcId+'hasVideo']:true });
-            }
+            setTimeout(() => {
+                if(ev.track.kind === 'audio') {
+                    (webrtc.rtc[rtcId] as RTCCallInfo).hasAudio = true;
+                    (webrtc.rtc[rtcId] as RTCCallInfo).viewingAudio = true;
+                    state.setState({ [rtcId+'hasAudio']:true, triggerPageRerender:true });
+                }
+                if(ev.track.kind === 'video') {
+                    (webrtc.rtc[rtcId] as RTCCallInfo).hasVideo = true;
+                    (webrtc.rtc[rtcId] as RTCCallInfo).viewingVideo = true;
+                    state.setState({ [rtcId+'hasVideo']:true, triggerPageRerender:true });
+                }
+
+            }, 500);
         },
         onclose:() => {
             if(alertNodes)
@@ -226,7 +234,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
                     graph.remove(key,true);
                 }
             delete webrtc.rtc[(webrtc.rtc[rtcId] as RTCCallInfo)._id];
-            state.setState({activeStream:undefined, availableStreams:webrtc.rtc, switchingUser:true});
+            state.setState({activeStream:undefined, availableStreams:webrtc.rtc, triggerPageRerender:true});
         }
     }
 }
@@ -318,22 +326,43 @@ export let answerCall = async (call:RTCCallProps) => {
     });
 }
 
-graph.subscribe('receiveCallInformation', (id) => {
-    
-    //console.log('received call information:', id);
+export function listMediaDevices() {
+    return new Promise((res,rej) => {
+        navigator.mediaDevices.enumerateDevices()
+        .then((deviceInfos) => { //https://github.com/garrettmflynn/intensities/blob/main/app/index.js
+            let ain = [] as any[]; let aout = [] as any[]; let cam = [] as any[];
+            for (var i = 0; i !== deviceInfos.length; ++i) {
+                var deviceInfo = deviceInfos[i];
+                var option = deviceInfo;
+                if (deviceInfo.kind === 'videoinput') {
+                    if(!state.data.selectedVideo) {
+                        state.setState({selectedVideo:deviceInfo.kind});
+                    }
+                    cam.push(option);
+                }
+                else if (deviceInfo.kind === 'audioinput') {
+                    if(!state.data.selectedAudioIn) {
+                        state.setState({selectedAudioIn:deviceInfo.kind});
+                    }
+                    ain.push(option);
+                } 
+                else if (deviceInfo.kind === 'audiooutput') {
+                    if(!state.data.selectedAudioOut) {
+                        state.setState({selectedAudioOut:deviceInfo.kind});
+                    }
+                    aout.push(option);
+                } 
+            }
 
-    //console.log(graph.__node.state, state, graph.__node.state.data.receiveCallInformation, state.data.receiveCallInformation);
-        
-    let call = webrtc.unanswered[id] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
-         
-    if(call) {
-    
-        state.setState({
-            unansweredCalls:webrtc.unanswered
-        }); //update this event for the app
-    
-    }
-});
+            res({
+                audioInDevices:ain,
+                audioOutDevices:aout,
+                cameraDevices:cam
+            });
+
+        }).catch(rej);;
+    });
+}
 
 
 export function callHasMyAudioVideo(streamId:string) {
@@ -489,28 +518,13 @@ export function disableDeviceStream(streamId) {
 }
 
 
-export function enableAudio(call:RTCCallInfo, audioOptions:boolean|MediaTrackConstraints=true) {
-
-    if(call.audioSender) this.disableVideo(call);
-    
-    let senders = webrtc.addUserMedia(
-        call.rtc, 
-        {
-            audio:audioOptions,
-            video:false
-        }, 
-        call 
-    );
-
-    call.audioSender = senders[0];
-    if((audioOptions as MediaTrackConstraints)?.deviceId) {
-        senders[0].deviceId = (audioOptions as MediaTrackConstraints).deviceId;
-    }
-
-    return senders;
+export async function enableAudio(call:RTCCallInfo, audioOptions:boolean|MediaTrackConstraints=true) {
+    let res = await webrtc.enableAudio(call, audioOptions);
+    //call.send({media:{hasAudio:true}});
+    return res;
 }
 
-export function enableVideo(
+export async function enableVideo(
     call:RTCCallInfo, 
     options:MediaTrackConstraints  = {
         //deviceId: 'abc' //or below default setting:
@@ -526,45 +540,55 @@ export function enableVideo(
     } as MediaTrackConstraints  & { optional:{minWidth: number}[] },
     includeAudio:boolean=false
 ) { //the maximum available resolution will be selected if not specified
-    
-    if(call.videoSender) this.disableVideo(call);
-
-    let senders = webrtc.addUserMedia(
-        call.rtc, 
-        {
-            audio:includeAudio, 
-            video:options
-        }, 
-        call 
-    );
-
-    call.videoSender = senders[0];
-    if((options as MediaTrackConstraints)?.deviceId) {
-        senders[0].deviceId = (options as MediaTrackConstraints).deviceId;
-    }
-
-    return senders;
+    let res = await webrtc.enableVideo(call,options,includeAudio);
+    //let t = {hasVideo:true} as any;
+    //if(includeAudio) t.hasAudio = true;
+    //call.send({media:t});
+    return res;
 }
 
 export function disableAudio(call:RTCCallInfo) {
-    if(call.audioSender) {
-        call.rtc.removeTrack(call.audioSender);
-        call.audioSender.track?.stop();
-        call.audioSender = undefined;
-    }
-
+    webrtc.disableAudio(call);
     call.send({media:{hasAudio:false}}); //ontrack events will handle the true case
-
 }
 
 export function disableVideo(call:RTCCallInfo) {
-    if(call.videoSender) {
-        call.rtc.removeTrack(call.videoSender);
-        call.videoSender.track?.stop();
-        call.videoSender = undefined;
-    }
-
+    webrtc.disableVideo(call);
     call.send({media:{hasVideo:false}}); //ontrack events will handle the true case
+}
+
+export async function checkMyStreamMedia(streamId:string) {
+    if(!streamId) return;
+    let stream = getStreamById(streamId) as RTCCallInfo;
+    let hasAudio; let hasVideo;
+
+    if(stream?.senders) {
+        for(let i = 0; i < stream.senders.length; i++ ) {
+            let s = stream.senders[i];
+            let videoEnabledInAudio = false;
+            if(s?.track?.kind === 'audio') {
+                hasAudio = true;
+                if((s as any).deviceId && this.state.selectedAudioIn && (s as any).deviceId !== this.state.selectedAudioIn) {
+                    disableAudio(stream);
+                    if(hasVideo && this.state.selectedAudioIn === this.state.selectedVideo) {
+                        disableVideo(stream);
+                        await enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, true);
+                        videoEnabledInAudio = true;
+                    }
+                    else await enableAudio(stream, this.state.selectedAudioIn ? {deviceId:this.state.selectedAudioIn} : undefined);
+                }
+            }
+            if(s?.track?.kind === 'video') {
+                hasVideo = true;
+                if((s as any).deviceId && this.state.selectedVideo && (s as any).deviceId !== this.state.selectedVideo && !videoEnabledInAudio) {
+                    disableVideo(stream);
+                    await enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
+                }
+            }
+        }
+    }
+   
+    return { hasAudio, hasVideo };
 
 }
 

@@ -1,7 +1,7 @@
 import React from "react"
 import { Button, Col, Row } from "react-bootstrap"
 import { client, getStreamById, state, webrtc } from "../../../scripts/client";
-import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio } from "../../../scripts/webrtc";
+import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio, checkMyStreamMedia } from "../../../scripts/webrtc";
 import { ProfileStruct } from "graphscript-services/struct/datastructures/types";
 import { sComponent } from "../../state.component";
 import { Widget } from "../../widgets/Widget";
@@ -100,67 +100,68 @@ export class ToggleAudioVideo extends sComponent {
         selectedAudioOut: '' as string,
     }
 
-    constructor(props:{streamId:string, audioOnClick?:(toggled:boolean)=>void,  videoOnClick?:(toggled:boolean)=>void}) {
+    hasAudio = false;
+    hasVideo = false;
+
+    constructor(props:{
+        streamId:string, 
+        audioOnClick?:(toggled:boolean)=>void,  
+        videoOnClick?:(toggled:boolean)=>void,
+        renderSelectors?:boolean
+    }) {
         super(props);
     }
 
-    render() {
-        let stream = getStreamById(this.props.streamId) as RTCCallInfo;
-        let hasAudio; let hasVideo;
-    
-        stream?.senders?.forEach((s) => {
-            let videoEnabledInAudio = false;
-            if(s?.track?.kind === 'audio') {
-                hasAudio = true;
-                if((s as any).deviceId && this.state.selectedAudioIn && (s as any).deviceId !== this.state.selectedAudioIn) {
-                    disableAudio(stream);
-                    if(hasVideo && this.state.selectedAudioIn === this.state.selectedVideo) {
-                        disableVideo(stream);
-                        enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, true);
-                        videoEnabledInAudio = true;
-                    }
-                    else enableAudio(stream, this.state.selectedAudioIn ? {deviceId:this.state.selectedAudioIn} : undefined);
-                }
-            }
-            if(s?.track?.kind === 'video') {
-                hasVideo = true;
-                if((s as any).deviceId && this.state.selectedVideo && (s as any).deviceId !== this.state.selectedVideo && !videoEnabledInAudio) {
-                    disableVideo(stream);
-                    enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
-                }
-            }
-        });
+    async checkMedia() {
+        checkMyStreamMedia(this.props.streamId).then(res => {
+            this.hasAudio = res?.hasAudio;
+            this.hasVideo = res?.hasVideo;
+            this.setState({})
+        })
+    }
 
-        console.log(hasAudio, hasVideo);
-    
+    componentDidMount(): void {
+        this.checkMedia();
+    }
+
+    render() {
+
+        //console.log(hasAudio, hasVideo);
+        let stream = getStreamById(this.props.streamId) as RTCCallInfo;
+
         return (
             <>
-                {hasVideo ? <Icon.Video style={{cursor:'pointer'}} 
+                {this.hasVideo ? <Icon.Video style={{cursor:'pointer'}} 
                     onClick={() => {
                         disableVideo(stream);
                         if(this.props.videoOnClick) this.props.videoOnClick(false);
+                        this.hasVideo = false;
                         this.setState({});
                 }} /> : <Icon.VideoOff style={{cursor:'pointer'}}  
-                    onClick={() => {
-                        enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
+                    onClick={async () => {
+                        await enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined); //todo: deal with case of using e.g. a webcam for both audio and video
                         if(this.props.videoOnClick) this.props.videoOnClick(true);
+                        this.hasVideo = true;
                         this.setState({});
                 }}/>}
-                {hasAudio ? <Icon.Mic style={{cursor:'pointer'}}  
-                    onClick={() => {
+                {this.hasAudio ? <Icon.Mic style={{cursor:'pointer'}}  
+                    onClick={async () => {
                         disableAudio(stream);
                         if(this.props.audioOnClick) this.props.audioOnClick(false);
+                        this.hasAudio = false;
                         this.setState({});
                 }}/> : <Icon.MicOff style={{cursor:'pointer'}}  
-                    onClick={() => {
-                        if(hasVideo && this.state.selectedAudioIn === this.state.selectedVideo) {
+                    onClick={async () => {
+                        if(this.hasVideo && this.state.selectedAudioIn === this.state.selectedVideo) {
                             disableVideo(stream);
-                            enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, true);
+                            await enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, true);
                         }
-                        else enableAudio(stream, this.state.selectedAudioIn ? {deviceId:this.state.selectedAudioIn} : undefined);
+                        else await enableAudio(stream, this.state.selectedAudioIn ? {deviceId:this.state.selectedAudioIn} : undefined);
                         if(this.props.audioOnClick) this.props.audioOnClick(true);
+                        this.hasAudio = true;
                         this.setState({});
                 }}/>}
+                {this.props.renderSelectors && <MediaDeviceOptions/>}
             </>
         );
     }
@@ -324,7 +325,7 @@ export class CallSelf extends sComponent {
                 Call Myself
             </Button>
             {
-                ownCall && <Button onClick={()=>{ answerCall(ownCall).then(()=>{this.setState({ activeStream:ownCall._id, switchingUser:true });}); }}>Answer Self</Button>
+                ownCall && <Button onClick={()=>{ answerCall(ownCall).then(()=>{this.setState({ activeStream:ownCall._id, triggerPageRerender:true });}); }}>Answer Self</Button>
             }
         </>
     }
