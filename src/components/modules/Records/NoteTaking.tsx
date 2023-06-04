@@ -141,12 +141,13 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         events.push(message as any);
 
         if(event) {
+
             let onclick = () => {
                 client.deleteData([event],()=>{
                     this.listEventHistory();
                 });
             }
-    
+
             this.state.noteRows.unshift(
                 <tr key={event._id}>
                     <td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td>
@@ -155,6 +156,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                     <td><button onClick={onclick}>❌</button></td>
                 </tr>
             );
+    
         }
         
         this.setState({});
