@@ -162,7 +162,9 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
     renderInputSection() {
 
-        var localDatetime = JSON.stringify(new Date()).slice(1, 17);
+        let now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        let localDateTime = now.toISOString().slice(0,16);
         
         const updateInputColor = (event: React.ChangeEvent<HTMLInputElement>) => {
             const value = parseInt(event.target.value);
@@ -191,7 +193,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                         {' '}<label><Icon.Clock/></label>{' '}
                         <input
                             style={{width:'65%'}}
-                            ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDatetime}/>
+                            ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDateTime}/>
                         {' '}<br/>
                         <Button style={{float:'right'}} onClick={this.submit}>Submit</Button>
                     </div>
