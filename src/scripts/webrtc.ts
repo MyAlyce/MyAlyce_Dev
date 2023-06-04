@@ -441,7 +441,7 @@ export function getCallerAudioVideo(streamId:string) {
 
 let tStart = performance.now();
 
-export function BufferAndSend(data:any, bufKey:string, stream:WebRTCInfo, buffers:{[key:string]:any[]}={}, bufferInterval=50) {
+export function BufferAndSend(data:any, bufKey:string, stream:WebRTCInfo, buffers:{[key:string]:any[]}={}, bufferInterval=333) {
     let now = performance.now();
     if(now > tStart + bufferInterval) {
         ///console.log( 'sent', buffers);
@@ -472,7 +472,7 @@ export function BufferAndSend(data:any, bufKey:string, stream:WebRTCInfo, buffer
 
 export let streamSubscriptions = {};
 
-export function enableDeviceStream(streamId, bufferInterval=100) { //enable sending data to a given RTC channel
+export function enableDeviceStream(streamId, bufferInterval=333) { //enable sending data to a given RTC channel
     
     let stream = webrtc.rtc[streamId as string] as WebRTCInfo;
 
