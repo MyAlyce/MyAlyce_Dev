@@ -96,7 +96,7 @@ export class RTCAudio extends Component<{
     }
 
     componentWillUnmount(): void {
-        (this.call as any).srcNode.disconnect();
+        (this.call as any)?.srcNode?.disconnect();
     }
 
     render() {

@@ -134,12 +134,12 @@ export const onrtcdata = (call, from, data) => {
         if('hasVideo' in data.media) {
             call.hasVideo = data.media.hasVideo;
             call.viewingVideo = data.media.hasVideo;
-            if(call.hasVideo === false) state.setState({[call._id+'hasVideo']:data.media.hasVideo}); //use ontrack event to set to true
+            state.setState({[call._id+'hasVideo']:data.media.hasVideo, triggerPageRerender:true}); //use ontrack event to set to true
         }
         if('hasAudio' in data.media) {
             call.hasAudio = data.media.hasAudio;
             call.viewingVideo = data.media.hasAudio;
-            if(call.hasAudio === false) state.setState({[call._id+'hasAudio']:data.media.hasAudio}); //use ontrack event to set to true
+            state.setState({[call._id+'hasAudio']:data.media.hasAudio, triggerPageRerender:true}); //use ontrack event to set to true
         }
     }
 }
