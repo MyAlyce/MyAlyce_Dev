@@ -15,15 +15,21 @@ export class HeartRateAlert extends Alert {
             onEvent,
             function check(
                 data:{
-                    bpm: number,
-                    change: number, //higher is better
-                    height0: number,
-                    height1: number,
-                    timestamp: number
+                    hr: number,
+                    hrv: number, //higher is better
+                    timestamp:  number[]|number
                 }
             ) {
-                if(data.bpm < 25) return {message:"Heart rate low", value:data.bpm, timestamp:data.timestamp};
-                else if (data.bpm > 180) return {message:"Heart rate high", value:data.bpm, timestamp:data.timestamp};
+                if(data.hr < 25) {
+                    let ts = data.timestamp;
+                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                    return {message:"Heart rate low", value:data.hr, timestamp:ts ? ts : Date.now()};
+                }
+                else if (data.hr > 180) {
+                    let ts = data.timestamp;
+                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                    return {message:"Heart rate high", value:data.hr, timestamp:ts ? ts : Date.now()};
+                }
             },
             {
                 sps:sampleRate //e.g. write the sample rate

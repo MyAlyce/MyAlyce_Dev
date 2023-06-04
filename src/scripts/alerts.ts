@@ -1,5 +1,5 @@
 import { HeartRateAlert } from "./alertTemplates/heartrate";
-import { alerts, graph } from "./client";
+import { alerts, client, graph } from "./client";
 import { BreathAlert } from "./alertTemplates/breath";
 import { FallAlert } from "./alertTemplates/falldetection";
 import { Howl } from "howler";
@@ -78,9 +78,8 @@ export function onAlert(event, streamId?) {
 
     console.warn("Alert:", event);
 
-    alerts.push(event);
-    
     let sound = new Howl({src:'./sounds/alarm.wav'});
+    sound.volume(0.5);
     sound.play(undefined,false);
     showNotification("Alert:", `${event.message} ${event.value ? ': '+event.value : ''} at ${toISOLocal(new Date(event.timestamp))}` );
 

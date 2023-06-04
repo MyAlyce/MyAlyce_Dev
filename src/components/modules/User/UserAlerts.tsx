@@ -45,12 +45,10 @@ export class UserAlerts extends sComponent {
             <Modal.Title><Icon.User className="align-text-bottom" color="red" size={26}></Icon.User>&nbsp;My Connections</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Table> 
-              <tbody>
+            <div> 
                 <Row><Col>Timestamp</Col><Col>Message</Col><Col>Value</Col><Col>From</Col></Row>
-                { as?.map(v => <Row><Col>{toISOLocal(new Date(v.timestamp))}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{v.from}</Col></Row>)}
-              </tbody>
-            </Table>
+                { as?.map((v,i) => { console.log(v.timestamp); return <Row key={i}><Col>{toISOLocal(v.timestamp)}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{v.from}</Col></Row>})}
+            </div>
             <Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button>
           </Modal.Body>
           <Modal.Footer>

@@ -28,7 +28,7 @@ export class FallAlert extends Alert {
                     gy: number[],
                     gz: number[],
                     mpu_dietemp: number,
-                    timestamp: number
+                    timestamp: number[]|number
                 }
             ) {
                 let a = Math.max(...data.ax);
@@ -37,10 +37,15 @@ export class FallAlert extends Alert {
 
                 let magnitude = Math.sqrt(a*a + b*b + c*c);
                 
-                if(magnitude > this.upperBound) return {
-                    message:"Force Threshold Surpassed: "+this.upperBound,
-                    value:magnitude,
-                    timestamp:data.timestamp
+                
+                if(magnitude > this.upperBound) {
+                    let ts = data.timestamp;
+                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                    return {
+                        message:"Force Threshold Surpassed: "+this.upperBound,
+                        value:magnitude,
+                        timestamp:ts ? ts : Date.now()
+                    }
                 }
             },
             {

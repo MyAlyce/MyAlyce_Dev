@@ -15,15 +15,22 @@ export class BreathAlert extends Alert {
             onEvent,
             function check(
                 data:{
-                    bpm: number,
-                    change: number, //higher is better
-                    height0: number,
-                    height1: number,
-                    timestamp: number
+                    breath: number,
+                    brv: number, //higher is better
+                    timestamp: number[]|number
                 }
             ) {
-                if(data.bpm < 3) return {message:"Breathing rate low", value:data.bpm, timestamp:data.timestamp};
-                else if (data.bpm > 20) return {message:"Breathing rate high", value:data.bpm, timestamp:data.timestamp};
+                
+                if(data.breath < 3) {
+                    let ts = data.timestamp;
+                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                    return {message:"Breathing rate low", value:data.breath, timestamp:ts ? ts : Date.now()};
+                }
+                else if (data.breath > 20) {
+                    let ts = data.timestamp;
+                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                    return {message:"Breathing rate high", value:data.breath, timestamp:ts ? ts : Date.now()};
+                }
             },
             {
                 sps:sampleRate //e.g. write the sample rate
