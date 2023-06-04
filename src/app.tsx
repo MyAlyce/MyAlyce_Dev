@@ -143,7 +143,7 @@ export class App extends sComponent {
                                 {this.state.triggerPageRerender ? null : 
                                     <>
                                         { state.data.unansweredCalls && Object.keys(state.data.unansweredCalls).map((rtcId) => {
-                                            return <AnswerCallModal streamId={rtcId}/>
+                                            return <span key={Math.random()}><AnswerCallModal streamId={rtcId}/></span>
                                         })}
                                         
                                         {/** Page URLS */}

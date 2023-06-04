@@ -104,7 +104,8 @@ export class UserBlock extends Component<{
         { this.props.pinOnClick ? <Icon.MapPin style={{cursor:'pointer'}}  className="align-text-bottom" size={20} onClick={this.props.pinOnClick}></Icon.MapPin> : null}
         { mediaSection }
         { this.props.xOnClick ? <Icon.XOctagon style={{cursor:'pointer'}}  className="align-text-bottom" size={20} onClick={this.props.xOnClick}></Icon.XOctagon> : null}
-      </Col>);
+      </Col>
+    );
   }
 
 }

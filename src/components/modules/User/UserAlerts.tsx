@@ -37,7 +37,7 @@ export class UserAlerts extends sComponent {
 
     return (
       <>
-        <Icon.Bell className="align-text-bottom" size={40}></Icon.Bell>
+        <Icon.Bell style={{cursor:'pointer'}}  className="align-text-bottom" size={40} onClick={handleShow}></Icon.Bell>
         <Badge bg="danger">{len ? len : 0}</Badge>
         <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>

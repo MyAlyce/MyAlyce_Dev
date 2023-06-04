@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Button, Col, Modal, Row } from "react-bootstrap"
-import { client, getStreamById, splitCamelCase, state, webrtc } from "../../../scripts/client";
-import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio, checkMyStreamMedia } from "../../../scripts/webrtc";
+import { client, getStreamById, splitCamelCase, state, webrtc, webrtcData } from "../../../scripts/client";
+import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio, checkMyStreamMedia, sendMessage } from "../../../scripts/webrtc";
 import { sComponent } from "../../state.component";
 import { Widget } from "../../widgets/Widget";
 import { RTCVideo } from "./WebRTCStream";
@@ -66,7 +66,7 @@ export function AnswerCallModal (props:{streamId:string}) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    console.log('answer call modal');
+    //console.log('answer call modal');
     
     return (
         <Modal show={show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
@@ -96,16 +96,38 @@ export class Messaging extends sComponent {
 
     constructor(props:{streamId:string, renderMessages?:boolean, renderInput?:boolean}) {
         super(props);
+
+        if(webrtcData.availableStreams[this.props.streamId].messages) 
+            for(const message of webrtcData.availableStreams[this.props.streamId].messages) {
+            let from = splitCamelCase(message.from);
+            this.messages.push(
+                <div key={this.messages.length} >
+                    {from}: {message.message} | {new Date(message.timestamp).toLocaleTimeString()}
+                </div>
+            )
+        }
     }
 
     componentDidMount() {
+        this.messages = [] as any[];
+        if(webrtcData.availableStreams[this.props.streamId].messages) 
+            for(const message of webrtcData.availableStreams[this.props.streamId].messages) {
+            let from = splitCamelCase(message.from);
+            this.messages.push(
+                <div key={this.messages.length} >
+                    {from}: {message.message} | {new Date(message.timestamp).toLocaleTimeString()}
+                </div>
+            );
+        }
+
         this.__subscribeComponent(this.props.streamId+'message',(newMessage)=>{
             let from = splitCamelCase(newMessage.from);
             this.messages.push(
-                <div key={this.messages.length} style={{float:'left'}}>
-                    {from}: {newMessage.message} | {new Date().toLocaleTimeString()}
+                <div key={this.messages.length} >
+                    {from}: {newMessage.message} | {new Date(newMessage.timestamp).toLocaleTimeString()}
                 </div>
-            )
+            );
+            this.setState({});
         });
     }
 
@@ -118,18 +140,15 @@ export class Messaging extends sComponent {
 
         let renderMessages = this.props.renderMessages ? this.props.renderMessages : true;
         let renderInput = this.props.renderInput ? this.props.renderInput : true;
+        
     
-        const sendMessage = (call:RTCCallInfo) => {
+        const send = (call:RTCCallInfo) => {
             let message = (document.getElementById(this.unique+'sendmessage') as HTMLInputElement).value;
             
-            call.send({message:message});
-            
-            if(!call.messages) call.messages = [] as any;
-            
-            call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + client.currentUser.lastName});
+            let result = sendMessage(call, message);
             
             if(renderMessages) {
-                this.messages.push(<div key={this.messages.length} style={{float:'right'}}>
+                this.messages.push(<div key={this.messages.length}>
                     {client.currentUser.firstName} {client.currentUser.lastName}: {message} | {new Date().toLocaleTimeString()}
                 </div>);
                 
@@ -144,7 +163,7 @@ export class Messaging extends sComponent {
             }
             { renderInput ? <>
                 <input id={this.unique+'sendmessage'} type='text'></input><Button id={this.unique+'send'} onClick={()=>{ 
-                    sendMessage(stream as RTCCallInfo); }}
+                    send(stream as RTCCallInfo); }}
                 >Send Message</Button>
                 </> 
                     : null 

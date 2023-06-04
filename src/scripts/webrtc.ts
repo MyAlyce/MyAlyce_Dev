@@ -72,6 +72,18 @@ export function getCallLocation(call:RTCCallInfo) {
     return call.run('getCurrentLocation'); //run geolocation at endpoint
 }
 
+export function sendMessage(call:RTCCallInfo, message:any) {
+            
+    if(!call.messages) call.messages = [] as any;
+    
+    let result = {message:message, timestamp:Date.now(), from:client.currentUser.firstName + client.currentUser.lastName};
+
+    call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + client.currentUser.lastName});
+    call.send({message:result});
+
+    return result;
+}
+
 export const onrtcdata = (call, from, data) => { 
 
     //console.log( 'received',data);
@@ -168,7 +180,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
                         ]
                     ]
                 ).then((id) => {
-                    console.log('call information echoed from peer:', id);
+                    //console.log('call information echoed from peer:', id);
                 });
             }
         },
@@ -436,7 +448,7 @@ export function BufferAndSend(data:any, bufKey:string, stream:WebRTCInfo, buffer
         if((stream.channels?.['data'] as RTCDataChannel).readyState === 'open')
             stream.send({...buffers});
         tStart = now;
-        buffers = {};
+        for (const key in buffers) delete buffers[key];
     } else {
         if(!buffers[bufKey]) buffers[bufKey] = {} as any;
         for(const key in data) {
@@ -460,7 +472,7 @@ export function BufferAndSend(data:any, bufKey:string, stream:WebRTCInfo, buffer
 
 export let streamSubscriptions = {};
 
-export function enableDeviceStream(streamId, bufferInterval=50) { //enable sending data to a given RTC channel
+export function enableDeviceStream(streamId, bufferInterval=100) { //enable sending data to a given RTC channel
     
     let stream = webrtc.rtc[streamId as string] as WebRTCInfo;
 
@@ -478,25 +490,25 @@ export function enableDeviceStream(streamId, bufferInterval=50) { //enable sendi
 
         streamSubscriptions[streamId] = {
             emg:state.subscribeEvent('emg', (emg) => {
-                buffers = BufferAndSend(emg,'emg',stream,buffers,bufferInterval);
+                BufferAndSend(emg,'emg',stream,buffers,bufferInterval);
             }),
             ecg:state.subscribeEvent('ecg', (ecg) => {
-                buffers = BufferAndSend(ecg,'ecg',stream,buffers,bufferInterval);
+                BufferAndSend(ecg,'ecg',stream,buffers,bufferInterval);
             }),
             ppg:state.subscribeEvent('ppg', (ppg) => {
-                buffers = BufferAndSend(ppg,'ppg',stream,buffers,bufferInterval);
+                BufferAndSend(ppg,'ppg',stream,buffers,bufferInterval);
             }),
             hr:state.subscribeEvent('hr', (hr) => {
-                buffers = BufferAndSend(hr,'hr',stream,buffers,bufferInterval);
+                BufferAndSend(hr,'hr',stream,buffers,bufferInterval);
             }),
             breath:state.subscribeEvent('breath', (breath) => {
-                buffers = BufferAndSend(breath,'breath',stream,buffers,bufferInterval);
+                BufferAndSend(breath,'breath',stream,buffers,bufferInterval);
             }),
             imu:state.subscribeEvent('imu', (imu) => {
-                buffers = BufferAndSend(imu,'imu',stream,buffers,bufferInterval);
+                BufferAndSend(imu,'imu',stream,buffers,bufferInterval);
             }),
             env:state.subscribeEvent('env', (env) => {
-                buffers = BufferAndSend(env,'env',stream,buffers,bufferInterval);
+                BufferAndSend(env,'env',stream,buffers,bufferInterval);
             })
         };
 
