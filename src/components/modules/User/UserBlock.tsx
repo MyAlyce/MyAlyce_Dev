@@ -47,6 +47,8 @@ export class UserBlock extends Component<{
       callMedia = getCallerAudioVideo(this.props.call._id);
     }
   
+    console.log(callMedia);
+    
     return (
       <Col style={{minWidth:this.props.width}}>
         <div>
@@ -57,7 +59,7 @@ export class UserBlock extends Component<{
         <div style={{wordWrap:"normal"}}>{this.props.name}</div>
         { this.props.eyeOnClick ? <Icon.Eye style={{cursor:'pointer'}}  className="align-text-bottom" size={20} onClick={this.props.eyeOnClick}></Icon.Eye> : null }
         { this.props.pinOnClick ? <Icon.MapPin style={{cursor:'pointer'}}  className="align-text-bottom" size={20} onClick={this.props.pinOnClick}></Icon.MapPin> : null}
-        { (this.props.audioOnClick && callMedia.hasAudio) ? <>
+        { (this.props.audioOnClick && callMedia?.hasAudio) ? <>
           { this.props.call?.viewingAudio ? <Icon.Mic
             onClick={() => {
               (this.props.call as RTCCallInfo).viewingAudio = false;
@@ -72,7 +74,7 @@ export class UserBlock extends Component<{
             }}
           /> }
           </> : null }
-        { (this.props.videoOnClick && callMedia.hasVideo) ? <>
+        { (this.props.videoOnClick && callMedia?.hasVideo) ? <>
             { this.props.call?.viewingVideo ? 
               <Icon.Video
                 onClick={() => {

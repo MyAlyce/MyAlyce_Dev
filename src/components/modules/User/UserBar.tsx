@@ -21,8 +21,10 @@ export function UserBar(props:{
 
   let name;
   let profilePic;
+  let call;
 
   if(props.streamId) {
+    call = webrtc.rtc[props.streamId];
     profilePic = (webrtc.rtc[props.streamId] as RTCCallInfo).pictureUrl;
     name = (webrtc.rtc[props.streamId] as RTCCallInfo).firstName + ' ' + (webrtc.rtc[props.streamId] as RTCCallInfo).lastName;
   } else {
@@ -41,6 +43,7 @@ export function UserBar(props:{
           name={name}
           pictureUrl={profilePic}
           width={"20%"}
+          call={call}
           eyeOnClick={props.eyeOnClick}
           pinOnClick={props.pinOnClick}
           xOnClick={props.xOnClick}

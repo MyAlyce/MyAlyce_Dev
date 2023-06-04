@@ -52,7 +52,7 @@ export class RTCAudio extends Component<{
         this.call = props.call;
 
         if(this.call && !props.stream) {
-            this.stream = getCallerAudioVideo(this.call._id).audioTrack;
+            this.stream = getCallerAudioVideo(this.call._id).audioStream;
         } else 
             this.stream = props.stream as MediaStream;
 
@@ -138,7 +138,7 @@ export class RTCVideo extends Component<{stream?:MediaStream, call?:RTCCallInfo,
 
         this.call = props.call;
         if(this.call && !props.stream) {
-            this.stream = getCallerAudioVideo(this.call._id).videoTrack;
+            this.stream = getCallerAudioVideo(this.call._id).videoStream;
         } else 
             this.stream = props.stream as MediaStream;
 

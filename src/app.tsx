@@ -114,13 +114,13 @@ export class App extends sComponent {
 
         return (
             <div style={{width:'100%', height:'100%'}}>
-                {this.state.loggingIn && 
+                {this.state.loggingIn && //TODO: RESTYLE
                     <div style={{zIndex:100, position:'absolute', width:'100%', height:'100%', backgroundColor:'royalblue', color:'white'}}>
                         LOADING
                     </div>
                 }
-                {(!this.state.isLoggedIn && !TESTVIEWS) && 
-                    <Login
+                {(!this.state.isLoggedIn && !TESTVIEWS) &&  
+                    <Login //TODO: RESTYLE
                         useRegularLogin={false}
                         onLoginClick={this.onLoginClick}
                         thirdPartyLogins={[
@@ -173,9 +173,11 @@ export class App extends sComponent {
                                                         <ToggleAudioVideo streamId={this.state.activeStream} 
                                                             videoOnClick={(onState:boolean)=>{ 
                                                                 //toggle picture in picture
+                                                                this.setState({});
                                                             }} 
                                                             audioOnClick={(onState:boolean)=>{  
                                                                 //toggle local volume controls
+                                                                this.setState({});
                                                             }}/>
                                                     }
                                                 /> : null    

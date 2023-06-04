@@ -176,7 +176,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
             //data channel streams the device data
             enableDeviceStream(rtcId); //enable my device to stream data to this endpoint
 
-            state.setState({ activeStream:rtcId, switchingUser:true });
+            state.setState({ activeStream:rtcId, deviceMode:rtcId, switchingUser:true }); //switch over to new call
         },
         ondata: (mev, channel) => {
             let data = JSON.parse(mev.data);
@@ -313,7 +313,8 @@ export let answerCall = async (call:RTCCallProps) => {
 
     state.setState({
         activeStream:call._id,
-        availableStreams:webrtc.rtc
+        availableStreams:webrtc.rtc,
+        deviceMode:call._id,
     });
 }
 
@@ -339,7 +340,7 @@ export function callHasMyAudioVideo(streamId:string) {
     
     let stream = getStreamById(streamId) as RTCCallInfo;
     let hasAudio; let hasVideo;
-    let videoTrack; let audioTrack;
+    let videoEnabledInAudio;
     
     stream?.senders?.forEach((s) => {
         let videoEnabledInAudio = false;
@@ -365,37 +366,65 @@ export function callHasMyAudioVideo(streamId:string) {
     });
 
     return {
-        hasAudio, hasVideo,
-        audioTrack, videoTrack
+        hasAudio, hasVideo, videoEnabledInAudio
     };
 }
 
 export function getCallerAudioVideo(streamId:string) {
-    let stream = getStreamById(this.props.streamId) as RTCCallInfo;
+    let stream = getStreamById(streamId) as RTCCallInfo;
+
 
     let hasAudio; let hasVideo;
-    let audioTrack; let videoTrack;
+    let audioStream; let videoStream;
 
-    if(stream.videoSender) {
-        hasVideo = true;
-        videoTrack = stream.videoSender.track;
-    }
-    if(stream.audioSender) {
-        hasAudio = true;
-        audioTrack = stream.audioSender.track;
-    }
+    videoStream = stream.streams?.find((s) => (s as MediaStream)?.getVideoTracks().length > 0);
+    audioStream= stream.streams?.find((s) => (s as MediaStream)?.getAudioTracks().length > 0);
+    
+    hasVideo = videoStream !== undefined;
+    hasAudio = audioStream !== undefined;
 
     return {
         hasAudio, hasVideo,
-        audioTrack, videoTrack
+        audioStream, videoStream
     };
 
+}
+
+
+let tStart = performance.now();
+
+export function BufferAndSend(data:any, bufKey:string, stream:WebRTCInfo, buffers:{[key:string]:any[]}={}, bufferInterval=50) {
+    let now = performance.now();
+    if(now > tStart + bufferInterval) {
+        ///console.log( 'sent', buffers);
+        if((stream.channels?.['data'] as RTCDataChannel).readyState === 'open')
+            stream.send({...buffers});
+        tStart = now;
+        buffers = {};
+    } else {
+        if(!buffers[bufKey]) buffers[bufKey] = {} as any;
+        for(const key in data) {
+            if(!(key in buffers[bufKey])) {
+                if(Array.isArray(data[key]))
+                    buffers[bufKey][key] = [...data[key]];
+                else buffers[bufKey][key] = [data[key]];
+            }
+            else {
+                if(Array.isArray((data[key])))
+                    buffers[bufKey][key].push(...data[key]);
+                else
+                    buffers[bufKey][key].push(data[key]);
+            }
+        }
+    }
+
+    return buffers;
 }
 
 
 export let streamSubscriptions = {};
 
-export function enableDeviceStream(streamId, bufferInterval=100) { //enable sending data to a given RTC channel
+export function enableDeviceStream(streamId, bufferInterval=50) { //enable sending data to a given RTC channel
     
     let stream = webrtc.rtc[streamId as string] as WebRTCInfo;
 
@@ -406,61 +435,32 @@ export function enableDeviceStream(streamId, bufferInterval=100) { //enable send
         hr:undefined,
         breath:undefined,
         imu:undefined,
-        env:undefined
+        env:undefined //etc
     } as any;
-
-    let tStart = performance.now();
-
-    function BufferAndSend(data, buf) {
-        let now = performance.now();
-        if(now > tStart + bufferInterval) {
-            ///console.log( 'sent', buffers);
-            if((stream.channels?.['data'] as RTCDataChannel).readyState === 'open')
-                stream.send({...buffers});
-            tStart = now;
-            buffers = {};
-        } else {
-            if(!buffers[buf]) buffers[buf] = {};
-            for(const key in data) {
-                if(!(key in buffers[buf])) {
-                    if(Array.isArray(data[key]))
-                        buffers[buf][key] = [...data[key]];
-                    else buffers[buf][key] = [data[key]];
-                }
-                else {
-                    if(Array.isArray((data[key])))
-                        buffers[buf][key].push(...data[key]);
-                    else
-                        buffers[buf][key].push(data[key]);
-                }
-            }
-        }
-    }
-
 
     if(stream) {
 
         streamSubscriptions[streamId] = {
             emg:state.subscribeEvent('emg', (emg) => {
-                BufferAndSend(emg,'emg');
+                buffers = BufferAndSend(emg,'emg',stream,buffers,bufferInterval);
             }),
             ecg:state.subscribeEvent('ecg', (ecg) => {
-                BufferAndSend(ecg,'ecg');
+                buffers = BufferAndSend(ecg,'ecg',stream,buffers,bufferInterval);
             }),
             ppg:state.subscribeEvent('ppg', (ppg) => {
-                BufferAndSend(ppg,'ppg');
+                buffers = BufferAndSend(ppg,'ppg',stream,buffers,bufferInterval);
             }),
             hr:state.subscribeEvent('hr', (hr) => {
-                BufferAndSend(hr,'hr');
+                buffers = BufferAndSend(hr,'hr',stream,buffers,bufferInterval);
             }),
             breath:state.subscribeEvent('breath', (breath) => {
-                BufferAndSend(breath,'breath');
+                buffers = BufferAndSend(breath,'breath',stream,buffers,bufferInterval);
             }),
             imu:state.subscribeEvent('imu', (imu) => {
-                BufferAndSend(imu,'imu');
+                buffers = BufferAndSend(imu,'imu',stream,buffers,bufferInterval);
             }),
             env:state.subscribeEvent('env', (env) => {
-                BufferAndSend(env,'env');
+                buffers = BufferAndSend(env,'env',stream,buffers,bufferInterval);
             })
         };
 
@@ -485,6 +485,7 @@ export function disableDeviceStream(streamId) {
         state.unsubscribeEvent(key, streamSubscriptions[streamId]?.[key]);
     }
     delete streamSubscriptions[streamId];
+
 }
 
 
@@ -551,6 +552,9 @@ export function disableAudio(call:RTCCallInfo) {
         call.audioSender.track?.stop();
         call.audioSender = undefined;
     }
+
+    call.send({media:{hasAudio:false}}); //ontrack events will handle the true case
+
 }
 
 export function disableVideo(call:RTCCallInfo) {
@@ -559,5 +563,8 @@ export function disableVideo(call:RTCCallInfo) {
         call.videoSender.track?.stop();
         call.videoSender = undefined;
     }
+
+    call.send({media:{hasVideo:false}}); //ontrack events will handle the true case
+
 }
 
