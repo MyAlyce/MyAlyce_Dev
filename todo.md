@@ -24,14 +24,20 @@
 
 ### Backend
 
-- Security
-- plain email/password storage? i.e. not just google reliance, see about microsoft accounts
+- Security, test access token system, more permissions
+- plain email/password storage? i.e. not just google reliance, see about microsoft accounts and other
 
 ## Data
 
 - more selective data representation
 - Video/Audio capture local and remote (ez)
 - Screen capture
+
+- Lots more recordkeeping tools
+
+## Third party
+
+- reintegrate fitbit api, it's there but not in use. Need to build more of the recordkeeping to make use of these. Mongodb is ready to accept anything.
 
 ## Widgets
 
