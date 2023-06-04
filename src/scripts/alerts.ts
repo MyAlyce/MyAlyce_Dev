@@ -110,7 +110,7 @@ export function throwAlert(
 
 //alert system
 export function setupAlerts(
-    streamId?,
+    streamId?:string,
     alerts?:('hr'|'breath'|'fall')[]
 ) {
     let nodes = {};
