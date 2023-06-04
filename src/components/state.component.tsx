@@ -55,7 +55,7 @@ export class sComponent extends Component<{[key:string]:any}> {
         
     }
 
-    __subscribeComponent(prop) {
+    __subscribeComponent(prop, onEvent?:(value)=>void) {
         
         let sub = this.statemgr.subscribeEvent(prop,(res)=>{
             let c = this;
@@ -63,6 +63,7 @@ export class sComponent extends Component<{[key:string]:any}> {
                 this.statemgr.unsubscribeEvent(prop, sub);
             }
             else {
+                if(onEvent) onEvent(res);
                 let wasupdated = this.UPDATED.indexOf(prop);
                 if( wasupdated > -1) {
                     this.UPDATED.splice(wasupdated,1);

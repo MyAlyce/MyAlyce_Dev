@@ -52,7 +52,7 @@ export class UserBlock extends Component<{
       callMedia = getCallerAudioVideo(this.props.call._id);
     }
 
-    console.log(callMedia?.hasVideo, this.props.videoOnClick, callMedia?.hasVideo);
+    //console.log(callMedia?.hasVideo, this.props.videoOnClick, callMedia?.hasVideo);
 
     let mediaSection = (<>
     { (this.props.audioOnClick !== undefined && callMedia?.hasAudio === true) ? <>
@@ -90,7 +90,7 @@ export class UserBlock extends Component<{
           </> : null }
     </>)
     
-    console.log('rerendering with', callMedia, mediaSection);
+    //console.log('rerendering with', callMedia, mediaSection);
 
     return (
       <Col style={{minWidth:this.props.width}}>

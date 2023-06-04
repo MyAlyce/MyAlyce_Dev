@@ -7,7 +7,7 @@ import { NoteTaking } from '../modules/Records/NoteTaking'
 import { getActiveStream, getActiveStreamDir, state, webrtc } from '../../scripts/client'
 import { RecordBar } from '../modules/Records/RecordBar'
 import { CardGroup } from 'react-bootstrap'
-import { RTCCallInfo, getCallLocation, getCallerAudioVideo } from '../../scripts/webrtc'
+import { RTCCallInfo, getCallLocation } from '../../scripts/webrtc'
 import { RTCAudio, RTCVideo } from '../modules/WebRTC/WebRTCStream'
 
 export class Dashboard extends sComponent {
@@ -36,8 +36,6 @@ export class Dashboard extends sComponent {
 
         let dir = getActiveStreamDir();
         let call = getActiveStream();
-
-        console.log('rendered');
         
         return (
             <div className='container-fluid'>

@@ -1,8 +1,7 @@
-import React from "react"
-import { Button, Col, Row } from "react-bootstrap"
-import { client, getStreamById, state, webrtc } from "../../../scripts/client";
+import React, { useState } from "react"
+import { Button, Col, Modal, Row } from "react-bootstrap"
+import { client, getStreamById, splitCamelCase, state, webrtc } from "../../../scripts/client";
 import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio, checkMyStreamMedia } from "../../../scripts/webrtc";
-import { ProfileStruct } from "graphscript-services/struct/datastructures/types";
 import { sComponent } from "../../state.component";
 import { Widget } from "../../widgets/Widget";
 import { RTCVideo } from "./WebRTCStream";
@@ -10,16 +9,27 @@ import { RTCVideo } from "./WebRTCStream";
 import * as Icon from 'react-feather'
 
 
-export function StartCall(user:Partial<ProfileStruct>) {
+export function StartCall(props:{userId:string, onClick?:(call?)=>void}) {
     return (
         <Button onClick={()=>{
-            startCall(user._id).then(call => {
+            startCall(props.userId).then(call => {
                 //overwrites the default message
+                if(props.onClick) props.onClick(call);
             })}}
         >Start Call</Button>
     )
 }
 
+export function AnswerCall(props:{streamId:string, onClick?:(call?)=>void}) {
+    return (
+        <Button onClick={()=>{
+            answerCall(webrtc.unanswered[props.streamId] as any).then(call => {
+                //overwrites the default message
+                if(props.onClick) props.onClick(call);
+            })}}
+        >Start Call</Button>
+    )
+}
 export function UnanweredCallInfo(onAnswered?:(call:RTCCallInfo)=>{}) {
     let keys = Object.keys(state.data.unansweredCalls);
 
@@ -50,47 +60,102 @@ export function UnanweredCallInfo(onAnswered?:(call:RTCCallInfo)=>{}) {
     
 }
 
+export function AnswerCallModal (props:{streamId:string}) {
+    const [show, setShow] = useState(true);
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-export function Messaging(props:{streamId:string, renderMessages?:boolean, renderInput?:boolean}) {
-
-    this.state = {
-        messages:undefined
-    }
-
-    let stream = getStreamById(props.streamId);
-
-    let renderMessages = props.renderMessages ? props.renderMessages : true;
-    let renderInput = props.renderInput ? props.renderInput : true;
-
-    let unique = `${Math.floor(Math.random()*1000000000000000)}`;
-    let messages = [] as any[];
-
-    function sendMessage(call:RTCCallInfo) {
-        let message = (document.getElementById(unique+'sendmessage') as HTMLInputElement).value;
-        call.send({message:message});
-        if(!call.messages) call.messages = [] as any;
-        call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + ' ' + client.currentUser.lastName});
-        if(renderMessages) {
-            messages.push(<div key={messages.length}>
-                {client.currentUser.firstName} {client.currentUser.lastName}: {message} | {new Date().toLocaleTimeString()}
-            </div>);
-            
-            this.setState({messages});
-        }
-    }
-
-    return (<>
-        { renderMessages ? <div id={unique + 'messages'}>
-            {this.state.messages ? this.state.messages.map(v => v): ""}
-        </div> : null }
-        { renderInput ? <><input id={unique+'sendmessage'} type='text'></input><Button id={unique+'send'} onClick={()=>{ sendMessage(stream as RTCCallInfo); }}>Send Message</Button></> : null }
-    </>);
-
-    }
-
-export function MessagingModal() {
-        
+    console.log('answer call modal');
+    
+    return (
+        <Modal show={show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
+          <Modal.Header closeButton>
+            <Modal.Title><Icon.User className="align-text-bottom" color="red" size={26}></Icon.User>&nbsp;My Connections</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Button onClick={() => {
+                answerCall(state.data.unansweredCalls[props.streamId]);
+                handleClose();
+            }}>Answer Call</Button>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={()=>{
+                handleClose();
+            }}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+    )
 }
+
+export class Messaging extends sComponent {
+
+    messages=[] as any[];
+
+    constructor(props:{streamId:string, renderMessages?:boolean, renderInput?:boolean}) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.__subscribeComponent(this.props.streamId+'message',(newMessage)=>{
+            let from = splitCamelCase(newMessage.from);
+            this.messages.push(
+                <div key={this.messages.length} style={{float:'left'}}>
+                    {from}: {newMessage.message} | {new Date().toLocaleTimeString()}
+                </div>
+            )
+        });
+    }
+
+    componentWillUnmount(): void {
+        this.__unsubscribeComponent(this.props.streamId+'message');
+    }
+
+    render() {
+        let stream = getStreamById(this.props.streamId);
+
+        let renderMessages = this.props.renderMessages ? this.props.renderMessages : true;
+        let renderInput = this.props.renderInput ? this.props.renderInput : true;
+    
+        const sendMessage = (call:RTCCallInfo) => {
+            let message = (document.getElementById(this.unique+'sendmessage') as HTMLInputElement).value;
+            
+            call.send({message:message});
+            
+            if(!call.messages) call.messages = [] as any;
+            
+            call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + client.currentUser.lastName});
+            
+            if(renderMessages) {
+                this.messages.push(<div key={this.messages.length} style={{float:'right'}}>
+                    {client.currentUser.firstName} {client.currentUser.lastName}: {message} | {new Date().toLocaleTimeString()}
+                </div>);
+                
+                this.setState({});
+            }
+        }
+    
+        return (<>
+            { renderMessages ? <div id={this.unique + 'messages'}>
+                    {this.messages ? this.messages.map(v => v): ""}
+                </div> : null 
+            }
+            { renderInput ? <>
+                <input id={this.unique+'sendmessage'} type='text'></input><Button id={this.unique+'send'} onClick={()=>{ 
+                    sendMessage(stream as RTCCallInfo); }}
+                >Send Message</Button>
+                </> 
+                    : null 
+            }
+        </>);
+    }
+
+    
+
+}
+
 
 export class ToggleAudioVideo extends sComponent {
 

@@ -1,5 +1,5 @@
 
-import { client, graph, usersocket, state, webrtc, getStreamById } from "./client"
+import { client, graph, usersocket, state, webrtc, getStreamById, newCalls } from "./client"
 import { recordChat, recordEvent } from "./datacsv";
 
 import { onAlert, setupAlerts } from "./alerts";
@@ -91,6 +91,8 @@ export const onrtcdata = (call, from, data) => {
         (call as RTCCallInfo).events.push(data.event);
         
         recordEvent(from, data.event, call._id);
+
+        state.setValue(call._id+'event', data.event);
     }
     if(data.message) {
 
@@ -101,6 +103,8 @@ export const onrtcdata = (call, from, data) => {
         if(state.data.isRecording) {
             recordChat(from, data.message, call._id);
         }
+
+        state.setValue(call._id+'message',data.message);
     }
     if(data.emg) {
         if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
@@ -275,6 +279,7 @@ export async function startCall(userId) {
 }
 
 export let answerCall = async (call:RTCCallProps) => {
+    if(!call) return;
     
     let nodes = setupAlerts(call._id, ['hr','breath','fall']);
 
@@ -318,6 +323,8 @@ export let answerCall = async (call:RTCCallProps) => {
             call.socketId
         ]
     );
+
+    delete newCalls[call._id as string];
 
     state.setState({
         activeStream:call._id,

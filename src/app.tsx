@@ -22,7 +22,7 @@ import { DeviceConnect } from './components/modules/Device/DeviceConnect';
 import { StreamSelect } from './components/modules/Streams/StreamSelect';
 import { Demo } from './components/modules/Device/DemoMode';
 import { Footer } from './components/modules/Footer/Footer';
-import { MediaDeviceOptions, ToggleAudioVideo, ViewSelfVideoStream } from './components/modules/WebRTC/Calling';
+import { AnswerCallModal, MediaDeviceOptions, ToggleAudioVideo, ViewSelfVideoStream } from './components/modules/WebRTC/Calling';
 import { Widget } from './components/widgets/Widget';
 import { Button } from 'react-bootstrap';
 import { throwAlert } from './scripts/alerts';
@@ -142,6 +142,11 @@ export class App extends sComponent {
                             <div id='route'>
                                 {this.state.triggerPageRerender ? null : 
                                     <>
+                                        { state.data.unansweredCalls && Object.keys(state.data.unansweredCalls).map((rtcId) => {
+                                            return <AnswerCallModal streamId={rtcId}/>
+                                        })}
+                                        
+                                        {/** Page URLS */}
                                         { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
                                             <Dashboard/>
                                         }
@@ -150,6 +155,8 @@ export class App extends sComponent {
                                             dir={getActiveStreamDir()}/>}
                                         { this.state.route.includes('settings') && <SettingsView/> }
                                         { this.state.route.includes('dev') && <Dev/>}
+                                    
+                                    
                                     </>
                                 }
                                 

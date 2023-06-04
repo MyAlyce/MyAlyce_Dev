@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { client, defaultProfilePic, usersocket } from '../../scripts/client';
+import { client, defaultProfilePic, usersocket, webrtc, webrtcData } from '../../scripts/client';
 import Button from 'react-bootstrap/Button';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
 import { UserSearch } from './UserSearch';
@@ -7,7 +7,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import * as Icon from 'react-feather';
 import { Card } from 'react-bootstrap';
 import { Avatar } from './User/Avatar';
-import { StartCall } from './WebRTC/Calling';
+import { AnswerCall, StartCall } from './WebRTC/Calling';
+import { RTCCallProps } from '../../scripts/webrtc';
 
 let personIcon = './assets/person.jpg';
 
@@ -159,6 +160,19 @@ export class UserAuths extends Component<{[key:string]:any}> {
                 }
             });
 
+            let receivedCall;
+            let callActive;
+            if(userIsOnline) {
+                if(webrtc.unansweredCalls) for(const key in webrtc.unansweredCalls) {
+                    if((webrtcData.unansweredCalls[key] as RTCCallProps).caller === a.authorizerId)
+                        receivedCall = key;
+                }
+                if(webrtcData.availableStreams) for(const key in webrtcData.availableStreams) {
+                    if((webrtcData.availableStreams[key] as RTCCallProps).caller === a.authorizerId)
+                        callActive = key;
+                }
+            }
+
             this.existingAuths.push( //lumping both auths into one for a more typical "friend" connection, need to toggle permissions tho
             <ListGroup.Item key={a._id} id={this.unique+a._id}>
                 {/* <td>Permissions: ${Object.keys(a.authorizations).map((key)=>{
@@ -169,12 +183,20 @@ export class UserAuths extends Component<{[key:string]:any}> {
                         pictureUrl={userInfo?.pictureUrl ? userInfo.pictureUrl : defaultProfilePic}
                         onlineStatus={a.status === 'OKAY' ? userIsOnline : undefined}
                     /> {userInfo ? userInfo.firstName + ' ' + userInfo.lastName : a.authorizerName} </div>
-                <div className="float-end">{userIsOnline ? StartCall(userInfo) : null}<Button variant="outline-success" size="sm" onClick={async ()=>{ 
-                    await client.deleteAuthorization(a._id); 
-                    let secondaryAuth = secondaryAuths.find((a2) => {if(a2.authorizedId === a.authorizerId) return true; });
-                    if(secondaryAuth) await client.deleteAuthorization(secondaryAuth._id);
-                    setTimeout(()=>{this.listAuths()},100); //give time for server to delete local data (hacky)
-                }}>Remove</Button>{a.status === 'OKAY' ? null : <div>{a.status}</div>}</div>
+                <div className="float-end">
+
+                    {userIsOnline ? (
+                        receivedCall ? <AnswerCall streamId={receivedCall} onClick={()=>{this.setState({})}}/> : (callActive ? null : <StartCall userId={a.authorizerId} onClick={()=>{this.setState({})}}/>)
+                    ) : null}
+                    
+                    <Button variant="outline-success" size="sm" 
+                        onClick={async ()=>{ 
+                            await client.deleteAuthorization(a._id); 
+                            let secondaryAuth = secondaryAuths.find((a2) => {if(a2.authorizedId === a.authorizerId) return true; });
+                            if(secondaryAuth) await client.deleteAuthorization(secondaryAuth._id);
+                            setTimeout(()=>{this.listAuths()},100); //give time for server to delete local data (hacky)
+                        
+                        }}>Remove</Button>{a.status === 'OKAY' ? null : <div>{a.status}</div>}</div>
             </ListGroup.Item>
             );
         }); //get own auths

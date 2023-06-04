@@ -91,6 +91,7 @@ export const graph = new Router({
     roots:{
         cleanupCallInfo:(callId)=>{ //for webrtc
             delete webrtc.unanswered[callId];
+            delete newCalls[callId];
             state.setState({
                 unansweredCalls:webrtc.unanswered
             }); //update this event for the app
@@ -112,6 +113,8 @@ graph.subscribe('checkForNotifications',(result:any[])=>{
     }); //pull latest data. That's it!
 });
 
+export let newCalls = {} as any;
+
 graph.subscribe('receiveCallInformation', (id) => {
     
     //console.log('received call information:', id);
@@ -119,12 +122,22 @@ graph.subscribe('receiveCallInformation', (id) => {
     //console.log(graph.__node.state, state, graph.__node.state.data.receiveCallInformation, state.data.receiveCallInformation);
         
     let call = webrtc.unanswered[id] as WebRTCProps & {caller:string, firstName:string, lastName:string, socketId:string};
-         
+
     if(call) {
     
-        state.setState({
-            unansweredCalls:webrtc.unanswered
-        }); //update this event for the app
+        if(!newCalls[id]) {
+            newCalls[id] = true;
+            state.setState({
+                triggerPageRerender:true,
+                unansweredCalls:webrtc.unanswered
+            }); //update this event for the app
+        } else {
+            state.setState({
+                unansweredCalls:webrtc.unanswered
+            }); //update this event for the app
+        }
+
+        
     
     }
 });
@@ -371,6 +384,10 @@ export function getActiveStream() {
 
 export function getStreamById(streamId:string) {
     return webrtc.rtc[streamId];
+}
+
+export function splitCamelCase(string:string) {
+    return string?.replace(/([a-z])([A-Z])/g, '$1 $2');
 }
 
 //dummy profile
