@@ -15,7 +15,6 @@ export class UserAlerts extends sComponent {
     super(props);
   }
 
-
   componentDidMount(): void {
     this.__subscribeComponent(this.props.streamId ? this.props.streamId+'alert' : 'alert', (value) => {
       this.show = true;
@@ -42,7 +41,7 @@ export class UserAlerts extends sComponent {
 
     return (
       <>
-        <Icon.Bell style={{cursor:'pointer'}}  className="align-text-bottom" size={40} onClick={handleShow}></Icon.Bell>
+        <Icon.Bell style={{cursor:'pointer'}}  className="svghover align-text-bottom" size={40} onClick={handleShow}></Icon.Bell>
         <Badge bg="danger">{len ? len : 0}</Badge>
         <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>

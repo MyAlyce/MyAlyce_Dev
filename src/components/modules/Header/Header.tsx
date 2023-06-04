@@ -27,7 +27,7 @@ export class Header extends sComponent {
                      <div className="nav-item text-nowrap">
                      {this.state.isLoggedIn ? <a className="nav-link px-3" onClick={()=>{ logoutSequence(); }}>
                         <img className="rounded-circle" width="40" alt={client.currentUser.firstName} src={client.currentUser.pictureUrl} /> Sign out </a> : 
-                        <Button onClick={()=>{ this.setState({isLoggedIn:false}); /** This will kick us back to the login page */}}> 
+                        <Button style={{cursor:'pointer'}} onClick={()=>{ this.setState({isLoggedIn:false}); /** This will kick us back to the login page */}}> 
                             Sign In 
                         </Button> }
                      </div>

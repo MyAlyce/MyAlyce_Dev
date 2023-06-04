@@ -33,7 +33,7 @@ export class UserMessages extends sComponent {
 
     return (
       <>
-        <Icon.MessageSquare style={{cursor:'pointer'}} className="align-text-bottom" size={40} onClick={handleShow}></Icon.MessageSquare>
+        <Icon.MessageSquare style={{cursor:'pointer'}} className="svghover align-text-bottom" size={40} onClick={handleShow}></Icon.MessageSquare>
         <Badge bg="secondary">{chats ? chats.length : 0}</Badge> {/** TODO: have a number for the number of unchecked messages */}
         <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>

@@ -119,10 +119,29 @@ html, body {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-30%);
+        transform: translateY(-30%) rotate(20deg);
     }
 }
 
 .logincover {
     background-color: rgb(2, 2, 46);
+}
+
+button {
+    transition:box-shadow 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 0 20px #0051ff;
+}
+
+.svghover {
+    transition: 0.3s;
+    border-radius:5px;
+    background-color:rgba(0,0,0,0);
+}
+
+.svghover:hover {
+    box-shadow: 0 0 20px rgba(0, 81, 255,0.5);
+    background-color: rgba(0, 81, 255,0.5);
 }
