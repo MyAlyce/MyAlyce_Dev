@@ -25,7 +25,7 @@ export function disconnectDevice() {
 export let hrworker: WorkerInfo; 
 export let brworker: WorkerInfo;
 
-export let serviceCharacteristic = '0001cafe-b0ba-8bad-f00d-deadbeef0000';
+export let serviceCharacteristic = '0000cafe-b0ba-8bad-f00d-deadbeef0000';
 
 export let characteristicCallbacks = {
     emg:{characteristic:'0002cafe-b0ba-8bad-f00d-deadbeef0000', callback:(data: { //ads131m08 (main)

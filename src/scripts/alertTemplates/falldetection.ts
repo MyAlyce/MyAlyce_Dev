@@ -13,7 +13,7 @@ export class FallAlert extends Alert {
         }) => void,
         subscribeTo:string, //the state key we want
         name='fallAlert', 
-        upperBound=50000
+        upperBound=30000
     ) {
         super(
             name,
