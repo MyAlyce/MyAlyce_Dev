@@ -85,31 +85,31 @@ html, body {
 }
 
 .wave:nth-child(1) {
-    animation-delay: 0.4s;
-    background: linear-gradient(to top, rgb(3, 161, 213), rgba(135, 153, 235, 0.5));
+    animation-delay: 1s;
+    background: linear-gradient(to top, rgb(3, 161, 213), rgba(35, 71, 232, 0.259));
     z-index: 5;
 }
 
 .wave:nth-child(2) {
-    animation-delay: 0.8s;
-    background: linear-gradient(to top, dodgerblue, rgba(135, 162, 250, 0.5));
+    animation-delay: 2s;
+    background: linear-gradient(to top, dodgerblue, rgba(37, 77, 210, 0.322));
     z-index: 4;
 }
 
 .wave:nth-child(3) {
-    animation-delay: 1.2s;
-    background: linear-gradient(to top, royalblue, rgba(68, 83, 183, 0.5));
+    animation-delay: 3s;
+    background: linear-gradient(to top, royalblue, rgba(57, 74, 183, 0.5));
     z-index: 3;
 }
 
 .wave:nth-child(4) {
-    animation-delay: 1.6s;
-    background: linear-gradient(to top, mediumblue, rgba(89, 79, 147, 0.5));
+    animation-delay: 4s;
+    background: linear-gradient(to top, mediumblue, rgba(73, 58, 159, 0.5));
     z-index: 2;
 }
 
 .wave:nth-child(5) {
-    animation-delay: 2s;
+    animation-delay: 5s;
     background: linear-gradient(to top, navy, rgba(93, 28, 223, 0.541));
     z-index: 1;
 }
