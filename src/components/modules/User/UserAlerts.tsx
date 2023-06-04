@@ -6,6 +6,7 @@ import { alerts, webrtc, webrtcData } from '../../../scripts/client';
 import { sComponent } from '../../state.component';
 import { Button, Col, Modal, Row, Table } from 'react-bootstrap';
 import { toISOLocal } from 'graphscript-services.storage';
+import { throwAlert } from '../../../scripts/alerts';
 
 export class UserAlerts extends sComponent {
 
@@ -50,6 +51,7 @@ export class UserAlerts extends sComponent {
                 { as?.map(v => <Row><Col>{toISOLocal(new Date(v.timestamp))}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{v.from}</Col></Row>)}
               </tbody>
             </Table>
+            <Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
