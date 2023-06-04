@@ -86,12 +86,12 @@ export function onAlert(event, streamId?) {
     recordAlert(event, streamId);
 
     //broadcast your own alerts to connected streams
-    if(!streamId) {
+    if(!streamId) 
         for(const key in webrtcData.availableStreams) {
             webrtcData.availableStreams[key].send({alert:event});
         }
-    }
 }
+
 
 export function throwAlert(
     event:{
