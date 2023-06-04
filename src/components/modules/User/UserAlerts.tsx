@@ -47,7 +47,7 @@ export class UserAlerts extends sComponent {
           <Modal.Body>
             <div> 
                 <Row><Col>Timestamp</Col><Col>Message</Col><Col>Value</Col><Col>From</Col></Row>
-                { as?.map((v,i) => { console.log(v.timestamp); return <Row key={i}><Col>{toISOLocal(v.timestamp)}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{v.from}</Col></Row>})}
+                { as?.map((v,i) => { return <Row key={i}><Col>{toISOLocal(v.timestamp)}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{v.from}</Col></Row>})}
             </div>
             <Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button>
           </Modal.Body>
