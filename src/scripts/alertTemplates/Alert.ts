@@ -21,11 +21,22 @@ export class Alert {
     ) {
         this.__node = { tag: name };
         if(check) this.check = check;
+        else this.check = function (data:any) {
+            console.log('data', data); 
+    
+            return undefined; //this won't throw a result to the main thread if undefined, to save some cpu
+        }
         if(props) Object.assign(this,props);
 
+        this.__operator = function (data) {
+            return this.check(data);
+        }
+
         let worker = workers.addWorker({url:gsworker});
+
+        console.log(Object.keys(this));
         
-        graph.run('transferNode',
+        let transferred = graph.run('transferNode',
             this,
             worker,
             name
@@ -48,15 +59,7 @@ export class Alert {
 
     }
 
-    check(data:any) {
-        console.log('data', data); 
-
-        return undefined; //this won't throw a result to the main thread if undefined, to save some cpu
-    }
-
-    __operator(data) {
-        return this.check(data);
-    }
+    
     
 
 }
