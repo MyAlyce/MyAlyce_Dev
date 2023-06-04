@@ -7,6 +7,7 @@ import { sComponent } from '../../state.component';
 import { Button, Col, Modal, Row, Table } from 'react-bootstrap';
 import { toISOLocal } from 'graphscript-services.storage';
 import { throwAlert } from '../../../scripts/alerts';
+import { BeatingSVG } from '../../svg/BeatingSVG/BeatingSVG';
 
 export class UserAlerts extends sComponent {
 
@@ -45,7 +46,7 @@ export class UserAlerts extends sComponent {
         <Badge bg="danger">{len ? len : 0}</Badge>
         <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>
-            <Modal.Title><Icon.AlertTriangle size={26}/>&nbsp;Alerts</Modal.Title>
+            <Modal.Title style={{position:'relative'}}><BeatingSVG customContent={<Icon.AlertTriangle size={26} color={'red'}/>}/>&nbsp;</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div> 
@@ -55,6 +56,7 @@ export class UserAlerts extends sComponent {
             <Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button>
           </Modal.Body>
           <Modal.Footer>
+            
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>

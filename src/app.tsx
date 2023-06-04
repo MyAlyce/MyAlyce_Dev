@@ -114,23 +114,52 @@ export class App extends sComponent {
 
         return (
             <div style={{width:'100%', height:'100%'}}>
-                {this.state.loggingIn && //TODO: RESTYLE
-                    <div style={{zIndex:100, position:'absolute', width:'100%', height:'100%', backgroundColor:'royalblue', color:'white'}}>
-                        LOADING
+                {((!this.state.isLoggedIn || this.state.loggingIn) && !TESTVIEWS) && //TODO: RESTYLE
+                    <div className='logincover' style={{zIndex:100, position:'absolute', width:'100%', height:'100%', color:'white'}}> 
+                        <div className="wave-container">
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                        </div>
+                        <div className="wave-container2">
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                        </div>
+                        {
+                            this.state.loggingIn ? 
+                                <img style={{   
+                                    position:'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)' /* Apply negative top and left margins to truly center the element */
+                                }} className="img-fluid" width="360" alt="myAlyce" src={myalyceLogo} />
+                                :
+                            <>
+                                <img style={{   
+                                    position:'absolute',
+                                    top: '25%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)' /* Apply negative top and left margins to truly center the element */
+                                }} className="img-fluid" width="360" alt="myAlyce" src={myalyceLogo} />
+                                <Button style={{   
+                                    position:'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    backgroundColor: 'ghostwhite',
+                                    transform: 'translate(-50%, -50%)' /* Apply negative top and left margins to truly center the element */
+                                }} onClick={this.onGoogleLoginClick}>
+                                    <img src={googleLogo} width="50px"></img>
+                                    <br/> Login With Google
+                                </Button>
+                            </>
+                        }
+                        
                     </div>
-                }
-                {(!this.state.isLoggedIn && !TESTVIEWS) &&  
-                    <Login //TODO: RESTYLE
-                        useRegularLogin={false}
-                        onLoginClick={this.onLoginClick}
-                        thirdPartyLogins={[
-                            {
-                                name:'Google',
-                                logo:(<img src={googleLogo} width="50px"></img>),
-                                onClick:this.onGoogleLoginClick
-                            }
-                        ]}   
-                    ></Login>
                 }
                 { (this.state.isLoggedIn || TESTVIEWS) && 
                     <div className="flex-container">

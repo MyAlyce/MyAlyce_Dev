@@ -7,6 +7,7 @@ import { Widget } from "../../widgets/Widget";
 import { RTCVideo } from "./WebRTCStream";
 
 import * as Icon from 'react-feather'
+import { Avatar } from "../User/Avatar";
 
 
 export function StartCall(props:{userId:string, onClick?:(call?)=>void}) {
@@ -66,18 +67,19 @@ export function AnswerCallModal (props:{streamId:string}) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    let call = state.data.unansweredCalls[props.streamId] as RTCCallProps;
     //console.log('answer call modal');
     
     return (
         <Modal show={show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>
-            <Modal.Title><Icon.User className="align-text-bottom" color="red" size={26}></Icon.User>&nbsp;My Connections</Modal.Title>
+            <Modal.Title><Icon.PhoneCall className="align-text-bottom" color="red" size={26}></Icon.PhoneCall>&nbsp;Incoming Call</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Button onClick={() => {
-                answerCall(state.data.unansweredCalls[props.streamId]);
+          {call && <Row>From: <Col>{call.pictureUrl ? <Avatar pictureUrl={call.pictureUrl}/> : null}{call.firstName ? `${call.firstName} ${call.lastName}` : null }</Col><Col><Button onClick={() => {
+                answerCall(call);
                 handleClose();
-            }}>Answer Call</Button>
+            }}>Answer Call</Button></Col></Row> }
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={()=>{
@@ -276,6 +278,8 @@ export class ViewSelfVideoStream extends sComponent {
             }
         });
 
+        console.log('video track', videoTrack);
+
         if(videoTrack) {
             let s = new MediaStream();
             s.addTrack(videoTrack);
@@ -366,18 +370,21 @@ export class MediaDeviceOptions extends sComponent {
                 title={"Voice and Video Options"}
                 content={
                     <>
-                        { this.audioInDevices?.length > 0 && ( <Row>
+                        { this.audioInDevices?.length > 0 && ( 
+                        <Row>
                             <Col>Mic In:</Col>   
                             <Col><select id={this.unique+'aIn'} onChange={(ev) => this.setState({selectedAudioIn: ev.target.value})}>{this.audioInDevices}</select></Col>
                         </Row>)}
-                        { this.audioOutDevices?.length > 0 && (<Row>
+                        { this.audioOutDevices?.length > 0 && (
+                        <Row>
                             <Col>Audio Out:</Col>
                             <Col><select id={this.unique+'aOut'} onChange={(ev) => this.setState({selectedAudioOut: ev.target.value})}>{this.audioOutDevices}</select></Col>
                         </Row>)}
-                        { this.cameraDevices?.length > 0 && ( <Row>
+                        { this.cameraDevices?.length > 0 && ( 
+                        <Row>
                             <Col>Camera In:</Col>
                             <Col><select id={this.unique+'vIn'} onChange={(ev) => this.setState({selectedVideo: ev.target.value})}>{this.cameraDevices}</select></Col>
-                            </Row>)}
+                        </Row>)}
                     </>
                 }
             />

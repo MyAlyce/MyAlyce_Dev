@@ -2,7 +2,7 @@ import React from "react";
 import { brworker, characteristicCallbacks, connectDevice, 
     disconnectDevice, hrworker, serviceCharacteristic, setupBRWorker, 
     setupHRWorker, terminateBRWorker, terminateHRWorker } from "../../../scripts/device";
-import { Button } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import { sComponent } from "../../state.component";
 import {SensorDefaults, Sensors, client, state} from '../../../scripts/client'
 import { stopdemos } from "../../../scripts/demo";
@@ -33,8 +33,7 @@ export class DeviceConnect extends sComponent {
             <Widget
                 className={"mx-auto"}
                 content={
-                    <Col className="mx-auto">   
-                        <span className="mx-auto">
+                    <Row className="mx-auto">   
                         { !this.state.deviceConnected ? 
                             
                             <Col>
@@ -87,8 +86,7 @@ export class DeviceConnect extends sComponent {
                                 </Col>
                             </>
                         } 
-                        </span>
-                    </Col>
+                    </Row>
                 }
             />      
         );
