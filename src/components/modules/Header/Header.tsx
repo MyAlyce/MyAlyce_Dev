@@ -21,7 +21,7 @@ export class Header extends sComponent {
         return(
             <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" id={this.unique+'header'}>
                  <a className="col-md-3 col-lg-2 me-0 px-3 fs-6" href="#"><img className="img-fluid" width="120" alt="myAlyce" src={myalyceLogo} /></a>
-                 <Icon.Bell className="align-text-bottom" color="white" size={30}></Icon.Bell>
+                 {/* <Icon.Bell className="align-text-bottom" color="white" size={30}></Icon.Bell> */}
                  <FriendsModal />
                  <div className="navbar-nav">
                      <div className="nav-item text-nowrap">

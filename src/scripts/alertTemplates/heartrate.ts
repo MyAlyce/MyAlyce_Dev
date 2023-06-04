@@ -20,16 +20,27 @@ export class HeartRateAlert extends Alert {
                     timestamp:  number[]|number
                 }
             ) {
+                if(this.failed === undefined) this.failed = 0;
                 if(data.hr < 25) {
-                    let ts = data.timestamp;
-                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
-                    return {message:"Heart rate low", value:data.hr, timestamp:ts ? ts : Date.now()};
+                    this.failed++;
+                    if(this.failed >= 3) {
+                        let ts = data.timestamp;
+                        if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                        this.failed = 0
+                        return {message:"Heart rate low", value:data.hr, timestamp:ts ? ts : Date.now()};
+                        
+                    }
                 }
                 else if (data.hr > 180) {
-                    let ts = data.timestamp;
-                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
-                    return {message:"Heart rate high", value:data.hr, timestamp:ts ? ts : Date.now()};
-                }
+                    this.failed++;
+                    if(this.failed >= 3) {
+                        let ts = data.timestamp;
+                        if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                        this.failed = 0;
+                        return {message:"Heart rate high", value:data.hr, timestamp:ts ? ts : Date.now()};
+                        
+                    }
+                } else this.failed = 0;
             },
             {
                 sps:sampleRate //e.g. write the sample rate

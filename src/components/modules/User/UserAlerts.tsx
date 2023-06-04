@@ -16,7 +16,10 @@ export class UserAlerts extends sComponent {
 
 
   componentDidMount(): void {
-    this.__subscribeComponent(this.props.streamId ? this.props.streamId+'alert' : 'alert');
+    this.__subscribeComponent(this.props.streamId ? this.props.streamId+'alert' : 'alert', (value) => {
+      this.show = true;
+      this.setState({});
+    });
   }
 
   componentWillUnmount(): void {
@@ -42,12 +45,12 @@ export class UserAlerts extends sComponent {
         <Badge bg="danger">{len ? len : 0}</Badge>
         <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>
-            <Modal.Title><Icon.User className="align-text-bottom" color="red" size={26}></Icon.User>&nbsp;My Connections</Modal.Title>
+            <Modal.Title><Icon.AlertTriangle size={26}/>&nbsp;Alerts</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div> 
                 <Row><Col>Timestamp</Col><Col>Message</Col><Col>Value</Col><Col>From</Col></Row>
-                { as?.map((v,i) => { return <Row key={i}><Col>{toISOLocal(v.timestamp)}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{v.from}</Col></Row>})}
+                { as ? [...as].reverse().map((v,i) => { return <Row key={i}><Col>{toISOLocal(v.timestamp)}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{v.from}</Col></Row>}) : null}
             </div>
             <Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button>
           </Modal.Body>

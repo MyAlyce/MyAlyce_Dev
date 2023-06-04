@@ -79,7 +79,7 @@ export function onAlert(event, streamId?) {
     console.warn("Alert:", event);
 
     let sound = new Howl({src:'./sounds/alarm.wav'});
-    sound.volume(0.5);
+    sound.volume(0.05);
     sound.play(undefined,false);
     showNotification("Alert:", `${event.message} ${event.value ? ': '+event.value : ''} at ${toISOLocal(new Date(event.timestamp))}` );
 

@@ -20,17 +20,25 @@ export class BreathAlert extends Alert {
                     timestamp: number[]|number
                 }
             ) {
-                
+                if(this.failed === undefined) this.failed = 0;
                 if(data.breath < 3) {
-                    let ts = data.timestamp;
-                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
-                    return {message:"Breathing rate low", value:data.breath, timestamp:ts ? ts : Date.now()};
+                    this.failed++;
+                    if(this.failed >= 3) {
+                        let ts = data.timestamp;
+                        if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                        this.failed = 0;
+                        return {message:"Breathing rate low", value:data.breath, timestamp:ts ? ts : Date.now()};
+                    }
                 }
                 else if (data.breath > 20) {
-                    let ts = data.timestamp;
-                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
-                    return {message:"Breathing rate high", value:data.breath, timestamp:ts ? ts : Date.now()};
-                }
+                    this.failed++;
+                    if(this.failed >= 3) {
+                        let ts = data.timestamp;
+                        if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                        this.failed = 0;
+                        return {message:"Breathing rate high", value:data.breath, timestamp:ts ? ts : Date.now()};
+                    }
+                } else this.failed = 0;
             },
             {
                 sps:sampleRate //e.g. write the sample rate
