@@ -18,6 +18,7 @@
 
 ### RTC
 
+- need to quit calls on sign out click (ez)
 - proper call interface
 - test buffering more
 - fix audio, not sure why it's not audible on receiver as the channels appear to negotiate
