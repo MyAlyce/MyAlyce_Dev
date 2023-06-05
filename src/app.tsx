@@ -175,6 +175,9 @@ export class App extends sComponent {
                                         { state.data.unansweredCalls && Object.keys(state.data.unansweredCalls).map((rtcId) => {
                                             return <span key={Math.random()}><AnswerCallModal streamId={rtcId}/></span>
                                         })}
+                                        { 
+                                            this.state.activeStream && <UserAlerts hideIcon={true}/> //render own alerts when other user is in focus, their dashboard will have an alert modal otherwise
+                                        } 
                                         { state.data.availablestreams && Object.keys(state.data.availablestreams).map((rtcId) => { //render alerts 
                                             if(this.state.activeStream !== rtcId) return <span key={Math.random()}><UserAlerts streamId={rtcId} hideIcon={true}/></span>
                                         })}
