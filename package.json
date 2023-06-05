@@ -30,7 +30,7 @@
     "@giveback007/fitbit-api": "^0.1.0",
     "bootstrap": "^5.2.3",
     "classnames": "^2.3.2",
-    "device-decoder": "~0.5.0",
+    "device-decoder": "~0.5.12",
     "graphscript": "~0.2.128",
     "graphscript-services": "~0.2.142",
     "graphscript-services.storage": "~0.2.131",
