@@ -25,7 +25,7 @@ export class BreathAlert extends Alert {
                     this.failed++;
                     if(this.failed >= 3) {
                         let ts = data.timestamp;
-                        if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                        if(Array.isArray(ts)) ts = ts[ts.length-1];
                         this.failed = 0;
                         return {message:"Breathing rate low", value:data.breath, timestamp:ts ? ts : Date.now()};
                     }
@@ -34,7 +34,7 @@ export class BreathAlert extends Alert {
                     this.failed++;
                     if(this.failed >= 3) {
                         let ts = data.timestamp;
-                        if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                        if(Array.isArray(ts)) ts = ts[ts.length-1];
                         this.failed = 0;
                         return {message:"Breathing rate high", value:data.breath, timestamp:ts ? ts : Date.now()};
                     }

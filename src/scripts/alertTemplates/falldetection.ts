@@ -40,7 +40,7 @@ export class FallAlert extends Alert {
                 
                 if(magnitude > this.upperBound) {
                     let ts = data.timestamp;
-                    if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                    if(Array.isArray(ts)) ts = ts[ts.length-1];
                     return {
                         message:"Force Threshold Surpassed: "+this.upperBound,
                         value:magnitude,

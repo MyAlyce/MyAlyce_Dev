@@ -121,6 +121,9 @@ html, body {
     50% {
         transform: translateY(-30%) rotate(20deg);
     }
+    /* 25% {
+        transform: rotate(20deg);
+    } */
 }
 
 .logincover {

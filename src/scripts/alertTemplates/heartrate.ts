@@ -25,7 +25,7 @@ export class HeartRateAlert extends Alert {
                     this.failed++;
                     if(this.failed >= 3) {
                         let ts = data.timestamp;
-                        if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                        if(Array.isArray(ts)) ts = ts[ts.length-1];
                         this.failed = 0
                         return {message:"Heart rate low", value:data.hr, timestamp:ts ? ts : Date.now()};
                         
@@ -35,7 +35,7 @@ export class HeartRateAlert extends Alert {
                     this.failed++;
                     if(this.failed >= 3) {
                         let ts = data.timestamp;
-                        if(Array.isArray(ts)) data.timestamp = ts[ts.length-1];
+                        if(Array.isArray(ts)) ts = ts[ts.length-1];
                         this.failed = 0;
                         return {message:"Heart rate high", value:data.hr, timestamp:ts ? ts : Date.now()};
                         

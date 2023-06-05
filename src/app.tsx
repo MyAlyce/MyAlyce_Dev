@@ -26,6 +26,7 @@ import { AnswerCallModal, MediaDeviceOptions, ToggleAudioVideo, ViewSelfVideoStr
 import { Widget } from './components/widgets/Widget';
 import { Button } from 'react-bootstrap';
 import { throwAlert } from './scripts/alerts';
+import { UserAlerts } from './components/modules/User/UserAlerts';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -174,7 +175,10 @@ export class App extends sComponent {
                                         { state.data.unansweredCalls && Object.keys(state.data.unansweredCalls).map((rtcId) => {
                                             return <span key={Math.random()}><AnswerCallModal streamId={rtcId}/></span>
                                         })}
-                                        
+                                        { state.data.availablestreams && Object.keys(state.data.availablestreams).map((rtcId) => { //render alerts 
+                                            if(this.state.activeStream !== rtcId) return <span key={Math.random()}><UserAlerts streamId={rtcId} hideIcon={true}/></span>
+                                        })}
+
                                         {/** Page URLS */}
                                         { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
                                             <Dashboard/>

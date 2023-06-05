@@ -11,7 +11,7 @@ import { BeatingSVG } from '../../svg/BeatingSVG/BeatingSVG';
 
 export class UserAlerts extends sComponent {
 
-  constructor(props:{streamId?:string}) {
+  constructor(props:{streamId?:string, hideIcon?:boolean}) {
     super(props);
   }
 
@@ -41,7 +41,7 @@ export class UserAlerts extends sComponent {
 
     return (
       <>
-        <Icon.Bell style={{cursor:'pointer'}}  className="svghover align-text-bottom" size={40} onClick={handleShow}></Icon.Bell>
+        {this.props.hideIcon ? null : <Icon.Bell style={{cursor:'pointer'}}  className="svghover align-text-bottom" size={40} onClick={handleShow}></Icon.Bell>}
         <Badge bg="danger">{len ? len : 0}</Badge>
         <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>
