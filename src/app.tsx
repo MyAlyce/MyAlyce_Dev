@@ -207,6 +207,8 @@ export class App extends sComponent {
                         <div className="footer">
                             <DropdownDrawer 
                                 direction={'up'}
+                                openText='Open Menu'
+                                closeText='Close Menu'
                                 content={[
                                     (<div className="stream-select" key={1}>
                                         {/** Device Connect */}
