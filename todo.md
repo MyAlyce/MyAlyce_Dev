@@ -18,7 +18,6 @@
 
 ### RTC
 
-- need to quit calls on sign out click (ez)
 - proper call interface
 - test buffering more
 

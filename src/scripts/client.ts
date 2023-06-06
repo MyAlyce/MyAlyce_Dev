@@ -278,6 +278,10 @@ export const logoutSequence = () => {
     } else if (state.data.deviceConnected) {
         disconnectDevice();
     }
+    for(const key in webrtc.rtc) {
+        webrtc.rtc[key].terminate();
+        delete webrtc.rtc[key];
+    }
     logout(onLogout);
 }
 
