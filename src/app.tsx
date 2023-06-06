@@ -139,11 +139,14 @@ export class App extends sComponent {
                                     !this.state.loggingIn && !this.state.isLoggedIn && !this.state.fetchingLogin && <>
                                         <br />
                                         <br />
+                                        <br />
+                                        <span style={{color:'white'}}>Log In</span>
+                                        <br />
+                                        <br />
                                         <Button style={{   
                                             backgroundColor: 'ghostwhite',
                                         }} onClick={this.onGoogleLoginClick}>
                                             <img src={googleLogo} width="50px"></img>
-                                            <br/> Login With Google
                                         </Button>
                                     </>
                             }
