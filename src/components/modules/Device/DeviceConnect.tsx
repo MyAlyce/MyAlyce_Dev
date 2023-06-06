@@ -61,7 +61,7 @@ export class DeviceConnect extends sComponent {
                                 </Col>
                                 {/** Toggles for sensor subscriptions */}
                                 <Col>
-                                    <StreamToggle
+                                    Sensors: <StreamToggle
                                         toggled={this.sensors}
                                         subscribable={[...SensorDefaults]}
                                         onChange={(ev) => {
