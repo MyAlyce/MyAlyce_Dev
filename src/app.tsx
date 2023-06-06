@@ -89,8 +89,6 @@ export class App extends sComponent {
     }
 
     onGoogleLoginClick() {
-        
-        state.setState({fetchingLogin:true});
         login('google').then(async (result) => {
             let u = await onLogin(result); //process login
             //if(u) await restoreSession(u as any); //restore previous session if matching user
@@ -138,7 +136,7 @@ export class App extends sComponent {
                         <div className="cover-content">
                             <img className="img-fluid" width="360" alt="myAlyce" src={myalyceLogo} />
                             {
-                                    !this.state.isLoggedIn && !this.state.fetchingLogin && <>
+                                    !this.state.loggingIn && !this.state.isLoggedIn && !this.state.fetchingLogin && <>
                                         <br />
                                         <br />
                                         <Button style={{   
