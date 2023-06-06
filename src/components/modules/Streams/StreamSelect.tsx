@@ -84,7 +84,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
                                 onClick={() => this.onItemClick('Demo')}
                                 className={this.state.activeStream === undefined ? 'selected' : ''}
                             >
-                                <Widget header={"Demo Data"} content={<>No content available</>}/>
+                                <Widget className='hoverdiv' header={"Demo Data"} content={<></>}/>
                             </div>
                             <div
                                 key="My-Device"
@@ -92,7 +92,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
                                 onClick={() => this.onItemClick('My Device')}
                                 className={this.state.activeStream === undefined ? 'selected' : ''}
                             >
-                                <Widget header={<>My Device</>} content={<UserBar/>} />
+                                <Widget className='hoverdiv'  header={<>My Device</>} content={<UserBar/>} />
                                 
                             </div>
                             {Object.keys(webrtc.rtc).length > 0 &&
@@ -104,7 +104,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
                                     onClick={() => this.onItemClick(key)}
                                     className={this.state.activeStream === key ? 'selected' : ''}
                                 >
-                                    <Widget content={<UserBar streamId={key}/>} />
+                                    <Widget className='hoverdiv'  content={<UserBar streamId={key}/>} />
                                 </div>
                                 );
                             })}
