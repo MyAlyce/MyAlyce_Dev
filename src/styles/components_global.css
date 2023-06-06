@@ -38,11 +38,13 @@ button:hover {
 }
 
 .btn-dark:hover {
+    white-space: nowrap;
     text-shadow:1px 1px 10px #fff, 1px 1px 10px #ccc;
     transform: translateY(-2px);
 }
 
 .btn-primary {
+    white-space: nowrap;
     font-family: Verdana;
     font-size: 0.9rem;
     outline: 1px solid rgba(0, 0, 0, 0.289);

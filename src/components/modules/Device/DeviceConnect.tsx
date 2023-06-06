@@ -33,13 +33,13 @@ export class DeviceConnect extends sComponent {
 
         return (      
             <Widget
-                className={"mx-auto"}
+                className={"mx-auto my-auto"}
                 content={
-                    <Row className="mx-auto">   
+                    <Row className="mx-auto my-auto">   
                         { !this.state.deviceConnected ? 
                             
                             <>
-                            <Col>
+                            <Col className="mx-auto my-auto">
                                 <Button onClick={()=>{
                                     if(state.data.demoing) {
                                         stopdemos();
@@ -52,7 +52,7 @@ export class DeviceConnect extends sComponent {
                             </Col>
                             </> :
                             <>
-                                <Col>
+                                <Col className="mx-auto my-auto">
                                     <Button onClick={()=>{
                                         if(state.data.demoing) {
                                             stopdemos();
@@ -61,7 +61,7 @@ export class DeviceConnect extends sComponent {
                                 </Col>
                                 {/** Toggles for sensor subscriptions */}
                                 <Col>
-                                    Sensors: <StreamToggle
+                                    <StreamToggle
                                         toggled={this.sensors}
                                         subscribable={[...SensorDefaults]}
                                         onChange={(ev) => {
