@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Widget } from "../../widgets/Widget";
 import { Button, Col, Row } from "react-bootstrap";
 import { BFSRoutes, csvRoutes } from "graphscript-services.storage";
-import { client, driveInstance, webrtc } from "../../../scripts/client";
+import { client, driveInstance, splitCamelCase, webrtc } from "../../../scripts/client";
 import { RTCCallInfo } from "../../../scripts/webrtc";
 
 import { workers } from 'device-decoder';
@@ -12,6 +12,8 @@ import { WorkerInfo } from 'graphscript';
 import * as Icon from 'react-feather'
 
 let GDriveIcon = "./assets/GDrive.svg";
+
+let selectedFolder = '';
 
 export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
 
@@ -27,7 +29,9 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
     constructor(props:{dir?:string, streamId?:string}) {
         super(props);
 
-        this.dir = props?.dir;
+
+        this.dir = props.dir;
+        if(this.dir) selectedFolder = this.dir;
         this.streamId = props?.streamId;
     }
 
@@ -37,10 +41,14 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
             client.currentUser.firstName+client.currentUser.lastName + '/folderList'
         ).then((data:any) => {
             this.setState({folders:data.folder});
+            this.listRecordings();
         });
     }
 
     componentDidMount(): void {
+
+        this.dir = selectedFolder;
+
         this.csvworker = workers.addWorker({url:gsworker});
         if(client.currentUser) this.csvworker.run('checkFolderList', [client.currentUser.firstName+client.currentUser.lastName+'/folderList', this.dir]).then(()=> {        
             this.parseFolderList();
@@ -63,10 +71,11 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
         
         let filelist = await BFSRoutes.listFiles(dir); //list for a particular user
         //getfilelist
+        if(!selectedFolder) selectedFolder = dir;
 
         filelist.forEach((file) => {
 
-            if(!file.includes('folderList')) {
+            if(!file.includes('folderList') && !file.includes('state')) {
 
                 let download = async () => {
                     csvRoutes.writeToCSVFromDB(dir+'/'+file, 10); //download files in chunks (in MB). !0MB limit recommended, it will number each chunk for huge files
@@ -104,15 +113,19 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
 
     render() {
 
+
+        console.log(this.state.recordings);
         return (
             <Widget 
                 header={( <b>Recordings</b> )}
                 content={
                     <>
                     <label>Select Folder:</label>&nbsp;
-                    <select onChange={(ev)=>{ this.dir = ev.target.value; this.listRecordings(); }}>
+                    <select value={selectedFolder} onChange={(ev)=>{ 
+                        this.dir = ev.target.value; selectedFolder=ev.target.value; this.listRecordings(); 
+                        }}>
                         { this.state.folders ? this.state.folders.map((v) => {
-                            return (<option value={v} key={v}>{v}</option>)
+                            return (<option value={v} key={v}>{splitCamelCase(v)}</option>)
                         }) : null }
                     </select>
                     <hr />

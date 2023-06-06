@@ -210,7 +210,7 @@ export class App extends sComponent {
                                 openText='Open Menu'
                                 closeText='Close Menu'
                                 content={
-                                    [<div className="d-flex flex-column" style={{gap: '10px'}}>
+                                    [<div key={1} className="d-flex flex-column" style={{gap: '10px'}}>
                                         {[
                                             (<div className="stream-select" key={1}>
                                                 {   

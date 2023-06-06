@@ -9,7 +9,7 @@ import {state} from '../../../scripts/client'
 export function Navigation (){
   const [expanded, setExpanded] = useState(false);
   
-  console.log(window.location.pathname)
+  //console.log(window.location.pathname)
     return (
         <>
         <Navbar bg="light" expand="md" expanded={expanded}>
