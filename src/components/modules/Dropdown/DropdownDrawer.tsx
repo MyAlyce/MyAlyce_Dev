@@ -3,7 +3,7 @@ import { Collapse } from 'react-bootstrap';
 
 import './DropdownDrawer.css'
 
-export class DropdownDrawer extends Component<{direction?:'up'|'down', isOpen?:boolean, content:any[]}> {
+export class DropdownDrawer extends Component<{direction?:'up'|'down', openText?:string, closeText?:string, isOpen?:boolean, content:any[]}> {
   state = {
     isOpen: false,
     exited:false
@@ -21,6 +21,9 @@ export class DropdownDrawer extends Component<{direction?:'up'|'down', isOpen?:b
 
     const arrowClass = `arrow-button arrow-button-${direction}`;
 
+    let openArrow = direction ? '▼' : '▲';
+    let closeArrow = direction ? '▲' : '▼';
+
     return (
       <div className="drawer-container">
         {direction === 'up' ? 
@@ -30,7 +33,9 @@ export class DropdownDrawer extends Component<{direction?:'up'|'down', isOpen?:b
                         <td width='100%'></td>
                         <td>
                             <button className={arrowClass} onClick={this.toggleDrawer}>
-                                {isOpen ? '▼' : '▲' }
+                                <div>
+                                    {isOpen ? (this.props.closeText ? this.props.closeText + ' ' + openArrow : openArrow) : (this.props.openText ? this.props.openText + ' ' + closeArrow : closeArrow) }
+                                </div>
                             </button>
                         </td>
                     </tr>
