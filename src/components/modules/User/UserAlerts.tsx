@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import * as Icon from 'react-feather';
 import Badge from 'react-bootstrap/Badge';
-import { alerts, webrtc, webrtcData } from '../../../scripts/client';
+import { alerts, splitCamelCase, webrtc, webrtcData } from '../../../scripts/client';
 import { sComponent } from '../../state.component';
 import { Button, Col, Modal, Row, Table } from 'react-bootstrap';
 import { toISOLocal } from 'graphscript-services.storage';
@@ -50,7 +50,7 @@ export class UserAlerts extends sComponent {
           <Modal.Body>
             <div> 
                 <Row><Col>Timestamp</Col><Col>Message</Col><Col>Value</Col><Col>From</Col></Row>
-                { as ? [...as].reverse().map((v,i) => { return <Row key={i}><Col>{toISOLocal(v.timestamp)}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{v.from}</Col></Row>}) : null}
+                { as ? [...as].reverse().map((v,i) => { return <Row key={i}><Col>{toISOLocal(v.timestamp)}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{splitCamelCase(v.from)}</Col></Row>}) : null}
             </div>
             <Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button>
           </Modal.Body>
