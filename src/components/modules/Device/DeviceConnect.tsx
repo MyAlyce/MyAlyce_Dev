@@ -38,6 +38,7 @@ export class DeviceConnect extends sComponent {
                     <Row className="mx-auto">   
                         { !this.state.deviceConnected ? 
                             
+                            <>
                             <Col>
                                 <Button onClick={()=>{
                                     if(state.data.demoing) {
@@ -45,7 +46,11 @@ export class DeviceConnect extends sComponent {
                                     }
                                     connectDevice(this.sensors);
                                 }}><Icon.Bluetooth/></Button>
-                            </Col> :
+                            </Col>
+                            <Col>
+                                <CallSelf/>  
+                            </Col>
+                            </> :
                             <>
                                 <Col>
                                     <Button onClick={()=>{

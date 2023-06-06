@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import { SensorDefaults, client, webrtc } from "../../../scripts/client";
 
+import { state } from '../../../scripts/client'
 
 import { WebRTCInfo } from 'graphscript'// "../../../../graphscript/index";//
 
@@ -37,10 +38,22 @@ export class RTCAudio extends Component<{
     audioOutId?:string //TODO: select output device for audio stream
 }> {
 
-    ctx = new AudioContext();
+    audioctx = new AudioContext();
     call?:RTCCallInfo;
     stream:MediaStream
     audioOutId?:string;
+    
+
+    gainNode;
+    filterNode;
+    srcNode;
+    analyserNode;
+
+    fftSize=256;
+    
+    canvas; ctx;
+    animating = true;
+
 
     constructor(props:{
         stream?:MediaStream, 
@@ -48,7 +61,22 @@ export class RTCAudio extends Component<{
         audioOutId?:string //TODO: select output device for audio stream
     }) {
         super(props);
+        this.setupAudio();
 
+        
+        let canvas = document.createElement('canvas');
+        let ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+        canvas.width = 800;
+        canvas.height = 400;
+        canvas.style.backgroundColor = 'black';
+        canvas.style.width = '100%';
+        canvas.style.height = '200px';
+        this.canvas = canvas;
+        this.ctx = ctx;
+    }
+
+    setupAudio = (props=this.props) => {
+                
         this.call = props.call;
 
         if(this.call && !props.stream) {
@@ -56,54 +84,139 @@ export class RTCAudio extends Component<{
         } else 
             this.stream = props.stream as MediaStream;
 
-        if(!this.call && !this.stream) navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then((stream) => { //get your own video if none specified
+        //get own audio
+        if(!props.call && !props.stream) navigator.mediaDevices.getUserMedia({ video: false, audio: state.data.selectedAudioIn ? {deviceId:state.data.selectedAudioIn} : true }).then((stream) => { //get your own video if none specified
             this.stream = stream;
+            state.subscribeEvent(
+                'selectedAudioIn', ()=>{
+                    this.setupAudio(); this.setState({});
+                }
+            );
+            this.finishSetup();
             this.forceUpdate();
-        })
+        });
+        else this.finishSetup();
 
-        this.audioOutId = props.audioOutId;
+
     }
 
-    async componentDidMount() {
-        //todo fix using howler for this
-
+    finishSetup = (props=this.props) => {
+        
+        this.audioOutId = props.audioOutId;
+        
         if((this.call as any)?.gainNode) {
             (this.call as any)?.gainNode.disconnect();
         }
 
         // let stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
         // let src = this.ctx.createMediaStreamSource(stream);
-        let src = this.ctx.createMediaStreamSource(this.stream);
 
-        let filterNode = this.ctx.createBiquadFilter();
+        //hack for chrome bug
+        if(props.call && navigator.userAgent.match(/chrome|chromium|crios/i)) {
+            let a = new Audio();
+            a.muted = true;
+            a.srcObject = this.stream;
+            a.addEventListener('canplaythrough', () => {
+                a = null as any;
+            });
+        }
+
+        //use audio context for local control
+        
+        let src = this.audioctx.createMediaStreamSource(this.stream);
+
+        let filterNode = this.audioctx.createBiquadFilter();
         filterNode.type = 'lowshelf'; 
         filterNode.frequency.value = 1000;
 
-        let gainNode = this.ctx.createGain();
+        let gainNode = this.audioctx.createGain();
         src.connect(filterNode);
         filterNode.connect(gainNode); //src.connect(gainNode); // filterNode.connect(gainNode);
-        // gainNode.gain.value = 1;
+        
+        //
+        //gainNode.gain.value = 1; 
+        if(!props.call && !props.stream) gainNode.gain.value = 0;
+        else gainNode.gain.value = 1;
 
-        if (this.audioOutId) (this.ctx as any).setSinkId(this.audioOutId)
-        gainNode.connect(this.ctx.destination);
+        if (this.audioOutId) try {(this.audioctx as any).setSinkId(this.audioOutId)} catch(er) {}
+        gainNode.connect(this.audioctx.destination);
 
-        if(this.call) {
-            (this.call as any).srcNode = src;
-            (this.call as any).filterNode = filterNode;
-            (this.call as any).gainNode = gainNode;
-        }
+        let analyser = this.audioctx.createAnalyser();
+        filterNode.connect(analyser);
+        analyser.fftSize = 256;
+        const bufferLength = analyser.frequencyBinCount;
 
+        setTimeout(() => {
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteFrequencyData(dataArray)
+            //console.log('byte frequency data', dataArray);
+        }, 2000)
+
+        this.srcNode = src;
+        this.filterNode = filterNode;
+        this.gainNode = gainNode;
+        this.analyserNode = analyser;
+
+        if(this.call) this.call.gainNode = gainNode;
+        
+
+    }
+
+
+    animation;
+
+    componentDidMount() {
+        this.animating = true;
     }
 
     componentWillUnmount(): void {
-        (this.call as any)?.srcNode?.disconnect();
+        this.gainNode?.disconnect();
+        this.srcNode?.disconnect();
+        this.animating = false;
+        if(this.animation) cancelAnimationFrame(this.animation);
     }
 
+
     render() {
+
+
+        let canvas = this.canvas;
+        let ctx = this.ctx; 
+
         return (
             <div>
-                <input type='range' min='0' max='1' step='0.01' defaultValue='1' onInput={(ev)=>{
-                    (this.call as any).gainNode.gain.value = (ev.target as any).value }}></input>
+                {this.gainNode && 
+                    <>
+                        <span ref={(ref)=>{
+                            ref?.appendChild(canvas);
+
+                            let animLoop = () => {
+                                if(this.analyserNode && this.animating) {
+                                    const bufferLength = this.analyserNode.frequencyBinCount;
+                                    const dataArray = new Uint8Array(bufferLength);
+                                    this.analyserNode.getByteFrequencyData(dataArray);
+                                    
+                                    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+                                    ctx.strokeStyle = 'green';
+                                    ctx.beginPath();
+                                    ctx.moveTo(0,0);
+                                    for(let i = 0; i < bufferLength; i++) {
+                                        ctx.lineTo(canvas.width*i/bufferLength, canvas.height - canvas.height*dataArray[i]/256 )
+                                    }   
+                                    ctx.stroke();
+
+                                    this.animation = requestAnimationFrame(animLoop);
+                                }
+                            }
+
+                            this.animation = requestAnimationFrame(animLoop);
+
+                        }} ></span>
+                        <input type='range' min='0' max='1' step='0.01' defaultValue={this.gainNode.gain.value} onInput={(ev)=>{
+                            this.gainNode.gain.value = (ev.target as any).value }}></input>
+                    </>
+                }
             </div>
         )
     }
@@ -163,6 +276,8 @@ export class RTCVideo extends Component<{stream?:MediaStream, call?:RTCCallInfo,
         //fill span, let span decide style
         this.video.style.height = "100%";
         this.video.style.width = "100%";
+        (this.video as HTMLVideoElement).volume = 1;
+        (this.video as HTMLVideoElement).muted = false;
 
         return (
             <span 

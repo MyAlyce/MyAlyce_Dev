@@ -228,7 +228,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
             });
         },
         ontrack:(ev) => {
-            console.log('\n\n\nreceived track\n\n\n', ev);
+            //console.log('\n\n\nreceived track\n\n\n', ev);
 
             setTimeout(() => {
                 if(ev.track.kind === 'audio') {
@@ -426,7 +426,7 @@ export function getCallerAudioVideo(streamId:string) {
     let audioStream; let videoStream;
 
     videoStream = stream.streams?.find((s) => (s as MediaStream)?.getVideoTracks().length > 0);
-    audioStream= stream.streams?.find((s) => (s as MediaStream)?.getAudioTracks().length > 0);
+    audioStream = stream.streams?.find((s) => (s as MediaStream)?.getAudioTracks().length > 0);
     
     hasVideo = videoStream !== undefined;
     hasAudio = audioStream !== undefined;
@@ -447,6 +447,8 @@ export function BufferAndSend(data:any, bufKey:string, stream:WebRTCInfo, buffer
         ///console.log( 'sent', buffers);
         if((stream.channels?.['data'] as RTCDataChannel).readyState === 'open')
             stream.send({...buffers});
+
+        //console.log({...buffers});
         tStart = now;
         for (const key in buffers) delete buffers[key];
     } else {

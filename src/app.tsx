@@ -1,5 +1,5 @@
 import React from 'react'
-import {getActiveStreamDir, state} from './scripts/client'//'../../graphscript/index'//
+import {getActiveStreamDir, state, webrtcData} from './scripts/client'//'../../graphscript/index'//
 
 import { sComponent } from './components/state.component';
 import { login, logout } from './scripts/login';
@@ -27,6 +27,7 @@ import { Widget } from './components/widgets/Widget';
 import { Button } from 'react-bootstrap';
 import { throwAlert } from './scripts/alerts';
 import { UserAlerts } from './components/modules/User/UserAlerts';
+import { RTCAudio } from './components/modules/WebRTC/WebRTCStream';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -235,7 +236,7 @@ export class App extends sComponent {
                                     </div>),
                                     (<span key={2}><Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button></span>),
                                     (<span key={3}><MediaDeviceOptions/></span>),
-                                    (<span key={4}>{this.state.activeStream && <ViewSelfVideoStream streamId={this.state.activeStream}/>}</span>),
+                                    (<span key={4}>{ this.state.activeStream && <><ViewSelfVideoStream streamId={this.state.activeStream}/> { webrtcData.availableStreams[this.state.activeStream].audioStream && <RTCAudio /> } </> }</span>),
                                     (<span key={5}><br/><br/><br/></span>) //pads it at the bottom to stay above the footer
                                 ]}
                             />

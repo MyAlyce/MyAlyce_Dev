@@ -106,6 +106,7 @@ export class Dashboard extends sComponent {
                                         content={
                                             <>
                                                 <RTCAudio
+                                                    call={call}
                                                     audioOutId={state.data.selectedAudioOut}
                                                 />
                                             </>

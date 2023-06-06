@@ -278,7 +278,7 @@ export class ViewSelfVideoStream extends sComponent {
             }
         });
 
-        console.log('video track', videoTrack);
+        //console.log('video track', videoTrack);
 
         if(videoTrack) {
             let s = new MediaStream();

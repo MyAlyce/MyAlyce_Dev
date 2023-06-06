@@ -41,8 +41,8 @@ export class UserAlerts extends sComponent {
 
     return (
       <>
-        {this.props.hideIcon ? null : <Icon.Bell style={{cursor:'pointer'}}  className="svghover align-text-bottom" size={40} onClick={handleShow}></Icon.Bell>}
-        <Badge bg="danger">{len ? len : 0}</Badge>
+        {this.props.hideIcon ? null : <><Icon.Bell style={{cursor:'pointer'}}  className="svghover align-text-bottom" size={40} onClick={handleShow}></Icon.Bell>
+        <Badge bg="danger">{len ? len : 0}</Badge></>}
         <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>
             <Modal.Title style={{position:'relative'}}><BeatingSVG customContent={<Icon.AlertTriangle size={26} color={'red'}/>}/>&nbsp;</Modal.Title>
