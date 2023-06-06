@@ -181,7 +181,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         return (
             <Widget 
                 style={{ maxWidth: '20rem' }}
-                header={"Log Event"}
+                header={( <b>Log Event</b> )}
                 content = {<>
                     <div>
                         <label><Icon.BookOpen/></label>{' '}<input ref={this.ref1 as any} id={this.id+'event'} placeholder="Event"  name="event" defaultValue="" style={{width:'87.5%'}}/>
@@ -212,7 +212,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         return (
             <Widget 
                 style={{ width: '40rem' }}
-                header={"History:"}
+                header={( <b>History</b> )}
                 content={
                     <Table striped bordered hover>
                         <tbody>

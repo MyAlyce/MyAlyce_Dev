@@ -106,19 +106,20 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
 
         return (
             <Widget 
-                header={( 
-                    <h2>Recordings</h2>
-                )}
-                title={(<>
-                    <strong>Select Folder: </strong>
+                header={( <b>Recordings</b> )}
+                content={
+                    <>
+                    <label>Select Folder:</label>&nbsp;
                     <select onChange={(ev)=>{ this.dir = ev.target.value; this.listRecordings(); }}>
                         { this.state.folders ? this.state.folders.map((v) => {
                             return (<option value={v} key={v}>{v}</option>)
                         }) : null }
                     </select>
-                </>)}
-                content={
-                    this.state.recordings ? this.state.recordings : ""
+                    <hr />
+                    <div>
+                        {this.state.recordings ? this.state.recordings : ""}
+                    </div>
+                </>
                 }
             />
         );

@@ -174,7 +174,8 @@ export class App extends sComponent {
                         </div>
                         <div id='viewcontent' className="flex-content">
                             <Navigation />
-                            <div id='route'>
+                            <div id='route' className='container-fluid'>
+
                                 {this.state.triggerPageRerender ? null : 
                                     <>
                                         { state.data.unansweredCalls && Object.keys(state.data.unansweredCalls).map((rtcId) => {
@@ -202,7 +203,6 @@ export class App extends sComponent {
                                 }
                                 
                             </div>
-                            <br/><br/><br/><br/>
                         </div>
                         <div className="footer">
                             <DropdownDrawer 
@@ -244,7 +244,6 @@ export class App extends sComponent {
                                     (<span key={5}><br/><br/><br/></span>) //pads it at the bottom to stay above the footer
                                 ]}
                             />
-                            <div style={{height:'50px'}}/>
                             <Footer />
                         </div>
                     </div>

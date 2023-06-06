@@ -31,8 +31,7 @@ export class Recordings extends sComponent {
         let dir =  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName;
 
         return (
-            <div className='container-fluid'>
-                <h1>Recording Manager</h1>
+            <div className="main-content d-flex flex-column" style={{gap: '10px'}}>
                 <NoteTaking 
                     streamId={ this.state.activeStream } 
                     filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 

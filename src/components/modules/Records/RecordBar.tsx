@@ -49,7 +49,7 @@ export class RecordBar extends sComponent {
         return (
             <Widget
                 style={{minWidth:'26rem'}}
-                header="Recording:"
+                header={( <b>Recording Controls</b> )}
                 content={(
                     <div className="d-grid gap-2">
                         {this.state.isRecording ? 

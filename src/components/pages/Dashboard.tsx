@@ -38,91 +38,86 @@ export class Dashboard extends sComponent {
         let call = getActiveStream();
         
         return (
-            <div className='container-fluid'>
-                <div className="main-content">
-                    {/* Widgets */}
-                    <Widget 
-                        header={<h4>Dashboard</h4>}
-                        title = {
-                            <UserBar 
-                                streamId={this.state.activeStream}
-                                pinOnClick={call ? () => {
-                                    getCallLocation(call as RTCCallInfo).then((res)=>{
-                                        alert("Callee Location: "+JSON.stringify(res));
-                                    });
-                                } : undefined}
-                                xOnClick={call ? () => {
-                                    call?.terminate();
-                                    delete webrtc.rtc[(call as RTCCallInfo)._id];
-                                    this.setState({activeStream:false, triggerPageRerender:true, availableStreams:webrtc.rtc});
-                                } : undefined}
-                                videoOnClick={call ? (onState) => {
-                                    this.setState({}); 
-                                } : undefined}
-                                audioOnClick={call ? (onState) => {
-                                    this.setState({});
-                                } : undefined}
-                            />
-                        }
-                    />
-                    <div className="device-section">
-                        {/* Charts and stats */}
-                        <Widget 
-                            content = {<Device
-                                streamId={ this.state.activeStream }
-                                sensors={['ppg']}
-                                onlyOneActive={true}
-                            />}
+            <div className="main-content d-flex flex-column" style={{gap: '10px'}}>
+                {/* Widgets */}
+                <Widget 
+                    title = {
+                        <UserBar 
+                            streamId={this.state.activeStream}
+                            pinOnClick={call ? () => {
+                                getCallLocation(call as RTCCallInfo).then((res)=>{
+                                    alert("Callee Location: "+JSON.stringify(res));
+                                });
+                            } : undefined}
+                            xOnClick={call ? () => {
+                                call?.terminate();
+                                delete webrtc.rtc[(call as RTCCallInfo)._id];
+                                this.setState({activeStream:false, triggerPageRerender:true, availableStreams:webrtc.rtc});
+                            } : undefined}
+                            videoOnClick={call ? (onState) => {
+                                this.setState({}); 
+                            } : undefined}
+                            audioOnClick={call ? (onState) => {
+                                this.setState({});
+                            } : undefined}
                         />
-                        <CardGroup>
-                            <RecordBar
-                                streamId={ this.state.activeStream }
-                                dir = { dir }
-                                // onChange={()=>{this.setState({});}}   
-                            />
-                            <NoteTaking 
-                                showHistory={ false }
-                                streamId={ this.state.activeStream } 
-                                filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
-                                dir={ dir }
-                            />
-                        </CardGroup>
-                        {(call?.viewingVideo || call?.viewingAudio) &&
-                            <CardGroup> 
-                                { call?.viewingVideo && 
-                                    <Widget
-                                        content={
-                                            <>
-                                                <RTCVideo
-                                                    call={call}
-                                                />
-                                            </>
-                                        }
-                                    />
-                                }
-                                {
-                                    call?.viewingAudio && 
-                                    <Widget
-                                        content={
-                                            <>
-                                                <RTCAudio
-                                                    call={call}
-                                                    audioOutId={state.data.selectedAudioOut}
-                                                />
-                                            </>
-                                        }
-                                    />
-                                }
-                            </CardGroup>
-                        }
+                    }
+                />
+                    {/* Charts and stats */}
+                    <Widget 
+                        content = {<Device
+                            streamId={ this.state.activeStream }
+                            sensors={['ppg']}
+                            onlyOneActive={true}
+                        />}
+                    />
+                    <CardGroup>
+                        <RecordBar
+                            streamId={ this.state.activeStream }
+                            dir = { dir }
+                            // onChange={()=>{this.setState({});}}   
+                        />
                         <NoteTaking 
-                            showInput={ false }
+                            showHistory={ false }
                             streamId={ this.state.activeStream } 
                             filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
                             dir={ dir }
                         />
-                    </div>
-                </div>
+                    </CardGroup>
+                    {(call?.viewingVideo || call?.viewingAudio) &&
+                        <CardGroup> 
+                            { call?.viewingVideo && 
+                                <Widget
+                                    content={
+                                        <>
+                                            <RTCVideo
+                                                call={call}
+                                            />
+                                        </>
+                                    }
+                                />
+                            }
+                            {
+                                call?.viewingAudio && 
+                                <Widget
+                                    content={
+                                        <>
+                                            <RTCAudio
+                                                call={call}
+                                                audioOutId={state.data.selectedAudioOut}
+                                            />
+                                        </>
+                                    }
+                                />
+                            }
+                        </CardGroup>
+                    }
+                    <NoteTaking 
+                        showInput={ false }
+                        streamId={ this.state.activeStream } 
+                        filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
+                        dir={ dir }
+                    />
             </div>
         )
     }

@@ -4,13 +4,20 @@ html, body {
     overflow-y: hidden;
 }
 
+#route {
+    padding: 15px 15px 25px 15px; /* NOTE: Accounting for footer */
+}
+
+[data-active-link=true] {
+    color: black !important;
+    font-weight: bold !important;
+}
+
 .footer-bar {
-    background: linear-gradient(to bottom, #5F86FC, rgb(2, 2, 46));
-    position:absolute; 
-    bottom:0; 
-    height:50px; 
+    background: linear-gradient(to bottom, #5F86FC, #02022e);
+    min-height:10px;  /* NOTE: Grow on mobile */
     width:100%;
-    box-shadow: 0px -2px rgba(0, 247, 255, 0.163)
+    box-shadow: 0px -2px rgba(0, 247, 255, 0.163);
 }
 
 .flex-container{
@@ -31,7 +38,7 @@ html, body {
 }
 
 .flex-container .footer{
-    position:absolute;
+    position: absolute;
     bottom:0;
     width:100%;
     z-index:10;
