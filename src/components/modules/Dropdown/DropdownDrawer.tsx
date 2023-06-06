@@ -43,9 +43,12 @@ export class DropdownDrawer extends Component<{direction?:'up'|'down', openText?
             </table>
             : null
         }
-        <Collapse className="drawer-content" in={isOpen} onExited={() => { this.setState({exited:true})}}>
-            <div>
-                {exited ? null : content}
+        <Collapse 
+            className="drawer-content"
+            in={isOpen} onExited={() => { this.setState({exited:true})}}
+        >
+            <div style={{}} >
+                    {exited ? null : content}
             </div>
         </Collapse> 
         {direction === 'down' ?
