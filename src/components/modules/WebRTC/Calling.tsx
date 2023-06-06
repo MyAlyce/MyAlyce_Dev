@@ -10,7 +10,7 @@ import * as Icon from 'react-feather'
 import { Avatar } from "../User/Avatar";
 
 
-export function StartCall(props:{userId:string, onClick?:(call?)=>void}) {
+export function StartCall(props:{userId:string|undefined, onClick?:(call?)=>void}) {
     return (
         <Button onClick={()=>{
             startCall(props.userId).then(call => {
@@ -372,7 +372,7 @@ export class MediaDeviceOptions extends sComponent {
         if(this.state.activeStream) {
             callHasMyStreamMedia(this.state.activeStream);
         }
-        
+
         return (
             <Widget 
                 title={"Voice and Video Options"}

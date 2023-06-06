@@ -105,7 +105,7 @@ export class WebRTCComponent extends sComponent {
                             status='online'
                             backgroundColor='lightblue'
                         /> {user.firstName} {user.lastName}</div>
-                        {StartCall(user)}
+                        {StartCall({userId:user._id})}
                     </div>
                 )
             })
