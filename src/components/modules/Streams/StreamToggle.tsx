@@ -46,6 +46,7 @@ export class StreamToggle extends Component<{
                             key={this.unique+v}
                             value={this.unique+i}
                             name={this.unique}
+                            className='btnhover'
                             checked={this.state.toggled.indexOf(v) > -1}
                             variant={this.state.toggled.indexOf(v) > -1 ? 'primary' : 'dark'}
                             type={this.props.onlyOneActive ? "radio" : "checkbox"} 

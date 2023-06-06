@@ -13,6 +13,35 @@ html, body {
     font-weight: bold !important;
 }
 
+button {
+    transition:box-shadow 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 0 20px #0051ff;
+    text-shadow:1px 1px 10px #fff, 1px 1px 10px #ccc;
+}
+
+.btn-dark {
+    font-size: 0.9rem;
+    font-family: Verdana;
+}
+
+.btn-dark:hover {
+    text-shadow:1px 1px 10px #fff, 1px 1px 10px #ccc;
+}
+
+.btn-primary {
+    font-family: Verdana;
+    font-size: 0.9rem;
+    outline: 1px solid rgba(0, 0, 0, 0.289);
+    outline-offset: none;
+}
+
+.btn-primary:hover {
+    text-shadow:1px 1px 10px #fff, 1px 1px 10px #ccc;
+}
+
 .footer-bar {
     background: linear-gradient(to bottom, #5F86FC, #02022e);
     min-height:10px;  /* NOTE: Grow on mobile */
@@ -154,14 +183,6 @@ html, body {
     align-items: center;
     justify-content: center; */
     z-index: 100;
-}
-
-button {
-    transition:box-shadow 0.3s;
-}
-
-button:hover {
-    box-shadow: 0 0 20px #0051ff;
 }
 
 .svghover {
