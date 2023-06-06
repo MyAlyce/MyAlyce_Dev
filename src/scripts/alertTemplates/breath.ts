@@ -21,7 +21,7 @@ export class BreathAlert extends Alert {
                 }
             ) {
                 if(this.failed === undefined) this.failed = 0;
-                if(data.breath < 3) {
+                if(data.breath < 2.5) {
                     this.failed++;
                     if(this.failed >= 3) {
                         let ts = data.timestamp;

@@ -23,7 +23,7 @@ export class HeartRateAlert extends Alert {
                 if(this.failed === undefined) this.failed = 0;
                 if(data.hr < 25) {
                     this.failed++;
-                    if(this.failed >= 3) {
+                    if(this.failed >= 5) {
                         let ts = data.timestamp;
                         if(Array.isArray(ts)) ts = ts[ts.length-1];
                         this.failed = 0
@@ -33,7 +33,7 @@ export class HeartRateAlert extends Alert {
                 }
                 else if (data.hr > 180) {
                     this.failed++;
-                    if(this.failed >= 3) {
+                    if(this.failed >= 5) {
                         let ts = data.timestamp;
                         if(Array.isArray(ts)) ts = ts[ts.length-1];
                         this.failed = 0;

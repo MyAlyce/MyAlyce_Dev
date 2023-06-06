@@ -5,6 +5,7 @@
 - browserfs EIO errors, though it doesn't seem to stop the files from writing
 
 ### UX/UI
+
 - styling, clean generic crm look like adminlte or google analytics
 - webrtc ux/ui. Make calling yourself its own separate deal from calling other users (since its just setting up a remote connection for yourself)
 - animation
