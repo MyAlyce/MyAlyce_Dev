@@ -14,6 +14,7 @@ import {  recordEvent } from '../../../scripts/datacsv';
 
 import * as Icon from 'react-feather'
 import { Widget } from '../../widgets/Widget';
+import { toISOLocal } from 'graphscript-services.storage';
 
 function getColorGradientRG(value) {
     let r, g, b;
@@ -80,7 +81,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
                 }
                 
                 noteRows.push(
-                    <tr key={event._id}>
+                    <tr key={event.timestamp}>
                         <td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td>
                         <td width="15%">{event.event}</td>
                         <td width="35%">{event.notes}</td>
@@ -140,23 +141,22 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         events.push(message as any);
 
-        if(event) {
-            let onclick = () => {
-                client.deleteData([event],()=>{
-                    this.listEventHistory();
-                });
-            }
-    
-            this.state.noteRows.unshift(
-                <tr key={event._id}>
-                    <td>{new Date(parseInt(event.timestamp as string)).toISOString()}</td>
-                    <td>{event.event}</td>
-                    <td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td> 
-                    <td><button onClick={onclick}>❌</button></td>
-                </tr>
-            );
+        let onclick = () => {
+            client.deleteData([event],()=>{
+                this.listEventHistory();
+            });
         }
-        
+
+        this.state.noteRows.unshift(
+            <tr key={message.timestamp}>
+                <td>{toISOLocal(message.timestamp)}</td>
+                <td>{message.event}</td>
+                <td style={{backgroundColor:getColorGradientRG(message.grade)}}>{message.grade}</td> 
+                <td><button onClick={onclick}>❌</button></td>
+            </tr>
+        );
+    
+    
         this.setState({});
     }
 

@@ -81,7 +81,7 @@ export function onAlert(event, streamId?) {
     let sound = new Howl({src:'./sounds/alarm.wav'});
     sound.volume(0.05);
     sound.play(undefined,false);
-    showNotification("Alert:", `${event.message} ${event.value ? ': '+event.value : ''} at ${toISOLocal(new Date(event.timestamp))}` );
+    showNotification("Alert:", `${event.message} ${event.value ? ': '+event.value : ''} at ${toISOLocal(event.timestamp)}` );
 
     recordAlert(event, streamId);
 
