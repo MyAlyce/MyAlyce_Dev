@@ -168,6 +168,8 @@ export const onrtcdata = (call, from, data) => {
 
 export function genCallSettings(userId, rtcId, alertNodes?) {
 
+
+
     return {
         onicecandidate:async (ev) => {
             if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
@@ -196,6 +198,8 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
             webrtc.rtc[rtcId as string].run('ping').then((res) => {
                 console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
             });
+
+            alertNodes = setupAlerts(rtcId);
 
             //the webrtc.rtc[rtcId] is now live, add tracks
             //data channel streams the device data
@@ -265,12 +269,10 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
 export async function startCall(userId) {
     //send handshake
     let rtcId = `room${Math.floor(Math.random()*1000000000000000)}`;
-    
-    let nodes = setupAlerts(rtcId);
 
     let call = await webrtc.openRTC({ 
         _id:rtcId,
-        ...genCallSettings(userId,rtcId,nodes)
+        ...genCallSettings(userId,rtcId)
     });
 
     usersocket.post(
