@@ -209,42 +209,43 @@ export class App extends sComponent {
                                 direction={'up'}
                                 openText='Open Menu'
                                 closeText='Close Menu'
-                                content={[
-                                    (<div className="stream-select" key={1}>
-                                        {/** Device Connect */}
-                                        {   
-                                            this.state.deviceMode === 'My Device' ? 
-                                                <DeviceConnect/> : 
-                                            this.state.deviceMode === 'Demo' ? 
-                                                <Demo/> : 
-                                            this.state.activeStream ? 
-                                                <Widget 
-                                                    content={
-                                                        <ToggleAudioVideo streamId={this.state.activeStream} 
-                                                            videoOnClick={(onState:boolean)=>{ 
-                                                                //toggle picture in picture
-                                                                this.setState({});
-                                                            }} 
-                                                            audioOnClick={(onState:boolean)=>{  
-                                                                //toggle local volume controls
-                                                                this.setState({});
-                                                            }}/>
-                                                    }
-                                                /> : null    
-                                        }
-                                        {/* Device/Stream select */}
-                                        { this.state.triggerPageRerender ? null : <StreamSelect 
-                                            onChange={(key, activeStream) => { 
-                                                this.setState({triggerPageRerender:true, deviceMode:key, activeStream:activeStream});
-                                            }} 
-                                            selected={this.state.activeStream}
-                                        /> }
-                                    </div>),
-                                    (<span key={2}><Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button></span>),
-                                    (<span key={3}><MediaDeviceOptions/></span>),
-                                    (<span key={4}>{ this.state.activeStream && <><ViewSelfVideoStream streamId={this.state.activeStream}/> { webrtcData.availableStreams[this.state.activeStream].audioStream && <RTCAudio /> } </> }</span>),
-                                    (<span key={5}><br/><br/><br/></span>) //pads it at the bottom to stay above the footer
-                                ]}
+                                content={
+                                    [<div className="d-flex flex-column" style={{gap: '10px'}}>
+                                        {[
+                                            (<div className="stream-select" key={1}>
+                                                {   
+                                                    this.state.deviceMode === 'My Device' ? 
+                                                        <DeviceConnect/> : 
+                                                    this.state.deviceMode === 'Demo' ? 
+                                                        <Demo/> : 
+                                                    this.state.activeStream ? 
+                                                        <Widget 
+                                                            content={
+                                                                <ToggleAudioVideo streamId={this.state.activeStream} 
+                                                                    videoOnClick={(onState:boolean)=>{ 
+                                                                        //toggle picture in picture
+                                                                        this.setState({});
+                                                                    }} 
+                                                                    audioOnClick={(onState:boolean)=>{  
+                                                                        //toggle local volume controls
+                                                                        this.setState({});
+                                                                    }}/>
+                                                            }
+                                                        /> : null    
+                                                }
+                                            </div>),
+                                            (<div  key={2}>{ this.state.triggerPageRerender ? null : <StreamSelect 
+                                                onChange={(key, activeStream) => { 
+                                                    this.setState({triggerPageRerender:true, deviceMode:key, activeStream:activeStream});
+                                                }} 
+                                                selected={this.state.activeStream}
+                                            /> }</div>),
+                                            (<span key={3}><Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button></span>),
+                                            (<span key={4}><MediaDeviceOptions/></span>),
+                                            (<span key={5}>{ this.state.activeStream && <><ViewSelfVideoStream streamId={this.state.activeStream}/> { webrtcData.availableStreams[this.state.activeStream].audioStream && <RTCAudio /> } </> }</span>),
+                                        ]}
+                                    </div>]
+                                }
                             />
                             <Footer />
                         </div>

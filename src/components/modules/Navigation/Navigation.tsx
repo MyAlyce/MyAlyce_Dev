@@ -20,7 +20,7 @@ export function Navigation (){
             <Nav className="me-auto">
               <Nav.Link onClick={()=>{state.setState({route:'/'}); setExpanded(false);}}>          
               <Icon.Home className="align-text-bottom" size={20} data-active-link={window.location.pathname === '/'}></Icon.Home>
-              &nbsp;Dashboard</Nav.Link>
+              &nbsp;Home</Nav.Link>
               {/* <Nav.Link onClick={()=>{state.setState({route:'/peers'}); setExpanded(false);}}>
               <Icon.Phone className="align-text-bottom" size={20}></Icon.Phone>
               &nbsp;WebRTC</Nav.Link> */}

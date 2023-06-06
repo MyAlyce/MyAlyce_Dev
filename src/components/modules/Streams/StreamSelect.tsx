@@ -67,30 +67,24 @@ export class StreamSelect extends Component<{[key:string]:any}> {
       
         return (
             <Widget 
-                header={<div style={{cursor:'pointer', width:'100%', height:'100%'}} onClick={this.toggleDropdown}>Select Stream:</div>}
-                subtitle={(
-                    <Card style={{cursor:'pointer'}} onClick={()=>{this.onItemClick(this.selectedKey)}} className="selected-item">
-                        <Card.Header>
-                            Selected: {this.state.activeStream
-                                ? (
-                                    <>{(webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName} {(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName} 
-                                </>)
-                                : this.selectedKey}
-                        </Card.Header>
-                    </Card>
-                )}
+                header={<div style={{cursor:'pointer', width:'100%', height:'100%'}} onClick={this.toggleDropdown}><b>Swap Current Streams:</b> {this.state.activeStream
+                    ? (
+                        <>{(webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName} {(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName} 
+                    </>)
+                    : this.selectedKey}</div>}
                 content={
                     <div ref={this.setWrapperRef} className="stream-select">
                         
                         {this.state.dropdownOpen && (
-                        <div className="stream-select-dropdown">
+                        <div className="d-flex flex-column" style={{gap: '10px', padding: '10px'}}>
+
                             <div
                                 key="Demo"
                                 style={{cursor:'pointer'}}
                                 onClick={() => this.onItemClick('Demo')}
                                 className={this.state.activeStream === undefined ? 'selected' : ''}
                             >
-                                <Widget subtitle={"Demo Data"}/>
+                                <Widget header={"Demo Data"} content={<>No content available</>}/>
                             </div>
                             <div
                                 key="My-Device"
@@ -98,7 +92,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
                                 onClick={() => this.onItemClick('My Device')}
                                 className={this.state.activeStream === undefined ? 'selected' : ''}
                             >
-                                <Widget subtitle={<>My Device<br/></>} content={<UserBar/>} />
+                                <Widget header={<>My Device</>} content={<UserBar/>} />
                                 
                             </div>
                             {Object.keys(webrtc.rtc).length > 0 &&
