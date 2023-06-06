@@ -113,8 +113,6 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
 
     render() {
 
-
-        console.log(this.state.recordings);
         return (
             <Widget 
                 header={( <b>Recordings</b> )}
