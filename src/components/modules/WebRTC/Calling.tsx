@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Button, Col, Modal, Row } from "react-bootstrap"
 import { client, getStreamById, splitCamelCase, state, webrtc, webrtcData } from "../../../scripts/client";
-import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio, checkMyStreamMedia, sendMessage } from "../../../scripts/webrtc";
+import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio, sendMessage, callHasMyStreamMedia } from "../../../scripts/webrtc";
 import { sComponent } from "../../state.component";
 import { Widget } from "../../widgets/Widget";
 import { RTCVideo } from "./WebRTCStream";
@@ -202,7 +202,7 @@ export class ToggleAudioVideo extends sComponent {
     }
 
     async checkMedia() {
-        checkMyStreamMedia(this.props.streamId).then(res => {
+        callHasMyStreamMedia(this.props.streamId).then(res => {
             this.hasAudio = res?.hasAudio;
             this.hasVideo = res?.hasVideo;
             this.setState({})
@@ -243,7 +243,7 @@ export class ToggleAudioVideo extends sComponent {
                     onClick={async () => {
                         if(this.hasVideo && this.state.selectedAudioIn === this.state.selectedVideo) {
                             disableVideo(stream);
-                            await enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, true);
+                            await enableVideo(stream, this.state.selectedVideo ? {deviceId:this.state.selectedVideo} : undefined, {deviceId:this.state.selectedAudioIn});
                         }
                         else await enableAudio(stream, this.state.selectedAudioIn ? {deviceId:this.state.selectedAudioIn} : undefined);
                         if(this.props.audioOnClick) this.props.audioOnClick(true);
@@ -302,15 +302,13 @@ export class MediaDeviceOptions extends sComponent {
         selectedVideo: '' as string,
         selectedAudioIn: '' as string,
         selectedAudioOut: '' as string,
+        activeStream: '' as string
     }
 
     audioInDevices;
     audioOutDevices;
     cameraDevices;
 
-    componentDidMount(): void {
-        this.listMediaDevices();
-    }
 
     listMediaDevices() {
         return new Promise((res,rej) => {
@@ -368,6 +366,13 @@ export class MediaDeviceOptions extends sComponent {
     }
     
     render() {
+
+        this.listMediaDevices();
+
+        if(this.state.activeStream) {
+            callHasMyStreamMedia(this.state.activeStream);
+        }
+        
         return (
             <Widget 
                 title={"Voice and Video Options"}
@@ -376,17 +381,25 @@ export class MediaDeviceOptions extends sComponent {
                         { this.audioInDevices?.length > 0 && ( 
                         <Row>
                             <Col>Mic In:</Col>   
-                            <Col><select id={this.unique+'aIn'} onChange={(ev) => this.setState({selectedAudioIn: ev.target.value})}>{this.audioInDevices}</select></Col>
+                            <Col><select id={this.unique+'aIn'} onChange={(ev) => {
+                                    this.setState({selectedAudioIn: ev.target.value});
+                                }}>{this.audioInDevices}</select></Col>
                         </Row>)}
                         { this.audioOutDevices?.length > 0 && (
                         <Row>
                             <Col>Audio Out:</Col>
-                            <Col><select id={this.unique+'aOut'} onChange={(ev) => this.setState({selectedAudioOut: ev.target.value})}>{this.audioOutDevices}</select></Col>
+                            <Col><select id={this.unique+'aOut'} onChange={(ev) => {
+                                this.setState({selectedAudioOut: ev.target.value});
+
+                                }}>{this.audioOutDevices}</select></Col>
                         </Row>)}
                         { this.cameraDevices?.length > 0 && ( 
                         <Row>
                             <Col>Camera In:</Col>
-                            <Col><select id={this.unique+'vIn'} onChange={(ev) => this.setState({selectedVideo: ev.target.value})}>{this.cameraDevices}</select></Col>
+                            <Col><select id={this.unique+'vIn'} onChange={(ev) => {
+                                this.setState({selectedVideo: ev.target.value});
+
+                            }}>{this.cameraDevices}</select></Col>
                         </Row>)}
                     </>
                 }

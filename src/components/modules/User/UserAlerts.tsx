@@ -49,7 +49,7 @@ export class UserAlerts extends sComponent {
           </Modal.Header>
           <Modal.Body>
             <div> 
-              <strong>Alerts for { this.props?.streamId ? webrtcData.availableStreams[this.props.streamId].firstName + ' ' + webrtcData.availableStreams[this.props.streamId].lastName : client.currentUser.firsTName + ' ' + client.currentUser.lastName }</strong>
+              <strong>Alerts for { this.props?.streamId ? webrtcData.availableStreams[this.props.streamId].firstName + ' ' + webrtcData.availableStreams[this.props.streamId].lastName : client.currentUser.firstName + ' ' + client.currentUser.lastName }</strong>
             { as ? [...as].reverse().map((v, i) => { 
               return (
                   <div key={i} className={"alert-message"}>
