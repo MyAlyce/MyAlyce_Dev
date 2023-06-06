@@ -72,12 +72,14 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         if(latest?.length > 0) {
             let noteRows = [] as any[];
-            latest.forEach((event:EventStruct) => {
+            latest.forEach((event:EventStruct,i) => {
 
                 let onclick = () => {
                     client.deleteData([event],()=>{
                         this.listEventHistory();
                     })
+                    noteRows[i] = null;
+                    this.setState({});
                 }
                 
                 noteRows.push(
@@ -141,10 +143,14 @@ export class NoteTaking extends Component<{[key:string]:any}> {
 
         events.push(message as any);
 
+        let i = this.state.noteRows.length;
+
         let onclick = () => {
             client.deleteData([event],()=>{
                 this.listEventHistory();
             });
+            this.state.noteRows[i] = null;
+            this.setState({});
         }
 
         this.state.noteRows.unshift(
