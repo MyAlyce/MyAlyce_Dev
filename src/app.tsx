@@ -72,6 +72,7 @@ export class App extends sComponent {
 
     state = {
         isLoggedIn: false,
+        fetchingLogin:true,
         loggingIn:false, //show load screen
         route: '/',
         triggerPageRerender:false,
@@ -135,7 +136,7 @@ export class App extends sComponent {
                         <div className="cover-content">
                             <img className="img-fluid" width="360" alt="myAlyce" src={myalyceLogo} />
                             {
-                                    !this.state.isLoggedIn && <>
+                                    !this.state.isLoggedIn && !this.state.fetchingLogin && <>
                                         <br />
                                         <br />
                                         <Button style={{   

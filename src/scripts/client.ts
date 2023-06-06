@@ -226,6 +226,7 @@ export const onLogin = async (
             resultHasUser = true;
             state.setState({
                 isLoggedIn: true,
+                fetchingLogin:false,
                 loggingIn: false,
                 loggedInId: user._id,
                 viewingId: user._id
