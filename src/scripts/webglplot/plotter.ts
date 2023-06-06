@@ -46,7 +46,7 @@ export class WGLPlotter {
                         
                     }
                     ((this.plotter.plots[options._id].plot as any).webgl as WebGLRenderingContext).viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
-                    (this.plotter.plots[options._id].plot as any).update(options._id);
+                    (this.plotter.plots[options._id].plot as any as WebglLinePlotUtil).update(options._id);
                 }
             }
 
