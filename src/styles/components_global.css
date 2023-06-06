@@ -130,6 +130,23 @@ html, body {
 
 .logincover {
     background-color: rgb(2, 2, 46);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logincover .cover-content {
+    text-align: center;
+
+    /* display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center; */
+    z-index: 100;
 }
 
 button {
