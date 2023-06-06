@@ -166,11 +166,11 @@ export class Messaging extends sComponent {
                     {this.messages ? this.messages.map(v => v): ""}
                 </div> : null 
             }
-            { renderInput ? <>
-                <input id={this.unique+'sendmessage'} type='text'></input><Button id={this.unique+'send'} onClick={()=>{ 
-                    send(stream as RTCCallInfo); }}
-                >Send Message</Button>
-                </> 
+            { renderInput ? <div>
+                    <span  style={{float:'right'}}><input id={this.unique+'sendmessage'} type='text'></input><Button id={this.unique+'send'} onClick={()=>{ 
+                        send(stream as RTCCallInfo); }}
+                    ><Icon.Send color='white' size={15}/></Button></span>
+                </div> 
                     : null 
             }
         </>);

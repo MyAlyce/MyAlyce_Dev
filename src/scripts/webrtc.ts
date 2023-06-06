@@ -449,29 +449,29 @@ let tStart = performance.now();
 
 export function BufferAndSend(data:any, bufKey:string, stream:WebRTCInfo, buffers:{[key:string]:any[]}={}, bufferInterval=333) {
     let now = performance.now();
+
+    if(!buffers[bufKey]) buffers[bufKey] = {} as any;
+    for(const key in data) {
+        if(!(key in buffers[bufKey])) {
+            if(Array.isArray(data[key]))
+                buffers[bufKey][key] = [...data[key]];
+            else buffers[bufKey][key] = [data[key]];
+        }
+        else {
+            if(Array.isArray((data[key])))
+                buffers[bufKey][key].push(...data[key]);
+            else
+                buffers[bufKey][key].push(data[key]);
+        }
+    }
+
     if(now > tStart + bufferInterval) {
-        ///console.log( 'sent', buffers);
         if((stream.channels?.['data'] as RTCDataChannel).readyState === 'open')
             stream.send({...buffers});
 
         //console.log({...buffers});
         tStart = now;
         for (const key in buffers) delete buffers[key];
-    } else {
-        if(!buffers[bufKey]) buffers[bufKey] = {} as any;
-        for(const key in data) {
-            if(!(key in buffers[bufKey])) {
-                if(Array.isArray(data[key]))
-                    buffers[bufKey][key] = [...data[key]];
-                else buffers[bufKey][key] = [data[key]];
-            }
-            else {
-                if(Array.isArray((data[key])))
-                    buffers[bufKey][key].push(...data[key]);
-                else
-                    buffers[bufKey][key].push(data[key]);
-            }
-        }
     }
 
     return buffers;
@@ -498,25 +498,25 @@ export function enableDeviceStream(streamId, bufferInterval=333) { //enable send
 
         streamSubscriptions[streamId] = {
             emg:state.subscribeEvent('emg', (emg) => {
-                BufferAndSend(emg,'emg',stream,buffers,bufferInterval);
+                buffers = BufferAndSend(emg,'emg',stream,buffers,bufferInterval);
             }),
             ecg:state.subscribeEvent('ecg', (ecg) => {
-                BufferAndSend(ecg,'ecg',stream,buffers,bufferInterval);
+                buffers = BufferAndSend(ecg,'ecg',stream,buffers,bufferInterval);
             }),
             ppg:state.subscribeEvent('ppg', (ppg) => {
-                BufferAndSend(ppg,'ppg',stream,buffers,bufferInterval);
+                buffers = BufferAndSend(ppg,'ppg',stream,buffers,bufferInterval);
             }),
             hr:state.subscribeEvent('hr', (hr) => {
-                BufferAndSend(hr,'hr',stream,buffers,bufferInterval);
+                buffers = BufferAndSend(hr,'hr',stream,buffers,bufferInterval);
             }),
             breath:state.subscribeEvent('breath', (breath) => {
-                BufferAndSend(breath,'breath',stream,buffers,bufferInterval);
+                buffers = BufferAndSend(breath,'breath',stream,buffers,bufferInterval);
             }),
             imu:state.subscribeEvent('imu', (imu) => {
-                BufferAndSend(imu,'imu',stream,buffers,bufferInterval);
+                buffers = BufferAndSend(imu,'imu',stream,buffers,bufferInterval);
             }),
             env:state.subscribeEvent('env', (env) => {
-                BufferAndSend(env,'env',stream,buffers,bufferInterval);
+                buffers = BufferAndSend(env,'env',stream,buffers,bufferInterval);
             })
         };
 
