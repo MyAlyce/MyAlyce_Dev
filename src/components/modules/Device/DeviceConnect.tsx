@@ -67,9 +67,11 @@ export class DeviceConnect extends sComponent {
                                         onChange={(ev) => {
                                             if(ev.key === 'ecg') {
                                                 ev.key = 'emg';
-                                                if(toggled.indexOf('emg') < 0) toggled.push('emg');
-                                            } else if (ev.key === 'emg' && toggled.indexOf('ecg') < 0) {
-                                                toggled.push('ecg')
+                                                if(ev.checked && toggled.indexOf('emg') < 0) toggled.push('emg');
+                                                else if (!ev.checked && toggled.indexOf('emg') > 0) toggled.splice(toggled.indexOf('emg'),1);
+                                            } else if (ev.key === 'emg') {
+                                                if(ev.checked && toggled.indexOf('ecg') < 0) toggled.push('ecg');
+                                                else if (!ev.checked && toggled.indexOf('emg') > 0) toggled.splice(toggled.indexOf('emg'),1);
                                             }
                                             if(ev.checked) {
                                                 if(device && characteristicCallbacks[ev.key]) {
