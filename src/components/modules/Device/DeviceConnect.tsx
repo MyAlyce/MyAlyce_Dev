@@ -8,13 +8,15 @@ import {SensorDefaults, Sensors, client, state} from '../../../scripts/client'
 import { stopdemos } from "../../../scripts/demo";
 import { StreamToggle } from "../Streams/StreamToggle";
 
-import {device} from '../../../scripts/device'
+import { device } from '../../../scripts/device'
 import { Widget } from "../../widgets/Widget";
 import { Col } from "react-bootstrap";
 
 import * as Icon from 'react-feather'
 
 import { CallSelf } from "../WebRTC/Calling";
+
+let toggled = ['ppg','breath','hr','imu','env']; //persistent value
 
 export class DeviceConnect extends sComponent {
 
@@ -23,7 +25,7 @@ export class DeviceConnect extends sComponent {
         unansweredCalls:undefined
     }
 
-    sensors=['ppg','breath','hr','imu','env'] as Sensors[];
+    sensors=toggled as Sensors[];
 
     //check for personal call
     
@@ -58,6 +60,12 @@ export class DeviceConnect extends sComponent {
                                         toggled={this.sensors}
                                         subscribable={[...SensorDefaults]}
                                         onChange={(ev) => {
+                                            if(ev.key === 'ecg') {
+                                                ev.key = 'emg';
+                                                if(toggled.indexOf('emg') < 0) toggled.push('emg');
+                                            } else if (ev.key === 'emg' && toggled.indexOf('ecg') < 0) {
+                                                toggled.push('ecg')
+                                            }
                                             if(ev.checked) {
                                                 if(device && characteristicCallbacks[ev.key]) {
                                                     device.subscribe(serviceCharacteristic, characteristicCallbacks[ev.key].characteristic, characteristicCallbacks[ev.key].callback);
