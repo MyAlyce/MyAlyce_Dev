@@ -8,6 +8,8 @@ import { ToggleAudioVideo } from '../WebRTC/Calling';
 
 const personIcon = './assets/person.jpg';
 
+let selectedKey = "Demo" as string|undefined;
+
 export class StreamSelect extends Component<{[key:string]:any}> {
    
     state = { //synced with global state
@@ -16,7 +18,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
     }
 
     wrapperRef:any;
-    selectedKey?:string = 'Demo';
+    selectedKey?:string = selectedKey;
 
     onchange=(key, activeStream)=>{}
 
@@ -53,6 +55,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
     onItemClick = (key: string | undefined) => {
         console.log(key);
         this.selectedKey = key;
+        selectedKey = key as string;
         let activeStream;
         if(key === 'My Device' || key === 'Demo')
             activeStream = undefined;//, dropdownOpen: false });
@@ -67,7 +70,7 @@ export class StreamSelect extends Component<{[key:string]:any}> {
       
         return (
             <Widget 
-                header={<div style={{cursor:'pointer', width:'100%', height:'100%'}} onClick={this.toggleDropdown}><b>Swap Current Streams:</b> {this.state.activeStream
+                header={<div style={{cursor:'pointer', width:'100%', height:'100%'}} onClick={this.toggleDropdown}><b>Live Streams | </b> {this.state.activeStream
                     ? (
                         <>{(webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName} {(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName} 
                     </>)
