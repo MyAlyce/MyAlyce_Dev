@@ -71,7 +71,7 @@ export class DeviceConnect extends sComponent {
                                                 else if (!ev.checked && toggled.indexOf('emg') > 0) toggled.splice(toggled.indexOf('emg'),1);
                                             } else if (ev.key === 'emg') {
                                                 if(ev.checked && toggled.indexOf('ecg') < 0) toggled.push('ecg');
-                                                else if (!ev.checked && toggled.indexOf('emg') > 0) toggled.splice(toggled.indexOf('emg'),1);
+                                                else if (!ev.checked && toggled.indexOf('ecg') > 0) toggled.splice(toggled.indexOf('ecg'),1);
                                             }
                                             if(ev.checked) {
                                                 if(device && characteristicCallbacks[ev.key]) {
