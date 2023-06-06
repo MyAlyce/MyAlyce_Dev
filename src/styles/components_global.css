@@ -114,6 +114,8 @@ html, body {
     z-index: 1;
 }
 
+
+
 @keyframes wave {
     0%, 100% {
         transform: translateY(0);
@@ -147,4 +149,57 @@ button:hover {
 .svghover:hover {
     box-shadow: 0 0 20px rgba(0, 81, 255,0.5);
     background-color: rgba(0, 81, 255,0.5);
+}
+
+
+.message-left,
+.message-right {
+    margin: 10px;
+    padding: 15px;
+    max-width: 75%;
+    font-size: 14px;
+    line-height: 1.4;
+    opacity: 0;
+    color: #fff;
+    transition: opacity 1s ease-in;
+    animation: fade-in 1s forwards;
+}
+
+.message-right {
+    align-self: flex-start;
+    background-color: rgb(0, 119, 255);
+    border-radius: 20px 20px 0px 20px;
+}
+
+.message-left {
+    align-self: flex-end;
+    background-color: rgb(46, 157, 46);
+    border-radius: 0px 20px 20px 20px;
+}
+
+.alert-message {
+    margin: 10px;
+    padding: 15px;
+    max-width: 75%;
+    color: #fff;
+    background-color: rgb(206, 75, 52);
+    font-size: 14px;
+    line-height: 1.4;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    animation: fade-in 1s forwards;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.alert-message .top-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

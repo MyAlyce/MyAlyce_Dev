@@ -103,31 +103,36 @@ export class Messaging extends sComponent {
             for(const message of webrtcData.availableStreams[this.props.streamId].messages) {
             let from = splitCamelCase(message.from);
             this.messages.push(
-                <div key={this.messages.length} >
+                <div key={this.messages.length}  className={message.streamId ? 'message-left' : 'message-right'}>
                     {from}: {message.message} | {new Date(message.timestamp).toLocaleTimeString()}
                 </div>
             )
         }
     }
 
+    makeMessage(message:any, from?) {
+        return (
+            <div key={this.messages.length} className={message.streamId ? 'message-left' : 'message-right'}>
+                {message.streamId && (from + ': ')} {message.message} | {new Date(message.timestamp).toLocaleTimeString()}
+            </div>
+        )
+    }
+
     componentDidMount() {
         this.messages = [] as any[];
         if(webrtcData.availableStreams[this.props.streamId].messages) 
             for(const message of webrtcData.availableStreams[this.props.streamId].messages) {
-            let from = splitCamelCase(message.from);
-            this.messages.push(
-                <div key={this.messages.length} >
-                    {from}: {message.message} | {new Date(message.timestamp).toLocaleTimeString()}
-                </div>
-            );
-        }
+                let from = splitCamelCase(message.from);
+                
+                this.messages.push(
+                    this.makeMessage(message,from)
+                );
+            }
 
         this.__subscribeComponent(this.props.streamId+'message',(newMessage)=>{
             let from = splitCamelCase(newMessage.from);
             this.messages.push(
-                <div key={this.messages.length} >
-                    {from}: {newMessage.message} | {new Date(newMessage.timestamp).toLocaleTimeString()}
-                </div>
+                 this.makeMessage(newMessage,from)
             );
             this.setState({});
         });
@@ -150,9 +155,7 @@ export class Messaging extends sComponent {
             let result = sendMessage(call, message);
             
             if(renderMessages) {
-                this.messages.push(<div key={this.messages.length}>
-                    {client.currentUser.firstName} {client.currentUser.lastName}: {message} | {new Date().toLocaleTimeString()}
-                </div>);
+                this.messages.push(this.makeMessage(result));
                 
                 this.setState({});
             }

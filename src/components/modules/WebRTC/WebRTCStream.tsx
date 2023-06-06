@@ -85,16 +85,17 @@ export class RTCAudio extends Component<{
             this.stream = props.stream as MediaStream;
 
         //get own audio
-        if(!props.call && !props.stream) navigator.mediaDevices.getUserMedia({ video: false, audio: state.data.selectedAudioIn ? {deviceId:state.data.selectedAudioIn} : true }).then((stream) => { //get your own video if none specified
-            this.stream = stream;
-            state.subscribeEvent(
-                'selectedAudioIn', ()=>{
-                    this.setupAudio(); this.setState({});
-                }
-            );
-            this.finishSetup();
-            this.forceUpdate();
-        });
+        if(!props.call && !props.stream) 
+            navigator.mediaDevices.getUserMedia({ video: false, audio: state.data.selectedAudioIn ? {deviceId:state.data.selectedAudioIn} : true }).then((stream) => { //get your own video if none specified
+                this.stream = stream;
+                state.subscribeEvent(
+                    'selectedAudioIn', ()=>{
+                        this.setupAudio(); this.setState({});
+                    }
+                );
+                this.finishSetup();
+                this.forceUpdate();
+            });
         else this.finishSetup();
 
 

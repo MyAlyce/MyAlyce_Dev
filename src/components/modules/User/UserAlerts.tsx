@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import * as Icon from 'react-feather';
 import Badge from 'react-bootstrap/Badge';
-import { alerts, splitCamelCase, webrtc, webrtcData } from '../../../scripts/client';
+import { alerts, client, splitCamelCase, webrtc, webrtcData } from '../../../scripts/client';
 import { sComponent } from '../../state.component';
 import { Button, Col, Modal, Row, Table } from 'react-bootstrap';
 import { toISOLocal } from 'graphscript-services.storage';
@@ -49,8 +49,19 @@ export class UserAlerts extends sComponent {
           </Modal.Header>
           <Modal.Body>
             <div> 
-                <Row><Col>Timestamp</Col><Col>Message</Col><Col>Value</Col><Col>From</Col></Row>
-                { as ? [...as].reverse().map((v,i) => { return <Row key={i}><Col>{toISOLocal(v.timestamp)}</Col><Col>{v.message}</Col><Col>{v.value}</Col><Col>{splitCamelCase(v.from)}</Col></Row>}) : null}
+              <strong>Alerts for { this.props?.streamId ? webrtcData.availableStreams[this.props.streamId].firstName + ' ' + webrtcData.availableStreams[this.props.streamId].lastName : client.currentUser.firsTName + ' ' + client.currentUser.lastName }</strong>
+            { as ? [...as].reverse().map((v, i) => { 
+              return (
+                  <div key={i} className={"alert-message"}>
+                      <div className="top-info">
+                          <p><strong>Time:</strong> {new Date(v.timestamp).toLocaleTimeString()}</p>
+                          <p><strong>From:</strong> {splitCamelCase(v.from)}</p>
+                      </div>
+                      <p><strong>Value:</strong> {typeof v.value === 'number' ? v.value.toFixed(3) : v.value}</p>
+                      <p><strong>Message:</strong> {v.message}</p>
+                  </div>
+              )
+            }) : null }
             </div>
             <Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button>
           </Modal.Body>

@@ -44,9 +44,9 @@ export type RTCCallInfo = WebRTCInfo & {
     lastName:string,
     pictureUrl:string, 
     socketId:string,  
-    messages:{message:string, from:string, timestamp:number}[],
-    events:{message:string, from:string, timestamp:number}[], 
-    alerts:{message:string, from:string, value:any, timestamp:number}[], 
+    messages:{message:string, from:string, timestamp:number, streamId?:string}[],
+    events:{message:string, from:string, timestamp:number, streamId?:string}[], 
+    alerts:{message:string, from:string, value:any, timestamp:number, streamId?:string}[], 
     
     //set by rtc peer
     hasVideo?:boolean,
@@ -78,7 +78,7 @@ export function sendMessage(call:RTCCallInfo, message:any) {
     
     let result = {message:message, timestamp:Date.now(), from:client.currentUser.firstName + client.currentUser.lastName};
 
-    call.messages.push({message:message, timestamp:Date.now(), from:client.currentUser.firstName + client.currentUser.lastName});
+    call.messages.push(result);
     call.send({message:result});
 
     return result;
@@ -88,9 +88,11 @@ export const onrtcdata = (call, from, data) => {
 
     //console.log( 'received',data);
 
+    //some data structures for the app
     if(data.alert) {
 
         if(!(call as RTCCallInfo).events) (call as RTCCallInfo).alerts = [] as any;
+        data.alert.streamId = call._id; //for marking that its a remote message (for styling mainly)
         (call as RTCCallInfo).alerts.push(data.alert);
 
         onAlert(data.alert,call._id);
@@ -100,6 +102,7 @@ export const onrtcdata = (call, from, data) => {
     if(data.event) {
 
         if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
+        data.event.streamId = call._id; //for marking that its a remote message (for styling mainly)
         (call as RTCCallInfo).events.push(data.event);
         
         recordEvent(from, data.event, call._id);
@@ -110,6 +113,7 @@ export const onrtcdata = (call, from, data) => {
 
         if(!(call as RTCCallInfo).messages) (call as RTCCallInfo).messages = [] as any;
         data.message.from = from;
+        data.message.streamId = call._id; //for marking that its a remote message (for styling mainly)
         (call as RTCCallInfo).messages.push(data.message);
         
         if(state.data.isRecording) {
@@ -118,6 +122,8 @@ export const onrtcdata = (call, from, data) => {
 
         state.setValue(call._id+'message',data.message);
     }
+
+    //sensor data
     if(data.emg) {
         if(!state.data[call._id+'detectedEMG']) state.setState({[call._id+'detectedEMG']:true});
         state.setValue(call._id+'emg', data.emg);
