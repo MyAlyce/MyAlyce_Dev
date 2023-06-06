@@ -89,6 +89,8 @@ export class App extends sComponent {
     }
 
     onGoogleLoginClick() {
+        
+        state.setState({fetchingLogin:true});
         login('google').then(async (result) => {
             let u = await onLogin(result); //process login
             //if(u) await restoreSession(u as any); //restore previous session if matching user
