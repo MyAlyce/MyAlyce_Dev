@@ -12,14 +12,17 @@
 
 ### Scripting/Events/State
 
+- make sure web workers for webrtc calls are not created on the host side until the call is answered
 - finish file saving subscriptions with local/stream recording. Get google drive working somehow
 - readd notifications, friends lists, etc.
 - make the local recordings more secure per-user
 
 ### RTC
 
+- fix selectors not swapping inputs automatically on active calls
 - proper call interface
 - test buffering more
+- audio quality (more filters? compressor? disabling stuff?)
 
 ### Backend
 
