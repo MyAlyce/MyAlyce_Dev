@@ -16,6 +16,7 @@ html, body {
 button {
     transition:box-shadow 0.3s;
     border: none;
+    border-radius: 10px;
 }
 
 button:hover {
