@@ -13,6 +13,8 @@
 - animation
 - fix chart scaling so the leading/trailing zeros don't make it useless for a few seconds
 
+- https://leafletjs.com/examples/quick-start/ for geolocation
+
 ### Scripting/Events/State
 
 - finish file saving subscriptions with local/stream recording. Get google drive working somehow
