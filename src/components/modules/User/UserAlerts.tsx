@@ -6,7 +6,7 @@ import { alerts, client, splitCamelCase, webrtc, webrtcData } from '../../../scr
 import { sComponent } from '../../state.component';
 import { Button, Col, Modal, Row, Table } from 'react-bootstrap';
 import { toISOLocal } from 'graphscript-services.storage';
-import { throwAlert } from '../../../scripts/alerts';
+import { checkForAlerts, throwAlert } from '../../../scripts/alerts';
 import { BeatingSVG } from '../../svg/BeatingSVG/BeatingSVG';
 
 export class UserAlerts extends sComponent {
@@ -32,17 +32,19 @@ export class UserAlerts extends sComponent {
     const handleClose = () => {this.show = false; this.setState({});};
     const handleShow = () => {this.show = true; this.setState({});};
   
-    let as = this.props?.streamId ? 
-      webrtcData.availableStreams[this.props.streamId].alerts 
-        : 
-      alerts;
+    let result = checkForAlerts(this.props.streamId);
 
-    let len = as?.length;
+    let len = result?.alerts?.length;
 
     return (
-      <>
-        {this.props.hideIcon ? null : <><Icon.Bell style={{cursor:'pointer'}}  className="svghover align-text-bottom" size={40} onClick={handleShow}></Icon.Bell>
-        <Badge bg="danger">{len ? len : 0}</Badge></>}
+        <>
+        {this.props.hideIcon ? null : 
+          <span onClick={handleShow}>
+            {len ? <Badge className="wiggletext" style={{ padding:'4px', position:'absolute'}} bg="danger">{len}</Badge> : null }
+            <Icon.Bell style={{cursor:'pointer'}}  className="svghover align-text-bottom" size={40}></Icon.Bell>
+          </span>
+        }
+     
         <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>
             <Modal.Title style={{position:'relative'}}><BeatingSVG customContent={<Icon.AlertTriangle size={26} color={'red'}/>}/>&nbsp;</Modal.Title>
@@ -50,7 +52,7 @@ export class UserAlerts extends sComponent {
           <Modal.Body>
             <div> 
               <strong>Alerts for { this.props?.streamId ? webrtcData.availableStreams[this.props.streamId].firstName + ' ' + webrtcData.availableStreams[this.props.streamId].lastName : client.currentUser.firstName + ' ' + client.currentUser.lastName }</strong>
-            { as ? [...as].reverse().map((v, i) => { 
+            { result?.alerts ? [...result.alerts].reverse().map((v, i) => { 
               return (
                   <div key={i} className={"alert-message"}>
                       <div className="top-info">
@@ -59,6 +61,10 @@ export class UserAlerts extends sComponent {
                       </div>
                       <p><strong>Value:</strong> {typeof v.value === 'number' ? v.value.toFixed(3) : v.value}</p>
                       <p><strong>Message:</strong> {v.message}</p>
+                      <button onClick={()=>{
+                        result.alerts.splice(i,1);
+                        this.setState({}); //remove old alerts
+                      }}>❌</button>
                   </div>
               )
             }) : null }

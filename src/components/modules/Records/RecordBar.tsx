@@ -53,14 +53,14 @@ export class RecordBar extends sComponent {
                 content={(
                     <div className="d-grid gap-2">
                         {this.state.isRecording ? 
-                            <Button variant='info' onClick={()=>{ 
+                            <Button variant='warning' onClick={()=>{ 
                                 stopRecording(this.state.streamRecording, dir, client.currentUser.firstName+client.currentUser.lastName) 
                             }}>
                                 <Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>&nbsp;Pause
                             </Button> 
                                 : 
                             <>
-                                <Button variant='danger' onClick={()=>{
+                                <Button variant='info' onClick={()=>{
                                     this.record(this.state.activeStream, this.toggled, dir, dir)}}
                                 >
                                     <Icon.Circle className="align-text-bottom" size={20}></Icon.Circle>&nbsp;Record

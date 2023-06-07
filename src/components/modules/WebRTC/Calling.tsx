@@ -8,6 +8,7 @@ import { RTCVideo } from "./WebRTCStream";
 
 import * as Icon from 'react-feather'
 import { Avatar } from "../User/Avatar";
+import { BeatingSVG } from "../../svg/BeatingSVG/BeatingSVG";
 
 
 export function StartCall(props:{userId:string|undefined, onClick?:(call?)=>void}) {
@@ -76,7 +77,8 @@ export function AnswerCallModal (props:{streamId:string}) {
             <Modal.Title><Icon.PhoneCall className="align-text-bottom" color="red" size={26}></Icon.PhoneCall>&nbsp;Incoming Call</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          {call && <Row>From: <Col>{call.pictureUrl ? <Avatar pictureUrl={call.pictureUrl}/> : null}{call.firstName ? `${call.firstName} ${call.lastName}` : null }</Col><Col><Button onClick={() => {
+          {call && <Row>
+            <Col style={{whiteSpace:'nowrap'}}><BeatingSVG customContent={<>{call.pictureUrl ? <Avatar pictureUrl={call.pictureUrl}/> : null} | {call.firstName ? `${call.firstName} ${call.lastName}` : null }</>}/></Col><Col><Button onClick={() => {
                 answerCall(call);
                 handleClose();
             }}>Answer Call</Button></Col></Row> }

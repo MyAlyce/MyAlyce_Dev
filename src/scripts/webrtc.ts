@@ -6,46 +6,18 @@ import { onAlert, setupAlerts } from "./alerts";
 import {WebRTCInfo, WebRTCProps} from 'graphscript'//'../../../graphscript/index'//
 //https://hacks.mozilla.org/2013/07/webrtc-and-the-ocean-of-acronyms/
 
-
-//the way these types are redundantly written just helps with the hints in VSCode fyi, no need to go digging
-export type RTCCallProps = WebRTCProps & {
-    caller:string, 
-    firstName:string, 
-    lastName:string, 
-    pictureUrl:string, 
-    socketId:string, 
-    messages:{message:string, from:string, timestamp:number}[], 
-    events:{message:string, from:string, timestamp:number}[], 
-    alerts:{message:string, from:string, timestamp:number}[], 
-
-    //set by rtc peer
-    hasVideo?:boolean,
-    hasAudio?:boolean,
-
-    //for ui controls
-    viewingVideo?:boolean,
-    viewingAudio?:boolean,
-
-    recordingVideo?:boolean,
-    recordingAudio?:boolean,
-
-    videoSender?:boolean, 
-    audioSender?:boolean,
-
-    //for audio controls
-    srcNode?:any,
-    filterNode?:any
-    gainNode?:any
-}
-
-export type RTCCallInfo = WebRTCInfo & {
+type RTCAppProps = {
     caller:string, 
     firstName:string, 
     lastName:string,
     pictureUrl:string, 
-    socketId:string,  
+    socketId:string,  //hosted endpoint from server (as opposed to the RTC p2p route)
+
+    unreadMessages:number,
     messages:{message:string, from:string, timestamp:number, streamId?:string}[],
+    newEvents:boolean,
     events:{message:string, from:string, timestamp:number, streamId?:string}[], 
+    newAlerts:boolean,
     alerts:{message:string, from:string, value:any, timestamp:number, streamId?:string}[], 
     
     //set by rtc peer
@@ -68,6 +40,10 @@ export type RTCCallInfo = WebRTCInfo & {
     gainNode?:any
 }
 
+//the way these types are redundantly written just helps with the hints in VSCode fyi, no need to go digging
+export type RTCCallProps = WebRTCProps & RTCAppProps;
+export type RTCCallInfo = WebRTCInfo & RTCAppProps;
+
 export function getCallLocation(call:RTCCallInfo) {
     return call.run('getCurrentLocation'); //run geolocation at endpoint
 }
@@ -84,7 +60,7 @@ export function sendMessage(call:RTCCallInfo, message:any) {
     return result;
 }
 
-export const onrtcdata = (call, from, data) => { 
+export const onrtcdata = (call:RTCCallInfo, from:string, data:any) => { 
 
     //console.log( 'received',data);
 
@@ -94,6 +70,7 @@ export const onrtcdata = (call, from, data) => {
         if(!(call as RTCCallInfo).events) (call as RTCCallInfo).alerts = [] as any;
         data.alert.streamId = call._id; //for marking that its a remote message (for styling mainly)
         (call as RTCCallInfo).alerts.push(data.alert);
+        call.newAlerts = true;
 
         onAlert(data.alert,call._id);
 
@@ -103,6 +80,7 @@ export const onrtcdata = (call, from, data) => {
 
         if(!(call as RTCCallInfo).events) (call as RTCCallInfo).events = [] as any;
         data.event.streamId = call._id; //for marking that its a remote message (for styling mainly)
+        call.newEvents = true;
         (call as RTCCallInfo).events.push(data.event);
         
         recordEvent(from, data.event, call._id);
@@ -119,6 +97,9 @@ export const onrtcdata = (call, from, data) => {
         if(state.data.isRecording) {
             recordChat(from, data.message, call._id);
         }
+
+        if(!call.unreadMessages) call.unreadMessages = 0;
+        call.unreadMessages++;
 
         state.setValue(call._id+'message',data.message);
     }
@@ -209,7 +190,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
         },
         ondata: (mev, channel) => {
             let data = JSON.parse(mev.data);
-            onrtcdata(webrtc.rtc[rtcId], (webrtc.rtc[rtcId] as RTCCallInfo).firstName+(webrtc.rtc[rtcId] as RTCCallInfo).lastName, data);
+            onrtcdata(webrtc.rtc[rtcId] as RTCCallInfo, (webrtc.rtc[rtcId] as RTCCallInfo).firstName+(webrtc.rtc[rtcId] as RTCCallInfo).lastName, data);
 
             //stock functions for the webrtc service, e.g. you can webrtc.rtc[rtcId] anything on each other's endpoints
             webrtc.receive(mev.data, channel, webrtc.rtc[rtcId]);

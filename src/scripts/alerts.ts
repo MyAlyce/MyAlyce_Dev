@@ -74,6 +74,20 @@ export const showNotification = (title,message) => {
     }
   };
 
+let newClientAlerts = false;
+
+export function checkForAlerts(streamId?) {
+    if(streamId && webrtcData.availableStreams[streamId]?.alerts) {
+        let newAlerts = webrtcData.availableStreams[streamId].newAlerts
+        webrtcData.availableStreams[streamId].newAlerts = false;
+        return {alerts:webrtcData.availableStreams[streamId].alerts, newAlerts};
+    } else {
+        let newAlerts = newClientAlerts;
+        newClientAlerts = false;
+        return {alerts:alerts, newAlerts};
+    }
+}
+
 export function onAlert(event, streamId?) {
 
     console.warn("Alert:", event);
@@ -86,10 +100,13 @@ export function onAlert(event, streamId?) {
     recordAlert(event, streamId);
 
     //broadcast your own alerts to connected streams
-    if(!streamId) 
+    if(!streamId) {
+        newClientAlerts = true;
         for(const key in webrtcData.availableStreams) {
             webrtcData.availableStreams[key].send({alert:event});
         }
+    }
+        
 }
 
 

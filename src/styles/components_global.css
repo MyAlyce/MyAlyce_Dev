@@ -15,6 +15,7 @@ html, body {
 
 button {
     transition:box-shadow 0.3s;
+    border: none;
 }
 
 button:hover {
@@ -263,4 +264,30 @@ button:hover {
 @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+@keyframes wiggle {
+    0%, 94%, 100% {
+        transform: translateY(0);
+    }
+    95% {
+        transform: translateY(10px);
+    }
+    96% {
+        transform: translateY(-10px);
+    }
+    97% {
+        transform: translateY(10px);
+    }
+    98% {
+        transform: translateY(-10px);
+    }
+    99% {
+        transform: translateY(10px);
+    }
+}
+
+.wiggletext {
+    position:absolute;
+    animation: wiggle 10s ease-in-out infinite;
 }

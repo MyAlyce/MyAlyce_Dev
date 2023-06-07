@@ -26,15 +26,25 @@ export class UserMessages extends sComponent {
   show=false;
   render() {
   
-    const handleClose = () => {this.show = false; this.setState({});};
-    const handleShow = () => {this.show = true; this.setState({});};
+    const handleClose = () => {
+      this.show = false; this.setState({});
+    };
+    const handleShow = () => {
+      (webrtc.rtc[this.props.streamId] as RTCCallInfo).unreadMessages = 0;
+      this.show = true; this.setState({});
+
+    };
   
     let chats = (webrtc.rtc[this.props.streamId] as RTCCallInfo).messages;
+    let unread = (webrtc.rtc[this.props.streamId] as RTCCallInfo).unreadMessages;
 
     return (
       <>
-        <Icon.MessageSquare style={{cursor:'pointer'}} className="svghover align-text-bottom" size={40} onClick={handleShow}></Icon.MessageSquare>
-        <Badge bg="secondary">{chats ? chats.length : 0}</Badge> {/** TODO: have a number for the number of unchecked messages */}
+        <span onClick={handleShow}>
+          {unread ? <Badge className="wiggletext" style={{padding:'4px', position:'absolute'}} bg="success">{unread}</Badge> : null} 
+          <Icon.MessageSquare style={{cursor:'pointer'}} className="svghover align-text-bottom" size={40}></Icon.MessageSquare>
+        </span>
+        {/** TODO: have a number for the number of unchecked messages */}
         <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
           <Modal.Header closeButton>
             <Modal.Title><Icon.MessageSquare className="align-text-bottom" color="red" size={26}></Icon.MessageSquare>&nbsp;Messages</Modal.Title>
