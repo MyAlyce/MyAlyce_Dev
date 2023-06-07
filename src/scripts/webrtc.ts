@@ -180,7 +180,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
                 console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
             });
 
-            alertNodes = setupAlerts(rtcId);
+            //alertNodes = setupAlerts(rtcId); //just leave alerts on client end rn, add a toggle in the app instead
 
             //the webrtc.rtc[rtcId] is now live, add tracks
             //data channel streams the device data
