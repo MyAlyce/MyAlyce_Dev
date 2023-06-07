@@ -5,6 +5,9 @@
  Second demo implementing goal system and social(ish) tracking features.
  Third will add back office support to start to build out an EHR companion system, eventually a full thing.
 
+WIP Image, showing high performance in live biometric streaming over WebRTC.
+![Capture](./Capture.PNG)
+
 ### Dev
 
 With the latest NodeJS LTS installed:

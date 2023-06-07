@@ -73,23 +73,30 @@ export function AnswerCallModal (props:{streamId:string}) {
     
     return (
         <Modal show={show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
-          <Modal.Header closeButton>
-            <Modal.Title><Icon.PhoneCall className="align-text-bottom" color="red" size={26}></Icon.PhoneCall>&nbsp;Incoming Call</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-          {call && <Row>
-            <Col style={{whiteSpace:'nowrap'}}><BeatingSVG customContent={<>{call.pictureUrl ? <Avatar pictureUrl={call.pictureUrl}/> : null} | {call.firstName ? `${call.firstName} ${call.lastName}` : null }</>}/></Col><Col><Button onClick={() => {
-                answerCall(call);
-                handleClose();
-            }}>Answer Call</Button></Col></Row> }
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={()=>{
-                handleClose();
-            }}>
-              Close
-            </Button>
-          </Modal.Footer>
+            <Modal.Header closeButton>
+                <Modal.Title><Icon.PhoneCall className="align-text-bottom" color="red" size={26}></Icon.PhoneCall>&nbsp;Incoming Call</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            { call && 
+                <Row  className='my-auto'>
+                    <Col style={{whiteSpace:'nowrap'}}><BeatingSVG customContent={<>{call.pictureUrl ? <Avatar pictureUrl={call.pictureUrl}/> : null} | {call.firstName ? `${call.firstName} ${call.lastName}` : null }</>}/></Col>
+                    <Col>
+                        <Button 
+                            onClick={() => {
+                                answerCall(call);
+                                handleClose();
+                            }
+                        }>Answer Call</Button></Col>
+                </Row> 
+            }
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={()=>{
+                    handleClose();
+                }}>
+                Close
+                </Button>
+            </Modal.Footer>
         </Modal>
     )
 }

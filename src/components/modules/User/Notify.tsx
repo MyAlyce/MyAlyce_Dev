@@ -6,7 +6,7 @@ import { Col } from 'react-bootstrap';
 
 export function Notify(props:{streamId?:string, width?:string}) {
   return (
-    <Col className="my-auto" style={{minWidth:props.width}}>
+    <Col className="my-auto" style={{minWidth:props.width, whiteSpace:'nowrap'}}>
       <UserAlerts
           streamId={props.streamId}
       /> 
