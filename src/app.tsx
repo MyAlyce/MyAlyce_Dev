@@ -238,7 +238,7 @@ export class App extends sComponent {
                                                 }
                                             </div>),
                                             (<div  key={2}>{ this.state.triggerPageRerender ? null : <StreamSelect 
-                                                onChange={(key, activeStream) => { 
+                                                onInput={(key, activeStream) => { 
                                                     this.setState({triggerPageRerender:true, deviceMode:key, activeStream:activeStream});
                                                 }} 
                                                 selected={this.state.activeStream}

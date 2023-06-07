@@ -133,7 +133,7 @@ export function setupAlerts(
 
     if(!alerts || alerts.includes('hr')) {
         let node = graph.add(new HeartRateAlert(
-            onAlert,
+            (ev)=>{onAlert(ev,streamId)},
             streamId ? streamId+'hr' : 'hr',    
             streamId ? streamId+'hrAlert' : 'hrAlert'
         ));
@@ -142,7 +142,7 @@ export function setupAlerts(
 
     if(!alerts || alerts.includes('breath')) {
         let node = graph.add(new BreathAlert(
-            onAlert,
+            (ev)=>{onAlert(ev,streamId)},
             streamId ? streamId+'breath' : 'breath',
             streamId ? streamId+'breathAlert' : 'breathAlert'
         ));
@@ -151,7 +151,7 @@ export function setupAlerts(
 
     if(!alerts || alerts.includes('fall')) {
         let node = graph.add(new FallAlert(
-            onAlert,
+            (ev)=>{onAlert(ev,streamId)},
             streamId ? streamId+'imu' : 'imu',
             streamId ? streamId+'fallAlert' : 'fallAlert'
         ));

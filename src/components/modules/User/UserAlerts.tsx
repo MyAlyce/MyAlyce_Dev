@@ -50,7 +50,7 @@ export class UserAlerts extends sComponent {
             <Modal.Title style={{position:'relative'}}><BeatingSVG customContent={<Icon.AlertTriangle size={26} color={'red'}/>}/>&nbsp;</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div> 
+            <div className='mx-auto'> 
               <strong>Alerts for { this.props?.streamId ? webrtcData.availableStreams[this.props.streamId].firstName + ' ' + webrtcData.availableStreams[this.props.streamId].lastName : client.currentUser.firstName + ' ' + client.currentUser.lastName }</strong>
             { result?.alerts ? [...result.alerts].reverse().map((v, i) => { 
               return (

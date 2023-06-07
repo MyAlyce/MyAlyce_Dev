@@ -53,16 +53,19 @@ export class StreamSelect extends Component<{[key:string]:any}> {
     };
 
     onItemClick = (key: string | undefined) => {
-        console.log(key);
-        this.selectedKey = key;
-        selectedKey = key as string;
+        //console.log(key);
         let activeStream;
         if(key === 'My Device' || key === 'Demo')
             activeStream = undefined;//, dropdownOpen: false });
         else 
             activeStream = key;
+
+        if(this.selectedKey !== key) 
+            this.onchange(key,activeStream);
+        
+            this.selectedKey = key;
+        selectedKey = key as string;
             
-        this.onchange(key,activeStream);
         this.setState({activeStream:activeStream});
     };
 
