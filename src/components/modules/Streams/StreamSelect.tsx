@@ -61,9 +61,10 @@ export class StreamSelect extends Component<{[key:string]:any}> {
             activeStream = key;
 
         if(this.selectedKey !== key) 
-            this.onchange(key,activeStream);
+            this.onchange(key, activeStream);
         
-            this.selectedKey = key;
+        this.selectedKey = key;
+
         selectedKey = key as string;
             
         this.setState({activeStream:activeStream});
@@ -84,34 +85,34 @@ export class StreamSelect extends Component<{[key:string]:any}> {
                         {this.state.dropdownOpen && (
                         <div className="d-flex flex-column" style={{gap: '10px', padding: '10px'}}>
 
-                            <div
+                            <span
                                 key="Demo"
                                 style={{cursor:'pointer'}}
                                 onClick={() => this.onItemClick('Demo')}
                                 className={this.state.activeStream === undefined ? 'selected' : ''}
                             >
                                 <Widget className='hoverdiv' header={"Demo Data"} content={<></>}/>
-                            </div>
-                            <div
+                            </span>
+                            <span
                                 key="My-Device"
                                 style={{cursor:'pointer'}}
                                 onClick={() => this.onItemClick('My Device')}
                                 className={this.state.activeStream === undefined ? 'selected' : ''}
                             >
-                                <Widget className='hoverdiv'  header={<>My Device</>} content={<UserBar/>} />
+                                <Widget className='hoverdiv'  header={<>My Device</>} content={<UserBar hideAlertModal={true}/>} />
                                 
-                            </div>
+                            </span>
                             {Object.keys(webrtc.rtc).length > 0 &&
                             Object.keys(webrtc.rtc).map((key) => {
                                 return (
-                                <div
+                                <span
                                     key={key}
                                     style={{cursor:'pointer'}}
                                     onClick={() => this.onItemClick(key)}
                                     className={this.state.activeStream === key ? 'selected' : ''}
                                 >
-                                    <Widget className='hoverdiv'  content={<UserBar streamId={key}/>} />
-                                </div>
+                                    <Widget className='hoverdiv'  content={<UserBar streamId={key} hideAlertModal={true}/>} />
+                                </span>
                                 );
                             })}
                         </div>

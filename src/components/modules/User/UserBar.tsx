@@ -16,7 +16,9 @@ export function UserBar(props:{
   pinOnClick?:(ev)=>void, 
   xOnClick?:(ev)=>void, 
   audioOnClick?:(ev)=>void, 
-  videoOnClick?:(ev)=>void
+  videoOnClick?:(ev)=>void,
+  hideAlertModal?:boolean,
+  hideAlertIcon?:boolean
 }) {
 
   let name;
@@ -56,6 +58,8 @@ export function UserBar(props:{
       />
       <Notify
         streamId={props.streamId}
+        hideAlertIcon={props.hideAlertIcon}
+        hideAlertModal={props.hideAlertModal}
         width={"20%"}
       />
     </Row>

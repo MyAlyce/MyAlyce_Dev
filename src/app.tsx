@@ -237,12 +237,14 @@ export class App extends sComponent {
                                                         /> : null    
                                                 }
                                             </div>),
-                                            (<div  key={2}>{ this.state.triggerPageRerender ? null : <StreamSelect 
-                                                onInput={(key, activeStream) => { 
-                                                    this.setState({triggerPageRerender:true, deviceMode:key, activeStream:activeStream});
-                                                }} 
-                                                selected={this.state.activeStream}
-                                            /> }</div>),
+                                            (<div  key={2}>{ this.state.triggerPageRerender ? null : 
+                                                <StreamSelect 
+                                                    onChange={(key, activeStream) => { 
+                                                        this.setState({triggerPageRerender:true, deviceMode:key, activeStream:activeStream});
+                                                    }} 
+                                                    selected={this.state.activeStream}
+                                                /> }
+                                            </div>),
                                             (<span key={3}><Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button></span>),
                                             (<span key={4}><MediaDeviceOptions/></span>),
                                             (<span key={5}>{ this.state.activeStream && <><ViewSelfVideoStream streamId={this.state.activeStream}/> { webrtcData.availableStreams[this.state.activeStream].audioStream && <RTCAudio /> } </> }</span>),

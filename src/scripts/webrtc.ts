@@ -67,7 +67,7 @@ export const onrtcdata = (call:RTCCallInfo, from:string, data:any) => {
     //some data structures for the app
     if(data.alert) {
 
-        if(!(call as RTCCallInfo).events) (call as RTCCallInfo).alerts = [] as any;
+        if(!(call as RTCCallInfo).alerts) (call as RTCCallInfo).alerts = [] as any;
         data.alert.streamId = call._id; //for marking that its a remote message (for styling mainly)
         (call as RTCCallInfo).alerts.push(data.alert);
         call.newAlerts = true;

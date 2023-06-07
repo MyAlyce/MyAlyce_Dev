@@ -6,6 +6,7 @@
 
 ### UX/UI
 
+- modals acting weird with alerts, tends to cause page reload with onItemClick triggering somehow from the StreamSelect divs... weird
 - create a tiling system for customizing dashboard setup, back up config to indexeddb 
 - styling, clean generic crm look like adminlte or google analytics. Modern and information-rich without being overwhelming as we need this to be nice for fairly tech-illiterate people.
 - webrtc ux/ui. Make calling yourself its own separate deal from calling other users (since its just setting up a remote connection for yourself)
