@@ -7,7 +7,7 @@
 ### UX/UI
 
 - create a tiling system for customizing dashboard setup, back up config to indexeddb 
-- styling, clean generic crm look like adminlte or google analytics
+- styling, clean generic crm look like adminlte or google analytics. Modern and information-rich without being overwhelming as we need this to be nice for fairly tech-illiterate people.
 - webrtc ux/ui. Make calling yourself its own separate deal from calling other users (since its just setting up a remote connection for yourself)
 - animation
 - fix chart scaling so the leading/trailing zeros don't make it useless for a few seconds
