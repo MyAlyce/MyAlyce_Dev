@@ -171,14 +171,37 @@ button:hover {
 
 @keyframes wave {
     0%, 100% {
-        transform: translateY(0);
+        transform: translateY(0) rotate(0deg); 
     }
     50% {
-        transform: translateY(-30%) rotate(20deg);
+        transform: translateY(-30%) rotate(15deg);
     }
-    /* 25% {
-        transform: rotate(20deg);
-    } */
+
+
+}
+
+@keyframes wave2 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg); 
+    }
+    25% {
+        transform: translateY(-15%) rotate(15deg);
+    } 
+    30% {
+        transform: translateY(-13%) rotate(10deg);
+    } 
+    50% {
+        transform: translateY(-30%) rotate(15deg);
+    }
+
+    
+    75% {
+        transform: translateY(-13%) rotate(10deg);
+    } 
+    80% {
+        transform: translateY(-15%) rotate(15deg);
+    } 
+
 }
 
 .logincover {
