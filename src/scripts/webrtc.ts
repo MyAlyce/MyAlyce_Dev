@@ -150,7 +150,6 @@ export const onrtcdata = (call:RTCCallInfo, from:string, data:any) => {
 export function genCallSettings(userId, rtcId, alertNodes?) {
 
 
-
     return {
         onicecandidate:async (ev) => {
             if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
@@ -180,7 +179,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
                 console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
             });
 
-            //alertNodes = setupAlerts(rtcId); //just leave alerts on client end rn, add a toggle in the app instead
+            //if(!alertNodes) alertNodes = setupAlerts(rtcId); //just leave alerts on client end rn, add a toggle in the app instead
 
             //the webrtc.rtc[rtcId] is now live, add tracks
             //data channel streams the device data
@@ -282,10 +281,10 @@ export async function startCall(userId) {
 export let answerCall = async (call:RTCCallProps) => {
     if(!call) return;
     
-    let nodes = setupAlerts(call._id, ['hr','breath','fall']);
+    //let nodes = setupAlerts(call._id, ['hr','breath','fall']);
 
     Object.assign(call,{
-        ...genCallSettings(call.caller, call._id, nodes)
+        ...genCallSettings(call.caller, call._id)//, nodes)
     });
 
     let rtc = await webrtc.answerCall(call as any);
