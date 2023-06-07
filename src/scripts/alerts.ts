@@ -77,10 +77,12 @@ export const showNotification = (title,message) => {
 let newClientAlerts = false;
 
 export function checkForAlerts(streamId?) {
-    if(streamId && webrtcData.availableStreams[streamId]?.alerts) {
-        let newAlerts = webrtcData.availableStreams[streamId].newAlerts;
-        webrtcData.availableStreams[streamId].newAlerts = false;
-        return {alerts:webrtcData.availableStreams[streamId].alerts, newAlerts};
+    if(streamId) {
+        if(webrtcData.availableStreams[streamId]?.alerts) {
+            let newAlerts = webrtcData.availableStreams[streamId].newAlerts;
+            webrtcData.availableStreams[streamId].newAlerts = false;
+            return {alerts:webrtcData.availableStreams[streamId].alerts, newAlerts};
+        }
     } else {
         let newAlerts = newClientAlerts;
         newClientAlerts = false;
