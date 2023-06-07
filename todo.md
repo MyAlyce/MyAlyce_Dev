@@ -1,8 +1,13 @@
 ### KNOWN BUGS
 
-- when not selecting a bluetooth device then selecting again, or when removing a device then reconnecting, this may cause ui not to respond
-- webrtc media device swapping not triggering device change yet
+- when not selecting a bluetooth device then selecting again, or when removing a device then reconnecting, this may cause ui not to respond, seems to be more a bluetooth issue
 - browserfs EIO errors, though it doesn't seem to stop the files from writing
+
+### Priorities
+
+- Arm/disarm alerts
+- Add local folder list option for custom folder names so a user can record several people on their own account
+- Punch in categorized notes easier, record audio/video. Potentially transcribe audio? Sort event tables
 
 ### UX/UI
 
