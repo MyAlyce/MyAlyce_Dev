@@ -18,13 +18,13 @@ export function Navigation (){
           <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : true)}  />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link onClick={()=>{state.setState({route:'/'}); setExpanded(false);}}>          
+              <Nav.Link className="svghover" onClick={()=>{state.setState({route:'/'}); setExpanded(false);}}>          
               <Icon.Home className="align-text-bottom" size={20} data-active-link={window.location.pathname === '/'}></Icon.Home>
               &nbsp;Home</Nav.Link>
               {/* <Nav.Link onClick={()=>{state.setState({route:'/peers'}); setExpanded(false);}}>
               <Icon.Phone className="align-text-bottom" size={20}></Icon.Phone>
               &nbsp;WebRTC</Nav.Link> */}
-              <Nav.Link onClick={()=>{state.setState({route:'/recordings'}); setExpanded(false);}}>
+              <Nav.Link className="svghover" onClick={()=>{state.setState({route:'/recordings'}); setExpanded(false);}}>
               <Icon.Activity className="align-text-bottom" size={20} data-active-link={window.location.pathname === '/recordings'}></Icon.Activity>
               &nbsp;Recordings</Nav.Link>
               {/* <Nav.Link  onClick={()=>{state.setState({route:'/settings'}); setExpanded(false);}}> 
