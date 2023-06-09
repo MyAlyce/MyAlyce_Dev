@@ -4,8 +4,8 @@ export default server = {  //node server settings, set false to skip server step
     host: "localhost", //'localhost' or '127.0.0.1' etc.
     port: 8081, //e.g. port 80, 443, 8000\
     
-    dataserverport:8082,
-    datasocketport:8083,
+    dataserverport:8083,
+    datasocketport:8084,
     
     mongodbmode: "dev", //local, dev, production, or undefined/false/null/0 for no mongoose
     localdbport:27017, //mongodb localhost port
@@ -14,7 +14,7 @@ export default server = {  //node server settings, set false to skip server step
 
     startpage: "index.html", //home page
     socket_protocol: "ws", //frontend socket protocol, wss for served, ws for localhost
-    hotreload: 7000,  //hotreload websocket server port 
+    hotreload: 7000,  //hotreload websocket server port. Set to let tinybuild handle this part for now and redirect to this server
     //watch: ['../'], //watch additional directories other than the current working directory
     pwa: "dist/service-worker.js",  //pwa mode? Injects service worker registry code in (see pwa README.md)
     python: false,//7000,  //quart server port (configured via the python server script file still)

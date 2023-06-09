@@ -14,8 +14,9 @@ import {
 
 import { scriptBoilerPlate } from 'graphscript-node/src/services/http/boilerplate'
 import { fitbitRoutes } from './fitbit';
-import settings from './serverconfig'
 
+import tcfg from '../tinybuild.config'
+import settings from './serverconfig'
 
 import {config} from 'dotenv'
 import fs from 'fs'
@@ -63,24 +64,25 @@ const ContentServer = new Router({
                         'test':'<div>TEST</div>',
                         _all:{
                             inject:{ //page building
-                                hotreload:`ws://${settings.host}:${settings.port}/hotreload` //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
+                                hotreload:[`ws://${tcfg.server.host}:${tcfg.server.port}/hotreload`,tcfg.bundler.outfile.split('/').pop()+'.css'] //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
                             }
                         }
                     },
                     onopen:(served)=>{
 
-                        let hotreloadsocket = ContentServer.openConnection(
+                        if(settings.hotreload) 
+                            ContentServer.openConnection(
                             'wss',
-                            {
-                                server:served.server,
-                                host:served.host,
-                                port:settings.hotreload,
-                                path:'hotreload',
-                                onconnection:(ws)=>{
-                                    ws.send('Hot reload port opened!');
+                                {
+                                    server:served.server,
+                                    host:served.host,
+                                    port:settings.hotreload,
+                                    path:'hotreload',
+                                    onconnection:(ws)=>{
+                                        ws.send('Hot reload port opened!');
+                                    }
                                 }
-                            }
-                        )
+                            )
                     }
                 }
             }
@@ -181,7 +183,7 @@ const DataServer = new Router({
                         '/':'Data Server',
                         _all:{
                             inject:{ //page building
-                                hotreload:`ws://${settings.host}:${settings.port}/hotreload` //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
+                                hotreload:`ws:///${tcfg.server.host}:${tcfg.server.port}/hotreload` //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
                             }
                         }
                     },

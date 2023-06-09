@@ -1,5 +1,7 @@
-import { streamingImportsPlugin, workerPlugin, installerPlugin } from 'tinybuild'
 import {sassPlugin} from 'esbuild-sass-plugin'
+
+
+//import settings from './backend/serverconfig.js'
 
 const config = {
     bundler: { //esbuild settings, set false to skip build step or add bundle:true to config object to only bundle (alt methods)
@@ -12,44 +14,51 @@ const config = {
         bundleESM: false, //create esm module js files
         bundleTypes: false, //create .d.ts files, the entry point must be a typescript file! (ts, tsx, etc)
         bundleNode: false, //create node platform plain js build, specify platform:'node' to do the rest of the files 
-        bundleHTML: true, //wrap the first entry point file as a plain js script in a boilerplate html file, frontend scripts can be run standalone like a .exe! Server serves this as start page if set to true.
+        bundleHTML: false, //wrap the first entry point file as a plain js script in a boilerplate html file, frontend scripts can be run standalone like a .exe! Server serves this as start page if set to true.
         minify: false,
         sourcemap: false,
         plugins:[
-            sassPlugin(),
-            streamingImportsPlugin,
-            workerPlugin({
-              blobWorkers:true,
-              bundler:{minifyWhitespace:true}
-            }),
-            installerPlugin
-          ], //{importmap:{imports:{[key:string]: string}}, directory: string}
+          sassPlugin()
+          // streamingImportsPlugin,
+          // workerPlugin({
+          //   blobWorkers:true,
+          //   bundler:{minifyWhitespace:true}
+          // }),
+          // installerPlugin
+        ], //{importmap:{imports:{[key:string]: string}}, directory: string}
 
-          loader: {
-            '.png': 'dataurl',
-            '.svg': 'dataurl',
-            '.jpg': 'dataurl',
-            '.jpeg': 'dataurl',
-          }
+          // loader: {
+          //   '.png': 'file',
+          //   '.svg': 'file',
+          //   '.jpg': 'file',
+          //   '.jpeg': 'file',
+          // }
         //globalThis:null //'mymodule'
         //globals:{'index.js':['Graph']}
         //init:{'index.js':function(bundle) { console.log('prepackaged bundle script!', bundle); }.toString(); } //pass stringified functions in to init bundle scripts in a custom way (e.g. for quick rebundling)     
      },
-    server: false//{  //node server settings, set false to skip server step or add serve:true to config object to only serve (alt methods)
-    //     debug: false,
-    //     protocol: "http",  //'http' or 'https'. HTTPS required for Nodejs <---> Python sockets. If using http, set production to False in python/server.py as well
-    //     host: "localhost", //'localhost' or '127.0.0.1' etc.
-    //     port: 8080, //e.g. port 80, 443, 8000
-    //     startpage: "index.html", //home page
-    //     socket_protocol: "ws", //frontend socket protocol, wss for served, ws for localhost
-    //     hotreload: 5000,  //hotreload websocket server port
-    //     //watch: ['../'], //watch additional directories other than the current working directory
-    //     pwa: "dist/service-worker.js",  //pwa mode? Injects service worker registry code in (see pwa README.md)
-    //     python: false,//7000,  //quart server port (configured via the python server script file still)
-    //     python_node: 7001, //websocket relay port (relays messages to client from nodejs that were sent to it by python)
-    //     errpage: "node_modules/tinybuild/tinybuild/node_server/other/404.html",  //default error page, etc.
-    //     certpath: "node_modules/tinybuild/tinybuild/node_server/ssl/cert.pem", //if using https, this is required. See cert.pfx.md for instructions
-    //     keypath: "node_modules/tinybuild/tinybuild/node_server/ssl/key.pem" //if using https, this is required. See cert.pfx.md for instructions
-    // }
+    server: {  //node server settings, set false to skip server step or add serve:true to config object to only serve (alt methods)
+        debug: false,
+        protocol: "http",  //'http' or 'https'. HTTPS required for Nodejs <---> Python sockets. If using http, set production to False in python/server.py as well
+        host: "localhost", //'localhost' or '127.0.0.1' etc.
+        port: 8000, //e.g. port 80, 443, 8000
+        redirect: 'http://localhost:8082',//settings.protocol + '://' + settings.host + ':' + settings.port, //redirect to this instead
+
+        //will skip this but use hotreload
+        startpage: "index.html", //home page
+
+        socket_protocol: "ws", //frontend socket protocol, wss for served, ws for localhost
+        hotreload: 5000,  //hotreload websocket server port
+        //delay: 5000,
+        //watch: ['../'], //watch additional directories other than the current working directory
+        
+        pwa: "dist/service-worker.js",  //pwa mode? Injects service worker registry code in (see pwa README.md)
+        python: false,//7000,  //quart server port (configured via the python server script file still)
+        python_node: 7001, //websocket relay port (relays messages to client from nodejs that were sent to it by python)
+        errpage: "node_modules/tinybuild/tinybuild/node_server/other/404.html",  //default error page, etc.
+        certpath: "node_modules/tinybuild/tinybuild/node_server/ssl/cert.pem", //if using https, this is required. See cert.pfx.md for instructions
+        keypath: "node_modules/tinybuild/tinybuild/node_server/ssl/key.pem" //if using https, this is required. See cert.pfx.md for instructions
+    }
 }
+
 export default config; //module.exports = config; //es5

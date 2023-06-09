@@ -27,14 +27,22 @@ export class RecordBar extends sComponent {
         this.dir = props.dir;
     }
 
+    componentDidMount(): void {
+        //this.__subscribeComponent(this.props.streamId ? this.props.streamId : '');
+    }
 
-    record(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[], subTitle?:string, dir?:string) {
+    componentWillUnmount(): void {
+        //this.__unsubscribeComponent
+    }
+
+
+    record(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[], subTitle?:string, dir:string=this.dir as string) {
         recordCSV(streamId, sensors, subTitle, dir);
         this.setState({streamRecording:streamId});
         if(this.onChange) this.onChange({isRecording:true, streamId})
     }
 
-    async stopRecording(streamId?:string, dir?:string) {
+    async stopRecording(streamId?:string, dir:string=this.dir as string) {
         await stopRecording(streamId, dir, client.currentUser.firstName+client.currentUser.lastName); //folder list will be associated with current user so they will only see indexeddb folders for users they are associated with
         this.setState({streamRecording:undefined});
         if(this.onChange) this.onChange({isRecording:false, streamId})
