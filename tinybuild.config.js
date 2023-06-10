@@ -42,7 +42,7 @@ const config = {
         protocol: "http",  //'http' or 'https'. HTTPS required for Nodejs <---> Python sockets. If using http, set production to False in python/server.py as well
         host: "localhost", //'localhost' or '127.0.0.1' etc.
         port: 8000, //e.g. port 80, 443, 8000
-        redirect: 'http://localhost:8082',//settings.protocol + '://' + settings.host + ':' + settings.port, //redirect to this instead
+        redirect: 'http://localhost:8081',//settings.protocol + '://' + settings.host + ':' + settings.port, //redirect to this instead
 
         //will skip this but use hotreload
         startpage: "index.html", //home page
