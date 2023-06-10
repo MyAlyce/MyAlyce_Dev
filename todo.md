@@ -2,6 +2,7 @@
 
 - when not selecting a bluetooth device then selecting again, or when removing a device then reconnecting, this may cause ui not to respond, seems to be more a bluetooth issue
 - browserfs EIO errors, though it doesn't seem to stop the files from writing
+- redirect can cache and screw up localhost on non-redirect servers (??)
 
 ### Priorities
 
