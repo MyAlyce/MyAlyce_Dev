@@ -121,7 +121,7 @@ export async function checkFitbitToken(accessToken: string) {
 //load into the struct backend
 export const fitbitRoutes = {
     'authorizefitbit':async function (...args:any[]) {
-        let u = await (this.__node.graph as StructBackend).getUser(args[0], args[1]);
+        let u = await (this.__node.graph as StructBackend).getUser(args[0], args[1], undefined, args[2]);
 
         if(!u) return undefined;
 
@@ -137,13 +137,13 @@ export const fitbitRoutes = {
         Object.assign(u.data.fitbit,{...res});
         u.data.fitbit.expires_on = Date.now() + (((res as FitbitAuth).expires_in - 60) * 1000);
 
-        let updated = await (this.__node.graph as StructBackend).setUser(args[0], u);
+        let updated = await (this.__node.graph as StructBackend).setUser(args[0], u, args[2]);
 
         return updated;
         
     },
     'refreshFitbit':async function (...args:any[]) {
-        let u = await (this.__node.graph as StructBackend).getUser(args[0], args[1]);
+        let u = await (this.__node.graph as StructBackend).getUser(args[0], args[1], undefined, args[2]);
 
         if(!u) return undefined;
 
@@ -160,13 +160,13 @@ export const fitbitRoutes = {
         u.data.fitbit.refresh_token = (res as FitbitAuth).refresh_token;
         u.data.fitbit.expires_on = Date.now() + (((res as FitbitAuth).expires_in - 60) * 1000);
 
-        let updated = await (this.__node.graph as StructBackend).setUser(args[0] , u);
+        let updated = await (this.__node.graph as StructBackend).setUser(args[0] , u, args[2]);
 
         return updated;
         
     },
     'rejectFitbit':async function (...args:any[]) {
-        let u = await (this.__node.graph as StructBackend).getUser(args[0], args[1]);
+        let u = await (this.__node.graph as StructBackend).getUser(args[0], args[1], undefined, args[2]);
 
         if(!u) return undefined;
 
@@ -174,7 +174,7 @@ export const fitbitRoutes = {
 
         if(fbauth) delete u.data.fitbit;
 
-        let updated = await (this.__node.graph as StructBackend).setUser(args[0], u);
+        let updated = await (this.__node.graph as StructBackend).setUser(args[0], u, args[2]);
 
         if(updated) {
             let res = await revokeFitbitAuth(fbauth.access_token);
@@ -187,7 +187,7 @@ export const fitbitRoutes = {
 
     },
     'checkFitbitToken':async function (...args:any[]) {
-        let u = await (this.__node.graph as StructBackend).getUser(args[0], args[1]);
+        let u = await (this.__node.graph as StructBackend).getUser(args[0], args[1], undefined, args[2]);
 
         if(!u) return undefined;
 
