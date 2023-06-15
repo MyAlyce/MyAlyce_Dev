@@ -71,10 +71,10 @@ export let driveInstance:GDrive;
 
 export type Sensors = 'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg'|'emg2';
 
-export type Streams = ('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg'|'emg2'|'chat'|'events'|'alerts')[];
+export type Streams = ('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg'|'emg2'|'chat'|'events'|'alerts'|'audiovideo')[];
 
 export const SensorDefaults = ['emg','ppg','breath','hr','imu','env','ecg'] as Sensors[];
-export const StreamDefaults = ['emg','ppg','breath','hr','imu','env','ecg','chat','events','alerts'] as any as Streams[];
+export const StreamDefaults = ['emg','ppg','breath','hr','imu','env','ecg','chat','events','alerts','alerts','audiovideo'] as any as Streams[];
 
 export const alerts = [] as {message:string,value:any, from:string, timestamp:number|string}[]; //session alerts
 export const events = [] as {message:string, from:string, timestamp:number|string}[]; //session events

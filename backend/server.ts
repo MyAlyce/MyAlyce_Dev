@@ -11,6 +11,7 @@ import settings from './serverconfig'
 
 import {config} from 'dotenv'
 import fs from 'fs'
+import path from 'path'
 
 if(fs.existsSync('.env'))
     config(); //load the .env file
@@ -19,7 +20,15 @@ if(fs.existsSync('.env'))
 
 //process.setMaxListeners(0);
 
-import './dataserver'
+import {Worker} from 'worker_threads'
+
+const DataServer = new Worker(path.join(process.cwd(),'/dataserver.js'));
+//run the data server on a thread
+
+DataServer.on('exit', (code) => {
+    if (code !== 0)
+      console.error(`Data Server stopped with exit code ${code}`);
+});
 
 const ContentServer = new Router({
     graph:{
