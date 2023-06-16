@@ -1,12 +1,9 @@
 {
   "name": "myalyce",
   "version": "0.0.0",
-  "description": "Barebones esbuild and test node server implementation. For building",
-  "main": "index.js",
+  "description": "Wearable real-time biometrics demo",
+  "main": "backend/dist/server.js",
   "type": "module",
-  "workspaces": [
-    "frontend/components/lib"
-  ],
   "scripts": {
     "start": "npm run concurrent",
     "production": "tinybuild && cd backend && tinybuild && cd dist && node server.js",

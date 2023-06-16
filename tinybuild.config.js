@@ -26,7 +26,7 @@ const config = {
           // }),
           // installerPlugin
         ], //{importmap:{imports:{[key:string]: string}}, directory: string}
-
+        //blobWorkers:true,
           // loader: {
           //   '.png': 'file',
           //   '.svg': 'file',

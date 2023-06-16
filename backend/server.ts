@@ -22,7 +22,7 @@ if(fs.existsSync('.env'))
 
 import {Worker} from 'worker_threads'
 
-const DataServer = new Worker(path.join(process.cwd(),'/dataserver.js'));
+const DataServer = new Worker(path.join(process.cwd(),'dataserver.js'));
 //run the data server on a thread
 
 DataServer.on('exit', (code) => {
