@@ -2,7 +2,7 @@
   "name": "myalyce-backend",
   "version": "0.0.0",
   "description": "Barebones esbuild and test node server implementation. For building",
-  "main": "dist/server.node.js",
+  "main": "dist/server.js",
   "scripts": {
     "start": "tinybuild",
     "build": "tinybuild build",
