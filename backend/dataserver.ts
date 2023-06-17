@@ -25,6 +25,8 @@ if(fs.existsSync('.env'))
 
 let db;
 
+console.log("Data Server Starting");
+
 const initDB = (router:Router) => {
     const { env } = process;
     let MONGODB_URI = `mongodb://${settings.host === 'localhost' ? '127.0.0.1' : settings.host}:${settings.localdbport}/${settings.localdb}`; //default localdb URI (if running);
@@ -109,8 +111,8 @@ const DataServer = new Router({
             config:{
                 'server2':{
                     protocol:settings.protocol,
-                    certpath:fs.existsSync('fullchain.pem') ? fs.readFileSync('fullchain.pem').toString() : undefined,
-                    keypath:fs.existsSync('privkey.pem') ? fs.readFileSync('privkey.pem').toString() : undefined,
+                    certpath:settings.certpath,
+                    keypath:settings.keypath,
 
                     host:settings.host,
                     port:settings.dataserverport,

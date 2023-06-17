@@ -10,7 +10,6 @@ export default server = {  //node server settings, set false to skip server step
     mongodbmode: "dev", //local, dev, production, or undefined/false/null/0 for no mongoose
     localdbport:27017, //mongodb localhost port
     localdb:'test', //a mongodb database added onto the end of our localdb uri e.g. localhost/test
-    key: './.key', //key file location, use MONGODB to set your private URI, do not share this!
 
     startpage: "index.html", //home page
     socket_protocol: "ws", //frontend socket protocol, wss for served, ws for localhost
@@ -20,6 +19,6 @@ export default server = {  //node server settings, set false to skip server step
     python: false,//7000,  //quart server port (configured via the python server script file still)
     python_node: 7001, //websocket relay port (relays messages to client from nodejs that were sent to it by python)
     errpage: "node_modules/tinybuild/tinybuild/node_server/other/404.html",  //default error page, etc.
-    certpath: "node_modules/tinybuild/tinybuild/node_server/ssl/cert.pem", //if using https, this is required. See cert.pfx.md for instructions
-    keypath: "node_modules/tinybuild/tinybuild/node_server/ssl/key.pem" //if using https, this is required. See cert.pfx.md for instructions
+    certpath: "cert.pem", //if using https, this is required. See cert.pfx.md for instructions
+    keypath: "key.pem" //if using https, this is required. See cert.pfx.md for instructions
 }

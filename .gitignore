@@ -13,6 +13,8 @@ dist/device.worker.js
 
 *.lock
 
+*.pem
+
 # Built application files
 #*.apk
 *.aar

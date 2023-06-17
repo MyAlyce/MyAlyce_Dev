@@ -1,7 +1,8 @@
 import { 
     Router, 
     HTTPbackend, 
-    WSSbackend
+    WSSbackend,
+    ServerProps
 } from 'graphscript-node'////'../../graphscript/index.node'//
 
 import { scriptBoilerPlate } from 'graphscript-node/src/services/http/boilerplate'
@@ -40,6 +41,8 @@ const ContentServer = new Router({
                     protocol:settings.protocol,
                     host:settings.host,
                     port:settings.port,
+                    certpath:settings.certpath,
+                    keypath:settings.keypath,
                     pages:{
                         '/':{
                             template:scriptBoilerPlate('./index.js'), 
@@ -84,7 +87,7 @@ const ContentServer = new Router({
                                 }
                             )
                     }
-                }
+                } as ServerProps
             }
         }
     }
