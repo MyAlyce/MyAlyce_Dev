@@ -2,7 +2,9 @@ import {
     Router, 
     HTTPbackend, 
     WSSbackend,
-    ServerProps
+    ServerProps,
+    SocketServerProps,
+    SocketServerInfo
 } from 'graphscript-node'////'../../graphscript/index.node'//
 
 import { scriptBoilerPlate } from 'graphscript-node/src/services/http/boilerplate'
@@ -67,7 +69,7 @@ const ContentServer = new Router({
                         'test':'<div>TEST</div>',
                         _all:{
                             inject:{ //page building
-                                hotreload:[`ws://${tcfg.server.host}:${tcfg.server.port}/hotreload`,tcfg.bundler.outfile.split('/').pop()+'.css'] //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
+                                hotreload:[`${tcfg.server.protocol === 'https' ? 'wss' : 'ws'}://${tcfg.server.protocol === 'https' ? tcfg.server.domain : tcfg.server.host}${tcfg.server.protocol === 'https' ? `` : `:${tcfg.server.port}` }/hotreload`, tcfg.bundler.outfile.split('/').pop()+'.css'] //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
                             }
                         }
                     },
@@ -84,7 +86,7 @@ const ContentServer = new Router({
                                     onconnection:(ws)=>{
                                         ws.send('Hot reload port opened!');
                                     }
-                                }
+                                } as SocketServerProps
                             )
                     }
                 } as ServerProps

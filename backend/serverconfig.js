@@ -1,6 +1,7 @@
 export default server = {  //node server settings, set false to skip server step or add serve:true to config object to only serve (alt methods)
     debug: false,
     protocol: "http",  //'http' or 'https'. HTTPS required for Nodejs <---> Python sockets. If using http, set production to False in python/server.py as well
+    domain:'alyce.app',
     host: "localhost", //'localhost' or '127.0.0.1' etc.
     port: 8081, //e.g. port 80, 443, 8000\
     

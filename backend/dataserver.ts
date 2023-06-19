@@ -4,7 +4,9 @@ import {
     WSSbackend, 
     ServerProps, 
     ConnectionInfo, 
-    SessionsService
+    SessionsService,
+    SocketServerInfo,
+    SocketServerProps
 } from  'graphscript-node'////'../../graphscript/index.node'//
 import { 
     StructBackend 
@@ -42,7 +44,7 @@ const initDB = (router:Router) => {
         MONGODB_URI = env.MONGODB; //or just use this URI if the testdb uri is unavailable but this one is 
     }
     
-    mongoose.connection.on('open', () => console.log(`connected to mongodb ${settings.mongodbmode} server`));
+    mongoose.connection.on('open', () => console.log(`Connected to mongodb ${settings.mongodbmode} server`));
     
     console.log('Connecting to MongoDB URI:', MONGODB_URI);
     mongoose.connect(MONGODB_URI)
@@ -120,7 +122,7 @@ const DataServer = new Router({
                         '/':'Data Server',
                         _all:{
                             inject:{ //page building
-                                hotreload:`ws:///${tcfg.server.host}:${tcfg.server.port}/hotreload` //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
+                                hotreload:`${tcfg.server.protocol === 'https' ? 'wss' : 'ws'}://${tcfg.server.protocol === 'https' ? tcfg.server.domain : tcfg.server.host}${tcfg.server.protocol === 'https' ? `` : `:${tcfg.server.port}` }/hotreload` //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
                             }
                         }
                     },
@@ -139,11 +141,16 @@ const DataServer = new Router({
                                     
                                     //debug
                                     //ws.addEventListener('message', (ev) => {console.log(ev.data);});
+                                },
+                                onconnectionclosed:(code,reason,ws,serverInfo) => {
+                                    // setTimeout(() => {
+                                    //     console.log(Object.keys(serverInfo.graph.__node.state.data),Object.keys(serverInfo.graph.__node.state.triggers));
+                                    // },100);
                                 }
-                            }
+                            } as SocketServerProps
                         ).then((info:void | ConnectionInfo) => { if(info) {
                             //console.log(info.service.servers[info._id].wss)//'wss address:', (info.connection as SocketServerInfo).wss.address())
-                        } })
+                        } }) 
 
 
                         initDB(DataServer);

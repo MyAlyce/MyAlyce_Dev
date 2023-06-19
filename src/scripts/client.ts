@@ -159,7 +159,8 @@ graph.setState({
 
 let makeSocket = () => {
     usersocket = sockets.open({
-        host:config.host,
+        protocol:config.protocol === 'https' ? 'wss' : 'ws',
+        host:config.socket_protocol === 'wss' ? config.domain : config.host,
         port:config.dataserverport,
         path:'wss'
     });

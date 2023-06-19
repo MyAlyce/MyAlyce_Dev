@@ -23,7 +23,7 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "esbuild-sass-plugin": "^2.9.0",
-    "graphscript-node": "^0.2.132",
+    "graphscript-node": "^0.2.135",
     "graphscript-services-node": "~0.2.142",
     "mongoose": "~7.0.0"
   },
