@@ -23,9 +23,12 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "esbuild-sass-plugin": "^2.9.0",
-    "graphscript-node": "^0.2.135",
+    "graphscript": "^0.2.134",
+    "graphscript-node": "^0.2.142",
     "graphscript-services-node": "~0.2.142",
-    "mongoose": "~7.0.0"
+    "http-proxy": "^1.18.1",
+    "mongoose": "~7.0.0",
+    "node": "^20.2.0"
   },
   "nodemonConfig": {
     "env": {

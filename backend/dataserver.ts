@@ -132,7 +132,7 @@ const DataServer = new Router({
                             'wss',
                             {
                                 server:served.server,
-                                host:served.host,
+                                host:settings.protocol === 'https' ? tcfg.server.domain : settings.host,
                                 port:settings.datasocketport,
                                 path:'wss',
                                 onconnection:(ws: WebSocket,req,serverinfo,id)=>{

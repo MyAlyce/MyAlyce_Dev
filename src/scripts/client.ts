@@ -161,8 +161,11 @@ let makeSocket = () => {
     usersocket = sockets.open({
         protocol:config.protocol === 'https' ? 'wss' : 'ws',
         host:config.socket_protocol === 'wss' ? config.domain : config.host,
-        port:config.dataserverport,
-        path:'wss'
+        port:config.socket_protocol === 'wss' ? undefined as any : config.dataserverport,
+        path:'wss',
+        onopen:() => {
+            console.log('port opened!')
+        }
     });
     
     usersocket.socket.addEventListener('message', (ev) => {

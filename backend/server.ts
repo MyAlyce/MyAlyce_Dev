@@ -16,6 +16,10 @@ import {config} from 'dotenv'
 import fs from 'fs'
 import path from 'path'
 
+import httpProxy from 'http-proxy'
+
+let proxy = httpProxy.createProxyServer({});
+
 if(fs.existsSync('.env'))
     config(); //load the .env file
 
@@ -80,7 +84,7 @@ const ContentServer = new Router({
                             'wss',
                                 {
                                     server:served.server,
-                                    host:served.host,
+                                    host:settings.protocol === 'https' ? settings.domain : settings.host,
                                     port:settings.hotreload,
                                     path:'hotreload',
                                     onconnection:(ws)=>{
@@ -88,6 +92,11 @@ const ContentServer = new Router({
                                     }
                                 } as SocketServerProps
                             )
+                    },
+                    onupgrade:(request, socket, head, served) => {
+                        if(settings.protocol === 'https' && request.url.startsWith('/wss')) {
+                            proxy.ws(request, socket, head, {target:'http://' + settings.domain + ':' + settings.datasocketport })
+                        }
                     }
                 } as ServerProps
             }
