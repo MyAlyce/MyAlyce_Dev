@@ -1,0 +1,30 @@
+{
+    "short_name": "MyAlyce",
+    "name": "MyAlyce",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "description": "PWA Test",
+    "lang": "en-US",
+    "permissions": [
+        "storage"
+    ],
+    "icons":[
+    {
+       "src": "./assets/icons/alyceico96.png",
+       "sizes": "96x96"
+    },{
+        "src": "./assets/icons/alyceico120.png",
+        "sizes": "120x120"
+    },{
+        "src": "./assets/icons/alyceico180.png",
+        "sizes": "180x180"
+    },{
+        "src": "./assets/icons/alyceico196.png",
+        "sizes": "196x196"
+    },{
+       "src": "./assets/icons/alyceico512.png",
+       "sizes": "512x512"
+    }]
+}
