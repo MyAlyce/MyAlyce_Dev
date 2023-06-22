@@ -15,7 +15,7 @@ export function FriendsModal() {
   return (
     <>
       <Icon.User style={{cursor:'pointer', padding:'5px'}} onClick={handleShow} className="svghover hoverdiv align-text-bottom" color="white" size={50}></Icon.User>
-      <Modal show={show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
+      <Modal centered show={show} onHide={handleClose} backdrop={false}>
         <Modal.Header closeButton>
           <Modal.Title><Icon.User className="align-text-bottom" color="red" size={26}></Icon.User>&nbsp;My Connections</Modal.Title>
         </Modal.Header>

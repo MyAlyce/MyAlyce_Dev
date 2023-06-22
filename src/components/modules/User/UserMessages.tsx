@@ -45,7 +45,7 @@ export class UserMessages extends sComponent {
           <Icon.MessageSquare style={{cursor:'pointer'}} className="svghover align-text-bottom" size={40}></Icon.MessageSquare>
         </span>
         {/** TODO: have a number for the number of unchecked messages */}
-        <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
+        <Modal centered show={this.show} onHide={handleClose} backdrop={false}>
           <Modal.Header closeButton>
             <Modal.Title><Icon.MessageSquare className="align-text-bottom" color="red" size={26}></Icon.MessageSquare>&nbsp;Messages</Modal.Title>
           </Modal.Header>

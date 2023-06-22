@@ -15,7 +15,7 @@ export function Notes() {
       <Button variant="accent1" onClick={handleShow}><Icon.Heart className="align-text-bottom" size={20}></Icon.Heart>
       &nbsp;Vitals
       </Button>
-      <Modal show={show} onHide={handleClose}>
+      <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title><Icon.Heart className="align-text-bottom" color="red" size={26}></Icon.Heart>&nbsp;Vitals</Modal.Title>
         </Modal.Header>

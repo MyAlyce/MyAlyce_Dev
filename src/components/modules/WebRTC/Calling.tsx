@@ -72,7 +72,7 @@ export function AnswerCallModal (props:{streamId:string}) {
     //console.log('answer call modal');
     
     return (
-        <Modal show={show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
+        <Modal centered show={show} onHide={handleClose} backdrop={false}>
             <Modal.Header closeButton>
                 <Modal.Title><Icon.PhoneCall className="align-text-bottom" color="red" size={26}></Icon.PhoneCall>&nbsp;Incoming Call</Modal.Title>
             </Modal.Header>

@@ -29,6 +29,8 @@ import { throwAlert } from './scripts/alerts';
 import { UserAlerts } from './components/modules/User/UserAlerts';
 import { RTCAudio } from './components/modules/WebRTC/WebRTCStream';
 import { About } from './components/pages/About';
+import { PopupModal } from './components/modules/Modal/Modal';
+import { Privacy } from './components/modules/Privacy';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -81,6 +83,8 @@ export class App extends sComponent {
         deviceMode:'My Device',
         availableStreams:{} //we can handle multiple connections too
     }
+
+    privacyModalOpen=false;
 
     onLoginClick(c:{email:string,password:string}) {
         login(c.email,c.password).then(async (result) => {
@@ -136,21 +140,23 @@ export class App extends sComponent {
                         </div>
                         <div className="cover-content">
                             <img className="img-fluid" width="360" alt="myAlyce" src={myalyceLogo} />
-                            {
-                                    !this.state.loggingIn && !this.state.isLoggedIn && !this.state.fetchingLogin && <>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <span style={{color:'white'}}>Log In</span>
-                                        <br />
-                                        <br />
-                                        <Button style={{   
-                                            backgroundColor: 'ghostwhite',
-                                        }} onClick={this.onGoogleLoginClick}>
-                                            <img src={googleLogo} width="50px"></img>
-                                        </Button>
-                                    </>
+                            { !this.state.loggingIn && !this.state.isLoggedIn && !this.state.fetchingLogin && 
+                                <>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <span style={{color:'white'}}>Log In</span>
+                                    <br />
+                                    <br />
+                                    <Button style={{   
+                                        backgroundColor: 'ghostwhite',
+                                    }} onClick={this.onGoogleLoginClick}>
+                                        <img src={googleLogo} width="50px"></img>
+                                    </Button>
+                                </>
                             }
+                            <Button style={{position:'absolute', top: 10, right: 10}} onClick={()=>{this.privacyModalOpen = true;  this.setState({})}}>Privacy Notice</Button>
+                            {this.privacyModalOpen && <PopupModal body={<Privacy/>} onClose={()=>{this.privacyModalOpen = false; this.setState({})}}/>}
                         </div>
                         {/* <div className="cover-content">
                             <div style={{  width: '100%', textAlign: 'center' }}>

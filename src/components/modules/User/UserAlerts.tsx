@@ -47,7 +47,8 @@ export class UserAlerts extends sComponent {
           </span>
         }
      
-      { !this.props.hideModal && <Modal show={this.show} onHide={handleClose} backdrop={false} style={{maxHeight:'500px'}}>
+      { !this.props.hideModal && 
+        <Modal centered show={this.show} onHide={handleClose} backdrop={false}>
             <Modal.Header closeButton>
               <Modal.Title style={{position:'relative'}}><BeatingSVG customContent={<Icon.AlertTriangle size={26} color={'red'}/>}/>&nbsp;</Modal.Title>
             </Modal.Header>
@@ -65,7 +66,7 @@ export class UserAlerts extends sComponent {
                         <p><strong>Message:</strong> {v.message}</p>
                         <button onClick={()=>{
                           console.log('onclick');
-                          result.alerts.splice(i,1);
+                          result?.alerts.splice(i,1);
                           this.setState({}); //remove old alerts
                         }}>❌</button>
                     </div>
