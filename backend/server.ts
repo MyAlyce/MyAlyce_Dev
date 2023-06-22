@@ -18,7 +18,18 @@ import path from 'path'
 
 import httpProxy from 'http-proxy'
 
-let proxy = httpProxy.createProxyServer({});
+let proxy;
+
+if(settings.protocol === 'https') {
+ proxy = httpProxy.createProxyServer({
+    ssl:{
+        key:fs.readFileSync(settings.keypath),
+        cert:fs.readFileSync(settings.certpath)
+    },
+    ws:true
+ });
+}
+
 
 if(fs.existsSync('.env'))
     config(); //load the .env file
@@ -73,7 +84,12 @@ const ContentServer = new Router({
                         'test':'<div>TEST</div>',
                         _all:{
                             inject:{ //page building
-                                hotreload:[`${tcfg.server.protocol === 'https' ? 'wss' : 'ws'}://${tcfg.server.protocol === 'https' ? tcfg.server.domain : tcfg.server.host}${tcfg.server.protocol === 'https' ? `` : `:${tcfg.server.port}` }/hotreload`, tcfg.bundler.outfile.split('/').pop()+'.css'] //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
+                                hotreload:[
+                                    `${tcfg.server.protocol === 'https' ? 'wss' : 'ws'}://${tcfg.server.protocol === 'https' ? tcfg.server.domain : 
+                                        tcfg.server.host}${tcfg.server.protocol === 'https' ? `` : `:${tcfg.server.port}` }/hotreload`, 
+                                    tcfg.bundler.outfile.split('/').pop()+'.css'
+                                ], //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
+                                pwa:undefined as any
                             }
                         }
                     },
