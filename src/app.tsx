@@ -28,6 +28,7 @@ import { Button } from 'react-bootstrap';
 import { throwAlert } from './scripts/alerts';
 import { UserAlerts } from './components/modules/User/UserAlerts';
 import { RTCAudio } from './components/modules/WebRTC/WebRTCStream';
+import { About } from './components/pages/About';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -200,6 +201,7 @@ export class App extends sComponent {
                                             dir={getActiveStreamDir()}/>}
                                         { this.state.route.includes('settings') && <SettingsView/> }
                                         { this.state.route.includes('dev') && <Dev/>}
+                                        { this.state.route.includes('about') && <About/>}
                                     
                                     
                                     </>

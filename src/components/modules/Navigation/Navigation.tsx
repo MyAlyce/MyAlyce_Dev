@@ -27,6 +27,9 @@ export function Navigation (){
               <Nav.Link className="svghover" onClick={()=>{state.setState({route:'/recordings'}); setExpanded(false);}}>
               <Icon.Activity className="align-text-bottom" size={20} data-active-link={window.location.pathname === '/recordings'}></Icon.Activity>
               &nbsp;Recordings</Nav.Link>
+              <Nav.Link className="svghover" onClick={()=>{state.setState({route:'/about'}); setExpanded(false);}}>
+              <Icon.Info className="align-text-bottom" size={20} data-active-link={window.location.pathname === '/about'}></Icon.Info>
+              &nbsp;About</Nav.Link>
               {/* <Nav.Link  onClick={()=>{state.setState({route:'/settings'}); setExpanded(false);}}> 
               <Icon.Settings className="align-text-bottom" size={20}></Icon.Settings>
               &nbsp;Settings</Nav.Link> */}
