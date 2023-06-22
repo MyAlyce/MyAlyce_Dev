@@ -145,7 +145,7 @@ export class App extends sComponent {
                                     <br />
                                     <br />
                                     <br />
-                                    <span style={{color:'white'}}>Log In</span>
+                                    <span style={{color:'white', fontWeight:'bold'}}>Log In</span>
                                     <br />
                                     <br />
                                     <Button style={{   
@@ -155,7 +155,7 @@ export class App extends sComponent {
                                     </Button>
                                 </>
                             }
-                            <Button style={{position:'absolute', top: 10, right: 10}} onClick={()=>{this.privacyModalOpen = true;  this.setState({})}}>Privacy Notice</Button>
+                            <Button variant="secondary" style={{position:'absolute', fontWeight:'bold', top: 10, right: 10}} onClick={()=>{this.privacyModalOpen = true;  this.setState({})}}>Privacy Notice</Button>
                             {this.privacyModalOpen && <PopupModal body={<Privacy/>} onClose={()=>{this.privacyModalOpen = false; this.setState({})}}/>}
                         </div>
                         {/* <div className="cover-content">
