@@ -3,6 +3,8 @@ import { sComponent } from '../state.component'
 import { Col, Row } from 'react-bootstrap';
 import { Privacy } from '../modules/Privacy';
 
+import * as Icon from 'react-feather'
+
 export class About extends sComponent {
 
     render() {
@@ -26,8 +28,11 @@ export class About extends sComponent {
                     <h4>Alex Shohet, cofounder:</h4> 
                     alexs@myalyce.com
                     <br/><br/>
-                    <h4>Sponsored by the Evergreen Fund</h4>
-                    <a href="https://evergreenfund.life">Home</a>
+                    <h4>Sponsored by the <a href="https://evergreenfund.life" target="_blank">Evergreen Fund</a></h4>
+                    <br/>
+                    <h4>Github</h4>
+                    <a href="https://github.com/MyAlyce" target="_blank"><Icon.GitHub className='svghover' color={'white'} size={60} style={{backgroundColor:'black', padding:'5px', borderRadius:'40%'}}></Icon.GitHub></a>
+                    
                 </p>
                 <hr/>
                 <Privacy/>
