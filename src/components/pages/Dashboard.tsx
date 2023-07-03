@@ -16,6 +16,7 @@ export class Dashboard extends sComponent {
         activeStream:undefined, //stream selected?
         deviceMode:'my-device',
         availableStreams:{}, //we can handle multiple connections too
+        viewVitals:false
     }
 
     componentDidMount(): void {
@@ -37,6 +38,7 @@ export class Dashboard extends sComponent {
         let dir = getActiveStreamDir();
         let call = getActiveStream();
         
+        console.log('dashboard rendered', this.state.activeStream);
         return (
             <div className="main-content d-flex flex-column" style={{gap: '10px'}}>
                 {/* Widgets */}
@@ -44,11 +46,15 @@ export class Dashboard extends sComponent {
                     title = {
                         <UserBar 
                             streamId={this.state.activeStream}
+                            useActiveStream={true}
                             pinOnClick={call ? () => {
                                 getCallLocation(call as RTCCallInfo).then((res)=>{
                                     alert("Callee Location: "+JSON.stringify(res));
                                 });
                             } : undefined}
+                            vitalsOnClick={() => {
+                                this.setState({viewVitals:!this.state.viewVitals})
+                            }}
                             xOnClick={call ? () => {
                                 call?.terminate();
                                 delete webrtc.rtc[(call as RTCCallInfo)._id];
@@ -64,25 +70,30 @@ export class Dashboard extends sComponent {
                     }
                 />
                     {/* Charts and stats */}
-                    <Widget 
-                        content = {<Device
-                            streamId={ this.state.activeStream }
-                            sensors={['ppg']}
-                            onlyOneActive={true}
-                        />}
-                    />
+                    {this.state.viewVitals &&
+                        <Widget 
+                            content = {
+                                <Device
+                                    streamId={ this.state.activeStream }
+                                    sensors={['ppg']}
+                                    onlyOneActive={true}
+                                />
+                            }
+                        />
+                    } 
+                    
                     <CardGroup>
                         <RecordBar
                             streamId={ this.state.activeStream }
                             dir = { dir }
                             // onChange={()=>{this.setState({});}}   
                         />
-                        <NoteTaking 
+                        {/* <NoteTaking 
                             showHistory={ false }
                             streamId={ this.state.activeStream } 
                             filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
                             dir={ dir }
-                        />
+                        /> */}
                     </CardGroup>
                     {(call?.viewingVideo || call?.viewingAudio) &&
                         <CardGroup> 

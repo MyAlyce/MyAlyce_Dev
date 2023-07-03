@@ -17,6 +17,8 @@ const useStyles = true;
 import './src/styles/custom.scss'
 import './src/styles/components_global.css'
 
+//for upgrading requests 
+document.head.insertAdjacentHTML('beforeend','<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">');
 
 if(useStyles) {
   document.head.insertAdjacentHTML('beforeend','<meta name="viewport" content="width=device-width, initial-scale=1" />');

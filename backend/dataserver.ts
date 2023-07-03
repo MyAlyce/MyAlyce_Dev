@@ -10,7 +10,7 @@ import {
 } from  'graphscript-node'////'../../graphscript/index.node'//
 import { 
     StructBackend 
-} from 'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'//
+} from 'graphscript-services-node'//'graphscript-services-node'//'../../graphscript/src/extras/struct/Struct.backend'//
 
 import { fitbitRoutes } from './src/fitbit';
 
@@ -53,7 +53,8 @@ const initDB = (router:Router) => {
                 mode:'mongo', //'local'
                 db: mongoose.connections[0].db, //set database
                 users:router.users as any,
-                useAuths:false //bypass our permissions system for users to be able to view each other
+                useAuths:true, //bypass our permissions system for users to be able to view each other
+                useRefreshTokens:true
             } as any);
 
             router.addServices({
@@ -66,7 +67,8 @@ const initDB = (router:Router) => {
             db = new StructBackend({},{
                 mode:'local', //'local'
                 users:router.users as any,
-                useAuths:false //bypass our permissions system for users to be able to view each other
+                useAuths:true, //bypass our permissions system for users to be able to view each other
+                useRefreshTokens:true
             } as any);
 
             router.addServices({

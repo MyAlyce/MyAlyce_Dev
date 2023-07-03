@@ -67,7 +67,6 @@ export class StreamSelect extends Component<{[key:string]:any}> {
 
         selectedKey = key as string;
             
-        this.setState({activeStream:activeStream});
     };
 
     render() {
@@ -111,7 +110,13 @@ export class StreamSelect extends Component<{[key:string]:any}> {
                                     onClick={() => this.onItemClick(key)}
                                     className={this.state.activeStream === key ? 'selected' : ''}
                                 >
-                                    <Widget className='hoverdiv'  content={<UserBar streamId={key} hideAlertModal={true}/>} />
+                                    <Widget className='hoverdiv'  content={
+                                        <UserBar 
+                                            streamId={key} 
+                                            hideAlertModal={true} 
+                                            hideMessageModal={true}
+                                        />
+                                    } />
                                 </span>
                                 );
                             })}

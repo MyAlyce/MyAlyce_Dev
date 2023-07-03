@@ -3,7 +3,7 @@ import React from 'react';
 import { client } from '../../scripts/client';
 import { authorizeRedirect } from '../../scripts/fitbit';
 import { sComponent } from '../state.component';
-import { UserAuths } from '../modules/UserAuths';
+import { UserAuths } from '../modules/User/UserAuths';
 
 export class SettingsView extends sComponent  {
 

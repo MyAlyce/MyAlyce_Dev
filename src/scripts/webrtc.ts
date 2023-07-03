@@ -67,14 +67,9 @@ export const onrtcdata = (call:RTCCallInfo, from:string, data:any) => {
     //some data structures for the app
     if(data.alert) {
 
-        if(!(call as RTCCallInfo).alerts) (call as RTCCallInfo).alerts = [] as any;
-        data.alert.streamId = call._id; //for marking that its a remote message (for styling mainly)
-        (call as RTCCallInfo).alerts.push(data.alert);
-        call.newAlerts = true;
+        onAlert(data.alert, call._id);
 
-        onAlert(data.alert,call._id);
-
-        state.setValue(call._id+'alert',data.alert);
+        //state.setValue(call._id+'alert',data.alert);
     }
     if(data.event) {
 
@@ -85,7 +80,7 @@ export const onrtcdata = (call:RTCCallInfo, from:string, data:any) => {
         
         recordEvent(from, data.event, call._id);
 
-        state.setValue(call._id+'event', data.event);
+        //state.setValue(call._id+'event', data.event);
     }
     if(data.message) {
 
@@ -175,6 +170,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
         ondatachannel: (ev) => {
             console.log('Call started with', (webrtc.rtc[rtcId] as RTCCallInfo).firstName, (webrtc.rtc[rtcId] as RTCCallInfo).lastName);
 
+            //we can run callbacks directly on the other user's graph. Todo: add restrictions
             webrtc.rtc[rtcId as string].run('ping').then((res) => {
                 console.log('ping result should be pong. Result:', res);//test to validate connection, should ping the other's console.
             });
@@ -327,10 +323,14 @@ export let answerCall = async (call:RTCCallProps) => {
     delete newCalls[call._id as string];
 
     state.setState({
-        activeStream:call._id,
+        //activeStream:call._id,
         availableStreams:webrtc.rtc,
-        deviceMode:call._id,
+        //deviceMode:call._id,
     });
+}
+
+export function rejectCall(callId:string){
+    delete newCalls[callId as string];
 }
 
 export function listMediaDevices() {

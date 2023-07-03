@@ -25,12 +25,14 @@ import { Footer } from './components/modules/Footer/Footer';
 import { AnswerCallModal, MediaDeviceOptions, ToggleAudioVideo, ViewSelfVideoStream } from './components/modules/WebRTC/Calling';
 import { Widget } from './components/widgets/Widget';
 import { Button } from 'react-bootstrap';
-import { throwAlert } from './scripts/alerts';
+import { throwAlert, toggleAlertNotifications, toggleBreathAlert, toggleFallAlert, toggleHRAlert } from './scripts/alerts';
 import { UserAlerts } from './components/modules/User/UserAlerts';
 import { RTCAudio } from './components/modules/WebRTC/WebRTCStream';
 import { About } from './components/pages/About';
 import { PopupModal } from './components/modules/Modal/Modal';
 import { Privacy } from './components/modules/Privacy';
+import { NoteModal } from './components/modules/Records/NoteModal';
+import { AlertModal } from './components/modules/User/AlertModal';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -81,7 +83,11 @@ export class App extends sComponent {
         triggerPageRerender:false,
         activeStream:undefined, //stream selected?
         deviceMode:'My Device',
-        availableStreams:{} //we can handle multiple connections too
+        availableStreams:{}, //we can handle multiple connections too
+        alertsEnabled:true,
+        useHRAlert:true,
+        useBreathAlert:true,
+        useFallAlert:true
     }
 
     privacyModalOpen=false;
@@ -113,7 +119,7 @@ export class App extends sComponent {
     flipState() {
         if(this.state.triggerPageRerender) setTimeout(()=>{
             this.setState({triggerPageRerender:false});
-        },0.1);
+        },0.01);
     }
 
     render() {
@@ -156,7 +162,7 @@ export class App extends sComponent {
                                 </>
                             }
                             <Button variant="secondary" style={{position:'absolute', fontWeight:'bold', top: 10, right: 10}} onClick={()=>{this.privacyModalOpen = true;  this.setState({})}}>Privacy Notice</Button>
-                            {this.privacyModalOpen && <PopupModal body={<Privacy/>} onClose={()=>{this.privacyModalOpen = false; this.setState({})}}/>}
+                            {this.privacyModalOpen && <PopupModal defaultShow={true} body={<Privacy/>} onClose={()=>{this.privacyModalOpen = false; this.setState({})}}/>}
                         </div>
                         {/* <div className="cover-content">
                             <div style={{  width: '100%', textAlign: 'center' }}>
@@ -185,20 +191,26 @@ export class App extends sComponent {
                         <div id='viewcontent' className="flex-content">
                             <Navigation />
                             <div id='route' className='container-fluid'>
-
+                                <NoteModal/> 
+                                { state.data.availableStreams && Object.keys(state.data.availableStreams).map((rtcId) => { 
+                                    return <NoteModal streamId={rtcId}/> }) //render note modals top level to preserve timers
+                                }
                                 {this.state.triggerPageRerender ? null : 
                                     <>
                                         { state.data.unansweredCalls && Object.keys(state.data.unansweredCalls).map((rtcId) => {
                                             return <span key={Math.random()}><AnswerCallModal streamId={rtcId}/></span>
                                         })}
                                         { 
-                                            this.state.activeStream && <UserAlerts hideIcon={true}/> //render own alerts when other user is in focus, their dashboard will have an alert modal otherwise
+                                            this.state.activeStream && <AlertModal/> //render own alerts when other user is in focus, their dashboard will have an alert modal otherwise
                                         } 
-                                        { state.data.availablestreams && Object.keys(state.data.availablestreams).map((rtcId) => { //render alerts 
-                                            if(this.state.activeStream !== rtcId) return <span key={Math.random()}><UserAlerts streamId={rtcId} hideIcon={true}/></span>
+                                        { state.data.availableStreams && Object.keys(state.data.availableStreams).map((rtcId) => { //render alerts 
+                                            if(this.state.activeStream !== rtcId) 
+                                                return <span key={Math.random()}><AlertModal streamId={rtcId}/></span>
+                                            
                                         })}
+                                        
 
-                                        {/** Page URLS */}
+                                        {/** Page URLS. this is a single page app structure so the whole app is in one file compiled and served on the root */}
                                         { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
                                             <Dashboard/>
                                         }
@@ -245,15 +257,23 @@ export class App extends sComponent {
                                                         /> : null    
                                                 }
                                             </div>),
-                                            (<div  key={2}>{ this.state.triggerPageRerender ? null : 
+                                            (<div  key={2}>{ 
+                                                this.state.triggerPageRerender ? null :
                                                 <StreamSelect 
                                                     onChange={(key, activeStream) => { 
                                                         this.setState({triggerPageRerender:true, deviceMode:key, activeStream:activeStream});
                                                     }} 
                                                     selected={this.state.activeStream}
-                                                /> }
+                                                /> 
+                                                }
                                             </div>),
                                             (<span key={3}><Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button></span>),
+                                            (<span key={3.5}>
+                                                <Button variant={this.state.alertsEnabled ? 'primary' : 'dark'} onClick={()=>{ toggleAlertNotifications(); }}>Alert Notifications {`(${this.state.alertsEnabled ? 'On' : 'Off'})`}</Button>
+                                                <Button variant={this.state.useHRAlert ? 'primary' : 'dark'} onClick={()=>{ toggleHRAlert(); }}>Heart Rate Alerts {`(${this.state.useHRAlert ? 'On' : 'Off'})`}</Button>
+                                                <Button variant={this.state.useBreathAlert ? 'primary' : 'dark'} onClick={()=>{ toggleBreathAlert(); }}>Breathing Alerts {`(${this.state.useBreathAlert ? 'On' : 'Off'})`}</Button>
+                                                <Button variant={this.state.useFallAlert ? 'primary' : 'dark'} onClick={()=>{ toggleFallAlert(); }}>Fall Alerts {`(${this.state.useFallAlert ? 'On' : 'Off'})`}</Button>
+                                            </span>),
                                             (<span key={4}><MediaDeviceOptions/></span>),
                                             (<span key={5}>{ this.state.activeStream && <><ViewSelfVideoStream streamId={this.state.activeStream}/> { webrtcData.availableStreams[this.state.activeStream].audioStream && <RTCAudio /> } </> }</span>),
                                         ]}

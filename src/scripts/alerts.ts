@@ -1,11 +1,12 @@
 import { HeartRateAlert } from "./alertTemplates/heartrate";
-import { alerts, client, graph } from "./client";
+import { alerts, client, getStreamById, graph, state } from "./client";
 import { BreathAlert } from "./alertTemplates/breath";
 import { FallAlert } from "./alertTemplates/falldetection";
 import { Howl } from "howler";
 import { recordAlert } from "./datacsv";
 import { webrtcData } from "./client";
 import { toISOLocal } from "graphscript-services.storage";
+import { RTCCallInfo } from "./webrtc";
 
 export let getCurrentLocation = (options:PositionOptions={enableHighAccuracy:true}) => {
     return new Promise((res,rej) => {
@@ -90,25 +91,63 @@ export function checkForAlerts(streamId?) {
     }
 }
 
-export function onAlert(event, streamId?) {
+
+export function toggleAlertNotifications() {
+    state.setState({alertsEnabled:!state.data.alertsEnabled});
+}
+export function toggleHRAlert() {
+    state.setState({useHRAlert:!state.data.useHRAlert});
+}
+export function toggleBreathAlert() {
+    state.setState({useBreathAlert:!state.data.useBreathAlert});
+}
+export function toggleFallAlert() {
+    state.setState({useFallAlert:!state.data.useFallAlert});
+}
+
+export function onAlert(event, streamId?, send?) {
 
     console.warn("Alert:", event);
 
-    let sound = new Howl({src:'./sounds/alarm.wav'});
-    sound.volume(0.05);
-    sound.play(undefined,false);
-    showNotification("Alert:", `${event.message} ${event.value ? ': '+event.value : ''} at ${toISOLocal(event.timestamp)}` );
-
-    recordAlert(event, streamId);
+    if(state.data.alertsEnabled) {
+        let sound = new Howl({src:'./sounds/alarm.wav'});
+        sound.volume(0.05);
+        sound.play(undefined,false);
+        showNotification("Alert:", `${event.message} ${event.value ? ': '+event.value : ''} at ${toISOLocal(event.timestamp)}` );
+    }
 
     //broadcast your own alerts to connected streams
-    if(!streamId) {
-        newClientAlerts = true;
+    if(!streamId || send) {
         for(const key in webrtcData.availableStreams) {
             webrtcData.availableStreams[key].send({alert:event});
         }
-    }
+    } 
         
+    let from;
+    if(streamId) {
+        const call = webrtcData.availableStreams[streamId];
+        from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
+    } else {
+        from = client.currentUser.firstName + client.currentUser.lastName;
+    }
+
+    event.from = from;
+
+    recordAlert(event, streamId);
+
+    if(streamId) {
+        let call = getStreamById(streamId) as any;
+        if(!call.alerts) call.alerts = [] as any;
+        event.streamId = call._id; //for marking that its a remote message (for styling mainly)
+        call.alerts.push(event);
+        call.newAlerts = true;
+    }
+    else {
+        newClientAlerts = true;
+        alerts.push(event);
+    }
+    
+    state.setValue(streamId ? streamId+'alert' : 'alert', event);
 }
 
 
@@ -121,9 +160,9 @@ export function throwAlert(
         message:"Alert: Something Happened",
         value:"Test",
         timestamp:Date.now()
-    }, streamId?
+    }, streamId?, send?
 ) {
-    onAlert(event, streamId);
+    onAlert(event, streamId, send);
 }   
 
 //alert system
@@ -135,7 +174,7 @@ export function setupAlerts(
 
     if(!alerts || alerts.includes('hr')) {
         let node = graph.add(new HeartRateAlert(
-            (ev)=>{onAlert(ev,streamId)},
+            (ev)=>{ if(state.data.useHRAlert) onAlert(ev,streamId) },
             streamId ? streamId+'hr' : 'hr',    
             streamId ? streamId+'hrAlert' : 'hrAlert'
         ));
@@ -144,7 +183,7 @@ export function setupAlerts(
 
     if(!alerts || alerts.includes('breath')) {
         let node = graph.add(new BreathAlert(
-            (ev)=>{onAlert(ev,streamId)},
+            (ev)=>{ if(state.data.useBreathAlert) onAlert(ev,streamId) },
             streamId ? streamId+'breath' : 'breath',
             streamId ? streamId+'breathAlert' : 'breathAlert'
         ));
@@ -153,7 +192,7 @@ export function setupAlerts(
 
     if(!alerts || alerts.includes('fall')) {
         let node = graph.add(new FallAlert(
-            (ev)=>{onAlert(ev,streamId)},
+            (ev)=>{ if(state.data.useFallAlert) onAlert(ev,streamId) },
             streamId ? streamId+'imu' : 'imu',
             streamId ? streamId+'fallAlert' : 'fallAlert'
         ));

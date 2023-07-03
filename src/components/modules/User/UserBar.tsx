@@ -14,11 +14,15 @@ export function UserBar(props:{
   streamId?:string, 
   eyeOnClick?:(ev)=>void, 
   pinOnClick?:(ev)=>void, 
+  vitalsOnClick?:(ev)=>void,
   xOnClick?:(ev)=>void, 
   audioOnClick?:(ev)=>void, 
   videoOnClick?:(ev)=>void,
   hideAlertModal?:boolean,
-  hideAlertIcon?:boolean
+  hideAlertIcon?:boolean,
+  hideMessageModal?:boolean,
+  hideMessageIcon?:boolean,
+  useActiveStream?:boolean
 }) {
 
   let name;
@@ -39,6 +43,8 @@ export function UserBar(props:{
   }
   if(!name) name = props.streamId ? props.streamId : 'Me';
 
+  console.log('rendering UserBar for',props.streamId);
+
   return (
     <Row className="grey-bar">
       <UserBlock
@@ -49,6 +55,7 @@ export function UserBar(props:{
           eyeOnClick={props.eyeOnClick}
           pinOnClick={props.pinOnClick}
           xOnClick={props.xOnClick}
+          vitalsOnClick={props.vitalsOnClick}
           videoOnClick={props.videoOnClick}
           audioOnClick={props.audioOnClick}
       />
@@ -60,6 +67,9 @@ export function UserBar(props:{
         streamId={props.streamId}
         hideAlertIcon={props.hideAlertIcon}
         hideAlertModal={props.hideAlertModal}
+        hideMessageModal={props.hideMessageModal}
+        hideMessageIcon={props.hideMessageIcon}
+        useActiveStream={props.useActiveStream}
         width={"20%"}
       />
     </Row>

@@ -12,6 +12,7 @@ export class UserBlock extends Component<{
   eyeOnClick?:(ev)=>void, 
   pinOnClick?:(ev)=>void,
   xOnClick?:(ev)=>void,
+  vitalsOnClick?:(ev)=>void,
   audioOnClick?:(onState:boolean)=>void,
   videoOnClick?:(onState:boolean)=>void,
   call?:RTCCallInfo
@@ -102,6 +103,7 @@ export class UserBlock extends Component<{
         <div style={{wordWrap:"normal"}}>{this.props.name}</div>
         { this.props.eyeOnClick ? <Icon.Eye style={{cursor:'pointer'}}  className="align-text-bottom" size={20} onClick={this.props.eyeOnClick}></Icon.Eye> : null }
         { this.props.pinOnClick ? <Icon.MapPin style={{cursor:'pointer'}}  className="align-text-bottom" size={20} onClick={this.props.pinOnClick}></Icon.MapPin> : null}
+        { this.props.vitalsOnClick ? <Icon.Heart style={{cursor:'pointer'}}  className="align-text-bottom" size={20} onClick={this.props.vitalsOnClick}></Icon.Heart> : null }
         { mediaSection }
         { this.props.xOnClick ? <Icon.XOctagon style={{cursor:'pointer'}}  className="align-text-bottom" size={20} onClick={this.props.xOnClick}></Icon.XOctagon> : null}
       </Col>

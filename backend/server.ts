@@ -64,6 +64,7 @@ const ContentServer = new Router({
                         '/':{
                             template:scriptBoilerPlate('./index.js'), 
                             onrequest:function(self, node, request, response) {
+                                //console.log('request')
                                 // //e.g. CORS
                                 // response.setHeader('Access-Control-Allow-Origin','*');
                                 
@@ -89,7 +90,7 @@ const ContentServer = new Router({
                                         tcfg.server.host}${tcfg.server.protocol === 'https' ? `` : `:${tcfg.server.port}` }/hotreload`, 
                                     tcfg.bundler.outfile.split('/').pop()+'.css'
                                 ], //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
-                                pwa:undefined as any
+                                //pwa:undefined as any
                             }
                         }
                     },

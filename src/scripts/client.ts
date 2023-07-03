@@ -39,7 +39,7 @@ import { getCurrentLocation } from './alerts'
 
 const startDemo = true;
 
-export const client = new StructFrontend({state:state});
+export const client = new StructFrontend({state:state, useRefreshTokens:true});
 export const sockets = new WSSfrontend({state:state});
 
 export const webrtc = new WebRTCfrontend({state:state as any});
@@ -70,11 +70,12 @@ export {state}; //
 export let driveInstance:GDrive;
 
 export type Sensors = 'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg'|'emg2';
+export type Stream = 'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg'|'emg2'|'event'|'alert'|'message'|'audiovideo';
 
-export type Streams = ('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg'|'emg2'|'chat'|'events'|'alerts'|'audiovideo')[];
+export type Streams = ('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg'|'emg2'|'event'|'alert'|'message'|'audiovideo')[];
 
 export const SensorDefaults = ['emg','ppg','breath','hr','imu','env','ecg'] as Sensors[];
-export const StreamDefaults = ['emg','ppg','breath','hr','imu','env','ecg','chat','events','alerts','alerts','audiovideo'] as any as Streams[];
+export const StreamDefaults = ['emg','ppg','breath','hr','imu','env','ecg','event','alert','message','audiovideo'] as any as Streams[];
 
 export const alerts = [] as {message:string,value:any, from:string, timestamp:number|string}[]; //session alerts
 export const events = [] as {message:string, from:string, timestamp:number|string}[]; //session events
@@ -142,14 +143,21 @@ graph.subscribe('receiveCallInformation', (id) => {
     }
 });
 
-graph.setState({
+state.setState({
     route: '/',            //current pathname
     isLoggedIn: false,     //logged in?
     loggingIn: false,       //loading login?
     appInitialized: false, //initialized app?
     loggedInId: undefined, //id of the current user
     viewingId: undefined,  //id of the user currently being viewed
+    savedEventOptions:[] as any, //list of event tags saved
     
+    alertsEnabled:true,
+    useHRAlert:true,
+    useBreathAlert:true,
+    useFallAlert:true,
+    viewVitals:true,
+
     detectedEMG:false,
     detectedENV:false,
     detectedPPG:false,
@@ -294,7 +302,15 @@ export const logoutSequence = () => {
 //subscribe to the state so any and all changes are saved, can store multiple states (e.g. particular for pages or components)
 export function backupState(
     filename='state.json', 
-    backup=['route','selectedVideo','selectedAudioIn','selectedAudioOut'],
+    backup=[
+        'route',
+        'viewVitals',
+        'selectedVideo',
+        'selectedAudioIn',
+        'selectedAudioOut',
+        'savedEventOptions',
+        'alertsEnabled'
+    ], //back these values up from the state object
     dir='data'
 ){
     //read initial data, now setup subscription to save the state every time it updates
@@ -367,7 +383,7 @@ export async function restoreSession(
 
 
 export function subscribeToStream(
-    stream:Sensors|'chat'|'alerts', 
+    stream:Stream, 
     onchange:(result:any)=>void, 
     streamId?:string
 ) {
@@ -375,7 +391,7 @@ export function subscribeToStream(
 }
 
 export function unsubscribeFromStream(
-    stream:Sensors|'chat'|'alerts',
+    stream:Stream,
     sub:number|undefined, 
     streamId?:string
 ) {

@@ -10,56 +10,58 @@ import { Messaging } from '../WebRTC/Calling';
 
 export class UserMessages extends sComponent {
 
-  constructor(props:{streamId?:string}) {
+  constructor(props:{streamId?:string, hideIcon?:boolean, hideModal?:boolean}) {
     super(props);
   }
 
   componentDidMount(): void {
-    this.__subscribeComponent(this.props.streamId + 'message');
+    if(!this.props.hideModal) this.__subscribeComponent(this.props.streamId + 'message');
   }
 
   componentWillUnmount(): void {
-    this.__unsubscribeComponent(this.props.streamId + 'message');
+    if(!this.props.hideModal) this.__unsubscribeComponent(this.props.streamId + 'message');
   }
 
+  handleClose = () => {
+    this.show = false; this.setState({});
+  };
+  handleShow = () => {
+    (webrtc.rtc[this.props.streamId] as RTCCallInfo).unreadMessages = 0;
+    this.show = true; this.setState({});
+  };
   
   show=false;
   render() {
-  
-    const handleClose = () => {
-      this.show = false; this.setState({});
-    };
-    const handleShow = () => {
-      (webrtc.rtc[this.props.streamId] as RTCCallInfo).unreadMessages = 0;
-      this.show = true; this.setState({});
-
-    };
   
     let chats = (webrtc.rtc[this.props.streamId] as RTCCallInfo).messages;
     let unread = (webrtc.rtc[this.props.streamId] as RTCCallInfo).unreadMessages;
 
     return (
       <>
-        <span onClick={handleShow}>
-          {unread ? <Badge className="wiggletext" style={{padding:'4px', position:'absolute'}} bg="success">{unread}</Badge> : null} 
-          <Icon.MessageSquare style={{cursor:'pointer'}} className="svghover align-text-bottom" size={40}></Icon.MessageSquare>
-        </span>
+        {!this.props.hideIcon && 
+          <span onClick={this.props.hideModal ? undefined : this.handleShow}>
+            {unread ? <Badge className="wiggletext" style={{padding:'4px', position:'absolute'}} bg="success">{unread}</Badge> : null} 
+            <Icon.MessageSquare style={{cursor:'pointer'}} className="svghover align-text-bottom" size={40}></Icon.MessageSquare>
+          </span>
+        }
         {/** TODO: have a number for the number of unchecked messages */}
-        <Modal centered show={this.show} onHide={handleClose} backdrop={false}>
-          <Modal.Header closeButton>
-            <Modal.Title><Icon.MessageSquare className="align-text-bottom" color="red" size={26}></Icon.MessageSquare>&nbsp;Messages</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Messaging
-              streamId={this.props.streamId}
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        { !this.props.hideModal &&
+          <Modal centered show={this.show} onHide={this.handleClose} backdrop={false}>
+            <Modal.Header closeButton>
+              <Modal.Title><Icon.MessageSquare className="align-text-bottom" color="red" size={26}></Icon.MessageSquare>&nbsp;Messages</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Messaging
+                streamId={this.props.streamId}
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        }
       </>
     );
   }

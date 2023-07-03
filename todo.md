@@ -1,15 +1,13 @@
 
 ### Priorities
 
-- Arm/disarm alerts, incl audio
-
 - Add local folder list option for custom folder names so a user can record several people on their own account
 
 - Punch in categorized notes easier.  Sort event tables. Record audio/video. Potentially transcribe audio?
 
 - Fix so offline accounts work, at least just with saved google verification (IDB)
 
-
+- Make timers persistent
 
 - Dumb everything down as much as possible. Give summaries, e.g. sleep. Event + data recording made much simpler.
 
@@ -20,15 +18,12 @@
  - - Add scheduling to point system valued
 
 
-
-
-
-
 ### KNOWN BUGS
 
 - when not selecting a bluetooth device then selecting again, or when removing a device then reconnecting, this may cause ui not to respond, seems to be more a bluetooth issue
 - browserfs EIO errors, though it doesn't seem to stop the files from writing
 - redirect can cache and screw up localhost on non-redirect servers (??)
+- wtf is wrong with the alert modals ??? I've spent 2 days hitting my head against a wall and I only made it worse.
 
 ### UX/UI
 

@@ -19,23 +19,9 @@ let recordingSubs = {} as any;
 
 let fileNames = {} as any;
 
-
-
-
 export const csvworkers = {} as {[key:string]:WorkerInfo};
 
-export function recordAlert(alert:{message:string,timestamp:number, value:any, [key:string]:any}, streamId?) {
-
-    let from;
-    if(streamId) {
-        const call = webrtc.rtc[streamId];
-        from = (call as RTCCallInfo).firstName + (call as RTCCallInfo).lastName;
-    } else {
-        from = client.currentUser.firstName + client.currentUser.lastName;
-    }
-
-    alert.from = from;
-    if(!streamId) alerts.push(alert as any);
+export function recordAlert(alert:{message:string,timestamp:number, value:any, from:string, [key:string]:any}, streamId?) {
 
     const workername = streamId ? streamId+'alerts' : 'alerts';
     
@@ -43,7 +29,7 @@ export function recordAlert(alert:{message:string,timestamp:number, value:any, [
         if(!csvworkers[workername]) {
             csvworkers[workername] =  workers.addWorker({ url: gsworker });
             csvworkers[workername].run('createCSV', [
-                `${from}/Alerts_${from}.csv`,
+                `${alert.from}/Alerts_${alert.from}.csv`,
                 [
                     'timestamp','message','value','from'
                 ]
@@ -51,8 +37,6 @@ export function recordAlert(alert:{message:string,timestamp:number, value:any, [
         }
         csvworkers[workername].run('appendCSV',alert);
     //}
-
-    state.setValue(streamId ? streamId+'alert' : 'alert', alert);
 
 }
 
@@ -66,12 +50,14 @@ export const recordEvent = (from, event, streamId?) => {
             csvworkers[name].run('createCSV', [
                 `${from}/Events_${from}.csv`,
                 [
-                    'timestamp','from', 'event', 'notes', 'grade'
+                    'timestamp','from', 'event', 'notes', 'grade', 'startTime', 'endTime'
                 ]
             ]);
         }
         csvworkers[name].run('appendCSV', event);
     //}
+
+    state.setValue(streamId ? streamId+'event' : 'event', event);
 }
 
 export const recordChat = (from,message,streamId?) => {
@@ -86,7 +72,7 @@ export const recordChat = (from,message,streamId?) => {
                 ]
             ]);
         }
-        csvworkers[name].run('appendCSV',message)
+        csvworkers[name].run('appendCSV', message)
     }
 }
 

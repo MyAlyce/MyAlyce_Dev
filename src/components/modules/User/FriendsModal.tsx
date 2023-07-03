@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import * as Icon from 'react-feather';
 
 
-import { UserAuths } from '../UserAuths';
+import { UserAuths } from './UserAuths';
 
 export function FriendsModal() {
   const [show, setShow] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Button, Col, Modal, Row } from "react-bootstrap"
 import { client, getStreamById, splitCamelCase, state, webrtc, webrtcData } from "../../../scripts/client";
-import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio, sendMessage, callHasMyStreamMedia } from "../../../scripts/webrtc";
+import { startCall, RTCCallInfo, RTCCallProps, answerCall, disableAudio, disableVideo, enableVideo, enableAudio, sendMessage, callHasMyStreamMedia, rejectCall } from "../../../scripts/webrtc";
 import { sComponent } from "../../state.component";
 import { Widget } from "../../widgets/Widget";
 import { RTCVideo } from "./WebRTCStream";
@@ -65,10 +65,14 @@ export function UnanweredCallInfo(onAnswered?:(call:RTCCallInfo)=>{}) {
 export function AnswerCallModal (props:{streamId:string}) {
     const [show, setShow] = useState(true);
   
-    const handleClose = () => setShow(false);
+    let call = state.data.unansweredCalls[props.streamId] as RTCCallProps;
+
+    const handleClose = () => {
+        setShow(false);
+        if(state.data.unansweredCalls[props.streamId]) rejectCall(call._id as string);
+    }
     const handleShow = () => setShow(true);
 
-    let call = state.data.unansweredCalls[props.streamId] as RTCCallProps;
     //console.log('answer call modal');
     
     return (
@@ -441,7 +445,7 @@ export class CallSelf extends sComponent {
                 Call Myself
             </Button>
             {
-                ownCall && <Button onClick={()=>{ answerCall(ownCall).then(()=>{this.setState({ activeStream:ownCall._id, triggerPageRerender:true });}); }}>Answer Self</Button>
+                ownCall && <Button onClick={()=>{ answerCall(ownCall).then(()=>{this.setState({ triggerPageRerender:true });}); }}>Answer Self</Button>
             }
         </>
     }
