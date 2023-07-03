@@ -7,8 +7,6 @@
 
 - Fix so offline accounts work, at least just with saved google verification (IDB)
 
-- Make timers persistent
-
 - Dumb everything down as much as possible. Give summaries, e.g. sleep. Event + data recording made much simpler.
 
 - Intermittent rewards for events? 

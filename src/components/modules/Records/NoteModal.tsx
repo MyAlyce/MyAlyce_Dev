@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {PopupModal} from '../Modal/Modal'
 import { Button } from 'react-bootstrap';
-import { Stopwatch } from '../Stopwatch/Stopwatch';
+import { Stopwatch } from '../State/StateStopwatch';
 import {client, events, state, webrtcData} from '../../../scripts/client'
 import { recordEvent } from '../../../scripts/datacsv';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
@@ -40,7 +40,7 @@ export class NoteModal extends Component<{streamId?:string, defaultShow?:boolean
         this.ref = React.createRef();
         this.ref2 = React.createRef();
         this.ref3 = React.createRef();
-
+        if(!state.data.selectedTimeInput) state.data.selectedTimeInput = 'date';
         this.streamId = props.streamId;
     }
 
@@ -160,13 +160,14 @@ export class NoteModal extends Component<{streamId?:string, defaultShow?:boolean
                             }
                         </span>
                         <label><Icon.Clock/></label>
-                        <select defaultValue={this.state.selectedTimeInput} onChange={(ev)=>{
+                        <select defaultValue={state.data.selectedTimeInput} onChange={(ev)=>{
+                            state.setState({selectedTimeInput: ev.target.value});
                             this.setState({selectedTimeInput:ev.target.value});
                         }}>
                             <option value="timer">Timer</option>
                             <option value="date">DateTime</option>
                         </select>
-                        { this.state.selectedTimeInput === "date" &&  
+                        { state.data.selectedTimeInput === "date" &&  
                             <>
                                 <input
                                     onChange={(ev)=>{
@@ -178,8 +179,9 @@ export class NoteModal extends Component<{streamId?:string, defaultShow?:boolean
                                 {' '}<br/>
                             </>
                         }
-                        { this.state.selectedTimeInput === "timer" && 
+                        { state.data.selectedTimeInput === "timer" && 
                             <Stopwatch 
+                                stateKey={this.streamId}
                                 onStart={(timestamp)=>{ this.startTime = timestamp; this.endTime = undefined; }}
                                 onFrame={(duration, timestamp)=>{ this.endTime = timestamp; }}
                                 onStop={(duration, timestamp)=>{ this.endTime = timestamp; }}

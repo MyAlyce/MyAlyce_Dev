@@ -129,7 +129,8 @@ export class UserAlerts extends sComponent {
                 Close
               </Button>
             </Modal.Footer>
-          </Modal> }
+          </Modal> 
+        }
       </>
     );
   }
