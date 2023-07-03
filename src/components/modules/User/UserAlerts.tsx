@@ -30,7 +30,7 @@ export class UserAlerts extends sComponent {
   };
 
   componentDidMount = () => {
-    if(~this.streamId && this.props.streamId) this.streamId = this.props.streamId;
+    if(this.streamId && this.props.streamId) this.streamId = this.props.streamId;
     if(!this.props.hideModal) {
       if(this.props.useActiveStream) {
         this.__subscribeComponent(
