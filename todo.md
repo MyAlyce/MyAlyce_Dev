@@ -1,11 +1,11 @@
-
 ### Priorities
 
-- Add local folder list option for custom folder names so a user can record several people on their own account
+- Add local folder list option for custom folder names so a user can record several people on their own account, this means just trade out the hard coded stream/currentUser getters for setting names/folders manually
 
 - Punch in categorized notes easier.  Sort event tables. Record audio/video. Potentially transcribe audio?
 
 - Fix so offline accounts work, at least just with saved google verification (IDB)
+   --- make a fallback to read out the event csv for a selected user
 
 - Dumb everything down as much as possible. Give summaries, e.g. sleep. Event + data recording made much simpler.
 
@@ -23,16 +23,17 @@
 - redirect can cache and screw up localhost on non-redirect servers (??)
 - wtf is wrong with the alert modals ??? I've spent 2 days hitting my head against a wall and I only made it worse.
 
+
 ### UX/UI
 
-- modals acting weird with alerts, tends to cause page reload with onItemClick triggering somehow from the StreamSelect divs... weird
+- modals acting weird with alerts... 
 - create a tiling system for customizing dashboard setup, back up config to indexeddb 
 - styling, clean generic crm look like adminlte or google analytics. Modern and information-rich without being overwhelming as we need this to be nice for fairly tech-illiterate people.
 - webrtc ux/ui. Make calling yourself its own separate deal from calling other users (since its just setting up a remote connection for yourself)
 - animation
 - fix chart scaling so the leading/trailing zeros don't make it useless for a few seconds
-
 - https://leafletjs.com/examples/quick-start/ for geolocation
+
 
 ### Scripting/Events/State
 
@@ -40,34 +41,39 @@
 - readd notifications, friends lists, etc.
 - make the local recordings more secure per-user
 
+
 ### RTC
 
-- fix selectors not swapping inputs automatically on active calls
 - proper call interface
 - test buffering more
-- audio quality (more filters? compressor? disabling stuff?)
+
 
 ### Backend
 
 - Security, test access token system, more permissions
 - plain email/password storage? i.e. not just google reliance, see about microsoft accounts and other
+- more querying macros, e.g. for time ranges and so on,
+- clearing out all user data by ID
 
 ## Data
 
-- more selective data representation
+- more selective data representation, e.g. time-based
 - Video/Audio capture local and remote (ez)
 - Screen capture
 
-- Lots more recordkeeping tools
+- Lots more recordkeeping tools, charting, etc. 
+
 
 ## Third party
 
 - reintegrate fitbit api, it's there but not in use. Need to build more of the recordkeeping to make use of these. Mongodb is ready to accept anything.
 
+
 ## Widgets
 
 - widgetize all the things
 - more data widgets, tables, etc, typical analytics stuff really (just needs to be PERFORMANT).
+
 
 ## Modularity
 

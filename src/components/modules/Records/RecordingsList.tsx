@@ -127,7 +127,7 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
                         }) : null }
                     </select>
                     <hr />
-                    <div>
+                    <div style={{maxHeight:'600px'}}>
                         {this.state.recordings ? this.state.recordings : ""}
                     </div>
                 </>

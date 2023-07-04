@@ -34,7 +34,7 @@ function getColorGradientRG(value) {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-export class NoteTaking extends Component<{[key:string]:any}> {
+export class NoteTaking extends Component<{streamId?:string, filename?:string, dir?:string, showInput?:boolean, showHistory?:boolean, onSubmit?:(message:any)=>void}> {
 
     state = {
         noteRows:[] as any[],
@@ -54,7 +54,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
     savedEventOptions = state.data.savedEventOptions as string[];
 
 
-    showInput = true;
+    showInput = false;
     showHistory = true;
 
     ref1;ref2;ref3;
@@ -131,7 +131,7 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         }
 
     }
-    
+
     renderInputSection() {
 
 

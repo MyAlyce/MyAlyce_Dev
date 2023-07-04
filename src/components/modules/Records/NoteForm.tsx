@@ -47,7 +47,7 @@ export class NoteForm extends Component<{
     }
 
     clearForm() {
-        (document.getElementById(this.unique+'note') as HTMLInputElement).value = '';
+        (document.getElementById(this.unique+'notes') as HTMLInputElement).value = '';
         (document.getElementById(this.unique+'grade') as HTMLInputElement).value = '0';
     }
 
@@ -87,9 +87,7 @@ export class NoteForm extends Component<{
 
         
         let from;
-        if(this.streamId) {
-            from = webrtcData.availableStreams[this.streamId].firstName + webrtcData.availableStreams[this.streamId].lastName;
-        } else {
+        if(client.currentUser) {
             from = client.currentUser.firstName + client.currentUser.lastName;
         }
 
@@ -107,7 +105,7 @@ export class NoteForm extends Component<{
             webrtcData.availableStreams[key].send({event:message});
         }
 
-        recordEvent(from, message, this.streamId);
+        if(this.streamId) recordEvent(from, message, this.streamId);
 
         events.push(message as any);
 
@@ -116,6 +114,7 @@ export class NoteForm extends Component<{
         }
 
         this.clearForm();
+        this.setState({});
    
     }
 
@@ -160,10 +159,11 @@ export class NoteForm extends Component<{
                 }
                 {
                     this.state.writeIn ? 
-                    <button onClick={()=>{this.setState({writeIn:false})}}>Selected</button> : 
+                    <button onClick={()=>{this.setState({writeIn:false})}}>Back</button> : 
                     <button onClick={()=>{this.setState({writeIn:true})}}>New</button>
                 }
             </span>
+            <br/>
             <label><Icon.Clock/></label>
             <select defaultValue={state.data.selectedTimeInput} onChange={(ev)=>{
                 state.setState({selectedTimeInput: ev.target.value});
@@ -193,6 +193,7 @@ export class NoteForm extends Component<{
                     onClear={(duratiom, timestamp)=>{ this.startTime = timestamp; this.endTime = undefined; }}
                 />
             }
+            <br/>
             <label><Icon.TrendingUp/></label>{' '}
             <input 
                 onInput={updateInputColor}
@@ -207,6 +208,7 @@ export class NoteForm extends Component<{
                 max='10' 
                 defaultValue='0'
             />
+            <br/>
             <label><Icon.Edit3/></label>{' '}
             <textarea ref={this.ref2 as any} id={this.unique+'notes'} placeholder="Take Notes..."  name="note" defaultValue="" style={{width:'87.5%'}}/>
             <Button onClick={this.submit}>Submit</Button>
