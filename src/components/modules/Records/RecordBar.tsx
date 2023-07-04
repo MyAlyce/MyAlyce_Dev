@@ -11,40 +11,40 @@ import { Widget } from '../../widgets/Widget';
 export class RecordBar extends sComponent {
 
     state = {
-        isRecording:false,
         streamRecording:undefined,
         activeStream:undefined,
     }
     
     dir?:string;  
     toggled=[...SensorDefaults] as any[];
+    isRecording = false;
 
     onChange=(ev:{isRecording:boolean, streamId?:string})=>{}
 
-    constructor(props:{dir?:string, onChange:(ev:{isRecording:boolean, streamId?:string})=>void}) {
+    constructor(props:{dir?:string, streamId?:string, onChange:(ev:{isRecording:boolean, streamId?:string})=>void}) {
         super(props);
-
         this.dir = props.dir;
+        this.isRecording = this.statemgr.data[props.streamId ? props.streamId+'isRecording':'isRecording'];
     }
 
     componentDidMount(): void {
         //this.__subscribeComponent(this.props.streamId ? this.props.streamId : '');
+        this.__subscribeComponent(this.props.streamId ? this.props.streamId+'isRecording':'isRecording');
     }
 
     componentWillUnmount(): void {
         //this.__unsubscribeComponent
+        this.__unsubscribeComponent(this.props.streamId ? this.props.streamId+'isRecording':'isRecording');
     }
 
 
     record(streamId?:string, sensors?:('emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg')[], subTitle?:string, dir:string=this.dir as string) {
         recordCSV(streamId, sensors, subTitle, dir);
-        this.setState({streamRecording:streamId});
         if(this.onChange) this.onChange({isRecording:true, streamId})
     }
 
     async stopRecording(streamId?:string, dir:string=this.dir as string) {
         await stopRecording(streamId, dir, client.currentUser.firstName+client.currentUser.lastName); //folder list will be associated with current user so they will only see indexeddb folders for users they are associated with
-        this.setState({streamRecording:undefined});
         if(this.onChange) this.onChange({isRecording:false, streamId})
     }
 
@@ -60,16 +60,16 @@ export class RecordBar extends sComponent {
                 header={( <b>Recording Controls</b> )}
                 content={(
                     <div className="d-grid gap-2">
-                        {this.state.isRecording ? 
+                        {this.statemgr.data[this.props.streamId ? this.props.streamId+'isRecording':'isRecording'] ? 
                             <Button variant='warning' onClick={()=>{ 
-                                stopRecording(this.state.streamRecording, dir, client.currentUser.firstName+client.currentUser.lastName) 
+                                stopRecording(this.props.streamId, dir, client.currentUser.firstName+client.currentUser.lastName) 
                             }}>
                                 <Icon.Pause className="align-text-bottom" size={20}></Icon.Pause>&nbsp;Pause
                             </Button> 
-                                : 
+                                : //OR
                             <>
                                 <Button variant='info' onClick={()=>{
-                                    this.record(this.state.activeStream, this.toggled, dir, dir)}}
+                                    this.record(this.props.streamId, this.toggled, dir, dir)}}
                                 >
                                     <Icon.Circle className="align-text-bottom" size={20}></Icon.Circle>&nbsp;Record
                                 </Button>{' '}
