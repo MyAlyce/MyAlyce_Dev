@@ -16,6 +16,7 @@ import * as Icon from 'react-feather'
 import { Widget } from '../../widgets/Widget';
 import { toISOLocal } from 'graphscript-services.storage';
 import { Stopwatch } from '../Stopwatch/Stopwatch';
+import { NoteForm } from './NoteForm';
 
 function getColorGradientRG(value) {
     let r, g, b;
@@ -130,154 +131,19 @@ export class NoteTaking extends Component<{[key:string]:any}> {
         }
 
     }
-
-    clearForm() {
-        (document.getElementById(this.id+'event') as HTMLInputElement).value = '';
-        (document.getElementById(this.id+'note') as HTMLInputElement).value = '';
-        (document.getElementById(this.id+'number') as HTMLInputElement).value = '0';
-    }
-
-    submit = async () => {
-        let note = {
-            notes:(document.getElementById(this.id+'note') as HTMLInputElement).value,
-            event:(document.getElementById(this.id+'event') as HTMLInputElement).value,
-            timestamp:this.startTime,
-            grade:parseInt((document.getElementById(this.id+'number') as HTMLInputElement).value)
-        };
-        if(!note.event) note.event = 'Event';
-        if(!note.timestamp) note.timestamp = Date.now();
-
-        //clear form
-
-        note.event = formatWord(note.event);
-
-        if(!this.savedEventOptions.includes(note.event)) {
-            this.savedEventOptions.push(note.event);
-        }
-        if(client.currentUser)
-            await client.addEvent(
-                client.currentUser, 
-                client.currentUser._id, 
-                note.event, 
-                note.notes,
-                this.startTime, 
-                this.endTime, 
-                note.grade 
-            ) as EventStruct;
-        //console.log('event returned? ', event)
-        let from;
-        if(this.streamId) {
-            from = webrtcData.availableStreams[this.streamId].firstName + webrtcData.availableStreams[this.streamId].lastName;
-        } else {
-            from = client.currentUser.firstName + client.currentUser.lastName;
-        }
-
-        let message = {
-            from:from,
-            event:note.event,
-            notes:note.notes,
-            grade:note.grade,
-            startTime:this.startTime,
-            endTime:this.endTime,
-            timestamp:note.timestamp as number
-        };
-
-        for(const key in webrtcData.availableStreams) {
-            webrtcData.availableStreams[key].send({event:message});
-        }
-
-        recordEvent(from, message, this.streamId);
-
-        events.push(message as any);
-
-        let i = this.state.noteRows.length;
-
-        if(this.showHistory) {
-            let onclick = () => {
-                client.deleteData([event],()=>{
-                    this.listEventHistory();
-                });
-                this.state.noteRows[i] = null;
-                this.setState({});
-            }
     
-            this.state.noteRows.unshift({
-                event:message.event,
-                timestamp:message.timestamp,
-                html:(
-                <tr key={message.timestamp}>
-                    <td>{toISOLocal(message.startTime)}</td>
-                    <td>{message.event}</td>
-                    <td width="35%">{message.notes}</td>
-                    <td>{message.endTime ? (getHoursAndMinutes((message as any).endTime - (message as any).startTime)) : undefined}</td>
-                    <td style={{backgroundColor:getColorGradientRG(message.grade)}}>{message.grade}</td> 
-                    <td><button onClick={onclick}>❌</button></td>
-                </tr>)
-            });
-        
-            this.setState({noteRows:this.state.noteRows});
-        }
-    }
-
     renderInputSection() {
 
-        let now = new Date();
-        this.startTime = now.getTime();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        let localDateTime = now.toISOString().slice(0,16);
-        
-        const updateInputColor = (event: React.ChangeEvent<HTMLInputElement>) => {
-            const value = parseInt(event.target.value);
-            const color = getColorGradientRG(value);
-            event.target.style.backgroundColor = color;
-        }
 
         return (
             <Widget 
                 style={{ maxWidth: '20rem' }}
                 header={( <b>Log Event</b> )}
                 content = {<>
-                    <div>
-                        <label><Icon.BookOpen/></label>{' '}<input ref={this.ref1 as any} id={this.id+'event'} placeholder="Event"  name="event" defaultValue="" style={{width:'87.5%'}}/>
-                    </div>
-                    
-                    <label><Icon.Edit3/></label>{' '}<textarea ref={this.ref1 as any} id={this.id+'note'} placeholder="Notes..."  name="note" defaultValue="" style={{width:'87.5%'}}/>
-                    <div>
-                        <label><Icon.TrendingUp/></label>{' '}
-                        <input 
-                            onInput={updateInputColor}
-                            onChange={updateInputColor}
-                            style={{width:'12%'}}
-                            className="number-input" ref={this.ref3 as any} id={this.id+'number'} name="grade" type='number' min='0' max='10' defaultValue='0'
-                        />
-                        {' '}<label><Icon.Clock/></label>{' '}
-                        <select defaultValue={this.state.selectedTimeInput} onChange={(ev)=>{
-                            this.setState({selectedTimeInput:ev.target.value});
-                        }}>
-                            <option value="timer">Timer</option>
-                            <option value="date">DateTime</option>
-                        </select>
-                    { this.state.selectedTimeInput === "date" &&  
-                        <>
-                            <input
-                                onChange={(ev)=>{
-                                    this.startTime = new Date(ev.target.value).getTime();
-                                }}
-                                style={{width:'65%'}}
-                                ref={this.ref2 as any} id={this.id+'time'} name="time" type='datetime-local' defaultValue={localDateTime}/>
-                            {' '}<br/>
-                        </>
-                    }
-                    { this.state.selectedTimeInput === "timer" && 
-                        <Stopwatch 
-                            onStart={(timestamp)=>{ this.startTime = timestamp; this.endTime = undefined; }}
-                            onFrame={(duration, timestamp)=>{ this.endTime = timestamp; }}
-                            onStop={(duration, timestamp)=>{ this.endTime = timestamp; }}
-                            onClear={(duratiom, timestamp)=>{ this.startTime = timestamp; this.endTime = undefined; }}
-                        />
-                    }
-                        <Button style={{float:'right'}} onClick={this.submit}>Submit</Button>
-                    </div>
+                    <NoteForm
+                        streamId={this.props.streamId}
+                        onSubmit={this.props.onSubmit}
+                    />
                 </>}
             />
         );

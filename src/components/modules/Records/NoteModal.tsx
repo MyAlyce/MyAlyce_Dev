@@ -7,6 +7,7 @@ import { recordEvent } from '../../../scripts/datacsv';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 import * as Icon from 'react-feather'
 import { StateModal } from '../State/StateModal';
+import { NoteForm } from './NoteForm';
 
 export class NoteModal extends Component<{streamId?:string, defaultShow?:boolean, onSubmit?:(message:any)=>void}> {
 
@@ -125,79 +126,10 @@ export class NoteModal extends Component<{streamId?:string, defaultShow?:boolean
                     defaultShow={this.props.defaultShow}
                     title={"New Event Log"} 
                     body={<>
-                        <span><Icon.BookOpen/>{
-                            !this.state.writeIn ? 
-                            <select id={this.unique+"event"}>
-                                { 
-                                    this.defaultOptions.map((v) => {
-                                        return <option value={v} key={v}>{v}</option>
-                                    })
-                                }
-                                {
-                                    this.savedEventOptions.map((v) => {
-                                        return <option value={v} key={v}>{v}</option>
-                                    })
-                                }
-                            </select>
-                            : <>
-                                <input type='text' placeholder="Event Name" id={this.unique+"event"}></input>
-                                <button onClick={()=>{
-                                    let event = (document.getElementById(this.unique+"event") as any).value;
-                                    if(event && !this.savedEventOptions.includes(event)) {
-                                        this.savedEventOptions.push(
-                                            event
-                                        );
-                                        state.setState({savedEventOptions:this.savedEventOptions, writeIn:false});
-                                        //write saved options to file
-                                    }
-                                }}>Set</button>
-                            </>
-                            }
-                            {
-                                this.state.writeIn ? 
-                                <button onClick={()=>{this.setState({writeIn:false})}}>Selected</button> : 
-                                <button onClick={()=>{this.setState({writeIn:true})}}>New</button>
-                            }
-                        </span>
-                        <label><Icon.Clock/></label>
-                        <select defaultValue={state.data.selectedTimeInput} onChange={(ev)=>{
-                            state.setState({selectedTimeInput: ev.target.value});
-                            this.setState({selectedTimeInput:ev.target.value});
-                        }}>
-                            <option value="timer">Timer</option>
-                            <option value="date">DateTime</option>
-                        </select>
-                        { state.data.selectedTimeInput === "date" &&  
-                            <>
-                                <input
-                                    onChange={(ev)=>{
-                                        this.startTime = new Date(ev.target.value).getTime();
-                                    }}
-                                    style={{width:'65%'}}
-                                    ref={this.ref as any} id={this.unique+'time'} name="time" type='datetime-local' defaultValue={localDateTime}
-                                />
-                                {' '}<br/>
-                            </>
-                        }
-                        { state.data.selectedTimeInput === "timer" && 
-                            <Stopwatch 
-                                stateKey={this.streamId}
-                                onStart={(timestamp)=>{ this.startTime = timestamp; this.endTime = undefined; }}
-                                onFrame={(duration, timestamp)=>{ this.endTime = timestamp; }}
-                                onStop={(duration, timestamp)=>{ this.endTime = timestamp; }}
-                                onClear={(duratiom, timestamp)=>{ this.startTime = timestamp; this.endTime = undefined; }}
-                            />
-                        }
-                        <label><Icon.TrendingUp/></label>{' '}
-                        <input 
-                            onInput={updateInputColor}
-                            onChange={updateInputColor}
-                            style={{width:'12%'}}
-                            className="number-input" ref={this.ref3 as any} id={this.unique+'grade'} name="grade" type='number' min='0' max='10' defaultValue='0'
+                        <NoteForm
+                            streamId={this.props.streamId}
+                            onSubmit={this.props.onSubmit}
                         />
-                        <label><Icon.Edit3/></label>{' '}
-                        <textarea ref={this.ref2 as any} id={this.unique+'notes'} placeholder="Take Notes..."  name="note" defaultValue="" style={{width:'87.5%'}}/>
-                        <Button onClick={this.submit}>Submit</Button>
                     </>}
                 />
             </>
