@@ -30,6 +30,7 @@ export class Demo extends sComponent {
 
         let demoonclick = () => {
             this.startDemos(); //todo add device selection
+            state.setState({demoing:true});
         }
 
         let stopdemoonclick = () => {
@@ -37,6 +38,7 @@ export class Demo extends sComponent {
                 disconnectDevice();
             }
             this.stopDemos();
+            state.setState({demoing:false});
         }
 
         return (

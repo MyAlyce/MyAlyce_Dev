@@ -151,7 +151,8 @@ state.setState({
     loggedInId: undefined, //id of the current user
     viewingId: undefined,  //id of the user currently being viewed
     savedEventOptions:[] as any, //list of event tags saved
-    
+    demoing:true,
+
     alertsEnabled:true,
     useHRAlert:true,
     useBreathAlert:true,
@@ -251,7 +252,7 @@ export const onLogin = async (
             restoreSession(user,undefined,user.firstName+user.lastName);
             listMediaDevices(); //run on start
 
-            if(startDemo) {
+            if(startDemo && state.data.demoing) {
                 demo();
             }
             
@@ -309,6 +310,7 @@ export function backupState(
         'selectedAudioIn',
         'selectedAudioOut',
         'savedEventOptions',
+        'demoing',
         'alertsEnabled'
     ], //back these values up from the state object
     dir='data'

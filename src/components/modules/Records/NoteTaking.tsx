@@ -17,6 +17,7 @@ import { Widget } from '../../widgets/Widget';
 import { toISOLocal } from 'graphscript-services.storage';
 import { Stopwatch } from '../Stopwatch/Stopwatch';
 import { NoteForm } from './NoteForm';
+import { defaultSpecifiers, genTimestampFromString } from 'graphscript-services';
 
 function getColorGradientRG(value) {
     let r, g, b;
@@ -34,7 +35,14 @@ function getColorGradientRG(value) {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-export class NoteTaking extends Component<{streamId?:string, filename?:string, dir?:string, showInput?:boolean, showHistory?:boolean, onSubmit?:(message:any)=>void}> {
+export class NoteTaking extends Component<{
+    streamId?:string, 
+    userId?:string,
+    filename?:string, 
+    dir?:string, 
+    showInput?:boolean, 
+    showHistory?:boolean, onSubmit?:(message:any)=>void
+}> {
 
     state = {
         noteRows:[] as any[],
@@ -42,8 +50,12 @@ export class NoteTaking extends Component<{streamId?:string, filename?:string, d
         selectedEvent:undefined as any
     }
 
-    id=`form${Math.floor(Math.random()*1000000000000000)}`;
+    unique=`form${Math.floor(Math.random()*1000000000000000)}`;
     streamId?:string;
+    userId?:string;
+
+    time0 = 'week';
+    time1 = 'now';
 
     startTime = Date.now();
     endTime = undefined;
@@ -61,13 +73,14 @@ export class NoteTaking extends Component<{streamId?:string, filename?:string, d
 
     sub;
 
-    constructor(props:{streamId?:string, filename?:string, dir?:string, showInput?:boolean, showHistory?:boolean}) {
+    constructor(props:{streamId?:string, userId?:string, filename?:string, dir?:string, showInput?:boolean, showHistory?:boolean}) {
         super(props);
 
         if('showInput' in props) this.showInput = props.showInput as boolean;
         if('showHistory' in props) this.showHistory = props.showHistory as boolean;
 
         this.streamId = props.streamId;
+        this.userId = props.userId;
         
         this.ref1 = React.createRef();
         this.ref2 = React.createRef();
@@ -75,27 +88,36 @@ export class NoteTaking extends Component<{streamId?:string, filename?:string, d
     }
 
     componentDidMount(): void {
-        this.sub = subscribeToStream('event',()=>{
+        this.sub = subscribeToStream(
+            'event',()=>{
             this.listEventHistory()
         }, this.streamId);
-        if(this.showHistory) this.listEventHistory();
+        if(this.showHistory) 
+            this.listEventHistory();
     }
 
     componentWillUnmount(): void {
-        unsubscribeFromStream('event',this.sub,this.streamId);
+        unsubscribeFromStream('event', this.sub, this.streamId);
     }
 
     async listEventHistory() {
         let latest;
 
+        if(this.time0 !== 'now' && this.time0.indexOf('last') < 0) this.time0 = 'last ' + this.time0;
+        if(this.time1 !== 'now' && this.time1.indexOf('last') < 0) this.time1 = 'last ' + this.time1; 
+        let t0 = genTimestampFromString(this.time0 as any);
+        let t1 = genTimestampFromString(this.time1 as any);
+        let searchDict = {timestamp:{$gt:t0, $lt:t1}};
         //todo: properly sort by timestamp
         if(this.streamId) {
             let call = (webrtc.rtc[this.streamId] as RTCCallInfo);
-            latest = await client.getData('event', call.caller, this.searchDict, this.eventLimit, this.eventSkip); //these are gotten in order of the latest data
+            latest = await client.getData('event', call.caller, searchDict, this.eventLimit, this.eventSkip); //these are gotten in order of the latest data
+        } else if (this.userId) {
+            latest = await client.getData('event', this.userId, searchDict, this.eventLimit, this.eventSkip); //these are gotten in order of the latest data
         } else {
-            latest = await client.getData('event', client.currentUser._id, this.searchDict, this.eventLimit, this.eventSkip);
+            latest = await client.getData('event', client.currentUser._id, searchDict, this.eventLimit, this.eventSkip);
         }
-
+        console.log(latest);
         if(latest?.length > 0) {
             let noteRows = [] as any[];
             latest.forEach((event:EventStruct,i) => {
@@ -132,24 +154,6 @@ export class NoteTaking extends Component<{streamId?:string, filename?:string, d
 
     }
 
-    renderInputSection() {
-
-
-        return (
-            <Widget 
-                style={{ maxWidth: '20rem' }}
-                header={( <b>Log Event</b> )}
-                content = {<>
-                    <NoteForm
-                        streamId={this.props.streamId}
-                        onSubmit={this.props.onSubmit}
-                    />
-                </>}
-            />
-        );
-    }
-
-
     //todo sort by event
     renderHistory() {
         return (
@@ -157,16 +161,45 @@ export class NoteTaking extends Component<{streamId?:string, filename?:string, d
                 style={{ width: '40rem' }}
                 header={( <>
                     <b>History</b>
-                    <select style={{float:'right'}} onChange={(ev)=>{
-                        this.setState({selectedEvent:ev.target.value})}}
-                    >
-                        <option value={0}>All</option>
-                    {
-                        this.savedEventOptions.map((v) => {
-                            return <option value={v} key={v}>{v}</option>
-                        })
-                    }
-                    </select>
+                    <span style={{float:'right'}}>
+                        From:{' '}<select defaultValue={defaultSpecifiers.indexOf(this.time0 as any)} onChange={(ev)=>{
+                            let time0 = document.getElementById(this.unique+'time0') as any;
+                            let time1 = document.getElementById(this.unique+'time1') as any;
+                            if(time0.value <= time1.value) time0.value = parseInt(time1.value)+1;
+                            this.time0 = defaultSpecifiers[parseInt(time0.value)];
+                            this.time1 = defaultSpecifiers[parseInt(time1.value)];
+                            this.listEventHistory();
+                        }} id={this.unique+'time0'}>{
+                            [...defaultSpecifiers].map((v,i) => {
+                                if(i !== 0) 
+                                    return <option value={i} key={v}>{v}</option> 
+                                else return null;
+                            })
+                        }</select>{' '}To:{' '}<select defaultValue={defaultSpecifiers.indexOf(this.time1 as any)} onChange={()=>{
+                            let time0 = document.getElementById(this.unique+'time0') as any;
+                            let time1 = document.getElementById(this.unique+'time1') as any;
+                            if(time0.value <= time1.value) time0.value = parseInt(time1.value)+1;
+                            this.time0 = defaultSpecifiers[parseInt(time0.value)];
+                            this.time1 = defaultSpecifiers[parseInt(time1.value)];
+                            this.listEventHistory();  
+                        }} id={this.unique+'time1'}>{
+                            [...defaultSpecifiers].map((v,i) => {
+                                if(i !== defaultSpecifiers.length-1) 
+                                    return <option value={i} key={v}>{v}</option> 
+                                else return null;
+                            })
+                        }</select>
+                        <select onChange={(ev)=>{
+                            this.setState({selectedEvent:ev.target.value})}}
+                        >
+                            <option value={0}>All</option>
+                        {
+                            this.savedEventOptions.map((v) => {
+                                return <option value={v} key={v}>{v}</option>
+                            })
+                        }
+                        </select>
+                    </span>
                 </>)}
                 content={
                     <Table striped bordered hover style={{maxHeight:'600px'}}>
@@ -177,13 +210,13 @@ export class NoteTaking extends Component<{streamId?:string, filename?:string, d
                                 <th>Notes</th>
                                 <th>Duration?</th>
                                 <th><Icon.TrendingUp/></th>
-                                <th>
+                                {!this.showInput && <th>
                                     <Button variant={'success'} 
                                         onClick={()=>{ 
                                             state.setState({[this.streamId ? this.streamId+'notemodal' : 'notemodal']:true}) 
                                         }}
                                     >➕</Button>
-                                </th>
+                                </th>}
                             </tr>
                             {this.state.noteRows.map((v) => {
                                 if(!v) return null;
@@ -198,6 +231,25 @@ export class NoteTaking extends Component<{streamId?:string, filename?:string, d
                 }
             />
         )
+    }
+
+
+    renderInputSection() {
+
+
+        return (
+            <Widget 
+                style={{ maxWidth: '20rem' }}
+                header={( <b>Log Event</b> )}
+                content = {<>
+                    <NoteForm
+                        userId={this.props.userId}
+                        streamId={this.props.streamId}
+                        onSubmit={this.props.onSubmit}
+                    />
+                </>}
+            />
+        );
     }
 
     render() {

@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import {client, events, state, webrtcData} from '../../../scripts/client'
+import {client, events, state, webrtc, webrtcData} from '../../../scripts/client'
 import { recordEvent } from '../../../scripts/datacsv';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 import { Button } from 'react-bootstrap';
 import { Stopwatch } from '../State/StateStopwatch'
 
 import * as Icon from 'react-feather'
+import { RTCCallInfo } from '../../../scripts/webrtc';
 
 export class NoteForm extends Component<{
+    userId?:string,
     streamId?:string, 
     onSubmit?:(message:any)=>void
 }> {
@@ -74,9 +76,19 @@ export class NoteForm extends Component<{
             }
         }
 
+        let userId;
+        if(this.streamId) {
+            let call = (webrtc.rtc[this.streamId] as RTCCallInfo);
+            userId = call.caller; 
+        } else if (this.props.userId) {
+            userId = this.props.userId;
+        } else {
+            userId = client.currentUser?._id;
+        }
+
         if(client.currentUser)
             await client.addEvent(
-                client.currentUser, 
+                { _id:userId }, 
                 client.currentUser._id, 
                 note.event, 
                 note.notes,
@@ -105,7 +117,7 @@ export class NoteForm extends Component<{
             webrtcData.availableStreams[key].send({event:message});
         }
 
-        if(this.streamId) recordEvent(from, message, this.streamId);
+        recordEvent(from, message, this.streamId);
 
         events.push(message as any);
 
