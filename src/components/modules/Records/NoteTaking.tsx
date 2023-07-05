@@ -117,7 +117,7 @@ export class NoteTaking extends Component<{
         } else {
             latest = await client.getData('event', client.currentUser._id, searchDict, this.eventLimit, this.eventSkip);
         }
-        console.log(latest);
+        
         if(latest?.length > 0) {
             let noteRows = [] as any[];
             latest.forEach((event:EventStruct,i) => {
@@ -165,20 +165,20 @@ export class NoteTaking extends Component<{
                         From:{' '}<select defaultValue={defaultSpecifiers.indexOf(this.time0 as any)} onChange={(ev)=>{
                             let time0 = document.getElementById(this.unique+'time0') as any;
                             let time1 = document.getElementById(this.unique+'time1') as any;
-                            if(time0.value <= time1.value) time0.value = parseInt(time1.value)+1;
+                            if(parseInt(time0.value) <= parseInt(time1.value)) time0.value = parseInt(time1.value)+1;
                             this.time0 = defaultSpecifiers[parseInt(time0.value)];
                             this.time1 = defaultSpecifiers[parseInt(time1.value)];
                             this.listEventHistory();
                         }} id={this.unique+'time0'}>{
                             [...defaultSpecifiers].map((v,i) => {
                                 if(i !== 0) 
-                                    return <option value={i} key={v}>{v}</option> 
+                                    return <option value={i} key={v}>{v == 'now' ? v : `last ${v}`}</option> 
                                 else return null;
                             })
                         }</select>{' '}To:{' '}<select defaultValue={defaultSpecifiers.indexOf(this.time1 as any)} onChange={()=>{
                             let time0 = document.getElementById(this.unique+'time0') as any;
                             let time1 = document.getElementById(this.unique+'time1') as any;
-                            if(time0.value <= time1.value) time0.value = parseInt(time1.value)+1;
+                            if(parseInt(time0.value) <= parseInt(time1.value)) time0.value = parseInt(time1.value)+1;
                             this.time0 = defaultSpecifiers[parseInt(time0.value)];
                             this.time1 = defaultSpecifiers[parseInt(time1.value)];
                             this.listEventHistory();  
@@ -195,7 +195,7 @@ export class NoteTaking extends Component<{
                             <option value={0}>All</option>
                         {
                             this.savedEventOptions.map((v) => {
-                                return <option value={v} key={v}>{v}</option>
+                                return <option value={v} key={v}>{v == 'now' ? v : `last ${v}`}</option>
                             })
                         }
                         </select>
