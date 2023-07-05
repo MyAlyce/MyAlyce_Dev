@@ -31,7 +31,6 @@ export class UserAuths extends Component<{[key:string]:any}> {
     ref;
     constructor(props) {
         super(props);
-
         this.listAuths();
         this.ref = React.createRef();
     }
@@ -96,9 +95,9 @@ export class UserAuths extends Component<{[key:string]:any}> {
         this.sentRequests = [];
 
         //my authorizations
-        let auths = client.getLocalData('authorization', {authorizedId:client.currentUser._id}); //await client.getAuthorizations();
+        //let auths = client.getLocalData('authorization', {authorizedId:client.currentUser._id}); 
+        let auths = (await client.getAuthorizations()).filter((a) => {if(a.authorizedId === client.currentUser._id) return true;});
         let secondaryAuths = client.getLocalData('authorization', {authorizerId:client.currentUser._id}); //await client.getAuthorizations();
-
         let userIds = auths.map((v) => {return v.authorizerId});
 
         let info = await client.getUsers(userIds, true); //get profile pics and stuff
@@ -180,7 +179,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
         //my requests
         let authRequests = await client.getData('authRequest', undefined, {requesting: client.currentUser._id});
-        
+        console.log('auth requests', authRequests);
         if(authRequests) await Promise.all(authRequests.map(async (req:{
             requesting:string, //them
             receiving:string //me

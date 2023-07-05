@@ -30,6 +30,9 @@ if(settings.protocol === 'https') {
  });
 }
 
+process.on('uncaughtException', function(err) {
+    console.log('Caught exception: ' + err);
+});
 
 if(fs.existsSync('.env'))
     config(); //load the .env file
