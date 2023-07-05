@@ -249,7 +249,7 @@ export const onLogin = async (
 
             driveInstance = new GDrive(apiKey, googleClientID);
 
-            restoreSession(user,undefined,user.firstName+user.lastName);
+            await restoreSession(user,undefined,user.firstName+user.lastName);
             listMediaDevices(); //run on start
 
             if(startDemo && state.data.demoing) {
