@@ -4,10 +4,13 @@
 
 - Punch in categorized notes easier.  Sort event tables. Record audio/video. Potentially transcribe audio?
 
+- Auto reconnect protocol for mobile or electron.
+
 - Fix so offline accounts work, at least just with saved google verification (IDB)
    --- make a fallback to read out the event csv for a selected user
 
 - Dumb everything down as much as possible. Give summaries, e.g. sleep. Event + data recording made much simpler.
+
 
 - Intermittent rewards for events? 
  - - Every time you enter data you get a point. Points based on types of events.
