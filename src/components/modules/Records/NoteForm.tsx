@@ -117,14 +117,15 @@ export class NoteForm extends Component<{
             webrtcData.availableStreams[key].send({event:message});
         }
 
-        recordEvent(from, message, this.streamId);
+        setTimeout(() => {
+            recordEvent(from, message, this.streamId);
 
-        events.push(message as any);
+            events.push(message as any);
 
-        if(this.props.onSubmit) {
-            this.props.onSubmit(message);
-        }
-
+            if(this.props.onSubmit) {
+                (this.props.onSubmit as any)(message);
+            }
+        },500)
         this.clearForm();
         this.setState({});
    
