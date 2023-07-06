@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {state} from '../../../scripts/client'
+import { Button } from 'react-bootstrap';
 
 export class Stopwatch extends Component<{
     stateKey?:string,
@@ -72,11 +73,11 @@ export class Stopwatch extends Component<{
         return (
         <span>
         { state.data[this.stateKey+'running'] ? 
-            <button onClick={()=>{this.stopTimer();}}>Stop</button> :
-            <button onClick={()=>{this.startTimer();}}>Start</button>
+            <Button onClick={()=>{this.stopTimer();}}>Stop</Button> :
+            <Button onClick={()=>{this.startTimer();}}>Start</Button>
         }
         { (state.data[this.stateKey+'running'] || state.data[this.stateKey+'timeRunning'] > 0) && 
-            <button onClick={()=>{this.clearTimer();}}>Clear</button>
+            <Button onClick={()=>{this.clearTimer();}}>Clear</Button>
         }
             <span id={this.stateKey+'time'}>{hhmmssms(state.data[this.stateKey+'timeRunning'])}</span>
         </span>

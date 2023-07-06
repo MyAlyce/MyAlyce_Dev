@@ -25,6 +25,7 @@ export class UserMessages extends sComponent {
   handleClose = () => {
     this.show = false; this.setState({});
   };
+  
   handleShow = () => {
     (webrtc.rtc[this.props.streamId] as RTCCallInfo).unreadMessages = 0;
     this.show = true; this.setState({});

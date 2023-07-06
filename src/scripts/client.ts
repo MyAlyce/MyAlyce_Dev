@@ -151,6 +151,7 @@ state.setState({
     loggedInId: undefined, //id of the current user
     viewingId: undefined,  //id of the user currently being viewed
     savedEventOptions:[] as any, //list of event tags saved
+    savedUnits:[] as any,
     demoing:true,
 
     alertsEnabled:true,
@@ -310,6 +311,7 @@ export function backupState(
         'selectedAudioIn',
         'selectedAudioOut',
         'savedEventOptions',
+        'savedUnits',
         'demoing',
         'alertsEnabled'
     ], //back these values up from the state object

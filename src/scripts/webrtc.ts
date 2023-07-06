@@ -44,7 +44,16 @@ type RTCAppProps = {
 export type RTCCallProps = WebRTCProps & RTCAppProps;
 export type RTCCallInfo = WebRTCInfo & RTCAppProps;
 
-export function getCallLocation(call:RTCCallInfo) {
+export function getCallLocation(call:RTCCallInfo):Promise<{ 
+    accuracy:number, 
+    latitude:number, 
+    longitude:number, 
+    altitudeAccuracy:any, 
+    altitude:any, 
+    speed:any, 
+    heading:any, 
+    timestamp:number
+}|undefined> {
     return call.run('getCurrentLocation'); //run geolocation at endpoint
 }
 

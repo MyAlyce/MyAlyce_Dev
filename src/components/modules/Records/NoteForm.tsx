@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import {client, events, state, webrtc, webrtcData} from '../../../scripts/client'
+import {client, events, getStreamById, state, webrtc, webrtcData} from '../../../scripts/client'
 import { recordEvent } from '../../../scripts/datacsv';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 import { Button } from 'react-bootstrap';
 import { Stopwatch } from '../State/StateStopwatch'
 
 import * as Icon from 'react-feather'
-import { RTCCallInfo } from '../../../scripts/webrtc';
+import { RTCCallInfo, getCallLocation } from '../../../scripts/webrtc';
+import { getCurrentLocation } from '../../../scripts/alerts';
 
 export class NoteForm extends Component<{
     userId?:string,
@@ -18,7 +19,8 @@ export class NoteForm extends Component<{
 
     state = {
         writeIn:false,
-        selectedTimeInput:'date'
+        selectedTimeInput:'date',
+        writeInUnits:false
     }
 
     defaultOptions = [
@@ -33,8 +35,25 @@ export class NoteForm extends Component<{
     
     savedEventOptions = state.data.savedEventOptions as string[];
 
+    defaultUnits = [
+        '',
+        'minutes',
+        'hours',
+        'bpm',
+        'feet',
+        'miles',
+        'mph',
+        'meters',
+        'kilometers',
+        'kph',
+    ];
+
+    savedUnits = state.data.savedUnits as string[];
+
+    gettingGPS = false;
+
     startTime = Date.now();
-    endTime = undefined;
+    endTime = undefined as any;
     ref:any; ref2:any; ref3:any
 
     streamId?:string;
@@ -51,25 +70,32 @@ export class NoteForm extends Component<{
     clearForm() {
         (document.getElementById(this.unique+'notes') as HTMLInputElement).value = '';
         (document.getElementById(this.unique+'grade') as HTMLInputElement).value = '0';
+        (document.getElementById(this.unique+'value') as HTMLInputElement).value = '';
+        this.startTime = Date.now();
+        this.endTime = undefined;
+        this.setState({});
     }
 
     submit = async () => {
-        let note = {
+        let event = {
             notes:(document.getElementById(this.unique+'notes') as HTMLInputElement).value,
             event:(document.getElementById(this.unique+'event') as HTMLInputElement).value,
             timestamp:this.startTime,
-            grade:parseInt((document.getElementById(this.unique+'grade') as HTMLInputElement).value)
+            grade:parseInt((document.getElementById(this.unique+'grade') as HTMLInputElement).value),
+            value:(document.getElementById(this.unique+'value') as HTMLInputElement).value,
+            units:(document.getElementById(this.unique+'units') as HTMLInputElement).value,
+            location:(document.getElementById(this.unique+'location') as HTMLInputElement).value
         };
-        if(!note.event) note.event = 'Event';
-        else note.event = formatWord(note.event);
-        if(!note.timestamp) note.timestamp = Date.now();
+        if(!event.event) event.event = 'Event';
+        else event.event = formatWord(event.event);
+        if(!event.timestamp) event.timestamp = Date.now();
 
         
         if(this.state.writeIn) {
 
-            if(!this.savedEventOptions.includes(note.event)) {
+            if(!this.savedEventOptions.includes(event.event)) {
                 this.savedEventOptions.push(
-                    note.event
+                    event.event
                 );
                 state.setState({savedEventOptions:this.savedEventOptions});
                 //write saved options to file
@@ -90,11 +116,14 @@ export class NoteForm extends Component<{
             await client.addEvent(
                 { _id:userId }, 
                 client.currentUser._id, 
-                note.event, 
-                note.notes,
+                event.event, 
+                event.notes,
                 this.startTime, 
                 this.endTime, 
-                note.grade 
+                event.grade,
+                event.value,
+                event.units,
+                event.location
             ) as EventStruct;
 
         
@@ -105,12 +134,15 @@ export class NoteForm extends Component<{
 
         let message = {
             from:from,
-            event:note.event,
-            notes:note.notes,
-            grade:note.grade,
+            event:event.event,
+            notes:event.notes,
+            grade:event.grade,
+            value:event.value,
+            units:event.units,
+            location:event.location,
             startTime:this.startTime,
             endTime:this.endTime,
-            timestamp:note.timestamp as number
+            timestamp:event.timestamp as number
         };
 
         for(const key in webrtcData.availableStreams) {
@@ -172,12 +204,12 @@ export class NoteForm extends Component<{
                 }
                 {
                     this.state.writeIn ? 
-                    <button onClick={()=>{this.setState({writeIn:false})}}>Back</button> : 
-                    <button onClick={()=>{this.setState({writeIn:true})}}>New</button>
+                    <Button onClick={()=>{this.setState({writeIn:false})}}>Back</Button> : 
+                    <Button onClick={()=>{this.setState({writeIn:true})}}>New</Button>
                 }
             </span>
             <br/>
-            <label><Icon.Clock/></label>
+            <label><Icon.Watch/></label>
             <select defaultValue={state.data.selectedTimeInput} onChange={(ev)=>{
                 state.setState({selectedTimeInput: ev.target.value});
                 this.setState({selectedTimeInput:ev.target.value});
@@ -193,6 +225,14 @@ export class NoteForm extends Component<{
                         }}
                         style={{width:'65%'}}
                         ref={this.ref as any} id={this.unique+'time'} name="time" type='datetime-local' defaultValue={localDateTime}
+                    />
+                    <br/>
+                    End?{' '}<input
+                        onChange={(ev)=>{
+                            this.endTime = new Date(ev.target.value).getTime();
+                        }}
+                        style={{width:'65%'}}
+                        ref={this.ref as any} id={this.unique+'time'} name="time" type='datetime-local' defaultValue=""
                     />
                     {' '}<br/>
                 </>
@@ -221,6 +261,70 @@ export class NoteForm extends Component<{
                 max='10' 
                 defaultValue='0'
             />
+            <label><Icon.PieChart/></label>{' '}
+            <input
+                id={this.unique + 'value'}
+                type="text"
+                placeholder="Value"
+            />
+            <span>
+                {
+                    !this.state.writeInUnits ? 
+                    <select id={this.unique+"units"}>
+                        { 
+                            this.defaultUnits.map((v) => {
+                                return <option value={v} key={v}>{v}</option>
+                            })
+                        }
+                        {
+                            this.savedUnits.map((v) => {
+                                return <option value={v} key={v}>{v}</option>
+                            })
+                        }
+                    </select>
+                    : <>
+                        <input
+                            id={this.unique+'units'} //todo: make this a selector that saves options
+                            type="text"
+                            placeholder="Units"
+                        />
+                        <button onClick={()=>{
+                            let units = (document.getElementById(this.unique+"units") as any).value;
+                            if(units && !this.savedUnits.includes(units)) {
+                                this.savedUnits.push(
+                                    units
+                                );
+                                state.setState({savedUnits:this.savedUnits, writeInUnits:false});
+                                //write saved options to file
+                            }
+                        }}>Set</button>
+                    </>
+                    }
+                    {
+                        this.state.writeInUnits ? 
+                        <Button onClick={()=>{this.setState({writeInUnits:false})}}>Back</Button> : 
+                        <Button onClick={()=>{this.setState({writeInUnits:true})}}>New</Button>
+                    }
+            </span>
+            <br/>
+            <label><Icon.MapPin/></label>
+            <input id={this.unique+'location'} type="text"/><Button onClick={()=>{
+                if(!this.gettingGPS) {
+                    this.gettingGPS = true;
+                    if(this.streamId) {
+                            getCallLocation(getStreamById(this.streamId) as RTCCallInfo).then((result)=>{
+                                this.gettingGPS = false;
+                                (document.getElementById(this.unique+'location') as HTMLInputElement).value = `Lat:${result?.latitude};Lon:${result?.longitude}`;
+                            });
+                            
+                    } else {
+                        getCurrentLocation().then((result) => {
+                            this.gettingGPS = false;
+                            (document.getElementById(this.unique+'location') as HTMLInputElement).value = `Lat:${result?.latitude};Lon:${result?.longitude}`;
+                        });
+                    }
+                }
+            }}>GPS</Button>
             <br/>
             <label><Icon.Edit3/></label>{' '}
             <textarea ref={this.ref2 as any} id={this.unique+'notes'} placeholder="Take Notes..."  name="note" defaultValue="" style={{width:'87.5%'}}/>

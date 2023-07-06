@@ -24,7 +24,7 @@
     "dotenv": "^16.0.3",
     "esbuild-sass-plugin": "^2.9.0",
     "graphscript-node": "^0.2.176",
-    "graphscript-services-node": "^0.2.160",
+    "graphscript-services-node": "^0.2.164",
     "http-proxy": "^1.18.1",
     "mongoose": "~7.0.0",
     "node": "^20.2.0"

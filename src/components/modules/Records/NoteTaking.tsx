@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 //import { workers } from "device-decoder";
 
 //import gsworker from '../../../scripts/device.worker'
-import { client, events, state, subscribeToStream, unsubscribeFromStream, webrtc, webrtcData } from '../../../scripts/client';
+import { client, events, getStreamById, state, subscribeToStream, unsubscribeFromStream, webrtc, webrtcData } from '../../../scripts/client';
 
 import Button from 'react-bootstrap/Button';
 import { RTCCallInfo } from '../../../scripts/webrtc';
@@ -10,12 +10,10 @@ import { EventStruct } from 'graphscript-services/struct/datastructures/types';
 //import { WorkerInfo } from 'graphscript';
 import { CardGroup, Table } from 'react-bootstrap';
 //import { Card } from 'react-bootstrap';
-import {  recordEvent } from '../../../scripts/datacsv';
 
 import * as Icon from 'react-feather'
 import { Widget } from '../../widgets/Widget';
-import { toISOLocal } from 'graphscript-services.storage';
-import { Stopwatch } from '../Stopwatch/Stopwatch';
+import { processDataForCSV } from 'graphscript-services.storage';//'../../../../../graphscript/src/extras/index.storage.services'//
 import { NoteForm } from './NoteForm';
 import { defaultSpecifiers, genTimestampFromString } from 'graphscript-services';
 
@@ -64,6 +62,8 @@ export class NoteTaking extends Component<{
     eventLimit = 300;
     eventSkip = 0;
     savedEventOptions = state.data.savedEventOptions as string[];
+
+    filteredEvents = [] as any[];
 
 
     showInput = false;
@@ -117,7 +117,7 @@ export class NoteTaking extends Component<{
         } else {
             latest = await client.getData('event', client.currentUser._id, searchDict, this.eventLimit, this.eventSkip);
         }
-        
+
         if(latest?.length > 0) {
             let noteRows = [] as any[];
             latest.forEach((event:EventStruct,i) => {
@@ -133,7 +133,7 @@ export class NoteTaking extends Component<{
                 }
                 
                 noteRows.push({
-                    event:event.event,
+                    event:event,
                     timestamp:event.timestamp,
                     html:(
                         <tr key={event.timestamp}>
@@ -160,7 +160,49 @@ export class NoteTaking extends Component<{
             <Widget 
                 style={{ width: '40rem' }}
                 header={( <>
-                    <b>History</b>
+                    <b>History</b>&nbsp;
+                    <Button onClick={()=>{
+                        let name;
+                        if(this.streamId) {
+                            let call = getStreamById(this.streamId) as RTCCallInfo;
+                            name = call.firstName + call.lastName;
+                        } else {
+                            name = client.currentUser.firstName + client.currentUser.lastName;
+                        }
+                        let csvdata = {
+                            filename:'Events'+'_'+name,
+                            save:true,
+                            header:[
+                                'timestamp', 'event', 'notes', 'grade', 'value', 'units', 'location', 'startTime', 'endTime'
+                            ],
+                            data:{
+                                timestamp:[],
+                                event:[],
+                                notes:[],
+                                grade:[],
+                                value:[],
+                                units:[],
+                                location:[],
+                                startTime:[],
+                                endTime:[]
+                            }
+                        } as any;
+
+                        for(const ev of this.filteredEvents) {
+                            csvdata.data.timestamp.push(ev.timestamp !== undefined ? ev.timestamp : "");
+                            csvdata.data.event.push(ev.event ? ev.event : "");
+                            csvdata.data.notes.push(ev.notes ? ev.notes : "");
+                            csvdata.data.grade.push(ev.grade !== undefined ? ev.grade : "");
+                            csvdata.data.value.push(ev.value !== undefined ? ev.value : "");
+                            csvdata.data.units.push(ev.units ? ev.units : "");
+                            csvdata.data.location.push(ev.location ? ev.location : "");
+                            csvdata.data.startTime.push(ev.startTime !== undefined ? ev.startTime : "");
+                            csvdata.data.endTime.push(ev.endTime !== undefined ? ev.endTime : "");
+                        }
+
+                        processDataForCSV(csvdata);
+
+                    }}>Download CSV</Button>
                     <span style={{float:'right'}}>
                         From:{' '}<select defaultValue={defaultSpecifiers.indexOf(this.time0 as any)} onChange={(ev)=>{
                             let time0 = document.getElementById(this.unique+'time0') as any;
@@ -218,13 +260,18 @@ export class NoteTaking extends Component<{
                                     >➕</Button>
                                 </th>}
                             </tr>
-                            {this.state.noteRows.map((v) => {
+                            { this.state.noteRows.map((v, i) => {
+                                if(i === 0) this.filteredEvents.length = 0;
                                 if(!v) return null;
                                 if(this.state.selectedEvent) {
                                     if(this.state.selectedEvent == 0 || v.event.toLowerCase() === this.state.selectedEvent?.toLowerCase()) {
+                                        this.filteredEvents.push(v.event);
                                         return v.html;
                                     }
-                                } else return v.html;
+                                } else {
+                                    this.filteredEvents.push(v.event);
+                                    return v.html;
+                                }
                             })}
                         </tbody>
                     </Table>

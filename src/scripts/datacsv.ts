@@ -50,7 +50,7 @@ export const recordEvent = (from, event, streamId?) => {
             csvworkers[name].run('createCSV', [
                 `${from}/Events_${from}.csv`,
                 [
-                    'timestamp','from', 'event', 'notes', 'grade', 'startTime', 'endTime'
+                    'timestamp','from', 'event', 'notes', 'grade', 'value', 'units', 'location', 'startTime', 'endTime'
                 ]
             ]);
         }

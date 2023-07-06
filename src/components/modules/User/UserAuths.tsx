@@ -179,7 +179,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
         //my requests
         let authRequests = await client.getData('authRequest', undefined, {requesting: client.currentUser._id});
-        console.log('auth requests', authRequests);
+        //console.log('auth requests', authRequests);
         if(authRequests) await Promise.all(authRequests.map(async (req:{
             requesting:string, //them
             receiving:string //me
