@@ -11,6 +11,8 @@
 
 - Dumb everything down as much as possible. Give summaries, e.g. sleep. Event + data recording made much simpler.
 
+- Electron with desktop bluetooth.
+
 
 - Intermittent rewards for events? 
  - - Every time you enter data you get a point. Points based on types of events.
