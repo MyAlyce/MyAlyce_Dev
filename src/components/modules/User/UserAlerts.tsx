@@ -32,23 +32,23 @@ export class UserAlerts extends sComponent {
   componentDidMount = () => {
     if(this.streamId && this.props.streamId) this.streamId = this.props.streamId;
     if(!this.props.hideModal) {
-      if(this.props.useActiveStream) {
-        this.__subscribeComponent(
-          'activeStream', 
-          (streamId) => {
-            console.log('new active stream', streamId, this);
-            this.__unsubscribeComponent(this.streamId ? this.streamId+'alert' : 'alert');
-            this.streamId = streamId;
-            this.__subscribeComponent(
-              this.streamId ? this.streamId+'alert' : 'alert', 
-              (v) => {
-                console.log('alert received by modal for',this.streamId);
-                this.handleShow();
-              }
-            );
-          }
-        );
-      } else {
+      // if(this.props.useActiveStream) {
+      //   this.__subscribeComponent(
+      //     'activeStream', 
+      //     (streamId) => {
+      //       console.log('new active stream', streamId, this);
+      //       this.__unsubscribeComponent(this.streamId ? this.streamId+'alert' : 'alert');
+      //       this.streamId = streamId;
+      //       this.__subscribeComponent(
+      //         this.streamId ? this.streamId+'alert' : 'alert', 
+      //         (v) => {
+      //           console.log('alert received by modal for',this.streamId);
+      //           this.handleShow();
+      //         }
+      //       );
+      //     }
+      //   );
+      // } else {
         this.__subscribeComponent(
           this.streamId ? this.streamId+'alert' : 'alert', 
           (value) => {
@@ -56,7 +56,7 @@ export class UserAlerts extends sComponent {
             this.handleShow();
           }
         );
-      }
+      //}
     }
   }
 
