@@ -237,7 +237,7 @@ export class NoteTaking extends Component<{
                         }} id={this.unique+'time1'}>{
                             [...defaultSpecifiers].map((v,i) => {
                                 if(i !== defaultSpecifiers.length-1) 
-                                    return <option value={i} key={v}>{v}</option> 
+                                    return <option value={i} key={v}>{v == 'now' ? v : `last ${v}`}</option> 
                                 else return null;
                             })
                         }</select>
@@ -247,7 +247,7 @@ export class NoteTaking extends Component<{
                             <option value={0}>All</option>
                         {
                             this.savedEventOptions.map((v) => {
-                                return <option value={v} key={v}>{v == 'now' ? v : `last ${v}`}</option>
+                                return <option value={v} key={v}>{v}</option>
                             })
                         }
                         </select>
