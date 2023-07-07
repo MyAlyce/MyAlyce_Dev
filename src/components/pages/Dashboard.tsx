@@ -9,6 +9,8 @@ import { RecordBar } from '../modules/Records/RecordBar'
 import { CardGroup } from 'react-bootstrap'
 import { RTCCallInfo, getCallLocation } from '../../scripts/webrtc'
 import { RTCAudio, RTCVideo } from '../modules/WebRTC/WebRTCStream'
+import { getCurrentLocation } from '../../scripts/alerts'
+import { PopupModal } from '../modules/Modal/Modal'
 
 export class Dashboard extends sComponent {
 
@@ -18,6 +20,8 @@ export class Dashboard extends sComponent {
         availableStreams:{}, //we can handle multiple connections too
         viewVitals:false
     }
+
+    selectedCoords?:any;
 
     componentDidMount(): void {
         if(this.state.activeStream) {
@@ -41,6 +45,15 @@ export class Dashboard extends sComponent {
         console.log('dashboard rendered', this.state.activeStream);
         return (
             <div className="main-content d-flex flex-column" style={{gap: '10px'}}>
+                { this.selectedCoords && <PopupModal
+                    defaultShow={true}
+                    body={
+                        <iframe width="100%" height="500px" style={{border:0}} loading="lazy" allowFullScreen={true}
+                            src={`https://www.google.com/maps/embed/v1/place?q=${this.selectedCoords}&key=AIzaSyDxBHuENbHVlbSj_v0ezWSqIw3JsxAsprc`}></iframe>
+                    }
+                    onClose={()=>{this.setState({selectedCoords:undefined})}}
+                />
+                }
                 {/* Widgets */}
                 <Widget 
                     title = {
@@ -49,9 +62,19 @@ export class Dashboard extends sComponent {
                             useActiveStream={true}
                             pinOnClick={call ? () => {
                                 getCallLocation(call as RTCCallInfo).then((res)=>{
-                                    alert("Callee Location: "+JSON.stringify(res));
+                                    if(res?.latitude) {
+                                        this.selectedCoords = `${res?.latitude},${res?.longitude}`
+                                        this.setState({});
+                                    }
                                 });
-                            } : undefined}
+                            } : () => {
+                                getCurrentLocation().then((res) => {
+                                    if(res?.latitude) {
+                                        this.selectedCoords = `${res?.latitude},${res?.longitude}`
+                                        this.setState({});
+                                    }
+                                });
+                            }}
                             vitalsOnClick={() => {
                                 this.setState({viewVitals:!this.state.viewVitals})
                             }}

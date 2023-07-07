@@ -25,7 +25,7 @@ export let getCurrentLocation = (options:PositionOptions={enableHighAccuracy:tru
                 res({ 
                     accuracy:position.coords.accuracy, 
                     latitude:position.coords.latitude, 
-                    longitude:position.coords.latitude, 
+                    longitude:position.coords.longitude, 
                     altitudeAccuracy:position.coords.altitudeAccuracy, 
                     altitude:position.coords.altitude, 
                     speed:position.coords.speed, 

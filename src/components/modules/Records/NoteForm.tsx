@@ -247,20 +247,6 @@ export class NoteForm extends Component<{
                 />
             }
             <br/>
-            <label><Icon.TrendingUp/></label>{' '}
-            <input 
-                onInput={updateInputColor}
-                onChange={updateInputColor}
-                style={{width:'12%'}}
-                className="number-input" 
-                ref={this.ref3 as any} 
-                id={this.unique+'grade'} 
-                name="grade" 
-                type='number' 
-                min='0' 
-                max='10' 
-                defaultValue='0'
-            />
             <label><Icon.PieChart/></label>{' '}
             <input
                 id={this.unique + 'value'}
@@ -288,7 +274,7 @@ export class NoteForm extends Component<{
                             type="text"
                             placeholder="Units"
                         />
-                        <button onClick={()=>{
+                        <Button onClick={()=>{
                             let units = (document.getElementById(this.unique+"units") as any).value;
                             if(units && !this.savedUnits.includes(units)) {
                                 this.savedUnits.push(
@@ -297,7 +283,7 @@ export class NoteForm extends Component<{
                                 state.setState({savedUnits:this.savedUnits, writeInUnits:false});
                                 //write saved options to file
                             }
-                        }}>Set</button>
+                        }}>Set</Button>
                     </>
                     }
                     {
@@ -305,7 +291,21 @@ export class NoteForm extends Component<{
                         <Button onClick={()=>{this.setState({writeInUnits:false})}}>Back</Button> : 
                         <Button onClick={()=>{this.setState({writeInUnits:true})}}>New</Button>
                     }
-            </span>
+            </span>&nbsp;
+            <label><Icon.TrendingUp/></label>{' '}
+            <input 
+                onInput={updateInputColor}
+                onChange={updateInputColor}
+                style={{width:'12%'}}
+                className="number-input" 
+                ref={this.ref3 as any} 
+                id={this.unique+'grade'} 
+                name="grade" 
+                type='number' 
+                min='0' 
+                max='10' 
+                defaultValue='0'
+            />
             <br/>
             <label><Icon.MapPin/></label>
             <input id={this.unique+'location'} type="text"/><Button onClick={()=>{
@@ -328,7 +328,7 @@ export class NoteForm extends Component<{
             <br/>
             <label><Icon.Edit3/></label>{' '}
             <textarea ref={this.ref2 as any} id={this.unique+'notes'} placeholder="Take Notes..."  name="note" defaultValue="" style={{width:'87.5%'}}/>
-            <Button onClick={this.submit}>Submit</Button>
+            <Button style={{float:'right'}} onClick={this.submit}>Submit</Button>
             </>
 
         )

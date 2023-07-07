@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 //import { workers } from "device-decoder";
 
 //import gsworker from '../../../scripts/device.worker'
-import { client, events, getStreamById, state, subscribeToStream, unsubscribeFromStream, webrtc, webrtcData } from '../../../scripts/client';
+import { client, getStreamById, state, subscribeToStream, unsubscribeFromStream, webrtc } from '../../../scripts/client';
 
 import Button from 'react-bootstrap/Button';
 import { RTCCallInfo } from '../../../scripts/webrtc';
@@ -16,6 +16,8 @@ import { Widget } from '../../widgets/Widget';
 import { processDataForCSV } from 'graphscript-services.storage';//'../../../../../graphscript/src/extras/index.storage.services'//
 import { NoteForm } from './NoteForm';
 import { defaultSpecifiers, genTimestampFromString } from 'graphscript-services';
+import { StateModal } from '../State/StateModal';
+import { PopupModal } from '../Modal/Modal';
 
 function getColorGradientRG(value) {
     let r, g, b;
@@ -45,7 +47,8 @@ export class NoteTaking extends Component<{
     state = {
         noteRows:[] as any[],
         selectedTimeInput:'date',
-        selectedEvent:undefined as any
+        selectedEvent:undefined as any,
+        selectedCoords:undefined,
     }
 
     unique=`form${Math.floor(Math.random()*1000000000000000)}`;
@@ -141,6 +144,13 @@ export class NoteTaking extends Component<{
                             <td width="15%">{event.event}</td>
                             <td width="35%">{event.notes}</td>
                             <td>{event.endTime ? (getHoursAndMinutes((event as any).endTime - (event as any).startTime)) : undefined}</td>
+                            <td style={{whiteSpace:'nowrap'}}>{event.value}{' '}{event.units}</td>
+                            <td>{event.location ? <Icon.MapPin style={{cursor:'pointer'}} onClick={()=>{ 
+                                let location = event.location.split(';');
+                                let lat = location[0].split(':')[1];
+                                let lon = location[1].split(':')[1];
+                                this.setState({selectedCoords:`${lat},${lon}`});
+                            }}/> : null}</td> 
                             <td style={{backgroundColor:getColorGradientRG(parseInt(event.grade as string))}}>{event.grade}</td> 
                             <td><button onClick={onclick}>❌</button></td>
                         </tr>
@@ -244,37 +254,53 @@ export class NoteTaking extends Component<{
                     </span>
                 </>)}
                 content={
-                    <Table striped bordered hover style={{maxHeight:'600px'}}>
-                        <tbody>
-                            <tr>
-                                <th><Icon.Clock/></th>
-                                <th>Event</th>
-                                <th>Notes</th>
-                                <th>Duration?</th>
-                                <th><Icon.TrendingUp/></th>
-                                {!this.showInput && <th>
-                                    <Button variant={'success'} 
-                                        onClick={()=>{ 
-                                            state.setState({[this.streamId ? this.streamId+'notemodal' : 'notemodal']:true}) 
-                                        }}
-                                    >➕</Button>
-                                </th>}
-                            </tr>
-                            { this.state.noteRows.map((v, i) => {
-                                if(i === 0) this.filteredEvents.length = 0;
-                                if(!v) return null;
-                                if(this.state.selectedEvent) {
-                                    if(this.state.selectedEvent == 0 || v.event.toLowerCase() === this.state.selectedEvent?.toLowerCase()) {
+                    <>  
+                        { this.state.selectedCoords && 
+                            <PopupModal
+                                defaultShow={true}
+                                body={
+                                <>
+                                    <iframe width="100%" height="500px" style={{border:0}} loading="lazy" allowFullScreen={true}
+                                        src={`https://www.google.com/maps/embed/v1/place?q=${this.state.selectedCoords}&key=AIzaSyDxBHuENbHVlbSj_v0ezWSqIw3JsxAsprc`}></iframe>
+                                </>
+                                }
+                                onClose={()=>{this.setState({selectedCoords:undefined})}}
+                            />
+                        }
+                        <Table striped bordered hover style={{maxHeight:'600px'}}>
+                            <tbody>
+                                <tr>
+                                    <th><Icon.Clock/></th>
+                                    <th>Event</th>
+                                    <th>Notes</th>
+                                    <th>Duration?</th>
+                                    <th><Icon.BarChart/></th>
+                                    <th><Icon.MapPin/></th>
+                                    <th><Icon.TrendingUp/></th>
+                                    {!this.showInput && <th>
+                                        <Button variant={'success'} 
+                                            onClick={()=>{ 
+                                                state.setState({[this.streamId ? this.streamId+'notemodal' : 'notemodal']:true}) 
+                                            }}
+                                        >➕</Button>
+                                    </th>}
+                                </tr>
+                                { this.state.noteRows.map((v, i) => {
+                                    if(i === 0) this.filteredEvents.length = 0;
+                                    if(!v) return null;
+                                    if(this.state.selectedEvent) {
+                                        if(this.state.selectedEvent == 0 || v.event.toLowerCase() === this.state.selectedEvent?.toLowerCase()) {
+                                            this.filteredEvents.push(v.event);
+                                            return v.html;
+                                        }
+                                    } else {
                                         this.filteredEvents.push(v.event);
                                         return v.html;
                                     }
-                                } else {
-                                    this.filteredEvents.push(v.event);
-                                    return v.html;
-                                }
-                            })}
-                        </tbody>
-                    </Table>
+                                })}
+                            </tbody>
+                        </Table>
+                    </>
                 }
             />
         )
@@ -352,14 +378,16 @@ export class NoteTaking extends Component<{
 
 
 
+function getHoursAndMinutes(milliseconds) {
+    // Create a new Date object using the provided milliseconds
+    let date = new Date(milliseconds);
 
-function getHoursAndMinutes(date) {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
+    let hours = date.getUTCHours(); // Use getUTCHours to get hours in UTC
+    let minutes = date.getUTCMinutes(); // Use getUTCMinutes to get minutes in UTC
 
     // Convert the hours and minutes to two digits
-    hours = hours < 10 ? '0' + hours : hours;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
+    hours = hours < 10 ? '0' + hours : hours as any;
+    minutes = minutes < 10 ? '0' + minutes : minutes as any;
 
     return `${hours}:${minutes}`;
 }
