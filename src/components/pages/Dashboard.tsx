@@ -59,7 +59,7 @@ export class Dashboard extends sComponent {
                     title = {
                         <UserBar 
                             streamId={this.state.activeStream}
-                            useActiveStream={true}
+                            //useActiveStream={true}
                             pinOnClick={call ? () => {
                                 getCallLocation(call as RTCCallInfo).then((res)=>{
                                     if(res?.latitude) {
