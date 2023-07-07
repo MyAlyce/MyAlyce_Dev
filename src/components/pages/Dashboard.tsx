@@ -51,7 +51,7 @@ export class Dashboard extends sComponent {
                         <iframe width="100%" height="500px" style={{border:0}} loading="lazy" allowFullScreen={true}
                             src={`https://www.google.com/maps/embed/v1/place?q=${this.selectedCoords}&key=AIzaSyDxBHuENbHVlbSj_v0ezWSqIw3JsxAsprc`}></iframe>
                     }
-                    onClose={()=>{this.setState({selectedCoords:undefined})}}
+                    onClose={()=>{this.selectedCoords = null; this.setState({})}}
                 />
                 }
                 {/* Widgets */}

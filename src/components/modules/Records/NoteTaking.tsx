@@ -16,7 +16,6 @@ import { Widget } from '../../widgets/Widget';
 import { processDataForCSV } from 'graphscript-services.storage';//'../../../../../graphscript/src/extras/index.storage.services'//
 import { NoteForm } from './NoteForm';
 import { defaultSpecifiers, genTimestampFromString } from 'graphscript-services';
-import { StateModal } from '../State/StateModal';
 import { PopupModal } from '../Modal/Modal';
 
 function getColorGradientRG(value) {

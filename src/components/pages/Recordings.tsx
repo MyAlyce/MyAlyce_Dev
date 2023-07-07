@@ -35,7 +35,9 @@ export class Recordings extends sComponent {
                 <NoteTaking 
                     streamId={ this.state.activeStream } 
                     filename={ this.state.activeStream ? this.state.activeStream+'.csv' : 'Notes.csv' } 
-                    dir={ dir }/>
+                    dir={ dir }
+                    
+                />
                 <RecordBar
                     streamId={ this.state.activeStream }
                     dir = { dir }
