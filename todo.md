@@ -42,9 +42,7 @@
 
 ### Scripting/Events/State
 
-- finish file saving subscriptions with local/stream recording. Get google drive working somehow
-- readd notifications, friends lists, etc.
-- make the local recordings more secure per-user
+
 
 
 ### RTC
@@ -55,10 +53,9 @@
 
 ### Backend
 
-- Security, test access token system, more permissions
+- More permissions, check that security meets standards now (https, mongo, cloudflare, access tokens, random Ids)
 - plain email/password storage? i.e. not just google reliance, see about microsoft accounts and other
-- more querying macros, e.g. for time ranges and so on,
-- clearing out all user data by ID
+- clearing out all user data by ID to delete accounts
 
 ## Data
 
