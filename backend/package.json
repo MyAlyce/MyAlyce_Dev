@@ -22,11 +22,11 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "esbuild-sass-plugin": "^2.9.0",
+    "esbuild-sass-plugin": "^2.10.0",
     "graphscript-node": "^0.2.176",
-    "graphscript-services-node": "^0.2.164",
+    "graphscript-services-node": "^0.2.166",
     "http-proxy": "^1.18.1",
-    "mongoose": "~7.0.0",
+    "mongoose": "~7.4.1",
     "node": "^20.2.0"
   },
   "nodemonConfig": {
