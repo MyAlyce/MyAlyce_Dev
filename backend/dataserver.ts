@@ -20,6 +20,7 @@ import settings from './serverconfig'
 import {config} from 'dotenv'
 import fs from 'fs'
 
+
 if(fs.existsSync('.env'))
     config(); //load the .env file
 

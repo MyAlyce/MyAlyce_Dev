@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { client } from '../../scripts/client';
+import { client, logoutSequence } from '../../scripts/client';
 import { authorizeRedirect } from '../../scripts/fitbit';
 import { sComponent } from '../state.component';
 import { UserAuths } from '../modules/User/UserAuths';
@@ -19,6 +19,12 @@ export class SettingsView extends sComponent  {
 
     }
 
+    deleteUser() {
+        client.deleteUser(client.currentUser._id, true, () => {
+            logoutSequence();
+        });
+    }
+
     render() {
 
         const data = client.currentUser
@@ -30,10 +36,10 @@ export class SettingsView extends sComponent  {
         }
 
         return (
-        <div className='container-fluid settings'>
-                <h1>Settings</h1>
-                <UserAuths/>
-        </div>
+            <div className='container-fluid settings'>
+                    <h1>Settings</h1>
+                    <UserAuths/>
+            </div>
         );
     }
 }
