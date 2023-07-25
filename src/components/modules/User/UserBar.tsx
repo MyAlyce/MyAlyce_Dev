@@ -43,7 +43,7 @@ export function UserBar(props:{
   }
   if(!name) name = props.streamId ? props.streamId : 'Me';
 
-  console.log('rendering UserBar for',props.streamId);
+  //console.log('rendering UserBar for',props.streamId);
 
   return (
     <Row className="grey-bar">

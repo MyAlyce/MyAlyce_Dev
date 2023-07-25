@@ -19,7 +19,7 @@ export class SettingsView extends sComponent  {
 
     }
 
-    deleteUser() {
+    deleteCurrentUser() {
         client.deleteUser(client.currentUser._id, true, () => {
             logoutSequence();
         });

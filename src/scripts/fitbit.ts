@@ -1,6 +1,6 @@
 import { FitbitApi } from '@giveback007/fitbit-api';
 import { ProfileStruct } from 'graphscript-services/dist/src/extras/struct/datastructures/types';
-import { usersocket, client } from './client'
+import { DataServerSocket, client } from './client'
 //REST authorizations to get the refresh token
 //opens the fitbit authorization portal to authorize our app for this client. We then can get the refresh token 
 export function setupFitbitApi(accesstoken:string, fitbitId:string, syncRate:number=5*60*1000, parentUser?:Partial<ProfileStruct>) {
@@ -76,7 +76,7 @@ export async function authorizeCode(userId:string, fitbitCode: string) {
 
     if(!userId || !fitbitCode) return undefined;
 
-    let res = (await usersocket.run('authorizeFitbit', [userId, fitbitCode]));  
+    let res = (await DataServerSocket.info.run('authorizeFitbit', [userId, fitbitCode]));  
     
     console.log(res);
 
@@ -89,7 +89,7 @@ export async function refreshToken(userId:string) {
 
     if(!userId) return undefined;
 
-    let res = (await usersocket.run('refreshFitbit', userId));
+    let res = (await DataServerSocket.info.run('refreshFitbit', userId));
 
     if(res && !res.errors && !res.html) client.baseServerCallback(res);
 
@@ -100,7 +100,7 @@ export async function revokeAuth(userId:string) {
 
     if(!userId) return undefined;
 
-    let res = (await usersocket.run('revokeFitbit', userId));
+    let res = (await DataServerSocket.info.run('revokeFitbit', userId));
 
     if(res && !res.errors && !res.html) client.baseServerCallback(res);
 
@@ -111,6 +111,6 @@ export async function checkToken(userId:string) {
 
     if(!userId) return undefined;
 
-    return (await usersocket.run('checkFitbitToken', userId)); 
+    return (await DataServerSocket.info.run('checkFitbitToken', userId)); 
 }
 

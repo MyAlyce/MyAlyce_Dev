@@ -1,7 +1,7 @@
 import './scripts/hacktimer/HackTimer.min' //Prevent setTimeout loops from hanging in browser
 
 import { ProfileStruct } from "graphscript-services/dist/src/extras/struct/datastructures/types";
-import { graph, onLogin, setupTestUser, usersocket, state } from "./scripts/client";
+import { graph, onLogin, setupTestUser, DataServerSocket, state } from "./scripts/client";
 import { authorizeCode, refreshToken, setupFitbitApi } from "./scripts/fitbit";
 import { login } from "./scripts/login";
 
@@ -67,7 +67,7 @@ const init = async () => {
 
   state.setState({fetchingLogin:true});
 
-  await connectionHasId(usersocket,3000);
+  if(DataServerSocket.info) await connectionHasId(DataServerSocket.info,3000);
   let promise;
   //spaghetti tests
   if(TESTUSER) {

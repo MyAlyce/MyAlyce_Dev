@@ -65,7 +65,7 @@ export class UserAlerts extends sComponent {
       this.__unsubscribeComponent(
         this.streamId ? this.streamId+'alert' : 'alert'
       );
-      console.log('unmounting', this.streamId);
+      //console.log('unmounting', this.streamId);
       if(this.props.useActiveStream) {
         this.__unsubscribeComponent('activeStream');
       }
@@ -83,7 +83,7 @@ export class UserAlerts extends sComponent {
 
     //console.log(result.alerts);
 
-    if(!this.props.hideModal) console.log('rendering', this.streamId);
+    //if(!this.props.hideModal) console.log('rendering', this.streamId);
 
     return (
         <>

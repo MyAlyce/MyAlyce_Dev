@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { client, defaultProfilePic, usersocket, webrtc, webrtcData } from '../../../scripts/client';
+import { client, defaultProfilePic, DataServerSocket, webrtc, webrtcData } from '../../../scripts/client';
 import Button from 'react-bootstrap/Button';
 import { AuthorizationStruct } from 'graphscript-services/struct/datastructures/types';
 import { UserSearch } from './UserSearch';
@@ -102,7 +102,7 @@ export class UserAuths extends Component<{[key:string]:any}> {
 
         let info = await client.getUsers(userIds, true); //get profile pics and stuff
 
-        let onlineUsers = await usersocket.run('usersAreOnline',[userIds]);
+        let onlineUsers = await DataServerSocket.info.run('usersAreOnline',[userIds]);
 
         auths?.sort((a, b) => {
             if (a.status === 'OKAY' && b.status !== 'OKAY') {

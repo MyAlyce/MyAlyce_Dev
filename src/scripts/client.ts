@@ -63,7 +63,7 @@ export function getAvailableConnections() {
 state.setState(webrtcData);
 
 
-export let usersocket:WebSocketInfo;
+export let DataServerSocket:{info:WebSocketInfo} = {info:undefined as any};
 
 export {state}; //
 
@@ -168,17 +168,17 @@ state.setState({
 });
 
 let makeSocket = () => {
-    usersocket = sockets.open({
+    DataServerSocket.info = sockets.open({
         protocol:config.protocol === 'https' ? 'wss' : 'ws',
         host:config.socket_protocol === 'wss' ? config.domain : config.host,
         port:config.socket_protocol === 'wss' ? undefined as any : config.dataserverport,
         path:'wss',
         onopen:() => {
-            console.log('port opened!')
+            console.log('port opened!');
         }
-    });
+    }); 
     
-    usersocket.socket.addEventListener('message', (ev) => {
+    DataServerSocket.info.socket.addEventListener('message', (ev) => {
         let data = ev.data;
         
         //debug
@@ -225,11 +225,11 @@ export const onLogin = async (
             state.setState({ loggingIn:true });
 
             client.currentUser = {
-                ...usersocket,
+                ...DataServerSocket.info,
                 _id:profile._id
             } as any;
 
-            await usersocket.run('addUser', [profile, {[usersocket._id as string]:usersocket._id }]);  //associate user id with connection (needs to be unique)
+            await DataServerSocket.info?.run('addUser', [profile, {[DataServerSocket.info._id as string]:DataServerSocket.info._id }]);  //associate user id with connection (needs to be unique)
             p = client.setupUser(profile); //see struct router (formerly UserPlatform)
         }
     }
@@ -276,15 +276,21 @@ export const onLogout = (
     result:{ type: 'FAIL'|'LOGOUT', data?:{err:Error}}
 ) => {
 
-    usersocket.terminate();
-    makeSocket(); //this just lets the backend know this connection is no longer associated with the previous user
+    DataServerSocket.info.onclose = () =>{ 
+            
+        makeSocket(); //this just lets the backend know this connection is no longer associated with the previous user
 
-    state.setState({
-        isLoggedIn: false,
-        loggingIn: false,
-        loggedInId: undefined,
-        viewingId: undefined
-    });
+        state.setState({
+            isLoggedIn: false,
+            loggingIn: false,
+            loggedInId: undefined,
+            viewingId: undefined
+        });
+    }
+
+    DataServerSocket.info?.terminate();
+    DataServerSocket.info = null as any;
+
 }
 
 export const logoutSequence = () => {
@@ -449,8 +455,8 @@ export async function setupTestUser():Promise<Partial<ProfileStruct> | undefined
     return await new Promise( async (res) => {
         //setTimeout(async() => {
         //
-            console.log(usersocket._id);
-            let ping = await usersocket.run('ping');
+            console.log(DataServerSocket.info?._id);
+            let ping = await DataServerSocket.info?.run('ping');
             console.log("Ping Result: ", ping);
 
             res(testuser);

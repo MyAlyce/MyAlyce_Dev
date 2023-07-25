@@ -2,7 +2,7 @@ import React from 'react';
 import { sComponent } from '../state.component';
 
 
-import { client, graph, usersocket, state, webrtc } from "../../scripts/client";
+import { client, graph, DataServerSocket, state, webrtc } from "../../scripts/client";
 
 
 import {AuthorizationStruct, ProfileStruct} from 'graphscript-services/struct/datastructures/types'
@@ -80,7 +80,7 @@ export class WebRTCComponent extends sComponent {
             }
         });
 
-        let userIds = await usersocket.run('getAllOnlineUsers', [pushed]);
+        let userIds = await DataServerSocket.info.run('getAllOnlineUsers', [pushed]);
 
         userIds.push(client.currentUser._id);
 

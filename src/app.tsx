@@ -33,6 +33,7 @@ import { PopupModal } from './components/modules/Modal/Modal';
 import { Privacy } from './components/modules/Privacy';
 import { NoteModal } from './components/modules/Records/NoteModal';
 import { AlertModal } from './components/modules/User/AlertModal';
+import { DeleteUser } from './components/modules/User/DeleteUser';
 
 let googleLogo = './assets/google.png';
 let myalyceLogo = './assets/myalyce.png';
@@ -209,7 +210,6 @@ export class App extends sComponent {
                                             
                                         })}
                                         
-
                                         {/** Page URLS. this is a single page app structure so the whole app is in one file compiled and served on the root */}
                                         { (this.state.route.includes('dashboard') || this.state.route === '/' || this.state.route === '') &&
                                             <Dashboard/>
@@ -269,13 +269,14 @@ export class App extends sComponent {
                                             </div>),
                                             (<span key={3}><Button onClick={()=>{ throwAlert({message:"This is an Alert", value:undefined, timestamp:Date.now()}) }}>Test Alert</Button></span>),
                                             (<span key={3.5}>
-                                                <Button variant={this.state.alertsEnabled ? 'primary' : 'dark'} onClick={()=>{ toggleAlertNotifications(); }}>Alert Notifications {`(${this.state.alertsEnabled ? 'On' : 'Off'})`}</Button>
-                                                <Button variant={this.state.useHRAlert ? 'primary' : 'dark'} onClick={()=>{ toggleHRAlert(); }}>Heart Rate Alerts {`(${this.state.useHRAlert ? 'On' : 'Off'})`}</Button>
+                                                <Button variant={this.state.alertsEnabled  ? 'primary' : 'dark'} onClick={()=>{ toggleAlertNotifications(); }}>Alert Notifications {`(${this.state.alertsEnabled ? 'On' : 'Off'})`}</Button>
+                                                <Button variant={this.state.useHRAlert     ? 'primary' : 'dark'} onClick={()=>{ toggleHRAlert(); }}>Heart Rate Alerts {`(${this.state.useHRAlert ? 'On' : 'Off'})`}</Button>
                                                 <Button variant={this.state.useBreathAlert ? 'primary' : 'dark'} onClick={()=>{ toggleBreathAlert(); }}>Breathing Alerts {`(${this.state.useBreathAlert ? 'On' : 'Off'})`}</Button>
-                                                <Button variant={this.state.useFallAlert ? 'primary' : 'dark'} onClick={()=>{ toggleFallAlert(); }}>Fall Alerts {`(${this.state.useFallAlert ? 'On' : 'Off'})`}</Button>
+                                                <Button variant={this.state.useFallAlert   ? 'primary' : 'dark'} onClick={()=>{ toggleFallAlert(); }}>Fall Alerts {`(${this.state.useFallAlert ? 'On' : 'Off'})`}</Button>
                                             </span>),
                                             (<span key={4}><MediaDeviceOptions/></span>),
                                             (<span key={5}>{ this.state.activeStream && <><ViewSelfVideoStream streamId={this.state.activeStream}/> { webrtcData.availableStreams[this.state.activeStream].audioStream && <RTCAudio /> } </> }</span>),
+                                            (<span key={6}> <DeleteUser/> </span>)
                                         ]}
                                     </div>]
                                 }

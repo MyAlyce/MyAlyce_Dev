@@ -1,5 +1,5 @@
 
-import { client, graph, usersocket, state, webrtc, getStreamById, newCalls } from "./client"
+import { client, graph, DataServerSocket, state, webrtc, getStreamById, newCalls } from "./client"
 import { recordChat, recordEvent } from "./datacsv";
 
 import { onAlert, setupAlerts } from "./alerts";
@@ -158,7 +158,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
         onicecandidate:async (ev) => {
             if(ev.candidate) { //we need to pass our candidates to the other endpoint, then they need to accept the call and return their ice candidates
                 let cid = `candidate${Math.floor(Math.random()*1000000000000000)}`;
-                usersocket.run(
+                DataServerSocket.info.run(
                     'runConnection', //run this function on the backend router
                     [
                         userId, //run this connection 
@@ -204,7 +204,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
     
             //console.log('negotiating');
 
-            usersocket.run(
+            DataServerSocket.info.run(
                 'runConnection', //run this function on the backend router
                 [
                     (webrtc.rtc[rtcId] as RTCCallInfo).caller, //run this connection 
@@ -260,7 +260,7 @@ export async function startCall(userId) {
         ...genCallSettings(userId,rtcId)
     });
 
-    usersocket.post(
+    DataServerSocket.info.post(
         'runConnection', //run this function on the backend router
         [
             userId, //run this connection 
@@ -271,7 +271,7 @@ export async function startCall(userId) {
                     _id:rtcId, 
                     description:encodeURIComponent(JSON.stringify(call.rtc.localDescription)), //the peer needs to accept this
                     caller:client.currentUser._id,
-                    socketId:usersocket._id,
+                    socketId:DataServerSocket.info._id,
                     firstName:client.currentUser.firstName,
                     lastName:client.currentUser.lastName,
                     pictureUrl:client.currentUser.pictureUrl
@@ -294,7 +294,7 @@ export let answerCall = async (call:RTCCallProps) => {
 
     let rtc = await webrtc.answerCall(call as any);
 
-    usersocket.run(
+    DataServerSocket.info.run(
         'runConnection', //run this function on the backend router
         [
             client.currentUser._id, //run this connection 
@@ -306,7 +306,7 @@ export let answerCall = async (call:RTCCallProps) => {
         ]
     )
     
-    usersocket.run(
+    DataServerSocket.info.run(
         'runConnection', //run this function on the backend router
         [
             call.caller, //run this connection 
@@ -318,7 +318,7 @@ export let answerCall = async (call:RTCCallProps) => {
                     {
                         description:encodeURIComponent(JSON.stringify(rtc.rtc.localDescription)), //the host needs this
                         caller:client.currentUser._id,
-                        socketId:usersocket._id,
+                        socketId:DataServerSocket.info._id,
                         firstName:client.currentUser.firstName,
                         lastName:client.currentUser.lastName,
                         pictureUrl:client.currentUser.pictureUrl

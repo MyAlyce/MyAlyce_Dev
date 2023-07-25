@@ -40,8 +40,9 @@ export class Stopwatch extends Component<{
             let getTime = () => {
                 let now = performance.now();
                 state.data[this.stateKey+'timeRunning'] = now - state.data[this.stateKey+'timeStart'];
-                if((document.getElementById(this.stateKey+'time') as HTMLElement)) 
-                    (document.getElementById(this.stateKey+'time') as HTMLElement).innerText = hhmmssms(state.data[this.stateKey+'timeRunning']);
+                let elm = (document.getElementById(this.stateKey+'time') as HTMLElement);
+                if(elm) 
+                    elm.innerText = hhmmssms(state.data[this.stateKey+'timeRunning']);
 
                 if(this.props.onFrame) this.props.onFrame(state.data[this.stateKey+'timeRunning'], Date.now());
                 
