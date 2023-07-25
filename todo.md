@@ -55,7 +55,6 @@
 
 - More permissions, check that security meets standards now (https, mongo, cloudflare, access tokens, random Ids)
 - plain email/password storage? i.e. not just google reliance, see about microsoft accounts and other
-- clearing out all user data by ID to delete accounts
 
 ## Data
 
