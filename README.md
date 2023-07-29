@@ -14,6 +14,17 @@ With the latest NodeJS LTS installed:
 
 Install dependencies, build, and run `npm i && npm start`
 
+You need the global dependency: 
+`npm i -g tinybuild`
+
+provide a `.env` file with mongodb login credentials:
+
+```
+MONGODB=mongodb+srv://user:pass@aa.bb.mongodb.net/dbname
+TESTDB=
+```
+
+
 #### Android
 
 With Android Studio installed:
