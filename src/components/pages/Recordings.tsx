@@ -1,6 +1,6 @@
 import React from 'react'
 import { sComponent } from '../state.component'
-import {client} from '../../scripts/client'
+import {client, getActiveStreamDir} from '../../scripts/client'
 import { webrtc } from '../../scripts/client';
 import { NoteTaking } from '../modules/Records/NoteTaking';
 import { RTCCallInfo } from '../../scripts/webrtc';
@@ -14,9 +14,7 @@ export class Recordings extends sComponent {
 
     state = {
         isRecording:false,
-        activeStream:undefined,
-        recordings:undefined,
-        folders:undefined as any
+        activeStream:undefined
     }
 
     dir?:string;    
@@ -26,9 +24,10 @@ export class Recordings extends sComponent {
 
         this.dir = props.dir;
     }
+    
     render() {
 
-        let dir =  this.dir ? this.dir : this.state.activeStream ? (webrtc.rtc[this.state.activeStream] as RTCCallInfo).firstName +(webrtc.rtc[this.state.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName;
+        let dir = this.dir ? this.dir : getActiveStreamDir();
 
         return (
             <div className="main-content d-flex flex-column" style={{gap: '10px'}}>

@@ -75,7 +75,14 @@ export class NoteTaking extends Component<{
 
     sub;
 
-    constructor(props:{streamId?:string, userId?:string, filename?:string, dir?:string, showInput?:boolean, showHistory?:boolean}) {
+    constructor(props:{
+        streamId?:string, 
+        userId?:string, 
+        filename?:string, 
+        dir?:string,
+        showInput?:boolean, 
+        showHistory?:boolean
+    }) {
         super(props);
 
         if('showInput' in props) this.showInput = props.showInput as boolean;

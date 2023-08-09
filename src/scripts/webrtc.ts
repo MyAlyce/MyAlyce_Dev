@@ -442,7 +442,13 @@ export function getCallerAudioVideo(streamId:string) {
 
 let tStart = performance.now();
 
-export function BufferAndSend(data:any, bufKey:string, stream:WebRTCInfo, buffers:{[key:string]:any[]}={}, bufferInterval=333) {
+export function BufferAndSend(
+    data:any, 
+    bufKey:string, 
+    stream:WebRTCInfo, 
+    buffers:{[key:string]:any[]}={}, 
+    bufferInterval=333
+) {
     let now = performance.now();
 
     if(!buffers[bufKey]) buffers[bufKey] = {} as any;

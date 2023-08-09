@@ -7,6 +7,7 @@ import { StreamToggle } from '../Streams/StreamToggle';
 import * as Icon from 'react-feather'
 import { RTCCallInfo } from '../../../scripts/webrtc';
 import { Widget } from '../../widgets/Widget';
+import { Folders } from './Folders';
 
 export class RecordBar extends sComponent {
 
@@ -15,7 +16,7 @@ export class RecordBar extends sComponent {
         activeStream:undefined,
     }
     
-    dir?:string;  
+    dir?:string;
     toggled=[...SensorDefaults] as any[];
     isRecording = false;
 
@@ -23,7 +24,7 @@ export class RecordBar extends sComponent {
 
     constructor(props:{dir?:string, streamId?:string, onChange:(ev:{isRecording:boolean, streamId?:string})=>void}) {
         super(props);
-        this.dir = props.dir;
+        this.dir = props.dir ? props.dir : client.currentUser.firstName+client.currentUser.lastName;
         this.isRecording = this.statemgr.data[props.streamId ? props.streamId+'isRecording':'isRecording'];
     }
 
@@ -57,7 +58,10 @@ export class RecordBar extends sComponent {
         return (
             <Widget
                 style={{minWidth:'26rem'}}
-                header={( <b>Recording Controls</b> )}
+                header={( <>
+                    <b>Recording Controls</b><span style={{float:'right'}}>
+                    <Folders folder={this.dir} onSelected={(folder)=>{ this.dir = folder; }}/></span>
+                </>)}
                 content={(
                     <div className="d-grid gap-2">
                         {this.statemgr.data[this.props.streamId ? this.props.streamId+'isRecording':'isRecording'] ? 

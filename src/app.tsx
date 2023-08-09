@@ -215,8 +215,7 @@ export class App extends sComponent {
                                             <Dashboard/>
                                         }
                                         { this.state.route.includes('peers') &&  <WebRTCComponent/>}
-                                        { this.state.route.includes('recordings') && <Recordings 
-                                            dir={getActiveStreamDir()}/>}
+                                        { this.state.route.includes('recordings') && <Recordings/>}
                                         { this.state.route.includes('settings') && <SettingsView/> }
                                         { this.state.route.includes('dev') && <Dev/>}
                                         { this.state.route.includes('about') && <About/>}

@@ -18,13 +18,7 @@ export class SettingsView extends sComponent  {
     addUser() {
 
     }
-
-    deleteCurrentUser() {
-        client.deleteUser(client.currentUser._id, true, () => {
-            logoutSequence();
-        });
-    }
-
+    
     render() {
 
         const data = client.currentUser
@@ -37,8 +31,8 @@ export class SettingsView extends sComponent  {
 
         return (
             <div className='container-fluid settings'>
-                    <h1>Settings</h1>
-                    <UserAuths/>
+                <h1>Settings</h1>
+                <UserAuths/>
             </div>
         );
     }

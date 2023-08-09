@@ -160,6 +160,8 @@ state.setState({
     useFallAlert:true,
     viewVitals:true,
 
+    selectedFolder:'',
+
     detectedEMG:false,
     detectedENV:false,
     detectedPPG:false,
@@ -319,7 +321,8 @@ export function backupState(
         'savedEventOptions',
         'savedUnits',
         'demoing',
-        'alertsEnabled'
+        'alertsEnabled',
+        'selectedFolder'
     ], //back these values up from the state object
     dir='data'
 ){
@@ -409,7 +412,12 @@ export function unsubscribeFromStream(
 }
 
 export function getActiveStreamDir() {
-    let dir = state.data.activeStream ? (webrtc.rtc[state.data.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[state.data.activeStream] as RTCCallInfo).lastName : client.currentUser.firstName + client.currentUser.lastName
+    let dir = state.data.activeStream ? 
+        (webrtc.rtc[state.data.activeStream] as RTCCallInfo).firstName + (webrtc.rtc[state.data.activeStream] as RTCCallInfo).lastName 
+            : 
+        state.data.selectedFolder ? state.data.selectedFolder 
+            : 
+        client.currentUser.firstName + client.currentUser.lastName
     return dir;
 }
 
@@ -423,6 +431,10 @@ export function getStreamById(streamId:string) {
 
 export function splitCamelCase(string:string) {
     return string?.replace(/([a-z])([A-Z])/g, '$1 $2');
+}
+
+export function setCamelCase(string:string) {
+    return string?.replace(/([a-z])([A-Z])/g, '$1$2');
 }
 
 //dummy profile

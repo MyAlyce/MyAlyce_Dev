@@ -13,13 +13,17 @@
 
 - Electron with desktop bluetooth.
 
-
 - Intermittent rewards for events? 
  - - Every time you enter data you get a point. Points based on types of events.
  - - E.g. a score for entering results
  - - Enter a lottery based on user inputs
  - - Add scheduling to point system valued
 
+- Alert system that is disarmable or can notify
+
+- Add Email and SMS with an ability to notify when alerts are thrown.
+
+- Add alt login methods
 
 ### KNOWN BUGS
 
@@ -41,8 +45,6 @@
 
 
 ### Scripting/Events/State
-
-
 
 
 ### RTC

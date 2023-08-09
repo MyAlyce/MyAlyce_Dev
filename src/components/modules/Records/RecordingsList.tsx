@@ -8,12 +8,12 @@ import { RTCCallInfo } from "../../../scripts/webrtc";
 import { workers } from 'device-decoder';
 import gsworker from '../../../scripts/device.worker'
 import { WorkerInfo } from 'graphscript';
+import {state} from '../../../scripts/client'
 
 import * as Icon from 'react-feather'
 
 let GDriveIcon = "./assets/GDrive.svg";
 
-let selectedFolder = '';
 
 export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
 
@@ -31,7 +31,7 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
 
 
         this.dir = props.dir;
-        if(this.dir) selectedFolder = this.dir;
+        if(props.dir) state.data.selectedFolder = props.dir;
         this.streamId = props?.streamId;
     }
 
@@ -47,7 +47,7 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
 
     componentDidMount(): void {
 
-        this.dir = selectedFolder;
+        this.dir = state.data.selectedFolder;
 
         this.csvworker = workers.addWorker({url:gsworker});
         if(client.currentUser) this.csvworker.run('checkFolderList', [client.currentUser.firstName+client.currentUser.lastName+'/folderList', this.dir]).then(()=> {        
@@ -71,7 +71,7 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
         
         let filelist = await BFSRoutes.listFiles(dir); //list for a particular user
         //getfilelist
-        if(!selectedFolder) selectedFolder = dir;
+        if(!state.data.selectedFolder) state.data.selectedFolder = dir;
 
         filelist.forEach((file) => {
 
@@ -119,9 +119,10 @@ export class RecordingsList extends Component<{dir?:string, streamId?:string}> {
                 content={
                     <>
                     <label>Select Folder:</label>&nbsp;
-                    <select value={selectedFolder} onChange={(ev)=>{ 
-                        this.dir = ev.target.value; selectedFolder=ev.target.value; this.listRecordings(); 
-                        }}>
+                    <select value={state.data.selectedFolder} onChange={(ev)=>{ 
+                            this.dir = ev.target.value; state.data.selectedFolder=ev.target.value; this.listRecordings(); 
+                        }}
+                    >
                         { this.state.folders ? this.state.folders.map((v) => {
                             return (<option value={v} key={v}>{splitCamelCase(v)}</option>)
                         }) : null }
