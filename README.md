@@ -63,3 +63,9 @@ With XCode installed:
 - `npx cap add ios`
 - `npx cap copy`
 - `npx cap open ios`
+
+### A Whole Health Monitoring System (just ideas, all free to use)
+<img width="1430" alt="RPMA (2)" src="https://github.com/MyAlyce/MyAlyce_Dev/assets/18196383/75a714d0-2946-42cd-bd6c-3b87fd205c9f">
+Idea being this can work in acute cases or in assisted living and remote monitoring scenarios. It would be entirely individualized and based on user consent. Epic and other systems feature some of these things but are locked up in giant proprietary schemes that are quite unweildy and expensive. We'd want something community-developed to serve public needs more directly. A good paper on what ideal future EHRs should look like was published by Johns Hopkins: 
+
+[Mobile Technology in Support of Frontline Health Workers](https://chwcentral.org/wp-content/uploads/2016/11/Mobile-Technology-in-Support-of-Frontline-Health-Workers.pdf)
