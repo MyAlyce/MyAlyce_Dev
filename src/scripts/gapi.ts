@@ -1,8 +1,8 @@
 //simply import to run this script on init
 
 
-export const googleClientID = "849761124848-uolvtqiurtjcnql91i224olp2diipeca.apps.googleusercontent.com";
-export const apiKey = "AIzaSyBYZX_H637kXgVvtNmhuy2D92KnFTPCC4c";
+export const googleClientID = "";
+export const apiKey = "";
 
 
 // (function initGapiAuth() {
