@@ -138,8 +138,6 @@ graph.subscribe('receiveCallInformation', (id) => {
             }); //update this event for the app
         }
 
-        
-    
     }
 });
 
@@ -171,9 +169,9 @@ state.setState({
 
 let makeSocket = () => {
     DataServerSocket.info = sockets.open({
-        protocol:config.protocol === 'https' ? 'wss' : 'ws',
-        host:config.socket_protocol === 'wss' ? config.domain : config.host,
-        port:config.socket_protocol === 'wss' ? undefined as any : config.dataserverport,
+        protocol:(config.protocol === 'https' && config.domain !== 'localhost') ? 'wss' : 'ws',
+        host:(config.protocol === 'https')  ? config.domain : config.host,
+        port:(config.protocol === 'https' && config.domain !== 'localhost') ? undefined as any : config.dataserverport,
         path:'wss',
         onopen:() => {
             console.log('port opened!');

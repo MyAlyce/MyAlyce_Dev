@@ -7,7 +7,7 @@ import { Sensors, state } from './client'//'../../../graphscript/index'//
 import { ByteParser } from 'device-decoder/src/util/ByteParser';
 import { setupAlerts } from './alerts';
 import { graph } from './client';
-import { WorkerInfo } from 'graphscript';
+import { WorkerInfo } from 'graphscript-workers';
 import { Math2 } from 'brainsatplay-math';
 
 export let device:BLEDeviceStream;
@@ -45,6 +45,8 @@ export let tCorrections = {
 
 export let serviceCharacteristic = '0000cafe-b0ba-8bad-f00d-deadbeef0000';
 
+
+//todo: check data isn't out of range for running the algos, and report moving averages for heartrate
 export let characteristicCallbacks = {
     emg:{characteristic:'0002cafe-b0ba-8bad-f00d-deadbeef0000', callback:(data: { //ads131m08 (main)
         timestamp:number,
@@ -108,6 +110,8 @@ export let characteristicCallbacks = {
 }
 
 export async function setupHRWorker() {
+
+    //@ts-ignore
     hrworker = workers.addWorker({url:gsworker});
 
     let t1 = await hrworker.run('loadFromTemplate',['beat_detect','hr',{
@@ -145,6 +149,7 @@ export function terminateHRWorker() {
 }
 
 export async function setupBRWorker() {
+    //@ts-ignore
     brworker = workers.addWorker({url:gsworker});
     let t2 = await brworker.run('loadFromTemplate',['beat_detect','breath',{
         maxFreq:0.2,
@@ -173,6 +178,21 @@ export async function setupBRWorker() {
         });
 
     });
+}
+
+//do this when the input is detected to be out of range
+export async function resetAlgorithms() {
+    hrworker?.run('remove',['hr',false]);
+    brworker?.run('remove',['breath',false]);
+
+    await brworker.run('loadFromTemplate',['beat_detect','breath',{
+        maxFreq:0.2,
+        sps:100
+    }]);
+    await hrworker.run('loadFromTemplate',['beat_detect','hr',{
+        maxFreq:3,
+        sps:100
+    }]);
 }
 
 export function terminateBRWorker() {

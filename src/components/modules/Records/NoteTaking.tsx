@@ -7,7 +7,7 @@ import { client, getStreamById, state, subscribeToStream, unsubscribeFromStream,
 import Button from 'react-bootstrap/Button';
 import { RTCCallInfo } from '../../../scripts/webrtc';
 import { EventStruct } from 'graphscript-services/struct/datastructures/types';
-//import { WorkerInfo } from 'graphscript';
+//import { WorkerInfo } from 'graphscript-workers';
 import { CardGroup, Table } from 'react-bootstrap';
 //import { Card } from 'react-bootstrap';
 

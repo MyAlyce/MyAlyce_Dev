@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {state} from '../../../scripts/client'
 
 import './BeatingSVG.css'
-import { Col } from 'react-bootstrap';
 
 type BeatingSVGProps = {
     style?:any, 

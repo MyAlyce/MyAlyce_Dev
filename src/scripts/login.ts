@@ -1,7 +1,7 @@
 //google login and backend setup
 import { App as RealmApp, Credentials, handleAuthRedirect } from "realm-web";
 
-const realmId = 'myalyce_dev-fyfvh';
+const realmId = 'application-0-wlbuxqy';
 
 export const realm = new RealmApp(realmId);
 
@@ -138,5 +138,5 @@ export const logout = async (onLogout?:(result:any)=>void) => {
 
 
 if (window.location.href.includes('_baas_client_app_id')) {
-    handleAuthRedirect(); // Authenticates on the other tab and closes this one
+    handleAuthRedirect(window.location); // Authenticates on the other tab and closes this one
 }

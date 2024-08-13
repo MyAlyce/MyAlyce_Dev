@@ -15,7 +15,7 @@ export class Stopwatch extends Component<{
     }
 
     unique = 'stopwatch'+Math.floor(Math.random()*10000000000000);
-    stateKey = 'timer_';
+    stateKey = 'timer_'; //specify for multiple timers
 
     constructor(props) {
         super(props);

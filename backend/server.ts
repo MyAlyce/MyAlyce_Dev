@@ -89,8 +89,8 @@ const ContentServer = new Router({
                         _all:{
                             inject:{ //page building
                                 hotreload:[
-                                    `${tcfg.server.protocol === 'https' ? 'wss' : 'ws'}://${tcfg.server.protocol === 'https' ? tcfg.server.domain : 
-                                        tcfg.server.host}${tcfg.server.protocol === 'https' ? `` : `:${tcfg.server.port}` }/hotreload`, 
+                                    `${(settings.domain !== 'localhost' && settings.protocol === 'https') ? 'wss' : 'ws'}://${settings.protocol === 'https' ? settings.domain : 
+                                        settings.host}${(settings.domain !== 'localhost' && settings.protocol === 'https') ? '' : `:${settings.port}`}/hotreload`, 
                                     tcfg.bundler.outfile.split('/').pop()+'.css'
                                 ], //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
                                 //pwa:undefined as any
@@ -114,7 +114,7 @@ const ContentServer = new Router({
                             )
                     },
                     onupgrade:(request, socket, head, served) => {
-                        if(settings.protocol === 'https' && request.url.startsWith('/wss')) {
+                        if(settings.domain !== 'localhost' && settings.protocol === 'https' && request.url.startsWith('/wss')) {
                             proxy.ws(request, socket, head, {target:'http://' + settings.domain + ':' + settings.datasocketport })
                         }
                     }

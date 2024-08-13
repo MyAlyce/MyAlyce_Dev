@@ -247,7 +247,7 @@ export function genCallSettings(userId, rtcId, alertNodes?) {
             delete webrtc.rtc[(webrtc.rtc[rtcId] as RTCCallInfo)._id];
             state.setState({activeStream:undefined, availableStreams:webrtc.rtc, triggerPageRerender:true});
         }
-    }
+    } as Partial<WebRTCProps>
 }
 
 //started from host end, see answerCall for peer end

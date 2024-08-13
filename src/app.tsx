@@ -36,17 +36,13 @@ import { AlertModal } from './components/modules/User/AlertModal';
 import { DeleteUser } from './components/modules/User/DeleteUser';
 
 let googleLogo = './assets/google.png';
-let myalyceLogo = './assets/myalyce.png';
+let appLogo = './assets/myalyce.png';
 
 state.subscribeEvent('route', (route:string) => {
     window.history.pushState(undefined, route, location.origin + route); //uhh
 });
   
 const TESTVIEWS = false //true; //skip login page (debug)
-
-const brand = () => {
-    return <img src={ myalyceLogo } width='100px' alt='MyAlyce'/>
-};
 
 
 // //this allows this part of the app to re-render independently
@@ -146,7 +142,7 @@ export class App extends sComponent {
                             <div className="wave"></div>
                         </div>
                         <div className="cover-content">
-                            <img className="img-fluid" width="360" alt="myAlyce" src={myalyceLogo} />
+                            <img className="img-fluid" width="360" alt="myAlyce" src={appLogo} />
                             { !this.state.loggingIn && !this.state.isLoggedIn && !this.state.fetchingLogin && 
                                 <>
                                     <br />

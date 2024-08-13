@@ -30,9 +30,6 @@ export const demos = {} as any; //we can cancel these at any time
 
 //roll over data from the parsed csv
 
-
-
-
 export function demoFile(sensor:'emg'|'ppg'|'breath'|'hr'|'imu'|'env'|'ecg', sps?, tcheck?, duration = Infinity) {
     let filename = recordingsList[sensor];
 

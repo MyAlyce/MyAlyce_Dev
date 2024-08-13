@@ -39,17 +39,17 @@ const config = {
      },
     server: {  //node server settings, set false to skip server step or add serve:true to config object to only serve (alt methods)
         debug: false,
-        protocol: "http",  //'http' or 'https'. HTTPS required for Nodejs <---> Python sockets. If using http, set production to False in python/server.py as well
-        domain:'alyce.app',
+        protocol: "https",  //'http' or 'https'. HTTPS required for Nodejs <---> Python sockets. If using http, set production to False in python/server.py as well
+        domain:'localhost',//'alyce.app',
         host: "localhost", //'localhost' or '127.0.0.1' etc.
         port: 8000, //e.g. port 80, 443, 8000
-        redirect: 'http://localhost:8081',//settings.protocol + '://' + settings.host + ':' + settings.port, //redirect to this instead
+        redirect: 'https://localhost:8081',//settings.protocol + '://' + settings.host + ':' + settings.port, //redirect to this instead
 
         //will skip this but use hotreload
         startpage: "index.html", //home page
 
-        socket_protocol: "wss", //frontend socket protocol, wss for served, ws for localhost
-        hotreload: 5000,  //hotreload websocket server port
+        // socket_protocol: "wss", //frontend socket protocol, wss for served, ws for localhost
+        hotreload: false,  //hotreload websocket server port
         //delay: 5000,
         //watch: ['../'], //watch additional directories other than the current working directory
         
@@ -57,7 +57,7 @@ const config = {
         python: false,//7000,  //quart server port (configured via the python server script file still)
         python_node: 7001, //websocket relay port (relays messages to client from nodejs that were sent to it by python)
         errpage: "node_modules/tinybuild/tinybuild/node_server/other/404.html",  //default error page, etc.
-        certpath: "backend/dist/fullchain.pem", //if using https, this is required. See cert.pfx.md for instructions
+        certpath: "backend/dist/cert.pem", //if using https, this is required. See cert.pfx.md for instructions
         keypath: "backend/dist/key.pem" //if using https, this is required. See cert.pfx.md for instructions
     }
 }

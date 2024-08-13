@@ -7,7 +7,7 @@ import { RTCCallInfo } from "../../../scripts/webrtc";
 
 import { workers } from 'device-decoder';
 import gsworker from '../../../scripts/device.worker'
-import { WorkerInfo } from 'graphscript';
+import { WorkerInfo } from 'graphscript-workers';
 import {state} from '../../../scripts/client'
 
 import * as Icon from 'react-feather'

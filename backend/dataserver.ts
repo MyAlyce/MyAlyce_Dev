@@ -123,11 +123,11 @@ const DataServer = new Router({
                     port:settings.dataserverport,
                     pages:{
                         '/':'Data Server',
-                        _all:{
-                            inject:{ //page building
-                                hotreload:`${tcfg.server.protocol === 'https' ? 'wss' : 'ws'}://${tcfg.server.protocol === 'https' ? tcfg.server.domain : tcfg.server.host}${tcfg.server.protocol === 'https' ? `` : `:${tcfg.server.port}` }/hotreload` //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
-                            }
-                        }
+                        // _all:{
+                        //     inject:{ //page building
+                        //         hotreload:`${tcfg.server.protocol === 'https' ? 'wss' : 'ws'}://${tcfg.server.protocol === 'https' ? tcfg.server.domain : tcfg.server.host}${tcfg.server.protocol === 'https' ? `` : `:${tcfg.server.port}` }/hotreload` //this is a route that exists as dynamic content with input arguments, in this case it's a url, could pass objects etc in as arguments
+                        //     }
+                        // }
                     },
                     onopen:(served)=>{
 

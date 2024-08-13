@@ -1,6 +1,6 @@
 import React from 'react'
 //@ts-ignore
-import {createRoot} from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import { App } from './src/app'
 
 import './src/init' //run init sequence

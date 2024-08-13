@@ -16,7 +16,6 @@ export class Dashboard extends sComponent {
 
     state = { //synced with global state
         activeStream:undefined, //stream selected?
-        deviceMode:'my-device',
         availableStreams:{}, //we can handle multiple connections too
         viewVitals:false
     }

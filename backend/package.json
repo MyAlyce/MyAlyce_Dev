@@ -21,13 +21,13 @@
   "author": "",
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "esbuild-sass-plugin": "^2.10.0",
-    "graphscript-node": "^0.2.177",
-    "graphscript-services-node": "^0.2.167",
+    "dotenv": "^16.4.5",
+    "esbuild-sass-plugin": "^3.3.1",
+    "graphscript-node": "^0.3.13",
+    "graphscript-services-node": "^0.3.2",
     "http-proxy": "^1.18.1",
-    "mongoose": "~7.3.0",
-    "node": "^20.2.0"
+    "mongoose": "~8.4.3",
+    "node": "^20.15.0"
   },
   "nodemonConfig": {
     "env": {

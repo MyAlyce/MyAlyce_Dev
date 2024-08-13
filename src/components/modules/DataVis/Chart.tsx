@@ -131,6 +131,7 @@ export class Chart extends sComponent {
 
         //we are appending the canvas and overlay this way so they only need to be transferred once to the plotter thread 
         this.plotter = new WGLPlotter({
+            _id:'abc',
             canvas:this.canvas,
             overlay:this.overlay,
             lines, //will render all lines unless specified
